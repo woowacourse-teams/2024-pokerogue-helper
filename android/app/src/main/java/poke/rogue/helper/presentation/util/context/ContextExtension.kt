@@ -18,7 +18,9 @@ fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
-fun Context.toast(@StringRes messageRes: Int) {
+fun Context.toast(
+    @StringRes messageRes: Int,
+) {
     Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show()
 }
 
@@ -26,25 +28,42 @@ fun Context.longToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
-fun Context.longToast(@StringRes messageRes: Int) {
+fun Context.longToast(
+    @StringRes messageRes: Int,
+) {
     Toast.makeText(this, messageRes, Toast.LENGTH_LONG).show()
 }
 
-fun Context.snackBar(anchorView: View, message: () -> String) {
+fun Context.snackBar(
+    anchorView: View,
+    message: () -> String,
+) {
     Snackbar.make(anchorView, message(), Snackbar.LENGTH_SHORT).show()
 }
 
-fun Context.snackBar(anchorView: View, @StringRes messageRes: Int) {
+fun Context.snackBar(
+    anchorView: View,
+    @StringRes messageRes: Int,
+) {
     Snackbar.make(anchorView, messageRes, Snackbar.LENGTH_SHORT).show()
 }
 
-fun Context.stringOf(@StringRes resId: Int) = getString(resId)
+fun Context.stringOf(
+    @StringRes resId: Int,
+) = getString(resId)
 
-fun Context.colorOf(@ColorRes resId: Int) = ContextCompat.getColor(this, resId)
+fun Context.colorOf(
+    @ColorRes resId: Int,
+) = ContextCompat.getColor(this, resId)
 
-fun Context.drawableOf(@DrawableRes resId: Int) = ContextCompat.getDrawable(this, resId)
+fun Context.drawableOf(
+    @DrawableRes resId: Int,
+) = ContextCompat.getDrawable(this, resId)
 
-fun Context.dialogWidthPercent(dialog: Dialog?, percent: Double = 0.8) {
+fun Context.dialogWidthPercent(
+    dialog: Dialog?,
+    percent: Double = 0.8,
+) {
     val deviceSize = getDeviceSize()
     dialog?.window?.run {
         val params = attributes
@@ -60,9 +79,10 @@ fun Context.getDeviceSize(): IntArray {
         val windowMetrics = windowManager.currentWindowMetrics
         val windowInsets = windowMetrics.windowInsets
 
-        val insets = windowInsets.getInsetsIgnoringVisibility(
-            WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout()
-        )
+        val insets =
+            windowInsets.getInsetsIgnoringVisibility(
+                WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout(),
+            )
         val insetsWidth = insets.right + insets.left
         val insetsHeight = insets.top + insets.bottom
 

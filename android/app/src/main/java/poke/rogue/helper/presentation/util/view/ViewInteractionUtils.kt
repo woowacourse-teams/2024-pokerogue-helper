@@ -8,7 +8,7 @@ import kotlin.time.TimeSource
 
 inline fun View.setOnSingleClickListener(
     delay: Long = 500L,
-    crossinline block: (View) -> Unit
+    crossinline block: (View) -> Unit,
 ) {
     val singleEventHandler: SingleEventHandler = DefaultSingleEventHandler(delay.milliseconds)
     setOnClickListener { view ->

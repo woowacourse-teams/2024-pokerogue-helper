@@ -15,7 +15,9 @@ fun Fragment.toast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }
 
-fun Fragment.toast(@StringRes messageRes: Int) {
+fun Fragment.toast(
+    @StringRes messageRes: Int,
+) {
     if (!isAdded) return
     Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
 }
@@ -25,27 +27,41 @@ fun Fragment.longToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
 }
 
-fun Fragment.longToast(@StringRes messageRes: Int) {
+fun Fragment.longToast(
+    @StringRes messageRes: Int,
+) {
     if (!isAdded) return
     Toast.makeText(requireContext(), messageRes, Toast.LENGTH_LONG).show()
 }
 
-fun Fragment.snackBar(anchorView: View, message: () -> String) {
+fun Fragment.snackBar(
+    anchorView: View,
+    message: () -> String,
+) {
     if (!isAdded) return
     Snackbar.make(anchorView, message(), Snackbar.LENGTH_SHORT).show()
 }
 
-fun Fragment.snackBar(anchorView: View, @StringRes messageRes: Int) {
+fun Fragment.snackBar(
+    anchorView: View,
+    @StringRes messageRes: Int,
+) {
     if (!isAdded) return
     Snackbar.make(anchorView, messageRes, Snackbar.LENGTH_SHORT).show()
 }
 
-fun Fragment.stringOf(@StringRes resId: Int, formatArgs: Any? = null) = getString(resId, formatArgs)
+fun Fragment.stringOf(
+    @StringRes resId: Int,
+    formatArgs: Any? = null,
+) = getString(resId, formatArgs)
 
-fun Fragment.colorOf(@ColorRes resId: Int) = ContextCompat.getColor(requireContext(), resId)
+fun Fragment.colorOf(
+    @ColorRes resId: Int,
+) = ContextCompat.getColor(requireContext(), resId)
 
-fun Fragment.drawableOf(@DrawableRes resId: Int) =
-    ContextCompat.getDrawable(requireContext(), resId)
+fun Fragment.drawableOf(
+    @DrawableRes resId: Int,
+) = ContextCompat.getDrawable(requireContext(), resId)
 
 val Fragment.viewLifeCycle
     get() = viewLifecycleOwner.lifecycle

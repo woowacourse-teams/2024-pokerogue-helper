@@ -4,7 +4,6 @@ import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import org.hamcrest.CoreMatchers
-import poke.rogue.helper.util.RecyclerViewItemCountAssertion
 
 /**
  * 자식 뷰의 텍스트를 포함하는 뷰가 있는지 확인하는 ViewAssertion을 반환하는 함수
