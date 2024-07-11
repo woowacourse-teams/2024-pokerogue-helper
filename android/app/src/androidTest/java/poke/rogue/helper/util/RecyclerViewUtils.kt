@@ -1,13 +1,17 @@
 package poke.rogue.helper.util
 
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.ViewAssertion
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.contrib.RecyclerViewActions
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
+import org.hamcrest.CoreMatchers
 import org.hamcrest.Matcher
 
 /**
@@ -64,4 +68,36 @@ fun clickChildViewWithId(id: Int): ViewAction {
             v.performClick()
         }
     }
+}
+
+/**
+ * 리사이클러뷰의 아이템 개수를 확인하는 ViewAssertion을 반환하는 함수
+ *
+ * sample
+ * ```kotlin
+ * // 리사이클러뷰의 아이템 개수가 3개인지 확인
+ * onView(withId(R.id.rv_shopping_cart)).check(withItemCount(3))
+ * ```
+ */
+fun withItemCount(expectedCount: Int): ViewAssertion {
+    return RecyclerViewItemCountAssertion(expectedCount)
+}
+
+inline fun <reified T : RecyclerView.ViewHolder> ViewInteraction.performScrollToHolder(position: Int = 0): ViewInteraction {
+    return perform(
+        RecyclerViewActions.scrollToHolder(CoreMatchers.instanceOf(T::class.java))
+            .atPosition(position),
+    )
+}
+
+fun <T : RecyclerView.ViewHolder> ViewInteraction.performClickHolderAt(
+    absolutePosition: Int = 0,
+    @IdRes childViewId: Int,
+): ViewInteraction {
+    return perform(
+        RecyclerViewActions.actionOnItemAtPosition<T>(
+            absolutePosition,
+            clickChildViewWithId(childViewId),
+        ),
+    )
 }

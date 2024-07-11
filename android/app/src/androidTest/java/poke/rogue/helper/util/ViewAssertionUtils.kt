@@ -23,16 +23,3 @@ fun matchDescendantSoftly(text: String): ViewAssertion {
         ),
     )
 }
-
-/**
- * 리사이클러뷰의 아이템 개수를 확인하는 ViewAssertion을 반환하는 함수
- *
- * sample
- * ```kotlin
- * // 리사이클러뷰의 아이템 개수가 3개인지 확인
- * onView(withId(R.id.rv_shopping_cart)).check(withItemCount(3))
- * ```
- */
-fun withItemCount(expectedCount: Int): ViewAssertion {
-    return RecyclerViewItemCountAssertion(expectedCount)
-}
