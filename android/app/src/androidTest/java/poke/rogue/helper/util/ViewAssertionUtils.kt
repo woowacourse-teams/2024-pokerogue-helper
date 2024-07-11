@@ -11,10 +11,10 @@ import org.hamcrest.CoreMatchers
  * sample
  * ```kotlin
  * // 리사이클러뷰의 자식 뷰 중 텍스트에 "텍스트"가 포함된 뷰가 있는지 확인
- * onView(withId(R.id.rv_shopping_cart)).check(matchDescendantSoftly("텍스트"))
+ * onView(withId(R.id.rv_shopping_cart)).check(matchDescendantWithText("텍스트"))
  * ```
  */
-fun matchDescendantSoftly(text: String): ViewAssertion {
+fun matchDescendantWithText(text: String): ViewAssertion {
     return ViewAssertions.matches(
         ViewMatchers.hasDescendant(
             ViewMatchers.withText(
