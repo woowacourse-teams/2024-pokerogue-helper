@@ -57,7 +57,7 @@ fun clickChildViewWithId(id: Int): ViewAction {
         }
 
         override fun getDescription(): String {
-            return "Click on specific button"
+            return "View id: $id - Click on specific button"
         }
 
         override fun perform(
