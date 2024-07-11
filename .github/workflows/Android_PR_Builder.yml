@@ -38,35 +38,39 @@ jobs:
       #
       - name: Create Local Properties
         run: touch local.properties
+        working-directory: android
+      #      - name: Access Local Properties
+      #        env:
+      #          FUNCH_DEBUG_BASE_URL: ${{ secrets.FUNCH_DEBUG_BASE_URL }}
+      #          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+      #          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      #          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+      #          STORE_FILE: ${{ secrets.STORE_FILE }}
+      #        run: |
+      #          echo FUNCH_DEBUG_BASE_URL=\"FUNCH_DEBUG_BASE_URL\" >> local.properties
+      #          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
+      #          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
+      #          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
+      #          echo STORE_FILE= $STORE_FILE >> local.properties
 
-#      - name: Access Local Properties
-#        env:
-#          FUNCH_DEBUG_BASE_URL: ${{ secrets.FUNCH_DEBUG_BASE_URL }}
-#          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-#          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-#          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-#          STORE_FILE: ${{ secrets.STORE_FILE }}
-#        run: |
-#          echo FUNCH_DEBUG_BASE_URL=\"FUNCH_DEBUG_BASE_URL\" >> local.properties
-#          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
-#          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
-#          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
-#          echo STORE_FILE= $STORE_FILE >> local.properties
-
-#      - name: Create Key Store
-#        env:
-#          KEY_STORE_BASE_64: ${{secrets.KEY_STORE_BASE_64}}
-#        run: |
-#          echo "$KEY_STORE_BASE_64" | base64 -d > ./funch_key_store.jks
+      #      - name: Create Key Store
+      #        env:
+      #          KEY_STORE_BASE_64: ${{secrets.KEY_STORE_BASE_64}}
+      #        run: |
+      #          echo "$KEY_STORE_BASE_64" | base64 -d > ./funch_key_store.jks
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+        working-directory: android
 
       - name: Lint Check
         run: ./gradlew ktlintCheck
+        working-directory: android
 
       - name: run rest
         run: ./gradlew test
+        working-directory: android
 
       - name: Build with Gradle
         run: ./gradlew build
+        working-directory: android
