@@ -79,6 +79,7 @@ dependencies {
     implementation(libs.androidx.lifecycle)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.kotlin.coroutines.android)
+    implementation(libs.androidx.fragment.ktx)
     // retrofit & okhttp
     implementation(libs.bundles.retrofit)
     implementation(platform(libs.okhttp.bom))
