@@ -80,6 +80,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.kotlin.coroutines.android)
     implementation(libs.androidx.fragment.ktx)
+    // room
+    implementation(libs.room)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
     // retrofit & okhttp
     implementation(libs.bundles.retrofit)
     implementation(platform(libs.okhttp.bom))
@@ -89,6 +93,7 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.coil.core)
     implementation(libs.glide)
+    kapt(libs.glide.compiler)
     implementation(libs.splash.screen)
     // unit test
     testImplementation(libs.bundles.unit.test)
