@@ -80,6 +80,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.kotlin.coroutines.android)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.flexbox)
     // room
     implementation(libs.room)
     implementation(libs.room.ktx)
