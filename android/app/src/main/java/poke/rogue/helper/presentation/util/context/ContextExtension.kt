@@ -64,7 +64,7 @@ fun Context.dialogWidthPercent(
     dialog: Dialog?,
     percent: Double = 0.8,
 ) {
-    val deviceSize = getDeviceSize()
+    val deviceSize = deviceSize()
     dialog?.window?.run {
         val params = attributes
         params.width = (deviceSize[0] * percent).toInt()
@@ -72,7 +72,7 @@ fun Context.dialogWidthPercent(
     }
 }
 
-fun Context.getDeviceSize(): IntArray {
+fun Context.deviceSize(): IntArray {
     val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
