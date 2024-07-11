@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="24dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_end="40dp" />
+
+            <TextView
+                android:id="@+id/tv_type_my_type_title"
+                style="@style/type_choice_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내 타입"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toTopOf="@id/gl_top" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_type_choice"
+                android:padding="2dp"
+                android:src="@drawable/ic_type_reset"
+                app:layout_constraintBottom_toBottomOf="@id/tv_type_my_type_title"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintTop_toTopOf="@id/tv_type_my_type_title" />
+
+            <ImageView
+                android:id="@+id/iv_type_my_type_content"
+                android:layout_width="0dp"
+                android:layout_height="68dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_type_choice"
+                android:padding="10dp"
+                android:src="@drawable/img_property_tmp_1"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/tv_type_my_type_title" />
+
+            <ImageButton
+                android:id="@+id/btn_type_my_type_delete"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_type_delete"
+                app:layout_constraintEnd_toEndOf="@id/iv_type_my_type_content"
+                app:layout_constraintTop_toTopOf="@id/iv_type_my_type_content" />
+
+            <TextView
+                android:id="@+id/tv_type_opponent_type_title"
+                style="@style/type_choice_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="상대 타입"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/iv_type_my_type_content" />
+
+            <ImageView
+                android:id="@+id/tv_type_opponent_type_content_1"
+                android:layout_width="0dp"
+                android:layout_height="68dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/bg_type_choice"
+                android:padding="10dp"
+                app:layout_constraintEnd_toStartOf="@id/tv_type_opponent_type_content_2"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/tv_type_opponent_type_title" />
+
+            <ImageButton
+                android:id="@+id/btn_type_opponent_type_delete_1"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_type_delete"
+                app:layout_constraintEnd_toEndOf="@id/tv_type_opponent_type_content_1"
+                app:layout_constraintTop_toTopOf="@id/tv_type_opponent_type_content_1" />
+
+            <ImageView
+                android:id="@+id/tv_type_opponent_type_content_2"
+                android:layout_width="0dp"
+                android:layout_height="68dp"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/bg_type_choice"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_type_opponent_type_content_1"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toEndOf="@id/tv_type_opponent_type_content_1"
+                app:layout_constraintTop_toTopOf="@id/tv_type_opponent_type_content_1" />
+
+            <ImageButton
+                android:id="@+id/btn_type_opponent_type_delete_2"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_type_delete"
+                app:layout_constraintEnd_toEndOf="@id/tv_type_opponent_type_content_2"
+                app:layout_constraintTop_toTopOf="@id/tv_type_opponent_type_content_2" />
+
+            <TextView
+                android:id="@+id/tv_type_result_title"
+                style="@style/type_choice_title_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="상성 결과"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/tv_type_opponent_type_content_1" />
+
+            <TextView
+                android:id="@+id/tv_type_result_sub_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="* 1배는 표시되지 않습니다."
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_type_result_title"
+                app:layout_constraintStart_toStartOf="@id/tv_type_result_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
+
+
+            <include
+                android:id="@+id/included_type_strong"
+                layout="@layout/item_type_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
+
+            <include
+                android:id="@+id/included_type_weak"
+                layout="@layout/item_type_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/included_type_strong" />
+
+            <include
+                android:id="@+id/included_type_no_effect"
+                layout="@layout/item_type_result"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toBottomOf="@id/included_type_weak" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

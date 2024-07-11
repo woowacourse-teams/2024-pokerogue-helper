@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/iv_result_my_type"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:src="@drawable/img_property_tmp_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_result_my_type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/iv_result_my_type"
+        app:layout_constraintStart_toEndOf="@id/iv_result_my_type"
+        app:layout_constraintTop_toTopOf="@id/iv_result_my_type"
+        tools:text="풀이(가)" />
+
+    <TextView
+        android:id="@+id/tv_result_my_type_strength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/iv_result_my_type"
+        app:layout_constraintStart_toEndOf="@id/tv_result_my_type_name"
+        app:layout_constraintTop_toTopOf="@id/iv_result_my_type"
+        tools:text="강한" />
+
+    <TextView
+        android:id="@+id/tv_result_my_type_tail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="타입"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/iv_result_my_type"
+        app:layout_constraintStart_toEndOf="@id/tv_result_my_type_strength"
+        app:layout_constraintTop_toTopOf="@id/iv_result_my_type" />
+
+    <View
+        android:id="@+id/vw_result_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginVertical="20dp"
+        android:background="#5E5A5A"
+        app:layout_constraintBottom_toTopOf="@id/rv_result_matched_types"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_result_my_type" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_result_matched_types"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_type_choice"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vw_result_divider"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_type_name"
+         />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
