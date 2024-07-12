@@ -17,6 +17,9 @@
         android:theme="@style/Theme.PokeRogueHelper"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.poketmon.PokemonActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.home.HomeActivity"
             android:exported="true">
             <intent-filter>
