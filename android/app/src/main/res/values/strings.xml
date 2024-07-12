@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PokeRogueHelper</string>
+    <string name="type_my_type_title">내 타입</string>
+    <string name="type_opponent_type_title">상대 타입</string>
+    <string name="type_result_title">상성 결과</string>
+    <string name="type_result_sub_title">* 1배는 표시되지 않습니다.</string>
+    <string name="type_item_result">%s 타입</string>
 </resources>
