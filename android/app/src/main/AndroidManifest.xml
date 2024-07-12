@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <application
+        android:name=".PokeRogueHelperApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,7 +17,7 @@
         android:theme="@style/Theme.PokeRogueHelper"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
