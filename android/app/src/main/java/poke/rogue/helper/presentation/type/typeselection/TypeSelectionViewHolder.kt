@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.type.type_selection
+package poke.rogue.helper.presentation.type.typeselection
 
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemTypeChoiceBinding

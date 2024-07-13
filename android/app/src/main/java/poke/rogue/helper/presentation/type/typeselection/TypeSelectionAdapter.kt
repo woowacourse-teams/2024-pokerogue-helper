@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.type.type_selection
+package poke.rogue.helper.presentation.type.typeselection
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

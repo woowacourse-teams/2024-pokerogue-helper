@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="24dp"
-        tools:context=".presentation.type.type_selection.TypeSelectionBottomSheetFragment">
+        tools:context=".presentation.type.typeselection.TypeSelectionBottomSheetFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_type_choice"

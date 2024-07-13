@@ -7,7 +7,7 @@ import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.local.dao.TypeDao
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
-import poke.rogue.helper.presentation.type.type_selection.TypeSelectionBottomSheetFragment
+import poke.rogue.helper.presentation.type.typeselection.TypeSelectionBottomSheetFragment
 
 class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type) {
     private val bottomSheet by lazy {
