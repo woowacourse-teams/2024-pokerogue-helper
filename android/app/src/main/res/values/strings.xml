@@ -4,5 +4,8 @@
     <string name="type_opponent_type_title">상대 타입</string>
     <string name="type_result_title">상성 결과</string>
     <string name="type_result_sub_title">* 1배는 표시되지 않습니다.</string>
-    <string name="type_item_result">%s 타입</string>
+    <string name="type_item_result_subject_mine">%s 이(가)</string>
+    <string name="type_item_result_subject_opponent">%s 에게</string>
+    <string name="type_item_result_tail">%s 타입</string>
+
 </resources>

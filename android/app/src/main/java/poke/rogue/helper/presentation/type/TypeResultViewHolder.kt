@@ -8,7 +8,7 @@ class TypeResultViewHolder(
     private val binding: ItemTypeNameBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(typeItem: TypeUiModel) {
+        binding.type = typeItem
         binding.ivTypeNameIcon.setImageResource(typeItem.iconResId)
-        binding.tvTypeName.text = typeItem.name
     }
 }

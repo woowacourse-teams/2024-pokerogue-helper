@@ -164,42 +164,19 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:text="@string/type_result_sub_title"
-                    android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@id/tv_type_result_title"
                     app:layout_constraintStart_toStartOf="@id/tv_type_result_title"
                     app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
 
-                <include
+                <poke.rogue.helper.presentation.type.TypeResultCustomView
                     android:id="@+id/included_type_strong"
-                    layout="@layout/item_type_result"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
-
-                <include
-                    android:id="@+id/included_type_weak"
-                    layout="@layout/item_type_result"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/included_type_strong" />
-
-                <include
-                    android:id="@+id/included_type_no_effect"
-                    layout="@layout/item_type_result"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
-                    app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/included_type_weak" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
