@@ -1,6 +1,10 @@
 package poke.rogue.helper.presentation.type
 
 import android.content.Context
+import android.graphics.Color
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +32,15 @@ class TypeResultCustomView(context: Context, attrs: AttributeSet) :
 
     fun bind(typeResult: TypeMatchedResultUiModel) {
         binding.typeResult = typeResult
+        binding.tvResultMyTypeStrength.text =
+            SpannableStringBuilder(typeResult.matchedResult).apply {
+                setSpan(
+                    ForegroundColorSpan(Color.RED),
+                    0,
+                    2,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
+                )
+            }
         binding.ivResultMyType.setImageResource(typeResult.typeIconResId)
 
         binding.rvResultMatchedTypes.layoutManager = flexboxLayoutManager
