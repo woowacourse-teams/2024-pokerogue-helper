@@ -37,7 +37,7 @@ class PokemonListFragment : BindingFragment<FragmentPokemonListBinding>(R.layout
 
     private fun initDummyPokemons() {
         pokemonAdapter.submitList(
-            List(10) { PokemonUiModel.DUMMY },
+            List(50) { PokemonUiModel.DUMMY },
         )
     }
 }

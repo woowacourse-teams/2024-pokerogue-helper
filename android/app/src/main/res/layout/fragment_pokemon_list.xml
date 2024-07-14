@@ -13,7 +13,7 @@
             android:id="@+id/search_bar_pokemon_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="포켓몬 이름으로 검색"
+            android:hint="@string/pokemon_list_search_pokemon_hint"
             app:layout_constraintBottom_toTopOf="@id/rv_pokemon_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

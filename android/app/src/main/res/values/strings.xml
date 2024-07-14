@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PokeRogueHelper</string>
+
+    <string name="pokemon_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
 </resources>
