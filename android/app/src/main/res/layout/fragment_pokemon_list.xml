@@ -9,6 +9,18 @@
         android:background="@color/black"
         tools:context=".presentation.poketmon.PokemonListFragment">
 
+        <com.google.android.material.search.SearchBar
+            android:id="@+id/search_bar_pokemon_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="포켓몬 이름으로 검색"
+            app:layout_constraintBottom_toTopOf="@id/rv_pokemon_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/menu_pokemon_list_pokemon_search"
+            app:navigationIcon="@drawable/ic_menu" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_list"
             android:layout_width="0dp"
@@ -17,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_bar_pokemon_list"
             app:spanCount="3"
             tools:listitem="@layout/item_pokemon_list_pokemon" />
 
