@@ -19,6 +19,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setDisplayShowTitleEnabled(false)
         }
+
+        initClickListeners()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -40,5 +42,26 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             }
         }
         return true
+    }
+
+    private fun initClickListeners() {
+        binding.ibtnHomeLogo.setOnClickListener {
+            toast(stringOf(R.string.toolbar_pokerogue))
+            val intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
+            startActivity(intent)
+        }
+        binding.cvHomeType.setOnClickListener {
+            toast("상성 페이지로 이동")
+        }
+        binding.cvHomeDex.setOnClickListener {
+            toast("도감 페이지로 이동")
+        }
+        binding.cvHomeAbility.setOnClickListener {
+            toast("특성 페이지로 이동")
+        }
+        binding.cvHomeTip.setOnClickListener {
+            toast("꿀팁 페이지로 이동")
+        }
     }
 }
