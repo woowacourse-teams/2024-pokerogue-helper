@@ -3,4 +3,8 @@
     <string name="toolbar_pokerogue">포켓로그 바로가기</string>
     <string name="toolbar_feedback">피드백 보내기</string>
     <string name="home_pokerogue_url">https://pokerogue.net/</string>
+    <string name="home_menu_type">상성 보기</string>
+    <string name="home_menu_dex">포켓몬 도감</string>
+    <string name="home_menu_ability">특성 도감</string>
+    <string name="home_menu_tip">꿀팁</string>
 </resources>
