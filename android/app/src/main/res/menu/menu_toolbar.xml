@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/it_toolbar_pokerogue"
+        android:id="@+id/item_toolbar_pokerogue"
         android:title="@string/toolbar_pokerogue" />
     <item
-        android:id="@+id/it_toolbar_feedback"
+        android:id="@+id/item_toolbar_feedback"
         android:title="@string/toolbar_feedback" />
 </menu>

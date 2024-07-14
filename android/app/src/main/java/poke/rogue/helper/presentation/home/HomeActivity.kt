@@ -35,9 +35,10 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
                 val intent =
                     Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
                 startActivity(intent)
+            R.id.item_toolbar_pokerogue -> {
             }
 
-            R.id.it_toolbar_feedback -> {
+            R.id.item_toolbar_feedback -> {
                 toast(stringOf(R.string.toolbar_feedback))
             }
         }
