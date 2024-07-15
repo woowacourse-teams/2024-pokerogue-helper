@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "ability")
+@Table(name = "pokemon_ability")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Ability {
+public class PokemonAbility {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
