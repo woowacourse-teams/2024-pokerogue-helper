@@ -22,12 +22,12 @@ public class PokemonTypeMapping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "pokemon_id", nullable = false)
     @ManyToOne
+    @JoinColumn(name = "pokemon_id", nullable = false)
     private Pokemon pokemon;
 
-    @JoinColumn(name = "pokemon_type_id", nullable = false)
     @ManyToOne
+    @JoinColumn(name = "pokemon_type_id", nullable = false)
     private PokemonType pokemonType;
 
     public String getCircleTypeImage() {
