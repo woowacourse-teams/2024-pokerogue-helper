@@ -25,10 +25,10 @@ public class PokemonService {
     private PokemonResponse toPokemonResponse(Pokemon pokemon) {
         List<PokemonTypeMapping> pokemonTypeMappings = pokemon.getPokemonTypeMappings();
 
-        List<String> typeImages = pokemonTypeMappings.stream()
+        List<String> pokemonTypeImages = pokemonTypeMappings.stream()
                 .map(PokemonTypeMapping::getCircleTypeImage)
                 .toList();
 
-        return PokemonResponse.of(pokemon, typeImages);
+        return PokemonResponse.of(pokemon, pokemonTypeImages);
     }
 }
