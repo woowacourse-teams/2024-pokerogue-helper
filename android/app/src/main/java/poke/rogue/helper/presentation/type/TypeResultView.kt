@@ -8,6 +8,7 @@ import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.BindingAdapter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -17,17 +18,15 @@ import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
 
 class TypeResultView(context: Context, attrs: AttributeSet) :
     ConstraintLayout(context, attrs) {
-    private val binding: ItemTypeResultBinding
-    private val flexboxLayoutManager: FlexboxLayoutManager
-
-    init {
-        binding = ItemTypeResultBinding.inflate(LayoutInflater.from(context), this, true)
-        flexboxLayoutManager =
-            FlexboxLayoutManager(context).apply {
-                flexWrap = FlexWrap.WRAP
-                flexDirection = FlexDirection.ROW
-                justifyContent = JustifyContent.FLEX_START
-            }
+    private val binding: ItemTypeResultBinding by lazy {
+        ItemTypeResultBinding.inflate(LayoutInflater.from(context), this, true)
+    }
+    private val flexboxLayoutManager: FlexboxLayoutManager by lazy {
+        FlexboxLayoutManager(context).apply {
+            flexWrap = FlexWrap.WRAP
+            flexDirection = FlexDirection.ROW
+            justifyContent = JustifyContent.FLEX_START
+        }
     }
 
     fun bind(typeResult: TypeMatchedResultUiModel) {
@@ -42,8 +41,18 @@ class TypeResultView(context: Context, attrs: AttributeSet) :
                 )
             }
         binding.ivResultMyType.setImageResource(typeResult.typeIconResId)
-
         binding.rvResultMatchedTypes.layoutManager = flexboxLayoutManager
         binding.rvResultMatchedTypes.adapter = TypeResultAdapter(typeResult.matchedItem)
+    }
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("typeResult")
+        fun setTypeResult(
+            view: TypeResultView,
+            typeResult: TypeMatchedResultUiModel,
+        ) {
+            view.bind(typeResult)
+        }
     }
 }
