@@ -1,4 +1,4 @@
-package poke.rogue.helper.data.mapper
+package poke.rogue.helper.presentation.type.mapper
 
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.TypeInfo

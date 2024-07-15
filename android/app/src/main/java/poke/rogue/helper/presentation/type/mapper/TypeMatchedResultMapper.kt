@@ -1,12 +1,12 @@
-package poke.rogue.helper.data.mapper
+package poke.rogue.helper.presentation.type.mapper
 
 import poke.rogue.helper.data.model.MatchedResult
 
-fun MatchedResult.toString(): String {
+fun MatchedResult.displayName(): String {
     return when (this) {
         MatchedResult.STRONG -> "강한"
         MatchedResult.WEAK -> "약한"
         MatchedResult.INVALID -> "무효한"
-        else -> ""
+        MatchedResult.NORMAL -> "일반"
     }
 }

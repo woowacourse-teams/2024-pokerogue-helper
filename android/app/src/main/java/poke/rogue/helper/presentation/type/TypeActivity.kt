@@ -2,10 +2,10 @@ package poke.rogue.helper.presentation.type
 
 import android.os.Bundle
 import poke.rogue.helper.R
-import poke.rogue.helper.data.mapper.toResultUiModel
 import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.local.dao.TypeDao
 import poke.rogue.helper.presentation.base.BindingActivity
+import poke.rogue.helper.presentation.type.mapper.toResultUiModel
 import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
 import poke.rogue.helper.presentation.type.typeselection.TypeSelectionBottomSheetFragment
 
