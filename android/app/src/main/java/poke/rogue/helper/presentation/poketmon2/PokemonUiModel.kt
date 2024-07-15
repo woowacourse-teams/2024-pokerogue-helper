@@ -1,10 +1,10 @@
 package poke.rogue.helper.presentation.poketmon2
 
 data class PokemonUiModel(
-    val id: Int,
+    val id: Long,
     val name: String,
     val imageUrl: String,
-    val type: List<String>,
+    val type: List<String>, //TODO : TypeUiModel 으로 변경
 ) {
     companion object {
         private const val DUMMY_POKEMON_NAME = "피카츄"

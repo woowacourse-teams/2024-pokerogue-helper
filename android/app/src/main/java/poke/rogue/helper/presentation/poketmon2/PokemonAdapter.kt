@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemPokemonListPokemonBinding
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class PokemonAdapter : ListAdapter<PokemonUiModel, PoketmonViewHolder>(poketmonComparator) {
+class PokemonAdapter(private val onClickPokeMonItem: PokeMonItemClickListener) :
+    ListAdapter<PokemonUiModel, PoketmonViewHolder>(poketmonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -17,6 +18,7 @@ class PokemonAdapter : ListAdapter<PokemonUiModel, PoketmonViewHolder>(poketmonC
                 parent,
                 false,
             ),
+            onClickPokeMonItem
         )
 
     override fun onBindViewHolder(

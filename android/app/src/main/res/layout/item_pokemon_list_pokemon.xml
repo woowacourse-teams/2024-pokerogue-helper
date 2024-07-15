@@ -7,11 +7,17 @@
         <variable
             name="pokemon"
             type="poke.rogue.helper.presentation.poketmon2.PokemonUiModel" />
+
+        <variable
+            name="listener"
+            type="poke.rogue.helper.presentation.poketmon2.PokeMonItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:onClick="@{() -> listener.onClickPokemon(pokemon.id)}"
         android:background="@drawable/shape_pokemon_corner_radius">
 
         <ImageView
@@ -19,6 +25,7 @@
             imageUrl="@{pokemon.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:scaleType="centerCrop"
             android:padding="20dp"
             app:layout_constraintBottom_toTopOf="@id/tv_item_poketmon_poketmon_name"
             app:layout_constraintDimensionRatio="1:1"
@@ -34,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/pretendard_medium"
             android:text="@{pokemon.name}"
-            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@id/iv_item_poketmon_poketmon"
             app:layout_constraintStart_toStartOf="@id/iv_item_poketmon_poketmon"
             app:layout_constraintTop_toBottomOf="@id/iv_item_poketmon_poketmon"
@@ -47,9 +54,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/pretendard_medium"
             android:text="@{pokemon.type.get(0)}"
-            android:textColor="@color/white"
-            android:textSize="10dp"
+            android:textSize="10sp"
             app:layout_constraintBottom_toTopOf="@id/tv_item_pokemon_sub_type"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="전기" />
