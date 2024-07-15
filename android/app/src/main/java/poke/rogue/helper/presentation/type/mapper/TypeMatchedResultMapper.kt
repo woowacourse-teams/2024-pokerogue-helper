@@ -14,9 +14,9 @@ fun MatchedResult.displayName(): String {
 
 fun MatchedResult.displayColor(): Int {
     return when (this) {
-        MatchedResult.STRONG -> R.color.white
-        MatchedResult.WEAK -> R.color.white
-        MatchedResult.INEFFECTIVE -> R.color.white
+        MatchedResult.STRONG -> R.color.poke_red_20
+        MatchedResult.WEAK -> R.color.poke_green_20
+        MatchedResult.INEFFECTIVE -> R.color.poke_grey_80
         MatchedResult.NORMAL -> throw IllegalStateException("")
     }
 }
