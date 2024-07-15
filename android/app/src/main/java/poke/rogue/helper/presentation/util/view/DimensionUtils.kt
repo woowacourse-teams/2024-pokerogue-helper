@@ -10,8 +10,8 @@ val Int.dp
 val Float.dp
     get(): Float = density * this
 
-val Int.dpToPx
+val Int.px
     get(): Int = (this / density).toInt()
 
-val Float.dpToPx
+val Float.px
     get(): Float = this / density
