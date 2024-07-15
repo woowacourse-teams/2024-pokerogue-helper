@@ -10,22 +10,20 @@ import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
 import poke.rogue.helper.presentation.type.typeselection.TypeSelectionBottomSheetFragment
 
 class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type) {
-    private val bottomSheet by lazy {
-        TypeSelectionBottomSheetFragment()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.ivTypeMyTypeContent.setOnClickListener {
             displayBottomSheet()
         }
-
         val dummy =
             TypeMatchedResultUiModel("페어리", R.drawable.img_property_tmp_2, true, "강한 타입", TypeDao.allTypes.map { it.toResultUiModel() })
-        binding.includedTypeStrong.bind(dummy)
+        binding.typeResult = dummy
     }
 
     private fun displayBottomSheet() {
-        bottomSheet.show(supportFragmentManager, TypeSelectionBottomSheetFragment.TAG)
+        TypeSelectionBottomSheetFragment().show(
+            supportFragmentManager,
+            TypeSelectionBottomSheetFragment.TAG,
+        )
     }
 }
