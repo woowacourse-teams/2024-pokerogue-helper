@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="stat"
+            type="poke.rogue.helper.presentation.poketmon2.Stat" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="6dp"
+        android:gravity="center"
+        android:paddingVertical="4dp">
+
+        <TextView
+            android:id="@+id/tv_type_name"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@{stat.name}"
+            android:textSize="12sp"
+            tools:text="HPD" />
+
+
+        <TextView
+            android:id="@+id/tv_stat_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="@{@string/dex_stat_format(stat.amount, stat.limit)}"
+            android:textSize="12sp"
+            tools:text="100/300" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_stat"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:max="100"
+            tools:progress="70"
+            android:progress="@{stat.progress}"
+            android:progressDrawable="@drawable/progress_dex_stat" />
+    </LinearLayout>
+</layout>
