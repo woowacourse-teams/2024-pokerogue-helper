@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.type
+package poke.rogue.helper.presentation.type.view
 
 import android.content.Context
 import android.graphics.Canvas
@@ -15,7 +15,7 @@ import kotlin.math.tan
 
 /**
  * ```xml
- *  <poke.rogue.helper.presentation.type.PokeParallelogramLayout
+ *  <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
  *             android:layout_width="match_parent"
  *             android:layout_height="70dp"
  *             app:contentColor="@color/poke_bug"
@@ -34,7 +34,7 @@ import kotlin.math.tan
  *                 app:layout_constraintStart_toStartOf="parent"
  *                 app:layout_constraintTop_toTopOf="parent" />
  *
- *         </poke.rogue.helper.presentation.type.PokeParallelogramLayout>
+ *         </poke.rogue.helper.presentation.type.view.PokeParallelogramLayout>
  * ```
  * */
 class PokeParallelogramLayout
