@@ -10,8 +10,8 @@ import poke.rogue.helper.R
 fun ImageView.setImage(imageUrl: String?) {
     Glide.with(context)
         .load(imageUrl)
-        .placeholder(R.drawable.ic_launcher_background) // TODO 적절한 이미지로 바꾸쇼
-        .error(R.drawable.ic_launcher_foreground) // TODO 적절한 이미지로 바꾸쇼
+        .placeholder(R.drawable.icon_poke)
+        .error(R.drawable.icon_error)
         .into(this)
 }
 
