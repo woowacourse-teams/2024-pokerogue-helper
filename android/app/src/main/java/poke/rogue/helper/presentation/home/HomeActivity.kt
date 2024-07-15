@@ -15,10 +15,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbarHome.toolbar)
-        supportActionBar?.let { actionBar ->
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setDisplayShowTitleEnabled(false)
-        }
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         initClickListeners()
     }
@@ -30,39 +27,31 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.it_toolbar_pokerogue -> {
-                toast(stringOf(R.string.toolbar_pokerogue))
-                val intent =
-                    Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
-                startActivity(intent)
             R.id.item_toolbar_pokerogue -> {
+                navigateToPokeRogue()
             }
 
             R.id.item_toolbar_feedback -> {
-                toast(stringOf(R.string.toolbar_feedback))
+                toast(R.string.toolbar_feedback)
             }
         }
         return true
     }
 
     private fun initClickListeners() {
-        binding.ibtnHomeLogo.setOnClickListener {
-            toast(stringOf(R.string.toolbar_pokerogue))
-            val intent =
-                Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
-            startActivity(intent)
+        binding.apply {
+            ibtnHomeLogo.setOnClickListener { navigateToPokeRogue() }
+            cvHomeType.setOnClickListener { toast("상성 페이지로 이동") }
+            cvHomeDex.setOnClickListener { toast("도감 페이지로 이동") }
+            /*  cvHomeAbility.setOnClickListener { toast("특성 페이지로 이동") }
+              cvHomeTip.setOnClickListener { toast("꿀팁 페이지로 이동") }*/
         }
-        binding.cvHomeType.setOnClickListener {
-            toast("상성 페이지로 이동")
-        }
-        binding.cvHomeDex.setOnClickListener {
-            toast("도감 페이지로 이동")
-        }
-        binding.cvHomeAbility.setOnClickListener {
-            toast("특성 페이지로 이동")
-        }
-        binding.cvHomeTip.setOnClickListener {
-            toast("꿀팁 페이지로 이동")
-        }
+    }
+
+    private fun navigateToPokeRogue() {
+        toast(R.string.toolbar_pokerogue)
+        val intent =
+            Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
+        startActivity(intent)
     }
 }
