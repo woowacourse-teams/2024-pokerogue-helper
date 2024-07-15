@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Color Attributes -->
+    <declare-styleable name="Parallogram">
+        <attr name="topAngle" format="integer" />
+        <attr name="contentColor" format="color" />
+        <attr name="borderColor" format="color" />
+        <attr name="borderWidth" format="dimension" />
+    </declare-styleable>
+</resources>

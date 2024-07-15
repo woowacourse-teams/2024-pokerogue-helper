@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">PokeRogueHelper</string>
+    <!-- type -->
+    <string name="type_my_type_title">내 타입</string>
+    <string name="type_opponent_type_title">상대 타입</string>
+    <string name="type_result_title">상성 결과</string>
+    <string name="type_result_sub_title">* 1배는 표시되지 않습니다.</string>
+    <string name="type_item_result_subject_mine">%s 이(가)</string>
+    <string name="type_item_result_subject_opponent">%s 에게</string>
+    <string name="type_item_result_tail">%s 타입</string>
+    <!-- home -->
     <string name="toolbar_pokerogue">포켓로그 바로가기</string>
     <string name="toolbar_feedback">피드백 보내기</string>
     <string name="home_pokerogue_url">https://pokerogue.net/</string>
