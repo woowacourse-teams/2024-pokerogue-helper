@@ -1,4 +1,5 @@
 <resources>
+
     <style name="Base.Theme.PokeRogueHelper" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/poke_black</item> <!-- 우리 앱의 first color-->
         <item name="colorPrimaryContainer">@color/poke_grey_80</item> <!-- 상성 박스 color 같은거-->
