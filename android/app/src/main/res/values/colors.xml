@@ -27,4 +27,6 @@
     <color name="poke_normal">#999999</color>
     <color name="poke_dark">#4E4747</color>
     <color name="poke_fairy">#F4B4FA</color>
+    <color name="item_pokemon_background_gray">#242627</color>
+
 </resources>

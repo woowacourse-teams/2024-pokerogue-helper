@@ -1,0 +1,90 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pokemon"
+            type="poke.rogue.helper.presentation.poketmon2.PokemonUiModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_pokemon_corner_radius">
+
+        <ImageView
+            android:id="@+id/iv_item_poketmon_poketmon"
+            imageUrl="@{pokemon.imageUrl}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="20dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_item_poketmon_poketmon_name"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_item_poketmon_poketmon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{pokemon.name}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/iv_item_poketmon_poketmon"
+            app:layout_constraintStart_toStartOf="@id/iv_item_poketmon_poketmon"
+            app:layout_constraintTop_toBottomOf="@id/iv_item_poketmon_poketmon"
+            tools:text="피카츄" />
+
+        <TextView
+            android:id="@+id/tv_item_pokemon_main_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@{pokemon.type.get(0)}"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_item_pokemon_sub_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="전기" />
+
+        <TextView
+            android:id="@+id/tv_item_pokemon_sub_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@{pokemon.type.get(1)}"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_item_poketmon_poketmon"
+            app:layout_constraintEnd_toEndOf="@id/tv_item_pokemon_main_type"
+            tools:text="노말" />
+
+        <ImageView
+            android:id="@+id/iv_item_pokemon_main_type"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_main_type"
+            app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_main_type"
+            app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_main_type"
+            app:srcCompat="@drawable/temporal_small_round_electric_type" />
+
+        <ImageView
+            android:id="@+id/iv_item_pokemon_sub_type"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_sub_type"
+            app:layout_constraintEnd_toEndOf="@id/iv_item_pokemon_main_type"
+            app:layout_constraintStart_toStartOf="@id/iv_item_pokemon_main_type"
+            app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_sub_type"
+            app:srcCompat="@drawable/temporal_small_round_normal_type" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
