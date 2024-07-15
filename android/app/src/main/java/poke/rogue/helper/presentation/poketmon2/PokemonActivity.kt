@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.poketmon2
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -58,5 +59,11 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
         val intent =
             Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
         startActivity(intent)
+    }
+
+    companion object {
+        fun intent(context: Context): Intent {
+            return Intent(context, PokemonActivity::class.java)
+        }
     }
 }
