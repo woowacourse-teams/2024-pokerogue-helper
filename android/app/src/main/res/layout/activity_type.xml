@@ -169,7 +169,7 @@
                     app:layout_constraintStart_toStartOf="@id/tv_type_result_title"
                     app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
 
-                <poke.rogue.helper.presentation.type.TypeResultCustomView
+                <poke.rogue.helper.presentation.type.TypeResultView
                     android:id="@+id/included_type_strong"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

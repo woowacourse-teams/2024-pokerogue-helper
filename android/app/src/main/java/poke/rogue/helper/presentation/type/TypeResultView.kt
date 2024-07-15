@@ -15,7 +15,7 @@ import com.google.android.flexbox.JustifyContent
 import poke.rogue.helper.databinding.ItemTypeResultBinding
 import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
 
-class TypeResultCustomView(context: Context, attrs: AttributeSet) :
+class TypeResultView(context: Context, attrs: AttributeSet) :
     ConstraintLayout(context, attrs) {
     private val binding: ItemTypeResultBinding
     private val flexboxLayoutManager: FlexboxLayoutManager
