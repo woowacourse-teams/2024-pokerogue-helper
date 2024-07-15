@@ -44,10 +44,6 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     private fun initClickListeners() {
         binding.apply {
             ibtnHomeLogo.setOnClickListener { navigateToPokeRogue() }
-            cvHomeType.setOnClickListener { toast("상성 페이지로 이동") }
-            cvHomeDex.setOnClickListener { toast("도감 페이지로 이동") }
-            /*  cvHomeAbility.setOnClickListener { toast("특성 페이지로 이동") }
-              cvHomeTip.setOnClickListener { toast("꿀팁 페이지로 이동") }*/
             cvHomeType.setOnClickListener {
                 navigateToType()
             }
@@ -55,6 +51,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
                 navigateToDex()
             }
             cvHomeAbility.setOnClickListener {
+                navigateToAbility()
             }
             cvHomeTip.setOnClickListener { toast("꿀팁 페이지로 이동") }
         }
@@ -79,4 +76,9 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         }
     }
 
+    private fun navigateToAbility() {
+        AbilityActivity.intent(this).apply {
+            startActivity(this)
+        }
+    }
 }
