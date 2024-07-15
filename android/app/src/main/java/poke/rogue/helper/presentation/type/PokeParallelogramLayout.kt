@@ -37,80 +37,86 @@ import kotlin.math.tan
  *         </poke.rogue.helper.presentation.type.PokeParallelogramLayout>
  * ```
  * */
-class PokeParallelogramLayout @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyle: Int = 0
-) : ConstraintLayout(context, attrs, defStyle) {
+class PokeParallelogramLayout
+    @JvmOverloads
+    constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyle: Int = 0,
+    ) : ConstraintLayout(context, attrs, defStyle) {
+        private val boarderPaint: Paint = Paint()
+        private val contentPaint: Paint = Paint()
+        private var angleDegree: Double = 0.0
 
-    private val boarderPaint: Paint = Paint()
-    private val contentPaint: Paint = Paint()
-    private var angleDegree: Double = 0.0
-
-    init {
-        context.theme.obtainStyledAttributes(
-            attrs,
-            R.styleable.Parallogram,
-            0, 0
-        ).apply {
-            try {
-                val topAngle = getInteger(R.styleable.Parallogram_topAngle, 110)
-                require(topAngle >= 90) { "(topAngle=$topAngle) - 평행사변형의 윗 각도는 90도 이상이어야 합니다." }
-                initPaint(
-                    contentColor = getColor(
-                        R.styleable.Parallogram_contentColor,
-                        context.colorOf(android.R.color.transparent)
-                    ),
-                    borderColor = getColor(
-                        R.styleable.Parallogram_borderColor,
-                        context.colorOf(android.R.color.transparent)
-                    ),
-                    borderWidth = getDimension(
-                        R.styleable.Parallogram_borderWidth,
-                        0f.dp
+        init {
+            context.theme.obtainStyledAttributes(
+                attrs,
+                R.styleable.Parallogram,
+                0,
+                0,
+            ).apply {
+                try {
+                    val topAngle = getInteger(R.styleable.Parallogram_topAngle, 110)
+                    require(topAngle >= 90) { "(topAngle=$topAngle) - 평행사변형의 윗 각도는 90도 이상이어야 합니다." }
+                    initPaint(
+                        contentColor =
+                            getColor(
+                                R.styleable.Parallogram_contentColor,
+                                context.colorOf(android.R.color.transparent),
+                            ),
+                        borderColor =
+                            getColor(
+                                R.styleable.Parallogram_borderColor,
+                                context.colorOf(android.R.color.transparent),
+                            ),
+                        borderWidth =
+                            getDimension(
+                                R.styleable.Parallogram_borderWidth,
+                                0f.dp,
+                            ),
                     )
-                )
-                angleDegree = topAngle.toDouble() - 90
-            } finally {
-                recycle()
+                    angleDegree = topAngle.toDouble() - 90
+                } finally {
+                    recycle()
+                }
+            }
+        }
+
+        override fun dispatchDraw(canvas: Canvas) {
+            val path =
+                Path().apply {
+                    val offset = tan(Math.toRadians(angleDegree)).toFloat() * height
+                    moveTo(offset, 0f)
+                    lineTo(width.toFloat(), 0f)
+                    lineTo(width.toFloat() - offset, height.toFloat())
+                    lineTo(0f, height.toFloat())
+                    lineTo(offset, 0f)
+                    close()
+                }
+            canvas.drawPath(path, boarderPaint)
+            canvas.drawPath(path, contentPaint)
+            canvas.save()
+            canvas.clipPath(path)
+            super.dispatchDraw(canvas)
+            canvas.restore()
+        }
+
+        private fun initPaint(
+            @ColorInt contentColor: Int,
+            @ColorInt borderColor: Int,
+            @Dimension(unit = Dimension.PX) borderWidth: Float,
+        ) {
+            contentPaint.apply {
+                color = contentColor
+                style = Paint.Style.FILL
+                strokeJoin = Paint.Join.ROUND
+            }
+            if (borderWidth == 0f) return
+            boarderPaint.apply {
+                isAntiAlias = true
+                color = borderColor
+                style = Paint.Style.STROKE
+                strokeWidth = borderWidth
             }
         }
     }
-
-    override fun dispatchDraw(canvas: Canvas) {
-        val path = Path().apply {
-            val offset = tan(Math.toRadians(angleDegree)).toFloat() * height
-            moveTo(offset, 0f)
-            lineTo(width.toFloat(), 0f)
-            lineTo(width.toFloat() - offset, height.toFloat())
-            lineTo(0f, height.toFloat())
-            lineTo(offset, 0f)
-            close()
-        }
-        canvas.drawPath(path, boarderPaint)
-        canvas.drawPath(path, contentPaint)
-        canvas.save()
-        canvas.clipPath(path)
-        super.dispatchDraw(canvas)
-        canvas.restore()
-    }
-
-    private fun initPaint(
-        @ColorInt contentColor: Int,
-        @ColorInt borderColor: Int,
-        @Dimension(unit = Dimension.PX) borderWidth: Float
-    ) {
-        contentPaint.apply {
-            color = contentColor
-            style = Paint.Style.FILL
-            strokeJoin = Paint.Join.ROUND
-        }
-        if (borderWidth == 0f) return
-        boarderPaint.apply {
-            isAntiAlias = true
-            color = borderColor
-            style = Paint.Style.STROKE
-            strokeWidth = borderWidth
-        }
-    }
-}
