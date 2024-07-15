@@ -1,7 +1,7 @@
 package com.pokerogue.helper.pokemon.service;
 
 import com.pokerogue.helper.pokemon.domain.Pokemon;
-import com.pokerogue.helper.pokemon.domain.PokemonType;
+import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.List;
@@ -23,10 +23,10 @@ public class PokemonService {
     }
 
     private PokemonResponse toPokemonResponse(Pokemon pokemon) {
-        List<PokemonType> pokemonTypes = pokemon.getPokemonTypes();
+        List<PokemonTypeMapping> pokemonTypeMappings = pokemon.getPokemonTypeMappings();
 
-        List<String> typeImages = pokemonTypes.stream()
-                .map(PokemonType::getCircleTypeImage)
+        List<String> typeImages = pokemonTypeMappings.stream()
+                .map(PokemonTypeMapping::getCircleTypeImage)
                 .toList();
 
         return PokemonResponse.of(pokemon, typeImages);

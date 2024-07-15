@@ -51,5 +51,5 @@ public class Pokemon {
     private String image;
 
     @OneToMany(mappedBy = "pokemon", fetch = FetchType.EAGER)
-    private List<PokemonType> pokemonTypes;
+    private List<PokemonTypeMapping> pokemonTypeMappings;
 }
