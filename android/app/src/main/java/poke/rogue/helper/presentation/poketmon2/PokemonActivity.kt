@@ -13,7 +13,6 @@ import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
-import timber.log.Timber
 
 class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activity_pokemon) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,4 +61,3 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
         startActivity(intent)
     }
 }
-

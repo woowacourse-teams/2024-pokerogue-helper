@@ -16,7 +16,6 @@ import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonListFragment :
     BindingFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
-
     private val viewModel by viewModels<PokemonListViewModel>()
     private lateinit var pokemonAdapter: PokemonAdapter
 
@@ -39,8 +38,8 @@ class PokemonListFragment :
                 GridSpacingItemDecoration(
                     spanCount = spanCount,
                     spacing = 7.dp,
-                    includeEdge = false
-                )
+                    includeEdge = false,
+                ),
             )
         }
     }
@@ -56,7 +55,7 @@ class PokemonListFragment :
                 parentFragmentManager.commit {
                     replace<PokemonDetailFragment>(
                         R.id.fragment_container_pokemon,
-                        args = PokemonDetailFragment.bundleOf(pokemonId)
+                        args = PokemonDetailFragment.bundleOf(pokemonId),
                     )
                     addToBackStack(TAG)
                 }

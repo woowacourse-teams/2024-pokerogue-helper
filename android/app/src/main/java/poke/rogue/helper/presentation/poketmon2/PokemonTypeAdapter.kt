@@ -10,17 +10,17 @@ import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class PokemonTypeAdapter() :
     ListAdapter<TypeUiModel, PokemonTypeAdapter.PokemonTypeViewHolder>(typeComparator) {
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): PokemonTypeViewHolder = PokemonTypeViewHolder(
-        ItemTypeRightNameBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false,
+    ): PokemonTypeViewHolder =
+        PokemonTypeViewHolder(
+            ItemTypeRightNameBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ),
         )
-    )
 
     override fun onBindViewHolder(
         viewHolder: PokemonTypeViewHolder,
@@ -37,9 +37,10 @@ class PokemonTypeAdapter() :
     }
 
     companion object {
-        private val typeComparator = ItemDiffCallback<TypeUiModel>(
-            onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
-            onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
-        )
+        private val typeComparator =
+            ItemDiffCallback<TypeUiModel>(
+                onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
+                onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
+            )
     }
 }

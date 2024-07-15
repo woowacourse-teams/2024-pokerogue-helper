@@ -9,12 +9,11 @@ class LinearSpacingItemDecoration(
     private val includeEdge: Boolean = true,
     private val orientation: Orientation = Orientation.VERTICAL,
 ) : RecyclerView.ItemDecoration() {
-
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
-        state: RecyclerView.State
+        state: RecyclerView.State,
     ) {
         super.getItemOffsets(outRect, view, parent, state)
         val position = parent.getChildAdapterPosition(view)
@@ -29,6 +28,6 @@ class LinearSpacingItemDecoration(
 
     enum class Orientation {
         HORIZONTAL,
-        VERTICAL
+        VERTICAL,
     }
 }

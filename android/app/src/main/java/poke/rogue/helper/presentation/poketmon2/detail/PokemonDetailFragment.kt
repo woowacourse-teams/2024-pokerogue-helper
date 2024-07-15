@@ -16,7 +16,10 @@ class PokemonDetailFragment :
     private lateinit var pokemonTypeAdapter: PokemonTypeAdapter
     private lateinit var pokemonStatAdapter: PokemonStatAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
         binding.vm = viewModel
@@ -47,8 +50,10 @@ class PokemonDetailFragment :
 
     companion object {
         private const val POKEMON_ID = "pokemonId"
-        fun bundleOf(pokemonId: Long) = Bundle().apply {
-            putLong(POKEMON_ID, pokemonId)
-        }
+
+        fun bundleOf(pokemonId: Long) =
+            Bundle().apply {
+                putLong(POKEMON_ID, pokemonId)
+            }
     }
 }

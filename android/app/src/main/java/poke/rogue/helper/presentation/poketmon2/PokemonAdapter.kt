@@ -18,7 +18,7 @@ class PokemonAdapter(private val onClickPokeMonItem: PokeMonItemClickListener) :
                 parent,
                 false,
             ),
-            onClickPokeMonItem
+            onClickPokeMonItem,
         )
 
     override fun onBindViewHolder(

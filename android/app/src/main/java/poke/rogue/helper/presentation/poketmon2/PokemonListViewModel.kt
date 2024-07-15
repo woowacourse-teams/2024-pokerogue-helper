@@ -10,9 +10,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class PokemonListViewModel : ViewModel(), PokeMonItemClickListener {
-    private val _uiState = MutableStateFlow(
-        PokemonUiModel.dummys(50)
-    )
+    private val _uiState =
+        MutableStateFlow(
+            PokemonUiModel.dummys(50),
+        )
 
     val uiState: StateFlow<List<PokemonUiModel>> = _uiState.asStateFlow()
 

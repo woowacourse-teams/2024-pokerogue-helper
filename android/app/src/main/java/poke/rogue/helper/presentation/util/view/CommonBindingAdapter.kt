@@ -19,6 +19,7 @@ fun ImageView.setImage(imageUrl: String?) {
 fun ImageView.setImageRes(imageRes: Int) {
     setImageResource(imageRes)
 }
+
 @BindingAdapter("visible")
 fun View.setVisible(visible: Boolean) {
     visibility = if (visible) View.VISIBLE else View.GONE
