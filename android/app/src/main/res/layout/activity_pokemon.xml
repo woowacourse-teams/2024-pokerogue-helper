@@ -7,7 +7,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.poketmon.PokemonActivity">
+        android:background="@color/black"
+        tools:context=".presentation.poketmon2.PokemonActivity">
+
+        <include
+            android:id="@+id/toolbar_home"
+            layout="@layout/toolbar" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_pokemon"
