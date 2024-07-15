@@ -7,13 +7,13 @@
 
         <variable
             name="vm"
-            type="poke.rogue.helper.presentation.poketmon2.PokemonDetailViewModel" />
+            type="poke.rogue.helper.presentation.poketmon2.detail.PokemonDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.poketmon2.PokemonDetailFragment">
+        tools:context=".presentation.poketmon2.detail.PokemonDetailFragment">
 
         <ScrollView
             android:layout_width="match_parent"

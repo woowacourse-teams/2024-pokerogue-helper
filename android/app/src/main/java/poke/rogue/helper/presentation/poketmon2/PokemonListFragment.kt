@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonListBinding
 import poke.rogue.helper.presentation.base.BindingFragment
+import poke.rogue.helper.presentation.poketmon2.detail.PokemonDetailFragment
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp

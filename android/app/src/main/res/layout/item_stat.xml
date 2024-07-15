@@ -6,7 +6,7 @@
 
         <variable
             name="stat"
-            type="poke.rogue.helper.presentation.poketmon2.Stat" />
+            type="poke.rogue.helper.presentation.poketmon2.detail.Stat" />
     </data>
 
     <LinearLayout
