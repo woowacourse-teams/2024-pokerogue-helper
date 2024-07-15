@@ -42,8 +42,7 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
             }
 
             android.R.id.home -> {
-                toast("뒤로가기")
-                finish()
+                onBackPressedDispatcher.onBackPressed()
             }
         }
         return true

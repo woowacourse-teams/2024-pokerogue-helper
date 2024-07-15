@@ -15,7 +15,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:spanCount="10"
+            tools:spanCount="3"
             tools:listitem="@layout/item_pokemon_list_pokemon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

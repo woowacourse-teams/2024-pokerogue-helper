@@ -12,16 +12,17 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         android:paddingHorizontal="3dp"
-        android:paddingVertical="4dp">
+        android:paddingVertical="2dp">
 
         <ImageView
             android:id="@+id/iv_type_name_icon"
+            imageRes="@{type.typeIconResId}"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_gravity="center_vertical"
-            imageRes="@{type.typeIconResId}"
             tools:src="@drawable/img_property_tmp_2" />
 
         <Space
@@ -32,8 +33,9 @@
             android:id="@+id/tv_type_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
+            android:fontFamily="@font/pretendard_semibold"
             android:text="@{type.typeName}"
+            android:textSize="12sp"
             tools:text="페어리" />
     </LinearLayout>
 </layout>

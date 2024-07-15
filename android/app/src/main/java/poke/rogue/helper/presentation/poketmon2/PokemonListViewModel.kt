@@ -10,15 +10,18 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class PokemonListViewModel : ViewModel(), PokeMonItemClickListener {
-    private val _uiState = MutableStateFlow(List(50) { PokemonUiModel.DUMMY })
+    private val _uiState = MutableStateFlow(
+        PokemonUiModel.dummys(50)
+    )
+
     val uiState: StateFlow<List<PokemonUiModel>> = _uiState.asStateFlow()
 
     private val _navigateToDetailEvent = MutableSharedFlow<Long>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
-    override fun onClickPokemon(pokemonId: Int) {
+    override fun onClickPokemon(pokemonId: Long) {
         viewModelScope.launch {
-            _navigateToDetailEvent.emit(pokemonId.toLong())
+            _navigateToDetailEvent.emit(pokemonId)
         }
     }
 }

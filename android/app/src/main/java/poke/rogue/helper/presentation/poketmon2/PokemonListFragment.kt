@@ -2,6 +2,8 @@ package poke.rogue.helper.presentation.poketmon2
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
@@ -48,5 +50,20 @@ class PokemonListFragment :
                 pokemonAdapter.submitList(pokemonUiModels)
             }
         }
+        repeatOnStarted {
+            viewModel.navigateToDetailEvent.collect { pokemonId ->
+                parentFragmentManager.commit {
+                    replace<PokemonDetailFragment>(
+                        R.id.fragment_container_pokemon,
+                        args = PokemonDetailFragment.bundleOf(pokemonId)
+                    )
+                    addToBackStack(TAG)
+                }
+            }
+        }
+    }
+
+    companion object {
+        val TAG: String = PokemonListFragment::class.java.simpleName
     }
 }
