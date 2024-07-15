@@ -1,6 +1,6 @@
 package com.pokerogue.helper.pokemon.domain;
 
-import com.pokerogue.helper.type.domain.PokemonType;
+import com.pokerogue.helper.ability.domain.PokemonAbility;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "pokemon_type_mapping")
+@Table(name = "pokemon_ability_mapping")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PokemonTypeMapping {
+public class PokemonAbilityMapping {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,6 @@ public class PokemonTypeMapping {
     private Pokemon pokemon;
 
     @ManyToOne
-    @JoinColumn(name = "pokemon_type_id", nullable = false)
-    private PokemonType pokemonType;
-
-    public String getCircleTypeImage() {
-        return pokemonType.getCircleImage();
-    }
+    @JoinColumn(name = "pokemon_ability_id", nullable = false)
+    private PokemonAbility pokemonAbility;
 }

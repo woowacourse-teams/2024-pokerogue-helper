@@ -52,4 +52,7 @@ public class Pokemon {
 
     @OneToMany(mappedBy = "pokemon", fetch = FetchType.EAGER)
     private List<PokemonTypeMapping> pokemonTypeMappings;
+
+    @OneToMany(mappedBy = "pokemon", fetch = FetchType.LAZY)
+    private List<PokemonAbilityMapping> pokemonAbilityMappings;
 }
