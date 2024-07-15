@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="type"
+            name="typeItem"
             type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
     </data>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingVertical="4dp"
+        android:orientation="horizontal"
         android:paddingHorizontal="8dp"
-        android:orientation="horizontal">
+        android:paddingVertical="4dp">
 
-        <TextView
-            android:id="@+id/tv_type_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{type.name}"
-            tools:text="페어리" />
+        <ImageView
+            android:id="@+id/iv_type_name_icon"
+            imageRes="@{typeItem.typeIconResId}"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/img_property_tmp_2" />
 
         <Space
             android:layout_width="8dp"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/iv_type_name_icon"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/img_property_tmp_2" />
+        <TextView
+            android:id="@+id/tv_type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{typeItem.typeName}"
+            tools:text="페어리" />
 
     </LinearLayout>
 </layout>

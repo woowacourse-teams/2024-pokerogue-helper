@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.databinding.FragmentTypeChoiceBottomSheetBinding
-import poke.rogue.helper.local.dao.TypeDao
-import poke.rogue.helper.presentation.type.mapper.toSelectionUiModel
+import poke.rogue.helper.local.DummyTypeData
+import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
@@ -15,7 +15,7 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentTypeChoiceBottomSheetBinding? = null
     private val binding get() = requireNotNull(_binding)
     private val adapter by lazy {
-        TypeSelectionAdapter(TypeDao.allTypes.map { it.toSelectionUiModel() })
+        TypeSelectionAdapter(DummyTypeData.allTypes.map { it.toUiModel() })
     }
 
     override fun onCreateView(
@@ -38,7 +38,7 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
     private fun initAdapter() {
         binding.rvTypeChoice.adapter = adapter
         val decoration =
-            GridSpacingItemDecoration(spanCount = 4, spacing = 19.dp, includeEdge = false)
+            GridSpacingItemDecoration(spanCount = 4, spacing = 20.dp, includeEdge = false)
         binding.rvTypeChoice.addItemDecoration(decoration)
     }
 

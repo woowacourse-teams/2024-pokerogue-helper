@@ -8,7 +8,6 @@ class TypeSelectionViewHolder(
     private val binding: ItemTypeChoiceBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(typeItem: TypeUiModel) {
-        binding.ivTypeChoiceIcon.setImageResource(typeItem.iconResId)
-        binding.tvTypeChoiceName.text = typeItem.name
+        binding.typeItem = typeItem
     }
 }

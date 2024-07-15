@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_type_choice"
             android:orientation="horizontal"
-            android:padding="12dp"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

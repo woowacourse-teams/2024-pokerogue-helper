@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.type
+package poke.rogue.helper.presentation.type.view
 
 import android.content.Context
 import android.graphics.Color
@@ -14,6 +14,7 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import poke.rogue.helper.databinding.ItemTypeResultBinding
+import poke.rogue.helper.presentation.type.TypeResultAdapter
 import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
 
 class TypeResultView(context: Context, attrs: AttributeSet) :
