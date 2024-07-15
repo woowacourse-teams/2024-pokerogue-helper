@@ -4,5 +4,5 @@ enum class MatchedResult {
     NORMAL,
     STRONG,
     WEAK,
-    INVALID,
+    INEFFECTIVE,
 }
