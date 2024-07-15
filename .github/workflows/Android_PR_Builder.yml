@@ -2,7 +2,7 @@ name: Android PR Builder
 
 on:
   pull_request:
-    branches: [ an/develop ]
+    branches: [ an/develop, an/hack/develop ]
 
 jobs:
   build:
