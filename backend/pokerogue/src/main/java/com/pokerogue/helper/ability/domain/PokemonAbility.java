@@ -30,6 +30,6 @@ public class PokemonAbility {
     @Column(name = "short_description", nullable = false)
     private String shortDescription;
 
-    @OneToMany(mappedBy = "pokemon_ability", fetch = FetchType.LAZY)
-    private List<PokemonAbilityMapping> pokemonAbilityMapping;
+    @OneToMany(mappedBy = "pokemonAbility", fetch = FetchType.LAZY)
+    private List<PokemonAbilityMapping> pokemonAbilityMappings;
 }
