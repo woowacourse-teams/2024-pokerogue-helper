@@ -47,6 +47,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             setSupportActionBar(toolbarHome.toolbar)
             toolbarHome.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
             supportActionBar?.setDisplayShowTitleEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
         }
 
     private fun initClickListeners() {

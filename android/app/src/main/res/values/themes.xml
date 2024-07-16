@@ -7,8 +7,6 @@
         <item name="android:textColor">@color/poke_white</item>
         <item name="android:windowBackground">@color/poke_black</item>
 
-        <item name="android:textColor">@color/poke_white</item>
-        <item name="android:windowBackground">@color/poke_black</item>
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialogTheme</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/black</item>

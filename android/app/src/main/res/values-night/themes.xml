@@ -1,7 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.PokeRogueHelper" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/black</item> <!-- 우리 앱의 first color-->
+        <item name="colorPrimaryContainer">@color/poke_grey_80</item> <!-- 상성 박스 color 같은거-->
+        <item name="colorOnPrimaryContainer">@color/poke_white</item> <!-- 타입 박스 text color-->
+        <item name="android:textColor">@color/poke_white</item>
+        <item name="android:windowBackground">@color/poke_black</item>
+
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialogTheme</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@color/black</item>
     </style>
 </resources>

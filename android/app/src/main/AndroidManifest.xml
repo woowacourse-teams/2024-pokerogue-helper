@@ -12,7 +12,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_poke_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.PokeRogueHelper"
         tools:targetApi="31">

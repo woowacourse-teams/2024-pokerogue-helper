@@ -35,7 +35,10 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
             DummyTypeData.allTypes.map { it.toUiModel() },
             selectorType,
             object : TypeHandler {
-                override fun selectType(selectorType: SelectorType, selectedType: TypeUiModel) {
+                override fun selectType(
+                    selectorType: SelectorType,
+                    selectedType: TypeUiModel,
+                ) {
                     sharedViewModel.selectType(selectorType, selectedType)
                     dismiss()
                 }
@@ -51,17 +54,17 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
                 override fun deleteOpponent2Type() {
                     sharedViewModel.deleteOpponent2Type()
                 }
-
             },
         )
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        sharedViewModel = ViewModelProvider(
-            requireActivity(),
-            TypeViewModel.factory()
-        ).get(TypeViewModel::class.java)
+        sharedViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                TypeViewModel.factory(),
+            ).get(TypeViewModel::class.java)
     }
 
     override fun onCreateView(

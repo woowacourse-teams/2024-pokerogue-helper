@@ -26,8 +26,8 @@
         <ImageView
             android:id="@+id/iv_type_choice_icon"
             imageRes="@{typeItem.typeIconResId}"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintBottom_toTopOf="@id/tv_type_choice_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
