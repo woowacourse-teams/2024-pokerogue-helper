@@ -10,7 +10,9 @@ class AbilityViewHolder(private val binding: ItemAbilityDescriptionBinding) :
     fun bind(abilityUiModel: AbilityUiModel) {
         binding.ability = abilityUiModel
         binding.root.setOnClickListener {
-            AbilityDetailActivity.intent(binding.root.context).also(binding.root.context::startActivity)
+            AbilityDetailActivity.intent(binding.root.context
+            , abilityUiModel.id
+            ).also(binding.root.context::startActivity)
         }
     }
 }
