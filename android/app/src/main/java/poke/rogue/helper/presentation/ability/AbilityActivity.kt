@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2
+package poke.rogue.helper.presentation.ability
 
 import android.content.Context
 import android.content.Intent
@@ -6,24 +6,23 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import poke.rogue.helper.R
-import poke.rogue.helper.databinding.ActivityPokemonBinding
+import poke.rogue.helper.databinding.ActivityAbilityBinding
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
+import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
+import poke.rogue.helper.presentation.util.view.dp
 
-class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activity_pokemon) {
+class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activity_ability) {
+    private val adapter: AbilityAdapter by lazy { AbilityAdapter() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         initViews()
-        if (savedInstanceState == null) {
-            supportFragmentManager.commit {
-                replace<PokemonListFragment>(R.id.fragment_container_pokemon)
-            }
-        }
+        initAdapter()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -42,7 +41,7 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
             }
 
             android.R.id.home -> {
-                onBackPressedDispatcher.onBackPressed()
+                finish()
             }
         }
         return true
@@ -50,8 +49,8 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
 
     private fun initViews() =
         with(binding) {
-            setSupportActionBar(toolbarHome.toolbar)
-            toolbarHome.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
+            setSupportActionBar(toolbarAbility.toolbar)
+            toolbarAbility.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
             supportActionBar?.setDisplayShowTitleEnabled(false)
         }
 
@@ -61,9 +60,25 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
         startActivity(intent)
     }
 
+    private fun initAdapter() {
+        initDummyAbility()
+        val decoration =
+            GridSpacingItemDecoration(spanCount = 1, spacing = 23.dp, includeEdge = true)
+        binding.rvAbilityDescription.adapter = adapter
+        binding.rvAbilityDescription.addItemDecoration(decoration)
+    }
+
+    private fun initDummyAbility() {
+        adapter.submitList(
+            AbilityUiModel.dummys,
+        )
+    }
+
     companion object {
+        const val EXTRA_BACK_FROM_CURATION = "backFromCuration"
+
         fun intent(context: Context): Intent {
-            return Intent(context, PokemonActivity::class.java)
+            return Intent(context, AbilityActivity::class.java)
         }
     }
 }

@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.type
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTypeBinding
@@ -25,5 +27,11 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             supportFragmentManager,
             TypeSelectionBottomSheetFragment.TAG,
         )
+    }
+
+    companion object {
+        fun intent(context: Context): Intent {
+            return Intent(context, TypeActivity::class.java)
+        }
     }
 }
