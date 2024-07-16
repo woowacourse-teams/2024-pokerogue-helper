@@ -70,7 +70,7 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
 
     private fun initDummyAbility() {
         adapter.submitList(
-            AbilityUiModel.dummys
+            AbilityUiModel.dummys,
         )
     }
 

@@ -25,9 +25,10 @@ class AbilityDetailActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val id = intent.getLongExtra(ID, -1)
-        val dummy = AbilityUiModel.dummys.find {
-            it.id == id
-        } ?: AbilityUiModel.DUMMY
+        val dummy =
+            AbilityUiModel.dummys.find {
+                it.id == id
+            } ?: AbilityUiModel.DUMMY
         binding.abilityUiModel = dummy
         initViews()
         initAdapter()
@@ -83,9 +84,12 @@ class AbilityDetailActivity :
     }
 
     companion object {
-
         private const val ID = "id"
-        fun intent(context: Context, id: Long): Intent {
+
+        fun intent(
+            context: Context,
+            id: Long,
+        ): Intent {
             return Intent(context, AbilityDetailActivity::class.java).apply {
                 putExtra(ID, id)
             }

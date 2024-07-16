@@ -202,11 +202,12 @@ data class PokemonUiModel(
                     name = "니드리나",
                     imageUrl = DUMMY_POKEMON_IMAGE_URL,
                     types = listOf(TypeUiModel.POISON).map { it.typeName },
-                )
+                ),
             ).map {
                 it.copy(
-                    imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other" +
-                            "/official-artwork/${it.id}.png"
+                    imageUrl =
+                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other" +
+                            "/official-artwork/${it.id}.png",
                 )
             }
 
