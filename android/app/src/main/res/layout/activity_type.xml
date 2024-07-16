@@ -3,6 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.type.TypeViewModel" />
+
+        <variable
+            name="typeHandler"
+            type="poke.rogue.helper.presentation.type.TypeHandler" />
+
+        <variable
+            name="myType"
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
+
         <variable
             name="typeResult"
             type="poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel" />
@@ -12,9 +25,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/toolbar_home"
+            layout="@layout/toolbar" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +79,9 @@
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toTopOf="@id/gl_top" />
 
+
                 <ImageButton
+                    android:id="@+id/btn_refresh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_type_choice"
@@ -71,27 +91,51 @@
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintTop_toTopOf="@id/tv_type_my_type_title" />
 
-                <ImageView
-                    android:id="@+id/iv_type_my_type_content"
+                <View
+                    android:id="@+id/vw_type_my_type_container"
                     android:layout_width="0dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/bg_type_choice"
-                    android:padding="10dp"
-                    android:src="@drawable/img_property_tmp_1"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_type_my_type_title" />
 
-                <ImageButton
-                    android:id="@+id/btn_type_my_type_delete"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/ic_type_delete"
-                    app:layout_constraintEnd_toEndOf="@id/iv_type_my_type_content"
-                    app:layout_constraintTop_toTopOf="@id/iv_type_my_type_content" />
+                <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
+                    android:id="@+id/vw_type_my_type_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/vw_type_my_type_container"
+                    app:layout_constraintEnd_toEndOf="@id/vw_type_my_type_container"
+                    app:layout_constraintStart_toStartOf="@id/vw_type_my_type_container"
+                    app:layout_constraintTop_toTopOf="@id/vw_type_my_type_container">
+
+                    <ImageView
+                        android:id="@+id/iv_type_my_type_content"
+                        imageRes="@{myType.typeIconResId}"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="4dp"
+                        android:elevation="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btn_type_my_type_delete"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{() -> typeHandler.deleteMyType()}"
+                        android:src="@drawable/ic_type_delete"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </poke.rogue.helper.presentation.type.view.PokeParallelogramLayout>
 
                 <TextView
                     android:id="@+id/tv_type_opponent_type_title"
@@ -101,52 +145,104 @@
                     android:layout_marginTop="20dp"
                     android:text="@string/type_opponent_type_title"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/iv_type_my_type_content" />
+                    app:layout_constraintTop_toBottomOf="@id/vw_type_my_type_container" />
 
-                <ImageView
-                    android:id="@+id/iv_type_opponent_type_content_1"
+                <View
+                    android:id="@+id/vw_type_opponent_type_container_1"
                     android:layout_width="0dp"
                     android:layout_height="68dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/bg_type_choice"
-                    android:padding="10dp"
-                    app:layout_constraintEnd_toStartOf="@id/iv_type_opponent_type_content_2"
+                    app:layout_constraintEnd_toStartOf="@id/vw_type_opponent_type_container_2"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_type_opponent_type_title" />
 
-                <ImageButton
-                    android:id="@+id/btn_type_opponent_type_delete_1"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/ic_type_delete"
-                    app:layout_constraintEnd_toEndOf="@id/iv_type_opponent_type_content_1"
-                    app:layout_constraintTop_toTopOf="@id/iv_type_opponent_type_content_1" />
 
-                <ImageView
-                    android:id="@+id/iv_type_opponent_type_content_2"
+                <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
+                    android:id="@+id/vw_type_opponent_type_content_1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/vw_type_opponent_type_container_1"
+                    app:layout_constraintEnd_toEndOf="@id/vw_type_opponent_type_container_1"
+                    app:layout_constraintStart_toStartOf="@id/vw_type_opponent_type_container_1"
+                    app:layout_constraintTop_toTopOf="@id/vw_type_opponent_type_container_1">
+
+                    <ImageView
+                        android:id="@+id/iv_type_opponent_type_content_1"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="4dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/icon_type_bug"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btn_type_opponent_type_delete_1"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{() -> typeHandler.deleteOpponent1Type()}"
+                        android:src="@drawable/ic_type_delete"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </poke.rogue.helper.presentation.type.view.PokeParallelogramLayout>
+
+                <View
+                    android:id="@+id/vw_type_opponent_type_container_2"
                     android:layout_width="0dp"
                     android:layout_height="68dp"
                     android:layout_marginStart="4dp"
                     android:background="@drawable/bg_type_choice"
-                    android:padding="10dp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_type_opponent_type_content_1"
+                    app:layout_constraintBottom_toBottomOf="@id/vw_type_opponent_type_container_1"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintStart_toEndOf="@id/iv_type_opponent_type_content_1"
-                    app:layout_constraintTop_toTopOf="@id/iv_type_opponent_type_content_1" />
+                    app:layout_constraintStart_toEndOf="@id/vw_type_opponent_type_container_1"
+                    app:layout_constraintTop_toTopOf="@id/vw_type_opponent_type_container_1" />
 
-                <ImageButton
-                    android:id="@+id/btn_type_opponent_type_delete_2"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:src="@drawable/ic_type_delete"
-                    app:layout_constraintEnd_toEndOf="@id/iv_type_opponent_type_content_2"
-                    app:layout_constraintTop_toTopOf="@id/iv_type_opponent_type_content_2" />
+                <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
+                    android:id="@+id/vw_type_opponent_type_content_2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/vw_type_opponent_type_container_2"
+                    app:layout_constraintEnd_toEndOf="@id/vw_type_opponent_type_container_2"
+                    app:layout_constraintStart_toStartOf="@id/vw_type_opponent_type_container_2"
+                    app:layout_constraintTop_toTopOf="@id/vw_type_opponent_type_container_2">
+
+                    <ImageView
+                        android:id="@+id/iv_type_opponent_type_content_2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="4dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/icon_type_bug"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageButton
+                        android:id="@+id/btn_type_opponent_type_delete_2"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@android:color/transparent"
+                        android:onClick="@{() -> typeHandler.deleteOpponent2Type()}"
+                        android:src="@drawable/ic_type_delete"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </poke.rogue.helper.presentation.type.view.PokeParallelogramLayout>
+
 
                 <TextView
                     android:id="@+id/tv_type_result_title"
@@ -158,7 +254,7 @@
                     android:text="@string/type_result_title"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/iv_type_opponent_type_content_1" />
+                    app:layout_constraintTop_toBottomOf="@id/vw_type_opponent_type_container_1" />
 
                 <TextView
                     android:id="@+id/tv_type_result_sub_content"
@@ -171,15 +267,17 @@
                     app:layout_constraintStart_toStartOf="@id/tv_type_result_title"
                     app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
 
-                <poke.rogue.helper.presentation.type.TypeResultView
-                    android:id="@+id/type_result_strong"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_type_result"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    typeResult="@{typeResult}"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_type_result_sub_content" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -187,3 +285,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
+
