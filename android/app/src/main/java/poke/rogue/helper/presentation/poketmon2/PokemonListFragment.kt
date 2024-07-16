@@ -2,14 +2,22 @@ package poke.rogue.helper.presentation.poketmon2
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonListBinding
 import poke.rogue.helper.presentation.base.BindingFragment
+import poke.rogue.helper.presentation.poketmon2.detail.PokemonDetailFragment
+import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
+import poke.rogue.helper.presentation.util.view.dp
 
-class PokemonListFragment : BindingFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
-    private val pokemonAdapter by lazy { PokemonAdapter() }
+class PokemonListFragment :
+    BindingFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
+    private val viewModel by viewModels<PokemonListViewModel>()
+    private lateinit var pokemonAdapter: PokemonAdapter
 
     override fun onViewCreated(
         view: View,
@@ -17,27 +25,45 @@ class PokemonListFragment : BindingFragment<FragmentPokemonListBinding>(R.layout
     ) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        initDummyPokemons()
+        initObservers()
     }
 
     private fun initAdapter() {
-        binding?.apply {
-            // TODO: 화면 사이즈에 대응해서 spanCount 와 spacing 조정 여부
+        binding.rvPokemonList.apply {
             val spanCount = 3
-            val spacing = 7
-            val includeEdge = false
+            pokemonAdapter = PokemonAdapter(viewModel::onClickPokemon)
+            adapter = pokemonAdapter
+            layoutManager = GridLayoutManager(context, spanCount)
+            addItemDecoration(
+                GridSpacingItemDecoration(
+                    spanCount = spanCount,
+                    spacing = 7.dp,
+                    includeEdge = false,
+                ),
+            )
+        }
+    }
 
-            rvPokemonList.apply {
-                adapter = pokemonAdapter
-                layoutManager = GridLayoutManager(context, spanCount)
-                addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+    private fun initObservers() {
+        repeatOnStarted {
+            viewModel.uiState.collect { pokemonUiModels ->
+                pokemonAdapter.submitList(pokemonUiModels)
+            }
+        }
+        repeatOnStarted {
+            viewModel.navigateToDetailEvent.collect { pokemonId ->
+                parentFragmentManager.commit {
+                    replace<PokemonDetailFragment>(
+                        R.id.fragment_container_pokemon,
+                        args = PokemonDetailFragment.bundleOf(pokemonId),
+                    )
+                    addToBackStack(TAG)
+                }
             }
         }
     }
 
-    private fun initDummyPokemons() {
-        pokemonAdapter.submitList(
-            List(50) { PokemonUiModel.DUMMY },
-        )
+    companion object {
+        val TAG: String = PokemonListFragment::class.java.simpleName
     }
 }

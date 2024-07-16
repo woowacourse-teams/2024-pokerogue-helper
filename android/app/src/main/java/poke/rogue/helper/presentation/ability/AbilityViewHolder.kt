@@ -3,6 +3,7 @@ package poke.rogue.helper.presentation.ability
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemAbilityDescriptionBinding
+import poke.rogue.helper.presentation.ability.detail.AbilityDetailActivity
 
 class AbilityViewHolder(private val binding: ItemAbilityDescriptionBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -10,6 +11,7 @@ class AbilityViewHolder(private val binding: ItemAbilityDescriptionBinding) :
         binding.ability = abilityUiModel
         binding.root.setOnClickListener {
             Toast.makeText(binding.root.context, "특성 상세페이지로 이동합니다.", Toast.LENGTH_SHORT).show()
+            AbilityDetailActivity.intent(binding.root.context).also(binding.root.context::startActivity)
         }
     }
 }

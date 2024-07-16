@@ -13,4 +13,11 @@
         <item name="android:background">@drawable/bg_type_choice_bottom_sheet</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.CardView" parent="">
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeBottomLeft">20%</item>
+        <item name="cornerSizeBottomRight">20%</item>
+    </style>
+
 </resources>

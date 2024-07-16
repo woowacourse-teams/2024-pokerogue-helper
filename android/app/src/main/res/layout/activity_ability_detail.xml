@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="abilityDetail"
+            type="poke.rogue.helper.presentation.ability.detail.AbilityDetailUiModel" />
+
+        <variable
+            name="abilityUiModel"
+            type="poke.rogue.helper.presentation.ability.AbilityUiModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar_ability_detail"
+            layout="@layout/toolbar" />
+
+     <!--   <LinearLayout
+            android:id="@+id/item_ability_detail"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_ability_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/gl_ability_end"
+            app:layout_constraintStart_toStartOf="@+id/gl_ability_start">
+
+            <TextView
+                android:id="@+id/tv_ability_title"
+                android:layout_width="102dp"
+                android:layout_height="67dp"
+                android:background="@drawable/bg_ability_title"
+                android:backgroundTint="@color/poke_grey_80"
+                android:gravity="center"
+                android:text="@{abilityDetail.title}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="악취" />
+
+            <TextView
+                android:id="@+id/tv_ability_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="29dp"
+                android:text="@{abilityDetail.fullDescription}"
+                android:textSize="16sp"
+                tools:text="특성을 대충 작성한 글입니다~~" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_ability_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_ability_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="24dp" />
+-->
+        <include
+            android:id="@+id/item_ability_detail"
+            layout="@layout/item_ability_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_ability_detail"
+            bind:ability="@{abilityUiModel}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_ability_detail_pokemon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="23dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_ability_detail"
+            app:spanCount="3"
+            tools:listitem="@layout/item_ability_detail_pokemon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

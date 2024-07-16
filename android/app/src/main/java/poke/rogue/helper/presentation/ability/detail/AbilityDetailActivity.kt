@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.ability
+package poke.rogue.helper.presentation.ability.detail
 
 import android.content.Context
 import android.content.Intent
@@ -7,20 +7,24 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import poke.rogue.helper.R
-import poke.rogue.helper.databinding.ActivityAbilityBinding
+import poke.rogue.helper.databinding.ActivityAbilityDetailBinding
+import poke.rogue.helper.presentation.ability.AbilityUiModel
 import poke.rogue.helper.presentation.base.BindingActivity
+import poke.rogue.helper.presentation.poketmon2.PokemonUiModel
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activity_ability) {
-    private val adapter: AbilityAdapter by lazy { AbilityAdapter() }
+// todo abilityDetailUiModel, 포켓몬 클릭시 도감상세 페이지로 이동?
+class AbilityDetailActivity :
+    BindingActivity<ActivityAbilityDetailBinding>(R.layout.activity_ability_detail) {
+    private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        binding.abilityUiModel = AbilityUiModel.DUMMY
         initViews()
         initAdapter()
     }
@@ -48,13 +52,6 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
         return true
     }
 
-    private fun initViews() =
-        with(binding) {
-            setSupportActionBar(toolbarAbility.toolbar)
-            toolbarAbility.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-        }
-
     private fun navigateToPokeRogue() {
         toast(R.string.toolbar_pokerogue)
         val intent =
@@ -62,25 +59,29 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
         startActivity(intent)
     }
 
+    private fun initViews() =
+        with(binding) {
+            setSupportActionBar(toolbarAbilityDetail.toolbar)
+            toolbarAbilityDetail.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+        }
+
     private fun initAdapter() {
-        initDummyAbility()
-        val decoration =
-            GridSpacingItemDecoration(spanCount = 1, spacing = 23.dp, includeEdge = true)
-        binding.rvAbilityDescription.adapter = adapter
-        binding.rvAbilityDescription.addItemDecoration(decoration)
+        initDummy()
+        val decoration = GridSpacingItemDecoration(3, 15.dp, false)
+        binding.rvAbilityDetailPokemon.adapter = adapter
+        binding.rvAbilityDetailPokemon.addItemDecoration(decoration)
     }
 
-    private fun initDummyAbility() {
+    private fun initDummy() {
         adapter.submitList(
-            List(50) { AbilityUiModel.DUMMY },
+            PokemonUiModel.dummys(10),
         )
     }
 
     companion object {
-        const val EXTRA_BACK_FROM_CURATION = "backFromCuration"
-
         fun intent(context: Context): Intent {
-            return Intent(context, AbilityActivity::class.java)
+            return Intent(context, AbilityDetailActivity::class.java)
         }
     }
 }

@@ -11,6 +11,7 @@ import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.poketmon2.PokemonActivity
 import poke.rogue.helper.presentation.type.TypeActivity
+import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
 
@@ -19,7 +20,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbarHome.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
+        initViews()
         initClickListeners()
     }
 
@@ -41,6 +42,13 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         return true
     }
 
+    private fun initViews() =
+        with(binding) {
+            setSupportActionBar(toolbarHome.toolbar)
+            toolbarHome.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+        }
+
     private fun initClickListeners() {
         binding.apply {
             ibtnHomeLogo.setOnClickListener { navigateToPokeRogue() }
@@ -53,7 +61,7 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             cvHomeAbility.setOnClickListener {
                 navigateToAbility()
             }
-            cvHomeTip.setOnClickListener { toast("꿀팁 페이지로 이동") }
+            cvHomeTip.setOnClickListener { navigateToTip() }
         }
     }
 
@@ -80,5 +88,11 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         AbilityActivity.intent(this).apply {
             startActivity(this)
         }
+    }
+
+    private fun navigateToTip() {
+        val intent =
+            Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_tip_url)))
+        startActivity(intent)
     }
 }

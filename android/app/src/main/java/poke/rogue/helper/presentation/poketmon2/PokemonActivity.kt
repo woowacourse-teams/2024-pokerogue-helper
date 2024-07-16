@@ -6,6 +6,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityPokemonBinding
 import poke.rogue.helper.presentation.base.BindingActivity
@@ -17,11 +19,11 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.commit {
-//                replace<PokemonListFragment>(R.id.fragment_container_pokemon)
-//            }
-//        }
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace<PokemonListFragment>(R.id.fragment_container_pokemon)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -40,8 +42,7 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
             }
 
             android.R.id.home -> {
-                toast("뒤로가기")
-                finish()
+                onBackPressedDispatcher.onBackPressed()
             }
         }
         return true

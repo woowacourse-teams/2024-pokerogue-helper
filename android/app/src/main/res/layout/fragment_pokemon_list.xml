@@ -6,18 +6,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
         tools:context=".presentation.poketmon2.PokemonListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_list"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:spanCount="3"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:spanCount="3"
             tools:listitem="@layout/item_pokemon_list_pokemon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
