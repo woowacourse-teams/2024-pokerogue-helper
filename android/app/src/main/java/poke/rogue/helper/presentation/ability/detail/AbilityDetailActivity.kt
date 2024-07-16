@@ -45,7 +45,6 @@ class AbilityDetailActivity :
             }
 
             android.R.id.home -> {
-                toast("뒤로가기")
                 finish()
             }
         }

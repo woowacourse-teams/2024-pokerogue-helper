@@ -10,7 +10,6 @@ class AbilityViewHolder(private val binding: ItemAbilityDescriptionBinding) :
     fun bind(abilityUiModel: AbilityUiModel) {
         binding.ability = abilityUiModel
         binding.root.setOnClickListener {
-            Toast.makeText(binding.root.context, "특성 상세페이지로 이동합니다.", Toast.LENGTH_SHORT).show()
             AbilityDetailActivity.intent(binding.root.context).also(binding.root.context::startActivity)
         }
     }

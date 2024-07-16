@@ -41,7 +41,6 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
             }
 
             android.R.id.home -> {
-                toast("뒤로가기")
                 finish()
             }
         }
@@ -56,7 +55,6 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
         }
 
     private fun navigateToPokeRogue() {
-        toast(R.string.toolbar_pokerogue)
         val intent =
             Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
         startActivity(intent)
