@@ -25,9 +25,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/toolbar_home"
+            layout="@layout/toolbar" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +79,9 @@
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toTopOf="@id/gl_top" />
 
+
                 <ImageButton
+                    android:id="@+id/btn_refresh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_type_choice"
@@ -237,7 +244,6 @@
                 </poke.rogue.helper.presentation.type.view.PokeParallelogramLayout>
 
 
-
                 <TextView
                     android:id="@+id/tv_type_result_title"
                     style="@style/type_choice_title_text"
@@ -269,8 +275,8 @@
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_type_result_sub_content" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -279,3 +285,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
+

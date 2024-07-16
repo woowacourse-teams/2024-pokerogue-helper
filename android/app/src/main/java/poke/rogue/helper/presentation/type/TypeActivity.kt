@@ -2,7 +2,10 @@ package poke.rogue.helper.presentation.type
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import poke.rogue.helper.R
@@ -12,6 +15,8 @@ import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeSelectionUiState
 import poke.rogue.helper.presentation.type.typeselection.TypeSelectionBottomSheetFragment
 import poke.rogue.helper.presentation.util.context.colorOf
+import poke.rogue.helper.presentation.util.context.drawableOf
+import poke.rogue.helper.presentation.util.context.stringOf
 
 class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type) {
     private val viewModel: TypeViewModel by viewModels {
@@ -19,8 +24,43 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
     }
     private val typeResultAdapter by lazy { TypeResultAdapter() }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_toolbar_pokerogue -> {
+                navigateToPokeRogue()
+            }
+
+            R.id.item_toolbar_feedback -> {
+            }
+
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return true
+    }
+
+    private fun navigateToPokeRogue() {
+        val intent =
+            Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
+        startActivity(intent)
+    }
+
+    private fun initViews() =
+        with(binding) {
+            setSupportActionBar(toolbarHome.toolbar)
+            toolbarHome.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initViews()
         initAdapter()
         initListener()
         initObserver()
@@ -42,6 +82,9 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
 
         binding.vwTypeOpponentTypeContainer2.setOnClickListener {
             displayBottomSheet(SelectorType.OPPONENT2)
+        }
+        binding.btnRefresh.setOnClickListener {
+            viewModel.refresh()
         }
     }
 

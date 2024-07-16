@@ -124,6 +124,12 @@ class TypeViewModel(
         _opponentType2.value = TypeSelectionUiState.Idle
     }
 
+    fun refresh() {
+        _myType.value = TypeSelectionUiState.Idle
+        _opponentType1.value = TypeSelectionUiState.Idle
+        _opponentType2.value = TypeSelectionUiState.Idle
+    }
+
     companion object {
         fun factory() = BaseViewModelFactory { TypeViewModel(TypeRepository(LocalTypeDataSource())) }
     }

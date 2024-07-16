@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.databinding.FragmentTypeChoiceBottomSheetBinding
 import poke.rogue.helper.local.DummyTypeData
+import poke.rogue.helper.presentation.type.TypeHandler
 import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.presentation.type.model.SelectorType
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
@@ -32,13 +34,34 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
         TypeSelectionAdapter(
             DummyTypeData.allTypes.map { it.toUiModel() },
             selectorType,
-            sharedViewModel,
+            object : TypeHandler {
+                override fun selectType(selectorType: SelectorType, selectedType: TypeUiModel) {
+                    sharedViewModel.selectType(selectorType, selectedType)
+                    dismiss()
+                }
+
+                override fun deleteMyType() {
+                    sharedViewModel.deleteMyType()
+                }
+
+                override fun deleteOpponent1Type() {
+                    sharedViewModel.deleteOpponent1Type()
+                }
+
+                override fun deleteOpponent2Type() {
+                    sharedViewModel.deleteOpponent2Type()
+                }
+
+            },
         )
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        sharedViewModel = ViewModelProvider(requireActivity(), TypeViewModel.factory()).get(TypeViewModel::class.java)
+        sharedViewModel = ViewModelProvider(
+            requireActivity(),
+            TypeViewModel.factory()
+        ).get(TypeViewModel::class.java)
     }
 
     override fun onCreateView(
