@@ -8,6 +8,7 @@ import android.view.MenuItem
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.base.BindingActivity
+import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
 
@@ -41,7 +42,12 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
     private fun initClickListeners() {
         binding.apply {
             ibtnHomeLogo.setOnClickListener { navigateToPokeRogue() }
-            cvHomeType.setOnClickListener { toast("상성 페이지로 이동") }
+            cvHomeType.setOnClickListener {
+                toast("상성 페이지로 이동")
+                Intent(this@HomeActivity, TypeActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
             cvHomeDex.setOnClickListener { toast("도감 페이지로 이동") }
             /*  cvHomeAbility.setOnClickListener { toast("특성 페이지로 이동") }
               cvHomeTip.setOnClickListener { toast("꿀팁 페이지로 이동") }*/

@@ -8,7 +8,7 @@ import poke.rogue.helper.data.model.TypeInfo
 enum class TypeUiModel(
     val id: Int,
     val typeName: String,
-    @ColorRes val typeColor: Int,
+    @ColorRes val typeColorResId: Int,
     @DrawableRes val typeIconResId: Int,
 ) {
     NORMAL(0, "노말", R.color.poke_normal, R.drawable.icon_type_normal),
@@ -32,8 +32,8 @@ enum class TypeUiModel(
     ;
 
     companion object {
-        fun fromId(id: Int): TypeUiModel? {
-            return entries.find { it.id == id }
+        fun fromId(id: Int): TypeUiModel {
+            return entries.find { it.id == id } ?: throw IllegalArgumentException("Not found Type")
         }
 
         fun fromName(typeName: String): TypeUiModel? {

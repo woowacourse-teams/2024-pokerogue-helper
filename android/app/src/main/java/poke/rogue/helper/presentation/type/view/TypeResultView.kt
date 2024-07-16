@@ -14,7 +14,7 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import poke.rogue.helper.databinding.ItemTypeResultBinding
-import poke.rogue.helper.presentation.type.TypeResultAdapter
+import poke.rogue.helper.presentation.type.TypeResultItemAdapter
 import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
 
 class TypeResultView(context: Context, attrs: AttributeSet) :
@@ -43,7 +43,7 @@ class TypeResultView(context: Context, attrs: AttributeSet) :
             }
         binding.ivResultMyType.setImageResource(typeResult.typeIconResId)
         binding.rvResultMatchedTypes.layoutManager = flexboxLayoutManager
-        binding.rvResultMatchedTypes.adapter = TypeResultAdapter(typeResult.matchedItem)
+        binding.rvResultMatchedTypes.adapter = TypeResultItemAdapter(typeResult.matchedItem)
     }
 
     companion object {

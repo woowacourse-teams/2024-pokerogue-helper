@@ -119,4 +119,11 @@ class PokeParallelogramLayout
                 strokeWidth = borderWidth
             }
         }
+
+        fun setContentColor(
+            @ColorInt color: Int,
+        ) {
+            contentPaint.color = color
+            invalidate()
+        }
     }
