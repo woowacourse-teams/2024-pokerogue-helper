@@ -29,7 +29,7 @@ fun TypeMatchedResult.toUiModel(
     typeId: Int,
     isMyType: Boolean,
 ): TypeMatchedResultUiModel {
-    val inputType = TypeUiModel.fromId(typeId)
+    val inputType = TypeUiModel.fromId(typeId) ?: throw IllegalArgumentException("Unknown type ID: $typeId")
     val editedTypeName =
         inputType.typeName +
             if (isMyType) {

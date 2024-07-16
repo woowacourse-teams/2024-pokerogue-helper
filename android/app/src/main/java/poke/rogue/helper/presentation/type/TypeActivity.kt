@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.type
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -49,7 +51,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
                 is TypeSelectionUiState.Selected -> {
                     val data = uiState.selectedType
                     binding.vwTypeMyTypeContent.visibility = View.VISIBLE
-                    binding.vwTypeMyTypeContent.setContentColor(this.colorOf(data.typeColorResId))
+                    binding.vwTypeMyTypeContent.setContentColor(this.colorOf(data.typeColor))
                     binding.ivTypeMyTypeContent.setImageResource(uiState.selectedType.typeIconResId)
                 }
 
@@ -64,7 +66,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
                 is TypeSelectionUiState.Selected -> {
                     val data = uiState.selectedType
                     binding.vwTypeOpponentTypeContent1.visibility = View.VISIBLE
-                    binding.vwTypeOpponentTypeContent1.setContentColor(this.colorOf(data.typeColorResId))
+                    binding.vwTypeOpponentTypeContent1.setContentColor(this.colorOf(data.typeColor))
                     binding.ivTypeOpponentTypeContent1.setImageResource(uiState.selectedType.typeIconResId)
                 }
 
@@ -79,7 +81,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
                 is TypeSelectionUiState.Selected -> {
                     val data = uiState.selectedType
                     binding.vwTypeOpponentTypeContent2.visibility = View.VISIBLE
-                    binding.vwTypeOpponentTypeContent2.setContentColor(this.colorOf(data.typeColorResId))
+                    binding.vwTypeOpponentTypeContent2.setContentColor(this.colorOf(data.typeColor))
                     binding.ivTypeOpponentTypeContent2.setImageResource(uiState.selectedType.typeIconResId)
                 }
 
@@ -99,5 +101,11 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             supportFragmentManager,
             TypeSelectionBottomSheetFragment.TAG,
         )
+    }
+
+    companion object {
+        fun intent(context: Context): Intent {
+            return Intent(context, TypeActivity::class.java)
+        }
     }
 }

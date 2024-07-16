@@ -10,17 +10,17 @@ import poke.rogue.helper.R
 fun ImageView.setImage(imageUrl: String?) {
     Glide.with(context)
         .load(imageUrl)
-        .placeholder(R.drawable.ic_launcher_background) // TODO 적절한 이미지로 바꾸쇼
-        .error(R.drawable.ic_launcher_foreground) // TODO 적절한 이미지로 바꾸쇼
+        .placeholder(R.drawable.icon_poke)
+        .error(R.drawable.icon_error)
         .into(this)
-}
-
-@BindingAdapter("visible")
-fun View.setVisible(visible: Boolean) {
-    visibility = if (visible) View.VISIBLE else View.GONE
 }
 
 @BindingAdapter("imageRes")
 fun ImageView.setImageRes(imageRes: Int) {
     setImageResource(imageRes)
+}
+
+@BindingAdapter("visible")
+fun View.setVisible(visible: Boolean) {
+    visibility = if (visible) View.VISIBLE else View.GONE
 }
