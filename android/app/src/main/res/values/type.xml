@@ -1,51 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--    TODO 이거 확정해야 할듯-->
     <style name="TextAppearance.Poke" parent="">
         <item name="font">@font/pretendard_medium</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:letterSpacing">-0.02</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
-    <style name="TextAppearance.Poke.HeadLine">
-        <item name="android:textSize">24sp</item>
-        <item name="lineHeight">32sp</item>
+    <style name="TextAppearance.Poke.TitleLarge">
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
     </style>
 
-    <style name="TextAppearance.Poke.HeadLineBold">
+    <style name="TextAppearance.Poke.TitleLargeBold">
         <item name="font">@font/pretendard_semibold</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">24sp</item>
-        <item name="lineHeight">32sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
     </style>
 
     <style name="TextAppearance.Poke.Title">
-        <item name="android:textSize">20sp</item>
-        <item name="lineHeight">28sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="lineHeight">22.5sp</item>
     </style>
 
     <style name="TextAppearance.Poke.TitleBold">
         <item name="font">@font/pretendard_semibold</item>
-        <item name="android:textSize">20sp</item>
-        <item name="lineHeight">28sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="lineHeight">22.5sp</item>
     </style>
 
-    <style name="TextAppearance.Poke.Body">
+    <style name="TextAppearance.Poke.Description">
+        <item name="android:textSize">15sp</item>
+        <item name="lineHeight">22.5sp</item>
+    </style>
+
+    <style name="TextAppearance.Poke.CaptionLarge">
         <item name="android:textSize">8sp</item>
         <item name="lineHeight">12sp</item>
     </style>
 
-    <style name="TextAppearance.Poke.BodyBold">
+    <style name="TextAppearance.Poke.CaptionLargeBold">
         <item name="font">@font/pretendard_semibold</item>
         <item name="android:textSize">8sp</item>
         <item name="lineHeight">12sp</item>
     </style>
 
-    <style name="TextAppearance.Poke.Popup">
-        <item name="android:textSize">12sp</item>
-        <item name="lineHeight">22sp</item>
+    <style name="TextAppearance.Poke.Caption">
+        <item name="android:textSize">7sp</item>
+        <item name="lineHeight">10.5sp</item>
+    </style>
+
+    <style name="TextAppearance.Poke.CaptionBold">
+        <item name="font">@font/pretendard_semibold</item>
+        <item name="android:textSize">7sp</item>
+        <item name="lineHeight">10.5sp</item>
     </style>
 
 </resources>
