@@ -15,7 +15,7 @@ enum class TypeUiModel(
     FIRE(1, "불꽃", R.color.poke_fire, R.drawable.icon_type_fire),
     WATER(2, "물", R.color.poke_water, R.drawable.icon_type_water),
     ELECTRIC(3, "전기", R.color.poke_electric, R.drawable.icon_type_electric),
-    GRASS(4, "풀", R.color.poke_grass, R.drawable.icon_type_green),
+    GRASS(4, "풀", R.color.poke_grass, R.drawable.icon_type_grass),
     ICE(5, "얼음", R.color.poke_ice, R.drawable.icon_type_ice),
     FIGHTING(6, "격투", R.color.poke_fighting, R.drawable.icon_type_fighting),
     POISON(7, "독", R.color.poke_poison, R.drawable.icon_type_poison),
