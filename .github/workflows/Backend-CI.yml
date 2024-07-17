@@ -11,6 +11,8 @@ permissions:
 
 jobs:
   build:
+    env:
+      working-directory: ./backend/pokerogue
     runs-on: ubuntu-latest
     steps:
 
@@ -25,6 +27,8 @@ jobs:
 
       - name: Run Test
         run: ./gradlew clean test
+        working-directory: ${{ env.working-directory }}
 
       - name: Build with Gradle
         run: ./gradlew bootJar
+        working-directory: ${{ env.working-directory }}
