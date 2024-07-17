@@ -13,7 +13,8 @@ import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeSelectionUiState
-import poke.rogue.helper.presentation.type.typeselection.TypeSelectionBottomSheetFragment
+import poke.rogue.helper.presentation.type.result.TypeResultAdapter
+import poke.rogue.helper.presentation.type.selection.TypeSelectionBottomSheetFragment
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf

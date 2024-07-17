@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.type
+package poke.rogue.helper.presentation.type.result
 
 import android.text.SpannableStringBuilder
 import android.text.Spanned

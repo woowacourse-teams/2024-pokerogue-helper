@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.type.typeselection
+package poke.rogue.helper.presentation.type.selection
 
 import android.content.Context
 import android.os.Build
