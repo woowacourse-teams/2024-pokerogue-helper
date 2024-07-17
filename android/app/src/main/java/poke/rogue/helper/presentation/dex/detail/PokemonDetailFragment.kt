@@ -12,7 +12,10 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class PokemonDetailFragment :
     BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
-    private val viewModel by viewModels<PokemonDetailViewModel>()
+    private val viewModel by viewModels<PokemonDetailViewModel> {
+        PokemonDetailViewModel.factory()
+    }
+
     private lateinit var pokemonTypeAdapter: PokemonTypeAdapter
     private lateinit var pokemonStatAdapter: PokemonStatAdapter
 
