@@ -38,14 +38,13 @@ jobs:
         working-directory: ${{ env.working-directory }}
 
       - name: Docker build and push
-        working-directory: ${{ env.docker-directory }}
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          
-          docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} .
+
+          docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
           docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
           
-          docker build -f dockerfile-nginx -t ${{ secrets.DOCKER_NGINX_IMAGE }} .
+          docker build -t ${{ secrets.DOCKER_NGINX_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-nginx ./backend/pokerogue
           docker push ${{ secrets.DOCKER_NGINX_IMAGE }}
 
       - name: Deploy
