@@ -20,6 +20,10 @@ class PokemonListFragment :
         PokemonListViewModel.factory()
     }
 
+    private val pokemonAdapter: PokemonAdapter by lazy {
+        PokemonAdapter(viewModel::onClickPokemon)
+    }
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
