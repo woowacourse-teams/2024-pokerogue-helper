@@ -4,8 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <!--    poke basic color-->
     <color name="poke_white">#FDFDFDFD</color>
-    <color name="poke_black">#2B2B2B</color>
+    <color name="poke_black">#000000</color>
     <color name="poke_grey_80">#242627</color>
+    <color name="poke_grey_60">#969696</color>
     <color name="poke_green_20">#74CC73</color>
     <color name="poke_red_20">#F66868</color>
     <!--    pokemon type-->
@@ -27,4 +28,6 @@
     <color name="poke_normal">#999999</color>
     <color name="poke_dark">#4E4747</color>
     <color name="poke_fairy">#F4B4FA</color>
+    <color name="item_pokemon_background_gray">#242627</color>
+
 </resources>

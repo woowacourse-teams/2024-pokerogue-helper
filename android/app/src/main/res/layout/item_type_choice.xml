@@ -4,17 +4,30 @@
 
     <data>
 
+        <variable
+            name="typeItem"
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
+
+        <variable
+            name="selector"
+            type="poke.rogue.helper.presentation.type.model.SelectorType" />
+
+        <variable
+            name="typeHandler"
+            type="poke.rogue.helper.presentation.type.TypeHandler" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> typeHandler.selectType(selector, typeItem)}">
 
         <ImageView
             android:id="@+id/iv_type_choice_icon"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:src="@drawable/img_type_tmp_1"
+            imageRes="@{typeItem.typeIconResId}"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintBottom_toTopOf="@id/tv_type_choice_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="풀"
+            android:text="@{typeItem.typeName}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/iv_type_choice_icon"
             app:layout_constraintStart_toStartOf="@id/iv_type_choice_icon"

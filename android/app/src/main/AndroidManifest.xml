@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".PokeRogueHelperApp"
@@ -12,10 +12,13 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_poke_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.PokeRogueHelper"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.poketmon2.PokemonActivity"
+            android:exported="true" />
         <activity
             android:name=".presentation.home.HomeActivity"
             android:exported="true">
@@ -27,6 +30,14 @@
         </activity>
         <activity
             android:name=".presentation.type.TypeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.ability.AbilityActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.ability.detail.AbilityDetailActivity"
             android:exported="false" />
     </application>
 

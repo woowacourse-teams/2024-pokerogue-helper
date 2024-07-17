@@ -2,29 +2,36 @@ package poke.rogue.helper.presentation.type
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import poke.rogue.helper.databinding.ItemTypeNameBinding
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import androidx.recyclerview.widget.ListAdapter
+import poke.rogue.helper.databinding.ItemTypeResultBinding
+import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
+import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class TypeResultAdapter(private val types: List<TypeUiModel> = listOf()) :
-    RecyclerView.Adapter<TypeResultViewHolder>() {
+class TypeResultAdapter : ListAdapter<TypeMatchedResultUiModel, TypeResultViewHolder>(typeComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): TypeResultViewHolder {
-        val view = ItemTypeNameBinding.inflate(LayoutInflater.from(parent.context))
-        return TypeResultViewHolder(view)
-    }
+    ): TypeResultViewHolder =
+        TypeResultViewHolder(
+            ItemTypeResultBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ),
+        )
 
     override fun onBindViewHolder(
         holder: TypeResultViewHolder,
         position: Int,
     ) {
-        val item = types[position]
-        holder.bind(item)
+        holder.bind(getItem(position))
     }
 
-    override fun getItemCount(): Int {
-        return types.size
+    companion object {
+        val typeComparator =
+            ItemDiffCallback<TypeMatchedResultUiModel>(
+                onItemsTheSame = { oldItem, newItem -> oldItem.typeName == newItem.typeName },
+                onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
+            )
     }
 }
