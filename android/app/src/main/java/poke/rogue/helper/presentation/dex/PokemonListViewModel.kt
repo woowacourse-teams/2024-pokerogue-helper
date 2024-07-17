@@ -9,12 +9,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import poke.rogue.helper.data.datasource.PokemonListDataSource
+import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
+import poke.rogue.helper.presentation.dex.model.PokemonUiModel
+import poke.rogue.helper.presentation.dex.model.toUi
 
-class PokemonListViewModel : ViewModel(), PokeMonItemClickListener {
+class PokemonListViewModel(
+    pokemonListDataSource: PokemonListDataSource,
+) : ViewModel(), PokeMonItemClickListener {
     private val _uiState =
         MutableStateFlow(
-            PokemonUiModel.dummys(50),
+            pokemonListDataSource.pokemons().map(Pokemon::toUi),
         )
 
     val uiState: StateFlow<List<PokemonUiModel>> = _uiState.asStateFlow()
@@ -29,6 +35,9 @@ class PokemonListViewModel : ViewModel(), PokeMonItemClickListener {
     }
 
     companion object {
-        fun factory(): ViewModelProvider.Factory = BaseViewModelFactory { PokemonListViewModel() }
+        fun factory(pokemonListDataSource: PokemonListDataSource): ViewModelProvider.Factory =
+            BaseViewModelFactory {
+                PokemonListViewModel(pokemonListDataSource)
+            }
     }
 }

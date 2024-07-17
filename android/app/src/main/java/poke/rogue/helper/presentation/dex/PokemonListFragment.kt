@@ -7,6 +7,7 @@ import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
+import poke.rogue.helper.data.datasource.InMemoryPokemonListDataSource
 import poke.rogue.helper.databinding.FragmentPokemonListBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
@@ -17,7 +18,9 @@ import poke.rogue.helper.presentation.util.view.dp
 class PokemonListFragment :
     BindingFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
     private val viewModel by viewModels<PokemonListViewModel> {
-        PokemonListViewModel.factory()
+        PokemonListViewModel.factory(
+            pokemonListDataSource = InMemoryPokemonListDataSource(),
+        )
     }
 
     private val pokemonAdapter: PokemonAdapter by lazy {
