@@ -16,8 +16,8 @@ class PokemonDetailFragment :
         PokemonDetailViewModel.factory()
     }
 
-    private lateinit var pokemonTypeAdapter: PokemonTypeAdapter
-    private lateinit var pokemonStatAdapter: PokemonStatAdapter
+    private val pokemonTypeAdapter by lazy { PokemonTypeAdapter() }
+    private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
 
     override fun onViewCreated(
         view: View,
@@ -32,14 +32,8 @@ class PokemonDetailFragment :
     }
 
     private fun initAdapter() {
-        binding.rvTypeList.apply {
-            pokemonTypeAdapter = PokemonTypeAdapter()
-            adapter = pokemonTypeAdapter
-        }
-        binding.rvStatList.apply {
-            pokemonStatAdapter = PokemonStatAdapter()
-            adapter = pokemonStatAdapter
-        }
+        binding.rvTypeList.adapter = pokemonTypeAdapter
+        binding.rvStatList.adapter = pokemonStatAdapter
     }
 
     private fun initObservers() {
