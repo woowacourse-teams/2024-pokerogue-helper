@@ -6,11 +6,11 @@
 
         <variable
             name="pokemon"
-            type="poke.rogue.helper.presentation.poketmon2.PokemonUiModel" />
+            type="poke.rogue.helper.presentation.dex.PokemonUiModel" />
 
         <variable
             name="listener"
-            type="poke.rogue.helper.presentation.poketmon2.PokeMonItemClickListener" />
+            type="poke.rogue.helper.presentation.dex.PokeMonItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

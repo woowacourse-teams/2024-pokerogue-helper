@@ -1,11 +1,11 @@
-package poke.rogue.helper.presentation.poketmon2
+package poke.rogue.helper.presentation.dex
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import poke.rogue.helper.databinding.ItemStatBinding
-import poke.rogue.helper.presentation.poketmon2.detail.Stat
+import poke.rogue.helper.presentation.dex.detail.Stat
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class PokemonStatAdapter() :

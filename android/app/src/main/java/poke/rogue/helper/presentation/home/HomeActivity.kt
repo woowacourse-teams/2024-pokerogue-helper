@@ -9,7 +9,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.BindingActivity
-import poke.rogue.helper.presentation.poketmon2.PokemonActivity
+import poke.rogue.helper.presentation.dex.PokemonActivity
 import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf

@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2
+package poke.rogue.helper.presentation.dex
 
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemPokemonListPokemonBinding

@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2.detail
+package poke.rogue.helper.presentation.dex.detail
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

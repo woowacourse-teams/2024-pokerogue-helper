@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2.detail
+package poke.rogue.helper.presentation.dex.detail
 
 import android.os.Bundle
 import android.view.View
@@ -6,8 +6,8 @@ import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.base.BindingFragment
-import poke.rogue.helper.presentation.poketmon2.PokemonStatAdapter
-import poke.rogue.helper.presentation.poketmon2.PokemonTypeAdapter
+import poke.rogue.helper.presentation.dex.PokemonStatAdapter
+import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class PokemonDetailFragment :

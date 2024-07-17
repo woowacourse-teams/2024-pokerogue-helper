@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2.detail
+package poke.rogue.helper.presentation.dex.detail
 
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 

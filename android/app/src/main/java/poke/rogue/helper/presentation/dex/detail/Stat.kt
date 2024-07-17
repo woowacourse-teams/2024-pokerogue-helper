@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2.detail
+package poke.rogue.helper.presentation.dex.detail
 
 data class Stat(
     val name: String,

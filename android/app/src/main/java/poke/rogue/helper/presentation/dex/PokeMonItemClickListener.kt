@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2
+package poke.rogue.helper.presentation.dex
 
 fun interface PokeMonItemClickListener {
     fun onClickPokemon(pokemonId: Long)
