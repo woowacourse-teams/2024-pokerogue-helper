@@ -44,7 +44,7 @@ jobs:
           docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
           docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
           
-          docker build -t ${{ secrets.DOCKER_NGINX_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-nginx ./backend/pokerogue
+          docker build -t ${{ secrets.DOCKER_NGINX_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-nginx ./backend/pokerogue/docker
           docker push ${{ secrets.DOCKER_NGINX_IMAGE }}
 
       - name: Deploy
