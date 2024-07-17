@@ -16,8 +16,9 @@ import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonListFragment :
     BindingFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
-    private val viewModel by viewModels<PokemonListViewModel>()
-    private lateinit var pokemonAdapter: PokemonAdapter
+    private val viewModel by viewModels<PokemonListViewModel> {
+        PokemonListViewModel.factory()
+    }
 
     override fun onViewCreated(
         view: View,
@@ -31,7 +32,6 @@ class PokemonListFragment :
     private fun initAdapter() {
         binding.rvPokemonList.apply {
             val spanCount = 3
-            pokemonAdapter = PokemonAdapter(viewModel::onClickPokemon)
             adapter = pokemonAdapter
             layoutManager = GridLayoutManager(context, spanCount)
             addItemDecoration(
