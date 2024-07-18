@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.presentation.base.BindingActivity
@@ -79,29 +81,37 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             }
         }
 
-        viewModel.myType.observe(this) { uiState ->
-            binding.parallelogramTypeMyTypeContent.setVisible(uiState is TypeSelectionUiState.Selected)
-            if (uiState is TypeSelectionUiState.Selected) {
-                binding.myType = uiState.selectedType
+        lifecycleScope.launch {
+            viewModel.myType.collect { uiState ->
+                binding.parallelogramTypeMyTypeContent.setVisible(uiState is TypeSelectionUiState.Selected)
+                if (uiState is TypeSelectionUiState.Selected) {
+                    binding.myType = uiState.selectedType
+                }
             }
         }
 
-        viewModel.opponentType1.observe(this) { uiState ->
-            binding.parallelogramTypeOpponentTypeContent1.setVisible(uiState is TypeSelectionUiState.Selected)
-            if (uiState is TypeSelectionUiState.Selected) {
-                binding.opponent1Type = uiState.selectedType
+        lifecycleScope.launch {
+            viewModel.opponentType1.collect { uiState ->
+                binding.parallelogramTypeOpponentTypeContent1.setVisible(uiState is TypeSelectionUiState.Selected)
+                if (uiState is TypeSelectionUiState.Selected) {
+                    binding.opponent1Type = uiState.selectedType
+                }
             }
         }
 
-        viewModel.opponentType2.observe(this) { uiState ->
-            binding.parallelogramTypeOpponentTypeContent2.setVisible(uiState is TypeSelectionUiState.Selected)
-            if (uiState is TypeSelectionUiState.Selected) {
-                binding.opponent2Type = uiState.selectedType
+        lifecycleScope.launch {
+            viewModel.opponentType2.collect { uiState ->
+                binding.parallelogramTypeOpponentTypeContent2.setVisible(uiState is TypeSelectionUiState.Selected)
+                if (uiState is TypeSelectionUiState.Selected) {
+                    binding.opponent2Type = uiState.selectedType
+                }
             }
         }
 
-        viewModel.type.observe(this) { matchedResult ->
-            typeResultAdapter.submitList(matchedResult)
+        lifecycleScope.launch {
+            viewModel.type.collect { matchedResult ->
+                typeResultAdapter.submitList(matchedResult)
+            }
         }
     }
 

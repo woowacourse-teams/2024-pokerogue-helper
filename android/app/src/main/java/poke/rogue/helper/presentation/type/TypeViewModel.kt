@@ -1,14 +1,16 @@
 package poke.rogue.helper.presentation.type
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
 import poke.rogue.helper.data.repository.TypeRepository
@@ -21,82 +23,82 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 class TypeViewModel(
     private val typeRepository: TypeRepository,
 ) : ViewModel(), TypeHandler {
-    private val _myType = MutableLiveData<TypeSelectionUiState>(TypeSelectionUiState.Idle)
-    val myType: LiveData<TypeSelectionUiState> = _myType
+    private val _myType = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Idle)
+    val myType: StateFlow<TypeSelectionUiState> = _myType
 
-    private val _opponentType1 = MutableLiveData<TypeSelectionUiState>(TypeSelectionUiState.Idle)
-    val opponentType1: LiveData<TypeSelectionUiState> = _opponentType1
+    private val _opponentType1 = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Idle)
+    val opponentType1: StateFlow<TypeSelectionUiState> = _opponentType1
 
-    private val _opponentType2 = MutableLiveData<TypeSelectionUiState>(TypeSelectionUiState.Idle)
-    val opponentType2: LiveData<TypeSelectionUiState> = _opponentType2
+    private val _opponentType2 = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Idle)
+    val opponentType2: StateFlow<TypeSelectionUiState> = _opponentType2
 
     private val _typeEvent = MutableSharedFlow<TypeEvent>()
     val typeEvent: SharedFlow<TypeEvent> = _typeEvent.asSharedFlow()
 
-    private val _type: MutableLiveData<List<TypeMatchedResultUiModel>> = MutableLiveData()
-    val type: LiveData<List<TypeMatchedResultUiModel>> = _type
+    private val isAnyOpponentSelected
+        get() = opponentType1.value is TypeSelectionUiState.Selected || opponentType2.value is TypeSelectionUiState.Selected
 
-    init {
-        viewModelScope.launch {
-            combine(
-                myType.asFlow(),
-                opponentType1.asFlow(),
-                opponentType2.asFlow(),
-            ) { my, op1, op2 ->
-                when {
-                    // 1) my is empty, op1 and op2 are not empty
-                    my.isEmpty() && (op1.isEmpty().not() || op2.isEmpty().not()) -> {
-                        val results = mutableListOf<TypeMatchedResultUiModel>()
-                        if (op1 is TypeSelectionUiState.Selected) {
-                            val tmp1 = op1.selectedType.id
-                            results.addAll(
-                                typeRepository.findResultAgainstOpponent(tmp1)
-                                    .map { it.toUiModel(tmp1, false) },
-                            )
-                        }
-                        if (op2 is TypeSelectionUiState.Selected) {
-                            val tmp2 = op2.selectedType.id
-                            results.addAll(
-                                typeRepository.findResultAgainstOpponent(tmp2)
-                                    .map { it.toUiModel(tmp2, false) },
-                            )
-                        }
-                        results
-                    }
-                    // 2) my is not empty, op1 and op2 are empty
-                    !my.isEmpty() && op1.isEmpty() && op2.isEmpty() -> {
-                        val myId = (my as TypeSelectionUiState.Selected).selectedType.id
-                        typeRepository.findResultAgainstMyType(myId)
-                            .map { it.toUiModel(myId, true) }
-                    }
-                    // 3) my is not empty, op1 and/or op2 are not empty
-                    !my.isEmpty() && (op1.isEmpty().not() || op2.isEmpty().not()) -> {
-                        val myId = (my as TypeSelectionUiState.Selected).selectedType.id
-                        val results = mutableListOf<TypeMatchedResultUiModel>()
-                        val tmpIds = mutableListOf<Int>()
-                        if (op1 is TypeSelectionUiState.Selected) {
-                            val tmp1 = op1.selectedType.id
-                            tmpIds.add(tmp1)
-                        }
-                        if (op2 is TypeSelectionUiState.Selected) {
-                            val tmp2 = op2.selectedType.id
-                            tmpIds.add(tmp2)
-                        }
-                        results.addAll(
-                            typeRepository.findMatchedResult(myId, tmpIds)
-                                .map { it.toUiModel(myId, true) },
-                        )
-                        results
-                    }
+    val type: StateFlow<List<TypeMatchedResultUiModel>> =
+        combine(
+            myType,
+            opponentType1,
+            opponentType2,
+        ) { mine, opponent1, opponent2 ->
+            when {
+                mine.isEmpty() && isAnyOpponentSelected ->
+                    handleOpponentSelectionOnly(
+                        opponent1,
+                        opponent2,
+                    )
 
-                    else -> {
-                        emptyList()
-                    }
-                }
-            }.collect { result ->
-                _type.value = result
+                mine is TypeSelectionUiState.Selected && opponent1.isEmpty() && opponent2.isEmpty() ->
+                    handleMySelectionOnly(mine)
+
+                mine is TypeSelectionUiState.Selected && isAnyOpponentSelected ->
+                    handleBothSelection(mine, opponent1, opponent2)
+
+                else -> emptyList()
             }
+        }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
+    private fun handleOpponentSelectionOnly(
+        opponent1: TypeSelectionUiState,
+        opponent2: TypeSelectionUiState,
+    ): List<TypeMatchedResultUiModel> {
+        return findResultsForSelectedOpponent(opponent1) + findResultsForSelectedOpponent(opponent2)
+    }
+
+    private fun findResultsForSelectedOpponent(opponent: TypeSelectionUiState): List<TypeMatchedResultUiModel> {
+        if (opponent is TypeSelectionUiState.Selected) {
+            val selectedTypeId = opponent.selectedType.id
+
+            return typeRepository.findResultAgainstOpponent(selectedTypeId)
+                .map { it.toUiModel(selectedTypeId, isMyType = false) }
         }
+        return emptyList()
+    }
+
+    private fun handleMySelectionOnly(mine: TypeSelectionUiState.Selected): List<TypeMatchedResultUiModel> {
+        val selectedTypeId = mine.selectedType.id
+
+        return typeRepository.findResultAgainstMyType(selectedTypeId)
+            .map { it.toUiModel(selectedTypeId, isMyType = true) }
+    }
+
+    private fun handleBothSelection(
+        mine: TypeSelectionUiState.Selected,
+        opponent1: TypeSelectionUiState,
+        opponent2: TypeSelectionUiState,
+    ): List<TypeMatchedResultUiModel> {
+        val mySelectedId = mine.selectedType.id
+
+        val opponentIds =
+            listOf(opponent1, opponent2)
+                .filterIsInstance<TypeSelectionUiState.Selected>()
+                .map { it.selectedType.id }
+
+        return typeRepository.findMatchedResult(mySelectedId, opponentIds)
+            .map { it.toUiModel(mySelectedId, isMyType = true) }
     }
 
     private fun TypeSelectionUiState.isEmpty(): Boolean = this is TypeSelectionUiState.Idle
@@ -127,17 +129,21 @@ class TypeViewModel(
         selectorType: SelectorType,
         changedState: TypeSelectionUiState,
     ) {
-        when (selectorType) {
-            SelectorType.MINE -> _myType.value = changedState
-            SelectorType.OPPONENT1 -> _opponentType1.value = changedState
-            SelectorType.OPPONENT2 -> _opponentType2.value = changedState
+        viewModelScope.launch {
+            when (selectorType) {
+                SelectorType.MINE -> _myType.update { changedState }
+                SelectorType.OPPONENT1 -> _opponentType1.update { changedState }
+                SelectorType.OPPONENT2 -> _opponentType2.update { changedState }
+            }
         }
     }
 
     override fun removeAllSelections() {
-        _myType.value = TypeSelectionUiState.Idle
-        _opponentType1.value = TypeSelectionUiState.Idle
-        _opponentType2.value = TypeSelectionUiState.Idle
+        viewModelScope.launch {
+            _myType.update { TypeSelectionUiState.Idle }
+            _opponentType1.update { TypeSelectionUiState.Idle }
+            _opponentType2.update { TypeSelectionUiState.Idle }
+        }
     }
 
     companion object {
