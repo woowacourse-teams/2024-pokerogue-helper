@@ -4,9 +4,7 @@
 
     <data>
 
-        <variable
-            name="vm"
-            type="poke.rogue.helper.presentation.type.TypeViewModel" />
+        <import type="poke.rogue.helper.presentation.type.model.SelectorType" />
 
         <variable
             name="typeHandler"
@@ -17,8 +15,13 @@
             type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
 
         <variable
-            name="typeResult"
-            type="poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel" />
+            name="opponent1Type"
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
+
+        <variable
+            name="opponent2Type"
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,6 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_type_choice"
+                    android:onClick="@{() -> typeHandler.removeAllSelections()}"
                     android:padding="2dp"
                     android:src="@drawable/ic_type_reset"
                     app:layout_constraintBottom_toBottomOf="@id/tv_type_my_type_title"
@@ -97,6 +101,7 @@
                     android:layout_height="68dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/bg_type_choice"
+                    android:onClick="@{() -> typeHandler.showSelection(SelectorType.MINE)}"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_type_my_type_title" />
@@ -154,6 +159,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/bg_type_choice"
+                    android:onClick="@{() -> typeHandler.showSelection(SelectorType.OPPONENT1)}"
                     app:layout_constraintEnd_toStartOf="@id/vw_type_opponent_type_container_2"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -202,6 +208,7 @@
                     android:layout_height="68dp"
                     android:layout_marginStart="4dp"
                     android:background="@drawable/bg_type_choice"
+                    android:onClick="@{() -> typeHandler.showSelection(SelectorType.OPPONENT2)}"
                     app:layout_constraintBottom_toBottomOf="@id/vw_type_opponent_type_container_1"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toEndOf="@id/vw_type_opponent_type_container_1"

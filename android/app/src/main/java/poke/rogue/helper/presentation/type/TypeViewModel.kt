@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
@@ -13,9 +16,7 @@ import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.type.mapper.toUiModel
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
-import poke.rogue.helper.presentation.type.model.TypeSelectionUiState
 import poke.rogue.helper.presentation.type.model.TypeUiModel
-import poke.rogue.helper.presentation.util.Event
 
 class TypeViewModel(
     private val typeRepository: TypeRepository,
@@ -29,8 +30,8 @@ class TypeViewModel(
     private val _opponentType2 = MutableLiveData<TypeSelectionUiState>(TypeSelectionUiState.Idle)
     val opponentType2: LiveData<TypeSelectionUiState> = _opponentType2
 
-    private val _navigateEvent = MutableLiveData<Event<Boolean>>()
-    val navigateEvent: LiveData<Event<Boolean>> = _navigateEvent
+    private val _typeEvent = MutableSharedFlow<TypeEvent>()
+    val typeEvent: SharedFlow<TypeEvent> = _typeEvent.asSharedFlow()
 
     private val _type: MutableLiveData<List<TypeMatchedResultUiModel>> = MutableLiveData()
     val type: LiveData<List<TypeMatchedResultUiModel>> = _type
@@ -100,11 +101,32 @@ class TypeViewModel(
 
     private fun TypeSelectionUiState.isEmpty(): Boolean = this is TypeSelectionUiState.Idle
 
-    override fun selectType(
+    override fun showSelection(selectorType: SelectorType) {
+        viewModelScope.launch {
+            _typeEvent.emit(TypeEvent.ShowSelection(selectorType))
+        }
+    }
+
+    override fun applySelection(
         selectorType: SelectorType,
         selectedType: TypeUiModel,
     ) {
         val changedState = TypeSelectionUiState.Selected(selectedType)
+        updateSelectionState(selectorType, changedState)
+        viewModelScope.launch {
+            _typeEvent.emit(TypeEvent.HideSelection)
+        }
+    }
+
+    override fun removeSelection(selectorType: SelectorType) {
+        val changedState = TypeSelectionUiState.Idle
+        updateSelectionState(selectorType, changedState)
+    }
+
+    private fun updateSelectionState(
+        selectorType: SelectorType,
+        changedState: TypeSelectionUiState,
+    ) {
         when (selectorType) {
             SelectorType.MINE -> _myType.value = changedState
             SelectorType.OPPONENT1 -> _opponentType1.value = changedState
@@ -112,19 +134,7 @@ class TypeViewModel(
         }
     }
 
-    override fun deleteMyType() {
-        _myType.value = TypeSelectionUiState.Idle
-    }
-
-    override fun deleteOpponent1Type() {
-        _opponentType1.value = TypeSelectionUiState.Idle
-    }
-
-    override fun deleteOpponent2Type() {
-        _opponentType2.value = TypeSelectionUiState.Idle
-    }
-
-    fun refresh() {
+    override fun removeAllSelections() {
         _myType.value = TypeSelectionUiState.Idle
         _opponentType1.value = TypeSelectionUiState.Idle
         _opponentType2.value = TypeSelectionUiState.Idle

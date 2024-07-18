@@ -4,14 +4,14 @@ import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 
 interface TypeHandler {
-    fun selectType(
+    fun showSelection(selectorType: SelectorType)
+
+    fun applySelection(
         selectorType: SelectorType,
         selectedType: TypeUiModel,
     )
 
-    fun deleteMyType()
+    fun removeSelection(selectorType: SelectorType)
 
-    fun deleteOpponent1Type()
-
-    fun deleteOpponent2Type()
+    fun removeAllSelections()
 }

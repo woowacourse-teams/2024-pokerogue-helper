@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.databinding.FragmentTypeChoiceBottomSheetBinding
 import poke.rogue.helper.local.DummyTypeData
-import poke.rogue.helper.presentation.type.TypeHandler
+import poke.rogue.helper.presentation.type.TypeEvent
 import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
+import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
@@ -34,27 +34,7 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
         TypeSelectionAdapter(
             DummyTypeData.allTypes.map { it.toUiModel() },
             selectorType,
-            object : TypeHandler {
-                override fun selectType(
-                    selectorType: SelectorType,
-                    selectedType: TypeUiModel,
-                ) {
-                    sharedViewModel.selectType(selectorType, selectedType)
-                    dismiss()
-                }
-
-                override fun deleteMyType() {
-                    sharedViewModel.deleteMyType()
-                }
-
-                override fun deleteOpponent1Type() {
-                    sharedViewModel.deleteOpponent1Type()
-                }
-
-                override fun deleteOpponent2Type() {
-                    sharedViewModel.deleteOpponent2Type()
-                }
-            },
+            sharedViewModel,
         )
     }
 
@@ -82,13 +62,23 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        initObserver()
     }
 
     private fun initAdapter() {
         binding.rvTypeChoice.adapter = adapter
-        val decoration =
-            GridSpacingItemDecoration(spanCount = 4, spacing = 20.dp, includeEdge = false)
+        val decoration = GridSpacingItemDecoration(spanCount = 4, spacing = 20.dp, includeEdge = false)
         binding.rvTypeChoice.addItemDecoration(decoration)
+    }
+
+    private fun initObserver() {
+        repeatOnStarted {
+            sharedViewModel.typeEvent.collect {
+                if (it is TypeEvent.HideSelection) {
+                    dismiss()
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

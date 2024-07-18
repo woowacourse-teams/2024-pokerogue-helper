@@ -6,18 +6,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeSelectionUiState
 import poke.rogue.helper.presentation.type.result.TypeResultAdapter
 import poke.rogue.helper.presentation.type.selection.TypeSelectionBottomSheetFragment
-import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
+import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.setVisible
 
 class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type) {
     private val viewModel: TypeViewModel by viewModels {
@@ -47,8 +46,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
     }
 
     private fun navigateToPokeRogue() {
-        val intent =
-            Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
         startActivity(intent)
     }
 
@@ -57,81 +55,48 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             setSupportActionBar(toolbarHome.toolbar)
             toolbarHome.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
             supportActionBar?.setDisplayShowTitleEnabled(false)
+
+            typeHandler = viewModel
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
         initAdapter()
-        initListener()
         initObserver()
-        binding.typeHandler = viewModel
     }
 
     private fun initAdapter() {
         binding.rvTypeResult.adapter = typeResultAdapter
     }
 
-    private fun initListener() {
-        binding.vwTypeMyTypeContainer.setOnClickListener {
-            displayBottomSheet(SelectorType.MINE)
-        }
-
-        binding.vwTypeOpponentTypeContainer1.setOnClickListener {
-            displayBottomSheet(SelectorType.OPPONENT1)
-        }
-
-        binding.vwTypeOpponentTypeContainer2.setOnClickListener {
-            displayBottomSheet(SelectorType.OPPONENT2)
-        }
-        binding.btnRefresh.setOnClickListener {
-            viewModel.refresh()
-        }
-    }
-
     private fun initObserver() {
-        viewModel.myType.observe(this) { uiState ->
-            when (uiState) {
-                is TypeSelectionUiState.Selected -> {
-                    val data = uiState.selectedType
-                    binding.vwTypeMyTypeContent.visibility = View.VISIBLE
-                    binding.vwTypeMyTypeContent.setContentColor(this.colorOf(data.typeColor))
-                    binding.ivTypeMyTypeContent.setImageResource(uiState.selectedType.typeIconResId)
+        repeatOnStarted {
+            viewModel.typeEvent.collect {
+                if (it is TypeEvent.ShowSelection) {
+                    displayBottomSheet(it.selectorType)
                 }
+            }
+        }
 
-                is TypeSelectionUiState.Idle -> {
-                    binding.vwTypeMyTypeContent.visibility = View.GONE
-                }
+        viewModel.myType.observe(this) { uiState ->
+            binding.parallelogramTypeMyTypeContent.setVisible(uiState is TypeSelectionUiState.Selected)
+            if (uiState is TypeSelectionUiState.Selected) {
+                binding.myType = uiState.selectedType
             }
         }
 
         viewModel.opponentType1.observe(this) { uiState ->
-            when (uiState) {
-                is TypeSelectionUiState.Selected -> {
-                    val data = uiState.selectedType
-                    binding.vwTypeOpponentTypeContent1.visibility = View.VISIBLE
-                    binding.vwTypeOpponentTypeContent1.setContentColor(this.colorOf(data.typeColor))
-                    binding.ivTypeOpponentTypeContent1.setImageResource(uiState.selectedType.typeIconResId)
-                }
-
-                is TypeSelectionUiState.Idle -> {
-                    binding.vwTypeOpponentTypeContent1.visibility = View.GONE
-                }
+            binding.parallelogramTypeOpponentTypeContent1.setVisible(uiState is TypeSelectionUiState.Selected)
+            if (uiState is TypeSelectionUiState.Selected) {
+                binding.opponent1Type = uiState.selectedType
             }
         }
 
         viewModel.opponentType2.observe(this) { uiState ->
-            when (uiState) {
-                is TypeSelectionUiState.Selected -> {
-                    val data = uiState.selectedType
-                    binding.vwTypeOpponentTypeContent2.visibility = View.VISIBLE
-                    binding.vwTypeOpponentTypeContent2.setContentColor(this.colorOf(data.typeColor))
-                    binding.ivTypeOpponentTypeContent2.setImageResource(uiState.selectedType.typeIconResId)
-                }
-
-                is TypeSelectionUiState.Idle -> {
-                    binding.vwTypeOpponentTypeContent2.visibility = View.GONE
-                }
+            binding.parallelogramTypeOpponentTypeContent2.setVisible(uiState is TypeSelectionUiState.Selected)
+            if (uiState is TypeSelectionUiState.Selected) {
+                binding.opponent2Type = uiState.selectedType
             }
         }
 
