@@ -10,7 +10,6 @@ import poke.rogue.helper.presentation.dex.model.toUi
 import timber.log.Timber
 
 class PokemonDetailViewModel(private val pokemonDetailDataSource: PokemonDetailDataSource) : ViewModel() {
-    // TODO: 스켈레톤에 쓰일 pokemon Id 를 지정해주어야 하나?
     private val _uiState =
         MutableStateFlow(
             pokemonDetailDataSource.pokemonDetail(1).toUi(),
