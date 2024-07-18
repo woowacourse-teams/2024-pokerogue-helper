@@ -14,8 +14,12 @@ jobs:
     env:
       working-directory: ./backend/pokerogue
       docker-directory: ./backend/pokerogue/docker
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
+
+      - name: Change permission
+        run: |
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/2024-pokerogue-helper
 
       - name: Checkout
         uses: actions/checkout@v3
