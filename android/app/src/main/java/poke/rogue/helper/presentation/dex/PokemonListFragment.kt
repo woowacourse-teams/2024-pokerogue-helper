@@ -24,7 +24,7 @@ class PokemonListFragment :
     }
 
     private val pokemonAdapter: PokemonAdapter by lazy {
-        PokemonAdapter(viewModel::onClickPokemon)
+        PokemonAdapter(viewModel)
     }
 
     override fun onViewCreated(
