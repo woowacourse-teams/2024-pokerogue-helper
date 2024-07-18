@@ -13,7 +13,7 @@ fun MatchedResult.displayName(): String {
         MatchedResult.WEAK -> "약한"
         MatchedResult.INEFFECTIVE -> "무효한"
         MatchedResult.NORMAL -> throw IllegalStateException("")
-    } + " 타입"
+    }
 }
 
 fun MatchedResult.displayColor(): Int {
@@ -30,16 +30,8 @@ fun TypeMatchedResult.toUiModel(
     isMyType: Boolean,
 ): TypeMatchedResultUiModel {
     val inputType = TypeUiModel.fromId(typeId) ?: throw IllegalArgumentException("Unknown type ID: $typeId")
-    val editedTypeName =
-        inputType.typeName +
-            if (isMyType) {
-                "이(가)"
-            } else {
-                "에게"
-            }
-
     return TypeMatchedResultUiModel(
-        typeName = editedTypeName,
+        typeName = inputType.typeName,
         typeIconResId = inputType.typeIconResId,
         isMyType = isMyType,
         matchedResult = this.matchedResult.displayName(),

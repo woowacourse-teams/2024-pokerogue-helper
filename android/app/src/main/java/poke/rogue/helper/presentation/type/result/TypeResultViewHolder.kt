@@ -1,13 +1,15 @@
 package poke.rogue.helper.presentation.type.result
 
-import android.text.SpannableStringBuilder
+import android.content.Context
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
+import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
 import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
@@ -22,20 +24,51 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
     }
 
     fun bind(typeMatchedResult: TypeMatchedResultUiModel) {
-        binding.typeResult = typeMatchedResult
+        val context = binding.root.context
 
-        val textColor = binding.root.context.colorOf(typeMatchedResult.matchedResultColorResId)
+        bindTypeNameText(typeMatchedResult, context)
+        bindTypeStrengthText(typeMatchedResult, context)
+
+        binding.typeResult = typeMatchedResult
+        binding.rvResultMatchedTypes.layoutManager = flexboxLayoutManager
+        binding.rvResultMatchedTypes.adapter = TypeResultItemAdapter(typeMatchedResult.matchedItem)
+    }
+
+    private fun bindTypeNameText(
+        typeMatchedResult: TypeMatchedResultUiModel,
+        context: Context,
+    ) {
+        binding.tvResultMyTypeName.text =
+            if (typeMatchedResult.isMyType) {
+                context.getString(
+                    R.string.type_item_result_subject_mine,
+                    typeMatchedResult.typeName,
+                )
+            } else {
+                context.getString(
+                    R.string.type_item_result_subject_opponent,
+                    typeMatchedResult.typeName,
+                )
+            }
+    }
+
+    private fun bindTypeStrengthText(
+        typeMatchedResult: TypeMatchedResultUiModel,
+        context: Context,
+    ) {
+        val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultColorResId)
+        val matchedResultTypeText =
+            context.getString(R.string.type_item_result_tail, typeMatchedResult.matchedResult)
+
         binding.tvResultMyTypeStrength.text =
-            SpannableStringBuilder(typeMatchedResult.matchedResult).apply {
+            buildSpannedString {
+                append(matchedResultTypeText)
                 setSpan(
-                    ForegroundColorSpan(textColor),
+                    ForegroundColorSpan(matchedResultTextColor),
                     0,
                     2,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
                 )
             }
-        binding.ivResultMyType.setImageResource(typeMatchedResult.typeIconResId)
-        binding.rvResultMatchedTypes.layoutManager = flexboxLayoutManager
-        binding.rvResultMatchedTypes.adapter = TypeResultItemAdapter(typeMatchedResult.matchedItem)
     }
 }
