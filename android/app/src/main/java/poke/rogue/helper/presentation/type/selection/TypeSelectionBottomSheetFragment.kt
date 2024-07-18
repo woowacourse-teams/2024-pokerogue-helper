@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.databinding.FragmentTypeChoiceBottomSheetBinding
-import poke.rogue.helper.local.DummyTypeData
 import poke.rogue.helper.presentation.type.TypeEvent
 import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
@@ -32,7 +30,7 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
 
     private val adapter by lazy {
         TypeSelectionAdapter(
-            DummyTypeData.allTypes.map { it.toUiModel() },
+            sharedViewModel.allTypes,
             selectorType,
             sharedViewModel,
         )

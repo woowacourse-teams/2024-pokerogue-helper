@@ -2,6 +2,7 @@ package poke.rogue.helper.data.repository
 
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
 import poke.rogue.helper.data.model.MatchedResult
+import poke.rogue.helper.data.model.TypeInfo
 import poke.rogue.helper.data.model.TypeMatchedResult
 
 class TypeRepository(private val localTypeDataSource: LocalTypeDataSource) {
@@ -22,5 +23,9 @@ class TypeRepository(private val localTypeDataSource: LocalTypeDataSource) {
         return opponentTypeIds.map {
             localTypeDataSource.findMatchedTypeResult(myTypeId, it)
         }.filter { it.matchedResult != MatchedResult.NORMAL }
+    }
+
+    fun allTypes(): List<TypeInfo> {
+        return localTypeDataSource.allTypes()
     }
 }
