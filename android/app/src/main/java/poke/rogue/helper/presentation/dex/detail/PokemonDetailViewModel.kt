@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import poke.rogue.helper.data.datasource.PokemonDetailDataSource
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.dex.model.toUi
-import timber.log.Timber
 
 class PokemonDetailViewModel(private val pokemonDetailDataSource: PokemonDetailDataSource) : ViewModel() {
     private val _uiState =
@@ -18,7 +17,6 @@ class PokemonDetailViewModel(private val pokemonDetailDataSource: PokemonDetailD
 
     fun updatePokemonDetail(pokemonId: Long?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
-        Timber.d("updatePokemonDetail: $pokemonId")
         _uiState.value = pokemonDetailDataSource.pokemonDetail(pokemonId).toUi()
     }
 
