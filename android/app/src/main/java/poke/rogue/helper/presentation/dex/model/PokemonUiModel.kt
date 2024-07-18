@@ -17,5 +17,5 @@ fun Pokemon.toUi(): PokemonUiModel =
         dexNumber = dexNumber,
         name = name,
         imageUrl = imageUrl,
-        types = types.mapNotNull(TypeUiModel::fromType),
+        types = types.mapNotNull { TypeUiModel.fromName(it.name) },
     )

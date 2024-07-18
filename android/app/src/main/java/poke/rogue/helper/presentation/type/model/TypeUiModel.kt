@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.type.model
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import poke.rogue.helper.R
-import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.model.TypeInfo
 
 enum class TypeUiModel(
@@ -40,29 +39,6 @@ enum class TypeUiModel(
         fun fromName(typeName: String): TypeUiModel? {
             return entries.find { it.typeName.equals(typeName, ignoreCase = true) }
         }
-
-        fun fromType(type: Type): TypeUiModel? =
-            when (type.name) {
-                "normal" -> NORMAL
-                "fire" -> FIRE
-                "water" -> WATER
-                "electric" -> ELECTRIC
-                "grass" -> GRASS
-                "ice" -> ICE
-                "fighting" -> FIGHTING
-                "poison" -> POISON
-                "ground" -> GROUND
-                "flying" -> FLYING
-                "psychic" -> PSYCHIC
-                "bug" -> BUG
-                "rock" -> ROCK
-                "ghost" -> GHOST
-                "dragon" -> DRAGON
-                "dark" -> DARK
-                "steel" -> STEEL
-                "fairy" -> FAIRY
-                else -> null
-            }
 
         fun TypeInfo.toUiModel(): TypeUiModel {
             return fromId(id)
