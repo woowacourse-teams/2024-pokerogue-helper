@@ -60,7 +60,11 @@ jobs:
           
           sudo chmod 666 /var/run/docker.sock
           
+          if [ "$(docker ps -qa)" ]; then
           sudo docker rm -f $(docker ps -qa)
+          else
+          echo "No containers to remove."
+          fi
           
           sudo docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
           sudo docker pull ${{ secrets.DOCKER_NGINX_IMAGE }}
