@@ -52,20 +52,18 @@ jobs:
           docker push ${{ secrets.DOCKER_NGINX_IMAGE }}
 
       - name: Deploy
-        uses: appleboy/ssh-action@v0.1.9
-        with:
-          script: |
-            cd /home/ubuntu
-
-            sudo touch docker-compose.yml
-            echo "${{ vars.DOCKER_COMPOSE }}" | sudo tee docker-compose.yml > /dev/null
-
-            sudo chmod 666 /var/run/docker.sock
-            
-            sudo docker rm -f $(docker ps -qa)
-            
-            sudo docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
-            sudo docker pull ${{ secrets.DOCKER_NGINX_IMAGE }}
-            
-            docker-compose -f docker-compose.yml up -d
-            docker image prune -f
+        run: |
+          cd /home/ubuntu
+          
+          sudo touch docker-compose.yml
+          echo "${{ vars.DOCKER_COMPOSE }}" | sudo tee docker-compose.yml > /dev/null
+          
+          sudo chmod 666 /var/run/docker.sock
+          
+          sudo docker rm -f $(docker ps -qa)
+          
+          sudo docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
+          sudo docker pull ${{ secrets.DOCKER_NGINX_IMAGE }}
+          
+          docker-compose -f docker-compose.yml up -d
+          docker image prune -f
