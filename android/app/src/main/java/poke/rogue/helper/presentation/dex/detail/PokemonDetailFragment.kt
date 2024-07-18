@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
+import poke.rogue.helper.data.datasource.DummyPokemonDetailDataSource
 import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
@@ -13,7 +14,9 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 class PokemonDetailFragment :
     BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
-        PokemonDetailViewModel.factory()
+        PokemonDetailViewModel.factory(
+            pokemonDetailDataSource = DummyPokemonDetailDataSource(),
+        )
     }
 
     private val pokemonTypeAdapter by lazy { PokemonTypeAdapter() }
@@ -39,7 +42,7 @@ class PokemonDetailFragment :
     private fun initObservers() {
         repeatOnStarted {
             viewModel.uiState.collect {
-                pokemonTypeAdapter.submitList(it.types)
+                pokemonTypeAdapter.submitList(it.pokemon.types)
                 pokemonStatAdapter.submitList(it.stats)
             }
         }

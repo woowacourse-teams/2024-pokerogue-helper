@@ -11,10 +11,11 @@ data class PokemonDetailUiModel(
     val weight: Float,
 )
 
-fun PokemonDetail.toUi(): PokemonDetailUiModel = PokemonDetailUiModel(
-    pokemon = pokemon.toUi(),
-    stats = stats.map(Stat::toUi),
-    abilities = abilities,
-    height = height,
-    weight = weight,
-)
+fun PokemonDetail.toUi(): PokemonDetailUiModel =
+    PokemonDetailUiModel(
+        pokemon = pokemon.toUi(),
+        stats = stats.map(Stat::toUi),
+        abilities = abilities,
+        height = height,
+        weight = weight,
+    )

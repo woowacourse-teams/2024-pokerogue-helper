@@ -8,7 +8,7 @@ import poke.rogue.helper.databinding.ItemTypeRightNameBinding
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class PokemonTypeAdapter() :
+class PokemonTypeAdapter :
     ListAdapter<TypeUiModel, PokemonTypeAdapter.PokemonTypeViewHolder>(typeComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
