@@ -54,9 +54,6 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v0.1.9
         with:
-          host: ${{ secrets.HOST }}
-          username: ubuntu
-          key: ${{ secrets.KEY }}
           script: |
             cd /home/ubuntu
 
