@@ -9,5 +9,5 @@ data class AbilityDetailResponse(
     val name: String,
     val description: String,
     val detailDescription: String,
-    val pokemons: List<PokemonResponse>
+    val pokemons: List<PokemonResponse>,
 )

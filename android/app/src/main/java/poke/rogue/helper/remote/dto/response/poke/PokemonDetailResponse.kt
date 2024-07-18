@@ -21,5 +21,5 @@ data class PokemonDetailResponse(
     val baseDefense: Int,
     val baseSpecialAttack: Int,
     val baseSpecialDefense: Int,
-    val baseSpeed: Int
+    val baseSpeed: Int,
 )

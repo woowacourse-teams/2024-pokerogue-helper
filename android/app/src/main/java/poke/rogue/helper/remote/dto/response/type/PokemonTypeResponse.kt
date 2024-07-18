@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PokemonTypeResponse(
     val pokemonTypeLogo: String,
-    val pokemonTypeName: String
+    val pokemonTypeName: String,
 )

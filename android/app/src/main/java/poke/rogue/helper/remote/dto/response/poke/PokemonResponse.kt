@@ -1,6 +1,5 @@
 package poke.rogue.helper.remote.dto.response.poke
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
@@ -12,5 +11,5 @@ data class PokemonResponse(
     val name: String,
     val pokedexNumber: Long,
     @SerialName("pokemonTypeResponses")
-    val types: List<PokemonTypeResponse>
+    val types: List<PokemonTypeResponse>,
 )

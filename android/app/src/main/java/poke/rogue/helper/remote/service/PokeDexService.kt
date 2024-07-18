@@ -10,5 +10,7 @@ interface PokeDexService {
     fun pokemons(): List<PokemonResponse>
 
     @GET("api/v1/pokemon/{id}")
-    fun pokemon(@Path("id") id: Long): PokemonDetailResponse
+    fun pokemon(
+        @Path("id") id: Long,
+    ): PokemonDetailResponse
 }
