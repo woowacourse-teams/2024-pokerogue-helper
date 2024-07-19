@@ -2,9 +2,11 @@ package poke.rogue.helper.presentation.util.view
 
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.ColorRes
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import poke.rogue.helper.R
+import poke.rogue.helper.presentation.util.context.colorOf
 
 @BindingAdapter("imageUrl")
 fun ImageView.setImage(imageUrl: String?) {
@@ -18,6 +20,12 @@ fun ImageView.setImage(imageUrl: String?) {
 @BindingAdapter("imageRes")
 fun ImageView.setImageRes(imageRes: Int) {
     setImageResource(imageRes)
+}
+
+@BindingAdapter("backgroundColorRes")
+fun View.setBackGroundColorRes(@ColorRes backgroundColorRes: Int) {
+    if (backgroundColorRes == 0) return
+    setBackgroundColor(context.colorOf(backgroundColorRes))
 }
 
 @BindingAdapter("visible")
