@@ -31,12 +31,12 @@ public class PokemonService {
     private PokemonResponse toPokemonResponse(Pokemon pokemon) {
         List<PokemonTypeMapping> pokemonTypeMappings = pokemon.getPokemonTypeMappings();
 
-        List<PokemonTypeResponse> pokemonTypeImages = pokemonTypeMappings.stream()
+        List<PokemonTypeResponse> pokemonTypeResponses = pokemonTypeMappings.stream()
                 .map(PokemonTypeMapping::getPokemonType)
                 .map(PokemonTypeResponse::from)
                 .toList();
 
-        return PokemonResponse.of(pokemon, pokemonTypeImages);
+        return PokemonResponse.of(pokemon, pokemonTypeResponses);
     }
 
     public PokedexResponse findPokedexDetails(Long id) {
