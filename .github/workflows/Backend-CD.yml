@@ -41,6 +41,7 @@ jobs:
           docker push ${{ secrets.DOCKER_NGINX_IMAGE }}
 
   deploy:
+    needs: build
     runs-on: self-hosted
     steps:
 
