@@ -39,4 +39,11 @@ public class PokemonAbility {
 
     @OneToMany(mappedBy = "pokemonAbility", fetch = FetchType.LAZY)
     private List<PokemonAbilityMapping> pokemonAbilityMappings;
+
+    public PokemonAbility(String name, String koName, String description, String detailDescription) {
+        this.name = name;
+        this.koName = koName;
+        this.description = description;
+        this.detailDescription = detailDescription;
+    }
 }
