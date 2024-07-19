@@ -9,10 +9,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,8 +28,14 @@ public class PokemonAbility {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "short_description", nullable = false)
-    private String shortDescription;
+    @Column(name = "ko_name", nullable = false)
+    private String koName;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "detail_description", nullable = false)
+    private String detailDescription;
 
     @OneToMany(mappedBy = "pokemonAbility", fetch = FetchType.LAZY)
     private List<PokemonAbilityMapping> pokemonAbilityMappings;

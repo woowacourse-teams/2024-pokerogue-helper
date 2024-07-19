@@ -9,9 +9,10 @@ import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +31,12 @@ public class PokemonService {
     private PokemonResponse toPokemonResponse(Pokemon pokemon) {
         List<PokemonTypeMapping> pokemonTypeMappings = pokemon.getPokemonTypeMappings();
 
-        List<String> pokemonTypeImages = pokemonTypeMappings.stream()
-                .map(PokemonTypeMapping::getCircleTypeImage)
+        List<PokemonTypeResponse> pokemonTypeResponses = pokemonTypeMappings.stream()
+                .map(PokemonTypeMapping::getPokemonType)
+                .map(PokemonTypeResponse::from)
                 .toList();
 
-        return PokemonResponse.of(pokemon, pokemonTypeImages);
+        return PokemonResponse.of(pokemon, pokemonTypeResponses);
     }
 
     public PokedexResponse findPokedexDetails(Long id) {

@@ -29,8 +29,4 @@ public class PokemonTypeMapping {
     @ManyToOne
     @JoinColumn(name = "pokemon_type_id", nullable = false)
     private PokemonType pokemonType;
-
-    public String getCircleTypeImage() {
-        return pokemonType.getCircleImage();
-    }
 }

@@ -1,12 +1,15 @@
 package com.pokerogue.helper.pokemon.dto;
 
 import com.pokerogue.helper.pokemon.domain.Pokemon;
+import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+
 import java.util.List;
 
-public record PokemonResponse(Long id, Long pokedexNumber, String name, String image, List<String> pokemonTypeImages) {
+public record PokemonResponse(Long id, Long pokedexNumber, String name, String image,
+                              List<PokemonTypeResponse> pokemonTypeResponses) {
 
-    public static PokemonResponse of(Pokemon pokemon, List<String> pokemonTypeImages) {
-        return new PokemonResponse(pokemon.getId(), pokemon.getPokemonNumber(), pokemon.getName(), pokemon.getImage(),
-                pokemonTypeImages);
+    public static PokemonResponse of(Pokemon pokemon, List<PokemonTypeResponse> pokemonTypeResponses) {
+        return new PokemonResponse(pokemon.getId(), pokemon.getPokedexNumber(), pokemon.getName(), pokemon.getImage(),
+                pokemonTypeResponses);
     }
 }
