@@ -11,15 +11,8 @@ permissions:
 
 jobs:
   build:
-    env:
-      working-directory: ./backend/pokerogue
-      docker-directory: ./backend/pokerogue/docker
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
-
-      - name: Change permission
-        run: |
-          sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/2024-pokerogue-helper
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,39 +28,4 @@ jobs:
 
       - name: Run Test
         run: ./gradlew clean test
-        working-directory: ${{ env.working-directory }}
-
-      - name: Build with Gradle
-        run: ./gradlew bootJar
-        working-directory: ${{ env.working-directory }}
-
-      - name: Docker build and push
-        run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-          docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
-          docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
-          
-          docker build -t ${{ secrets.DOCKER_NGINX_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-nginx ./backend/pokerogue/docker
-          docker push ${{ secrets.DOCKER_NGINX_IMAGE }}
-
-      - name: Deploy
-        run: |
-          cd /home/ubuntu
-          
-          sudo touch docker-compose.yml
-          echo "${{ vars.DOCKER_COMPOSE }}" | sudo tee docker-compose.yml > /dev/null
-          
-          sudo chmod 666 /var/run/docker.sock
-          
-          if [ "$(docker ps -qa)" ]; then
-          sudo docker rm -f $(docker ps -qa)
-          else
-          echo "No containers to remove."
-          fi
-          
-          sudo docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
-          sudo docker pull ${{ secrets.DOCKER_NGINX_IMAGE }}
-          
-          docker-compose -f docker-compose.yml up -d
-          docker image prune -f
+        working-directory: ./backend/pokerogue
