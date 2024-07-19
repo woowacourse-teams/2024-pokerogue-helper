@@ -23,8 +23,8 @@ public class Pokemon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "pokemon_number", nullable = false)
-    private Long pokemonNumber;
+    @Column(name = "pokedex_number", nullable = false)
+    private Long pokedexNumber;
 
     @Column(name = "name", nullable = false)
     private String name;

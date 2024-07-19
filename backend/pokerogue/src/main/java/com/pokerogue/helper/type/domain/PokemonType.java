@@ -23,12 +23,6 @@ public class PokemonType {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "long_image", nullable = false)
-    private String longImage;
-
-    @Column(name = "circle_image", nullable = false)
-    private String circleImage;
-
-    @Column(name = "square_image", nullable = false)
-    private String squareImage;
+    @Column(name = "image", nullable = false)
+    private String image;
 }

@@ -10,7 +10,7 @@ public record PokedexResponse(Long pokedexNumber, String name, String pokemonIma
 
     public static PokedexResponse of(Pokemon pokemon, List<PokemonTypeResponse> pokemonTypeResponses,
                                      List<String> pokemonAbilityNames) {
-        return new PokedexResponse(pokemon.getPokemonNumber(), pokemon.getName(), pokemon.getImage(),
+        return new PokedexResponse(pokemon.getPokedexNumber(), pokemon.getName(), pokemon.getImage(),
                 pokemonTypeResponses, pokemonAbilityNames, pokemon.getWeight(), pokemon.getHeight());
     }
 }
