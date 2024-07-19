@@ -39,27 +39,27 @@
     </style>
 
     <style name="TextAppearance.Poke.CaptionLarge">
-        <item name="android:textSize">8sp</item>
-        <item name="lineHeight">12sp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="lineHeight">18.5sp</item>
     </style>
 
     <style name="TextAppearance.Poke.CaptionLargeBold">
         <item name="android:textStyle">bold</item>
         <item name="font">@font/pretendard_semibold</item>
-        <item name="android:textSize">8sp</item>
-        <item name="lineHeight">12sp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="lineHeight">18.5sp</item>
     </style>
 
     <style name="TextAppearance.Poke.Caption">
-        <item name="android:textSize">7sp</item>
-        <item name="lineHeight">10.5sp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="lineHeight">16.5sp</item>
     </style>
 
     <style name="TextAppearance.Poke.CaptionBold">
         <item name="android:textStyle">bold</item>
         <item name="font">@font/pretendard_semibold</item>
-        <item name="android:textSize">7sp</item>
-        <item name="lineHeight">10.5sp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="lineHeight">16.5sp</item>
     </style>
 
 </resources>
