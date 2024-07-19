@@ -28,6 +28,9 @@ public class PokemonAbility {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "ko_name", nullable = false)
+    private String koName;
+
     @Column(name = "description", nullable = false)
     private String description;
 
