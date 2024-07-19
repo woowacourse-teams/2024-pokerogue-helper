@@ -23,6 +23,9 @@ public class PokemonType {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "ko_name", nullable = false)
+    private String koName;
+
     @Column(name = "image", nullable = false)
     private String image;
 }
