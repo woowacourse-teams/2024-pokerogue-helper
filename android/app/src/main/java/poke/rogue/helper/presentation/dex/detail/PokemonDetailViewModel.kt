@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import poke.rogue.helper.data.datasource.PokemonDetailDataSource
+import poke.rogue.helper.data.datasource.FakePokemonDetailDataSource
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.dex.model.toUi
 
-class PokemonDetailViewModel(private val pokemonDetailDataSource: PokemonDetailDataSource) : ViewModel() {
+class PokemonDetailViewModel(private val pokemonDetailDataSource: FakePokemonDetailDataSource) : ViewModel() {
     private val _uiState =
         MutableStateFlow(
             pokemonDetailDataSource.pokemonDetail(1).toUi(),
@@ -21,7 +21,7 @@ class PokemonDetailViewModel(private val pokemonDetailDataSource: PokemonDetailD
     }
 
     companion object {
-        fun factory(pokemonDetailDataSource: PokemonDetailDataSource): ViewModelProvider.Factory =
+        fun factory(pokemonDetailDataSource: FakePokemonDetailDataSource): ViewModelProvider.Factory =
             BaseViewModelFactory { PokemonDetailViewModel(pokemonDetailDataSource) }
     }
 }
