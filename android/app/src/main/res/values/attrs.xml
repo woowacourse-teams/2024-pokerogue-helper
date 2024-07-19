@@ -8,7 +8,7 @@
         <attr name="borderWidth" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="TypeItemView">
+    <declare-styleable name="TypeChip">
         <attr name="iconSize" format="dimension"/>
         <attr name="spacing" format="dimension" />
         <attr name="nameSize" format="dimension" />

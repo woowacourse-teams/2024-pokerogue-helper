@@ -9,7 +9,7 @@
             type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
     </data>
 
-    <poke.rogue.helper.presentation.type.view.TypeItemView
+    <poke.rogue.helper.presentation.type.view.TypeChip
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:iconSize="18dp"

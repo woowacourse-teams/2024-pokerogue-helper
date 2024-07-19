@@ -11,7 +11,7 @@ import poke.rogue.helper.databinding.ItemTypeBinding
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.view.px
 
-class TypeItemView
+class TypeChip
     @JvmOverloads
     constructor(
         context: Context,
@@ -22,13 +22,13 @@ class TypeItemView
             ItemTypeBinding.inflate(LayoutInflater.from(context), this, true)
 
         init {
-            val attributes = context.obtainStyledAttributes(attrs, R.styleable.TypeItemView)
+            val attributes = context.obtainStyledAttributes(attrs, R.styleable.TypeChip)
             attributes.use {
-                val iconSize = attributes.getDimension(R.styleable.TypeItemView_iconSize, 18f)
-                val spacing = attributes.getDimension(R.styleable.TypeItemView_spacing, 7f)
-                val nameSize = attributes.getDimension(R.styleable.TypeItemView_nameSize, 8f).px
+                val iconSize = attributes.getDimension(R.styleable.TypeChip_iconSize, 18f)
+                val spacing = attributes.getDimension(R.styleable.TypeChip_spacing, 7f)
+                val nameSize = attributes.getDimension(R.styleable.TypeChip_nameSize, 8f).px
                 val isEmptyBackGround =
-                    attributes.getBoolean(R.styleable.TypeItemView_emptyBackGround, false)
+                    attributes.getBoolean(R.styleable.TypeChip_emptyBackGround, true)
                 initViews(iconSize, spacing, nameSize, isEmptyBackGround)
             }
         }
@@ -53,7 +53,7 @@ class TypeItemView
             @JvmStatic
             @BindingAdapter("type")
             fun setTypeName(
-                view: TypeItemView,
+                view: TypeChip,
                 typeUiModel: TypeUiModel,
             ) {
                 view.binding.type = typeUiModel
