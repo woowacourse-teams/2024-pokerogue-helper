@@ -39,15 +39,15 @@ jobs:
       - name: Create Local Properties
         run: touch local.properties
         working-directory: android
-      #      - name: Access Local Properties
-      #        env:
-      #          FUNCH_DEBUG_BASE_URL: ${{ secrets.FUNCH_DEBUG_BASE_URL }}
+            - name: Access Local Properties
+              env:
+                POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
       #          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
       #          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       #          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
       #          STORE_FILE: ${{ secrets.STORE_FILE }}
-      #        run: |
-      #          echo FUNCH_DEBUG_BASE_URL=\"FUNCH_DEBUG_BASE_URL\" >> local.properties
+              run: |
+                echo POKE_BASE_URL=\"POKE_BASE_URL\" >> local.properties
       #          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
       #          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
       #          echo KEY_ALIAS= $KEY_ALIAS >> local.properties

@@ -29,12 +29,11 @@ android {
         testInstrumentationRunnerArguments["runnerBuilder"] =
             "de.mannodermaus.junit5.AndroidJUnit5Builder"
 
-// TODO 서버 URL 나오면 설정
-//        buildConfigField(
-//            "String",
-//            "SHOPPING_BASE_URL",
-//            properties.getProperty("SHOPPING_BASE_URL"),
-//        )
+        buildConfigField(
+            "String",
+            "POKE_BASE_URL",
+            properties.getProperty("POKE_BASE_URL"),
+        )
     }
 
     buildTypes {
