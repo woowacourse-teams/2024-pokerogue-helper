@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,31 +9,12 @@
             type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
     </data>
 
-    <LinearLayout
+    <poke.rogue.helper.presentation.type.view.TypeItemView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="4dp">
-
-        <ImageView
-            android:id="@+id/iv_type_name_icon"
-            imageRes="@{typeItem.typeIconResId}"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/img_property_tmp_2" />
-
-        <Space
-            android:layout_width="8dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tv_type_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{typeItem.typeName}"
-            tools:text="페어리" />
-
-    </LinearLayout>
+        app:iconSize="18dp"
+        app:spacing="8dp"
+        app:nameSize="13dp"
+        app:emptyBackGround="true"
+        app:type="@{typeItem}" />
 </layout>

@@ -7,4 +7,11 @@
         <attr name="borderColor" format="color" />
         <attr name="borderWidth" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="TypeItemView">
+        <attr name="iconSize" format="dimension"/>
+        <attr name="spacing" format="dimension" />
+        <attr name="nameSize" format="dimension" />
+        <attr name="emptyBackGround" format="boolean" />
+    </declare-styleable>
 </resources>
