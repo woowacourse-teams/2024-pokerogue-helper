@@ -1,7 +1,9 @@
 package poke.rogue.helper.presentation.dex.model
 
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.toUi
 
 data class PokemonUiModel(
     val id: Long,
@@ -17,5 +19,5 @@ fun Pokemon.toUi(): PokemonUiModel =
         dexNumber = dexNumber,
         name = name,
         imageUrl = imageUrl,
-        types = types.mapNotNull { TypeUiModel.fromName(it.name) },
+        types = types.map(Type::toUi),
     )

@@ -3,6 +3,7 @@ package poke.rogue.helper.presentation.type.model
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import poke.rogue.helper.R
+import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.model.TypeInfo
 
 enum class TypeUiModel(
@@ -46,3 +47,5 @@ enum class TypeUiModel(
         }
     }
 }
+
+fun Type.toUi(): TypeUiModel = TypeUiModel.valueOf(this.name)

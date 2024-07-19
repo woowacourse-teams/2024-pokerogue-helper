@@ -11,7 +11,7 @@ data class Pokemon(
         private const val DUMMY_POKEMON_NAME = "이상해씨"
         private const val DUMMY_IMAGE_URL =
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-        private val DUMMY_TYPES = listOf(Type.of("풀"), Type.of("독"))
+        private val DUMMY_TYPES = listOf(Type.GRASS, Type.POISON)
 
         val DUMMY =
             Pokemon(
