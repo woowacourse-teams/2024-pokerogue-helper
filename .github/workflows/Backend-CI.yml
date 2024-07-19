@@ -27,5 +27,5 @@ jobs:
           distribution: 'temurin'
 
       - name: Run Test
-        run: ./gradlew clean test
+        run: SPRING_PROFILES_ACTIVE=h2 ./gradlew clean test
         working-directory: ./backend/pokerogue
