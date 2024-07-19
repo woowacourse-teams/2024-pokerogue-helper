@@ -9,6 +9,6 @@ inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? {
     return IntentCompat.getParcelableExtra(this, key, T::class.java)
 }
 
-inline fun <reified T: Serializable> Intent.serializable(key: String): T? {
+inline fun <reified T : Serializable> Intent.serializable(key: String): T? {
     return IntentCompat.getSerializableExtra(this, key, T::class.java)
 }

@@ -11,48 +11,52 @@ import poke.rogue.helper.databinding.ItemTypeBinding
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.view.px
 
-class TypeItemView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+class TypeItemView
+    @JvmOverloads
+    constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0,
+    ) : LinearLayout(context, attrs, defStyleAttr) {
+        private val binding: ItemTypeBinding =
+            ItemTypeBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private val binding: ItemTypeBinding =
-        ItemTypeBinding.inflate(LayoutInflater.from(context), this, true)
+        init {
+            val attributes = context.obtainStyledAttributes(attrs, R.styleable.TypeItemView)
+            attributes.use {
+                val iconSize = attributes.getDimension(R.styleable.TypeItemView_iconSize, 18f)
+                val spacing = attributes.getDimension(R.styleable.TypeItemView_spacing, 7f)
+                val nameSize = attributes.getDimension(R.styleable.TypeItemView_nameSize, 8f).px
+                val isEmptyBackGround =
+                    attributes.getBoolean(R.styleable.TypeItemView_emptyBackGround, false)
+                initViews(iconSize, spacing, nameSize, isEmptyBackGround)
+            }
+        }
 
-    init {
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.TypeItemView)
-        attributes.use {
-            val iconSize = attributes.getDimension(R.styleable.TypeItemView_iconSize, 18f)
-            val spacing = attributes.getDimension(R.styleable.TypeItemView_spacing, 7f)
-            val nameSize = attributes.getDimension(R.styleable.TypeItemView_nameSize, 8f).px
-            val isEmptyBackGround =
-                attributes.getBoolean(R.styleable.TypeItemView_emptyBackGround, false)
-            initViews(iconSize, spacing, nameSize, isEmptyBackGround)
+        private fun initViews(
+            @Dimension iconSize: Float,
+            @Dimension spacing: Float,
+            @Dimension nameSize: Float,
+            isEmptyBackGround: Boolean,
+        ) = with(binding) {
+            orientation = HORIZONTAL
+            ivTypeNameIcon.layoutParams.apply {
+                width = iconSize.toInt()
+                height = iconSize.toInt()
+            }
+            spaceType.layoutParams.width = spacing.toInt()
+            tvTypeName.textSize = nameSize
+            isEmptyBackground = isEmptyBackGround
+        }
+
+        companion object {
+            @JvmStatic
+            @BindingAdapter("type")
+            fun setTypeName(
+                view: TypeItemView,
+                typeUiModel: TypeUiModel,
+            ) {
+                view.binding.type = typeUiModel
+            }
         }
     }
-
-    private fun initViews(
-        @Dimension iconSize: Float,
-        @Dimension spacing: Float,
-        @Dimension nameSize: Float,
-        isEmptyBackGround: Boolean
-    ) = with(binding) {
-        orientation = HORIZONTAL
-        ivTypeNameIcon.layoutParams.apply {
-            width = iconSize.toInt()
-            height = iconSize.toInt()
-        }
-        spaceType.layoutParams.width = spacing.toInt()
-        tvTypeName.textSize = nameSize
-        isEmptyBackground = isEmptyBackGround
-    }
-
-    companion object {
-        @JvmStatic
-        @BindingAdapter("type")
-        fun setTypeName(view: TypeItemView, typeUiModel: TypeUiModel) {
-            view.binding.type = typeUiModel
-        }
-    }
-}

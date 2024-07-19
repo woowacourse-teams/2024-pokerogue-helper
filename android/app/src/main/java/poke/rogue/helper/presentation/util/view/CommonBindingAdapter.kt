@@ -23,7 +23,9 @@ fun ImageView.setImageRes(imageRes: Int) {
 }
 
 @BindingAdapter("backgroundColorRes")
-fun View.setBackGroundColorRes(@ColorRes backgroundColorRes: Int) {
+fun View.setBackGroundColorRes(
+    @ColorRes backgroundColorRes: Int,
+) {
     if (backgroundColorRes == 0) return
     setBackgroundColor(context.colorOf(backgroundColorRes))
 }
