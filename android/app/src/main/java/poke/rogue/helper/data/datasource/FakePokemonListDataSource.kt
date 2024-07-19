@@ -3,8 +3,8 @@ package poke.rogue.helper.data.datasource
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.Type
 
-class FakePokemonListDataSource : PokemonListDataSource {
-    override fun pokemons(): List<Pokemon> = POKEMONS
+class FakePokemonListDataSource {
+    fun pokemons(): List<Pokemon> = POKEMONS
 
     companion object {
         private const val FORMAT_POKEMON_IMAGE_URL =
