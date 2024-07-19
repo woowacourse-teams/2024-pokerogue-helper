@@ -3,7 +3,7 @@ package poke.rogue.helper.data.datasource
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.Type
 
-class InMemoryPokemonListDataSource : PokemonListDataSource {
+class FakePokemonListDataSource : PokemonListDataSource {
     override fun pokemons(): List<Pokemon> = POKEMONS
 
     companion object {
