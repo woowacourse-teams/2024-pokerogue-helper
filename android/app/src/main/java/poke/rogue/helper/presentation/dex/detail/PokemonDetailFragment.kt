@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.data.datasource.FakePokemonDetailDataSource
+import poke.rogue.helper.data.repository.FakePokemonDetailRepository
 import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
@@ -15,7 +16,10 @@ class PokemonDetailFragment :
     BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(
-            pokemonDetailDataSource = FakePokemonDetailDataSource(),
+            pokemonDetailRepository =
+                FakePokemonDetailRepository(
+                    fakePokemonDetailDataSource = FakePokemonDetailDataSource(),
+                ),
         )
     }
 
