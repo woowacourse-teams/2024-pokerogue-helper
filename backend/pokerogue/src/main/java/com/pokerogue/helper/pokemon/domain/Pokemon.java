@@ -47,6 +47,15 @@ public class Pokemon {
     @Column(name = "defense", nullable = false)
     private Integer defense;
 
+    @Column(name = "special_attack", nullable = false)
+    private Integer specialAttack;
+
+    @Column(name = "special_defense", nullable = false)
+    private Integer specialDefense;
+
+    @Column(name = "total_stats", nullable = false)
+    private Integer totalStats;
+
     @Column(name = "image", nullable = false)
     private String image;
 
