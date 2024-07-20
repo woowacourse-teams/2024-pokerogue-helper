@@ -39,11 +39,6 @@ public class Saver {
     private DtoParser dtoParser;
     private PokeClient pokeClient;
 
-    public PokemonAbility savePokemonAbility(AbilityResponse abilityResponse) {
-        PokemonAbility pokemonAbility = dtoParser.getPokemonAbility(abilityResponse);
-        return pokemonAbilityRepository.save(pokemonAbility);
-    }
-
     public List<PokemonAbility> savePokemonAbilityList(List<AbilityResponse> abilityResponses) {
         List<PokemonAbility> pokemonAbilities = new ArrayList<>();
         for (AbilityResponse abilityResponse : abilityResponses) {
@@ -51,11 +46,6 @@ public class Saver {
             pokemonAbilities.add(pokemonAbility);
         }
         return pokemonAbilityRepository.saveAll(pokemonAbilities);
-    }
-
-    public PokemonType savePokemonType(TypeResponse typeResponse) {
-        PokemonType pokemonType = dtoParser.getPokemonType(typeResponse);
-        return pokemonTypeRepository.save(pokemonType);
     }
 
     public List<PokemonType> savePokemonTypeList(List<TypeResponse> typeResponses) {
