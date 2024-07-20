@@ -4,9 +4,11 @@ import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
 import com.pokerogue.helper.external.client.PokeClient;
 import com.pokerogue.helper.external.dto.ability.AbilityResponse;
+import com.pokerogue.helper.external.dto.type.TypeResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonAbilityMappingRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonTypeMappingRepository;
+import com.pokerogue.helper.type.domain.PokemonType;
 import com.pokerogue.helper.type.repository.PokemonTypeRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +38,19 @@ public class Saver {
             pokemonAbilities.add(pokemonAbility);
         }
         return pokemonAbilityRepository.saveAll(pokemonAbilities);
+    }
+
+    public PokemonType savePokemonType(TypeResponse typeResponse) {
+        PokemonType pokemonType = dtoParser.getPokemonType(typeResponse);
+        return pokemonTypeRepository.save(pokemonType);
+    }
+
+    public List<PokemonType> savePokemonTypeList(List<TypeResponse> typeResponses) {
+        List<PokemonType> pokemonTypes = new ArrayList<>();
+        for (TypeResponse typeResponse : typeResponses) {
+            PokemonType pokemonType = dtoParser.getPokemonType(typeResponse);
+            pokemonTypes.add(pokemonType);
+        }
+        return pokemonTypeRepository.saveAll(pokemonTypes);
     }
 }
