@@ -4,7 +4,7 @@ import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.service.PokemonService;
-import com.pokerogue.helper.util.Saver;
+import com.pokerogue.helper.util.DataSettingService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PokemonController {
 
     private final PokemonService pokemonService;
-    private final Saver saver;
+    private final DataSettingService dataSettingService;
 
     @GetMapping("/api/v1/pokemons")
     public ApiResponse<List<PokemonResponse>> pokemonList() {
@@ -31,7 +31,7 @@ public class PokemonController {
 
     @GetMapping("/api/v1/update/pokemon")
     public ApiResponse<List<Pokemon>> savePokemonList() {
-        List<Pokemon> savedPokemons = saver.savePokemons();
+        List<Pokemon> savedPokemons = dataSettingService.savePokemons();
 
         return new ApiResponse<>("포켓몬 저장 완료", savedPokemons);
     }
