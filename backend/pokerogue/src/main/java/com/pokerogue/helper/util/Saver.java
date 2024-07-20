@@ -41,7 +41,7 @@ public class Saver {
     private DtoParser dtoParser;
     private PokeClient pokeClient;
 
-    public List<PokemonAbility> savePokemonAbilityList() {
+    public List<PokemonAbility> savePokemonAbilities() {
         pokemonAbilityRepository.deleteAllInBatch();
 
         ListResponse abilityList = getAbilityList();
@@ -70,7 +70,7 @@ public class Saver {
                 .toList();
     }
 
-    public List<PokemonType> savePokemonTypeList() {
+    public List<PokemonType> savePokemonTypes() {
         pokemonTypeRepository.deleteAllInBatch();
 
         ListResponse typeList = getTypeList();
@@ -100,7 +100,7 @@ public class Saver {
     }
 
     @Transactional
-    public List<Pokemon> savePokemonList() {
+    public List<Pokemon> savePokemons() {
         pokemonAbilityMappingRepository.deleteAllInBatch();
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonRepository.deleteAllInBatch();

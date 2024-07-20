@@ -31,7 +31,7 @@ public class PokemonController {
 
     @GetMapping("/api/v1/update/pokemon")
     public ApiResponse<List<Pokemon>> savePokemonList() {
-        List<Pokemon> savedPokemons = saver.savePokemonList();
+        List<Pokemon> savedPokemons = saver.savePokemons();
 
         return new ApiResponse<>("포켓몬 저장 완료", savedPokemons);
     }

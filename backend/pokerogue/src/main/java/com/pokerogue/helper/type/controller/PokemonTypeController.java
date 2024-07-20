@@ -16,7 +16,7 @@ public class PokemonTypeController {
 
     @GetMapping("/api/v1/update/type")
     public ApiResponse<List<PokemonType>> saveTypeList() {
-        List<PokemonType> savedPokemonTypes = saver.savePokemonTypeList();
+        List<PokemonType> savedPokemonTypes = saver.savePokemonTypes();
 
         return new ApiResponse<>("타입 정보 업데이트", savedPokemonTypes);
     }
