@@ -31,8 +31,8 @@ public interface PokeClient {
     @GetExchange("/type/{id}")
     TypeResponse getTypeResponse(@PathVariable String id);
 
-    @GetExchange("/pokemon/?offset=0&limit={size}")
-    ListResponse getPokemonList(@PathVariable String size);
+    @GetExchange("/pokemon/?offset={start}&limit={limit}")
+    ListResponse getPokemonList(@PathVariable String start, @PathVariable String limit);
 
     @GetExchange("/pokemon")
     CountResponse getPokemonListSize();

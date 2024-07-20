@@ -39,13 +39,15 @@ public class PokemonController {
     @GetMapping("/api/v1/update/pokemon")
     public ApiResponse<List<Pokemon>> savePokemonList() {
         CountResponse pokemonListSize = pokeClient.getPokemonListSize();
-        ListResponse pokemonList = pokeClient.getPokemonList(String.valueOf(pokemonListSize.count()));
         List<Pokemon> pokemons = new ArrayList<>();
-        for (NameAndUrl nameAndUrl : pokemonList.results()) {
-            String[] split = nameAndUrl.url().split("/");
-            PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(split[split.length - 1]);
-            Pokemon pokemon = saver.savePokemon(pokemonSaveResponse);
-            pokemons.add(pokemon);
+        for (int i = 0; i < pokemonListSize.count(); i+=500) {
+            ListResponse pokemonList = pokeClient.getPokemonList(String.valueOf(i), "500");
+            for (NameAndUrl nameAndUrl : pokemonList.results()) {
+                String[] split = nameAndUrl.url().split("/");
+                PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(split[split.length - 1]);
+                Pokemon pokemon = saver.savePokemon(pokemonSaveResponse);
+                pokemons.add(pokemon);
+            }
         }
         return new ApiResponse<>("포켓몬 저장 완료", pokemons);
     }
