@@ -66,19 +66,19 @@ public class DtoParser {
                 .map(typeSummary -> typeSummary.type().name())
                 .toList();
 
-        return new PokemonDetails(pokemonSaveResponse.name(), weight, height, species, stat.get("hp"), stat.get("attack"), stat.get("defense"), stat.get("speed"), stat.get("specialAttack"), stat.get("specialDefense"), stat.get("totalStats"), abilityNameList, typeNameList);
+        return new PokemonDetails(pokemonSaveResponse.name(), weight, height, species, stat.get("hp"), stat.get("attack"), stat.get("defense"), stat.get("speed"), stat.get("special-attack"), stat.get("special-defense"), stat.get("total-stats"), abilityNameList, typeNameList);
     }
 
     private Map<String, Integer> getStat(List<Stat> stats) {
         Map<String, Integer> res = new HashMap<>();
         for (Stat stat : stats) {
-            res.put(stat.stat().name(), stat.baseStat());
+            res.put(stat.stat().name(), stat.base_stat());
         }
         int totalStats = 0;
         for (Integer baseStat : res.values()) {
             totalStats += baseStat;
         }
-        res.put("totalStats", totalStats);
+        res.put("total-stats", totalStats);
 
         return res;
     }
