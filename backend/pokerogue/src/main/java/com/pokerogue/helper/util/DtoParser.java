@@ -21,17 +21,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class DtoParser {
 
+    private static final String NOT_EXIST_KOREAN_NAME = "존재하지 않습니다";
+
     public PokemonAbility getPokemonAbility(AbilityResponse abilityResponse) {
-        List<Name> names = abilityResponse.names();
-        String koName = "존재하지 않습니다";
-        for (Name value : names) {
-            if (value.language().name().equals("ko")) {
-                koName = value.name();
-            }
-        }
+        String koName = getKoName(abilityResponse.names());
 
         List<FlavorTextEntry> flavorTextEntries = abilityResponse.flavor_text_entries();
-        String description = "존재하지 않습니다";
+        String description = NOT_EXIST_KOREAN_NAME;
         for (int i = flavorTextEntries.size() - 1; i > -1; i--) {
             if (flavorTextEntries.get(i).language().name().equals("ko")) {
                 description = flavorTextEntries.get(i).flavor_text();
@@ -41,14 +37,19 @@ public class DtoParser {
         return new PokemonAbility(null, abilityResponse.name(), koName, description, "자세한 설명입니다.", new ArrayList<>());
     }
 
-    public PokemonType getPokemonType(TypeResponse typeResponse) {
-        String koName = "존재하지 않습니다";
-        List<Name> names = typeResponse.names();
+    private static String getKoName(List<Name> names) {
+        String koName = NOT_EXIST_KOREAN_NAME;
         for (Name value : names) {
             if (value.language().name().equals("ko")) {
                 koName = value.name();
             }
         }
+
+        return koName;
+    }
+
+    public PokemonType getPokemonType(TypeResponse typeResponse) {
+        String koName = getKoName(typeResponse.names());
 
         return new PokemonType(null, typeResponse.name(), koName, "null");
     }
@@ -57,7 +58,7 @@ public class DtoParser {
         int height = pokemonSaveResponse.height();
         int weight = pokemonSaveResponse.weight();
         NameAndUrl species = pokemonSaveResponse.species();
-        List<StatDetail> statDetails = pokemonSaveResponse.statDetails();
+        List<StatDetail> statDetails = pokemonSaveResponse.stats();
         Map<String, Integer> stat = getStat(statDetails);
 
         List<String> abilityNameList = pokemonSaveResponse.abilities().stream()
@@ -71,28 +72,22 @@ public class DtoParser {
     }
 
     private Map<String, Integer> getStat(List<StatDetail> statDetails) {
-        Map<String, Integer> res = new HashMap<>();
+        Map<String, Integer> stats = new HashMap<>();
         for (StatDetail statDetail : statDetails) {
-            res.put(statDetail.stat().name(), statDetail.base_stat());
+            stats.put(statDetail.stat().name(), statDetail.base_stat());
         }
 
         int totalStats = 0;
-        for (Integer baseStat : res.values()) {
+        for (Integer baseStat : stats.values()) {
             totalStats += baseStat;
         }
-        res.put("total-stats", totalStats);
+        stats.put("total-stats", totalStats);
 
-        return res;
+        return stats;
     }
 
     public PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
-        String koName = "존재하지 않습니다";
-        List<Name> names = pokemonSpeciesResponse.names();
-        for (Name value : names) {
-            if (value.language().name().equals("ko")) {
-                koName = value.name();
-            }
-        }
+        String koName = getKoName(pokemonSpeciesResponse.names());
 
         return new PokemonNameAndDexNumber(pokemonSpeciesResponse.id(), koName);
     }
