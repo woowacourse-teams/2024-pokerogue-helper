@@ -12,6 +12,8 @@ import com.pokerogue.helper.external.dto.pokemon.TypeSummary;
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonNameAndDexNumber;
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.helper.external.dto.type.TypeResponse;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
 import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
@@ -80,7 +82,8 @@ public class Saver {
         List<AbilitySummary> abilities = pokemonSaveResponse.abilities();
         for (AbilitySummary abilitySummary : abilities) {
             String name = abilitySummary.ability().name();
-            PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name).orElseThrow();
+            PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name)
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
             PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(null, savedPokemon, pokemonAbility);
             savedPokemon.getPokemonAbilityMappings().add(pokemonAbilityMapping);
             pokemonAbility.getPokemonAbilityMappings().add(pokemonAbilityMapping);
@@ -89,7 +92,8 @@ public class Saver {
         List<TypeSummary> types = pokemonSaveResponse.types();
         for (TypeSummary typeSummary : types) {
             String name = typeSummary.type().name();
-            PokemonType pokemonType = pokemonTypeRepository.findByName(name).orElseThrow();
+            PokemonType pokemonType = pokemonTypeRepository.findByName(name)
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(null, savedPokemon, pokemonType);
             savedPokemon.getPokemonTypeMappings().add(pokemonTypeMapping);
             pokemonTypeMappingRepository.save(pokemonTypeMapping);
