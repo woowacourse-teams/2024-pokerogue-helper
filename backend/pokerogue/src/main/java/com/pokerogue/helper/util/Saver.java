@@ -71,8 +71,8 @@ public class Saver {
         NameAndUrl species = pokemonDetails.species();
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(
                 getPokemonSpeciesResponse(species));
-        Pokemon pokemon = new Pokemon(null, pokemonNameAndDexNumber.pokemonNumber(), pokemonNameAndDexNumber.name(),
-                pokemonDetails.weight(),
+        Pokemon pokemon = new Pokemon(null, pokemonNameAndDexNumber.pokemonNumber(), pokemonDetails.name(),
+                pokemonNameAndDexNumber.koName(), pokemonDetails.weight(),
                 pokemonDetails.height(), pokemonDetails.hp(), pokemonDetails.speed(), pokemonDetails.attack(),
                 pokemonDetails.defense(), pokemonDetails.specialAttack(), pokemonDetails.specialDefense(),
                 pokemonDetails.totalStats(), "null", new ArrayList<>(), new ArrayList<>());
