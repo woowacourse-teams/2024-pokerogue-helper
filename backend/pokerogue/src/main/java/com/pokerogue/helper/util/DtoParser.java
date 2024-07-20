@@ -5,17 +5,17 @@ import com.pokerogue.helper.external.dto.Name;
 import com.pokerogue.helper.external.dto.NameAndUrl;
 import com.pokerogue.helper.external.dto.ability.AbilityResponse;
 import com.pokerogue.helper.external.dto.ability.FlavorTextEntry;
-import com.pokerogue.helper.external.dto.pokemon.AbilitySummary;
 import com.pokerogue.helper.external.dto.pokemon.PokemonDetails;
 import com.pokerogue.helper.external.dto.pokemon.PokemonSaveResponse;
 import com.pokerogue.helper.external.dto.pokemon.Stat;
-import com.pokerogue.helper.external.dto.pokemon.TypeSummary;
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonNameAndDexNumber;
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.helper.external.dto.type.TypeResponse;
 import com.pokerogue.helper.type.domain.PokemonType;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -36,6 +36,7 @@ public class DtoParser {
                 description = flavorTextEntries.get(i).flavor_text();
             }
         }
+
         return new PokemonAbility(null, abilityResponse.name(), koName, description, "자세한 설명입니다.", new ArrayList<>());
     }
 
@@ -47,6 +48,7 @@ public class DtoParser {
                 koName = value.name();
             }
         }
+
         return new PokemonType(null, typeResponse.name(), koName, "null");
     }
 
@@ -55,40 +57,30 @@ public class DtoParser {
         int weight = pokemonSaveResponse.weight();
         NameAndUrl species = pokemonSaveResponse.species();
         List<Stat> stats = pokemonSaveResponse.stats();
-        int hp = 0, defense = 0, attack = 0, speed = 0, specialAttack = 0, specialDefense = 0;
+        Map<String, Integer> stat = getStat(stats);
+
+        List<String> abilityNameList = pokemonSaveResponse.abilities().stream()
+                .map(abilitySummary -> abilitySummary.ability().name())
+                .toList();
+        List<String> typeNameList = pokemonSaveResponse.types().stream()
+                .map(typeSummary -> typeSummary.type().name())
+                .toList();
+
+        return new PokemonDetails(pokemonSaveResponse.name(), weight, height, species, stat.get("hp"), stat.get("attack"), stat.get("defense"), stat.get("speed"), stat.get("specialAttack"), stat.get("specialDefense"), stat.get("totalStats"), abilityNameList, typeNameList);
+    }
+
+    private Map<String, Integer> getStat(List<Stat> stats) {
+        Map<String, Integer> res = new HashMap<>();
         for (Stat stat : stats) {
-            String statName = stat.stat().name();
-            if (statName.equals("hp")) {
-                hp = stat.base_stat();
-            }
-            if (statName.equals("attack")) {
-                attack = stat.base_stat();
-            }
-            if (statName.equals("defense")) {
-                defense = stat.base_stat();
-            }
-            if (statName.equals("speed")) {
-                speed = stat.base_stat();
-            }
-            if (statName.equals("special-attack")) {
-                specialAttack = stat.base_stat();
-            }
-            if (statName.equals("special-defense")) {
-                specialDefense = stat.base_stat();
-            }
+            res.put(stat.stat().name(), stat.baseStat());
         }
-        int totalStats = hp + defense + attack + speed + specialAttack + specialDefense;
-        List<AbilitySummary> abilitySummaries = pokemonSaveResponse.abilities();
-        List<String> abilityNameList = new ArrayList<>();
-        for (AbilitySummary abilitySummary : abilitySummaries) {
-            abilityNameList.add(abilitySummary.ability().name());
+        int totalStats = 0;
+        for (Integer baseStat : res.values()) {
+            totalStats += baseStat;
         }
-        List<TypeSummary> typeSummaries = pokemonSaveResponse.types();
-        List<String> typeNameList = new ArrayList<>();
-        for (TypeSummary typeSummary : typeSummaries) {
-            typeNameList.add(typeSummary.type().name());
-        }
-        return new PokemonDetails(pokemonSaveResponse.name(), weight, height, species, hp, attack, defense, speed, specialAttack, specialDefense, totalStats, abilityNameList, typeNameList);
+        res.put("totalStats", totalStats);
+
+        return res;
     }
 
     public PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
@@ -99,6 +91,7 @@ public class DtoParser {
                 koName = value.name();
             }
         }
+
         return new PokemonNameAndDexNumber(pokemonSpeciesResponse.id(), koName);
     }
 }
