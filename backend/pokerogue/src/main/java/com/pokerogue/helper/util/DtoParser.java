@@ -5,9 +5,9 @@ import com.pokerogue.helper.external.dto.Name;
 import com.pokerogue.helper.external.dto.NameAndUrl;
 import com.pokerogue.helper.external.dto.ability.AbilityResponse;
 import com.pokerogue.helper.external.dto.ability.FlavorTextEntry;
-import com.pokerogue.helper.external.dto.pokemon.PokemonDetails;
+import com.pokerogue.helper.external.dto.pokemon.PokemonDetail;
 import com.pokerogue.helper.external.dto.pokemon.PokemonSaveResponse;
-import com.pokerogue.helper.external.dto.pokemon.Stat;
+import com.pokerogue.helper.external.dto.pokemon.StatDetail;
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonNameAndDexNumber;
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.helper.external.dto.type.TypeResponse;
@@ -29,6 +29,7 @@ public class DtoParser {
                 koName = value.name();
             }
         }
+
         List<FlavorTextEntry> flavorTextEntries = abilityResponse.flavor_text_entries();
         String description = "존재하지 않습니다";
         for (int i = flavorTextEntries.size() - 1; i > -1; i--) {
@@ -52,12 +53,12 @@ public class DtoParser {
         return new PokemonType(null, typeResponse.name(), koName, "null");
     }
 
-    public PokemonDetails getPokemonDetails(PokemonSaveResponse pokemonSaveResponse) {
+    public PokemonDetail getPokemonDetails(PokemonSaveResponse pokemonSaveResponse) {
         int height = pokemonSaveResponse.height();
         int weight = pokemonSaveResponse.weight();
         NameAndUrl species = pokemonSaveResponse.species();
-        List<Stat> stats = pokemonSaveResponse.stats();
-        Map<String, Integer> stat = getStat(stats);
+        List<StatDetail> statDetails = pokemonSaveResponse.statDetails();
+        Map<String, Integer> stat = getStat(statDetails);
 
         List<String> abilityNameList = pokemonSaveResponse.abilities().stream()
                 .map(abilitySummary -> abilitySummary.ability().name())
@@ -66,14 +67,15 @@ public class DtoParser {
                 .map(typeSummary -> typeSummary.type().name())
                 .toList();
 
-        return new PokemonDetails(pokemonSaveResponse.name(), weight, height, species, stat.get("hp"), stat.get("attack"), stat.get("defense"), stat.get("speed"), stat.get("special-attack"), stat.get("special-defense"), stat.get("total-stats"), abilityNameList, typeNameList);
+        return new PokemonDetail(pokemonSaveResponse.name(), weight, height, species, stat.get("hp"), stat.get("attack"), stat.get("defense"), stat.get("speed"), stat.get("special-attack"), stat.get("special-defense"), stat.get("total-stats"), abilityNameList, typeNameList);
     }
 
-    private Map<String, Integer> getStat(List<Stat> stats) {
+    private Map<String, Integer> getStat(List<StatDetail> statDetails) {
         Map<String, Integer> res = new HashMap<>();
-        for (Stat stat : stats) {
-            res.put(stat.stat().name(), stat.base_stat());
+        for (StatDetail statDetail : statDetails) {
+            res.put(statDetail.stat().name(), statDetail.base_stat());
         }
+
         int totalStats = 0;
         for (Integer baseStat : res.values()) {
             totalStats += baseStat;
