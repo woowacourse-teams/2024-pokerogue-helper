@@ -3,6 +3,8 @@ package com.pokerogue.helper.util;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
 import com.pokerogue.helper.external.client.PokeClient;
+import com.pokerogue.helper.external.dto.CountResponse;
+import com.pokerogue.helper.external.dto.ListResponse;
 import com.pokerogue.helper.external.dto.NameAndUrl;
 import com.pokerogue.helper.external.dto.ability.AbilityResponse;
 import com.pokerogue.helper.external.dto.pokemon.AbilitySummary;
@@ -39,26 +41,94 @@ public class Saver {
     private DtoParser dtoParser;
     private PokeClient pokeClient;
 
-    public List<PokemonAbility> savePokemonAbilityList(List<AbilityResponse> abilityResponses) {
+    public List<PokemonAbility> savePokemonAbilityList() {
+        ListResponse abilityList = getAbilityList();
+        List<AbilityResponse> abilityResponses = getAbilityResponses(abilityList);
+        List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
+
+        return pokemonAbilityRepository.saveAll(pokemonAbilities);
+    }
+
+    private ListResponse getAbilityList() {
+        CountResponse abilityListSize = pokeClient.getAbilityListSize();
+
+        return pokeClient.getAbilityList(String.valueOf(abilityListSize.count()));
+    }
+
+    private List<AbilityResponse> getAbilityResponses(ListResponse abilityList) {
+        List<AbilityResponse> abilityResponses = new ArrayList<>();
+        for (NameAndUrl nameAndUrl : abilityList.results()) {
+            String[] split = nameAndUrl.url().split("/");
+            AbilityResponse abilityResponse = pokeClient.getAbilityResponse(split[split.length - 1]);
+            abilityResponses.add(abilityResponse);
+        }
+
+        return abilityResponses;
+    }
+
+    private List<PokemonAbility> getPokemonAbilities(List<AbilityResponse> abilityResponses) {
         List<PokemonAbility> pokemonAbilities = new ArrayList<>();
         for (AbilityResponse abilityResponse : abilityResponses) {
             PokemonAbility pokemonAbility = dtoParser.getPokemonAbility(abilityResponse);
             pokemonAbilities.add(pokemonAbility);
         }
-        return pokemonAbilityRepository.saveAll(pokemonAbilities);
+
+        return pokemonAbilities;
     }
 
-    public List<PokemonType> savePokemonTypeList(List<TypeResponse> typeResponses) {
+    public List<PokemonType> savePokemonTypeList() {
+        ListResponse typeList = getTypeList();
+        List<TypeResponse> typeResponses = getTypeResponses(typeList);
+        List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
+
+        return pokemonTypeRepository.saveAll(pokemonTypes);
+    }
+
+    private ListResponse getTypeList() {
+        CountResponse typeListSize = pokeClient.getTypeListSize();
+
+        return pokeClient.getTypeList(String.valueOf(typeListSize.count()));
+    }
+
+    private List<TypeResponse> getTypeResponses(ListResponse typeList) {
+        List<TypeResponse> typeResponses = new ArrayList<>();
+        for (NameAndUrl nameAndUrl : typeList.results()) {
+            String[] split = nameAndUrl.url().split("/");
+            TypeResponse typeResponse = pokeClient.getTypeResponse(split[split.length - 1]);
+            typeResponses.add(typeResponse);
+        }
+
+        return typeResponses;
+    }
+
+    private List<PokemonType> getPokemonTypes(List<TypeResponse> typeResponses) {
         List<PokemonType> pokemonTypes = new ArrayList<>();
         for (TypeResponse typeResponse : typeResponses) {
             PokemonType pokemonType = dtoParser.getPokemonType(typeResponse);
             pokemonTypes.add(pokemonType);
         }
-        return pokemonTypeRepository.saveAll(pokemonTypes);
+
+        return pokemonTypes;
     }
 
     @Transactional
-    public Pokemon savePokemon(PokemonSaveResponse pokemonSaveResponse) {
+    public List<Pokemon> savePokemonList() {
+        CountResponse pokemonListSize = pokeClient.getPokemonListSize();
+        List<Pokemon> pokemons = new ArrayList<>();
+        for (int i = 0; i < pokemonListSize.count(); i+=500) {
+            ListResponse pokemonList = pokeClient.getPokemonList(String.valueOf(i), "500");
+            for (NameAndUrl nameAndUrl : pokemonList.results()) {
+                String[] split = nameAndUrl.url().split("/");
+                PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(split[split.length - 1]);
+                Pokemon pokemon = savePokemon(pokemonSaveResponse);
+                pokemons.add(pokemon);
+            }
+        }
+
+        return pokemons;
+    }
+
+    private Pokemon savePokemon(PokemonSaveResponse pokemonSaveResponse) {
         PokemonDetails pokemonDetails = dtoParser.getPokemonDetails(pokemonSaveResponse);
         NameAndUrl species = pokemonDetails.species();
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(
@@ -69,6 +139,12 @@ public class Saver {
                 pokemonDetails.defense(), pokemonDetails.specialAttack(), pokemonDetails.specialDefense(),
                 pokemonDetails.totalStats(), "null", new ArrayList<>(), new ArrayList<>());
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
+        pokemonMapping(pokemonSaveResponse, savedPokemon);
+
+        return savedPokemon;
+    }
+
+    private void pokemonMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
         List<AbilitySummary> abilities = pokemonSaveResponse.abilities();
         for (AbilitySummary abilitySummary : abilities) {
             String name = abilitySummary.ability().name();
@@ -79,6 +155,7 @@ public class Saver {
             pokemonAbility.getPokemonAbilityMappings().add(pokemonAbilityMapping);
             pokemonAbilityMappingRepository.save(pokemonAbilityMapping);
         }
+
         List<TypeSummary> types = pokemonSaveResponse.types();
         for (TypeSummary typeSummary : types) {
             String name = typeSummary.type().name();
@@ -88,11 +165,11 @@ public class Saver {
             savedPokemon.getPokemonTypeMappings().add(pokemonTypeMapping);
             pokemonTypeMappingRepository.save(pokemonTypeMapping);
         }
-        return savedPokemon;
     }
 
     private PokemonSpeciesResponse getPokemonSpeciesResponse(NameAndUrl species) {
         String[] split = species.url().split("/");
+
         return pokeClient.getPokemonSpeciesResponse(split[split.length - 1]);
     }
 
