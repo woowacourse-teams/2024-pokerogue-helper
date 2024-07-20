@@ -125,11 +125,11 @@ public class Saver {
         NameAndUrl species = pokemonDetail.species();
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(getPokemonSpeciesResponse(species));
 
-        Pokemon pokemon = new Pokemon(null, pokemonNameAndDexNumber.pokemonNumber(), pokemonDetail.name(),
-                pokemonNameAndDexNumber.koName(), pokemonDetail.weight(),
-                pokemonDetail.height(), pokemonDetail.hp(), pokemonDetail.speed(), pokemonDetail.attack(),
-                pokemonDetail.defense(), pokemonDetail.specialAttack(), pokemonDetail.specialDefense(),
-                pokemonDetail.totalStats(), "null", new ArrayList<>(), new ArrayList<>());
+        Pokemon pokemon = new Pokemon(null, pokemonNameAndDexNumber.pokedexNumber(), pokemonDetail.name(),
+                pokemonNameAndDexNumber.koName(), pokemonDetail.weight(), pokemonDetail.height(), pokemonDetail.hp(),
+                pokemonDetail.speed(), pokemonDetail.attack(), pokemonDetail.defense(), pokemonDetail.specialAttack(),
+                pokemonDetail.specialDefense(), pokemonDetail.totalStats(), "null",
+                new ArrayList<>(), new ArrayList<>());
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
         pokemonMapping(pokemonSaveResponse, savedPokemon);
 

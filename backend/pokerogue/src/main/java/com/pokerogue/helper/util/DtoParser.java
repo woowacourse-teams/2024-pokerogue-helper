@@ -34,7 +34,8 @@ public class DtoParser {
             }
         }
 
-        return new PokemonAbility(null, abilityResponse.name(), koName, description, "자세한 설명입니다.", new ArrayList<>());
+        return new PokemonAbility(null, abilityResponse.name(), koName, description, "자세한 설명입니다.",
+                new ArrayList<>());
     }
 
     private static String getKoName(List<Name> names) {
@@ -68,7 +69,9 @@ public class DtoParser {
                 .map(typeSummary -> typeSummary.type().name())
                 .toList();
 
-        return new PokemonDetail(pokemonSaveResponse.name(), weight, height, species, stat.get("hp"), stat.get("attack"), stat.get("defense"), stat.get("speed"), stat.get("special-attack"), stat.get("special-defense"), stat.get("total-stats"), abilityNameList, typeNameList);
+        return new PokemonDetail(pokemonSaveResponse.name(), weight, height, species, stat.get("hp"),
+                stat.get("attack"), stat.get("defense"), stat.get("speed"), stat.get("special-attack"),
+                stat.get("special-defense"), stat.get("total-stats"), abilityNameList, typeNameList);
     }
 
     private Map<String, Integer> getStat(List<StatDetail> statDetails) {
