@@ -27,12 +27,12 @@ import com.pokerogue.helper.type.repository.PokemonTypeRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component
+@Service
 @AllArgsConstructor
-public class Saver {
+public class DataSettingService {
     private PokemonRepository pokemonRepository;
     private PokemonAbilityRepository pokemonAbilityRepository;
     private PokemonTypeRepository pokemonTypeRepository;

@@ -3,7 +3,7 @@ package com.pokerogue.helper.ability.controller;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.ability.service.PokemonAbilityService;
-import com.pokerogue.helper.util.Saver;
+import com.pokerogue.helper.util.DataSettingService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PokemonAbilityController {
 
     private final PokemonAbilityService pokemonAbilityService;
-    private final Saver saver;
+    private final DataSettingService dataSettingService;
 
     @GetMapping("/api/v1/abilities")
     public ApiResponse<List<PokemonAbilityResponse>> abilityList() {
@@ -24,7 +24,7 @@ public class PokemonAbilityController {
 
     @GetMapping("api/v1/update/ability")
     public ApiResponse<List<PokemonAbility>> saveAbilityList() {
-        List<PokemonAbility> savedPokemonAbilities = saver.savePokemonAbilities();
+        List<PokemonAbility> savedPokemonAbilities = dataSettingService.savePokemonAbilities();
 
         return new ApiResponse<>("특성 정보 업데이트", savedPokemonAbilities);
     }
