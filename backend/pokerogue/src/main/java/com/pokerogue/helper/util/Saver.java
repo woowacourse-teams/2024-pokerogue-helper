@@ -42,6 +42,7 @@ public class Saver {
     private PokeClient pokeClient;
 
     public List<PokemonAbility> savePokemonAbilityList() {
+        pokemonAbilityRepository.deleteAllInBatch();
         ListResponse abilityList = getAbilityList();
         List<AbilityResponse> abilityResponses = getAbilityResponses(abilityList);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
@@ -77,6 +78,7 @@ public class Saver {
     }
 
     public List<PokemonType> savePokemonTypeList() {
+        pokemonTypeRepository.deleteAllInBatch();
         ListResponse typeList = getTypeList();
         List<TypeResponse> typeResponses = getTypeResponses(typeList);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
@@ -113,9 +115,12 @@ public class Saver {
 
     @Transactional
     public List<Pokemon> savePokemonList() {
+        pokemonAbilityMappingRepository.deleteAllInBatch();
+        pokemonTypeMappingRepository.deleteAllInBatch();
+        pokemonRepository.deleteAllInBatch();
         CountResponse pokemonListSize = pokeClient.getPokemonListSize();
         List<Pokemon> pokemons = new ArrayList<>();
-        for (int i = 0; i < pokemonListSize.count(); i+=500) {
+        for (int i = 0; i < pokemonListSize.count(); i += 500) {
             ListResponse pokemonList = pokeClient.getPokemonList(String.valueOf(i), "500");
             for (NameAndUrl nameAndUrl : pokemonList.results()) {
                 String[] split = nameAndUrl.url().split("/");
