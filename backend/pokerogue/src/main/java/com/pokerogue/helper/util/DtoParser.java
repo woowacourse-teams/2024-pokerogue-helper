@@ -88,17 +88,17 @@ public class DtoParser {
         for (TypeSummary typeSummary : typeSummaries) {
             typeNameList.add(typeSummary.type().name());
         }
-        return new PokemonDetails(weight, height, species, hp, attack, defense, speed, specialAttack, specialDefense, totalStats, abilityNameList, typeNameList);
+        return new PokemonDetails(pokemonSaveResponse.name(), weight, height, species, hp, attack, defense, speed, specialAttack, specialDefense, totalStats, abilityNameList, typeNameList);
     }
 
     public PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
-        String name = "존재하지 않습니다";
+        String koName = "존재하지 않습니다";
         List<Name> names = pokemonSpeciesResponse.names();
         for (Name value : names) {
             if (value.language().name().equals("ko")) {
-                name = value.name();
+                koName = value.name();
             }
         }
-        return new PokemonNameAndDexNumber(pokemonSpeciesResponse.id(), name);
+        return new PokemonNameAndDexNumber(pokemonSpeciesResponse.id(), koName);
     }
 }
