@@ -3,6 +3,8 @@ package com.pokerogue.helper.external.client;
 import com.pokerogue.helper.external.dto.CountResponse;
 import com.pokerogue.helper.external.dto.ListResponse;
 import com.pokerogue.helper.external.dto.ability.AbilityResponse;
+import com.pokerogue.helper.external.dto.pokemon.PokemonSaveResponse;
+import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.helper.external.dto.type.TypeResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.service.annotation.GetExchange;
@@ -28,4 +30,16 @@ public interface PokeClient {
 
     @GetExchange("/type/{id}")
     TypeResponse getTypeResponse(@PathVariable String id);
+
+    @GetExchange("/pokemon/?offset=0&limit={size}")
+    ListResponse getPokemonList(@PathVariable String size);
+
+    @GetExchange("/pokemon")
+    CountResponse getPokemonListSize();
+
+    @GetExchange("/pokemon/{id}")
+    PokemonSaveResponse getPokemonSaveResponse(@PathVariable String id);
+
+    @GetExchange("/pokemon-species/{id}")
+    PokemonSpeciesResponse getPokemonSpeciesResponse(@PathVariable String id);
 }

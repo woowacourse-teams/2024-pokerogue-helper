@@ -3,8 +3,18 @@ package com.pokerogue.helper.util;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
 import com.pokerogue.helper.external.client.PokeClient;
+import com.pokerogue.helper.external.dto.NameAndUrl;
 import com.pokerogue.helper.external.dto.ability.AbilityResponse;
+import com.pokerogue.helper.external.dto.pokemon.AbilitySummary;
+import com.pokerogue.helper.external.dto.pokemon.PokemonDetails;
+import com.pokerogue.helper.external.dto.pokemon.PokemonSaveResponse;
+import com.pokerogue.helper.external.dto.pokemon.TypeSummary;
+import com.pokerogue.helper.external.dto.pokemon.species.PokemonNameAndDexNumber;
+import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.helper.external.dto.type.TypeResponse;
+import com.pokerogue.helper.pokemon.domain.Pokemon;
+import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
+import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
 import com.pokerogue.helper.pokemon.repository.PokemonAbilityMappingRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonTypeMappingRepository;
@@ -14,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @AllArgsConstructor
@@ -52,5 +63,46 @@ public class Saver {
             pokemonTypes.add(pokemonType);
         }
         return pokemonTypeRepository.saveAll(pokemonTypes);
+    }
+
+    @Transactional
+    public Pokemon savePokemon(PokemonSaveResponse pokemonSaveResponse) {
+        PokemonDetails pokemonDetails = dtoParser.getPokemonDetails(pokemonSaveResponse);
+        NameAndUrl species = pokemonDetails.species();
+        PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(
+                getPokemonSpeciesResponse(species));
+        Pokemon pokemon = new Pokemon(null, pokemonNameAndDexNumber.pokemonNumber(), pokemonNameAndDexNumber.name(),
+                pokemonDetails.weight(),
+                pokemonDetails.height(), pokemonDetails.hp(), pokemonDetails.speed(), pokemonDetails.attack(),
+                pokemonDetails.defense(), pokemonDetails.specialAttack(), pokemonDetails.specialDefense(),
+                pokemonDetails.totalStats(), "null", new ArrayList<>(), new ArrayList<>());
+        Pokemon savedPokemon = pokemonRepository.save(pokemon);
+        List<AbilitySummary> abilities = pokemonSaveResponse.abilities();
+        for (AbilitySummary abilitySummary : abilities) {
+            String name = abilitySummary.ability().name();
+            PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name).orElseThrow();
+            PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(null, savedPokemon, pokemonAbility);
+            savedPokemon.getPokemonAbilityMappings().add(pokemonAbilityMapping);
+            pokemonAbility.getPokemonAbilityMappings().add(pokemonAbilityMapping);
+            pokemonAbilityMappingRepository.save(pokemonAbilityMapping);
+        }
+        List<TypeSummary> types = pokemonSaveResponse.types();
+        for (TypeSummary typeSummary : types) {
+            String name = typeSummary.type().name();
+            PokemonType pokemonType = pokemonTypeRepository.findByName(name).orElseThrow();
+            PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(null, savedPokemon, pokemonType);
+            savedPokemon.getPokemonTypeMappings().add(pokemonTypeMapping);
+            pokemonTypeMappingRepository.save(pokemonTypeMapping);
+        }
+        return savedPokemon;
+    }
+
+    private PokemonSpeciesResponse getPokemonSpeciesResponse(NameAndUrl species) {
+        String[] split = species.url().split("/");
+        return pokeClient.getPokemonSpeciesResponse(split[split.length - 1]);
+    }
+
+    private PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
+        return dtoParser.getPokemonNameAndDexNumber(pokemonSpeciesResponse);
     }
 }
