@@ -6,40 +6,94 @@ import com.pokerogue.helper.external.dto.ability.AbilityResponse;
 import com.pokerogue.helper.external.dto.pokemon.PokemonSaveResponse;
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.helper.external.dto.type.TypeResponse;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.service.annotation.GetExchange;
-import org.springframework.web.service.annotation.HttpExchange;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestClient;
 
-@HttpExchange
-public interface PokeClient {
+public class PokeClient {
 
-    @GetExchange("/ability/?offset=0&limit={size}")
-    ListResponse getAbilityList(@PathVariable String size);
+    private final RestClient restClient;
 
-    @GetExchange("/ability")
-    CountResponse getAbilityListSize();
+    public PokeClient(RestClient restClient) {
+        this.restClient = restClient;
+    }
 
-    @GetExchange("/ability/{id}")
-    AbilityResponse getAbilityResponse(@PathVariable String id);
+    public CountResponse getAbilityListSize() {
+        return restClient.get()
+                .uri("/ability")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(CountResponse.class);
+    }
 
-    @GetExchange("/type/?offset=0&limit={size}")
-    ListResponse getTypeList(@PathVariable String size);
+    public ListResponse getAbilityList(String limit) {
+        return restClient.get()
+                .uri("/ability/?offset=0&limit={limit}", limit)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(ListResponse.class);
+    }
 
-    @GetExchange("/type")
-    CountResponse getTypeListSize();
+    public AbilityResponse getAbilityResponse(String id) {
+        return restClient.get()
+                .uri("/ability/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(AbilityResponse.class);
+    }
 
-    @GetExchange("/type/{id}")
-    TypeResponse getTypeResponse(@PathVariable String id);
+    public CountResponse getTypeListSize() {
+        return restClient.get()
+                .uri("/type")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(CountResponse.class);
+    }
 
-    @GetExchange("/pokemon/?offset={start}&limit={limit}")
-    ListResponse getPokemonList(@PathVariable String start, @PathVariable String limit);
+    public ListResponse getTypeList(String limit) {
+        return restClient.get()
+                .uri("/type/?offset=0&limit={limit}", limit)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(ListResponse.class);
+    }
 
-    @GetExchange("/pokemon")
-    CountResponse getPokemonListSize();
+    public TypeResponse getTypeResponse(String id) {
+        return restClient.get()
+                .uri("/type/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(TypeResponse.class);
+    }
 
-    @GetExchange("/pokemon/{id}")
-    PokemonSaveResponse getPokemonSaveResponse(@PathVariable String id);
+    public CountResponse getPokemonListSize() {
+        return restClient.get()
+                .uri("/pokemon")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(CountResponse.class);
+    }
 
-    @GetExchange("/pokemon-species/{id}")
-    PokemonSpeciesResponse getPokemonSpeciesResponse(@PathVariable String id);
+    public ListResponse getPokemonList(String offset, String limit) {
+        return restClient.get()
+                .uri("/pokemon/?offset={offset}&limit={limit}", offset, limit)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(ListResponse.class);
+    }
+
+    public PokemonSaveResponse getPokemonSaveResponse(String id) {
+        return restClient.get()
+                .uri("/pokemon/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(PokemonSaveResponse.class);
+    }
+
+    public PokemonSpeciesResponse getPokemonSpeciesResponse(String id) {
+        return restClient.get()
+                .uri("/pokemon-species/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(PokemonSpeciesResponse.class);
+    }
 }

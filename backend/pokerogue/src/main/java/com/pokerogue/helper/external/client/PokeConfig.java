@@ -9,18 +9,13 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClient.Builder;
-import org.springframework.web.client.support.RestClientAdapter;
-import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 @Configuration
 public class PokeConfig {
 
     @Bean
-    public PokeClient pocketClient() {
-        RestClient pocket = getBuilder().build();
-        return HttpServiceProxyFactory
-                .builderFor(RestClientAdapter.create(pocket))
-                .build().createClient(PokeClient.class);
+    public PokeClient pokeClient() {
+        return new PokeClient(getBuilder().build());
     }
 
     @Bean
