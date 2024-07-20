@@ -24,7 +24,7 @@ public class PokemonAbilityController {
 
     @GetMapping("api/v1/update/ability")
     public ApiResponse<List<PokemonAbility>> saveAbilityList() {
-        List<PokemonAbility> savedPokemonAbilities = saver.savePokemonAbilityList();
+        List<PokemonAbility> savedPokemonAbilities = saver.savePokemonAbilities();
 
         return new ApiResponse<>("특성 정보 업데이트", savedPokemonAbilities);
     }
