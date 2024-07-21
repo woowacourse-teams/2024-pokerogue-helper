@@ -13,24 +13,24 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
-import poke.rogue.helper.data.repository.TypeRepository
+import poke.rogue.helper.data.repository.DefaultTypeRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.type.mapper.toUiModel
+import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
 
 class TypeViewModel(
-    private val typeRepository: TypeRepository,
+    private val typeRepository: DefaultTypeRepository,
 ) : ViewModel(), TypeHandler {
-    private val _myType = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Idle)
+    private val _myType = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Empty)
     val myType: StateFlow<TypeSelectionUiState> = _myType
 
-    private val _opponentType1 = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Idle)
+    private val _opponentType1 = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Empty)
     val opponentType1: StateFlow<TypeSelectionUiState> = _opponentType1
 
-    private val _opponentType2 = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Idle)
+    private val _opponentType2 = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Empty)
     val opponentType2: StateFlow<TypeSelectionUiState> = _opponentType2
 
     private val _typeEvent = MutableSharedFlow<TypeEvent>()
@@ -43,7 +43,7 @@ class TypeViewModel(
     private val isAnyOpponentSelected
         get() = opponentType1.value is TypeSelectionUiState.Selected || opponentType2.value is TypeSelectionUiState.Selected
 
-    val type: StateFlow<List<TypeMatchedResultUiModel>> =
+    val type: StateFlow<List<MatchedTypesUiModel>> =
         combine(
             myType,
             opponentType1,
@@ -51,50 +51,50 @@ class TypeViewModel(
         ) { mine, opponent1, opponent2 ->
             when {
                 mine.isEmpty() && isAnyOpponentSelected ->
-                    handleOpponentSelectionOnly(
+                    matchedTypesAgainstOpponentSelections(
                         opponent1,
                         opponent2,
                     )
 
                 mine is TypeSelectionUiState.Selected && opponent1.isEmpty() && opponent2.isEmpty() ->
-                    handleMySelectionOnly(mine)
+                    matchedTypesAgainstMySelection(mine)
 
                 mine is TypeSelectionUiState.Selected && isAnyOpponentSelected ->
-                    handleBothSelection(mine, opponent1, opponent2)
+                    matchedTypes(mine, opponent1, opponent2)
 
                 else -> emptyList()
             }
         }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    private fun handleOpponentSelectionOnly(
+    private fun matchedTypesAgainstOpponentSelections(
         opponent1: TypeSelectionUiState,
         opponent2: TypeSelectionUiState,
-    ): List<TypeMatchedResultUiModel> {
-        return findResultsForSelectedOpponent(opponent1) + findResultsForSelectedOpponent(opponent2)
+    ): List<MatchedTypesUiModel> {
+        return matchedTypesAgainstOpponentSelection(opponent1) + matchedTypesAgainstOpponentSelection(opponent2)
     }
 
-    private fun findResultsForSelectedOpponent(opponent: TypeSelectionUiState): List<TypeMatchedResultUiModel> {
+    private fun matchedTypesAgainstOpponentSelection(opponent: TypeSelectionUiState): List<MatchedTypesUiModel> {
         if (opponent is TypeSelectionUiState.Selected) {
             val selectedTypeId = opponent.selectedType.id
 
-            return typeRepository.findResultAgainstOpponent(selectedTypeId)
+            return typeRepository.matchedTypesAgainstOpponent(selectedTypeId)
                 .map { it.toUiModel(selectedTypeId, isMyType = false) }
         }
         return emptyList()
     }
 
-    private fun handleMySelectionOnly(mine: TypeSelectionUiState.Selected): List<TypeMatchedResultUiModel> {
+    private fun matchedTypesAgainstMySelection(mine: TypeSelectionUiState.Selected): List<MatchedTypesUiModel> {
         val selectedTypeId = mine.selectedType.id
 
-        return typeRepository.findResultAgainstMyType(selectedTypeId)
+        return typeRepository.matchedTypesAgainstMyType(selectedTypeId)
             .map { it.toUiModel(selectedTypeId, isMyType = true) }
     }
 
-    private fun handleBothSelection(
+    private fun matchedTypes(
         mine: TypeSelectionUiState.Selected,
         opponent1: TypeSelectionUiState,
         opponent2: TypeSelectionUiState,
-    ): List<TypeMatchedResultUiModel> {
+    ): List<MatchedTypesUiModel> {
         val mySelectedId = mine.selectedType.id
 
         val opponentIds =
@@ -102,19 +102,19 @@ class TypeViewModel(
                 .filterIsInstance<TypeSelectionUiState.Selected>()
                 .map { it.selectedType.id }
 
-        return typeRepository.findMatchedResult(mySelectedId, opponentIds)
+        return typeRepository.matchedTypes(mySelectedId, opponentIds)
             .map { it.toUiModel(mySelectedId, isMyType = true) }
     }
 
-    private fun TypeSelectionUiState.isEmpty(): Boolean = this is TypeSelectionUiState.Idle
+    private fun TypeSelectionUiState.isEmpty(): Boolean = this is TypeSelectionUiState.Empty
 
-    override fun showSelection(selectorType: SelectorType) {
+    override fun startSelection(selectorType: SelectorType) {
         viewModelScope.launch {
             _typeEvent.emit(TypeEvent.ShowSelection(selectorType))
         }
     }
 
-    override fun applySelection(
+    override fun selectType(
         selectorType: SelectorType,
         selectedType: TypeUiModel,
     ) {
@@ -126,7 +126,7 @@ class TypeViewModel(
     }
 
     override fun removeSelection(selectorType: SelectorType) {
-        val changedState = TypeSelectionUiState.Idle
+        val changedState = TypeSelectionUiState.Empty
         updateSelectionState(selectorType, changedState)
     }
 
@@ -145,13 +145,13 @@ class TypeViewModel(
 
     override fun removeAllSelections() {
         viewModelScope.launch {
-            _myType.update { TypeSelectionUiState.Idle }
-            _opponentType1.update { TypeSelectionUiState.Idle }
-            _opponentType2.update { TypeSelectionUiState.Idle }
+            _myType.update { TypeSelectionUiState.Empty }
+            _opponentType1.update { TypeSelectionUiState.Empty }
+            _opponentType2.update { TypeSelectionUiState.Empty }
         }
     }
 
     companion object {
-        fun factory() = BaseViewModelFactory { TypeViewModel(TypeRepository(LocalTypeDataSource())) }
+        fun factory() = BaseViewModelFactory { TypeViewModel(DefaultTypeRepository(LocalTypeDataSource())) }
     }
 }

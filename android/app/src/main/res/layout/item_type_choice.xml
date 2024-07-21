@@ -21,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> typeHandler.applySelection(selector, typeItem)}">
+        android:onClick="@{() -> typeHandler.selectType(selector, typeItem)}">
 
         <ImageView
             android:id="@+id/iv_type_choice_icon"

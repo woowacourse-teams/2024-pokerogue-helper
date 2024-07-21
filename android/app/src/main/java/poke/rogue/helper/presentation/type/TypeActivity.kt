@@ -76,7 +76,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
         repeatOnStarted {
             viewModel.typeEvent.collect {
                 if (it is TypeEvent.ShowSelection) {
-                    displayBottomSheet(it.selectorType)
+                    showBottomSheet(it.selectorType)
                 }
             }
         }
@@ -115,7 +115,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
         }
     }
 
-    private fun displayBottomSheet(selectorType: SelectorType) {
+    private fun showBottomSheet(selectorType: SelectorType) {
         TypeSelectionBottomSheetFragment.newInstance(selectorType).show(
             supportFragmentManager,
             TypeSelectionBottomSheetFragment.TAG,

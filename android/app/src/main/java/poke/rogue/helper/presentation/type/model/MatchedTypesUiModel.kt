@@ -3,7 +3,7 @@ package poke.rogue.helper.presentation.type.model
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 
-data class TypeMatchedResultUiModel(
+data class MatchedTypesUiModel(
     val typeName: String,
     @DrawableRes val typeIconResId: Int,
     val isMyType: Boolean,

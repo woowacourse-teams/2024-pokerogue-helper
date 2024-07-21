@@ -2,8 +2,8 @@ package poke.rogue.helper.presentation.type.mapper
 
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.MatchedResult
-import poke.rogue.helper.data.model.TypeMatchedResult
-import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
+import poke.rogue.helper.data.model.MatchedTypes
+import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
 
@@ -25,12 +25,12 @@ fun MatchedResult.displayColor(): Int {
     }
 }
 
-fun TypeMatchedResult.toUiModel(
+fun MatchedTypes.toUiModel(
     typeId: Int,
     isMyType: Boolean,
-): TypeMatchedResultUiModel {
+): MatchedTypesUiModel {
     val inputType = TypeUiModel.fromId(typeId) ?: throw IllegalArgumentException("Unknown type ID: $typeId")
-    return TypeMatchedResultUiModel(
+    return MatchedTypesUiModel(
         typeName = inputType.typeName,
         typeIconResId = inputType.typeIconResId,
         isMyType = isMyType,

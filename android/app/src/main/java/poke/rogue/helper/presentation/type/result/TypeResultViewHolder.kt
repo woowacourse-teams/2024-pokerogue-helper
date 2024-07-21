@@ -11,7 +11,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
-import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
+import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
 
 class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -23,7 +23,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         }
     }
 
-    fun bind(typeMatchedResult: TypeMatchedResultUiModel) {
+    fun bind(typeMatchedResult: MatchedTypesUiModel) {
         val context = binding.root.context
 
         bindTypeNameText(typeMatchedResult, context)
@@ -35,7 +35,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
     }
 
     private fun bindTypeNameText(
-        typeMatchedResult: TypeMatchedResultUiModel,
+        typeMatchedResult: MatchedTypesUiModel,
         context: Context,
     ) {
         binding.tvResultMyTypeName.text =
@@ -53,7 +53,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
     }
 
     private fun bindTypeStrengthText(
-        typeMatchedResult: TypeMatchedResultUiModel,
+        typeMatchedResult: MatchedTypesUiModel,
         context: Context,
     ) {
         val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultColorResId)

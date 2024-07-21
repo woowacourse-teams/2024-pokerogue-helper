@@ -7,7 +7,7 @@
 
         <variable
             name="typeResult"
-            type="poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel" />
+            type="poke.rogue.helper.presentation.type.model.MatchedTypesUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
