@@ -30,4 +30,10 @@ public class PokemonType {
 
     @Column(name = "image", nullable = false)
     private String image;
+
+    public PokemonType(String name, String koName, String image) {
+        this.name = name;
+        this.koName = koName;
+        this.image = image;
+    }
 }
