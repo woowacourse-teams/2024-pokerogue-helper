@@ -6,11 +6,11 @@
 
         <variable
             name="pokemon"
-            type="poke.rogue.helper.presentation.poketmon2.PokemonUiModel" />
+            type="poke.rogue.helper.presentation.dex.model.PokemonUiModel" />
 
         <variable
             name="listener"
-            type="poke.rogue.helper.presentation.poketmon2.PokeMonItemClickListener" />
+            type="poke.rogue.helper.presentation.dex.PokeMonItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:srcCompat="@drawable/ic_arrow_back_24" />
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tv_item_poketmon_poketmon_name"
@@ -53,10 +53,10 @@
             android:id="@+id/rv_poke_type_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginEnd="3dp"
-            app:layout_constraintBottom_toTopOf="@id/tv_item_poketmon_poketmon_name"
+            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/tv_item_poketmon_poketmon_name"
             app:layout_constraintEnd_toEndOf="parent"
             tools:itemCount="2"
             tools:listitem="@layout/item_type_right_name" />
