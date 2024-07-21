@@ -42,6 +42,8 @@ public class DataSettingService {
     private PokeClient pokeClient;
 
     public List<PokemonAbility> savePokemonAbilities() {
+        pokemonAbilityMappingRepository.deleteAllInBatch();
+        pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonAbilityRepository.deleteAllInBatch();
 
         ListResponse abilityList = getAbilityList();
@@ -71,6 +73,8 @@ public class DataSettingService {
     }
 
     public List<PokemonType> savePokemonTypes() {
+        pokemonAbilityMappingRepository.deleteAllInBatch();
+        pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonTypeRepository.deleteAllInBatch();
 
         ListResponse typeList = getTypeList();
