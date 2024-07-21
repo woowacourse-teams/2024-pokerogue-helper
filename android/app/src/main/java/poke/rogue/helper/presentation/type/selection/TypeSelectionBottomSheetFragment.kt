@@ -1,12 +1,11 @@
 package poke.rogue.helper.presentation.type.selection
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.databinding.FragmentTypeChoiceBottomSheetBinding
 import poke.rogue.helper.presentation.type.TypeEvent
@@ -26,7 +25,7 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
             arguments?.getSerializable(KEY_SELECTION_TYPE) as? SelectorType
         } ?: throw IllegalArgumentException("InValid TypeSelector")
     }
-    private lateinit var sharedViewModel: TypeViewModel
+    private val sharedViewModel by activityViewModels<TypeViewModel>()
 
     private val adapter by lazy {
         TypeSelectionAdapter(
@@ -34,15 +33,6 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
             selectorType,
             sharedViewModel,
         )
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        sharedViewModel =
-            ViewModelProvider(
-                requireActivity(),
-                TypeViewModel.factory(),
-            ).get(TypeViewModel::class.java)
     }
 
     override fun onCreateView(
