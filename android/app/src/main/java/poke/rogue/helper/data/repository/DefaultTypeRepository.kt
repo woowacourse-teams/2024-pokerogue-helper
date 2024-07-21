@@ -5,18 +5,18 @@ import poke.rogue.helper.data.model.MatchedResult
 import poke.rogue.helper.data.model.MatchedTypes
 import poke.rogue.helper.data.model.TypeInfo
 
-class DefaultTypeRepository(private val localTypeDataSource: LocalTypeDataSource) {
-    fun matchedTypesAgainstMyType(myTypeId: Int): List<MatchedTypes> {
+class DefaultTypeRepository(private val localTypeDataSource: LocalTypeDataSource) : TypeRepository {
+    override fun matchedTypesAgainstMyType(myTypeId: Int): List<MatchedTypes> {
         return localTypeDataSource.matchedTypesAgainstAttackingType(myTypeId)
             .filter { it.matchedResult != MatchedResult.NORMAL }
     }
 
-    fun matchedTypesAgainstOpponent(opponentTypeId: Int): List<MatchedTypes> {
+    override fun matchedTypesAgainstOpponent(opponentTypeId: Int): List<MatchedTypes> {
         return localTypeDataSource.matchedTypesAgainstDefendingType(opponentTypeId)
             .filter { it.matchedResult != MatchedResult.NORMAL }
     }
 
-    fun matchedTypes(
+    override fun matchedTypes(
         myTypeId: Int,
         opponentTypeIds: List<Int>,
     ): List<MatchedTypes> {
@@ -25,7 +25,7 @@ class DefaultTypeRepository(private val localTypeDataSource: LocalTypeDataSource
         }.filter { it.matchedResult != MatchedResult.NORMAL }
     }
 
-    fun allTypes(): List<TypeInfo> {
+    override fun allTypes(): List<TypeInfo> {
         return localTypeDataSource.allTypes()
     }
 }

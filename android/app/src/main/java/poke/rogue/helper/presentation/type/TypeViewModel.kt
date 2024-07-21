@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
 import poke.rogue.helper.data.repository.DefaultTypeRepository
+import poke.rogue.helper.data.repository.TypeRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.type.mapper.toUiModel
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
@@ -22,7 +23,7 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
 
 class TypeViewModel(
-    private val typeRepository: DefaultTypeRepository,
+    private val typeRepository: TypeRepository,
 ) : ViewModel(), TypeHandler {
     private val _myType = MutableStateFlow<TypeSelectionUiState>(TypeSelectionUiState.Empty)
     val myType: StateFlow<TypeSelectionUiState> = _myType
