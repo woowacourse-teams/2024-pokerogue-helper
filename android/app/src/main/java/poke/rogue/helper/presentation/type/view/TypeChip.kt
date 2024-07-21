@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.Dimension
+import androidx.core.content.res.use
 import androidx.databinding.BindingAdapter
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeBinding
