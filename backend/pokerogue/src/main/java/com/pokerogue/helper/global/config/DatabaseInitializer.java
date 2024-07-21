@@ -101,7 +101,7 @@ public class DatabaseInitializer implements ApplicationRunner {
                 new PokemonAbilityMapping(pokemons.get(0), pokemonAbilities.get(16)),
                 new PokemonAbilityMapping(pokemons.get(1), pokemonAbilities.get(2)),
                 new PokemonAbilityMapping(pokemons.get(1), pokemonAbilities.get(17)),
-                new PokemonAbilityMapping(pokemons.get(2), pokemonAbilities.get(18)),
+                new PokemonAbilityMapping(pokemons.get(2), pokemonAbilities.get(17)),
                 new PokemonAbilityMapping(pokemons.get(2), pokemonAbilities.get(3)),
                 new PokemonAbilityMapping(pokemons.get(3), pokemonAbilities.get(4)),
                 new PokemonAbilityMapping(pokemons.get(3), pokemonAbilities.get(5)),
