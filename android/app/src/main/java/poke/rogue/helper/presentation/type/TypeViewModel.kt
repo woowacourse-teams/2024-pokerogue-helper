@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
 import poke.rogue.helper.data.repository.DefaultTypeRepository
@@ -137,18 +136,18 @@ class TypeViewModel(
     ) {
         viewModelScope.launch {
             when (selectorType) {
-                SelectorType.MINE -> _myType.update { changedState }
-                SelectorType.OPPONENT1 -> _opponentType1.update { changedState }
-                SelectorType.OPPONENT2 -> _opponentType2.update { changedState }
+                SelectorType.MINE -> _myType.value = changedState
+                SelectorType.OPPONENT1 -> _opponentType1.value = changedState
+                SelectorType.OPPONENT2 -> _opponentType2.value = changedState
             }
         }
     }
 
     override fun removeAllSelections() {
         viewModelScope.launch {
-            _myType.update { TypeSelectionUiState.Empty }
-            _opponentType1.update { TypeSelectionUiState.Empty }
-            _opponentType2.update { TypeSelectionUiState.Empty }
+            _myType.value = TypeSelectionUiState.Empty
+            _opponentType1.value = TypeSelectionUiState.Empty
+            _opponentType2.value = TypeSelectionUiState.Empty
         }
     }
 

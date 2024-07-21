@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.presentation.base.BindingActivity
@@ -81,7 +79,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             }
         }
 
-        lifecycleScope.launch {
+        repeatOnStarted {
             viewModel.myType.collect { uiState ->
                 binding.parallelogramTypeMyTypeContent.setVisible(uiState is TypeSelectionUiState.Selected)
                 if (uiState is TypeSelectionUiState.Selected) {
@@ -90,7 +88,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             }
         }
 
-        lifecycleScope.launch {
+        repeatOnStarted {
             viewModel.opponentType1.collect { uiState ->
                 binding.parallelogramTypeOpponentTypeContent1.setVisible(uiState is TypeSelectionUiState.Selected)
                 if (uiState is TypeSelectionUiState.Selected) {
@@ -99,7 +97,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             }
         }
 
-        lifecycleScope.launch {
+        repeatOnStarted {
             viewModel.opponentType2.collect { uiState ->
                 binding.parallelogramTypeOpponentTypeContent2.setVisible(uiState is TypeSelectionUiState.Selected)
                 if (uiState is TypeSelectionUiState.Selected) {
@@ -108,7 +106,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             }
         }
 
-        lifecycleScope.launch {
+        repeatOnStarted {
             viewModel.type.collect { matchedResult ->
                 typeResultAdapter.submitList(matchedResult)
             }
