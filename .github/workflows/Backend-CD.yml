@@ -1,8 +1,6 @@
 name: Backend CD
 
 on:
-  pull_request:
-    branches: [ "be/develop" ]
   push:
     branches: [ "be/develop" ]
 

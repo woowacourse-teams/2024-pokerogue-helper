@@ -30,6 +30,11 @@ public class PokemonAbilityMapping {
     @JoinColumn(name = "pokemon_ability_id", nullable = false)
     private PokemonAbility pokemonAbility;
 
+    public PokemonAbilityMapping(Pokemon pokemon, PokemonAbility pokemonAbility) {
+        this.pokemon = pokemon;
+        this.pokemonAbility = pokemonAbility;
+    }
+
     public String getPokemonAbilityName() {
         return pokemonAbility.getName();
     }

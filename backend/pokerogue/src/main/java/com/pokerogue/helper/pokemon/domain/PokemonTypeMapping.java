@@ -29,4 +29,9 @@ public class PokemonTypeMapping {
     @ManyToOne
     @JoinColumn(name = "pokemon_type_id", nullable = false)
     private PokemonType pokemonType;
+
+    public PokemonTypeMapping(Pokemon pokemon, PokemonType pokemonType) {
+        this.pokemon = pokemon;
+        this.pokemonType = pokemonType;
+    }
 }
