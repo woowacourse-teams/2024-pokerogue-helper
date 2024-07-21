@@ -28,7 +28,7 @@ public class Pokemon {
     @Column(name = "pokedex_number", nullable = false)
     private Long pokedexNumber;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "ko_name", nullable = false)
