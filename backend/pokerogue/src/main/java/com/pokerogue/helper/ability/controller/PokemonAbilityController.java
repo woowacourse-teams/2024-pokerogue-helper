@@ -8,6 +8,7 @@ import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,8 +23,8 @@ public class PokemonAbilityController {
         return new ApiResponse<>("특성 리스트 불러오기에 성공했습니다.", pokemonAbilityService.findAbilities());
     }
 
-    @GetMapping("api/v1/update/ability")
-    public ApiResponse<List<PokemonAbility>> saveAbilityList() {
+    @PostMapping("/api/v1/setting/abilities")
+    public ApiResponse<List<PokemonAbility>> saveAbilities() {
         List<PokemonAbility> savedPokemonAbilities = dataSettingService.savePokemonAbilities();
 
         return new ApiResponse<>("특성 정보 업데이트", savedPokemonAbilities);

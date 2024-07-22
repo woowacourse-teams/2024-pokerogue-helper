@@ -10,6 +10,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,8 +30,8 @@ public class PokemonController {
         return new ApiResponse<>("포켓몬 정보 불러오기에 성공했습니다.", pokemonService.findPokedexDetails(id));
     }
 
-    @GetMapping("/api/v1/update/pokemon")
-    public ApiResponse<List<Pokemon>> savePokemonList() {
+    @PostMapping("/api/v1/setting/pokemons")
+    public ApiResponse<List<Pokemon>> savePokemons() {
         List<Pokemon> savedPokemons = dataSettingService.savePokemons();
 
         return new ApiResponse<>("포켓몬 저장 완료", savedPokemons);
