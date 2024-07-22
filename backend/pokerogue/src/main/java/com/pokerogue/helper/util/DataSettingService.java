@@ -42,7 +42,6 @@ public class DataSettingService {
 
     public void savePokemonAbilities() {
         pokemonAbilityMappingRepository.deleteAllInBatch();
-        pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonAbilityRepository.deleteAllInBatch();
 
         ListResponse abilityList = getAbilityList();
@@ -75,7 +74,6 @@ public class DataSettingService {
     }
 
     public void savePokemonTypes() {
-        pokemonAbilityMappingRepository.deleteAllInBatch();
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonTypeRepository.deleteAllInBatch();
 
