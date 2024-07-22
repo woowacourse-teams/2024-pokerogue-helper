@@ -8,9 +8,7 @@ import poke.rogue.helper.data.model.Pokemon
 class FakePokemonListRepository(
     private val pokemonListDataSource: FakePokemonListDataSource,
 ) : PokemonListRepository {
-    override fun pokemons(): List<Pokemon> = pokemonListDataSource.pokemons()
-
-    override fun pokemons2(): Flow<List<Pokemon>> =
+    override fun pokemons(): Flow<List<Pokemon>> =
         flow {
             emit(pokemonListDataSource.pokemons())
         }

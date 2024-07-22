@@ -29,7 +29,7 @@ class PokemonListViewModel(
 ) : ViewModel(), PokeMonItemClickListener, PokemonQueryListener {
     private val initialUiState =
         runBlocking {
-            pokemonListRepository.pokemons2().first().map(Pokemon::toUi)
+            pokemonListRepository.pokemons().first().map(Pokemon::toUi)
         }
 
     private val searchQuery = MutableStateFlow("")
@@ -67,7 +67,7 @@ class PokemonListViewModel(
         pokemonListRepository: PokemonListRepository,
     ): Flow<List<PokemonUiModel>> {
         if (query.isEmpty()) {
-            return pokemonListRepository.pokemons2().map(List<Pokemon>::toUi)
+            return pokemonListRepository.pokemons().map(List<Pokemon>::toUi)
         }
         return pokemonListRepository.searchedPokemons(query).map(List<Pokemon>::toUi)
     }
