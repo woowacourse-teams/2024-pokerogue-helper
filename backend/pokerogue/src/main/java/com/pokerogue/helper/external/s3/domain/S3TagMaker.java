@@ -4,7 +4,10 @@ import java.util.List;
 import software.amazon.awssdk.services.s3.model.Tag;
 import software.amazon.awssdk.services.s3.model.Tagging;
 
-public class S3TagMaker {
+public final class S3TagMaker {
+
+    private S3TagMaker() {
+    }
 
     public static Tagging makeDefaultTags() {
         Tag serviceTag = Tag.builder()
