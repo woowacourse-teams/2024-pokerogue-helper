@@ -38,3 +38,11 @@ fun MatchedTypes.toUiModel(
         matchedItem = this.types.map { it.toUiModel() },
     )
 }
+
+fun List<MatchedTypes>.sortedAndMappedToUiModel(
+    selectedTypeId: Int,
+    isMyType: Boolean,
+): List<MatchedTypesUiModel> {
+    return this.sortedBy { it.matchedResult }
+        .map { it.toUiModel(selectedTypeId, isMyType) }
+}

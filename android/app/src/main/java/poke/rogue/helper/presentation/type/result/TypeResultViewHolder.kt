@@ -66,7 +66,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
                 setSpan(
                     ForegroundColorSpan(matchedResultTextColor),
                     0,
-                    2,
+                    typeMatchedResult.matchedResult.length,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
                 )
             }
