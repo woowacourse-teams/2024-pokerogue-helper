@@ -53,6 +53,7 @@ public class S3ImageClient {
                 .build();
 
         String originUrl = s3Utilities.getUrl(urlRequest).toString();
+
         return originUrl.replace(endPoint, cloudfrontEndPoint);
     }
 }
