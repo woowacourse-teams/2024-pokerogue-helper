@@ -11,7 +11,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClient.Builder;
 
 @Configuration
-public class PokeConfig {
+public class PokeClientConfig {
 
     @Bean
     public PokeClient pokeClient() {
