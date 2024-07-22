@@ -1,6 +1,5 @@
 package com.pokerogue.helper.ability.controller;
 
-import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.ability.service.PokemonAbilityService;
 import com.pokerogue.helper.util.DataSettingService;
@@ -24,9 +23,7 @@ public class PokemonAbilityController {
     }
 
     @PostMapping("/api/v1/setting/abilities")
-    public ApiResponse<List<PokemonAbility>> saveAbilities() {
-        List<PokemonAbility> savedPokemonAbilities = dataSettingService.savePokemonAbilities();
-
-        return new ApiResponse<>("특성 정보 업데이트", savedPokemonAbilities);
+    public void saveAbilities() {
+        dataSettingService.savePokemonAbilities();
     }
 }

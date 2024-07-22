@@ -1,6 +1,5 @@
 package com.pokerogue.helper.pokemon.controller;
 
-import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.service.PokemonService;
@@ -31,9 +30,7 @@ public class PokemonController {
     }
 
     @PostMapping("/api/v1/setting/pokemons")
-    public ApiResponse<List<Pokemon>> savePokemons() {
-        List<Pokemon> savedPokemons = dataSettingService.savePokemons();
-
-        return new ApiResponse<>("포켓몬 저장 완료", savedPokemons);
+    public void savePokemons() {
+        dataSettingService.savePokemons();
     }
 }
