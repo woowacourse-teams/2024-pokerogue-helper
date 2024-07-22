@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="actionHandler"
+            type="poke.rogue.helper.presentation.home.HomeActionHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +37,7 @@
                     android:layout_height="108dp"
                     android:layout_marginTop="75dp"
                     android:background="@color/black"
+                    android:onClick="@{() -> actionHandler.onClickLogo()}"
                     android:src="@drawable/img_home_logo"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -61,6 +65,7 @@
                         android:layout_gravity="fill"
                         android:layout_margin="6dp"
                         android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.onClickType()}"
                         app:cardCornerRadius="16dp">
 
                         <LinearLayout
@@ -98,6 +103,7 @@
                         android:layout_gravity="fill"
                         android:layout_margin="6dp"
                         android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.onClickDex()}"
                         app:cardCornerRadius="16dp">
 
                         <LinearLayout
@@ -135,6 +141,7 @@
                         android:layout_gravity="fill"
                         android:layout_margin="6dp"
                         android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.onClickAbility()}"
                         app:cardCornerRadius="16dp">
 
                         <LinearLayout
@@ -173,6 +180,7 @@
                         android:layout_gravity="fill"
                         android:layout_margin="6dp"
                         android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.onClickTip()}"
                         app:cardCornerRadius="16dp">
 
                         <LinearLayout
