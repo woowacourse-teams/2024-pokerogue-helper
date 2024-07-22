@@ -10,9 +10,13 @@ class FakePokemonListRepository(
 ) : PokemonListRepository {
     override fun pokemons(): List<Pokemon> = pokemonListDataSource.pokemons()
 
-    override fun searchPokemons(query: String): Flow<List<Pokemon>> {
-        return flow {
-            emit(pokemons().filter { it.name.contains(query, ignoreCase = true) })
+    override fun pokemons2(): Flow<List<Pokemon>> =
+        flow {
+            emit(pokemonListDataSource.pokemons())
         }
-    }
+
+    override fun searchedPokemons(query: String): Flow<List<Pokemon>> =
+        flow {
+            emit(pokemonListDataSource.searchedPokemons(query))
+        }
 }

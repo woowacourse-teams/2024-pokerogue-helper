@@ -6,5 +6,7 @@ import poke.rogue.helper.data.model.Pokemon
 interface PokemonListRepository {
     fun pokemons(): List<Pokemon>
 
-    fun searchPokemons(query: String): Flow<List<Pokemon>>
+    fun pokemons2(): Flow<List<Pokemon>>
+
+    fun searchedPokemons(query: String): Flow<List<Pokemon>>
 }
