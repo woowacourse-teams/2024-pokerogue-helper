@@ -138,8 +138,6 @@ public class DataSettingService {
             PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
             PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(savedPokemon, pokemonAbility);
-            savedPokemon.getPokemonAbilityMappings().add(pokemonAbilityMapping);
-            pokemonAbility.getPokemonAbilityMappings().add(pokemonAbilityMapping);
             pokemonAbilityMappingRepository.save(pokemonAbilityMapping);
         }
 
@@ -149,7 +147,6 @@ public class DataSettingService {
             PokemonType pokemonType = pokemonTypeRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(savedPokemon, pokemonType);
-            savedPokemon.getPokemonTypeMappings().add(pokemonTypeMapping);
             pokemonTypeMappingRepository.save(pokemonTypeMapping);
         }
     }
