@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="poke.rogue.helper.presentation.dex.PokemonListViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:onQueryTextChange="@{viewModel}"
             app:queryHint="@string/dex_list_search_pokemon_hint" />
 
         <androidx.recyclerview.widget.RecyclerView
