@@ -29,12 +29,14 @@ class LocalTypeDataSource(private val typeData: DummyTypeData = DummyTypeData) {
 
     fun matchedTypes(
         attackingTypeId: Int,
-        defendingTypeId: Int,
-    ): MatchedTypes {
-        return MatchedTypes(
-            typeData.typeMatchedTable[attackingTypeId][defendingTypeId],
-            listOf(typeData.allTypes.get(defendingTypeId)),
-        )
+        defendingTypeIds: List<Int>,
+    ): List<MatchedTypes> {
+        val defendingTypes = defendingTypeIds.map { typeData.allTypes[it] }
+        val results =
+            defendingTypes.groupBy { defendingType ->
+                typeData.typeMatchedTable[attackingTypeId][defendingType.id]
+            }.map { (matchedResult, types) -> MatchedTypes(matchedResult, types) }
+        return results
     }
 
     fun allTypes(): List<TypeInfo> = typeData.allTypes

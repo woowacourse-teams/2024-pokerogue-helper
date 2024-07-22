@@ -20,9 +20,10 @@ class DefaultTypeRepository(private val localTypeDataSource: LocalTypeDataSource
         myTypeId: Int,
         opponentTypeIds: List<Int>,
     ): List<MatchedTypes> {
-        return opponentTypeIds.map {
-            localTypeDataSource.matchedTypes(myTypeId, it)
-        }.filter { it.matchedResult != MatchedResult.NORMAL }
+        return localTypeDataSource.matchedTypes(
+            myTypeId,
+            opponentTypeIds,
+        ).filter { it.matchedResult != MatchedResult.NORMAL }
     }
 
     override fun allTypes(): List<TypeInfo> {
