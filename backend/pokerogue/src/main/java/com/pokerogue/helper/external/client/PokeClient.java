@@ -17,7 +17,7 @@ public class PokeClient {
         this.restClient = restClient;
     }
 
-    public CountResponse getAbilityListSize() {
+    public CountResponse getAbilityResponsesCount() {
         return restClient.get()
                 .uri("/ability")
                 .accept(MediaType.APPLICATION_JSON)
@@ -25,7 +25,7 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getAbilityList(String limit) {
+    public ListResponse getAbilityResponses(String limit) {
         return restClient.get()
                 .uri("/ability/?offset=0&limit={limit}", limit)
                 .accept(MediaType.APPLICATION_JSON)
@@ -41,7 +41,7 @@ public class PokeClient {
                 .body(AbilityResponse.class);
     }
 
-    public CountResponse getTypeListSize() {
+    public CountResponse getTypeResponsesCount() {
         return restClient.get()
                 .uri("/type")
                 .accept(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getTypeList(String limit) {
+    public ListResponse getTypeResponses(String limit) {
         return restClient.get()
                 .uri("/type/?offset=0&limit={limit}", limit)
                 .accept(MediaType.APPLICATION_JSON)
@@ -65,7 +65,7 @@ public class PokeClient {
                 .body(TypeResponse.class);
     }
 
-    public CountResponse getPokemonListSize() {
+    public CountResponse getPokemonResponsesCount() {
         return restClient.get()
                 .uri("/pokemon")
                 .accept(MediaType.APPLICATION_JSON)
@@ -73,7 +73,7 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getPokemonList(String offset, String limit) {
+    public ListResponse getPokemonResponses(String offset, String limit) {
         return restClient.get()
                 .uri("/pokemon/?offset={offset}&limit={limit}", offset, limit)
                 .accept(MediaType.APPLICATION_JSON)
