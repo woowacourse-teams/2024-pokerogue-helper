@@ -54,9 +54,9 @@ public class DataSettingService {
     }
 
     private ListResponse getAbilityList() {
-        CountResponse abilityListSize = pokeClient.getAbilityListSize();
+        CountResponse abilityListSize = pokeClient.getAbilityResponsesCount();
 
-        return pokeClient.getAbilityList(String.valueOf(abilityListSize.count()));
+        return pokeClient.getAbilityResponses(String.valueOf(abilityListSize.count()));
     }
 
     private List<AbilityResponse> getAbilityResponses(ListResponse abilityList) {
@@ -85,9 +85,9 @@ public class DataSettingService {
     }
 
     private ListResponse getTypeList() {
-        CountResponse typeListSize = pokeClient.getTypeListSize();
+        CountResponse typeListSize = pokeClient.getTypeResponsesCount();
 
-        return pokeClient.getTypeList(String.valueOf(typeListSize.count()));
+        return pokeClient.getTypeResponses(String.valueOf(typeListSize.count()));
     }
 
     private List<TypeResponse> getTypeResponses(ListResponse typeList) {
@@ -109,10 +109,10 @@ public class DataSettingService {
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonRepository.deleteAllInBatch();
 
-        CountResponse pokemonListSize = pokeClient.getPokemonListSize();
+        CountResponse pokemonListSize = pokeClient.getPokemonResponsesCount();
         List<Pokemon> pokemons = new ArrayList<>();
         for (int i = 0; i < pokemonListSize.count(); i += 500) {
-            ListResponse pokemonList = pokeClient.getPokemonList(String.valueOf(i), "500");
+            ListResponse pokemonList = pokeClient.getPokemonResponses(String.valueOf(i), "500");
             for (NameAndUrl nameAndUrl : pokemonList.results()) {
                 String[] tokens = nameAndUrl.url().split("/");
                 PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(tokens[tokens.length - 1]);
@@ -135,12 +135,12 @@ public class DataSettingService {
                 pokemonDetail.specialDefense(), pokemonDetail.totalStats(), "null",
                 new ArrayList<>(), new ArrayList<>());
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
-        pokemonMapping(pokemonSaveResponse, savedPokemon);
+        savePokemonMapping(pokemonSaveResponse, savedPokemon);
 
         return savedPokemon;
     }
 
-    private void pokemonMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
+    private void savePokemonMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
         List<AbilitySummary> abilities = pokemonSaveResponse.abilities();
         for (AbilitySummary abilitySummary : abilities) {
             String name = abilitySummary.ability().name();
