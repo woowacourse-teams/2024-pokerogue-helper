@@ -16,6 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/black"
             app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/toolbar_menu_text"
             app:navigationIcon="@drawable/ic_arrow_back_24">
 
             <TextView
