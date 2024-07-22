@@ -24,7 +24,7 @@ import timber.log.Timber
 
 class PokemonListViewModel(
     pokemonListRepository: PokemonListRepository,
-) : ViewModel(), PokeMonItemClickListener {
+) : ViewModel(), PokeMonItemClickListener, PokemonQueryListener {
     private val _uiState =
         MutableStateFlow(
             pokemonListRepository.pokemons().map(Pokemon::toUi),
@@ -54,16 +54,18 @@ class PokemonListViewModel(
                 Timber.d("result: $it")
             }
 
-    fun setSearchQuery(query: String) {
-        _searchQuery.value = query
-    }
-
     private val _navigateToDetailEvent = MutableSharedFlow<Long>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
     override fun onClickPokemon(pokemonId: Long) {
         viewModelScope.launch {
             _navigateToDetailEvent.emit(pokemonId)
+        }
+    }
+
+    override fun onQueryName(name: String) {
+        viewModelScope.launch {
+            _searchQuery.emit(name)
         }
     }
 
