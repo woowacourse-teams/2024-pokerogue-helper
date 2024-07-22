@@ -1,6 +1,5 @@
 package com.pokerogue.helper.external.s3.client;
 
-import com.pokerogue.helper.external.s3.domain.S3TagMaker;
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -38,7 +37,6 @@ public class S3ImageClient {
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .key(fileName)
                 .bucket(bucket)
-                .tagging(S3TagMaker.makeDefaultTags())
                 .contentType(contentType)
                 .build();
 
