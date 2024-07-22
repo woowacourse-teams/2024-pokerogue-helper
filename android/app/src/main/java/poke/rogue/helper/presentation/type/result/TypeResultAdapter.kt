@@ -1,13 +1,13 @@
-package poke.rogue.helper.presentation.type
+package poke.rogue.helper.presentation.type.result
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemTypeResultBinding
-import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
+import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class TypeResultAdapter : ListAdapter<TypeMatchedResultUiModel, TypeResultViewHolder>(typeComparator) {
+class TypeResultAdapter : ListAdapter<MatchedTypesUiModel, TypeResultViewHolder>(typeComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -29,8 +29,8 @@ class TypeResultAdapter : ListAdapter<TypeMatchedResultUiModel, TypeResultViewHo
 
     companion object {
         val typeComparator =
-            ItemDiffCallback<TypeMatchedResultUiModel>(
-                onItemsTheSame = { oldItem, newItem -> oldItem.typeName == newItem.typeName },
+            ItemDiffCallback<MatchedTypesUiModel>(
+                onItemsTheSame = { oldItem, newItem -> oldItem.selectedType == newItem.selectedType },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
     }

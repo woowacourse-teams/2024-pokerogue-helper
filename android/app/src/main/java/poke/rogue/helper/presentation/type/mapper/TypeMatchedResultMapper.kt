@@ -2,8 +2,8 @@ package poke.rogue.helper.presentation.type.mapper
 
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.MatchedResult
-import poke.rogue.helper.data.model.TypeMatchedResult
-import poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel
+import poke.rogue.helper.data.model.MatchedTypes
+import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
 
@@ -13,7 +13,7 @@ fun MatchedResult.displayName(): String {
         MatchedResult.WEAK -> "약한"
         MatchedResult.INEFFECTIVE -> "무효한"
         MatchedResult.NORMAL -> throw IllegalStateException("")
-    } + " 타입"
+    }
 }
 
 fun MatchedResult.displayColor(): Int {
@@ -25,22 +25,13 @@ fun MatchedResult.displayColor(): Int {
     }
 }
 
-fun TypeMatchedResult.toUiModel(
+fun MatchedTypes.toUiModel(
     typeId: Int,
     isMyType: Boolean,
-): TypeMatchedResultUiModel {
+): MatchedTypesUiModel {
     val inputType = TypeUiModel.fromId(typeId) ?: throw IllegalArgumentException("Unknown type ID: $typeId")
-    val editedTypeName =
-        inputType.typeName +
-            if (isMyType) {
-                "이(가)"
-            } else {
-                "에게"
-            }
-
-    return TypeMatchedResultUiModel(
-        typeName = editedTypeName,
-        typeIconResId = inputType.typeIconResId,
+    return MatchedTypesUiModel(
+        selectedType = inputType,
         isMyType = isMyType,
         matchedResult = this.matchedResult.displayName(),
         matchedResultColorResId = this.matchedResult.displayColor(),
