@@ -68,9 +68,21 @@ public class Pokemon {
     @OneToMany(mappedBy = "pokemon", fetch = FetchType.LAZY)
     private List<PokemonAbilityMapping> pokemonAbilityMappings;
 
-    public Pokemon(Long pokedexNumber, String name, String koName, Integer weight, Integer height, Integer hp, Integer speed,
-                   Integer attack, Integer defense, Integer specialAttack, Integer specialDefense,
-                   Integer totalStats, String image) {
+    public Pokemon(
+            Long pokedexNumber,
+            String name,
+            String koName,
+            Integer weight,
+            Integer height,
+            Integer hp,
+            Integer speed,
+            Integer attack,
+            Integer defense,
+            Integer specialAttack,
+            Integer specialDefense,
+            Integer totalStats,
+            String image
+    ) {
         this.pokedexNumber = pokedexNumber;
         this.name = name;
         this.koName = koName;
