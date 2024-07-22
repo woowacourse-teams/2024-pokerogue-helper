@@ -32,13 +32,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @AllArgsConstructor
 public class DataSettingService {
-    private PokemonRepository pokemonRepository;
-    private PokemonAbilityRepository pokemonAbilityRepository;
-    private PokemonTypeRepository pokemonTypeRepository;
-    private PokemonAbilityMappingRepository pokemonAbilityMappingRepository;
-    private PokemonTypeMappingRepository pokemonTypeMappingRepository;
-    private DtoParser dtoParser;
-    private PokeClient pokeClient;
+
+    private final PokemonRepository pokemonRepository;
+    private final PokemonAbilityRepository pokemonAbilityRepository;
+    private final PokemonTypeRepository pokemonTypeRepository;
+    private final PokemonAbilityMappingRepository pokemonAbilityMappingRepository;
+    private final PokemonTypeMappingRepository pokemonTypeMappingRepository;
+    private final DtoParser dtoParser;
+    private final PokeClient pokeClient;
 
     public void savePokemonAbilities() {
         pokemonAbilityMappingRepository.deleteAllInBatch();
@@ -69,7 +70,7 @@ public class DataSettingService {
 
     private List<PokemonAbility> getPokemonAbilities(List<AbilityResponse> abilityResponses) {
         return abilityResponses.stream()
-                .map(abilityResponse -> dtoParser.getPokemonAbility(abilityResponse))
+                .map(dtoParser::getPokemonAbility)
                 .toList();
     }
 
@@ -97,7 +98,7 @@ public class DataSettingService {
 
     private List<PokemonType> getPokemonTypes(List<TypeResponse> typeResponses) {
         return typeResponses.stream()
-                .map(typeResponse -> dtoParser.getPokemonType(typeResponse))
+                .map(dtoParser::getPokemonType)
                 .toList();
     }
 
