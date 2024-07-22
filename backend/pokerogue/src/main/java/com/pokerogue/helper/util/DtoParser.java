@@ -31,6 +31,7 @@ public class DtoParser {
         for (int i = flavorTextEntries.size() - 1; i > -1; i--) {
             if (flavorTextEntries.get(i).language().name().equals("ko")) {
                 description = flavorTextEntries.get(i).flavor_text();
+                break;
             }
         }
 
@@ -43,6 +44,7 @@ public class DtoParser {
         for (Name value : names) {
             if (value.language().name().equals("ko")) {
                 koName = value.name();
+                break;
             }
         }
 
