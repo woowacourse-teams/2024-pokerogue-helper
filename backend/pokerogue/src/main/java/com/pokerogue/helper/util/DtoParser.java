@@ -41,7 +41,7 @@ public class DtoParser {
         return names.stream()
                 .filter(Name::isKorean)
                 .map(Name::name)
-                .findAny()
+                .findFirst()
                 .orElse(NOT_EXIST_KOREAN_NAME);
     }
 
