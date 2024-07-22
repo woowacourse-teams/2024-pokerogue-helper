@@ -22,8 +22,11 @@ data class TypeSelectionStates(
 
     val isMyTypeSelectedAndAnyOpponentSelected: Boolean
         get() = isMyTypeSelected && (isOpponent1Selected || isOpponent2Selected)
+
+    val areAllTypesEmpty: Boolean
+        get() = !isMyTypeSelected && !isOpponent1Selected && !isOpponent2Selected
 }
 
-fun TypeSelectionUiState.isSelected(): Boolean = this is TypeSelectionUiState.Selected
+private fun TypeSelectionUiState.isSelected(): Boolean = this is TypeSelectionUiState.Selected
 
-fun TypeSelectionUiState.isEmpty(): Boolean = this is TypeSelectionUiState.Empty
+private fun TypeSelectionUiState.isEmpty(): Boolean = this is TypeSelectionUiState.Empty

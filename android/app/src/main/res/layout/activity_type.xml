@@ -200,9 +200,21 @@
                     android:id="@+id/rv_type_result"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginVertical="20dp"
                     android:orientation="vertical"
+                    visible="@{!vm.typeStates.areAllTypesEmpty}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    visible="@{vm.typeStates.areAllTypesEmpty}"
+                    android:src="@drawable/img_type_empty_view_placeholder"
                     app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
