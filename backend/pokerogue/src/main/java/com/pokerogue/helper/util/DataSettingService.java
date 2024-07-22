@@ -24,7 +24,6 @@ import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonTypeMappingRepository;
 import com.pokerogue.helper.type.domain.PokemonType;
 import com.pokerogue.helper.type.repository.PokemonTypeRepository;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,7 +40,7 @@ public class DataSettingService {
     private DtoParser dtoParser;
     private PokeClient pokeClient;
 
-    public List<PokemonAbility> savePokemonAbilities() {
+    public void savePokemonAbilities() {
         pokemonAbilityMappingRepository.deleteAllInBatch();
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonAbilityRepository.deleteAllInBatch();
@@ -49,8 +48,7 @@ public class DataSettingService {
         ListResponse abilityList = getAbilityList();
         List<AbilityResponse> abilityResponses = getAbilityResponses(abilityList);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
-
-        return pokemonAbilityRepository.saveAll(pokemonAbilities);
+        pokemonAbilityRepository.saveAll(pokemonAbilities);
     }
 
     private ListResponse getAbilityList() {
@@ -72,7 +70,7 @@ public class DataSettingService {
                 .toList();
     }
 
-    public List<PokemonType> savePokemonTypes() {
+    public void savePokemonTypes() {
         pokemonAbilityMappingRepository.deleteAllInBatch();
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonTypeRepository.deleteAllInBatch();
@@ -80,8 +78,7 @@ public class DataSettingService {
         ListResponse typeList = getTypeList();
         List<TypeResponse> typeResponses = getTypeResponses(typeList);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
-
-        return pokemonTypeRepository.saveAll(pokemonTypes);
+        pokemonTypeRepository.saveAll(pokemonTypes);
     }
 
     private ListResponse getTypeList() {
@@ -104,27 +101,23 @@ public class DataSettingService {
     }
 
     @Transactional
-    public List<Pokemon> savePokemons() {
+    public void savePokemons() {
         pokemonAbilityMappingRepository.deleteAllInBatch();
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonRepository.deleteAllInBatch();
 
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
-        List<Pokemon> pokemons = new ArrayList<>();
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += 500) {
             ListResponse pokemonList = pokeClient.getPokemonResponses(offset, 500);
             for (NameAndUrl nameAndUrl : pokemonList.results()) {
                 String[] tokens = nameAndUrl.url().split("/");
                 PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(tokens[tokens.length - 1]);
-                Pokemon pokemon = savePokemon(pokemonSaveResponse);
-                pokemons.add(pokemon);
+                savePokemon(pokemonSaveResponse);
             }
         }
-
-        return pokemons;
     }
 
-    private Pokemon savePokemon(PokemonSaveResponse pokemonSaveResponse) {
+    private void savePokemon(PokemonSaveResponse pokemonSaveResponse) {
         PokemonDetail pokemonDetail = dtoParser.getPokemonDetails(pokemonSaveResponse);
         NameAndUrl species = pokemonDetail.species();
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(getPokemonSpeciesResponse(species));
@@ -135,8 +128,6 @@ public class DataSettingService {
                 pokemonDetail.specialDefense(), pokemonDetail.totalStats(), "null");
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
         savePokemonMapping(pokemonSaveResponse, savedPokemon);
-
-        return savedPokemon;
     }
 
     private void savePokemonMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
