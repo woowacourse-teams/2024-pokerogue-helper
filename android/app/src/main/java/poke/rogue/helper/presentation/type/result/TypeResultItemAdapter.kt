@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.type
+package poke.rogue.helper.presentation.type.result
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

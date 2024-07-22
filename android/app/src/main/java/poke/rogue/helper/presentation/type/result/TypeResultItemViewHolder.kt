@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.type
+package poke.rogue.helper.presentation.type.result
 
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemTypeNameBinding
