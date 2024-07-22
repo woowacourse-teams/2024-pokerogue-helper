@@ -111,8 +111,8 @@ public class DataSettingService {
 
         CountResponse pokemonListSize = pokeClient.getPokemonResponsesCount();
         List<Pokemon> pokemons = new ArrayList<>();
-        for (int i = 0; i < pokemonListSize.count(); i += 500) {
-            ListResponse pokemonList = pokeClient.getPokemonResponses(String.valueOf(i), "500");
+        for (int offset = 0; offset < pokemonListSize.count(); offset += 500) {
+            ListResponse pokemonList = pokeClient.getPokemonResponses(String.valueOf(offset), "500");
             for (NameAndUrl nameAndUrl : pokemonList.results()) {
                 String[] tokens = nameAndUrl.url().split("/");
                 PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(tokens[tokens.length - 1]);
