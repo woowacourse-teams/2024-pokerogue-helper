@@ -16,6 +16,6 @@ public class PokemonTypeController{
 
     @GetMapping("/api/v1/types")
     public ApiResponse<List<PokemonTypeResponse>> typeList() {
-        return new ApiResponse<>("상성 리스트 불러오기에 성공했습니다.", pokemonTypeService.findTypes());
+        return new ApiResponse<>("타입 리스트 불러오기에 성공했습니다.", pokemonTypeService.findTypes());
     }
 }
