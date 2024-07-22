@@ -56,7 +56,7 @@ public class DataSettingService {
     private ListResponse getAbilityList() {
         CountResponse abilityListSize = pokeClient.getAbilityResponsesCount();
 
-        return pokeClient.getAbilityResponses(String.valueOf(abilityListSize.count()));
+        return pokeClient.getAbilityResponses(abilityListSize.count());
     }
 
     private List<AbilityResponse> getAbilityResponses(ListResponse abilityList) {
@@ -87,7 +87,7 @@ public class DataSettingService {
     private ListResponse getTypeList() {
         CountResponse typeListSize = pokeClient.getTypeResponsesCount();
 
-        return pokeClient.getTypeResponses(String.valueOf(typeListSize.count()));
+        return pokeClient.getTypeResponses(typeListSize.count());
     }
 
     private List<TypeResponse> getTypeResponses(ListResponse typeList) {
@@ -112,7 +112,7 @@ public class DataSettingService {
         CountResponse pokemonListSize = pokeClient.getPokemonResponsesCount();
         List<Pokemon> pokemons = new ArrayList<>();
         for (int offset = 0; offset < pokemonListSize.count(); offset += 500) {
-            ListResponse pokemonList = pokeClient.getPokemonResponses(String.valueOf(offset), "500");
+            ListResponse pokemonList = pokeClient.getPokemonResponses(offset, 500);
             for (NameAndUrl nameAndUrl : pokemonList.results()) {
                 String[] tokens = nameAndUrl.url().split("/");
                 PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(tokens[tokens.length - 1]);

@@ -25,7 +25,7 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getAbilityResponses(String limit) {
+    public ListResponse getAbilityResponses(int limit) {
         return restClient.get()
                 .uri("/ability/?offset=0&limit={limit}", limit)
                 .accept(MediaType.APPLICATION_JSON)
@@ -49,7 +49,7 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getTypeResponses(String limit) {
+    public ListResponse getTypeResponses(int limit) {
         return restClient.get()
                 .uri("/type/?offset=0&limit={limit}", limit)
                 .accept(MediaType.APPLICATION_JSON)
@@ -73,7 +73,7 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getPokemonResponses(String offset, String limit) {
+    public ListResponse getPokemonResponses(int offset, int limit) {
         return restClient.get()
                 .uri("/pokemon/?offset={offset}&limit={limit}", offset, limit)
                 .accept(MediaType.APPLICATION_JSON)
