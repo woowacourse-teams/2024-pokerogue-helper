@@ -1,7 +1,7 @@
 package com.pokerogue.helper.type.controller;
 
-import com.pokerogue.helper.type.domain.PokemonType;
-import com.pokerogue.helper.util.DataSettingService;
+import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+import com.pokerogue.helper.type.service.PokemonTypeService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class PokemonTypeController {
+public class PokemonTypeController{
 
-    private final DataSettingService dataSettingService;
+    private final PokemonTypeService pokemonTypeService;
 
-    @GetMapping("/api/v1/update/type")
-    public ApiResponse<List<PokemonType>> saveTypeList() {
-        List<PokemonType> savedPokemonTypes = dataSettingService.savePokemonTypes();
-
-        return new ApiResponse<>("타입 정보 업데이트", savedPokemonTypes);
+    @GetMapping("/api/v1/types")
+    public ApiResponse<List<PokemonTypeResponse>> typeList() {
+        return new ApiResponse<>("상성 리스트 불러오기에 성공했습니다.", pokemonTypeService.findTypes());
     }
 }
