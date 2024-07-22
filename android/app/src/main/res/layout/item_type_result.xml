@@ -80,7 +80,7 @@
             android:id="@+id/rv_result_matched_types"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_type_choice"
+            android:background="@drawable/bg_type_choice_container"
             android:orientation="horizontal"
             android:padding="8dp"
             android:layout_marginBottom="28dp"

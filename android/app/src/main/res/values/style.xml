@@ -10,7 +10,7 @@
     </style>
 
     <style name="CustomRoundedBackgroundBottomSheet" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/bg_type_choice_bottom_sheet</item>
+        <item name="android:background">@drawable/bg_type_selection_bottom_sheet</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.CardView" parent="">
