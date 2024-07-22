@@ -10,24 +10,24 @@
     <color name="poke_green_20">#74CC73</color>
     <color name="poke_red_20">#F66868</color>
     <!--    pokemon type-->
-    <color name="poke_grass">#47C50E</color>
-    <color name="poke_electric">#F9DC4A</color>
-    <color name="poke_fighting">#F2A63B</color>
-    <color name="poke_fire">#ED6C3E</color>
-    <color name="poke_flying">#A0C8FA</color>
-    <color name="poke_steel">#7AACCF</color>
-    <color name="poke_ice">#72D5FB</color>
-    <color name="poke_water">#4A90F7</color>
-    <color name="poke_dragon">#5762CF</color>
-    <color name="poke_poison">#8E41D6</color>
-    <color name="poke_ghost">#68476E</color>
-    <color name="poke_ground">#A47B44</color>
-    <color name="poke_psychic">#ED6D81</color>
-    <color name="poke_bug">#A0A43E</color>
-    <color name="poke_rock">#BBB88E</color>
-    <color name="poke_normal">#999999</color>
-    <color name="poke_dark">#4E4747</color>
-    <color name="poke_fairy">#F4B4FA</color>
+    <color name="poke_grass">#459836</color>
+    <color name="poke_electric">#DDBC29</color>
+    <color name="poke_fighting">#E3901E</color>
+    <color name="poke_fire">#E3613F</color>
+    <color name="poke_flying">#75A9D0</color>
+    <color name="poke_steel">#73B1CC</color>
+    <color name="poke_ice">#46C8C8</color>
+    <color name="poke_water">#3199E2</color>
+    <color name="poke_dragon">#576FBE</color>
+    <color name="poke_poison">#9454CC</color>
+    <color name="poke_ghost">#704572</color>
+    <color name="poke_ground">#A4733A</color>
+    <color name="poke_psychic">#E96C8B</color>
+    <color name="poke_bug">#9f9f27</color>
+    <color name="poke_rock">#AAA482</color>
+    <color name="poke_normal">#828282</color>
+    <color name="poke_dark">#514747</color>
+    <color name="poke_fairy">#E08CE0</color>
     <color name="item_pokemon_background_gray">#242627</color>
 
 </resources>
