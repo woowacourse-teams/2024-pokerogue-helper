@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.type.selection
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,9 @@ import poke.rogue.helper.databinding.FragmentTypeChoiceBottomSheetBinding
 import poke.rogue.helper.presentation.type.TypeEvent
 import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.presentation.type.model.SelectorType
+import poke.rogue.helper.presentation.util.fragment.withArgs
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.serializable
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
@@ -19,11 +20,8 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentTypeChoiceBottomSheetBinding? = null
     private val binding get() = requireNotNull(_binding)
     private val selectorType: SelectorType by lazy {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arguments?.getSerializable(KEY_SELECTION_TYPE, SelectorType::class.java)
-        } else {
-            arguments?.getSerializable(KEY_SELECTION_TYPE) as? SelectorType
-        } ?: throw IllegalArgumentException("InValid TypeSelector")
+        arguments?.serializable<SelectorType>(KEY_SELECTION_TYPE)
+            ?: error("InValid TypeSelector")
     }
     private val sharedViewModel by activityViewModels<TypeViewModel>()
 
@@ -79,8 +77,8 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
         private const val KEY_SELECTION_TYPE = "selection_type"
 
         fun newInstance(selectorType: SelectorType): TypeSelectionBottomSheetFragment {
-            return TypeSelectionBottomSheetFragment().apply {
-                arguments = Bundle().apply { putSerializable(KEY_SELECTION_TYPE, selectorType) }
+            return TypeSelectionBottomSheetFragment().withArgs {
+                putSerializable(KEY_SELECTION_TYPE, selectorType)
             }
         }
     }

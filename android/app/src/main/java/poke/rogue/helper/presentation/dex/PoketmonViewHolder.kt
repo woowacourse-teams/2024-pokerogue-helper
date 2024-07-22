@@ -1,8 +1,8 @@
-package poke.rogue.helper.presentation.poketmon2
+package poke.rogue.helper.presentation.dex
 
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemPokemonListPokemonBinding
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 
 class PoketmonViewHolder(
     private val binding: ItemPokemonListPokemonBinding,
@@ -14,12 +14,9 @@ class PoketmonViewHolder(
 
     fun bind(pokemonUiModel: PokemonUiModel) {
         binding.pokemon = pokemonUiModel
-        binding.rvPokeTypeList.apply {
-            val types = pokemonUiModel.types.mapNotNull { TypeUiModel.fromName(it) }
-            adapter =
-                PokemonTypeAdapter().apply {
-                    submitList(types)
-                }
-        }
+        binding.rvPokeTypeList.adapter =
+            PokemonTypeAdapter().apply {
+                submitList(pokemonUiModel.types)
+            }
     }
 }

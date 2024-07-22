@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2
+package poke.rogue.helper.presentation.dex
 
 import android.content.Context
 import android.content.Intent

@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.poketmon2
+package poke.rogue.helper.presentation.dex
 
 import android.os.Bundle
 import android.view.View
@@ -7,17 +7,26 @@ import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
+import poke.rogue.helper.data.datasource.FakePokemonListDataSource
+import poke.rogue.helper.data.repository.FakePokemonListRepository
 import poke.rogue.helper.databinding.FragmentPokemonListBinding
 import poke.rogue.helper.presentation.base.BindingFragment
-import poke.rogue.helper.presentation.poketmon2.detail.PokemonDetailFragment
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonListFragment :
     BindingFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
-    private val viewModel by viewModels<PokemonListViewModel>()
-    private lateinit var pokemonAdapter: PokemonAdapter
+    private val viewModel by viewModels<PokemonListViewModel> {
+        PokemonListViewModel.factory(
+            FakePokemonListRepository(FakePokemonListDataSource()),
+        )
+    }
+
+    private val pokemonAdapter: PokemonAdapter by lazy {
+        PokemonAdapter(viewModel)
+    }
 
     override fun onViewCreated(
         view: View,
@@ -31,7 +40,6 @@ class PokemonListFragment :
     private fun initAdapter() {
         binding.rvPokemonList.apply {
             val spanCount = 3
-            pokemonAdapter = PokemonAdapter(viewModel::onClickPokemon)
             adapter = pokemonAdapter
             layoutManager = GridLayoutManager(context, spanCount)
             addItemDecoration(
