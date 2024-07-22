@@ -12,7 +12,7 @@ fun MatchedResult.displayName(): String {
         MatchedResult.STRONG -> "강한"
         MatchedResult.WEAK -> "약한"
         MatchedResult.INEFFECTIVE -> "무효한"
-        MatchedResult.NORMAL -> throw IllegalStateException("")
+        MatchedResult.NORMAL -> "대등한"
     }
 }
 
@@ -20,8 +20,8 @@ fun MatchedResult.displayColor(): Int {
     return when (this) {
         MatchedResult.STRONG -> R.color.poke_red_20
         MatchedResult.WEAK -> R.color.poke_green_20
-        MatchedResult.INEFFECTIVE -> R.color.poke_grey_80
-        MatchedResult.NORMAL -> throw IllegalStateException("")
+        MatchedResult.INEFFECTIVE -> R.color.poke_grey_60
+        MatchedResult.NORMAL -> R.color.poke_white
     }
 }
 
