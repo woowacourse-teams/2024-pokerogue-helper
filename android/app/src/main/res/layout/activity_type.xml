@@ -11,6 +11,10 @@
             type="poke.rogue.helper.presentation.type.TypeHandler" />
 
         <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.type.TypeViewModel" />
+
+        <variable
             name="myType"
             type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
 
@@ -110,6 +114,7 @@
                     android:id="@+id/parallelogram_type_my_type_content"
                     typeSelection="@{myType}"
                     typeSelectionListener="@{() -> typeHandler.removeSelection(SelectorType.MINE)}"
+                    visible="@{vm.typeStates.isMyTypeSelected}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="10dp"
@@ -145,6 +150,7 @@
                     android:id="@+id/parallelogram_type_opponent_type_content_1"
                     typeSelection="@{opponent1Type}"
                     typeSelectionListener="@{() -> typeHandler.removeSelection(SelectorType.OPPONENT1)}"
+                    visible="@{vm.typeStates.isOpponent1Selected}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="10dp"
@@ -169,6 +175,7 @@
                     android:id="@+id/parallelogram_type_opponent_type_content_2"
                     typeSelection="@{opponent2Type}"
                     typeSelectionListener="@{() -> typeHandler.removeSelection(SelectorType.OPPONENT2)}"
+                    visible="@{vm.typeStates.isOpponent2Selected}"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="10dp"

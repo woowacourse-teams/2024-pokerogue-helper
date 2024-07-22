@@ -38,16 +38,16 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         typeMatchedResult: MatchedTypesUiModel,
         context: Context,
     ) {
-        binding.tvResultMyTypeName.text =
+        binding.tvResultSelectedTypeName.text =
             if (typeMatchedResult.isMyType) {
                 context.getString(
                     R.string.type_item_result_subject_mine,
-                    typeMatchedResult.typeName,
+                    typeMatchedResult.selectedType.typeName,
                 )
             } else {
                 context.getString(
                     R.string.type_item_result_subject_opponent,
-                    typeMatchedResult.typeName,
+                    typeMatchedResult.selectedType.typeName,
                 )
             }
     }
@@ -60,7 +60,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         val matchedResultTypeText =
             context.getString(R.string.type_item_result_tail, typeMatchedResult.matchedResult)
 
-        binding.tvResultMyTypeStrength.text =
+        binding.tvResultSelectedTypeStrength.text =
             buildSpannedString {
                 append(matchedResultTypeText)
                 setSpan(

@@ -30,7 +30,7 @@ class TypeResultAdapter : ListAdapter<MatchedTypesUiModel, TypeResultViewHolder>
     companion object {
         val typeComparator =
             ItemDiffCallback<MatchedTypesUiModel>(
-                onItemsTheSame = { oldItem, newItem -> oldItem.typeName == newItem.typeName },
+                onItemsTheSame = { oldItem, newItem -> oldItem.selectedType == newItem.selectedType },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
     }

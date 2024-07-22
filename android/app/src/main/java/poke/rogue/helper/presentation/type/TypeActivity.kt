@@ -16,7 +16,6 @@ import poke.rogue.helper.presentation.type.selection.TypeSelectionBottomSheetFra
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
-import poke.rogue.helper.presentation.util.view.setVisible
 
 class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type) {
     private val viewModel: TypeViewModel by viewModels {
@@ -57,6 +56,8 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             supportActionBar?.setDisplayShowTitleEnabled(false)
 
             typeHandler = viewModel
+            vm = viewModel
+            lifecycleOwner = this@TypeActivity
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,28 +81,17 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
         }
 
         repeatOnStarted {
-            viewModel.myType.collect { uiState ->
-                binding.parallelogramTypeMyTypeContent.setVisible(uiState is TypeSelectionUiState.Selected)
-                if (uiState is TypeSelectionUiState.Selected) {
-                    binding.myType = uiState.selectedType
+            viewModel.typeStates.collect { states ->
+                if (states.myType is TypeSelectionUiState.Selected) {
+                    binding.myType = states.myType.selectedType
                 }
-            }
-        }
 
-        repeatOnStarted {
-            viewModel.opponentType1.collect { uiState ->
-                binding.parallelogramTypeOpponentTypeContent1.setVisible(uiState is TypeSelectionUiState.Selected)
-                if (uiState is TypeSelectionUiState.Selected) {
-                    binding.opponent1Type = uiState.selectedType
+                if (states.opponentType1 is TypeSelectionUiState.Selected) {
+                    binding.opponent1Type = states.opponentType1.selectedType
                 }
-            }
-        }
 
-        repeatOnStarted {
-            viewModel.opponentType2.collect { uiState ->
-                binding.parallelogramTypeOpponentTypeContent2.setVisible(uiState is TypeSelectionUiState.Selected)
-                if (uiState is TypeSelectionUiState.Selected) {
-                    binding.opponent2Type = uiState.selectedType
+                if (states.opponentType2 is TypeSelectionUiState.Selected) {
+                    binding.opponent2Type = states.opponentType2.selectedType
                 }
             }
         }

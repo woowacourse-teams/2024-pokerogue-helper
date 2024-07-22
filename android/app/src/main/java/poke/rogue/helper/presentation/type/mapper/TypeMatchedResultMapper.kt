@@ -31,8 +31,7 @@ fun MatchedTypes.toUiModel(
 ): MatchedTypesUiModel {
     val inputType = TypeUiModel.fromId(typeId) ?: throw IllegalArgumentException("Unknown type ID: $typeId")
     return MatchedTypesUiModel(
-        typeName = inputType.typeName,
-        typeIconResId = inputType.typeIconResId,
+        selectedType = inputType,
         isMyType = isMyType,
         matchedResult = this.matchedResult.displayName(),
         matchedResultColorResId = this.matchedResult.displayColor(),
