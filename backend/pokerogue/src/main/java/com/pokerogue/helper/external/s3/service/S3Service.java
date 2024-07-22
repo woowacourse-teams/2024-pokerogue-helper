@@ -28,6 +28,7 @@ public class S3Service {
         } catch (IOException e) {
             throw new GlobalCustomException(ErrorMessage.FILE_ACCESS_FAILED);
         }
+
         return s3ImageClient.getFileUrl(key);
     }
 
