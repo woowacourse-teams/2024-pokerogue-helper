@@ -17,9 +17,12 @@ public class S3ImageClient {
 
     private final S3Client s3Client;
     private final String bucket;
+    private final String endPoint;
+    private final String cloudfrontEndPoint;
 
     public S3ImageClient(@Value("${cloud.aws.s3.bucket}") String bucket,
-                         @Value("${cloud.aws.s3.endpoint}") String endPoint) {
+                         @Value("${cloud.aws.s3.endpoint}") String endPoint,
+                         @Value("${cloud.aws.cloudfront.endpoint}") String cloudfrontEndPoint) {
         this.s3Client = S3Client.builder()
                 .region(Region.AP_NORTHEAST_2)
                 .credentialsProvider(InstanceProfileCredentialsProvider.create())
@@ -27,6 +30,8 @@ public class S3ImageClient {
                 .forcePathStyle(true)
                 .build();
         this.bucket = bucket;
+        this.endPoint = endPoint;
+        this.cloudfrontEndPoint = cloudfrontEndPoint;
     }
 
     public void putObject(byte[] imageBytes, String contentType, String fileName) {
@@ -47,6 +52,7 @@ public class S3ImageClient {
                 .key(fileName)
                 .build();
 
-        return s3Utilities.getUrl(urlRequest).toString();
+        String originUrl = s3Utilities.getUrl(urlRequest).toString();
+        return originUrl.replace(endPoint, cloudfrontEndPoint);
     }
 }
