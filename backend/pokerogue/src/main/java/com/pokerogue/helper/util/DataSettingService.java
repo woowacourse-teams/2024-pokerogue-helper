@@ -59,9 +59,13 @@ public class DataSettingService {
 
     private List<AbilityResponse> getAbilityResponses(ListResponse abilityList) {
         return abilityList.results().stream()
-                .map(nameAndUrl -> nameAndUrl.url().split("/"))
-                .map(tokens -> pokeClient.getAbilityResponse(tokens[tokens.length - 1]))
+                .map(nameAndUrl -> pokeClient.getAbilityResponse(extractIdFromUrl(nameAndUrl)))
                 .toList();
+    }
+
+    private String extractIdFromUrl(NameAndUrl nameAndUrl) {
+        String[] tokens = nameAndUrl.url().split("/");
+        return tokens[tokens.length - 1];
     }
 
     private List<PokemonAbility> getPokemonAbilities(List<AbilityResponse> abilityResponses) {
@@ -89,8 +93,7 @@ public class DataSettingService {
 
     private List<TypeResponse> getTypeResponses(ListResponse typeList) {
         return typeList.results().stream()
-                .map(nameAndUrl -> nameAndUrl.url().split("/"))
-                .map(tokens -> pokeClient.getTypeResponse(tokens[tokens.length - 1]))
+                .map(nameAndUrl -> pokeClient.getTypeResponse(extractIdFromUrl(nameAndUrl)))
                 .toList();
     }
 
@@ -110,8 +113,7 @@ public class DataSettingService {
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += 500) {
             ListResponse pokemonList = pokeClient.getPokemonResponses(offset, 500);
             for (NameAndUrl nameAndUrl : pokemonList.results()) {
-                String[] tokens = nameAndUrl.url().split("/");
-                PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(tokens[tokens.length - 1]);
+                PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(extractIdFromUrl(nameAndUrl));
                 savePokemon(pokemonSaveResponse);
             }
         }
@@ -154,9 +156,7 @@ public class DataSettingService {
     }
 
     private PokemonSpeciesResponse getPokemonSpeciesResponse(NameAndUrl species) {
-        String[] tokens = species.url().split("/");
-
-        return pokeClient.getPokemonSpeciesResponse(tokens[tokens.length - 1]);
+        return pokeClient.getPokemonSpeciesResponse(extractIdFromUrl(species));
     }
 
     private PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
