@@ -27,6 +27,12 @@ public class DtoParser {
 
         List<FlavorTextEntry> flavorTextEntries = abilityResponse.flavor_text_entries();
         String description = NOT_EXIST_KOREAN_NAME;
+        description = getLatestVersionDescription(flavorTextEntries, description);
+
+        return new PokemonAbility(abilityResponse.name(), koName, description, "자세한 설명입니다.");
+    }
+
+    private static String getLatestVersionDescription(List<FlavorTextEntry> flavorTextEntries, String description) {
         for (int i = flavorTextEntries.size() - 1; i > -1; i--) {
             if (flavorTextEntries.get(i).language().name().equals("ko")) {
                 description = flavorTextEntries.get(i).flavor_text();
@@ -34,7 +40,7 @@ public class DtoParser {
             }
         }
 
-        return new PokemonAbility(abilityResponse.name(), koName, description, "자세한 설명입니다.");
+        return description;
     }
 
     private static String getKoName(List<Name> names) {
