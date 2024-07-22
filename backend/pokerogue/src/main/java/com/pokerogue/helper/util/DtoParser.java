@@ -40,15 +40,11 @@ public class DtoParser {
     }
 
     private static String getKoName(List<Name> names) {
-        String koName = NOT_EXIST_KOREAN_NAME;
-        for (Name value : names) {
-            if (value.language().name().equals("ko")) {
-                koName = value.name();
-                break;
-            }
-        }
-
-        return koName;
+        return names.stream()
+                .filter(Name::isKorean)
+                .map(Name::name)
+                .findAny()
+                .orElse(NOT_EXIST_KOREAN_NAME);
     }
 
     public PokemonType getPokemonType(TypeResponse typeResponse) {
