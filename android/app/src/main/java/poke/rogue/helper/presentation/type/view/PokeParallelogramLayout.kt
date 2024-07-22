@@ -5,10 +5,14 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.BindingAdapter
 import poke.rogue.helper.R
+import poke.rogue.helper.databinding.ItemTypeParallelogramBinding
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.view.dp
 import kotlin.math.tan
@@ -47,6 +51,9 @@ class PokeParallelogramLayout
         private val boarderPaint: Paint = Paint()
         private val contentPaint: Paint = Paint()
         private var angleDegree: Double = 0.0
+        private val binding: ItemTypeParallelogramBinding by lazy {
+            ItemTypeParallelogramBinding.inflate(LayoutInflater.from(context), this, true)
+        }
 
         init {
             context.theme.obtainStyledAttributes(
@@ -120,10 +127,26 @@ class PokeParallelogramLayout
             }
         }
 
-        fun setContentColor(
-            @ColorInt color: Int,
-        ) {
-            contentPaint.color = color
+        private fun bindType(type: TypeUiModel) {
+            binding.type = type
+            contentPaint.color = context.colorOf(type.typeColor)
             invalidate()
+        }
+
+        private fun bindListener(clickListener: OnClickListener) {
+            binding.btnTopRight.setOnClickListener(clickListener)
+        }
+
+        companion object {
+            @JvmStatic
+            @BindingAdapter("typeSelection", "typeSelectionListener", requireAll = false)
+            fun setSelectedType(
+                view: PokeParallelogramLayout,
+                type: TypeUiModel?,
+                clickListener: OnClickListener?,
+            ) {
+                type?.let { view.bindType(it) }
+                clickListener?.let { view.bindListener(clickListener) }
+            }
         }
     }

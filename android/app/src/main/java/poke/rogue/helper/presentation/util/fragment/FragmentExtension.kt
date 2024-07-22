@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.util.fragment
 
+import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.ColorRes
@@ -62,6 +63,12 @@ fun Fragment.colorOf(
 fun Fragment.drawableOf(
     @DrawableRes resId: Int,
 ) = ContextCompat.getDrawable(requireContext(), resId)
+
+inline fun <T : Fragment> T.withArgs(argsBuilder: Bundle.() -> Unit): T {
+    return this.apply {
+        arguments = Bundle().apply(argsBuilder)
+    }
+}
 
 val Fragment.viewLifeCycle
     get() = viewLifecycleOwner.lifecycle

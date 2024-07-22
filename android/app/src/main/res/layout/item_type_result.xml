@@ -7,7 +7,7 @@
 
         <variable
             name="typeResult"
-            type="poke.rogue.helper.presentation.type.model.TypeMatchedResultUiModel" />
+            type="poke.rogue.helper.presentation.type.model.MatchedTypesUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,53 +18,52 @@
             android:id="@+id/vw_spacer_left"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toStartOf="@id/iv_result_my_type"
+            visible="@{!typeResult.isMyType}"
+            app:layout_constraintEnd_toStartOf="@id/iv_result_selected_type"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_result_my_type" />
+            app:layout_constraintTop_toTopOf="@id/iv_result_selected_type" />
 
         <ImageView
-            android:id="@+id/iv_result_my_type"
+            android:id="@+id/iv_result_selected_type"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            imageRes="@{typeResult.typeIconResId}"
+            imageRes="@{typeResult.selectedType.typeIconResId}"
             app:layout_constraintBottom_toTopOf="@id/vw_result_divider"
-            app:layout_constraintEnd_toStartOf="@id/tv_result_my_type_name"
+            app:layout_constraintEnd_toStartOf="@id/tv_result_selected_type_name"
             app:layout_constraintStart_toEndOf="@id/vw_spacer_left"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_result_my_type_name"
+            android:id="@+id/tv_result_selected_type_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{typeResult.typeName}"
-            app:layout_constraintBottom_toBottomOf="@id/iv_result_my_type"
-            app:layout_constraintEnd_toStartOf="@id/tv_result_my_type_strength"
-            app:layout_constraintStart_toEndOf="@id/iv_result_my_type"
-            app:layout_constraintTop_toTopOf="@id/iv_result_my_type"
+            app:layout_constraintBottom_toBottomOf="@id/iv_result_selected_type"
+            app:layout_constraintEnd_toStartOf="@id/tv_result_selected_type_strength"
+            app:layout_constraintStart_toEndOf="@id/iv_result_selected_type"
+            app:layout_constraintTop_toTopOf="@id/iv_result_selected_type"
             tools:text="풀이(가)" />
 
         <TextView
-            android:id="@+id/tv_result_my_type_strength"
+            android:id="@+id/tv_result_selected_type_strength"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_result_my_type"
+            app:layout_constraintBottom_toBottomOf="@id/iv_result_selected_type"
             app:layout_constraintEnd_toStartOf="@id/vw_spacer_right"
-            app:layout_constraintStart_toEndOf="@id/tv_result_my_type_name"
-            app:layout_constraintTop_toTopOf="@id/iv_result_my_type"
+            app:layout_constraintStart_toEndOf="@id/tv_result_selected_type_name"
+            app:layout_constraintTop_toTopOf="@id/iv_result_selected_type"
             tools:text="강한 타입" />
 
         <View
             android:id="@+id/vw_spacer_right"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="visible"
+            visible="@{typeResult.isMyType}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_result_my_type_strength"
-            app:layout_constraintTop_toTopOf="@id/iv_result_my_type" />
+            app:layout_constraintStart_toEndOf="@id/tv_result_selected_type_strength"
+            app:layout_constraintTop_toTopOf="@id/iv_result_selected_type" />
 
         <View
             android:id="@+id/vw_result_divider"
@@ -75,7 +74,7 @@
             app:layout_constraintBottom_toTopOf="@id/rv_result_matched_types"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_result_my_type" />
+            app:layout_constraintTop_toBottomOf="@id/iv_result_selected_type" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_result_matched_types"
