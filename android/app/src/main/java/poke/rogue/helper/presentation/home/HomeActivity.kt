@@ -18,8 +18,8 @@ import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
-
     private val viewModel by viewModels<HomeViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbarHome.toolbar)
@@ -57,21 +57,25 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun initObservers() {
         repeatOnStarted {
-            viewModel.navigateHandler.collect { uiState ->
-                when (uiState) {
-                    is HomeNavigateState.ToType -> TypeActivity.intent(this)
-                        .also { startActivity(it) }
+            viewModel.navigateHandler.collect { state ->
+                when (state) {
+                    is HomeNavigateState.ToType ->
+                        TypeActivity.intent(this)
+                            .also { startActivity(it) }
 
-                    is HomeNavigateState.ToDex -> PokemonActivity.intent(this)
-                        .also { startActivity(it) }
+                    is HomeNavigateState.ToDex ->
+                        PokemonActivity.intent(this)
+                            .also { startActivity(it) }
 
-                    is HomeNavigateState.ToAbility -> AbilityActivity.intent(this)
-                        .also { startActivity(it) }
+                    is HomeNavigateState.ToAbility ->
+                        AbilityActivity.intent(this)
+                            .also { startActivity(it) }
 
-                    is HomeNavigateState.ToTip -> Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse(stringOf(R.string.home_pokerogue_tip_url))
-                    ).also { startActivity(it) }
+                    is HomeNavigateState.ToTip ->
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(stringOf(R.string.home_pokerogue_tip_url)),
+                        ).also { startActivity(it) }
 
                     is HomeNavigateState.ToLogo -> navigateToPokeRogue()
                 }
@@ -81,7 +85,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun navigateToPokeRogue() {
         Intent(
-            Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url))
+            Intent.ACTION_VIEW,
+            Uri.parse(stringOf(R.string.home_pokerogue_url)),
         ).also { startActivity(it) }
     }
 }
