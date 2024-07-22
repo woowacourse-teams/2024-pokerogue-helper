@@ -15,9 +15,9 @@ public class PokemonTypeService {
     private final PokemonTypeRepository pokemonTypeRepository;
 
     public List<PokemonTypeResponse> findTypes() {
-        List<PokemonType> pokemonAbilities = pokemonTypeRepository.findAll();
+        List<PokemonType> pokemonTypes = pokemonTypeRepository.findAll();
 
-        return pokemonAbilities.stream()
+        return pokemonTypes.stream()
                 .map(PokemonTypeResponse::from)
                 .toList();
     }
