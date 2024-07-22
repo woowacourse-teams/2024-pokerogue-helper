@@ -12,9 +12,9 @@ import com.pokerogue.helper.external.dto.pokemon.species.PokemonNameAndDexNumber
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.helper.external.dto.type.TypeResponse;
 import com.pokerogue.helper.type.domain.PokemonType;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -71,15 +71,14 @@ public class DtoParser {
     }
 
     private Map<String, Integer> getStat(List<StatDetail> statDetails) {
-        Map<String, Integer> stats = new HashMap<>();
-        for (StatDetail statDetail : statDetails) {
-            stats.put(statDetail.stat().name(), statDetail.base_stat());
-        }
+        Map<String, Integer> stats = statDetails.stream()
+                .collect(Collectors.toMap(
+                        StatDetail::getStatName,
+                        StatDetail::base_stat));
 
-        int totalStats = 0;
-        for (Integer baseStat : stats.values()) {
-            totalStats += baseStat;
-        }
+        int totalStats = stats.values().stream()
+                        .mapToInt(Integer::intValue)
+                                .sum();
         stats.put("total-stats", totalStats);
 
         return stats;
