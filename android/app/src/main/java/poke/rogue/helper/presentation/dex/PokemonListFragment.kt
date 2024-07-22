@@ -6,8 +6,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import poke.rogue.helper.R
 import poke.rogue.helper.data.datasource.FakePokemonListDataSource
 import poke.rogue.helper.data.repository.FakePokemonListRepository
@@ -63,7 +61,6 @@ class PokemonListFragment :
         observeNavigateToDetail()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     private fun observeDisplayedPokemons() {
         repeatOnStarted {
             viewModel.uiState.collect { pokemonUiModels ->
