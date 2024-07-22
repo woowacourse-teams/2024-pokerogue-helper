@@ -12,7 +12,6 @@ import com.pokerogue.helper.external.dto.pokemon.species.PokemonNameAndDexNumber
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.helper.external.dto.type.TypeResponse;
 import com.pokerogue.helper.type.domain.PokemonType;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +34,7 @@ public class DtoParser {
             }
         }
 
-        return new PokemonAbility(null, abilityResponse.name(), koName, description, "자세한 설명입니다.",
-                new ArrayList<>());
+        return new PokemonAbility(abilityResponse.name(), koName, description, "자세한 설명입니다.");
     }
 
     private static String getKoName(List<Name> names) {
@@ -50,7 +48,7 @@ public class DtoParser {
     public PokemonType getPokemonType(TypeResponse typeResponse) {
         String koName = getKoName(typeResponse.names());
 
-        return new PokemonType(null, typeResponse.name(), koName, "null");
+        return new PokemonType(typeResponse.name(), koName, "null");
     }
 
     public PokemonDetail getPokemonDetails(PokemonSaveResponse pokemonSaveResponse) {

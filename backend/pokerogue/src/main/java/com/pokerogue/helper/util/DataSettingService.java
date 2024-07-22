@@ -129,11 +129,10 @@ public class DataSettingService {
         NameAndUrl species = pokemonDetail.species();
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(getPokemonSpeciesResponse(species));
 
-        Pokemon pokemon = new Pokemon(null, pokemonNameAndDexNumber.pokedexNumber(), pokemonDetail.name(),
+        Pokemon pokemon = new Pokemon(pokemonNameAndDexNumber.pokedexNumber(), pokemonDetail.name(),
                 pokemonNameAndDexNumber.koName(), pokemonDetail.weight(), pokemonDetail.height(), pokemonDetail.hp(),
                 pokemonDetail.speed(), pokemonDetail.attack(), pokemonDetail.defense(), pokemonDetail.specialAttack(),
-                pokemonDetail.specialDefense(), pokemonDetail.totalStats(), "null",
-                new ArrayList<>(), new ArrayList<>());
+                pokemonDetail.specialDefense(), pokemonDetail.totalStats(), "null");
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
         savePokemonMapping(pokemonSaveResponse, savedPokemon);
 
@@ -146,7 +145,7 @@ public class DataSettingService {
             String name = abilitySummary.ability().name();
             PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
-            PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(null, savedPokemon, pokemonAbility);
+            PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(savedPokemon, pokemonAbility);
             savedPokemon.getPokemonAbilityMappings().add(pokemonAbilityMapping);
             pokemonAbility.getPokemonAbilityMappings().add(pokemonAbilityMapping);
             pokemonAbilityMappingRepository.save(pokemonAbilityMapping);
@@ -157,7 +156,7 @@ public class DataSettingService {
             String name = typeSummary.type().name();
             PokemonType pokemonType = pokemonTypeRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-            PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(null, savedPokemon, pokemonType);
+            PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(savedPokemon, pokemonType);
             savedPokemon.getPokemonTypeMappings().add(pokemonTypeMapping);
             pokemonTypeMappingRepository.save(pokemonTypeMapping);
         }

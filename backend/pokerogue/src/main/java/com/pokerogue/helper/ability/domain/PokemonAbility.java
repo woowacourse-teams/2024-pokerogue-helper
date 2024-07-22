@@ -9,16 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Getter
-@AllArgsConstructor
 @Table(name = "pokemon_ability")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PokemonAbility {
