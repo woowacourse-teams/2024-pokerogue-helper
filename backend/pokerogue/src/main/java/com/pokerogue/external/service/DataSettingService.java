@@ -79,7 +79,9 @@ public class DataSettingService {
     }
 
     private DataUrls getTypeDataUrls() {
-        return pokeClient.getTypeResponses(18);
+        CountResponse typeCountResponse = pokeClient.getTypeResponsesCount();
+
+        return pokeClient.getTypeResponses(typeCountResponse.count() - 2);
     }
 
     private List<TypeResponse> getTypeResponses(DataUrls dataUrls) {
