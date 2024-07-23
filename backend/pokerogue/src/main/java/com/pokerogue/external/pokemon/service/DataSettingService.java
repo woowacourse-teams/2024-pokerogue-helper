@@ -92,7 +92,7 @@ public class DataSettingService {
 
     private List<TypeResponse> getTypeResponses(DataUrls dataUrls) {
         return dataUrls.results().stream()
-                .map(dataUrl -> pokeClient.getTypeResponse(extractIdFromUrl(dataUrl)))
+                .map(dataUrl -> pokeClient.getTypeResponse(dataUrl.getUrlId()))
                 .toList();
     }
 
@@ -105,7 +105,7 @@ public class DataSettingService {
     private void saveAllPokemonTypeMatching(DataUrls typeDataUrls) {
         for (DataUrl dataUrl : typeDataUrls.results()) {
             String fromTypeKoName = pokemonTypeRepository.findByName(dataUrl.name()).orElseThrow().getKoName();
-            TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(extractIdFromUrl(dataUrl));
+            TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(dataUrl.getUrlId());
 
             savePokemonTypeMatching(typeMatchingResponse, fromTypeKoName);
         }
@@ -186,7 +186,7 @@ public class DataSettingService {
 
     private List<AbilityResponse> getAbilityResponses(DataUrls abilityList) {
         return abilityList.results().stream()
-                .map(dataUrl -> pokeClient.getAbilityResponse(extractIdFromUrl(dataUrl)))
+                .map(dataUrl -> pokeClient.getAbilityResponse(dataUrl.getUrlId()))
                 .toList();
     }
 
@@ -206,7 +206,7 @@ public class DataSettingService {
     private void savePokemonsByOffset(int offset) {
         DataUrls pokemonDataUrls = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
         for (DataUrl dataUrl : pokemonDataUrls.results()) {
-            String id = extractIdFromUrl(dataUrl);
+            String id = dataUrl.getUrlId();
             PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(id);
 
             savePokemon(pokemonSaveResponse, id);
@@ -234,7 +234,7 @@ public class DataSettingService {
     }
 
     private PokemonSpeciesResponse getPokemonSpeciesResponse(DataUrl species) {
-        return pokeClient.getPokemonSpeciesResponse(extractIdFromUrl(species));
+        return pokeClient.getPokemonSpeciesResponse(species.getUrlId());
     }
 
     private PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
@@ -263,10 +263,5 @@ public class DataSettingService {
 
             pokemonAbilityMappingRepository.save(pokemonAbilityMapping);
         }
-    }
-
-    private String extractIdFromUrl(DataUrl dataUrl) {
-        String[] tokens = dataUrl.url().split("/");
-        return tokens[tokens.length - 1];
     }
 }
