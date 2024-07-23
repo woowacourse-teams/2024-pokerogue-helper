@@ -32,7 +32,7 @@ public class PokemonAbilityService {
     }
 
     public PokemonAbilityWithPokemonsResponse findAbilityDetails(Long id) {
-        PokemonAbility ability = pokemonAbilityRepository.findById(id)
+        PokemonAbility ability = pokemonAbilityRepository.findByIdWithPokemonMappings(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.ABILITY_NOT_FOUND));
 
         List<SameAbilityPokemonResponse> pokemonResponses = ability.getPokemonAbilityMappings().stream()
