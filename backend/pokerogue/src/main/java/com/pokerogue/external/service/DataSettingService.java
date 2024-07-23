@@ -54,50 +54,20 @@ public class DataSettingService {
     private final PokeClient pokeClient;
 
     @Transactional
-    public void dataSetting() {
-        dataReset();
+    public void setData() {
+        deleteAll();
         savePokemonTypes();
         savePokemonAbilities();
         saveAllPokemons();
     }
 
-    private void dataReset() {
+    private void deleteAll() {
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonAbilityMappingRepository.deleteAllInBatch();
         pokemonTypeMatchingRepository.deleteAllInBatch();
         pokemonTypeRepository.deleteAllInBatch();
         pokemonAbilityRepository.deleteAllInBatch();
         pokemonRepository.deleteAllInBatch();
-    }
-
-    private void savePokemonAbilities() {
-        InformationLinks abilityInformationLinks = getAbilityInformationLinks();
-        List<AbilityResponse> abilityResponses = getAbilityResponses(abilityInformationLinks);
-        List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
-        pokemonAbilityRepository.saveAll(pokemonAbilities);
-    }
-
-    private InformationLinks getAbilityInformationLinks() {
-        CountResponse abilityCountResponse = pokeClient.getAbilityResponsesCount();
-
-        return pokeClient.getAbilityResponses(abilityCountResponse.count());
-    }
-
-    private List<AbilityResponse> getAbilityResponses(InformationLinks abilityList) {
-        return abilityList.results().stream()
-                .map(nameAndUrl -> pokeClient.getAbilityResponse(extractIdFromUrl(nameAndUrl)))
-                .toList();
-    }
-
-    private String extractIdFromUrl(InformationLink informationLink) {
-        String[] tokens = informationLink.url().split("/");
-        return tokens[tokens.length - 1];
-    }
-
-    private List<PokemonAbility> getPokemonAbilities(List<AbilityResponse> abilityResponses) {
-        return abilityResponses.stream()
-                .map(dtoParser::getPokemonAbility)
-                .toList();
     }
 
     private void savePokemonTypes() {
@@ -186,6 +156,31 @@ public class DataSettingService {
         }
     }
 
+    private void savePokemonAbilities() {
+        InformationLinks abilityInformationLinks = getAbilityInformationLinks();
+        List<AbilityResponse> abilityResponses = getAbilityResponses(abilityInformationLinks);
+        List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
+        pokemonAbilityRepository.saveAll(pokemonAbilities);
+    }
+
+    private InformationLinks getAbilityInformationLinks() {
+        CountResponse abilityCountResponse = pokeClient.getAbilityResponsesCount();
+
+        return pokeClient.getAbilityResponses(abilityCountResponse.count());
+    }
+
+    private List<AbilityResponse> getAbilityResponses(InformationLinks abilityList) {
+        return abilityList.results().stream()
+                .map(nameAndUrl -> pokeClient.getAbilityResponse(extractIdFromUrl(nameAndUrl)))
+                .toList();
+    }
+
+    private List<PokemonAbility> getPokemonAbilities(List<AbilityResponse> abilityResponses) {
+        return abilityResponses.stream()
+                .map(dtoParser::getPokemonAbility)
+                .toList();
+    }
+
     private void saveAllPokemons() {
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += PACKET_SIZE) {
@@ -216,6 +211,14 @@ public class DataSettingService {
         savePokemonAbilityMapping(pokemonSaveResponse, savedPokemon);
     }
 
+    private PokemonSpeciesResponse getPokemonSpeciesResponse(InformationLink species) {
+        return pokeClient.getPokemonSpeciesResponse(extractIdFromUrl(species));
+    }
+
+    private PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
+        return dtoParser.getPokemonNameAndDexNumber(pokemonSpeciesResponse);
+    }
+
     private void savePokemonTypeMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
         List<TypeInformationLink> types = pokemonSaveResponse.types();
         for (TypeInformationLink typeInformationLink : types) {
@@ -238,11 +241,8 @@ public class DataSettingService {
         }
     }
 
-    private PokemonSpeciesResponse getPokemonSpeciesResponse(InformationLink species) {
-        return pokeClient.getPokemonSpeciesResponse(extractIdFromUrl(species));
-    }
-
-    private PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
-        return dtoParser.getPokemonNameAndDexNumber(pokemonSpeciesResponse);
+    private String extractIdFromUrl(InformationLink informationLink) {
+        String[] tokens = informationLink.url().split("/");
+        return tokens[tokens.length - 1];
     }
 }
