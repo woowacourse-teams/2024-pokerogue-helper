@@ -1,4 +1,4 @@
-package com.pokerogue.external.pokemon.infrastructure;
+package com.pokerogue.external.pokemon.parser;
 
 import com.pokerogue.external.pokemon.dto.DataUrl;
 import com.pokerogue.external.pokemon.dto.Name;
