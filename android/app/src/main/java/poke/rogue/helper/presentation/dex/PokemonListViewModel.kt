@@ -34,7 +34,7 @@ class PokemonListViewModel(
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000L),
-                pokemonListRepository.pokemons2().map(Pokemon::toUi),
+                pokemonListRepository.pokemons().map(Pokemon::toUi),
             )
 
     private val _navigateToDetailEvent = MutableSharedFlow<Long>()
@@ -54,7 +54,7 @@ class PokemonListViewModel(
 
     private fun queriedPokemons(query: String): List<PokemonUiModel> {
         if (query.isEmpty()) {
-            return pokemonListRepository.pokemons2().map(Pokemon::toUi)
+            return pokemonListRepository.pokemons().map(Pokemon::toUi)
         }
         return pokemonListRepository.pokemons(query).map(Pokemon::toUi)
     }
