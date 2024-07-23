@@ -8,7 +8,7 @@ import retrofit2.http.Path
 
 interface PokeDexService {
     @GET("api/v1/pokemons")
-    fun pokemons(): BaseResponse<List<PokemonResponse>>
+    suspend fun pokemons(): BaseResponse<List<PokemonResponse>>
 
     @GET("api/v1/pokemon/{id}")
     fun pokemon(

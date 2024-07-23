@@ -7,5 +7,5 @@ import poke.rogue.helper.remote.service.PokeDexService
 class RemotePokemonListDataSource(
     private val pokeDexService: PokeDexService,
 ) {
-    fun pokemons(): List<Pokemon> = pokeDexService.pokemons().data.toData()
+    suspend fun pokemons(): List<Pokemon> = pokeDexService.pokemons().data.toData()
 }
