@@ -19,8 +19,8 @@ class PokemonControllerTest extends ControllerTest {
     private PokemonService pokemonService;
 
     @Test
-    @DisplayName("")
-    void pokedexDetails() throws Exception {
+    @DisplayName("유효하지 않은 형식의 포켓몬 id로 도감 상세 정보 요청 시 상태코드 400을 반환한다.")
+    void pokedexDetailsWhenRequestWithInvalidName() throws Exception {
         String notExistingId = "ABC";
 
         mockMvc.perform(get("/api/v1/pokemon/{id}", notExistingId))
