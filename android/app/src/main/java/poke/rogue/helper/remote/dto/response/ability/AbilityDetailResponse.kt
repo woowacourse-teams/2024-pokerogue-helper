@@ -1,7 +1,7 @@
 package poke.rogue.helper.remote.dto.response.ability
 
 import kotlinx.serialization.Serializable
-import poke.rogue.helper.remote.dto.response.poke.PokemonResponse
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 
 @Serializable
 data class AbilityDetailResponse(

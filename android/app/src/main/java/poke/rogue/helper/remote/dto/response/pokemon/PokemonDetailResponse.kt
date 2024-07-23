@@ -1,4 +1,4 @@
-package poke.rogue.helper.remote.dto.response.poke
+package poke.rogue.helper.remote.dto.response.pokemon
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
