@@ -17,7 +17,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class PokemonService {
 
     private final PokemonRepository pokemonRepository;
@@ -41,6 +40,7 @@ public class PokemonService {
         return PokemonResponse.of(pokemon, pokemonTypeResponses);
     }
 
+    @Transactional(readOnly = true)
     public PokedexResponse findPokedexDetails(Long id) {
         Pokemon pokemon = pokemonRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
