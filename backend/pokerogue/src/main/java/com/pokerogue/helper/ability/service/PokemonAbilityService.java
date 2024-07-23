@@ -20,8 +20,6 @@ import java.util.List;
 public class PokemonAbilityService {
 
     private final PokemonAbilityRepository pokemonAbilityRepository;
-    private final PokemonRepository pokemonRepository;
-
 
     public List<PokemonAbilityResponse> findAbilities() {
         List<PokemonAbility> pokemonAbilities = pokemonAbilityRepository.findAll();
@@ -35,21 +33,15 @@ public class PokemonAbilityService {
         PokemonAbility ability = pokemonAbilityRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.ABILITY_NOT_FOUND));
 
-        List<Pokemon> pokemons = pokemonRepository.findAll().stream()
-                .filter(pokemon ->
-                        pokemon.getPokemonAbilityMappings()
-                                .stream()
-                                .map(PokemonAbilityMapping::getPokemonAbilityName)
-                                .anyMatch(name -> name.equals(ability.getName()))
-                ).toList();
+        List<SameAbilityPokemonResponse> pokemonResponses = ability.getPokemonAbilityMappings().stream()
+                .map(PokemonAbilityMapping::getPokemon)
+                .map(SameAbilityPokemonResponse::from)
+                .toList();
 
         return new PokemonAbilityWithPokemonsResponse(
                 ability.getName(),
                 ability.getDescription(),
-                pokemons.stream()
-                        .map(SameAbilityPokemonResponse::from)
-                        .toList()
+                pokemonResponses
         );
-
     }
 }
