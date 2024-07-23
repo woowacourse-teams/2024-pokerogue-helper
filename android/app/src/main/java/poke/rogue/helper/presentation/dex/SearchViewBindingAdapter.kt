@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 @BindingAdapter("onQueryTextChange")
 fun setOnQueryTextListener(
     searchView: SearchView,
-    onQueryTextChangeListener: PokemonQueryListener,
+    onQueryTextChangeListener: PokemonQueryHandler,
 ) {
     searchView.setOnQueryTextListener(
         object : SearchView.OnQueryTextListener {

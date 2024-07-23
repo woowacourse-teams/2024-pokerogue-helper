@@ -26,7 +26,7 @@ import poke.rogue.helper.presentation.dex.model.toUi
 
 class PokemonListViewModel(
     pokemonListRepository: PokemonListRepository,
-) : ViewModel(), PokeMonItemClickListener, PokemonQueryListener {
+) : ViewModel(), PokeMonItemClickListener, PokemonQueryHandler {
     private val initialUiState =
         runBlocking {
             pokemonListRepository.pokemons().first().map(Pokemon::toUi)
