@@ -50,6 +50,13 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
         startActivity(intent)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initViews()
+        initAdapter()
+        initObserver()
+    }
+
     private fun initViews() =
         with(binding) {
             setSupportActionBar(toolbarHome.toolbar)
@@ -61,18 +68,17 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
             lifecycleOwner = this@TypeActivity
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initViews()
-        initAdapter()
-        initObserver()
-    }
-
     private fun initAdapter() {
         binding.rvTypeResult.adapter = typeResultAdapter
     }
 
     private fun initObserver() {
+        observeTypeEvent()
+        observeTypeSelectionStates()
+        observeTypeResults()
+    }
+
+    private fun observeTypeEvent() {
         repeatOnStarted {
             viewModel.typeEvent.collect {
                 if (it is TypeEvent.ShowSelection) {
@@ -80,9 +86,11 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
                 }
             }
         }
+    }
 
+    private fun observeTypeSelectionStates() {
         repeatOnStarted {
-            viewModel.typeStates.collect { states ->
+            viewModel.typeSelectionStates.collect { states ->
                 if (states.myType is TypeSelectionUiState.Selected) {
                     binding.myType = states.myType.selectedType
                 }
@@ -96,7 +104,9 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
                 }
             }
         }
+    }
 
+    private fun observeTypeResults() {
         repeatOnStarted {
             viewModel.type.collect { matchedResult ->
                 typeResultAdapter.submitList(matchedResult)

@@ -24,8 +24,8 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
 class TypeViewModel(
     private val typeRepository: TypeRepository,
 ) : ViewModel(), TypeHandler {
-    private val _typeStates = MutableStateFlow(TypeSelectionStates())
-    val typeStates: StateFlow<TypeSelectionStates> = _typeStates
+    private val _typeSelectionStates = MutableStateFlow(TypeSelectionStates())
+    val typeSelectionStates: StateFlow<TypeSelectionStates> = _typeSelectionStates
 
     private val _typeEvent = MutableSharedFlow<TypeEvent>()
     val typeEvent: SharedFlow<TypeEvent> = _typeEvent.asSharedFlow()
@@ -35,7 +35,7 @@ class TypeViewModel(
     }
 
     val type: StateFlow<List<MatchedTypesUiModel>> =
-        _typeStates.map { states ->
+        _typeSelectionStates.map { states ->
             when {
                 states.isMyTypeEmptyAndAnyOpponentSelected ->
                     matchedTypesAgainstOpponentSelections(
@@ -99,7 +99,7 @@ class TypeViewModel(
             _typeEvent.emit(
                 TypeEvent.ShowSelection(
                     selectorType,
-                    typeStates.value.disabledTypeItemSet(selectorType),
+                    typeSelectionStates.value.disabledTypeItemSet(selectorType),
                 ),
             )
         }
@@ -126,19 +126,19 @@ class TypeViewModel(
         changedState: TypeSelectionUiState,
     ) {
         viewModelScope.launch {
-            _typeStates.value =
+            _typeSelectionStates.value =
                 when (selectorType) {
-                    SelectorType.MINE -> _typeStates.value.copy(myType = changedState)
-                    SelectorType.OPPONENT1 -> _typeStates.value.copy(opponentType1 = changedState)
-                    SelectorType.OPPONENT2 -> _typeStates.value.copy(opponentType2 = changedState)
+                    SelectorType.MINE -> _typeSelectionStates.value.copy(myType = changedState)
+                    SelectorType.OPPONENT1 -> _typeSelectionStates.value.copy(opponentType1 = changedState)
+                    SelectorType.OPPONENT2 -> _typeSelectionStates.value.copy(opponentType2 = changedState)
                 }
         }
     }
 
     override fun removeAllSelections() {
         viewModelScope.launch {
-            _typeStates.value =
-                _typeStates.value.copy(
+            _typeSelectionStates.value =
+                _typeSelectionStates.value.copy(
                     TypeSelectionUiState.Empty,
                     TypeSelectionUiState.Empty,
                     TypeSelectionUiState.Empty,
