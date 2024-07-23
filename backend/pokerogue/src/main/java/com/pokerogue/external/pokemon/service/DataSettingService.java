@@ -235,7 +235,7 @@ public class DataSettingService {
     private void savePokemonTypeMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
         List<TypeDataUrl> types = pokemonSaveResponse.types();
         for (TypeDataUrl typeDataUrl : types) {
-            String name = typeDataUrl.type().name();
+            String name = typeDataUrl.getName();
             PokemonType pokemonType = pokemonTypeRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(savedPokemon, pokemonType);
@@ -247,7 +247,7 @@ public class DataSettingService {
     private void savePokemonAbilityMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
         List<AbilityDataUrl> abilities = pokemonSaveResponse.abilities();
         for (AbilityDataUrl abilityDataUrl : abilities) {
-            String name = abilityDataUrl.ability().name();
+            String name = abilityDataUrl.getName();
             PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
             PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(savedPokemon, pokemonAbility);

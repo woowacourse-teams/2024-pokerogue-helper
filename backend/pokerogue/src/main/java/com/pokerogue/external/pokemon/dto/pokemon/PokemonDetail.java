@@ -1,7 +1,6 @@
 package com.pokerogue.external.pokemon.dto.pokemon;
 
 import com.pokerogue.external.pokemon.dto.DataUrl;
-import java.util.List;
 
 public record PokemonDetail(
         String name,
@@ -14,8 +13,6 @@ public record PokemonDetail(
         int speed,
         int specialAttack,
         int specialDefense,
-        int totalStats,
-        List<String> abilityNames,
-        List<String> typeNames
+        int totalStats
 ) {
 }

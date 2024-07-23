@@ -2,7 +2,6 @@ package com.pokerogue.external.pokemon.infrastructure;
 
 import com.pokerogue.external.pokemon.dto.DataUrl;
 import com.pokerogue.external.pokemon.dto.Name;
-import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.external.pokemon.dto.ability.AbilityResponse;
 import com.pokerogue.external.pokemon.dto.ability.FlavorTextEntry;
 import com.pokerogue.external.pokemon.dto.pokemon.PokemonDetail;
@@ -11,6 +10,7 @@ import com.pokerogue.external.pokemon.dto.pokemon.StatDetail;
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonNameAndDexNumber;
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.external.pokemon.dto.type.TypeResponse;
+import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.type.domain.PokemonType;
 import java.util.List;
 import java.util.Map;
@@ -54,16 +54,9 @@ public class DtoParser {
         List<StatDetail> statDetails = pokemonSaveResponse.stats();
         Map<String, Integer> stat = getStat(statDetails);
 
-        List<String> abilityNameList = pokemonSaveResponse.abilities().stream()
-                .map(abilitySummary -> abilitySummary.ability().name())
-                .toList();
-        List<String> typeNameList = pokemonSaveResponse.types().stream()
-                .map(typeSummary -> typeSummary.type().name())
-                .toList();
-
         return new PokemonDetail(pokemonSaveResponse.name(), weight, height, species, stat.get("hp"),
                 stat.get("attack"), stat.get("defense"), stat.get("speed"), stat.get("special-attack"),
-                stat.get("special-defense"), stat.get("total-stats"), abilityNameList, typeNameList);
+                stat.get("special-defense"), stat.get("total-stats"));
     }
 
     private Map<String, Integer> getStat(List<StatDetail> statDetails) {
