@@ -3,21 +3,16 @@ package poke.rogue.helper.presentation.dex
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.repository.PokemonListRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
@@ -25,26 +20,21 @@ import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 
 class PokemonListViewModel(
-    pokemonListRepository: PokemonListRepository,
+    private val pokemonListRepository: PokemonListRepository,
 ) : ViewModel(), PokeMonItemClickListener, PokemonQueryHandler {
-    private val initialUiState =
-        runBlocking {
-            pokemonListRepository.pokemons().first().map(Pokemon::toUi)
-        }
-
     private val searchQuery = MutableStateFlow("")
 
-    @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
+    @OptIn(FlowPreview::class)
     val uiState: StateFlow<List<PokemonUiModel>> =
         searchQuery
             .debounce(300)
-            .flatMapLatest { query ->
-                pokemonsQueryFlow(query, pokemonListRepository)
+            .map { query ->
+                queriedPokemons(query)
             }
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000L),
-                initialUiState,
+                pokemonListRepository.pokemons2().map(Pokemon::toUi),
             )
 
     private val _navigateToDetailEvent = MutableSharedFlow<Long>()
@@ -62,14 +52,11 @@ class PokemonListViewModel(
         }
     }
 
-    private fun pokemonsQueryFlow(
-        query: String,
-        pokemonListRepository: PokemonListRepository,
-    ): Flow<List<PokemonUiModel>> {
+    private fun queriedPokemons(query: String): List<PokemonUiModel> {
         if (query.isEmpty()) {
-            return pokemonListRepository.pokemons().map(List<Pokemon>::toUi)
+            return pokemonListRepository.pokemons2().map(Pokemon::toUi)
         }
-        return pokemonListRepository.searchedPokemons(query).map(List<Pokemon>::toUi)
+        return pokemonListRepository.pokemons(query).map(Pokemon::toUi)
     }
 
     companion object {

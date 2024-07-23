@@ -21,5 +21,3 @@ fun Pokemon.toUi(): PokemonUiModel =
         imageUrl = imageUrl,
         types = types.map(Type::toUi),
     )
-
-fun List<Pokemon>.toUi(): List<PokemonUiModel> = map(Pokemon::toUi)
