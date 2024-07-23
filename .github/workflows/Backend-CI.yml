@@ -26,6 +26,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set up MySQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql database: 'pokerogue'
+          mysql user: ${{ secrets.TEST_DB_USERNAME }}
+          mysql password: ${{ secrets.TEST_DB_PASSWORD }}
+
       - name: Run Test
-        run: SPRING_PROFILES_ACTIVE=h2 ./gradlew clean test
+        run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
         working-directory: ./backend/pokerogue
