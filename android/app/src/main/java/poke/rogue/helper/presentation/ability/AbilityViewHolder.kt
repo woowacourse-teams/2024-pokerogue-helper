@@ -8,7 +8,6 @@ class AbilityViewHolder(
     private val onClickAbilityItem: AbilityActionHandler,
 ) :
     RecyclerView.ViewHolder(binding.root) {
-
     fun bind(abilityUiModel: AbilityUiModel) {
         binding.ability = abilityUiModel
         binding.actionHandler = onClickAbilityItem
