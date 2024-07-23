@@ -1,4 +1,4 @@
-package com.pokerogue.helper.util;
+package com.pokerogue.helper.external.infrastructure;
 
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.external.dto.Name;

@@ -2,7 +2,7 @@ package com.pokerogue.helper.ability.controller;
 
 import com.pokerogue.helper.ability.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.ability.service.PokemonAbilityService;
-import com.pokerogue.helper.util.DataSettingService;
+import com.pokerogue.helper.external.service.DataSettingService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

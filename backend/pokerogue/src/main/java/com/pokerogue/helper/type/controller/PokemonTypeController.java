@@ -1,6 +1,6 @@
 package com.pokerogue.helper.type.controller;
 
-import com.pokerogue.helper.util.DataSettingService;
+import com.pokerogue.helper.external.service.DataSettingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
