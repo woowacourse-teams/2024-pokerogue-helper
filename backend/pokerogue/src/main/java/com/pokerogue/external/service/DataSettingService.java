@@ -11,6 +11,7 @@ import com.pokerogue.external.dto.pokemon.PokemonSaveResponse;
 import com.pokerogue.external.dto.pokemon.TypeInformationLink;
 import com.pokerogue.external.dto.pokemon.species.PokemonNameAndDexNumber;
 import com.pokerogue.external.dto.pokemon.species.PokemonSpeciesResponse;
+import com.pokerogue.external.dto.type.TypeMatchingResponse;
 import com.pokerogue.external.dto.type.TypeResponse;
 import com.pokerogue.external.infrastructure.DtoParser;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
@@ -24,8 +25,11 @@ import com.pokerogue.helper.pokemon.repository.PokemonAbilityMappingRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonTypeMappingRepository;
 import com.pokerogue.helper.type.domain.PokemonType;
+import com.pokerogue.helper.type.domain.PokemonTypeMatching;
+import com.pokerogue.helper.type.repository.PokemonTypeMatchingRepository;
 import com.pokerogue.helper.type.repository.PokemonTypeRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,12 +39,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class DataSettingService {
 
     private static final int PACKET_SIZE = 500;
+    private static final double DOUBLE_DAMAGE = 2.0;
+    private static final double HALF_DAMAGE = 0.5;
+    private static final double NO_DAMAGE = 0.0;
+    private static final double BASIC_DAMAGE = 1.0;
 
     private final PokemonRepository pokemonRepository;
     private final PokemonAbilityRepository pokemonAbilityRepository;
     private final PokemonTypeRepository pokemonTypeRepository;
     private final PokemonAbilityMappingRepository pokemonAbilityMappingRepository;
     private final PokemonTypeMappingRepository pokemonTypeMappingRepository;
+    private final PokemonTypeMatchingRepository pokemonTypeMatchingRepository;
     private final DtoParser dtoParser;
     private final PokeClient pokeClient;
 
@@ -55,6 +64,7 @@ public class DataSettingService {
     private void dataReset() {
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonAbilityMappingRepository.deleteAllInBatch();
+        pokemonTypeMatchingRepository.deleteAllInBatch();
         pokemonTypeRepository.deleteAllInBatch();
         pokemonAbilityRepository.deleteAllInBatch();
         pokemonRepository.deleteAllInBatch();
@@ -90,17 +100,18 @@ public class DataSettingService {
                 .toList();
     }
 
-    private void savePokemonTypes() {
+    public void savePokemonTypes() {
+        pokemonTypeMappingRepository.deleteAllInBatch();
+        pokemonTypeRepository.deleteAllInBatch();
         InformationLinks typeInformationLinks = getTypeInformationLinks();
         List<TypeResponse> typeResponses = getTypeResponses(typeInformationLinks);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
         pokemonTypeRepository.saveAll(pokemonTypes);
+        saveAllPokemonTypeMatching(typeInformationLinks);
     }
 
     private InformationLinks getTypeInformationLinks() {
-        CountResponse typeCountResponse = pokeClient.getTypeResponsesCount();
-
-        return pokeClient.getTypeResponses(typeCountResponse.count());
+        return pokeClient.getTypeResponses(18);
     }
 
     private List<TypeResponse> getTypeResponses(InformationLinks typeList) {
@@ -113,6 +124,68 @@ public class DataSettingService {
         return typeResponses.stream()
                 .map(dtoParser::getPokemonType)
                 .toList();
+    }
+
+    private void saveAllPokemonTypeMatching(InformationLinks typeInformationLinks) {
+        for (InformationLink informationLink : typeInformationLinks.results()) {
+            String fromKoName = pokemonTypeRepository.findByName(informationLink.name()).orElseThrow().getKoName();
+            TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(extractIdFromUrl(informationLink));
+
+            savePokemonTypeMatching(typeMatchingResponse, fromKoName);
+        }
+    }
+
+    private void savePokemonTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName) {
+        List<String> allTypeNames = getAllTypeNames();
+        saveDoubleDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
+        saveHalfDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
+        saveNoDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
+        saveBasicDamageTypeMatching(fromKoName, allTypeNames);
+    }
+
+    private List<String> getAllTypeNames() {
+        List<String> typeNames = pokemonTypeRepository.findAll().stream()
+                .map(PokemonType::getKoName)
+                .collect(Collectors.toList());
+        typeNames.remove("스텔라");
+        typeNames.remove("???");
+        typeNames.remove("다크");
+
+        return typeNames;
+    }
+
+    private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
+        for (InformationLink type : typeMatchingResponse.getDoubleDamageTo()) {
+            String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, DOUBLE_DAMAGE);
+            pokemonTypeMatchingRepository.save(pokemonTypeMatching);
+            allTypeNames.remove(toKoName);
+        }
+    }
+
+    private void saveHalfDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
+        for (InformationLink type : typeMatchingResponse.getHalfDamageTo()) {
+            String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, HALF_DAMAGE);
+            pokemonTypeMatchingRepository.save(pokemonTypeMatching);
+            allTypeNames.remove(toKoName);
+        }
+    }
+
+    private void saveNoDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
+        for (InformationLink type : typeMatchingResponse.getNoDamageTo()) {
+            String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, NO_DAMAGE);
+            pokemonTypeMatchingRepository.save(pokemonTypeMatching);
+            allTypeNames.remove(toKoName);
+        }
+    }
+
+    private void saveBasicDamageTypeMatching(String fromKoName, List<String> allTypeNames) {
+        for (String toKoName : allTypeNames) {
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, BASIC_DAMAGE);
+            pokemonTypeMatchingRepository.save(pokemonTypeMatching);
+        }
     }
 
     private void saveAllPokemons() {

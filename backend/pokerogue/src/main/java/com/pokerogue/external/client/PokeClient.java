@@ -42,14 +42,6 @@ public class PokeClient {
                 .body(AbilityResponse.class);
     }
 
-    public CountResponse getTypeResponsesCount() {
-        return restClient.get()
-                .uri("/type")
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .body(CountResponse.class);
-    }
-
     public InformationLinks getTypeResponses(int limit) {
         return restClient.get()
                 .uri("/type/?offset=0&limit={limit}", limit)
