@@ -9,11 +9,10 @@ import org.springframework.data.repository.query.Param;
 
 public interface PokemonAbilityRepository extends JpaRepository<PokemonAbility, Long> {
 
-    @Override
     @NonNull
     @Query("""
             select a from PokemonAbility a
             join fetch a.pokemonAbilityMappings m
             """)
-    Optional<PokemonAbility> findById(@NonNull @Param("id") Long id);
+    Optional<PokemonAbility> findByIdWithPokemonMappings(@NonNull @Param("id") Long id);
 }
