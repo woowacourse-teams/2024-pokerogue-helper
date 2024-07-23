@@ -24,7 +24,7 @@ public class ArticleService {
                 .toList();
     }
 
-    public ArticleDetailsResponse findArticleDetails(final Long id) {
+    public ArticleDetailsResponse findArticleDetails(Long id) {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.ARTICLE_NOT_FOUND));
 
