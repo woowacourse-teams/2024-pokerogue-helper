@@ -29,8 +29,8 @@ public class PokemonController {
         return new ApiResponse<>("포켓몬 정보 불러오기에 성공했습니다.", pokemonService.findPokedexDetails(id));
     }
 
-    @PostMapping("/api/v1/setting/pokemons")
+    @PostMapping("/api/v1/setting")
     public void savePokemons() {
-        dataSettingService.savePokemons();
+        dataSettingService.dataSetting();
     }
 }
