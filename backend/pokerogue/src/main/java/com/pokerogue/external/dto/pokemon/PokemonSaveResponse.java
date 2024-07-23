@@ -1,6 +1,6 @@
-package com.pokerogue.helper.external.dto.pokemon;
+package com.pokerogue.external.dto.pokemon;
 
-import com.pokerogue.helper.external.dto.InformationLink;
+import com.pokerogue.external.dto.InformationLink;
 import java.util.List;
 
 // https://pokeapi.co/api/v2/pokemon/{id}

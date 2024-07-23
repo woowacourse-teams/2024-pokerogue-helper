@@ -1,16 +1,16 @@
-package com.pokerogue.helper.external.infrastructure;
+package com.pokerogue.external.infrastructure;
 
+import com.pokerogue.external.dto.InformationLink;
+import com.pokerogue.external.dto.Name;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
-import com.pokerogue.helper.external.dto.Name;
-import com.pokerogue.helper.external.dto.InformationLink;
-import com.pokerogue.helper.external.dto.ability.AbilityResponse;
-import com.pokerogue.helper.external.dto.ability.FlavorTextEntry;
-import com.pokerogue.helper.external.dto.pokemon.PokemonDetail;
-import com.pokerogue.helper.external.dto.pokemon.PokemonSaveResponse;
-import com.pokerogue.helper.external.dto.pokemon.StatDetail;
-import com.pokerogue.helper.external.dto.pokemon.species.PokemonNameAndDexNumber;
-import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
-import com.pokerogue.helper.external.dto.type.TypeResponse;
+import com.pokerogue.external.dto.ability.AbilityResponse;
+import com.pokerogue.external.dto.ability.FlavorTextEntry;
+import com.pokerogue.external.dto.pokemon.PokemonDetail;
+import com.pokerogue.external.dto.pokemon.PokemonSaveResponse;
+import com.pokerogue.external.dto.pokemon.StatDetail;
+import com.pokerogue.external.dto.pokemon.species.PokemonNameAndDexNumber;
+import com.pokerogue.external.dto.pokemon.species.PokemonSpeciesResponse;
+import com.pokerogue.external.dto.type.TypeResponse;
 import com.pokerogue.helper.type.domain.PokemonType;
 import java.util.List;
 import java.util.Map;

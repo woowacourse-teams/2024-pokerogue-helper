@@ -1,4 +1,4 @@
-package com.pokerogue.helper.external.dto;
+package com.pokerogue.external.dto;
 
 import java.util.List;
 

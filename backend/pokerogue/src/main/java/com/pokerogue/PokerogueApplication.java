@@ -1,4 +1,4 @@
-package com.pokerogue.helper;
+package com.pokerogue;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
