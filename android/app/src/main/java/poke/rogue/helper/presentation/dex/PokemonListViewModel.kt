@@ -3,6 +3,7 @@ package poke.rogue.helper.presentation.dex
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,7 +11,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.model.Pokemon
@@ -24,11 +25,11 @@ class PokemonListViewModel(
 ) : ViewModel(), PokemonDetailNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
 
-    @OptIn(FlowPreview::class)
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<List<PokemonUiModel>> =
         searchQuery
             .debounce(300)
-            .map { query ->
+            .mapLatest { query ->
                 queriedPokemons(query)
             }
             .stateIn(
