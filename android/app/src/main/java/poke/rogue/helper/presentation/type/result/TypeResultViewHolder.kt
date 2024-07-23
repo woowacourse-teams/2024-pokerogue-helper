@@ -1,9 +1,11 @@
 package poke.rogue.helper.presentation.type.result
 
 import android.content.Context
-import android.text.Spanned
+import android.graphics.Typeface
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import androidx.core.text.buildSpannedString
+import androidx.core.text.inSpans
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -13,6 +15,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
+import poke.rogue.helper.presentation.util.context.stringOf
 
 class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : RecyclerView.ViewHolder(binding.root) {
     private val flexboxLayoutManager: FlexboxLayoutManager by lazy {
@@ -56,19 +59,19 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         typeMatchedResult: MatchedTypesUiModel,
         context: Context,
     ) {
+        val matchedResultText = typeMatchedResult.matchedResult
+        val matchedResultTextTail = context.stringOf(R.string.type_item_result_tail)
         val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultColorResId)
-        val matchedResultTypeText =
-            context.getString(R.string.type_item_result_tail, typeMatchedResult.matchedResult)
 
         binding.tvResultSelectedTypeStrength.text =
             buildSpannedString {
-                append(matchedResultTypeText)
-                setSpan(
+                inSpans(
                     ForegroundColorSpan(matchedResultTextColor),
-                    0,
-                    typeMatchedResult.matchedResult.length,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
-                )
+                    StyleSpan(Typeface.BOLD),
+                ) {
+                    append(matchedResultText)
+                }
+                append(matchedResultTextTail)
             }
     }
 }
