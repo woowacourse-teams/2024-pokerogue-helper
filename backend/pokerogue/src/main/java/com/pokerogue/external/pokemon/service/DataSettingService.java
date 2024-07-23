@@ -101,20 +101,20 @@ public class DataSettingService {
 
     private void saveAllPokemonTypeMatching(DataUrls typeDataUrls) {
         for (DataUrl dataUrl : typeDataUrls.results()) {
-            String fromKoName = pokemonTypeRepository.findByName(dataUrl.name()).orElseThrow().getKoName();
+            String fromTypeKoName = pokemonTypeRepository.findByName(dataUrl.name()).orElseThrow().getKoName();
             TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(extractIdFromUrl(dataUrl));
 
-            savePokemonTypeMatching(typeMatchingResponse, fromKoName);
+            savePokemonTypeMatching(typeMatchingResponse, fromTypeKoName);
         }
     }
 
-    private void savePokemonTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName) {
+    private void savePokemonTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromTypeKoName) {
         List<String> allTypeNames = getAllTypeNames();
 
-        saveDoubleDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
-        saveHalfDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
-        saveNoDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
-        saveBasicDamageTypeMatching(fromKoName, allTypeNames);
+        saveDoubleDamageTypeMatching(typeMatchingResponse, fromTypeKoName, allTypeNames);
+        saveHalfDamageTypeMatching(typeMatchingResponse, fromTypeKoName, allTypeNames);
+        saveNoDamageTypeMatching(typeMatchingResponse, fromTypeKoName, allTypeNames);
+        saveBasicDamageTypeMatching(fromTypeKoName, allTypeNames);
     }
 
     private List<String> getAllTypeNames() {
@@ -123,36 +123,46 @@ public class DataSettingService {
                 .collect(Collectors.toList());
     }
 
-    private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
+    private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromTypeKoName, List<String> allTypeNames) {
         for (DataUrl type : typeMatchingResponse.getDoubleDamageTo()) {
-            String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, DOUBLE_DAMAGE);
+            PokemonType pokemonType = pokemonTypeRepository.findByName(type.name())
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+            String toTypeKoName = pokemonType.getKoName();
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromTypeKoName, toTypeKoName, DOUBLE_DAMAGE);
+
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
-            allTypeNames.remove(toKoName);
+            allTypeNames.remove(toTypeKoName);
         }
     }
 
-    private void saveHalfDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
+    private void saveHalfDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromTypeKoName, List<String> allTypeNames) {
         for (DataUrl type : typeMatchingResponse.getHalfDamageTo()) {
-            String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, HALF_DAMAGE);
+            PokemonType pokemonType = pokemonTypeRepository.findByName(type.name())
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+            String toTypeKoName = pokemonType.getKoName();
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromTypeKoName, toTypeKoName, HALF_DAMAGE);
+
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
-            allTypeNames.remove(toKoName);
+            allTypeNames.remove(toTypeKoName);
         }
     }
 
-    private void saveNoDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
+    private void saveNoDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromTypeKoName, List<String> allTypeNames) {
         for (DataUrl type : typeMatchingResponse.getNoDamageTo()) {
-            String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, NO_DAMAGE);
+            PokemonType pokemonType = pokemonTypeRepository.findByName(type.name())
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+            String toTypeKoName = pokemonType.getKoName();
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromTypeKoName, toTypeKoName, NO_DAMAGE);
+
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
-            allTypeNames.remove(toKoName);
+            allTypeNames.remove(toTypeKoName);
         }
     }
 
-    private void saveBasicDamageTypeMatching(String fromKoName, List<String> allTypeNames) {
-        for (String toKoName : allTypeNames) {
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, BASIC_DAMAGE);
+    private void saveBasicDamageTypeMatching(String fromTypeKoName, List<String> allTypeNames) {
+        for (String toTypeKoName : allTypeNames) {
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromTypeKoName, toTypeKoName, BASIC_DAMAGE);
+
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
         }
     }
