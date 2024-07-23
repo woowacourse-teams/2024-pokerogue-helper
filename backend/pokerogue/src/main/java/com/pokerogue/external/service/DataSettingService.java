@@ -2,13 +2,13 @@ package com.pokerogue.external.service;
 
 import com.pokerogue.external.client.PokeClient;
 import com.pokerogue.external.dto.CountResponse;
-import com.pokerogue.external.dto.InformationLink;
-import com.pokerogue.external.dto.InformationLinks;
+import com.pokerogue.external.dto.DataUrl;
+import com.pokerogue.external.dto.DataUrls;
 import com.pokerogue.external.dto.ability.AbilityResponse;
-import com.pokerogue.external.dto.pokemon.AbilityInformationLink;
+import com.pokerogue.external.dto.pokemon.AbilityDataUrl;
 import com.pokerogue.external.dto.pokemon.PokemonDetail;
 import com.pokerogue.external.dto.pokemon.PokemonSaveResponse;
-import com.pokerogue.external.dto.pokemon.TypeInformationLink;
+import com.pokerogue.external.dto.pokemon.TypeDataUrl;
 import com.pokerogue.external.dto.pokemon.species.PokemonNameAndDexNumber;
 import com.pokerogue.external.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.external.dto.type.TypeMatchingResponse;
@@ -71,20 +71,20 @@ public class DataSettingService {
     }
 
     private void savePokemonTypes() {
-        InformationLinks typeInformationLinks = getTypeInformationLinks();
-        List<TypeResponse> typeResponses = getTypeResponses(typeInformationLinks);
+        DataUrls typeDataUrls = getTypeDataUrls();
+        List<TypeResponse> typeResponses = getTypeResponses(typeDataUrls);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
         pokemonTypeRepository.saveAll(pokemonTypes);
-        saveAllPokemonTypeMatching(typeInformationLinks);
+        saveAllPokemonTypeMatching(typeDataUrls);
     }
 
-    private InformationLinks getTypeInformationLinks() {
+    private DataUrls getTypeDataUrls() {
         return pokeClient.getTypeResponses(18);
     }
 
-    private List<TypeResponse> getTypeResponses(InformationLinks typeList) {
-        return typeList.results().stream()
-                .map(nameAndUrl -> pokeClient.getTypeResponse(extractIdFromUrl(nameAndUrl)))
+    private List<TypeResponse> getTypeResponses(DataUrls dataUrls) {
+        return dataUrls.results().stream()
+                .map(dataUrl -> pokeClient.getTypeResponse(extractIdFromUrl(dataUrl)))
                 .toList();
     }
 
@@ -94,10 +94,10 @@ public class DataSettingService {
                 .toList();
     }
 
-    private void saveAllPokemonTypeMatching(InformationLinks typeInformationLinks) {
-        for (InformationLink informationLink : typeInformationLinks.results()) {
-            String fromKoName = pokemonTypeRepository.findByName(informationLink.name()).orElseThrow().getKoName();
-            TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(extractIdFromUrl(informationLink));
+    private void saveAllPokemonTypeMatching(DataUrls typeDataUrls) {
+        for (DataUrl dataUrl : typeDataUrls.results()) {
+            String fromKoName = pokemonTypeRepository.findByName(dataUrl.name()).orElseThrow().getKoName();
+            TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(extractIdFromUrl(dataUrl));
 
             savePokemonTypeMatching(typeMatchingResponse, fromKoName);
         }
@@ -123,7 +123,7 @@ public class DataSettingService {
     }
 
     private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
-        for (InformationLink type : typeMatchingResponse.getDoubleDamageTo()) {
+        for (DataUrl type : typeMatchingResponse.getDoubleDamageTo()) {
             String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, DOUBLE_DAMAGE);
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
@@ -132,7 +132,7 @@ public class DataSettingService {
     }
 
     private void saveHalfDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
-        for (InformationLink type : typeMatchingResponse.getHalfDamageTo()) {
+        for (DataUrl type : typeMatchingResponse.getHalfDamageTo()) {
             String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, HALF_DAMAGE);
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
@@ -141,7 +141,7 @@ public class DataSettingService {
     }
 
     private void saveNoDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
-        for (InformationLink type : typeMatchingResponse.getNoDamageTo()) {
+        for (DataUrl type : typeMatchingResponse.getNoDamageTo()) {
             String toKoName = pokemonTypeRepository.findByName(type.name()).orElseThrow().getKoName();
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromKoName, toKoName, NO_DAMAGE);
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
@@ -157,21 +157,21 @@ public class DataSettingService {
     }
 
     private void savePokemonAbilities() {
-        InformationLinks abilityInformationLinks = getAbilityInformationLinks();
-        List<AbilityResponse> abilityResponses = getAbilityResponses(abilityInformationLinks);
+        DataUrls abilityDataUrls = getAbilityDataUrls();
+        List<AbilityResponse> abilityResponses = getAbilityResponses(abilityDataUrls);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
         pokemonAbilityRepository.saveAll(pokemonAbilities);
     }
 
-    private InformationLinks getAbilityInformationLinks() {
+    private DataUrls getAbilityDataUrls() {
         CountResponse abilityCountResponse = pokeClient.getAbilityResponsesCount();
 
         return pokeClient.getAbilityResponses(abilityCountResponse.count());
     }
 
-    private List<AbilityResponse> getAbilityResponses(InformationLinks abilityList) {
+    private List<AbilityResponse> getAbilityResponses(DataUrls abilityList) {
         return abilityList.results().stream()
-                .map(nameAndUrl -> pokeClient.getAbilityResponse(extractIdFromUrl(nameAndUrl)))
+                .map(dataUrl -> pokeClient.getAbilityResponse(extractIdFromUrl(dataUrl)))
                 .toList();
     }
 
@@ -189,17 +189,17 @@ public class DataSettingService {
     }
 
     private void savePokemons(int offset) {
-        InformationLinks pokemonInformationLinks = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
-        for (InformationLink informationLink : pokemonInformationLinks.results()) {
+        DataUrls pokemonDataUrls = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
+        for (DataUrl dataUrl : pokemonDataUrls.results()) {
             PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(extractIdFromUrl(
-                    informationLink));
+                    dataUrl));
             savePokemon(pokemonSaveResponse);
         }
     }
 
     private void savePokemon(PokemonSaveResponse pokemonSaveResponse) {
         PokemonDetail pokemonDetail = dtoParser.getPokemonDetails(pokemonSaveResponse);
-        InformationLink species = pokemonDetail.species();
+        DataUrl species = pokemonDetail.species();
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(getPokemonSpeciesResponse(species));
 
         Pokemon pokemon = new Pokemon(pokemonNameAndDexNumber.pokedexNumber(), pokemonDetail.name(),
@@ -211,7 +211,7 @@ public class DataSettingService {
         savePokemonAbilityMapping(pokemonSaveResponse, savedPokemon);
     }
 
-    private PokemonSpeciesResponse getPokemonSpeciesResponse(InformationLink species) {
+    private PokemonSpeciesResponse getPokemonSpeciesResponse(DataUrl species) {
         return pokeClient.getPokemonSpeciesResponse(extractIdFromUrl(species));
     }
 
@@ -220,9 +220,9 @@ public class DataSettingService {
     }
 
     private void savePokemonTypeMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
-        List<TypeInformationLink> types = pokemonSaveResponse.types();
-        for (TypeInformationLink typeInformationLink : types) {
-            String name = typeInformationLink.type().name();
+        List<TypeDataUrl> types = pokemonSaveResponse.types();
+        for (TypeDataUrl typeDataUrl : types) {
+            String name = typeDataUrl.type().name();
             PokemonType pokemonType = pokemonTypeRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(savedPokemon, pokemonType);
@@ -231,9 +231,9 @@ public class DataSettingService {
     }
 
     private void savePokemonAbilityMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
-        List<AbilityInformationLink> abilities = pokemonSaveResponse.abilities();
-        for (AbilityInformationLink abilityInformationLink : abilities) {
-            String name = abilityInformationLink.ability().name();
+        List<AbilityDataUrl> abilities = pokemonSaveResponse.abilities();
+        for (AbilityDataUrl abilityDataUrl : abilities) {
+            String name = abilityDataUrl.ability().name();
             PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
             PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(savedPokemon, pokemonAbility);
@@ -241,8 +241,8 @@ public class DataSettingService {
         }
     }
 
-    private String extractIdFromUrl(InformationLink informationLink) {
-        String[] tokens = informationLink.url().split("/");
+    private String extractIdFromUrl(DataUrl dataUrl) {
+        String[] tokens = dataUrl.url().split("/");
         return tokens[tokens.length - 1];
     }
 }

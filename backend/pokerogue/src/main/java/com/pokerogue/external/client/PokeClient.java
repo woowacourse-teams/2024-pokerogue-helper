@@ -1,7 +1,7 @@
 package com.pokerogue.external.client;
 
 import com.pokerogue.external.dto.CountResponse;
-import com.pokerogue.external.dto.InformationLinks;
+import com.pokerogue.external.dto.DataUrls;
 import com.pokerogue.external.dto.ability.AbilityResponse;
 import com.pokerogue.external.dto.pokemon.PokemonSaveResponse;
 import com.pokerogue.external.dto.pokemon.species.PokemonSpeciesResponse;
@@ -26,12 +26,12 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public InformationLinks getAbilityResponses(int limit) {
+    public DataUrls getAbilityResponses(int limit) {
         return restClient.get()
                 .uri("/ability/?offset=0&limit={limit}", limit)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(InformationLinks.class);
+                .body(DataUrls.class);
     }
 
     public AbilityResponse getAbilityResponse(String id) {
@@ -42,12 +42,12 @@ public class PokeClient {
                 .body(AbilityResponse.class);
     }
 
-    public InformationLinks getTypeResponses(int limit) {
+    public DataUrls getTypeResponses(int limit) {
         return restClient.get()
                 .uri("/type/?offset=0&limit={limit}", limit)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(InformationLinks.class);
+                .body(DataUrls.class);
     }
 
     public TypeResponse getTypeResponse(String id) {
@@ -66,12 +66,12 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public InformationLinks getPokemonResponses(int offset, int limit) {
+    public DataUrls getPokemonResponses(int offset, int limit) {
         return restClient.get()
                 .uri("/pokemon/?offset={offset}&limit={limit}", offset, limit)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(InformationLinks.class);
+                .body(DataUrls.class);
     }
 
     public PokemonSaveResponse getPokemonSaveResponse(String id) {

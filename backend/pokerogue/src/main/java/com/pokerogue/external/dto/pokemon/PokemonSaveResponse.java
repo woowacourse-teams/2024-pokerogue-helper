@@ -1,6 +1,6 @@
 package com.pokerogue.external.dto.pokemon;
 
-import com.pokerogue.external.dto.InformationLink;
+import com.pokerogue.external.dto.DataUrl;
 import java.util.List;
 
 // https://pokeapi.co/api/v2/pokemon/{id}
@@ -9,9 +9,9 @@ public record PokemonSaveResponse(
         int height,
         int weight,
         String name,
-        List<AbilityInformationLink> abilities,
-        List<TypeInformationLink> types,
+        List<AbilityDataUrl> abilities,
+        List<TypeDataUrl> types,
         List<StatDetail> stats,
-        InformationLink species
+        DataUrl species
 ) {
 }

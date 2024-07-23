@@ -1,6 +1,6 @@
 package com.pokerogue.external.dto.ability;
 
-import com.pokerogue.external.dto.InformationLink;
+import com.pokerogue.external.dto.DataUrl;
 
-public record PokemonSummary(InformationLink pokemon) {
+public record PokemonSummary(DataUrl pokemon) {
 }
