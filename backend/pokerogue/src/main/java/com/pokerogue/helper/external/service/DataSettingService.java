@@ -137,19 +137,11 @@ public class DataSettingService {
                 pokemonDetail.speed(), pokemonDetail.attack(), pokemonDetail.defense(), pokemonDetail.specialAttack(),
                 pokemonDetail.specialDefense(), pokemonDetail.totalStats(), "null");
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
-        savePokemonMapping(pokemonSaveResponse, savedPokemon);
+        savePokemonTypeMapping(pokemonSaveResponse, savedPokemon);
+        savePokemonAbilityMapping(pokemonSaveResponse, savedPokemon);
     }
 
-    private void savePokemonMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
-        List<AbilityInformationLink> abilities = pokemonSaveResponse.abilities();
-        for (AbilityInformationLink abilityInformationLink : abilities) {
-            String name = abilityInformationLink.ability().name();
-            PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name)
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
-            PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(savedPokemon, pokemonAbility);
-            pokemonAbilityMappingRepository.save(pokemonAbilityMapping);
-        }
-
+    private void savePokemonTypeMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
         List<TypeInformationLink> types = pokemonSaveResponse.types();
         for (TypeInformationLink typeInformationLink : types) {
             String name = typeInformationLink.type().name();
@@ -157,6 +149,17 @@ public class DataSettingService {
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(savedPokemon, pokemonType);
             pokemonTypeMappingRepository.save(pokemonTypeMapping);
+        }
+    }
+
+    private void savePokemonAbilityMapping(PokemonSaveResponse pokemonSaveResponse, Pokemon savedPokemon) {
+        List<AbilityInformationLink> abilities = pokemonSaveResponse.abilities();
+        for (AbilityInformationLink abilityInformationLink : abilities) {
+            String name = abilityInformationLink.ability().name();
+            PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name)
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
+            PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(savedPokemon, pokemonAbility);
+            pokemonAbilityMappingRepository.save(pokemonAbilityMapping);
         }
     }
 
