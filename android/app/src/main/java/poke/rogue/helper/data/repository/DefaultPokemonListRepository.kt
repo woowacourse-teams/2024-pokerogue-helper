@@ -8,7 +8,5 @@ class DefaultPokemonListRepository(
 ) : PokemonListRepository {
     override suspend fun pokemons(): List<Pokemon> = pokemonListDataSource.pokemons()
 
-    override fun pokemons(query: String): List<Pokemon> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun pokemons(query: String): List<Pokemon> = pokemonListDataSource.pokemons(query)
 }

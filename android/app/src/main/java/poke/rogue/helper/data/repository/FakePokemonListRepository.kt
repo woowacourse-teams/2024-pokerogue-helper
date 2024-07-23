@@ -8,5 +8,5 @@ class FakePokemonListRepository(
 ) : PokemonListRepository {
     override suspend fun pokemons(): List<Pokemon> = pokemonListDataSource.pokemons()
 
-    override fun pokemons(query: String): List<Pokemon> = pokemonListDataSource.pokemons(query)
+    override suspend fun pokemons(query: String): List<Pokemon> = pokemonListDataSource.pokemons(query)
 }

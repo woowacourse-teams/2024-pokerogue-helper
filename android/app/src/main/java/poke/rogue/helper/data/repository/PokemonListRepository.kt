@@ -5,5 +5,5 @@ import poke.rogue.helper.data.model.Pokemon
 interface PokemonListRepository {
     suspend fun pokemons(): List<Pokemon>
 
-    fun pokemons(query: String): List<Pokemon>
+    suspend fun pokemons(query: String): List<Pokemon>
 }
