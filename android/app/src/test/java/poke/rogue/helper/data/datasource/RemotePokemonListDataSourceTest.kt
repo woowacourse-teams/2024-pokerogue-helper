@@ -15,7 +15,7 @@ class RemotePokemonListDataSourceTest {
     private val dataSource = RemotePokemonListDataSource(mockService)
 
     @Test
-    fun `포켓몬 목록을 불러온다`() =
+    fun `모든 포켓몬 목록을 불러온다`() =
         runTest {
             // given
             val mockPokemonResponses = pokemonResponses(1, 2, 3, 4, 5)
@@ -23,11 +23,11 @@ class RemotePokemonListDataSourceTest {
             coEvery { mockService.pokemons() } returns mockResponse
 
             // when
-            val expectedPokemonDatas = dataSource.pokemons()
+            val actualPokemonDatas = dataSource.pokemons()
 
             // then
-            val actualPokemonDatas = pokemons(1, 2, 3, 4, 5)
-            expectedPokemonDatas shouldBe actualPokemonDatas
+            val expectedPokemonDatas = pokemons(1, 2, 3, 4, 5)
+            actualPokemonDatas shouldBe expectedPokemonDatas
         }
 
     @Test
@@ -40,10 +40,10 @@ class RemotePokemonListDataSourceTest {
             coEvery { mockService.pokemons() } returns mockResponse
 
             // when
-            val expectedPokemonDatas = dataSource.pokemons(query)
+            val actualPokemonDatas = dataSource.pokemons(query)
 
             // then
-            val actionPokemonDatas = pokemons(1, 10)
-            expectedPokemonDatas shouldBe actionPokemonDatas
+            val expectedPokemonDatas = pokemons(1, 10)
+            actualPokemonDatas shouldBe expectedPokemonDatas
         }
 }
