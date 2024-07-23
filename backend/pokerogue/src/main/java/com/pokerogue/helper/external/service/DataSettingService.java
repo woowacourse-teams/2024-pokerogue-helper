@@ -34,6 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class DataSettingService {
 
+    private static final int PACKET_SIZE = 500;
+
     private final PokemonRepository pokemonRepository;
     private final PokemonAbilityRepository pokemonAbilityRepository;
     private final PokemonTypeRepository pokemonTypeRepository;
@@ -115,8 +117,8 @@ public class DataSettingService {
 
     private void savePokemons() {
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
-        for (int offset = 0; offset < pokemonCountResponse.count(); offset += 500) {
-            InformationLinks pokemonInformationLinks = pokeClient.getPokemonResponses(offset, 500);
+        for (int offset = 0; offset < pokemonCountResponse.count(); offset += PACKET_SIZE) {
+            InformationLinks pokemonInformationLinks = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
             for (InformationLink informationLink : pokemonInformationLinks.results()) {
                 PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(extractIdFromUrl(
                         informationLink));
