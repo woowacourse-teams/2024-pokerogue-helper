@@ -49,7 +49,7 @@ public class DataSettingService {
         dataReset();
         savePokemonTypes();
         savePokemonAbilities();
-        savePokemons();
+        saveAllPokemons();
     }
 
     private void dataReset() {
@@ -115,15 +115,19 @@ public class DataSettingService {
                 .toList();
     }
 
-    private void savePokemons() {
+    private void saveAllPokemons() {
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += PACKET_SIZE) {
-            InformationLinks pokemonInformationLinks = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
-            for (InformationLink informationLink : pokemonInformationLinks.results()) {
-                PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(extractIdFromUrl(
-                        informationLink));
-                savePokemon(pokemonSaveResponse);
-            }
+            savePokemons(offset);
+        }
+    }
+
+    private void savePokemons(int offset) {
+        InformationLinks pokemonInformationLinks = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
+        for (InformationLink informationLink : pokemonInformationLinks.results()) {
+            PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(extractIdFromUrl(
+                    informationLink));
+            savePokemon(pokemonSaveResponse);
         }
     }
 
