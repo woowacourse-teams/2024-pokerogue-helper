@@ -1,8 +1,8 @@
 package com.pokerogue.external.dto.pokemon;
 
-import com.pokerogue.external.dto.InformationLink;
+import com.pokerogue.external.dto.DataUrl;
 
-public record StatDetail(int base_stat, InformationLink stat) {
+public record StatDetail(int base_stat, DataUrl stat) {
 
     public String getStatName() {
         return stat.name();

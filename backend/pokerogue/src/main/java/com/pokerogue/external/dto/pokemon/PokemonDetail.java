@@ -1,13 +1,13 @@
 package com.pokerogue.external.dto.pokemon;
 
-import com.pokerogue.external.dto.InformationLink;
+import com.pokerogue.external.dto.DataUrl;
 import java.util.List;
 
 public record PokemonDetail(
         String name,
         int weight,
         int height,
-        InformationLink species,
+        DataUrl species,
         int hp,
         int attack,
         int defense,

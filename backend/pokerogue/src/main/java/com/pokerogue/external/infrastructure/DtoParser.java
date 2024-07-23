@@ -1,6 +1,6 @@
 package com.pokerogue.external.infrastructure;
 
-import com.pokerogue.external.dto.InformationLink;
+import com.pokerogue.external.dto.DataUrl;
 import com.pokerogue.external.dto.Name;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.external.dto.ability.AbilityResponse;
@@ -58,7 +58,7 @@ public class DtoParser {
     public PokemonDetail getPokemonDetails(PokemonSaveResponse pokemonSaveResponse) {
         int height = pokemonSaveResponse.height();
         int weight = pokemonSaveResponse.weight();
-        InformationLink species = pokemonSaveResponse.species();
+        DataUrl species = pokemonSaveResponse.species();
         List<StatDetail> statDetails = pokemonSaveResponse.stats();
         Map<String, Integer> stat = getStat(statDetails);
 
