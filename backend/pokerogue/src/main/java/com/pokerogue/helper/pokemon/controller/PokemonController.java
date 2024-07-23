@@ -1,9 +1,9 @@
 package com.pokerogue.helper.pokemon.controller;
 
+import com.pokerogue.external.pokemon.service.DataSettingService;
 import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.service.PokemonService;
-import com.pokerogue.external.pokemon.service.DataSettingService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class PokemonController {
     }
 
     @PostMapping("/api/v1/setting")
-    public ApiResponse<Void> savePokemons() {
+    public ApiResponse<Void> savePokemonData() {
         dataSettingService.setData();
 
         return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);

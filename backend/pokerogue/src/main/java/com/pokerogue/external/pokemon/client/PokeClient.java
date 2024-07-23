@@ -105,4 +105,12 @@ public class PokeClient {
                 .retrieve()
                 .body(TypeMatchingResponse.class);
     }
+
+    public byte[] getImage(String id) {
+        return restClient.get()
+                .uri("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png", id)
+                .accept(MediaType.IMAGE_PNG)
+                .retrieve()
+                .body(byte[].class);
+    }
 }
