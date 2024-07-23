@@ -13,7 +13,7 @@ import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonNameAndDexNumbe
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.external.pokemon.dto.type.TypeMatchingResponse;
 import com.pokerogue.external.pokemon.dto.type.TypeResponse;
-import com.pokerogue.external.pokemon.infrastructure.DtoParser;
+import com.pokerogue.external.pokemon.parser.DtoParser;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
