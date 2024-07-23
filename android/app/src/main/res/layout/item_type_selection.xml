@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,6 +14,10 @@
             type="poke.rogue.helper.presentation.type.model.SelectorType" />
 
         <variable
+            name="isDisabled"
+            type="Boolean" />
+
+        <variable
             name="typeHandler"
             type="poke.rogue.helper.presentation.type.TypeHandler" />
 
@@ -21,17 +26,50 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="@{!isDisabled}"
         android:onClick="@{() -> typeHandler.selectType(selector, typeItem)}">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.92" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.92" />
 
         <ImageView
             android:id="@+id/iv_type_choice_icon"
+            backgroundTintRes="@{typeItem.typeColor}"
             imageRes="@{typeItem.typeIconResId}"
             android:layout_width="56dp"
             android:layout_height="56dp"
+            android:background="@drawable/bg_type_selection_item"
             app:layout_constraintBottom_toTopOf="@id/tv_type_choice_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="@id/gl_top"
+            tools:backgroundTint="@color/poke_fairy"
+            tools:src="@drawable/icon_type_fairy" />
 
         <TextView
             android:id="@+id/tv_type_choice_name"
@@ -41,10 +79,21 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="@{typeItem.typeName}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
             app:layout_constraintEnd_toEndOf="@id/iv_type_choice_icon"
             app:layout_constraintStart_toStartOf="@id/iv_type_choice_icon"
-            app:layout_constraintTop_toBottomOf="@id/iv_type_choice_icon" />
+            app:layout_constraintTop_toBottomOf="@id/iv_type_choice_icon"
+            tools:text="페어리" />
+
+        <View
+            visible="@{isDisabled}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/poke_grey_80_inactive"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
