@@ -43,6 +43,7 @@ public class DataSettingService {
     private static final double HALF_DAMAGE = 0.5;
     private static final double NO_DAMAGE = 0.0;
     private static final double BASIC_DAMAGE = 1.0;
+    private static final int NO_USE_TYPE_COUNT = 2;
 
     private final PokemonRepository pokemonRepository;
     private final PokemonAbilityRepository pokemonAbilityRepository;
@@ -56,6 +57,7 @@ public class DataSettingService {
     @Transactional
     public void setData() {
         deleteAll();
+
         savePokemonTypes();
         savePokemonAbilities();
         saveAllPokemons();
@@ -74,6 +76,7 @@ public class DataSettingService {
         DataUrls typeDataUrls = getTypeDataUrls();
         List<TypeResponse> typeResponses = getTypeResponses(typeDataUrls);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
+
         pokemonTypeRepository.saveAll(pokemonTypes);
         saveAllPokemonTypeMatching(typeDataUrls);
     }
@@ -81,7 +84,7 @@ public class DataSettingService {
     private DataUrls getTypeDataUrls() {
         CountResponse typeCountResponse = pokeClient.getTypeResponsesCount();
 
-        return pokeClient.getTypeResponses(typeCountResponse.count() - 2);
+        return pokeClient.getTypeResponses(typeCountResponse.count() - NO_USE_TYPE_COUNT);
     }
 
     private List<TypeResponse> getTypeResponses(DataUrls dataUrls) {
@@ -107,6 +110,7 @@ public class DataSettingService {
 
     private void savePokemonTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName) {
         List<String> allTypeNames = getAllTypeNames();
+
         saveDoubleDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
         saveHalfDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
         saveNoDamageTypeMatching(typeMatchingResponse, fromKoName, allTypeNames);
@@ -114,14 +118,9 @@ public class DataSettingService {
     }
 
     private List<String> getAllTypeNames() {
-        List<String> typeNames = pokemonTypeRepository.findAll().stream()
+        return pokemonTypeRepository.findAll().stream()
                 .map(PokemonType::getKoName)
                 .collect(Collectors.toList());
-        typeNames.remove("스텔라");
-        typeNames.remove("???");
-        typeNames.remove("다크");
-
-        return typeNames;
     }
 
     private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromKoName, List<String> allTypeNames) {
@@ -162,6 +161,7 @@ public class DataSettingService {
         DataUrls abilityDataUrls = getAbilityDataUrls();
         List<AbilityResponse> abilityResponses = getAbilityResponses(abilityDataUrls);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
+
         pokemonAbilityRepository.saveAll(pokemonAbilities);
     }
 
@@ -193,8 +193,8 @@ public class DataSettingService {
     private void savePokemons(int offset) {
         DataUrls pokemonDataUrls = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
         for (DataUrl dataUrl : pokemonDataUrls.results()) {
-            PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(extractIdFromUrl(
-                    dataUrl));
+            PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(extractIdFromUrl(dataUrl));
+
             savePokemon(pokemonSaveResponse);
         }
     }
@@ -208,6 +208,7 @@ public class DataSettingService {
                 pokemonNameAndDexNumber.koName(), pokemonDetail.weight(), pokemonDetail.height(), pokemonDetail.hp(),
                 pokemonDetail.speed(), pokemonDetail.attack(), pokemonDetail.defense(), pokemonDetail.specialAttack(),
                 pokemonDetail.specialDefense(), pokemonDetail.totalStats(), "null");
+
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
         savePokemonTypeMapping(pokemonSaveResponse, savedPokemon);
         savePokemonAbilityMapping(pokemonSaveResponse, savedPokemon);
@@ -228,6 +229,7 @@ public class DataSettingService {
             PokemonType pokemonType = pokemonTypeRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(savedPokemon, pokemonType);
+
             pokemonTypeMappingRepository.save(pokemonTypeMapping);
         }
     }
@@ -239,6 +241,7 @@ public class DataSettingService {
             PokemonAbility pokemonAbility = pokemonAbilityRepository.findByName(name)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
             PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(savedPokemon, pokemonAbility);
+
             pokemonAbilityMappingRepository.save(pokemonAbilityMapping);
         }
     }
