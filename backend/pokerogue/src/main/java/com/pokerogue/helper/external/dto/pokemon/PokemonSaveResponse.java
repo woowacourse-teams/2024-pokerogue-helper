@@ -4,6 +4,7 @@ import com.pokerogue.helper.external.dto.InformationLink;
 import java.util.List;
 
 // https://pokeapi.co/api/v2/pokemon/{id}
+// 해당 id의 포켓몬을 받아오는 Dto
 public record PokemonSaveResponse(
         int height,
         int weight,
