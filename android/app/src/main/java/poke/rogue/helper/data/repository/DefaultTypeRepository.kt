@@ -2,7 +2,7 @@ package poke.rogue.helper.data.repository
 
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
 import poke.rogue.helper.data.model.MatchedTypes
-import poke.rogue.helper.data.model.TypeInfo
+import poke.rogue.helper.data.model.Type
 
 class DefaultTypeRepository(private val localTypeDataSource: LocalTypeDataSource) : TypeRepository {
     override fun matchedTypesAgainstMyType(myTypeId: Int): List<MatchedTypes> {
@@ -23,7 +23,7 @@ class DefaultTypeRepository(private val localTypeDataSource: LocalTypeDataSource
         )
     }
 
-    override fun allTypes(): List<TypeInfo> {
+    override fun allTypes(): List<Type> {
         return localTypeDataSource.allTypes()
     }
 }

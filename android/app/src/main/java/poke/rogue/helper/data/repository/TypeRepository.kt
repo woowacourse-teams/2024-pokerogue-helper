@@ -1,7 +1,7 @@
 package poke.rogue.helper.data.repository
 
 import poke.rogue.helper.data.model.MatchedTypes
-import poke.rogue.helper.data.model.TypeInfo
+import poke.rogue.helper.data.model.Type
 
 interface TypeRepository {
     fun matchedTypesAgainstMyType(myTypeId: Int): List<MatchedTypes>
@@ -13,5 +13,5 @@ interface TypeRepository {
         opponentTypeIds: List<Int>,
     ): List<MatchedTypes>
 
-    fun allTypes(): List<TypeInfo>
+    fun allTypes(): List<Type>
 }

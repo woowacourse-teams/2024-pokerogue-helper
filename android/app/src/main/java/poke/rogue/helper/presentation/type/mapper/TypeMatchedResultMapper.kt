@@ -5,7 +5,7 @@ import poke.rogue.helper.data.model.MatchedResult
 import poke.rogue.helper.data.model.MatchedTypes
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
-import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
+import poke.rogue.helper.presentation.type.model.toUi
 
 fun MatchedResult.displayName(): String {
     return when (this) {
@@ -35,7 +35,7 @@ fun MatchedTypes.toUiModel(
         isMyType = isMyType,
         matchedResult = this.matchedResult.displayName(),
         matchedResultColorResId = this.matchedResult.displayColor(),
-        matchedItem = this.types.map { it.toUiModel() },
+        matchedItem = this.types.map { it.toUi() },
     )
 }
 

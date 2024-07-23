@@ -19,7 +19,7 @@ import poke.rogue.helper.presentation.type.mapper.sortedAndMappedToUiModel
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
-import poke.rogue.helper.presentation.type.model.TypeUiModel.Companion.toUiModel
+import poke.rogue.helper.presentation.type.model.toUi
 
 class TypeViewModel(
     private val typeRepository: TypeRepository,
@@ -31,7 +31,7 @@ class TypeViewModel(
     val typeEvent: SharedFlow<TypeEvent> = _typeEvent.asSharedFlow()
 
     val allTypes: List<TypeUiModel> by lazy {
-        typeRepository.allTypes().map { it.toUiModel() }
+        typeRepository.allTypes().map { it.toUi() }
     }
 
     val type: StateFlow<List<MatchedTypesUiModel>> =

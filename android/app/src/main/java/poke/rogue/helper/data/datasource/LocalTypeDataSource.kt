@@ -1,7 +1,7 @@
 package poke.rogue.helper.data.datasource
 
 import poke.rogue.helper.data.model.MatchedTypes
-import poke.rogue.helper.data.model.TypeInfo
+import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.local.DummyTypeData
 
 class LocalTypeDataSource(private val typeData: DummyTypeData = DummyTypeData) {
@@ -39,5 +39,5 @@ class LocalTypeDataSource(private val typeData: DummyTypeData = DummyTypeData) {
         return results
     }
 
-    fun allTypes(): List<TypeInfo> = typeData.allTypes
+    fun allTypes(): List<Type> = typeData.allTypes
 }
