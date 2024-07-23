@@ -1,7 +1,7 @@
 package com.pokerogue.helper.external.client;
 
 import com.pokerogue.helper.external.dto.CountResponse;
-import com.pokerogue.helper.external.dto.ListResponse;
+import com.pokerogue.helper.external.dto.InformationLinks;
 import com.pokerogue.helper.external.dto.ability.AbilityResponse;
 import com.pokerogue.helper.external.dto.pokemon.PokemonSaveResponse;
 import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
@@ -25,12 +25,12 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getAbilityResponses(int limit) {
+    public InformationLinks getAbilityResponses(int limit) {
         return restClient.get()
                 .uri("/ability/?offset=0&limit={limit}", limit)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(ListResponse.class);
+                .body(InformationLinks.class);
     }
 
     public AbilityResponse getAbilityResponse(String id) {
@@ -49,12 +49,12 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getTypeResponses(int limit) {
+    public InformationLinks getTypeResponses(int limit) {
         return restClient.get()
                 .uri("/type/?offset=0&limit={limit}", limit)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(ListResponse.class);
+                .body(InformationLinks.class);
     }
 
     public TypeResponse getTypeResponse(String id) {
@@ -73,12 +73,12 @@ public class PokeClient {
                 .body(CountResponse.class);
     }
 
-    public ListResponse getPokemonResponses(int offset, int limit) {
+    public InformationLinks getPokemonResponses(int offset, int limit) {
         return restClient.get()
                 .uri("/pokemon/?offset={offset}&limit={limit}", offset, limit)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(ListResponse.class);
+                .body(InformationLinks.class);
     }
 
     public PokemonSaveResponse getPokemonSaveResponse(String id) {

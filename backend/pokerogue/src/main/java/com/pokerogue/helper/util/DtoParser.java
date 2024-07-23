@@ -2,7 +2,7 @@ package com.pokerogue.helper.util;
 
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.external.dto.Name;
-import com.pokerogue.helper.external.dto.NameAndUrl;
+import com.pokerogue.helper.external.dto.InformationLink;
 import com.pokerogue.helper.external.dto.ability.AbilityResponse;
 import com.pokerogue.helper.external.dto.ability.FlavorTextEntry;
 import com.pokerogue.helper.external.dto.pokemon.PokemonDetail;
@@ -60,7 +60,7 @@ public class DtoParser {
     public PokemonDetail getPokemonDetails(PokemonSaveResponse pokemonSaveResponse) {
         int height = pokemonSaveResponse.height();
         int weight = pokemonSaveResponse.weight();
-        NameAndUrl species = pokemonSaveResponse.species();
+        InformationLink species = pokemonSaveResponse.species();
         List<StatDetail> statDetails = pokemonSaveResponse.stats();
         Map<String, Integer> stat = getStat(statDetails);
 
