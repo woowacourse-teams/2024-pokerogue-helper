@@ -35,11 +35,4 @@ public class PokemonController {
 
         return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
     }
-
-    @PostMapping("/api/v1/setting/test")
-    public ApiResponse<Void> savePokemonst() {
-        dataSettingService.savePokemonTypes();
-
-        return new ApiResponse<>("테스트 성공했습니다.", null);
-    }
 }

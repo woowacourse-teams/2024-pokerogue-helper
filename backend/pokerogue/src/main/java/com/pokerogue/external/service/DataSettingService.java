@@ -100,9 +100,7 @@ public class DataSettingService {
                 .toList();
     }
 
-    public void savePokemonTypes() {
-        pokemonTypeMappingRepository.deleteAllInBatch();
-        pokemonTypeRepository.deleteAllInBatch();
+    private void savePokemonTypes() {
         InformationLinks typeInformationLinks = getTypeInformationLinks();
         List<TypeResponse> typeResponses = getTypeResponses(typeInformationLinks);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
