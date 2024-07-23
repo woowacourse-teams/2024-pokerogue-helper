@@ -1,9 +1,12 @@
 package poke.rogue.helper.remote.dto.response.type
 
 import io.kotest.matchers.shouldBe
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import poke.rogue.helper.data.model.Type
+import poke.rogue.helper.pokemonTypeResponse
+import poke.rogue.helper.pokemonTypeResponses
 
 class PokemonTypeResponseTest {
     @ParameterizedTest
@@ -18,13 +21,18 @@ class PokemonTypeResponseTest {
         dataTypeName: String,
     ) {
         // given
-        val typeResponse =
-            PokemonTypeResponse(
-                pokemonTypeName = responseTypeName,
-                pokemonTypeLogo = "logo",
-            )
+        val typeResponse = pokemonTypeResponse(responseTypeName)
 
         // then
         typeResponse.toData() shouldBe Type.valueOf(dataTypeName)
+    }
+
+    @Test
+    fun `포켓몬 타입 응답 목록을 데이터로 매핑한다`() {
+        // given
+        val typeResponses = pokemonTypeResponses("fire", "water")
+
+        // then
+        typeResponses.toData() shouldBe listOf(Type.FIRE, Type.WATER)
     }
 }

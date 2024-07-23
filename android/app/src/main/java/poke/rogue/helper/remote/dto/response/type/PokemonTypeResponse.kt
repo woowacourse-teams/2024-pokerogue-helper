@@ -11,3 +11,5 @@ data class PokemonTypeResponse(
 )
 
 fun PokemonTypeResponse.toData(): Type = Type.valueOf(pokemonTypeName.uppercase(Locale.ROOT))
+
+fun List<PokemonTypeResponse>.toData(): List<Type> = map(PokemonTypeResponse::toData)
