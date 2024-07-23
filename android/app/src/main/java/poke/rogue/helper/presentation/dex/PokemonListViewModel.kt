@@ -21,7 +21,7 @@ import poke.rogue.helper.presentation.dex.model.toUi
 
 class PokemonListViewModel(
     private val pokemonListRepository: PokemonListRepository,
-) : ViewModel(), PokeMonItemClickListener, PokemonQueryHandler {
+) : ViewModel(), PokemonDetailNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class)
@@ -40,7 +40,7 @@ class PokemonListViewModel(
     private val _navigateToDetailEvent = MutableSharedFlow<Long>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
-    override fun onClickPokemon(pokemonId: Long) {
+    override fun navigateToPokemonDetail(pokemonId: Long) {
         viewModelScope.launch {
             _navigateToDetailEvent.emit(pokemonId)
         }
