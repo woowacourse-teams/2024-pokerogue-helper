@@ -22,11 +22,12 @@ class PokemonListFragment :
     private val viewModel by viewModels<PokemonListViewModel> {
         PokemonListViewModel.factory(
             pokemonListRepository =
-            DefaultPokemonListRepository(
-                pokemonListDataSource = RemotePokemonListDataSource(
-                    pokeDexService = ServiceModule.pokeDexService(),
+                DefaultPokemonListRepository(
+                    pokemonListDataSource =
+                        RemotePokemonListDataSource(
+                            pokeDexService = ServiceModule.pokeDexService(),
+                        ),
                 ),
-            ),
         )
     }
 
