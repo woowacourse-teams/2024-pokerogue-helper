@@ -20,7 +20,7 @@ class FakePokemonListDataSource {
 
         private fun pokemonImageUrl(pokemonId: Long) = FORMAT_POKEMON_IMAGE_URL + pokemonId + POSTFIX_PNG
 
-        private val POKEMONS: List<Pokemon> =
+        val POKEMONS: List<Pokemon> =
             listOf(
                 Pokemon(
                     id = 1,
