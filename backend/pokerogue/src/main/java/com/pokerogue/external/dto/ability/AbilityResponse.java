@@ -1,6 +1,6 @@
-package com.pokerogue.helper.external.dto.ability;
+package com.pokerogue.external.dto.ability;
 
-import com.pokerogue.helper.external.dto.Name;
+import com.pokerogue.external.dto.Name;
 import java.util.List;
 
 // https://pokeapi.co/api/v2/ability/{id}

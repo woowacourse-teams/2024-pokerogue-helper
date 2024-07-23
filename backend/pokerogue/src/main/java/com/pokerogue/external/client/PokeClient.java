@@ -1,11 +1,12 @@
-package com.pokerogue.helper.external.client;
+package com.pokerogue.external.client;
 
-import com.pokerogue.helper.external.dto.CountResponse;
-import com.pokerogue.helper.external.dto.InformationLinks;
-import com.pokerogue.helper.external.dto.ability.AbilityResponse;
-import com.pokerogue.helper.external.dto.pokemon.PokemonSaveResponse;
-import com.pokerogue.helper.external.dto.pokemon.species.PokemonSpeciesResponse;
-import com.pokerogue.helper.external.dto.type.TypeResponse;
+import com.pokerogue.external.dto.CountResponse;
+import com.pokerogue.external.dto.InformationLinks;
+import com.pokerogue.external.dto.ability.AbilityResponse;
+import com.pokerogue.external.dto.pokemon.PokemonSaveResponse;
+import com.pokerogue.external.dto.pokemon.species.PokemonSpeciesResponse;
+import com.pokerogue.external.dto.type.TypeMatchingResponse;
+import com.pokerogue.external.dto.type.TypeResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 
@@ -95,5 +96,13 @@ public class PokeClient {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(PokemonSpeciesResponse.class);
+    }
+
+    public TypeMatchingResponse getTypeMatchingResponse(String id) {
+        return restClient.get()
+                .uri("/type/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(TypeMatchingResponse.class);
     }
 }

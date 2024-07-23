@@ -1,6 +1,6 @@
-package com.pokerogue.helper.external.dto.pokemon.species;
+package com.pokerogue.external.dto.pokemon.species;
 
-import com.pokerogue.helper.external.dto.Name;
+import com.pokerogue.external.dto.Name;
 import java.util.List;
 
 // https://pokeapi.co/api/v2/pokemon-species/{id}

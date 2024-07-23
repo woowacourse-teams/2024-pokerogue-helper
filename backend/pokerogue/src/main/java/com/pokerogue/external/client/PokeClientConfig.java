@@ -1,4 +1,4 @@
-package com.pokerogue.helper.external.client;
+package com.pokerogue.external.client;
 
 import java.time.Duration;
 import org.springframework.boot.web.client.ClientHttpRequestFactories;
