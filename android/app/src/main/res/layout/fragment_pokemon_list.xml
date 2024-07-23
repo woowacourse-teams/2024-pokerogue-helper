@@ -3,10 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="poke.rogue.helper.presentation.dex.PokemonListViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.dex.PokemonListFragment">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar_pokemon_list"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/rounded_searchbar_background"
+            android:hint="@string/dex_list_search_pokemon_hint"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onQueryTextChange="@{viewModel}"
+            app:queryHint="@string/dex_list_search_pokemon_hint" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_list"
@@ -14,9 +36,9 @@
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:spanCount="3"
-            tools:listitem="@layout/item_pokemon_list_pokemon" />
+            app:layout_constraintTop_toBottomOf="@id/search_bar_pokemon_list"
+            tools:listitem="@layout/item_pokemon_list_pokemon"
+            tools:spanCount="3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

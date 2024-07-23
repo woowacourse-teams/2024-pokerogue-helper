@@ -4,4 +4,6 @@ import poke.rogue.helper.data.model.Pokemon
 
 interface PokemonListRepository {
     fun pokemons(): List<Pokemon>
+
+    fun pokemons(query: String): List<Pokemon>
 }

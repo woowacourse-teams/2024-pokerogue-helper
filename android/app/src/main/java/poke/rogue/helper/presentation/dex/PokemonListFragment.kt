@@ -33,6 +33,10 @@ class PokemonListFragment :
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         initAdapter()
         initObservers()
     }
@@ -53,11 +57,19 @@ class PokemonListFragment :
     }
 
     private fun initObservers() {
+        observeDisplayedPokemons()
+        observeNavigateToDetail()
+    }
+
+    private fun observeDisplayedPokemons() {
         repeatOnStarted {
             viewModel.uiState.collect { pokemonUiModels ->
                 pokemonAdapter.submitList(pokemonUiModels)
             }
         }
+    }
+
+    private fun observeNavigateToDetail() {
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
