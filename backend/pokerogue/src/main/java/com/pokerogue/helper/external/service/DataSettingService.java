@@ -42,10 +42,23 @@ public class DataSettingService {
     private final DtoParser dtoParser;
     private final PokeClient pokeClient;
 
-    public void savePokemonAbilities() {
-        pokemonAbilityMappingRepository.deleteAllInBatch();
-        pokemonAbilityRepository.deleteAllInBatch();
+    @Transactional
+    public void dataSetting() {
+        dataReset();
+        savePokemonTypes();
+        savePokemonAbilities();
+        savePokemons();
+    }
 
+    private void dataReset() {
+        pokemonTypeMappingRepository.deleteAllInBatch();
+        pokemonAbilityMappingRepository.deleteAllInBatch();
+        pokemonTypeRepository.deleteAllInBatch();
+        pokemonAbilityRepository.deleteAllInBatch();
+        pokemonRepository.deleteAllInBatch();
+    }
+
+    private void savePokemonAbilities() {
         InformationLinks abilityInformationLinks = getAbilityInformationLinks();
         List<AbilityResponse> abilityResponses = getAbilityResponses(abilityInformationLinks);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
@@ -75,10 +88,7 @@ public class DataSettingService {
                 .toList();
     }
 
-    public void savePokemonTypes() {
-        pokemonTypeMappingRepository.deleteAllInBatch();
-        pokemonTypeRepository.deleteAllInBatch();
-
+    private void savePokemonTypes() {
         InformationLinks typeInformationLinks = getTypeInformationLinks();
         List<TypeResponse> typeResponses = getTypeResponses(typeInformationLinks);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
@@ -103,12 +113,7 @@ public class DataSettingService {
                 .toList();
     }
 
-    @Transactional
-    public void savePokemons() {
-        pokemonAbilityMappingRepository.deleteAllInBatch();
-        pokemonTypeMappingRepository.deleteAllInBatch();
-        pokemonRepository.deleteAllInBatch();
-
+    private void savePokemons() {
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += 500) {
             InformationLinks pokemonInformationLinks = pokeClient.getPokemonResponses(offset, 500);
