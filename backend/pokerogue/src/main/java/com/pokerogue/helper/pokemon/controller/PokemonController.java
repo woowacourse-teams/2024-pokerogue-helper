@@ -3,7 +3,7 @@ package com.pokerogue.helper.pokemon.controller;
 import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.service.PokemonService;
-import com.pokerogue.external.service.DataSettingService;
+import com.pokerogue.external.pokemon.service.DataSettingService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
