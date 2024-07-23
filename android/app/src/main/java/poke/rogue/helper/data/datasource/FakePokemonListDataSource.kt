@@ -6,7 +6,7 @@ import poke.rogue.helper.data.model.Type
 class FakePokemonListDataSource {
     fun pokemons(): List<Pokemon> = POKEMONS
 
-    fun searchedPokemons(query: String): List<Pokemon> =
+    fun pokemons(query: String): List<Pokemon> =
         POKEMONS.filter { pokemon ->
             pokemon.name.contains(query, ignoreCase = true)
         }
