@@ -14,6 +14,7 @@ import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse
 import com.pokerogue.external.pokemon.dto.type.TypeMatchingResponse;
 import com.pokerogue.external.pokemon.dto.type.TypeResponse;
 import com.pokerogue.external.pokemon.parser.DtoParser;
+import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 @Service
 @AllArgsConstructor
@@ -53,6 +55,7 @@ public class DataSettingService {
     private final PokemonTypeMatchingRepository pokemonTypeMatchingRepository;
     private final DtoParser dtoParser;
     private final PokeClient pokeClient;
+    private final S3Service s3Service;
 
     @Transactional
     public void setData() {
@@ -203,21 +206,27 @@ public class DataSettingService {
     private void savePokemonsByOffset(int offset) {
         DataUrls pokemonDataUrls = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
         for (DataUrl dataUrl : pokemonDataUrls.results()) {
-            PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(extractIdFromUrl(dataUrl));
+            String id = extractIdFromUrl(dataUrl);
+            PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(id);
 
-            savePokemon(pokemonSaveResponse);
+            savePokemon(pokemonSaveResponse, id);
         }
     }
 
-    private void savePokemon(PokemonSaveResponse pokemonSaveResponse) {
+    private void savePokemon(PokemonSaveResponse pokemonSaveResponse, String id) {
         PokemonDetail pokemonDetail = dtoParser.getPokemonDetails(pokemonSaveResponse);
         DataUrl species = pokemonDetail.species();
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(getPokemonSpeciesResponse(species));
-
+        String image;
+        try {
+            image = s3Service.postImageToS3(pokeClient.getImage(id));
+        } catch (HttpClientErrorException e) {
+            image = "이미지가 없습니다ㅠㅠ";
+        }
         Pokemon pokemon = new Pokemon(pokemonNameAndDexNumber.pokedexNumber(), pokemonDetail.name(),
                 pokemonNameAndDexNumber.koName(), pokemonDetail.weight(), pokemonDetail.height(), pokemonDetail.hp(),
                 pokemonDetail.speed(), pokemonDetail.attack(), pokemonDetail.defense(), pokemonDetail.specialAttack(),
-                pokemonDetail.specialDefense(), pokemonDetail.totalStats(), "null");
+                pokemonDetail.specialDefense(), pokemonDetail.totalStats(), image);
 
         Pokemon savedPokemon = pokemonRepository.save(pokemon);
         savePokemonTypeMapping(pokemonSaveResponse, savedPokemon);
