@@ -12,6 +12,7 @@ import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse
 import com.pokerogue.external.pokemon.dto.type.TypeResponse;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.type.domain.PokemonType;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,13 +33,12 @@ public class DtoParser {
     }
 
     private static String getLatestVersionDescription(List<FlavorTextEntry> flavorTextEntries) {
-        for (int i = flavorTextEntries.size() - 1; i > -1; i--) {
-            if (flavorTextEntries.get(i).language().isKorean()) {
-                return flavorTextEntries.get(i).flavor_text();
-            }
-        }
-
-        return NOT_EXIST_KOREAN_NAME;
+        return flavorTextEntries.stream()
+                .sorted(Comparator.comparingInt(flavorTextEntries::indexOf).reversed())
+                .filter(entry -> entry.language().isKorean())
+                .map(FlavorTextEntry::flavor_text)
+                .findFirst()
+                .orElse(NOT_EXIST_KOREAN_NAME);
     }
 
     public PokemonType getPokemonType(TypeResponse typeResponse) {
