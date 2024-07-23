@@ -76,9 +76,7 @@ public class DtoParser {
 
     private Map<String, Integer> getStat(List<StatDetail> statDetails) {
         Map<String, Integer> stats = statDetails.stream()
-                .collect(Collectors.toMap(
-                        StatDetail::getStatName,
-                        StatDetail::base_stat));
+                .collect(Collectors.toMap(StatDetail::getStatName, StatDetail::base_stat));
 
         int totalStats = stats.values().stream()
                         .mapToInt(Integer::intValue)
