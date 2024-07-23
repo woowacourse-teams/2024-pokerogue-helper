@@ -17,4 +17,8 @@ class FakePokemonListRepository(
         flow {
             emit(pokemonListDataSource.pokemons(query))
         }
+
+    override fun pokemons2(): List<Pokemon> = pokemonListDataSource.pokemons()
+
+    override fun pokemons(query: String): List<Pokemon> = pokemonListDataSource.pokemons(query)
 }
