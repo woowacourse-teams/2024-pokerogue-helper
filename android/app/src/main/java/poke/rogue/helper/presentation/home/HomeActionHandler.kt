@@ -1,13 +1,13 @@
 package poke.rogue.helper.presentation.home
 
 interface HomeActionHandler {
-    fun onClickType()
+    fun navigateToType()
 
-    fun onClickDex()
+    fun navigateToDex()
 
-    fun onClickAbility()
+    fun navigateToAbility()
 
-    fun onClickTip()
+    fun navigateToTip()
 
-    fun onClickLogo()
+    fun navigateToPokeRogue()
 }

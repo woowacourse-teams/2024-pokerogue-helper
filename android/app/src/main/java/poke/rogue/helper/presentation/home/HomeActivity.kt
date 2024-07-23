@@ -57,27 +57,27 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
 
     private fun initObservers() {
         repeatOnStarted {
-            viewModel.navigateHandler.collect { state ->
+            viewModel.navigationEvent.collect { state ->
                 when (state) {
-                    is HomeNavigateState.ToType ->
+                    is HomeNavigateEvent.ToType ->
                         TypeActivity.intent(this)
                             .also { startActivity(it) }
 
-                    is HomeNavigateState.ToDex ->
+                    is HomeNavigateEvent.ToDex ->
                         PokemonActivity.intent(this)
                             .also { startActivity(it) }
 
-                    is HomeNavigateState.ToAbility ->
+                    is HomeNavigateEvent.ToAbility ->
                         AbilityActivity.intent(this)
                             .also { startActivity(it) }
 
-                    is HomeNavigateState.ToTip ->
+                    is HomeNavigateEvent.ToTip ->
                         Intent(
                             Intent.ACTION_VIEW,
                             Uri.parse(stringOf(R.string.home_pokerogue_tip_url)),
                         ).also { startActivity(it) }
 
-                    is HomeNavigateState.ToLogo -> navigateToPokeRogue()
+                    is HomeNavigateEvent.ToLogo -> navigateToPokeRogue()
                 }
             }
         }

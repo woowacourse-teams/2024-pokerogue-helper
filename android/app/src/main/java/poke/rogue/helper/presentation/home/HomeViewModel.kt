@@ -8,36 +8,36 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel(), HomeActionHandler {
-    private val _navigateHandler = MutableSharedFlow<HomeNavigateState>()
-    val navigateHandler: SharedFlow<HomeNavigateState> = _navigateHandler.asSharedFlow()
+    private val _navigationEvent = MutableSharedFlow<HomeNavigateEvent>()
+    val navigationEvent: SharedFlow<HomeNavigateEvent> = _navigationEvent.asSharedFlow()
 
-    override fun onClickType() {
+    override fun navigateToType() {
         viewModelScope.launch {
-            _navigateHandler.emit(HomeNavigateState.ToType)
+            _navigationEvent.emit(HomeNavigateEvent.ToType)
         }
     }
 
-    override fun onClickDex() {
+    override fun navigateToDex() {
         viewModelScope.launch {
-            _navigateHandler.emit(HomeNavigateState.ToDex)
+            _navigationEvent.emit(HomeNavigateEvent.ToDex)
         }
     }
 
-    override fun onClickAbility() {
+    override fun navigateToAbility() {
         viewModelScope.launch {
-            _navigateHandler.emit(HomeNavigateState.ToAbility)
+            _navigationEvent.emit(HomeNavigateEvent.ToAbility)
         }
     }
 
-    override fun onClickTip() {
+    override fun navigateToTip() {
         viewModelScope.launch {
-            _navigateHandler.emit(HomeNavigateState.ToTip)
+            _navigationEvent.emit(HomeNavigateEvent.ToTip)
         }
     }
 
-    override fun onClickLogo() {
+    override fun navigateToPokeRogue() {
         viewModelScope.launch {
-            _navigateHandler.emit(HomeNavigateState.ToLogo)
+            _navigationEvent.emit(HomeNavigateEvent.ToLogo)
         }
     }
 }
