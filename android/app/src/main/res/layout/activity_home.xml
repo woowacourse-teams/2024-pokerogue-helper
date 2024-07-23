@@ -12,8 +12,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black">
+        android:layout_height="match_parent">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -31,12 +30,11 @@
                     android:id="@+id/toolbar_home"
                     layout="@layout/toolbar" />
 
-                <ImageButton
-                    android:id="@+id/ibtn_home_logo"
-                    android:layout_width="232dp"
-                    android:layout_height="108dp"
-                    android:layout_marginTop="75dp"
-                    android:background="@color/black"
+                <ImageView
+                    android:id="@+id/iv_home_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="?attr/actionBarSize"
                     android:onClick="@{() -> actionHandler.onClickLogo()}"
                     android:src="@drawable/img_home_logo"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -228,13 +226,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layout_constraintGuide_begin="200dp" />
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/gl_bottom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="500dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
