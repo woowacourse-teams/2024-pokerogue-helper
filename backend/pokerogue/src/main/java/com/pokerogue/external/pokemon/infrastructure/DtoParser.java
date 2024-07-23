@@ -41,14 +41,6 @@ public class DtoParser {
         return NOT_EXIST_KOREAN_NAME;
     }
 
-    private static String getKoName(List<Name> names) {
-        return names.stream()
-                .filter(Name::isKorean)
-                .map(Name::name)
-                .findFirst()
-                .orElse(NOT_EXIST_KOREAN_NAME);
-    }
-
     public PokemonType getPokemonType(TypeResponse typeResponse) {
         String koName = getKoName(typeResponse.names());
 
@@ -90,5 +82,13 @@ public class DtoParser {
         String koName = getKoName(pokemonSpeciesResponse.names());
 
         return new PokemonNameAndDexNumber(pokemonSpeciesResponse.id(), koName);
+    }
+
+    private static String getKoName(List<Name> names) {
+        return names.stream()
+                .filter(Name::isKorean)
+                .map(Name::name)
+                .findFirst()
+                .orElse(NOT_EXIST_KOREAN_NAME);
     }
 }
