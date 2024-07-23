@@ -9,7 +9,9 @@ import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
+import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,13 +37,16 @@ public class PokemonAbilityService {
 
         List<SameAbilityPokemonResponse> pokemonResponses = ability.getPokemonAbilityMappings().stream()
                 .map(PokemonAbilityMapping::getPokemon)
-                .map(SameAbilityPokemonResponse::from)
+                .map(pokemon -> SameAbilityPokemonResponse.from(pokemon, toPokemonTypeResponse(pokemon)))
                 .toList();
 
-        return new PokemonAbilityWithPokemonsResponse(
-                ability.getName(),
-                ability.getDescription(),
-                pokemonResponses
-        );
+        return new PokemonAbilityWithPokemonsResponse(ability.getName(), ability.getDescription(), pokemonResponses);
+    }
+
+    private List<PokemonTypeResponse> toPokemonTypeResponse(Pokemon pokemon) {
+        return pokemon.getPokemonTypeMappings().stream()
+                .map(PokemonTypeMapping::getPokemonType)
+                .map(PokemonTypeResponse::from)
+                .toList();
     }
 }
