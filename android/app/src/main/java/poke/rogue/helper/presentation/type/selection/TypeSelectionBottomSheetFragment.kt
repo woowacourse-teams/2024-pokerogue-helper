@@ -10,6 +10,7 @@ import poke.rogue.helper.databinding.FragmentTypeSelectionBottomSheetBinding
 import poke.rogue.helper.presentation.type.TypeEvent
 import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.presentation.type.model.SelectorType
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.fragment.withArgs
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.serializable
@@ -20,15 +21,21 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentTypeSelectionBottomSheetBinding? = null
     private val binding get() = requireNotNull(_binding)
     private val selectorType: SelectorType by lazy {
-        arguments?.serializable<SelectorType>(KEY_SELECTION_TYPE)
+        arguments?.serializable<SelectorType>(KEY_SELECTOR_TYPE)
             ?: error("InValid TypeSelector")
     }
+    private val disabledTypes: Set<TypeUiModel> by lazy {
+        arguments?.serializable<Array<TypeUiModel>>(KEY_DISABLED_TYPES)?.toSet()
+            ?: error("Invalid DisabledTypes")
+    }
+
     private val sharedViewModel by activityViewModels<TypeViewModel>()
 
     private val adapter by lazy {
         TypeSelectionAdapter(
             sharedViewModel.allTypes,
             selectorType,
+            disabledTypes,
             sharedViewModel,
         )
     }
@@ -74,11 +81,16 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "type_selection_bottom_sheet_fragment"
-        private const val KEY_SELECTION_TYPE = "selection_type"
+        private const val KEY_SELECTOR_TYPE = "selection_type"
+        private const val KEY_DISABLED_TYPES = "disabled_type"
 
-        fun newInstance(selectorType: SelectorType): TypeSelectionBottomSheetFragment {
+        fun newInstance(
+            selectorType: SelectorType,
+            disabledTypes: Set<TypeUiModel>,
+        ): TypeSelectionBottomSheetFragment {
             return TypeSelectionBottomSheetFragment().withArgs {
-                putSerializable(KEY_SELECTION_TYPE, selectorType)
+                putSerializable(KEY_SELECTOR_TYPE, selectorType)
+                putSerializable(KEY_DISABLED_TYPES, disabledTypes.toTypedArray())
             }
         }
     }

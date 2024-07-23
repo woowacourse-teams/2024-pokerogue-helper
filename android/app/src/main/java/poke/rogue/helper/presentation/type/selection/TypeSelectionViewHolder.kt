@@ -10,12 +10,14 @@ class TypeSelectionViewHolder(
     private val binding: ItemTypeSelectionBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
-        selector: SelectorType,
         typeItem: TypeUiModel,
+        selector: SelectorType,
+        disabledTypeSet: Set<TypeUiModel>,
         typeHandler: TypeHandler,
     ) {
         binding.typeItem = typeItem
         binding.selector = selector
+        binding.isDisabled = typeItem in disabledTypeSet
         binding.typeHandler = typeHandler
     }
 }

@@ -96,7 +96,12 @@ class TypeViewModel(
 
     override fun startSelection(selectorType: SelectorType) {
         viewModelScope.launch {
-            _typeEvent.emit(TypeEvent.ShowSelection(selectorType))
+            _typeEvent.emit(
+                TypeEvent.ShowSelection(
+                    selectorType,
+                    typeStates.value.disabledTypeItemSet(selectorType),
+                ),
+            )
         }
     }
 

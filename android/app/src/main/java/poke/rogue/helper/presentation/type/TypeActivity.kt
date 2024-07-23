@@ -11,6 +11,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.type.model.SelectorType
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.result.TypeResultAdapter
 import poke.rogue.helper.presentation.type.selection.TypeSelectionBottomSheetFragment
 import poke.rogue.helper.presentation.util.context.drawableOf
@@ -75,7 +76,7 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
         repeatOnStarted {
             viewModel.typeEvent.collect {
                 if (it is TypeEvent.ShowSelection) {
-                    showBottomSheet(it.selectorType)
+                    showBottomSheet(it.selectorType, it.disabledTypes)
                 }
             }
         }
@@ -103,8 +104,11 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
         }
     }
 
-    private fun showBottomSheet(selectorType: SelectorType) {
-        TypeSelectionBottomSheetFragment.newInstance(selectorType).show(
+    private fun showBottomSheet(
+        selectorType: SelectorType,
+        disabledTypes: Set<TypeUiModel>,
+    ) {
+        TypeSelectionBottomSheetFragment.newInstance(selectorType, disabledTypes).show(
             supportFragmentManager,
             TypeSelectionBottomSheetFragment.TAG,
         )
