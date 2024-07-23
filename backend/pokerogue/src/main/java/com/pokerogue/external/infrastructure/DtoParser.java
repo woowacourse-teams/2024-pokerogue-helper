@@ -26,21 +26,19 @@ public class DtoParser {
         String koName = getKoName(abilityResponse.names());
 
         List<FlavorTextEntry> flavorTextEntries = abilityResponse.flavor_text_entries();
-        String description = NOT_EXIST_KOREAN_NAME;
-        description = getLatestVersionDescription(flavorTextEntries, description);
+        String description = getLatestVersionDescription(flavorTextEntries);
 
         return new PokemonAbility(abilityResponse.name(), koName, description, "자세한 설명입니다.");
     }
 
-    private static String getLatestVersionDescription(List<FlavorTextEntry> flavorTextEntries, String description) {
+    private static String getLatestVersionDescription(List<FlavorTextEntry> flavorTextEntries) {
         for (int i = flavorTextEntries.size() - 1; i > -1; i--) {
-            if (flavorTextEntries.get(i).language().name().equals("ko")) {
-                description = flavorTextEntries.get(i).flavor_text();
-                break;
+            if (flavorTextEntries.get(i).language().isKorean()) {
+                return flavorTextEntries.get(i).flavor_text();
             }
         }
 
-        return description;
+        return NOT_EXIST_KOREAN_NAME;
     }
 
     private static String getKoName(List<Name> names) {
