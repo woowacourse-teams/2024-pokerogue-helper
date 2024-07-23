@@ -1,7 +1,8 @@
-package com.pokerogue.helper.util;
+package com.pokerogue.helper.external.service;
 
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
+import com.pokerogue.helper.external.infrastructure.DtoParser;
 import com.pokerogue.helper.external.client.PokeClient;
 import com.pokerogue.helper.external.dto.CountResponse;
 import com.pokerogue.helper.external.dto.InformationLinks;
