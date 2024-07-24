@@ -15,7 +15,7 @@ import poke.rogue.helper.data.datasource.LocalTypeDataSource
 import poke.rogue.helper.data.repository.DefaultTypeRepository
 import poke.rogue.helper.data.repository.TypeRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
-import poke.rogue.helper.presentation.type.mapper.sortedAndMappedToUiModel
+import poke.rogue.helper.presentation.type.mapper.sortedAndMappedToUi
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
@@ -68,7 +68,7 @@ class TypeViewModel(
         if (opponent is TypeSelectionUiState.Selected) {
             val selectedTypeId = opponent.selectedType.id
             return typeRepository.matchedTypesAgainstOpponent(selectedTypeId)
-                .sortedAndMappedToUiModel(selectedTypeId = selectedTypeId, isMyType = false)
+                .sortedAndMappedToUi(selectedTypeId = selectedTypeId, isMyType = false)
         }
         return emptyList()
     }
@@ -76,7 +76,7 @@ class TypeViewModel(
     private fun matchedTypesAgainstMySelection(mine: TypeSelectionUiState.Selected): List<MatchedTypesUiModel> {
         val selectedTypeId = mine.selectedType.id
         return typeRepository.matchedTypesAgainstMyType(selectedTypeId)
-            .sortedAndMappedToUiModel(selectedTypeId = selectedTypeId, isMyType = true)
+            .sortedAndMappedToUi(selectedTypeId = selectedTypeId, isMyType = true)
     }
 
     private fun matchedTypes(
@@ -91,7 +91,7 @@ class TypeViewModel(
                 .map { it.selectedType.id }
 
         return typeRepository.matchedTypes(mySelectedId, opponentIds)
-            .sortedAndMappedToUiModel(selectedTypeId = mySelectedId, isMyType = true)
+            .sortedAndMappedToUi(selectedTypeId = mySelectedId, isMyType = true)
     }
 
     override fun startSelection(selectorType: SelectorType) {

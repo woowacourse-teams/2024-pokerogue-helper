@@ -15,7 +15,7 @@ import poke.rogue.helper.data.model.MatchedResult
 import poke.rogue.helper.data.model.MatchedTypes
 import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.TypeRepository
-import poke.rogue.helper.presentation.type.mapper.sortedAndMappedToUiModel
+import poke.rogue.helper.presentation.type.mapper.sortedAndMappedToUi
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.utils.CoroutinesTestExtension
@@ -70,7 +70,7 @@ class TypeViewModelTest {
             // then
             launch {
                 viewModel.type.collect { actual ->
-                    val expected = FakeMatchedResults.sortedAndMappedToUiModel(Type.FAIRY.id, isMyType = true)
+                    val expected = FakeMatchedResults.sortedAndMappedToUi(Type.FAIRY.id, isMyType = true)
                     actual shouldBe expected
                     cancel()
                 }
@@ -90,7 +90,7 @@ class TypeViewModelTest {
             // then
             launch {
                 viewModel.type.collect { actual ->
-                    val expected = FakeMatchedResults.sortedAndMappedToUiModel(Type.FAIRY.id, isMyType = false)
+                    val expected = FakeMatchedResults.sortedAndMappedToUi(Type.FAIRY.id, isMyType = false)
                     actual shouldBe expected
                     cancel()
                 }
@@ -113,7 +113,7 @@ class TypeViewModelTest {
             launch {
                 viewModel.type.collect { actual ->
                     val expected =
-                        FakeMatchedResults.sortedAndMappedToUiModel(Type.FAIRY.id, isMyType = true)
+                        FakeMatchedResults.sortedAndMappedToUi(Type.FAIRY.id, isMyType = true)
                     actual shouldBe expected
                     cancel()
                 }

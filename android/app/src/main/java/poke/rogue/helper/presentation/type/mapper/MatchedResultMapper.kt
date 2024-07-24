@@ -31,7 +31,7 @@ enum class MatchedResultUiModel(
     }
 }
 
-fun MatchedTypes.toUiModel(
+fun MatchedTypes.toUi(
     typeId: Int,
     isMyType: Boolean,
 ): MatchedTypesUiModel {
@@ -46,10 +46,10 @@ fun MatchedTypes.toUiModel(
     )
 }
 
-fun List<MatchedTypes>.sortedAndMappedToUiModel(
+fun List<MatchedTypes>.sortedAndMappedToUi(
     selectedTypeId: Int,
     isMyType: Boolean,
 ): List<MatchedTypesUiModel> {
     return this.sortedBy { it.matchedResult }
-        .map { it.toUiModel(selectedTypeId, isMyType) }
+        .map { it.toUi(selectedTypeId, isMyType) }
 }
