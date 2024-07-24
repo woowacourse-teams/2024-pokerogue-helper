@@ -34,5 +34,5 @@ jobs:
           mysql password: ${{ secrets.TEST_DB_PASSWORD }}
 
       - name: Run Test
-        run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
+        run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test -i
         working-directory: ./backend/pokerogue
