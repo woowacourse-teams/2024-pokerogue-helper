@@ -8,7 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles(value = "local-mysql")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AcceptanceTest {
+public abstract class AcceptanceTest {
 
     @LocalServerPort
     private int port;
