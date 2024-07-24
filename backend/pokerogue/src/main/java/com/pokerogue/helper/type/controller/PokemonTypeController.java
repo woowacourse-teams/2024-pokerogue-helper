@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class PokemonTypeController{
+public class PokemonTypeController {
 
     private final PokemonTypeService pokemonTypeService;
 
