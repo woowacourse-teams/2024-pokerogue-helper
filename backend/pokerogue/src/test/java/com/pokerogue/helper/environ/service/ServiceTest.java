@@ -1,15 +1,9 @@
-package com.pokerogue.helper;
+package com.pokerogue.helper.environ.service;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
 @ActiveProfiles(value = "local-mysql")
-class PokerogueApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+public abstract class ServiceTest {
 }

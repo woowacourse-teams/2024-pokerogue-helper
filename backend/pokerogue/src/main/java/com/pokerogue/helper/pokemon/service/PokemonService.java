@@ -11,6 +11,7 @@ import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class PokemonService {
         return PokemonResponse.of(pokemon, pokemonTypeResponses);
     }
 
+    @Transactional(readOnly = true)
     public PokedexResponse findPokedexDetails(Long id) {
         Pokemon pokemon = pokemonRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
