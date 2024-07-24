@@ -30,7 +30,6 @@ public class PokemonService {
 
     private PokemonResponse toPokemonResponse(Pokemon pokemon) {
         List<PokemonTypeMapping> pokemonTypeMappings = pokemon.getPokemonTypeMappings();
-
         List<PokemonTypeResponse> pokemonTypeResponses = pokemonTypeMappings.stream()
                 .map(PokemonTypeMapping::getPokemonType)
                 .map(PokemonTypeResponse::from)
@@ -47,14 +46,11 @@ public class PokemonService {
     }
 
     private PokedexResponse toPokedexResponse(Pokemon pokemon) {
-        List<PokemonTypeMapping> pokemonTypeMappings = pokemon.getPokemonTypeMappings();
-        List<PokemonAbilityMapping> pokemonAbilityMappings = pokemon.getPokemonAbilityMappings();
-
-        List<PokemonTypeResponse> pokemonTypeResponses = pokemonTypeMappings.stream()
+        List<PokemonTypeResponse> pokemonTypeResponses = pokemon.getPokemonTypeMappings().stream()
                 .map(PokemonTypeMapping::getPokemonType)
                 .map(PokemonTypeResponse::from)
                 .toList();
-        List<String> pokemonAbilityNames = pokemonAbilityMappings.stream()
+        List<String> pokemonAbilityNames = pokemon.getPokemonAbilityMappings().stream()
                 .map(PokemonAbilityMapping::getPokemonAbilityName)
                 .toList();
 
