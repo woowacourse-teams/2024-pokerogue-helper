@@ -6,23 +6,29 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityAbilityBinding
+import poke.rogue.helper.presentation.ability.detail.AbilityDetailActivity
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
+import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activity_ability) {
-    private val adapter: AbilityAdapter by lazy { AbilityAdapter() }
+    private val viewModel by viewModels<AbilityViewModel>()
+
+    private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initViews()
         initAdapter()
+        initObservers()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -74,9 +80,15 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
         )
     }
 
-    companion object {
-        const val EXTRA_BACK_FROM_CURATION = "backFromCuration"
+    private fun initObservers() {
+        repeatOnStarted {
+            viewModel.navigationToDetailEvent.collect {
+                AbilityDetailActivity.intent(this, it).also { startActivity(it) }
+            }
+        }
+    }
 
+    companion object {
         fun intent(context: Context): Intent {
             return Intent(context, AbilityActivity::class.java)
         }
