@@ -5,10 +5,10 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
-import poke.rogue.helper.pokemonResponses
-import poke.rogue.helper.pokemons
 import poke.rogue.helper.remote.dto.response.BaseResponse
 import poke.rogue.helper.remote.service.PokeDexService
+import poke.rogue.helper.utils.fixture.pokemonResponses
+import poke.rogue.helper.utils.fixture.pokemons
 
 class RemotePokemonListDataSourceTest {
     private val mockService = mockk<PokeDexService>()
