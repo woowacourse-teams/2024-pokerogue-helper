@@ -27,7 +27,7 @@ public class DtoParser {
         String koName = getKoName(abilityResponse.names());
 
         List<FlavorTextEntry> flavorTextEntries = abilityResponse.flavor_text_entries();
-        String description = getLatestVersionDescription(flavorTextEntries);
+        String description = getLatestVersionDescription(flavorTextEntries).replace("\n", " ");
 
         return new PokemonAbility(abilityResponse.name(), koName, description, "자세한 설명입니다.");
     }
