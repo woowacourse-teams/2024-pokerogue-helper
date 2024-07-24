@@ -82,7 +82,7 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
 
     private fun initObservers() {
         repeatOnStarted {
-            viewModel.navigationEvent.collect {
+            viewModel.navigationToDetailEvent.collect {
                 AbilityDetailActivity.intent(this, it).also { startActivity(it) }
             }
         }

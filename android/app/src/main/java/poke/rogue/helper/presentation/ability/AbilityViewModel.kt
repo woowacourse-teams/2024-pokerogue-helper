@@ -8,12 +8,12 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
 class AbilityViewModel : ViewModel(), AbilityUiEventHandler {
-    private val _navigationEvent = MutableSharedFlow<Long>()
-    val navigationEvent: SharedFlow<Long> = _navigationEvent.asSharedFlow()
+    private val _navigationToDetailEvent = MutableSharedFlow<Long>()
+    val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
 
     override fun navigateToDetail(abilityId: Long) {
         viewModelScope.launch {
-            _navigationEvent.emit(abilityId)
+            _navigationToDetailEvent.emit(abilityId)
         }
     }
 }
