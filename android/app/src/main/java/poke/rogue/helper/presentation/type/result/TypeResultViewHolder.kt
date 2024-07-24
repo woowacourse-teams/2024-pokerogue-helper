@@ -48,7 +48,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         typeMatchedResult: MatchedTypesUiModel,
         context: Context,
     ) {
-        val matchedResultText = typeMatchedResult.matchedResult
+        val matchedResultText = context.stringOf(typeMatchedResult.matchedResultDescriptionResId)
         val matchedResultTextTail = context.stringOf(R.string.type_item_result_tail)
         val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultColorResId)
 

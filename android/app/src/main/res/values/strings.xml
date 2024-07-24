@@ -8,6 +8,10 @@
     <string name="type_item_result_subject_mine">%s이(가)</string>
     <string name="type_item_result_subject_opponent">%s에게</string>
     <string name="type_item_result_tail">&#160;타입</string>
+    <string name="type_result_strong">강한</string>
+    <string name="type_result_weak">약한</string>
+    <string name="type_result_ineffective">무효한</string>
+    <string name="type_result_normal">대등한</string>
     <!-- home -->
     <string name="toolbar_pokerogue">포켓로그 바로가기</string>
     <string name="toolbar_feedback">피드백 보내기</string>

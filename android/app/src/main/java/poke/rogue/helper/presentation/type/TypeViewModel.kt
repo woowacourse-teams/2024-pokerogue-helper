@@ -35,7 +35,7 @@ class TypeViewModel(
     }
 
     val type: StateFlow<List<MatchedTypesUiModel>> =
-        _typeSelectionStates.map { states ->
+        typeSelectionStates.map { states ->
             when {
                 states.isMyTypeEmptyAndAnyOpponentSelected ->
                     matchedTypesAgainstOpponentSelections(
@@ -125,25 +125,21 @@ class TypeViewModel(
         selectorType: SelectorType,
         changedState: TypeSelectionUiState,
     ) {
-        viewModelScope.launch {
-            _typeSelectionStates.value =
-                when (selectorType) {
-                    SelectorType.MINE -> _typeSelectionStates.value.copy(myType = changedState)
-                    SelectorType.OPPONENT1 -> _typeSelectionStates.value.copy(opponentType1 = changedState)
-                    SelectorType.OPPONENT2 -> _typeSelectionStates.value.copy(opponentType2 = changedState)
-                }
-        }
+        _typeSelectionStates.value =
+            when (selectorType) {
+                SelectorType.MINE -> _typeSelectionStates.value.copy(myType = changedState)
+                SelectorType.OPPONENT1 -> _typeSelectionStates.value.copy(opponentType1 = changedState)
+                SelectorType.OPPONENT2 -> _typeSelectionStates.value.copy(opponentType2 = changedState)
+            }
     }
 
     override fun removeAllSelections() {
-        viewModelScope.launch {
-            _typeSelectionStates.value =
-                _typeSelectionStates.value.copy(
-                    TypeSelectionUiState.Empty,
-                    TypeSelectionUiState.Empty,
-                    TypeSelectionUiState.Empty,
-                )
-        }
+        _typeSelectionStates.value =
+            _typeSelectionStates.value.copy(
+                myType = TypeSelectionUiState.Empty,
+                opponentType1 = TypeSelectionUiState.Empty,
+                opponentType2 = TypeSelectionUiState.Empty,
+            )
     }
 
     companion object {
