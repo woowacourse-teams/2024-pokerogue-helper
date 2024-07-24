@@ -6,12 +6,12 @@ import java.util.List;
 
 public record PokedexResponse(
         Long pokedexNumber,
-        String name,
+        String koName,
         String pokemonImage,
         List<PokemonTypeResponse> pokemonTypeResponses,
         List<String> pokemonAbilityNames,
-        Integer weight,
-        Integer height,
+        Double weight,
+        Double height,
         Integer attack,
         Integer defense,
         Integer specialAttack,
@@ -25,7 +25,7 @@ public record PokedexResponse(
             List<PokemonTypeResponse> pokemonTypeResponses,
             List<String> pokemonAbilityNames
     ) {
-        return new PokedexResponse(pokemon.getPokedexNumber(), pokemon.getName(), pokemon.getImage(),
+        return new PokedexResponse(pokemon.getPokedexNumber(), pokemon.getKoName(), pokemon.getImage(),
                 pokemonTypeResponses, pokemonAbilityNames, pokemon.getWeight(), pokemon.getHeight(),
                 pokemon.getAttack(), pokemon.getDefense(), pokemon.getSpecialAttack(), pokemon.getSpecialDefense(),
                 pokemon.getHp(), pokemon.getTotalStats());
