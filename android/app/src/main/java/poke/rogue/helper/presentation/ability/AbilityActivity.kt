@@ -8,6 +8,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import poke.rogue.helper.R
+import poke.rogue.helper.data.datasource.RemoteAbilityDataSource
+import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.ActivityAbilityBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailActivity
 import poke.rogue.helper.presentation.base.BindingActivity
@@ -17,9 +19,18 @@ import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.remote.ServiceModule
 
 class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activity_ability) {
-    private val viewModel by viewModels<AbilityViewModel>()
+    private val viewModel by viewModels<AbilityViewModel> {
+        AbilityViewModel.factory(
+            DefaultAbilityRepository(
+                remoteAbilityDataSource = RemoteAbilityDataSource(
+                    abilityApi = ServiceModule.abilityService()
+                )
+            ),
+        )
+    }
 
     private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
 
