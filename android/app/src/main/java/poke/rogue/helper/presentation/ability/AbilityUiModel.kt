@@ -51,5 +51,5 @@ fun Ability.toUi(): AbilityUiModel =
     AbilityUiModel(
         id = id,
         title = name,
-        description = description
+        description = description,
     )

@@ -10,7 +10,8 @@ import kotlinx.coroutines.launch
 import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 
-class AbilityViewModel(private val abilityRepository: AbilityRepository) : ViewModel(),
+class AbilityViewModel(private val abilityRepository: AbilityRepository) :
+    ViewModel(),
     AbilityUiEventHandler {
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()
     val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()

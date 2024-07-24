@@ -25,9 +25,10 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
     private val viewModel by viewModels<AbilityViewModel> {
         AbilityViewModel.factory(
             DefaultAbilityRepository(
-                remoteAbilityDataSource = RemoteAbilityDataSource(
-                    abilityApi = ServiceModule.abilityService()
-                )
+                remoteAbilityDataSource =
+                    RemoteAbilityDataSource(
+                        abilityApi = ServiceModule.abilityService(),
+                    ),
             ),
         )
     }
