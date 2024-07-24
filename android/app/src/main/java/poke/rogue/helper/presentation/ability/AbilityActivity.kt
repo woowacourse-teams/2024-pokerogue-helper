@@ -78,17 +78,15 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
     }
 
     private fun initAdapter() {
-        initDummyAbility()
+        repeatOnStarted {
+            viewModel.abilities.collect { abilities ->
+                adapter.submitList(abilities)
+            }
+        }
         val decoration =
             GridSpacingItemDecoration(spanCount = 1, spacing = 23.dp, includeEdge = true)
         binding.rvAbilityDescription.adapter = adapter
         binding.rvAbilityDescription.addItemDecoration(decoration)
-    }
-
-    private fun initDummyAbility() {
-        adapter.submitList(
-            AbilityUiModel.dummys,
-        )
     }
 
     private fun initObservers() {
