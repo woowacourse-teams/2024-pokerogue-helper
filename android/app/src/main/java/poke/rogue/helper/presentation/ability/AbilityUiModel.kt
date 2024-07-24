@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.ability
 
+import poke.rogue.helper.data.model.Ability
+
 data class AbilityUiModel(
     val id: Long,
     val title: String,
@@ -44,3 +46,10 @@ data class AbilityUiModel(
             )
     }
 }
+
+fun Ability.toUi(): AbilityUiModel =
+    AbilityUiModel(
+        id = id,
+        title = name,
+        description = description
+    )

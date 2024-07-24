@@ -8,13 +8,5 @@ import poke.rogue.helper.data.model.Ability
 data class AbilityResponse(
     val id: Long = 0,
     val name: String,
-    @SerialName("shortDescription")
     val description: String,
-) {
-    fun toData(): Ability =
-        Ability(
-            id = id,
-            name = name,
-            description = description,
-        )
-}
+)
