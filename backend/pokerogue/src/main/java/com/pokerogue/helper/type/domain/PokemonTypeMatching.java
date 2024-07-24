@@ -12,26 +12,26 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@Table(name = "pokemon_type")
+@Table(name = "pokemon_type_matching")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PokemonType {
+public class PokemonTypeMatching {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true)
-    private String name;
+    @Column(name = "type_from", nullable = false)
+    private String typeFrom;
 
-    @Column(name = "ko_name", nullable = false)
-    private String koName;
+    @Column(name = "type_to", nullable = false)
+    private String typeTo;
 
-    @Column(name = "image", nullable = false)
-    private String image;
+    @Column(name = "result", nullable = false)
+    private Double result;
 
-    public PokemonType(String name, String koName, String image) {
-        this.name = name;
-        this.koName = koName;
-        this.image = image;
+    public PokemonTypeMatching(String typeFrom, String typeTo, Double result) {
+        this.typeFrom = typeFrom;
+        this.typeTo = typeTo;
+        this.result = result;
     }
 }

@@ -1,4 +1,4 @@
-package com.pokerogue.helper.external.s3.client;
+package com.pokerogue.external.s3.client;
 
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Value;

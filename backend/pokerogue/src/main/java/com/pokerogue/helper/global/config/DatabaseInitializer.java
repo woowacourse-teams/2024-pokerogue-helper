@@ -36,15 +36,15 @@ public class DatabaseInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         List<Pokemon> pokemons = pokemonRepository.saveAll(List.of(
-                new Pokemon(1L, "이상해씨", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
-                new Pokemon(4L, "파이리", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"),
-                new Pokemon(7L, "꼬부기", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"),
-                new Pokemon(25L, "피카츄", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"),
-                new Pokemon(133L, "이브이", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"),
-                new Pokemon(152L, "치코리타", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png"),
-                new Pokemon(393L, "펭도리", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/393.png"),
-                new Pokemon(702L, "데덴네", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/702.png"),
-                new Pokemon(54L, "고라파덕", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png")
+                new Pokemon(1L, "이상해씨", "이상해씨", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"),
+                new Pokemon(4L, "파이리", "파이리", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"),
+                new Pokemon(7L, "꼬부기", "꼬부기", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png"),
+                new Pokemon(25L, "피카츄", "피카츄", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"),
+                new Pokemon(133L, "이브이", "이브이", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png"),
+                new Pokemon(152L, "치코리타", "치코리타", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png"),
+                new Pokemon(393L, "펭도리", "펭도리", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/393.png"),
+                new Pokemon(702L, "데덴네", "데덴네", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/702.png"),
+                new Pokemon(54L, "고라파덕", "고라파덕", 69, 7, 45, 45, 55, 50, 60, 70, 500, "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png")
         ));
 
         List<PokemonType> pokemonTypes = pokemonTypeRepository.saveAll(List.of(
@@ -63,13 +63,11 @@ public class DatabaseInitializer implements ApplicationRunner {
                 new PokemonAbility("맹화", "맹화", "description", "detail description"),
                 new PokemonAbility("선파워", "선파워", "description", "detail description"),
                 new PokemonAbility("급류", "급류", "description", "detail description"),
-                new PokemonAbility("심록", "심록", "description", "detail description"),
                 new PokemonAbility("젖은접시", "젖은접시", "description", "detail description"),
                 new PokemonAbility("정전기", "정전기", "description", "detail description"),
                 new PokemonAbility("피뢰침", "피뢰침", "description", "detail description"),
                 new PokemonAbility("도주", "도주", "description", "detail description"),
                 new PokemonAbility("적응력", "적응력", "description", "detail description"),
-                new PokemonAbility("위험예지", "위험예지", "description", "detail description"),
                 new PokemonAbility("리프가드", "리프가드", "description", "detail description"),
                 new PokemonAbility("위험예지", "위험예지", "description", "detail description"),
                 new PokemonAbility("승기", "승기", "description", "detail description"),
@@ -103,7 +101,7 @@ public class DatabaseInitializer implements ApplicationRunner {
                 new PokemonAbilityMapping(pokemons.get(0), pokemonAbilities.get(16)),
                 new PokemonAbilityMapping(pokemons.get(1), pokemonAbilities.get(2)),
                 new PokemonAbilityMapping(pokemons.get(1), pokemonAbilities.get(17)),
-                new PokemonAbilityMapping(pokemons.get(2), pokemonAbilities.get(18)),
+                new PokemonAbilityMapping(pokemons.get(2), pokemonAbilities.get(17)),
                 new PokemonAbilityMapping(pokemons.get(2), pokemonAbilities.get(3)),
                 new PokemonAbilityMapping(pokemons.get(3), pokemonAbilities.get(4)),
                 new PokemonAbilityMapping(pokemons.get(3), pokemonAbilities.get(5)),
