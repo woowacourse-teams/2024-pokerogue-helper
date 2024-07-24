@@ -30,8 +30,8 @@ public class PokemonTypeService {
         List<PokemonMatchingResponse> matching = pokemonTypeMatchingRepository.findAll().stream()
                 .map(PokemonMatchingResponse::from)
                 .toList();
-        List<PokemonTypeResponse> images = findTypes();
+        List<PokemonTypeResponse> pokemonTypeResponses = findTypes();
 
-        return new PokemonMatchingAndTypeResponse(matching, images);
+        return new PokemonMatchingAndTypeResponse(matching, pokemonTypeResponses);
     }
 }
