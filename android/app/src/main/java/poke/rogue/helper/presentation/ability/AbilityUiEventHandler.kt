@@ -1,5 +1,5 @@
 package poke.rogue.helper.presentation.ability
 
-interface AbilityActionHandler {
+interface AbilityUiEventHandler {
     fun navigateToDetail(abilityId: Long)
 }

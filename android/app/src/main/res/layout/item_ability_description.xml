@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="actionHandler"
-            type="poke.rogue.helper.presentation.ability.AbilityActionHandler" />
+            name="uiEventHandler"
+            type="poke.rogue.helper.presentation.ability.AbilityUiEventHandler" />
 
         <variable
             name="ability"
@@ -21,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{()->actionHandler.navigateToDetail(ability.id)}"
+            android:onClick="@{()->uiEventHandler.navigateToDetail(ability.id)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_ability_end"
             app:layout_constraintStart_toStartOf="@+id/gl_ability_start"

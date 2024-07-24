@@ -5,11 +5,11 @@ import poke.rogue.helper.databinding.ItemAbilityDescriptionBinding
 
 class AbilityViewHolder(
     private val binding: ItemAbilityDescriptionBinding,
-    private val onClickAbilityItem: AbilityActionHandler,
+    private val onClickAbilityItem: AbilityUiEventHandler,
 ) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(abilityUiModel: AbilityUiModel) {
         binding.ability = abilityUiModel
-        binding.actionHandler = onClickAbilityItem
+        binding.uiEventHandler = onClickAbilityItem
     }
 }

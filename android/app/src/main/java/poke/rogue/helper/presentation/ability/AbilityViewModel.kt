@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 
-class AbilityViewModel : ViewModel(), AbilityActionHandler {
+class AbilityViewModel : ViewModel(), AbilityUiEventHandler {
     private val _navigationEvent = MutableSharedFlow<Long>()
     val navigationEvent: SharedFlow<Long> = _navigationEvent.asSharedFlow()
 
