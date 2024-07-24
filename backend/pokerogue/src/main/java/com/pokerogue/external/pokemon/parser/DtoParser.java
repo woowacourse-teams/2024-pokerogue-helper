@@ -41,15 +41,15 @@ public class DtoParser {
                 .orElse(NOT_EXIST_KOREAN_NAME);
     }
 
-    public PokemonType getPokemonType(TypeResponse typeResponse) {
+    public PokemonType getPokemonType(TypeResponse typeResponse, String typeImage) {
         String koName = getKoName(typeResponse.names());
 
-        return new PokemonType(typeResponse.name(), koName, "null");
+        return new PokemonType(typeResponse.name(), koName, typeImage);
     }
 
     public PokemonDetail getPokemonDetails(PokemonSaveResponse pokemonSaveResponse) {
-        int height = pokemonSaveResponse.height();
-        int weight = pokemonSaveResponse.weight();
+        double height = pokemonSaveResponse.height() * 1.0 / 10;
+        double weight = pokemonSaveResponse.weight() * 1.0 / 10;
         DataUrl species = pokemonSaveResponse.species();
         List<StatDetail> statDetails = pokemonSaveResponse.stats();
         Map<String, Integer> stat = getStat(statDetails);

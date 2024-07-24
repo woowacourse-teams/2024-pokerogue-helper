@@ -4,8 +4,8 @@ import com.pokerogue.external.pokemon.dto.DataUrl;
 
 public record PokemonDetail(
         String name,
-        int weight,
-        int height,
+        double weight,
+        double height,
         DataUrl species,
         int hp,
         int attack,
