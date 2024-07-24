@@ -6,11 +6,8 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
@@ -18,14 +15,6 @@ import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.stringOf
 
 class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : RecyclerView.ViewHolder(binding.root) {
-    private val flexboxLayoutManager: FlexboxLayoutManager by lazy {
-        FlexboxLayoutManager(binding.root.context).apply {
-            flexWrap = FlexWrap.WRAP
-            flexDirection = FlexDirection.ROW
-            justifyContent = JustifyContent.FLEX_START
-        }
-    }
-
     fun bind(typeMatchedResult: MatchedTypesUiModel) {
         val context = binding.root.context
 
@@ -33,7 +22,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         bindTypeStrengthText(typeMatchedResult, context)
 
         binding.typeResult = typeMatchedResult
-        binding.rvResultMatchedTypes.layoutManager = flexboxLayoutManager
+        binding.rvResultMatchedTypes.layoutManager = GridLayoutManager(context, 4)
         binding.rvResultMatchedTypes.adapter = TypeResultItemAdapter(typeMatchedResult.matchedItem)
     }
 
