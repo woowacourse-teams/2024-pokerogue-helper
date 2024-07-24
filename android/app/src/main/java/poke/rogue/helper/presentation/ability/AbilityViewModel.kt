@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.repository.AbilityRepository
+import poke.rogue.helper.presentation.ability.model.AbilityUiModel
+import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 
 class AbilityViewModel(private val abilityRepository: AbilityRepository) :

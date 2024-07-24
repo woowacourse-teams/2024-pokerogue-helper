@@ -8,7 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityAbilityDetailBinding
-import poke.rogue.helper.presentation.ability.AbilityUiModel
+import poke.rogue.helper.presentation.ability.model.AbilityUiModel
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.dex.PokemonUiModel
 import poke.rogue.helper.presentation.util.context.drawableOf
