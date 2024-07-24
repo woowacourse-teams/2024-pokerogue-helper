@@ -79,11 +79,6 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
     }
 
     private fun initAdapter() {
-        repeatOnStarted {
-            viewModel.abilities.collect { abilities ->
-                adapter.submitList(abilities)
-            }
-        }
         val decoration =
             GridSpacingItemDecoration(spanCount = 1, spacing = 23.dp, includeEdge = true)
         binding.rvAbilityDescription.adapter = adapter
@@ -91,6 +86,12 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
     }
 
     private fun initObservers() {
+        repeatOnStarted {
+            viewModel.abilities.collect { abilities ->
+                adapter.submitList(abilities)
+            }
+        }
+
         repeatOnStarted {
             viewModel.navigationToDetailEvent.collect {
                 AbilityDetailActivity.intent(this, it).also { startActivity(it) }
