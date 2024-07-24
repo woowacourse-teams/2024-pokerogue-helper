@@ -8,7 +8,7 @@ import retrofit2.http.Path
 
 interface AbilityService {
     @GET("api/v1/abilities")
-    fun abilities(): BaseResponse<List<AbilityResponse>>
+    suspend fun abilities(): BaseResponse<List<AbilityResponse>>
 
     @GET("api/v1/abilities/{id}")
     fun ability(
