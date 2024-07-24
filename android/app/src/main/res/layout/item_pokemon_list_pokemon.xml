@@ -22,11 +22,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_item_poketmon_poketmon"
-            imageUrl="@{pokemon.imageUrl}"
+            cropImageUrl="@{pokemon.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="10dp"
-            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@id/tv_item_poketmon_poketmon_name"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
