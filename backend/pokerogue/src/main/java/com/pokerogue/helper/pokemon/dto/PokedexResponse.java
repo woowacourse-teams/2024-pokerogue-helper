@@ -17,6 +17,7 @@ public record PokedexResponse(
         Integer specialAttack,
         Integer specialDefense,
         Integer hp,
+        Integer speed,
         Integer totalStats
 ) {
 
@@ -28,6 +29,6 @@ public record PokedexResponse(
         return new PokedexResponse(pokemon.getPokedexNumber(), pokemon.getKoName(), pokemon.getImage(),
                 pokemonTypeResponses, pokemonAbilityNames, pokemon.getWeight(), pokemon.getHeight(),
                 pokemon.getAttack(), pokemon.getDefense(), pokemon.getSpecialAttack(), pokemon.getSpecialDefense(),
-                pokemon.getHp(), pokemon.getTotalStats());
+                pokemon.getHp(), pokemon.getSpeed(), pokemon.getTotalStats());
     }
 }
