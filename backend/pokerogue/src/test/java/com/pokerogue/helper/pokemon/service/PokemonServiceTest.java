@@ -43,7 +43,8 @@ class PokemonServiceTest extends ServiceTest {
     @Test
     @DisplayName("존재하지 않는 포켓몬의 상세 정보를 조회하면 예외가 발생한다.")
     void findPokedexDetailsWhenNotExist() {
-        Long pokemonId = 100L;
+        long totalPokemonCount = pokemonService.findPokemons().size();
+        Long pokemonId = totalPokemonCount + 1;
 
         assertThatThrownBy(() -> pokemonService.findPokedexDetails(pokemonId))
                 .isInstanceOf(GlobalCustomException.class)
