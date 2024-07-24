@@ -98,7 +98,7 @@ public class DataSettingService {
 
     private List<PokemonType> getPokemonTypes(List<TypeResponse> typeResponses) {
         return typeResponses.stream()
-                .map(dtoParser::getPokemonType)
+                .map(typeResponse -> dtoParser.getPokemonType(typeResponse, s3Service.getTypeImageFromS3(typeResponse.name())))
                 .toList();
     }
 
