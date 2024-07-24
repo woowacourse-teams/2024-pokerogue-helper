@@ -1,5 +1,9 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
+import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
+import poke.rogue.helper.remote.dto.response.type.toData
+
 data class Pokemon(
     val id: Long,
     val dexNumber: Long,
@@ -23,3 +27,14 @@ data class Pokemon(
             )
     }
 }
+
+fun PokemonResponse.toData(): Pokemon =
+    Pokemon(
+        id = id,
+        dexNumber = pokedexNumber,
+        name = name,
+        imageUrl = image,
+        types = types.map(PokemonTypeResponse::toData),
+    )
+
+fun List<PokemonResponse>.toData(): List<Pokemon> = map(PokemonResponse::toData)
