@@ -53,7 +53,7 @@ public class PokemonService {
                 .map(PokemonTypeResponse::from)
                 .toList();
         List<String> pokemonAbilityNames = pokemon.getPokemonAbilityMappings().stream()
-                .map(PokemonAbilityMapping::getPokemonAbilityName)
+                .map(PokemonAbilityMapping::getPokemonAbilityKoName)
                 .toList();
 
         return PokedexResponse.of(pokemon, pokemonTypeResponses, pokemonAbilityNames);

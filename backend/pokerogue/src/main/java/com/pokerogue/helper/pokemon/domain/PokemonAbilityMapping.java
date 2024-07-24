@@ -35,7 +35,7 @@ public class PokemonAbilityMapping {
         this.pokemonAbility = pokemonAbility;
     }
 
-    public String getPokemonAbilityName() {
-        return pokemonAbility.getName();
+    public String getPokemonAbilityKoName() {
+        return pokemonAbility.getKoName();
     }
 }

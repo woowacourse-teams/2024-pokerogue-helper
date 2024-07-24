@@ -33,10 +33,10 @@ public class Pokemon {
     private String koName;
 
     @Column(name = "weight", nullable = false)
-    private Integer weight;
+    private Double weight;
 
     @Column(name = "height", nullable = false)
-    private Integer height;
+    private Double height;
 
     @Column(name = "hp", nullable = false)
     private Integer hp;
@@ -72,8 +72,8 @@ public class Pokemon {
             Long pokedexNumber,
             String name,
             String koName,
-            Integer weight,
-            Integer height,
+            Double weight,
+            Double height,
             Integer hp,
             Integer speed,
             Integer attack,
