@@ -6,20 +6,23 @@ import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 @Serializable
 data class PokemonDetailResponse(
-    val pokedexNumber: Long,
+    @SerialName("pokedexNumber")
+    val dexNumber: Long,
+    @SerialName("koName")
     val name: String,
-    val pokemonImage: String,
+    @SerialName("pokemonImage")
+    val imageUrl: String,
     @SerialName("pokemonTypeResponses")
     val types: List<PokemonTypeResponse>,
     @SerialName("pokemonAbilityNames")
     val abilityNames: List<String>,
-    val weight: Int,
-    val height: Int,
-    val baseTotal: Int,
-    val baseHp: Int,
-    val baseAttack: Int,
-    val baseDefense: Int,
-    val baseSpecialAttack: Int,
-    val baseSpecialDefense: Int,
-    val baseSpeed: Int,
+    val weight: Float,
+    val height: Float,
+    val totalStats: Int,
+    val hp: Int,
+    val attack: Int,
+    val defense: Int,
+    val specialAttack: Int,
+    val specialDefense: Int,
+    val speed: Int,
 )
