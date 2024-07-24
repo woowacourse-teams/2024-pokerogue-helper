@@ -2,7 +2,6 @@ package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
-import poke.rogue.helper.remote.dto.response.type.toData
 
 data class Pokemon(
     val id: Long,
