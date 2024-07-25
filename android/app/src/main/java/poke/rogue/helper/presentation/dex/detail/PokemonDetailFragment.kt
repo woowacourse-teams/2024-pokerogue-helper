@@ -16,6 +16,7 @@ import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.remote.ServiceModule
+import timber.log.Timber
 
 class PokemonDetailFragment :
     BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
@@ -96,7 +97,11 @@ class PokemonDetailFragment :
 
         pokemonTypeAdapter.submitList(pokemonDetail.pokemon.types)
         pokemonStatAdapter.submitList(pokemonDetail.stats)
-        abilityAdapter.submitList(pokemonDetail.abilities.map { AbilityTitleUiModel(1, it) })
+        abilityAdapter.submitList(
+            pokemonDetail.abilities.map { AbilityTitleUiModel(1, it) }.also {
+                Timber.d("pokemon Abilities: $it")
+            },
+        )
     }
 
     companion object {

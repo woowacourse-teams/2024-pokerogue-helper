@@ -10,11 +10,7 @@ class AbilityTitleViewHolder(
     private val onClickAbility: AbilityUiEventHandler,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(ability: AbilityTitleUiModel) {
-        with(binding) {
-            tvAbilityTitle.text = ability.name
-            tvAbilityTitle.setOnClickListener {
-                onClickAbility
-            }
-        }
+        binding.ability = ability
+        binding.onClickAbility = onClickAbility
     }
 }

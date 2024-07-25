@@ -56,7 +56,9 @@ class PokemonDetailViewModelTest {
                             id = 1,
                             dexNumber = 1,
                             name = "이상해씨",
-                            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                            imageUrl =
+                                "https://raw.githubusercontent.com" +
+                                    "/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
                             types =
                                 listOf(
                                     TypeUiModel.GRASS,
