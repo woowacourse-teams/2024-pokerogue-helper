@@ -59,7 +59,7 @@ fun Fragment.stringOf(
 fun Fragment.stringOf(
     @StringRes resId: Int,
     vararg formatArgs: Any?,
-) = getString(resId, formatArgs)
+) = getString(resId, *formatArgs)
 
 fun Fragment.colorOf(
     @ColorRes resId: Int,
