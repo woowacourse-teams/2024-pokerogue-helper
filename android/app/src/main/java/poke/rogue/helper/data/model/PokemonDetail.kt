@@ -1,12 +1,13 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonDetailResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 data class PokemonDetail(
     val pokemon: Pokemon,
     val stats: List<Stat>,
-    val abilities: List<String>,
+    val abilities: List<Ability>,
     val height: Float,
     val weight: Float,
 )
@@ -30,7 +31,7 @@ fun PokemonDetailResponse.toData(id: Long): PokemonDetail =
                 Stat("speed", speed),
                 Stat("total", totalStats),
             ),
-        abilities = abilityNames,
+        abilities = abilityNames.map(AbilityResponse::toData),
         height = height,
         weight = weight,
     )
