@@ -8,6 +8,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import poke.rogue.helper.R
+import poke.rogue.helper.data.datasource.RemoteAbilityDataSource
+import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.ActivityAbilityBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailActivity
 import poke.rogue.helper.presentation.base.BindingActivity
@@ -17,9 +19,19 @@ import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.remote.ServiceModule
 
 class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activity_ability) {
-    private val viewModel by viewModels<AbilityViewModel>()
+    private val viewModel by viewModels<AbilityViewModel> {
+        AbilityViewModel.factory(
+            DefaultAbilityRepository(
+                remoteAbilityDataSource =
+                    RemoteAbilityDataSource(
+                        abilityService = ServiceModule.abilityService(),
+                    ),
+            ),
+        )
+    }
 
     private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
 
@@ -67,20 +79,19 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
     }
 
     private fun initAdapter() {
-        initDummyAbility()
         val decoration =
             GridSpacingItemDecoration(spanCount = 1, spacing = 23.dp, includeEdge = true)
         binding.rvAbilityDescription.adapter = adapter
         binding.rvAbilityDescription.addItemDecoration(decoration)
     }
 
-    private fun initDummyAbility() {
-        adapter.submitList(
-            AbilityUiModel.dummys,
-        )
-    }
-
     private fun initObservers() {
+        repeatOnStarted {
+            viewModel.abilities.collect { abilities ->
+                adapter.submitList(abilities)
+            }
+        }
+
         repeatOnStarted {
             viewModel.navigationToDetailEvent.collect {
                 AbilityDetailActivity.intent(this, it).also { startActivity(it) }
