@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.ability
 
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemAbilityDescriptionBinding
+import poke.rogue.helper.presentation.ability.model.AbilityUiModel
 
 class AbilityViewHolder(
     private val binding: ItemAbilityDescriptionBinding,
