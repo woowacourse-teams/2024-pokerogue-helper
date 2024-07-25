@@ -33,7 +33,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <ImageView
                         android:id="@+id/iv_pokemon"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -44,7 +44,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/iv_pokemon_surface"
                         app:layout_constraintWidth_percent="0.66"
-                        tools:src="@color/poke_white" />
+                        tools:src="@tools:sample/avatars" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
@@ -78,7 +78,25 @@
                             tools:itemCount="2"
                             tools:listitem="@layout/item_type_right_name" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_pokemon_abilities"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/layout_stats"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_pokemon_surface"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_ability_title">
+
+
+                </androidx.recyclerview.widget.RecyclerView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_stats"
@@ -88,8 +106,9 @@
                     android:background="@drawable/shape_grey_80_fill_20_rect"
                     android:paddingBottom="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.473"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_pokemon_surface">
+                    app:layout_constraintTop_toBottomOf="@+id/rv_pokemon_abilities">
 
                     <TextView
                         android:id="@+id/tv_title_stats"
