@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.dto;
 
+import com.pokerogue.helper.ability.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
@@ -9,7 +10,7 @@ public record PokedexResponse(
         String koName,
         String pokemonImage,
         List<PokemonTypeResponse> pokemonTypeResponses,
-        List<String> pokemonAbilityNames,
+        List<PokemonAbilityResponse> pokemonAbilityResponses,
         Double weight,
         Double height,
         Integer attack,
@@ -24,11 +25,22 @@ public record PokedexResponse(
     public static PokedexResponse of(
             Pokemon pokemon,
             List<PokemonTypeResponse> pokemonTypeResponses,
-            List<String> pokemonAbilityNames
+            List<PokemonAbilityResponse> pokemonAbilityResponses
     ) {
-        return new PokedexResponse(pokemon.getPokedexNumber(), pokemon.getKoName(), pokemon.getImage(),
-                pokemonTypeResponses, pokemonAbilityNames, pokemon.getWeight(), pokemon.getHeight(),
-                pokemon.getAttack(), pokemon.getDefense(), pokemon.getSpecialAttack(), pokemon.getSpecialDefense(),
-                pokemon.getHp(), pokemon.getSpeed(), pokemon.getTotalStats());
+        return new PokedexResponse(
+                pokemon.getPokedexNumber(),
+                pokemon.getKoName(),
+                pokemon.getImage(),
+                pokemonTypeResponses,
+                pokemonAbilityResponses,
+                pokemon.getWeight(),
+                pokemon.getHeight(),
+                pokemon.getAttack(),
+                pokemon.getDefense(),
+                pokemon.getSpecialAttack(),
+                pokemon.getSpecialDefense(),
+                pokemon.getHp(),
+                pokemon.getSpeed(),
+                pokemon.getTotalStats());
     }
 }
