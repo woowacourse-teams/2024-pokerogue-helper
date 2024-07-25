@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.service;
 
+import com.pokerogue.helper.ability.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
@@ -9,11 +10,10 @@ import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -52,8 +52,9 @@ public class PokemonService {
                 .map(PokemonTypeMapping::getPokemonType)
                 .map(PokemonTypeResponse::from)
                 .toList();
-        List<String> pokemonAbilityNames = pokemon.getPokemonAbilityMappings().stream()
-                .map(PokemonAbilityMapping::getPokemonAbilityKoName)
+        List<PokemonAbilityResponse> pokemonAbilityNames = pokemon.getPokemonAbilityMappings().stream()
+                .map(PokemonAbilityMapping::getPokemonAbility)
+                .map(PokemonAbilityResponse::from)
                 .toList();
 
         return PokedexResponse.of(pokemon, pokemonTypeResponses, pokemonAbilityNames);

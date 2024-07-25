@@ -36,7 +36,7 @@ class PokemonServiceTest extends ServiceTest {
         assertAll(() -> {
             assertThat(pokedexDetails.pokedexNumber()).isNotNull();
             assertThat(pokedexDetails.pokemonTypeResponses()).isNotEmpty();
-            assertThat(pokedexDetails.pokemonAbilityNames()).isNotEmpty();
+            assertThat(pokedexDetails.pokemonAbilityResponses()).isNotEmpty();
         });
     }
 
