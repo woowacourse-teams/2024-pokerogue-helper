@@ -22,7 +22,8 @@ import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.util.view.QueryHandler
 
 class AbilityViewModel(private val abilityRepository: AbilityRepository) :
-    ViewModel(), QueryHandler,
+    ViewModel(),
+    QueryHandler,
     AbilityUiEventHandler {
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()
     val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
@@ -48,8 +49,7 @@ class AbilityViewModel(private val abilityRepository: AbilityRepository) :
         }
     }
 
-    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> =
-        abilityRepository.abilities(query).map { it.toUi() }
+    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> = abilityRepository.abilities(query).map { it.toUi() }
 
     override fun navigateToDetail(abilityId: Long) {
         viewModelScope.launch {
