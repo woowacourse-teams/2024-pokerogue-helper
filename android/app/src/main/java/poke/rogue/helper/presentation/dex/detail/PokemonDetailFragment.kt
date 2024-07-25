@@ -4,21 +4,26 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
-import poke.rogue.helper.data.datasource.FakePokemonDetailDataSource
-import poke.rogue.helper.data.repository.FakePokemonDetailRepository
+import poke.rogue.helper.data.datasource.RemotePokemonDetailDataSource
+import poke.rogue.helper.data.repository.DefaultPokemonDetailRepository
 import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.setImage
+import poke.rogue.helper.remote.ServiceModule
 
 class PokemonDetailFragment :
     BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(
             pokemonDetailRepository =
-                FakePokemonDetailRepository(
-                    fakePokemonDetailDataSource = FakePokemonDetailDataSource(),
+                DefaultPokemonDetailRepository(
+                    remotePokemonDetailDataSource =
+                        RemotePokemonDetailDataSource(
+                            pokeDexService = ServiceModule.pokeDexService(),
+                        ),
                 ),
         )
     }
@@ -31,9 +36,12 @@ class PokemonDetailFragment :
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        repeatOnStarted {
+            viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
+        }
         initAdapter()
         initObservers()
     }
@@ -45,9 +53,15 @@ class PokemonDetailFragment :
 
     private fun initObservers() {
         repeatOnStarted {
-            viewModel.uiState.collect {
-                pokemonTypeAdapter.submitList(it.pokemon.types)
-                pokemonStatAdapter.submitList(it.stats)
+            viewModel.uiState.collect { pokemonDetail ->
+                when (pokemonDetail) {
+                    is PokemonDetailUiState.IsLoading -> return@collect
+                    is PokemonDetailUiState.PokemonDetailUiModel -> {
+                        binding.ivPokemon.setImage(pokemonDetail.pokemon.imageUrl)
+                        pokemonTypeAdapter.submitList(pokemonDetail.pokemon.types)
+                        pokemonStatAdapter.submitList(pokemonDetail.stats)
+                    }
+                }
             }
         }
     }

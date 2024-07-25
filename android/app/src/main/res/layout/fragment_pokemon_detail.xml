@@ -35,7 +35,6 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_pokemon"
-                        imageUrl="@{vm.uiState.pokemon.imageUrl}"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:scaleType="center"
@@ -61,7 +60,6 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/pretendard_semibold"
                             android:paddingEnd="5dp"
-                            android:text="@{@string/dex_poke_name_format(vm.uiState.pokemon.name, vm.uiState.pokemon.dexNumber)}"
                             android:textSize="24sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
