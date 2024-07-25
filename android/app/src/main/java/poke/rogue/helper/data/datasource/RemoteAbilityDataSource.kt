@@ -5,7 +5,5 @@ import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.remote.service.AbilityService
 
 class RemoteAbilityDataSource(private val abilityApi: AbilityService) {
-    suspend fun abilities(): List<Ability> {
-        return abilityApi.abilities().data.map { it.toData() }
-    }
+    suspend fun abilities() = abilityApi.abilities().data.map { it.toData() }
 }
