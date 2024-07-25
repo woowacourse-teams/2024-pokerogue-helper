@@ -27,9 +27,20 @@ public record PokedexResponse(
             List<PokemonTypeResponse> pokemonTypeResponses,
             List<PokemonAbilityResponse> pokemonAbilityResponses
     ) {
-        return new PokedexResponse(pokemon.getPokedexNumber(), pokemon.getKoName(), pokemon.getImage(),
-                pokemonTypeResponses, pokemonAbilityResponses, pokemon.getWeight(), pokemon.getHeight(),
-                pokemon.getAttack(), pokemon.getDefense(), pokemon.getSpecialAttack(), pokemon.getSpecialDefense(),
-                pokemon.getHp(), pokemon.getSpeed(), pokemon.getTotalStats());
+        return new PokedexResponse(
+                pokemon.getPokedexNumber(),
+                pokemon.getKoName(),
+                pokemon.getImage(),
+                pokemonTypeResponses,
+                pokemonAbilityResponses,
+                pokemon.getWeight(),
+                pokemon.getHeight(),
+                pokemon.getAttack(),
+                pokemon.getDefense(),
+                pokemon.getSpecialAttack(),
+                pokemon.getSpecialDefense(),
+                pokemon.getHp(),
+                pokemon.getSpeed(),
+                pokemon.getTotalStats());
     }
 }
