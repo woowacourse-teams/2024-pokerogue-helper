@@ -11,8 +11,8 @@ data class PokemonDetail(
     val weight: Float,
 )
 
-fun PokemonDetailResponse.toData(id: Long): PokemonDetail {
-    return PokemonDetail(
+fun PokemonDetailResponse.toData(id: Long): PokemonDetail =
+    PokemonDetail(
         Pokemon(
             id = id,
             dexNumber = dexNumber,
@@ -22,16 +22,15 @@ fun PokemonDetailResponse.toData(id: Long): PokemonDetail {
         ),
         stats =
             listOf(
-                Stat("total", totalStats),
                 Stat("hp", hp),
                 Stat("attack", attack),
                 Stat("defense", defense),
                 Stat("specialAttack", specialAttack),
                 Stat("specialDefense", specialDefense),
                 Stat("speed", speed),
+                Stat("total", totalStats),
             ),
         abilities = abilityNames,
         height = height,
         weight = weight,
     )
-}
