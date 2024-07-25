@@ -41,7 +41,7 @@ class AbilityViewModel(private val abilityRepository: AbilityRepository) :
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000L),
-                AbilityUiState.Loading
+                AbilityUiState.Loading,
             )
 
     override fun onQueryName(name: String) {
@@ -50,8 +50,7 @@ class AbilityViewModel(private val abilityRepository: AbilityRepository) :
         }
     }
 
-    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> =
-        abilityRepository.abilities(query).map { it.toUi() }
+    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> = abilityRepository.abilities(query).map { it.toUi() }
 
     override fun navigateToDetail(abilityId: Long) {
         viewModelScope.launch {
