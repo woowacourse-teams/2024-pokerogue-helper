@@ -11,7 +11,7 @@ interface AbilityService {
     suspend fun abilities(): BaseResponse<List<AbilityResponse>>
 
     @GET("api/v1/abilities/{id}")
-    fun ability(
+    suspend fun ability(
         @Path("id") id: Int,
-    ): AbilityDetailResponse
+    ): BaseResponse<AbilityDetailResponse>
 }
