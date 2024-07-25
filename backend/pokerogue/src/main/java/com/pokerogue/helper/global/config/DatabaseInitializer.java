@@ -13,17 +13,15 @@ import com.pokerogue.helper.type.repository.PokemonTypeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/*
-   추후 production에서는 제외되어야 함.
-   ( @Profile 사용 )
- */
 @Component
 @Transactional
+@Profile("local-mysql")
 @RequiredArgsConstructor
 public class DatabaseInitializer implements ApplicationRunner {
 
