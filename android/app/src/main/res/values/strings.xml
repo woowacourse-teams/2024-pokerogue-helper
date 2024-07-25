@@ -23,4 +23,7 @@
     <string name="dex_poke_name_format">%s #%d</string>
     <string name="dex_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
 
+    <!-- ability -->
+    <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
+
 </resources>
