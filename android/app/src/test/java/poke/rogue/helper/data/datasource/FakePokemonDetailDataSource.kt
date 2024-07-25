@@ -19,7 +19,7 @@ class FakePokemonDetailDataSource {
                         Stat("specialAttack", 65),
                         Stat("specialDefense", 65),
                         Stat("speed", 45),
-                        Stat("totalStats", 318),
+                        Stat("total", 318),
                     ),
                 abilities = listOf("그래스메이커", "심록", "엽록소"),
                 height = 0.7f,
