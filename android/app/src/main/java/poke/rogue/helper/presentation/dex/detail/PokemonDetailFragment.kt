@@ -10,6 +10,7 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
+import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.remote.ServiceModule
@@ -57,13 +58,26 @@ class PokemonDetailFragment :
                 when (pokemonDetail) {
                     is PokemonDetailUiState.IsLoading -> return@collect
                     is PokemonDetailUiState.PokemonDetailUiModel -> {
-                        binding.ivPokemon.setImage(pokemonDetail.pokemon.imageUrl)
-                        pokemonTypeAdapter.submitList(pokemonDetail.pokemon.types)
-                        pokemonStatAdapter.submitList(pokemonDetail.stats)
+                        binPokemonDetail(pokemonDetail)
                     }
                 }
             }
         }
+    }
+
+    private fun binPokemonDetail(pokemonDetail: PokemonDetailUiState.PokemonDetailUiModel) {
+        with(binding) {
+            ivPokemon.setImage(pokemonDetail.pokemon.imageUrl)
+            tvPokemonName.text =
+                stringOf(
+                    R.string.dex_poke_name_format,
+                    pokemonDetail.pokemon.name,
+                    pokemonDetail.pokemon.dexNumber,
+                )
+        }
+
+        pokemonTypeAdapter.submitList(pokemonDetail.pokemon.types)
+        pokemonStatAdapter.submitList(pokemonDetail.stats)
     }
 
     companion object {
