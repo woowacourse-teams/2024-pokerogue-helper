@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.data.datasource.RemoteAbilityDataSource
@@ -26,9 +27,9 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
         AbilityViewModel.factory(
             DefaultAbilityRepository(
                 remoteAbilityDataSource =
-                    RemoteAbilityDataSource(
-                        abilityService = ServiceModule.abilityService(),
-                    ),
+                RemoteAbilityDataSource(
+                    abilityService = ServiceModule.abilityService(),
+                ),
             ),
         )
     }
@@ -89,7 +90,12 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
     private fun initObservers() {
         repeatOnStarted {
             viewModel.uiState.collect { abilities ->
-                adapter.submitList(abilities)
+                when (abilities) {
+                    is AbilityUiState.Loading -> {}
+                    is AbilityUiState.Success -> {
+                        adapter.submitList(abilities.data)
+                    }
+                }
             }
         }
 

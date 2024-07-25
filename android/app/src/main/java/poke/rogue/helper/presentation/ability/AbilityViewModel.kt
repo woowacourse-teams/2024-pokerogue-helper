@@ -31,16 +31,17 @@ class AbilityViewModel(private val abilityRepository: AbilityRepository) :
     private val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    val uiState: StateFlow<List<AbilityUiModel>> =
+    val uiState: StateFlow<AbilityUiState<List<AbilityUiModel>>> =
         searchQuery
             .debounce(300)
             .mapLatest { query ->
-                queriedAbilities(query)
+                val abilities = queriedAbilities(query)
+                AbilityUiState.Success(abilities)
             }
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000L),
-                emptyList(),
+                AbilityUiState.Loading
             )
 
     override fun onQueryName(name: String) {
@@ -49,7 +50,8 @@ class AbilityViewModel(private val abilityRepository: AbilityRepository) :
         }
     }
 
-    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> = abilityRepository.abilities(query).map { it.toUi() }
+    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> =
+        abilityRepository.abilities(query).map { it.toUi() }
 
     override fun navigateToDetail(abilityId: Long) {
         viewModelScope.launch {
