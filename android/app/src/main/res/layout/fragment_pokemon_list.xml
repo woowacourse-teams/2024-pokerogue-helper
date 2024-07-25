@@ -22,7 +22,6 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_marginHorizontal="15dp"
             android:background="@drawable/rounded_searchbar_background"
-            android:hint="@string/dex_list_search_pokemon_hint"
             app:iconifiedByDefault="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
