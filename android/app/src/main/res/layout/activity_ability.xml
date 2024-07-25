@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.ability.AbilityViewModel" />
     </data>
 
 
@@ -27,6 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:onQueryTextChange="@{vm}"
             app:queryHint="@string/ability_search_hint" />
 
 
