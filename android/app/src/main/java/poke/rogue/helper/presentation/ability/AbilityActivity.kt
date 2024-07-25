@@ -27,7 +27,7 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
             DefaultAbilityRepository(
                 remoteAbilityDataSource =
                     RemoteAbilityDataSource(
-                        abilityApi = ServiceModule.abilityService(),
+                        abilityService = ServiceModule.abilityService(),
                     ),
             ),
         )
