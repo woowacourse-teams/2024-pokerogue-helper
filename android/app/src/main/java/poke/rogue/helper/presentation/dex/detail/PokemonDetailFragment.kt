@@ -11,14 +11,12 @@ import poke.rogue.helper.presentation.ability.detail.AbilityDetailActivity
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
-import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.remote.ServiceModule
-import timber.log.Timber
 
 class PokemonDetailFragment :
     BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
@@ -106,11 +104,7 @@ class PokemonDetailFragment :
 
         pokemonTypeAdapter.submitList(pokemonDetail.pokemon.types)
         pokemonStatAdapter.submitList(pokemonDetail.stats)
-        abilityAdapter.submitList(
-            pokemonDetail.abilities.map { AbilityTitleUiModel(1, it) }.also {
-                Timber.d("pokemon Abilities: $it")
-            },
-        )
+        abilityAdapter.submitList(pokemonDetail.abilities)
     }
 
     companion object {
