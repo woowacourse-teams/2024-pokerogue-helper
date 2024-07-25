@@ -14,6 +14,8 @@ import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
+import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.remote.ServiceModule
 import timber.log.Timber
@@ -55,6 +57,13 @@ class PokemonDetailFragment :
             rvTypeList.adapter = pokemonTypeAdapter
             rvStatList.adapter = pokemonStatAdapter
             rvPokemonAbilities.adapter = abilityAdapter
+            rvPokemonAbilities.addItemDecoration(
+                LinearSpacingItemDecoration(
+                    spacing = 7.dp,
+                    includeEdge = false,
+                    orientation = LinearSpacingItemDecoration.Orientation.HORIZONTAL,
+                ),
+            )
         }
     }
 
