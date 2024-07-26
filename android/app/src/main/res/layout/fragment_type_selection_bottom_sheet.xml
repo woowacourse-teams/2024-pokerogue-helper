@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="24dp"
+        android:paddingBottom="12dp"
         android:orientation="vertical"
         tools:context=".presentation.type.selection.TypeSelectionBottomSheetFragment">
 
@@ -20,11 +21,11 @@
             android:layout_height="wrap_content"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_type_choice"
+            android:id="@+id/rv_type_selection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="4"
-            tools:listitem="@layout/item_type_choice" />
+            tools:listitem="@layout/item_type_selection" />
     </LinearLayout>
 </layout>

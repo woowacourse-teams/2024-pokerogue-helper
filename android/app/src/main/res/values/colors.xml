@@ -9,6 +9,8 @@
     <color name="poke_grey_60">#969696</color>
     <color name="poke_green_20">#74CC73</color>
     <color name="poke_red_20">#F66868</color>
+
+    <color name="poke_grey_80_inactive">#BF242627</color>
     <!--    pokemon type-->
     <color name="poke_grass">#459836</color>
     <color name="poke_electric">#DDBC29</color>

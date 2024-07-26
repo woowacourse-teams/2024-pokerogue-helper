@@ -4,7 +4,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.Type
-import poke.rogue.helper.data.model.TypeInfo
 
 enum class TypeUiModel(
     val id: Int,
@@ -39,11 +38,6 @@ enum class TypeUiModel(
 
         fun fromName(typeName: String): TypeUiModel? {
             return entries.find { it.typeName.equals(typeName, ignoreCase = true) }
-        }
-
-        fun TypeInfo.toUiModel(): TypeUiModel {
-            return fromId(id)
-                ?: throw IllegalArgumentException("Unknown type ID: $id")
         }
     }
 }
