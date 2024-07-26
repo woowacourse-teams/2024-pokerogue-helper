@@ -98,9 +98,7 @@ class AbilityDetailActivity :
                     is AbilityDetailUiState.Loading -> {}
 
                     is AbilityDetailUiState.Success -> {
-                        //binding.itemAbilityDetail.ability = abilityDetail.data.toUi()
                         binding.abilityUiModel = abilityDetail.data.toUi()
-                        // binding.abilityDetail = abilityDetail.data
                         adapter.submitList(abilityDetail.data.pokemons)
                     }
                 }
