@@ -56,6 +56,11 @@ fun Fragment.stringOf(
     formatArgs: Any? = null,
 ) = getString(resId, formatArgs)
 
+fun Fragment.stringOf(
+    @StringRes resId: Int,
+    vararg formatArgs: Any?,
+) = getString(resId, *formatArgs)
+
 fun Fragment.colorOf(
     @ColorRes resId: Int,
 ) = ContextCompat.getColor(requireContext(), resId)

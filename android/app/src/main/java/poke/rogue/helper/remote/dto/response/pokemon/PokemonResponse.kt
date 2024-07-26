@@ -8,6 +8,7 @@ import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 data class PokemonResponse(
     val id: Long,
     val pokedexNumber: Long,
+    @SerialName("koName")
     val name: String,
     val image: String,
     @SerialName("pokemonTypeResponses")
