@@ -31,7 +31,7 @@ fun PokemonDetailResponse.toData(id: Long): PokemonDetail =
                 Stat("speed", speed),
                 Stat("total", totalStats),
             ),
-        abilities = abilityNames.map(AbilityResponse::toData),
+        abilities = abilities.map(AbilityResponse::toData),
         height = height,
         weight = weight,
     )

@@ -16,7 +16,7 @@ data class PokemonDetailResponse(
     @SerialName("pokemonTypeResponses")
     val types: List<PokemonTypeResponse>,
     @SerialName("pokemonAbilityResponses")
-    val abilityNames: List<AbilityResponse>,
+    val abilities: List<AbilityResponse>,
     val weight: Float,
     val height: Float,
     val totalStats: Int,
