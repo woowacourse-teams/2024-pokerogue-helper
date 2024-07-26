@@ -9,6 +9,6 @@ class RemoteAbilityDataSource(private val abilityService: AbilityService) {
 
     suspend fun abilities(query: String): List<Ability> =
         abilities().filter { ability ->
-            ability.name.contains(query, ignoreCase = true)
+            ability.title.contains(query, ignoreCase = true)
         }
 }

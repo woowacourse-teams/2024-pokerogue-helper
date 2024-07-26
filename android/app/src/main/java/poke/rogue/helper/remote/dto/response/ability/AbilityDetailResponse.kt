@@ -6,9 +6,8 @@ import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 
 @Serializable
 data class AbilityDetailResponse(
-    val id: Long = 0,
     @SerialName("koName")
-    val name: String,
+    val title: String,
     val description: String,
     val pokemons: List<PokemonResponse>,
 )

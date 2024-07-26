@@ -1,19 +1,16 @@
 package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.ability.AbilityDetailResponse
-import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 
 class AbilityDetail(
-    val id: Long = 0,
-    val name: String,
+    val title: String,
     val description: String,
-    val pokemons: List<PokemonResponse>
+    val pokemons: List<Pokemon>
 )
 
 fun AbilityDetailResponse.toData(): AbilityDetail =
     AbilityDetail(
-        id = id,
-        name = name,
+        title = title,
         description = description,
-        pokemons = pokemons,
+        pokemons = pokemons.toData(),
     )
