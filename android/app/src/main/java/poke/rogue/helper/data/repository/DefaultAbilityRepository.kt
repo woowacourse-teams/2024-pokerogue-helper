@@ -7,5 +7,8 @@ class DefaultAbilityRepository(private val remoteAbilityDataSource: RemoteAbilit
     AbilityRepository {
     override suspend fun abilities(): List<Ability> = remoteAbilityDataSource.abilities()
 
-    override suspend fun abilities(query: String): List<Ability> = remoteAbilityDataSource.abilities(query)
+    override suspend fun abilities(query: String): List<Ability> =
+        remoteAbilityDataSource.abilities().filter { ability ->
+            ability.title.contains(query, ignoreCase = true)
+        }
 }

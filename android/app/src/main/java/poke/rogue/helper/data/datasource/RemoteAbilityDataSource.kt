@@ -6,9 +6,4 @@ import poke.rogue.helper.remote.service.AbilityService
 
 class RemoteAbilityDataSource(private val abilityService: AbilityService) {
     suspend fun abilities() = abilityService.abilities().data.map { it.toData() }
-
-    suspend fun abilities(query: String): List<Ability> =
-        abilities().filter { ability ->
-            ability.title.contains(query, ignoreCase = true)
-        }
 }
