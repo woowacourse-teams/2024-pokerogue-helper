@@ -4,8 +4,9 @@ import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.Type
-import poke.rogue.helper.pokemonResponses
-import poke.rogue.helper.pokemonTypeResponses
+import poke.rogue.helper.data.model.toData
+import poke.rogue.helper.utils.fixture.pokemonResponses
+import poke.rogue.helper.utils.fixture.pokemonTypeResponses
 
 class PokemonResponseTest {
     @Test

@@ -5,9 +5,13 @@
     <string name="type_opponent_type_title">상대 타입</string>
     <string name="type_result_title">상성 결과</string>
     <string name="type_result_sub_title">* 1배는 표시되지 않습니다.</string>
-    <string name="type_item_result_subject_mine">%s 이(가)</string>
-    <string name="type_item_result_subject_opponent">%s 에게</string>
-    <string name="type_item_result_tail">%s 타입</string>
+    <string name="type_item_result_subject_mine">%s이(가)</string>
+    <string name="type_item_result_subject_opponent">%s에게</string>
+    <string name="type_item_result_tail">&#160;타입</string>
+    <string name="type_result_strong">강한</string>
+    <string name="type_result_weak">약한</string>
+    <string name="type_result_ineffective">무효한</string>
+    <string name="type_result_normal">대등한</string>
     <!-- home -->
     <string name="toolbar_pokerogue">포켓로그 바로가기</string>
     <string name="toolbar_feedback">피드백 보내기</string>
@@ -22,5 +26,8 @@
     <string name="dex_stat_format">%03d/%03d</string>
     <string name="dex_poke_name_format">%s #%d</string>
     <string name="dex_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
+
+    <!-- ability -->
+    <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
 
 </resources>

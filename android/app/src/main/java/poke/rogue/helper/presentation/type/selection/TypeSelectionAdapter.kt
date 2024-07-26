@@ -3,7 +3,7 @@ package poke.rogue.helper.presentation.type.selection
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import poke.rogue.helper.databinding.ItemTypeChoiceBinding
+import poke.rogue.helper.databinding.ItemTypeSelectionBinding
 import poke.rogue.helper.presentation.type.TypeHandler
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
@@ -11,6 +11,7 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 class TypeSelectionAdapter(
     private val types: List<TypeUiModel> = listOf(),
     private val selector: SelectorType,
+    private val disabledTypeSet: Set<TypeUiModel> = setOf(),
     private val typeHandler: TypeHandler,
 ) :
     RecyclerView.Adapter<TypeSelectionViewHolder>() {
@@ -18,7 +19,7 @@ class TypeSelectionAdapter(
         parent: ViewGroup,
         viewType: Int,
     ): TypeSelectionViewHolder {
-        val view = ItemTypeChoiceBinding.inflate(LayoutInflater.from(parent.context))
+        val view = ItemTypeSelectionBinding.inflate(LayoutInflater.from(parent.context))
         return TypeSelectionViewHolder(view)
     }
 
@@ -31,6 +32,6 @@ class TypeSelectionAdapter(
         position: Int,
     ) {
         val item = types[position]
-        holder.bind(selector, item, typeHandler)
+        holder.bind(item, selector, disabledTypeSet, typeHandler)
     }
 }

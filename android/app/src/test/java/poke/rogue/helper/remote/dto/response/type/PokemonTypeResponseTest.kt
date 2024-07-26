@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import poke.rogue.helper.data.model.Type
-import poke.rogue.helper.pokemonTypeResponse
-import poke.rogue.helper.pokemonTypeResponses
+import poke.rogue.helper.data.model.toData
+import poke.rogue.helper.utils.fixture.pokemonTypeResponse
+import poke.rogue.helper.utils.fixture.pokemonTypeResponses
 
 class PokemonTypeResponseTest {
     @ParameterizedTest

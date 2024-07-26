@@ -1,28 +1,20 @@
 package poke.rogue.helper.presentation.type.result
 
 import android.content.Context
-import android.text.Spanned
+import android.graphics.Typeface
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import androidx.core.text.buildSpannedString
+import androidx.core.text.inSpans
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
+import poke.rogue.helper.presentation.util.context.stringOf
 
 class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : RecyclerView.ViewHolder(binding.root) {
-    private val flexboxLayoutManager: FlexboxLayoutManager by lazy {
-        FlexboxLayoutManager(binding.root.context).apply {
-            flexWrap = FlexWrap.WRAP
-            flexDirection = FlexDirection.ROW
-            justifyContent = JustifyContent.FLEX_START
-        }
-    }
-
     fun bind(typeMatchedResult: MatchedTypesUiModel) {
         val context = binding.root.context
 
@@ -30,7 +22,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         bindTypeStrengthText(typeMatchedResult, context)
 
         binding.typeResult = typeMatchedResult
-        binding.rvResultMatchedTypes.layoutManager = flexboxLayoutManager
+        binding.rvResultMatchedTypes.layoutManager = GridLayoutManager(context, 4)
         binding.rvResultMatchedTypes.adapter = TypeResultItemAdapter(typeMatchedResult.matchedItem)
     }
 
@@ -56,19 +48,19 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         typeMatchedResult: MatchedTypesUiModel,
         context: Context,
     ) {
+        val matchedResultText = context.stringOf(typeMatchedResult.matchedResultDescriptionResId)
+        val matchedResultTextTail = context.stringOf(R.string.type_item_result_tail)
         val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultColorResId)
-        val matchedResultTypeText =
-            context.getString(R.string.type_item_result_tail, typeMatchedResult.matchedResult)
 
         binding.tvResultSelectedTypeStrength.text =
             buildSpannedString {
-                append(matchedResultTypeText)
-                setSpan(
+                inSpans(
                     ForegroundColorSpan(matchedResultTextColor),
-                    0,
-                    2,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
-                )
+                    StyleSpan(Typeface.BOLD),
+                ) {
+                    append(matchedResultText)
+                }
+                append(matchedResultTextTail)
             }
     }
 }

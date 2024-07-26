@@ -6,5 +6,5 @@ import poke.rogue.helper.data.model.PokemonDetail
 class FakePokemonDetailRepository(
     private val fakePokemonDetailDataSource: FakePokemonDetailDataSource,
 ) : PokemonDetailRepository {
-    override fun pokemonDetail(id: Long): PokemonDetail = fakePokemonDetailDataSource.pokemonDetail(id)
+    override suspend fun pokemonDetail(id: Long): PokemonDetail = fakePokemonDetailDataSource.pokemonDetail(id)
 }
