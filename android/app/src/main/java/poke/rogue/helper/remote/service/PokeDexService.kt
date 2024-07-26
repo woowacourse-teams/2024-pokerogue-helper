@@ -11,7 +11,7 @@ interface PokeDexService {
     suspend fun pokemons(): BaseResponse<List<PokemonResponse>>
 
     @GET("api/v1/pokemon/{id}")
-    fun pokemon(
+    suspend fun pokemon(
         @Path("id") id: Long,
-    ): PokemonDetailResponse
+    ): BaseResponse<PokemonDetailResponse>
 }

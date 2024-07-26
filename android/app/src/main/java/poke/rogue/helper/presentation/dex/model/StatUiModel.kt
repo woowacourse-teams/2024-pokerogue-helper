@@ -13,10 +13,22 @@ data class StatUiModel(
 
 fun Stat.toUi(): StatUiModel =
     StatUiModel(
-        name = name,
+        name = statNameUi(),
         amount = amount,
-        limit = if (name == "총합") MAX_PROGRESS_FOR_TOTAL_STAT else MAX_PROGRESS_FOR_SINGLE_STAT,
+        limit = if (name == "total") MAX_PROGRESS_FOR_TOTAL_STAT else MAX_PROGRESS_FOR_SINGLE_STAT,
     )
+
+private fun Stat.statNameUi() =
+    when (name) {
+        "hp" -> "HP"
+        "attack" -> "공격"
+        "defense" -> "방어"
+        "specialAttack" -> "특수공격"
+        "specialDefense" -> "특수방어"
+        "speed" -> "스피드"
+        "total" -> "총합"
+        else -> name
+    }
 
 private const val MAX_PROGRESS_FOR_SINGLE_STAT = 300
 private const val MAX_PROGRESS_FOR_TOTAL_STAT = 1_000

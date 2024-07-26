@@ -1,31 +1,29 @@
 package poke.rogue.helper.data.repository
 
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
-import poke.rogue.helper.data.model.MatchedResult
 import poke.rogue.helper.data.model.MatchedTypes
-import poke.rogue.helper.data.model.TypeInfo
+import poke.rogue.helper.data.model.Type
 
 class DefaultTypeRepository(private val localTypeDataSource: LocalTypeDataSource) : TypeRepository {
     override fun matchedTypesAgainstMyType(myTypeId: Int): List<MatchedTypes> {
         return localTypeDataSource.matchedTypesAgainstAttackingType(myTypeId)
-            .filter { it.matchedResult != MatchedResult.NORMAL }
     }
 
     override fun matchedTypesAgainstOpponent(opponentTypeId: Int): List<MatchedTypes> {
         return localTypeDataSource.matchedTypesAgainstDefendingType(opponentTypeId)
-            .filter { it.matchedResult != MatchedResult.NORMAL }
     }
 
     override fun matchedTypes(
         myTypeId: Int,
         opponentTypeIds: List<Int>,
     ): List<MatchedTypes> {
-        return opponentTypeIds.map {
-            localTypeDataSource.matchedTypes(myTypeId, it)
-        }.filter { it.matchedResult != MatchedResult.NORMAL }
+        return localTypeDataSource.matchedTypes(
+            myTypeId,
+            opponentTypeIds,
+        )
     }
 
-    override fun allTypes(): List<TypeInfo> {
+    override fun allTypes(): List<Type> {
         return localTypeDataSource.allTypes()
     }
 }

@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.dex
+package poke.rogue.helper.presentation.util.view
 
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.BindingAdapter
@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 @BindingAdapter("onQueryTextChange")
 fun setOnQueryTextListener(
     searchView: SearchView,
-    onQueryTextChangeListener: PokemonQueryHandler,
+    onQueryTextChangeListener: QueryHandler,
 ) {
     searchView.setOnQueryTextListener(
         object : SearchView.OnQueryTextListener {

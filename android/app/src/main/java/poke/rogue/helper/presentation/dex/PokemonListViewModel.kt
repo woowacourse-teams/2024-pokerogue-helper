@@ -19,10 +19,11 @@ import poke.rogue.helper.data.repository.PokemonListRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
+import poke.rogue.helper.presentation.util.view.QueryHandler
 
 class PokemonListViewModel(
     private val pokemonListRepository: PokemonListRepository,
-) : ViewModel(), PokemonDetailNavigateHandler, PokemonQueryHandler {
+) : ViewModel(), PokemonDetailNavigateHandler, QueryHandler {
     private val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
