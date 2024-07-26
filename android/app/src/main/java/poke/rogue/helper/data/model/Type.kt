@@ -1,5 +1,8 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
+import java.util.Locale
+
 enum class Type(val id: Int) {
     NORMAL(0),
     FIRE(1),
@@ -20,3 +23,7 @@ enum class Type(val id: Int) {
     STEEL(16),
     FAIRY(17),
 }
+
+fun PokemonTypeResponse.toData(): Type = Type.valueOf(pokemonTypeName.uppercase(Locale.ROOT))
+
+fun List<PokemonTypeResponse>.toData(): List<Type> = map(PokemonTypeResponse::toData)

@@ -7,20 +7,27 @@ import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
-import poke.rogue.helper.data.datasource.FakePokemonListDataSource
-import poke.rogue.helper.data.repository.FakePokemonListRepository
+import poke.rogue.helper.data.datasource.RemotePokemonListDataSource
+import poke.rogue.helper.data.repository.DefaultPokemonListRepository
 import poke.rogue.helper.databinding.FragmentPokemonListBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.remote.ServiceModule
 
 class PokemonListFragment :
     BindingFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
     private val viewModel by viewModels<PokemonListViewModel> {
         PokemonListViewModel.factory(
-            FakePokemonListRepository(FakePokemonListDataSource()),
+            pokemonListRepository =
+                DefaultPokemonListRepository(
+                    pokemonListDataSource =
+                        RemotePokemonListDataSource(
+                            pokeDexService = ServiceModule.pokeDexService(),
+                        ),
+                ),
         )
     }
 
@@ -33,6 +40,10 @@ class PokemonListFragment :
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         initAdapter()
         initObservers()
     }
@@ -53,11 +64,19 @@ class PokemonListFragment :
     }
 
     private fun initObservers() {
+        observeDisplayedPokemons()
+        observeNavigateToDetail()
+    }
+
+    private fun observeDisplayedPokemons() {
         repeatOnStarted {
             viewModel.uiState.collect { pokemonUiModels ->
                 pokemonAdapter.submitList(pokemonUiModels)
             }
         }
+    }
+
+    private fun observeNavigateToDetail() {
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {

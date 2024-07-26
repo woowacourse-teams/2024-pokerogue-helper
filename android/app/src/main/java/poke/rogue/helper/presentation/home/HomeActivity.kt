@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
@@ -14,14 +15,17 @@ import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
+import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
+    private val viewModel by viewModels<HomeViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbarHome.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         initViews()
-        initClickListeners()
+        initObservers()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,52 +52,41 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             toolbarHome.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
             supportActionBar?.setDisplayShowTitleEnabled(false)
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
+            actionHandler = viewModel
         }
 
-    private fun initClickListeners() {
-        binding.apply {
-            ibtnHomeLogo.setOnClickListener { navigateToPokeRogue() }
-            cvHomeType.setOnClickListener {
-                navigateToType()
+    private fun initObservers() {
+        repeatOnStarted {
+            viewModel.navigationEvent.collect { state ->
+                when (state) {
+                    is HomeNavigateEvent.ToType ->
+                        TypeActivity.intent(this)
+                            .also { startActivity(it) }
+
+                    is HomeNavigateEvent.ToDex ->
+                        PokemonActivity.intent(this)
+                            .also { startActivity(it) }
+
+                    is HomeNavigateEvent.ToAbility ->
+                        AbilityActivity.intent(this)
+                            .also { startActivity(it) }
+
+                    is HomeNavigateEvent.ToTip ->
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(stringOf(R.string.home_pokerogue_tip_url)),
+                        ).also { startActivity(it) }
+
+                    is HomeNavigateEvent.ToLogo -> navigateToPokeRogue()
+                }
             }
-            cvHomeDex.setOnClickListener {
-                navigateToDex()
-            }
-            cvHomeAbility.setOnClickListener {
-                navigateToAbility()
-            }
-            cvHomeTip.setOnClickListener { navigateToTip() }
         }
     }
 
     private fun navigateToPokeRogue() {
-        toast(R.string.toolbar_pokerogue)
-        val intent =
-            Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
-        startActivity(intent)
-    }
-
-    private fun navigateToType() {
-        TypeActivity.intent(this).apply {
-            startActivity(this)
-        }
-    }
-
-    private fun navigateToDex() {
-        PokemonActivity.intent(this).apply {
-            startActivity(this)
-        }
-    }
-
-    private fun navigateToAbility() {
-        AbilityActivity.intent(this).apply {
-            startActivity(this)
-        }
-    }
-
-    private fun navigateToTip() {
-        val intent =
-            Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_tip_url)))
-        startActivity(intent)
+        Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(stringOf(R.string.home_pokerogue_url)),
+        ).also { startActivity(it) }
     }
 }

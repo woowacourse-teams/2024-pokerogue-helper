@@ -12,7 +12,7 @@
 
         <variable
             name="abilityUiModel"
-            type="poke.rogue.helper.presentation.ability.AbilityUiModel" />
+            type="poke.rogue.helper.presentation.ability.model.AbilityUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

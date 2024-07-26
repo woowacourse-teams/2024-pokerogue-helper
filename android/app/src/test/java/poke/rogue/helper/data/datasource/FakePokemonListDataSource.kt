@@ -6,6 +6,11 @@ import poke.rogue.helper.data.model.Type
 class FakePokemonListDataSource {
     fun pokemons(): List<Pokemon> = POKEMONS
 
+    fun pokemons(query: String): List<Pokemon> =
+        POKEMONS.filter { pokemon ->
+            pokemon.name.contains(query, ignoreCase = true)
+        }
+
     companion object {
         private const val FORMAT_POKEMON_IMAGE_URL =
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other" +
@@ -15,7 +20,7 @@ class FakePokemonListDataSource {
 
         private fun pokemonImageUrl(pokemonId: Long) = FORMAT_POKEMON_IMAGE_URL + pokemonId + POSTFIX_PNG
 
-        private val POKEMONS: List<Pokemon> =
+        val POKEMONS: List<Pokemon> =
             listOf(
                 Pokemon(
                     id = 1,

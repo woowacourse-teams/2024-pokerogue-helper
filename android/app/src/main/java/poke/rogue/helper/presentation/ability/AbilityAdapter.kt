@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemAbilityDescriptionBinding
+import poke.rogue.helper.presentation.ability.model.AbilityUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class AbilityAdapter : ListAdapter<AbilityUiModel, AbilityViewHolder>(abilityComparator) {
+class AbilityAdapter(private val onClickAbilityItem: AbilityUiEventHandler) :
+    ListAdapter<AbilityUiModel, AbilityViewHolder>(abilityComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -17,6 +19,7 @@ class AbilityAdapter : ListAdapter<AbilityUiModel, AbilityViewHolder>(abilityCom
                 parent,
                 false,
             ),
+            onClickAbilityItem,
         )
     }
 
