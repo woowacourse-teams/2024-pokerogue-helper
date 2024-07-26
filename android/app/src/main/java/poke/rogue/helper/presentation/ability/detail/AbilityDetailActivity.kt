@@ -6,32 +6,47 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import poke.rogue.helper.R
+import poke.rogue.helper.data.datasource.RemoteAbilityDetailDataSource
+import poke.rogue.helper.data.repository.DefaultAbilityDetailRepository
 import poke.rogue.helper.databinding.ActivityAbilityDetailBinding
-import poke.rogue.helper.presentation.ability.model.AbilityUiModel
+import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BindingActivity
-import poke.rogue.helper.presentation.dex.PokemonUiModel
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
+import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.remote.ServiceModule
+import timber.log.Timber
 
-// todo abilityDetailUiModel, 포켓몬 클릭시 도감상세 페이지로 이동?
 class AbilityDetailActivity :
     BindingActivity<ActivityAbilityDetailBinding>(R.layout.activity_ability_detail) {
+    private val viewModel by viewModels<AbilityDetailViewModel> {
+        AbilityDetailViewModel.factory(
+            DefaultAbilityDetailRepository(
+                remoteAbilityDetailDataSource =
+                RemoteAbilityDetailDataSource(
+                    abilityService = ServiceModule.abilityService(
+                    ),
+                ),
+            )
+        )
+    }
+
     private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val id = intent.getLongExtra(ID, -1)
-        val dummy =
-            AbilityUiModel.dummys.find {
-                it.id == id
-            } ?: AbilityUiModel.DUMMY
-        binding.abilityUiModel = dummy
+        repeatOnStarted {
+            val id = intent.getLongExtra(ID, -1)
+            viewModel.updateAbilityDetail(id)
+        }
         initViews()
         initAdapter()
+        initObservers()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -71,16 +86,26 @@ class AbilityDetailActivity :
         }
 
     private fun initAdapter() {
-        initDummy()
         val decoration = GridSpacingItemDecoration(3, 15.dp, false)
         binding.rvAbilityDetailPokemon.adapter = adapter
         binding.rvAbilityDetailPokemon.addItemDecoration(decoration)
     }
 
-    private fun initDummy() {
-        adapter.submitList(
-            PokemonUiModel.dummys(10),
-        )
+    private fun initObservers() {
+        repeatOnStarted {
+            viewModel.abilityDetail.collect { abilityDetail ->
+                when (abilityDetail) {
+                    is AbilityDetailUiState.Loading -> {}
+
+                    is AbilityDetailUiState.Success -> {
+                        //binding.itemAbilityDetail.ability = abilityDetail.data.toUi()
+                        binding.abilityUiModel = abilityDetail.data.toUi()
+                        // binding.abilityDetail = abilityDetail.data
+                        adapter.submitList(abilityDetail.data.pokemons)
+                    }
+                }
+            }
+        }
     }
 
     companion object {

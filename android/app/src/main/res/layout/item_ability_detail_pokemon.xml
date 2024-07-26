@@ -6,7 +6,7 @@
 
         <variable
             name="pokemon"
-            type="poke.rogue.helper.presentation.dex.PokemonUiModel" />
+            type="poke.rogue.helper.presentation.dex.model.PokemonUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

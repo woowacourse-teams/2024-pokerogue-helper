@@ -6,6 +6,10 @@
 
     <data>
 
+<!--        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.ability.detail.AbilityDetailViewModel" />-->
+
         <variable
             name="abilityDetail"
             type="poke.rogue.helper.presentation.ability.detail.AbilityDetailUiModel" />
