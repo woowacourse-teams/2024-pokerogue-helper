@@ -70,6 +70,7 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
             setSupportActionBar(toolbarAbility.toolbar)
             toolbarAbility.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
             supportActionBar?.setDisplayShowTitleEnabled(false)
+            vm = viewModel
         }
 
     private fun navigateToPokeRogue() {
@@ -87,8 +88,13 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
 
     private fun initObservers() {
         repeatOnStarted {
-            viewModel.abilities.collect { abilities ->
-                adapter.submitList(abilities)
+            viewModel.uiState.collect { abilities ->
+                when (abilities) {
+                    is AbilityUiState.Loading -> {}
+                    is AbilityUiState.Success -> {
+                        adapter.submitList(abilities.data)
+                    }
+                }
             }
         }
 
