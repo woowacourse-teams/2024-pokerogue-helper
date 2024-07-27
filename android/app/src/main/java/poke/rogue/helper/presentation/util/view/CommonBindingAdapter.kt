@@ -24,7 +24,7 @@ fun ImageView.setCroppedImage(imageUrl: String?) {
         .load(imageUrl)
         .placeholder(R.drawable.icon_poke)
         .error(R.drawable.icon_error)
-        .transform(CropTransformation(width, height))
+        .transform(CropMarginTransformation())
         .into(this)
 }
 

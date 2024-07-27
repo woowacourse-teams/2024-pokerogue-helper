@@ -6,7 +6,7 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import java.security.MessageDigest
 
-class CropTransformation(private val newWidth: Int, private val newHeight: Int) :
+class CropMarginTransformation() :
     BitmapTransformation() {
     override fun transform(
         pool: BitmapPool,
@@ -14,8 +14,7 @@ class CropTransformation(private val newWidth: Int, private val newHeight: Int) 
         outWidth: Int,
         outHeight: Int,
     ): Bitmap {
-        val newBitmap: Bitmap = noMarginBitmap(toTransform)
-        return Bitmap.createScaledBitmap(newBitmap, newWidth, newHeight, true)
+        return noMarginBitmap(toTransform)
     }
 
     private fun noMarginBitmap(original: Bitmap): Bitmap {
@@ -46,14 +45,11 @@ class CropTransformation(private val newWidth: Int, private val newHeight: Int) 
     private fun Int.hasColor() = (this != Color.TRANSPARENT)
 
     override fun equals(other: Any?): Boolean {
-        if (other is CropTransformation) {
-            return newWidth == other.newWidth && newHeight == other.newHeight
-        }
-        return false
+        return other is CropMarginTransformation
     }
 
     override fun hashCode(): Int {
-        return ID.hashCode() + newWidth * 10000 + newHeight
+        return ID.hashCode()
     }
 
     override fun updateDiskCacheKey(messageDigest: MessageDigest) {
@@ -62,8 +58,8 @@ class CropTransformation(private val newWidth: Int, private val newHeight: Int) 
 
     companion object {
         private val ID: String =
-            CropTransformation::class.java.canonicalName
-                ?: CropTransformation::class.java.simpleName
+            CropMarginTransformation::class.java.canonicalName
+                ?: CropMarginTransformation::class.java.simpleName
         private val ID_BYTES = ID.toByteArray(Charsets.UTF_8)
     }
 }
