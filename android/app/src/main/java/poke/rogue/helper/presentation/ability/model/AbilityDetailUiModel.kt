@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.ability.detail
+package poke.rogue.helper.presentation.ability.model
 
 import poke.rogue.helper.data.model.AbilityDetail
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
