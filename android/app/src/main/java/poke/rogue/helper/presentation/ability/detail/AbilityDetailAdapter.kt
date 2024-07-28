@@ -7,7 +7,7 @@ import poke.rogue.helper.databinding.ItemAbilityDetailPokemonBinding
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class AbilityDetailAdapter :
+class AbilityDetailAdapter(private val onClickPokemonItem: AbilityDetailUiEventHandler) :
     ListAdapter<PokemonUiModel, AbilityDetailViewHolder>(poketmonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -19,6 +19,7 @@ class AbilityDetailAdapter :
                 parent,
                 false,
             ),
+            onClickPokemonItem
         )
 
     override fun onBindViewHolder(

@@ -36,7 +36,7 @@ class AbilityDetailActivity :
         )
     }
 
-    private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter() }
+    private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter(viewModel) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +102,12 @@ class AbilityDetailActivity :
                         adapter.submitList(abilityDetail.data.pokemons)
                     }
                 }
+            }
+        }
+        // todo navigate to pokemon detail
+        repeatOnStarted {
+            viewModel.navigationToPokemonDetailEvent.collect { pokemonId ->
+                Timber.d("pokemonId: $pokemonId")
             }
         }
     }
