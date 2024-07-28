@@ -50,7 +50,7 @@ class PokemonDetailViewModelTest {
             // then
             val pokemonDetailUiState = viewModel.uiState
             pokemonDetailUiState.value shouldBe
-                PokemonDetailUiState.PokemonDetailUiModel(
+                PokemonDetailUiState.Success(
                     pokemon =
                         PokemonUiModel(
                             id = 1,

@@ -10,7 +10,7 @@ import poke.rogue.helper.presentation.dex.model.toPokemonDetailUi
 import poke.rogue.helper.presentation.dex.model.toUi
 
 sealed interface PokemonDetailUiState {
-    data class PokemonDetailUiModel(
+    data class Success(
         val pokemon: PokemonUiModel,
         val stats: List<StatUiModel>,
         val abilities: List<AbilityTitleUiModel>,
@@ -21,8 +21,8 @@ sealed interface PokemonDetailUiState {
     data object IsLoading : PokemonDetailUiState
 }
 
-fun PokemonDetail.toUi(): PokemonDetailUiState.PokemonDetailUiModel =
-    PokemonDetailUiState.PokemonDetailUiModel(
+fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
+    PokemonDetailUiState.Success(
         pokemon = pokemon.toUi(),
         stats = stats.map(Stat::toUi),
         abilities = abilities.map(Ability::toPokemonDetailUi),
