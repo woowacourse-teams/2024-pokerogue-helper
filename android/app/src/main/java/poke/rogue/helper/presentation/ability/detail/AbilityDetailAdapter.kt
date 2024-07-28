@@ -19,7 +19,7 @@ class AbilityDetailAdapter(private val onClickPokemonItem: AbilityDetailUiEventH
                 parent,
                 false,
             ),
-            onClickPokemonItem
+            onClickPokemonItem,
         )
 
     override fun onBindViewHolder(

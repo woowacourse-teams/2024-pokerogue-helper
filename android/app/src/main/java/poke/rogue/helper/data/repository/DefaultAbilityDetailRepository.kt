@@ -5,6 +5,5 @@ import poke.rogue.helper.data.model.AbilityDetail
 
 class DefaultAbilityDetailRepository(private val remoteAbilityDetailDataSource: RemoteAbilityDetailDataSource) :
     AbilityDetailRepository {
-    override suspend fun abilityDetail(id: Long): AbilityDetail =
-        remoteAbilityDetailDataSource.abilityDetail(id)
+    override suspend fun abilityDetail(id: Long): AbilityDetail = remoteAbilityDetailDataSource.abilityDetail(id)
 }

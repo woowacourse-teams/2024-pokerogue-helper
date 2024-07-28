@@ -7,7 +7,7 @@ import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 
 class AbilityDetailViewHolder(
     private val binding: ItemAbilityDetailPokemonBinding,
-    private val onClickPokemonItem: AbilityDetailUiEventHandler
+    private val onClickPokemonItem: AbilityDetailUiEventHandler,
 ) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(pokemonUiModel: PokemonUiModel) {
