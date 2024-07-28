@@ -34,3 +34,6 @@ google-services.json
 
 # Mac OS
 .DS_Store
+
+# docker scripts
+docker

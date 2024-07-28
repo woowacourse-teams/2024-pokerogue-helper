@@ -54,7 +54,7 @@ class PokemonListViewModel(
         }
     }
 
-    override fun onQueryName(name: String) {
+    override fun queryName(name: String) {
         viewModelScope.launch {
             searchQuery.emit(name)
         }
