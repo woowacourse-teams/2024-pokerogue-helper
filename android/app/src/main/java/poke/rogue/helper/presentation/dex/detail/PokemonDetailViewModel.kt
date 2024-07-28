@@ -10,12 +10,11 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.repository.PokemonDetailRepository
-import poke.rogue.helper.presentation.ability.AbilityUiEventHandler
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 
 class PokemonDetailViewModel(private val pokemonDetailRepository: PokemonDetailRepository) :
     ViewModel(),
-    AbilityUiEventHandler {
+    PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 
@@ -27,7 +26,7 @@ class PokemonDetailViewModel(private val pokemonDetailRepository: PokemonDetailR
         _uiState.value = pokemonDetailRepository.pokemonDetail(pokemonId).toUi()
     }
 
-    override fun navigateToDetail(abilityId: Long) {
+    override fun navigateToAbilityDetail(abilityId: Long) {
         viewModelScope.launch {
             _navigationToDetailEvent.emit(abilityId)
         }

@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemAbilityTitleBinding
-import poke.rogue.helper.presentation.ability.AbilityUiEventHandler
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class AbilityTitleAdapter(private val onClickAbility: AbilityUiEventHandler) :
+class AbilityTitleAdapter(private val onClickAbility: PokemonDetailNavigateHandler) :
     ListAdapter<AbilityTitleUiModel, AbilityTitleViewHolder>(abilityComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
