@@ -76,7 +76,7 @@ class PokemonDetailFragment :
                 when (pokemonDetail) {
                     is PokemonDetailUiState.IsLoading -> return@collect
                     is PokemonDetailUiState.PokemonDetailUiModel -> {
-                        binPokemonDetail(pokemonDetail)
+                        bindPokemonDetail(pokemonDetail)
                     }
                 }
             }
@@ -91,7 +91,7 @@ class PokemonDetailFragment :
         }
     }
 
-    private fun binPokemonDetail(pokemonDetail: PokemonDetailUiState.PokemonDetailUiModel) {
+    private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.PokemonDetailUiModel) {
         with(binding) {
             ivPokemon.setImage(pokemonDetail.pokemon.imageUrl)
             tvPokemonName.text =
