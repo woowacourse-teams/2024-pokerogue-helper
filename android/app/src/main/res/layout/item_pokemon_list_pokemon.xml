@@ -10,7 +10,7 @@
 
         <variable
             name="listener"
-            type="poke.rogue.helper.presentation.dex.PokemonDetailNavigateHandler" />
+            type="poke.rogue.helper.presentation.dex.PokemonListNavigateHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
