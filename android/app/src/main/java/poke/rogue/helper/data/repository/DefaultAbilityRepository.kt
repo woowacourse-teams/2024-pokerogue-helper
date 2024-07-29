@@ -13,6 +13,5 @@ class DefaultAbilityRepository(private val remoteAbilityDataSource: RemoteAbilit
             ability.title.contains(query, ignoreCase = true)
         }
 
-    override suspend fun abilityDetail(id: Long): AbilityDetail =
-        remoteAbilityDataSource.abilityDetail(id)
+    override suspend fun abilityDetail(id: Long): AbilityDetail = remoteAbilityDataSource.abilityDetail(id)
 }

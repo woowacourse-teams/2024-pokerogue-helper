@@ -43,6 +43,7 @@ class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
 
     companion object {
         private const val ABILITY_DETAIL_ERROR = "Ability detail error"
+
         fun factory(abilityRepository: AbilityRepository): ViewModelProvider.Factory =
             BaseViewModelFactory {
                 AbilityDetailViewModel(abilityRepository)

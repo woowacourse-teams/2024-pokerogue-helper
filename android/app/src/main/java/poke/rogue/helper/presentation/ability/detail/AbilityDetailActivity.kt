@@ -28,10 +28,10 @@ class AbilityDetailActivity :
         AbilityDetailViewModel.factory(
             DefaultAbilityRepository(
                 remoteAbilityDataSource =
-                RemoteAbilityDataSource(
-                    abilityService =
-                    ServiceModule.abilityService(),
-                ),
+                    RemoteAbilityDataSource(
+                        abilityService =
+                            ServiceModule.abilityService(),
+                    ),
             ),
         )
     }
