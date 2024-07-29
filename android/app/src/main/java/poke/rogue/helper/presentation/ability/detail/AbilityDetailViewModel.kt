@@ -9,12 +9,12 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import poke.rogue.helper.data.repository.AbilityDetailRepository
+import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.presentation.ability.model.AbilityDetailUiModel
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 
-class AbilityDetailViewModel(private val abilityDetailRepository: AbilityDetailRepository) :
+class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
     ViewModel(), AbilityDetailUiEventHandler {
     private val _abilityDetail =
         MutableStateFlow<AbilityDetailUiState<AbilityDetailUiModel>>(AbilityDetailUiState.Loading)
@@ -32,15 +32,15 @@ class AbilityDetailViewModel(private val abilityDetailRepository: AbilityDetailR
 
     suspend fun updateAbilityDetail(abilityId: Long) {
         viewModelScope.launch {
-            val abilityDetail = abilityDetailRepository.abilityDetail(abilityId).toUi()
+            val abilityDetail = abilityRepository.abilityDetail(abilityId).toUi()
             _abilityDetail.value = AbilityDetailUiState.Success(abilityDetail)
         }
     }
 
     companion object {
-        fun factory(abilityDetailRepository: AbilityDetailRepository): ViewModelProvider.Factory =
+        fun factory(abilityRepository: AbilityRepository): ViewModelProvider.Factory =
             BaseViewModelFactory {
-                AbilityDetailViewModel(abilityDetailRepository)
+                AbilityDetailViewModel(abilityRepository)
             }
     }
 }

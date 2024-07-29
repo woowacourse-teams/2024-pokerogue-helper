@@ -8,8 +8,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import poke.rogue.helper.R
-import poke.rogue.helper.data.datasource.RemoteAbilityDetailDataSource
-import poke.rogue.helper.data.repository.DefaultAbilityDetailRepository
+import poke.rogue.helper.data.datasource.RemoteAbilityDataSource
+import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.ActivityAbilityDetailBinding
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BindingActivity
@@ -26,12 +26,12 @@ class AbilityDetailActivity :
     BindingActivity<ActivityAbilityDetailBinding>(R.layout.activity_ability_detail) {
     private val viewModel by viewModels<AbilityDetailViewModel> {
         AbilityDetailViewModel.factory(
-            DefaultAbilityDetailRepository(
-                remoteAbilityDetailDataSource =
-                    RemoteAbilityDetailDataSource(
-                        abilityService =
-                            ServiceModule.abilityService(),
-                    ),
+            DefaultAbilityRepository(
+                remoteAbilityDataSource =
+                RemoteAbilityDataSource(
+                    abilityService =
+                    ServiceModule.abilityService(),
+                ),
             ),
         )
     }
