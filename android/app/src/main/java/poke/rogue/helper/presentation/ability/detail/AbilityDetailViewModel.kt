@@ -30,7 +30,11 @@ class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
         }
     }
 
-    suspend fun updateAbilityDetail(abilityId: Long) {
+    fun updateAbilityDetail(abilityId: Long) {
+        if (abilityId == -1L) {
+            _abilityDetail.value = AbilityDetailUiState.Error(ABILITY_DETAIL_ERROR)
+            return
+        }
         viewModelScope.launch {
             val abilityDetail = abilityRepository.abilityDetail(abilityId).toUi()
             _abilityDetail.value = AbilityDetailUiState.Success(abilityDetail)
@@ -38,6 +42,7 @@ class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
     }
 
     companion object {
+        private const val ABILITY_DETAIL_ERROR = "Ability detail error"
         fun factory(abilityRepository: AbilityRepository): ViewModelProvider.Factory =
             BaseViewModelFactory {
                 AbilityDetailViewModel(abilityRepository)

@@ -101,6 +101,10 @@ class AbilityDetailActivity :
                         binding.abilityUiModel = abilityDetail.data.toUi()
                         adapter.submitList(abilityDetail.data.pokemons)
                     }
+
+                    is AbilityDetailUiState.Error -> {
+                        toast(abilityDetail.message)
+                    }
                 }
             }
         }
