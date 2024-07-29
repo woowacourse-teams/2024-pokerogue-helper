@@ -5,5 +5,4 @@ interface AbilityDetailUiState<out T : Any> {
 
     data class Success<out T : Any>(val data: T) : AbilityDetailUiState<T>
 
-    data class Error(val message: String) : AbilityDetailUiState<Nothing>
 }

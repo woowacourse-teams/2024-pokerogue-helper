@@ -24,6 +24,9 @@ class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
     val navigationToPokemonDetailEvent: SharedFlow<Long> =
         _navigationToPokemonDetailEvent.asSharedFlow()
 
+    private val _errorEvent: MutableSharedFlow<Unit> = MutableSharedFlow()
+    val errorEvent = _errorEvent.asSharedFlow()
+
     override fun navigateToPokemonDetail(pokemonId: Long) {
         viewModelScope.launch {
             _navigationToPokemonDetailEvent.emit(pokemonId)
@@ -32,7 +35,7 @@ class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
 
     fun updateAbilityDetail(abilityId: Long) {
         if (abilityId == -1L) {
-            _abilityDetail.value = AbilityDetailUiState.Error(ABILITY_DETAIL_ERROR)
+            _errorEvent.tryEmit(Unit)
             return
         }
         viewModelScope.launch {
@@ -42,8 +45,6 @@ class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
     }
 
     companion object {
-        private const val ABILITY_DETAIL_ERROR = "Ability detail error"
-
         fun factory(abilityRepository: AbilityRepository): ViewModelProvider.Factory =
             BaseViewModelFactory {
                 AbilityDetailViewModel(abilityRepository)

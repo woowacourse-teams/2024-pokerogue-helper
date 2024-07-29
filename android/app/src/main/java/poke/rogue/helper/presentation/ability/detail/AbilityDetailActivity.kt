@@ -28,10 +28,10 @@ class AbilityDetailActivity :
         AbilityDetailViewModel.factory(
             DefaultAbilityRepository(
                 remoteAbilityDataSource =
-                    RemoteAbilityDataSource(
-                        abilityService =
-                            ServiceModule.abilityService(),
-                    ),
+                RemoteAbilityDataSource(
+                    abilityService =
+                    ServiceModule.abilityService(),
+                ),
             ),
         )
     }
@@ -101,11 +101,13 @@ class AbilityDetailActivity :
                         binding.abilityUiModel = abilityDetail.data.toUi()
                         adapter.submitList(abilityDetail.data.pokemons)
                     }
-
-                    is AbilityDetailUiState.Error -> {
-                        toast(abilityDetail.message)
-                    }
                 }
+            }
+        }
+
+        repeatOnStarted {
+            viewModel.errorEvent.collect {
+                toast(R.string.ability_detail_error)
             }
         }
         // todo navigate to pokemon detail
