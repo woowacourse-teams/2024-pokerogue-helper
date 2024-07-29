@@ -16,6 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
         android:background="@drawable/shape_pokemon_corner_radius"
         android:onClick="@{() -> listener.navigateToPokemonDetail(pokemon.id)}"
         android:paddingBottom="6dp">
@@ -29,7 +30,7 @@
             app:layout_constraintBottom_toTopOf="@id/tv_item_poketmon_poketmon_name"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintWidth_percent="0.75"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
