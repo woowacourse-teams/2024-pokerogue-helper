@@ -29,5 +29,6 @@
 
     <!-- ability -->
     <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
+    <string name="ability_detail_error">잘못된 id값(-1) 입니다.</string>
 
 </resources>

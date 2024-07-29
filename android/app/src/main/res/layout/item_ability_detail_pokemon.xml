@@ -3,10 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        
+        <variable
+            name="uiEventHandler"
+            type="poke.rogue.helper.presentation.ability.detail.AbilityDetailUiEventHandler" />
 
         <variable
             name="pokemon"
-            type="poke.rogue.helper.presentation.dex.PokemonUiModel" />
+            type="poke.rogue.helper.presentation.dex.model.PokemonUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +20,7 @@
 
         <ImageView
             android:id="@+id/iv_ability_detail_pokemon"
+            android:onClick="@{()->uiEventHandler.navigateToPokemonDetail(pokemon.id)}"
             imageUrl="@{pokemon.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -29,25 +34,30 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_ability_detail_pokemon">
-
             <TextView
                 android:id="@+id/tv_ability_detail_pokemon_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/iv_ability_detail_pokemon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:paddingHorizontal="10dp"
                 android:paddingBottom="5dp"
                 android:text="@{pokemon.name}"
                 android:textAlignment="center"
                 tools:text="피카츄" />
-        </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_poke_type_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/tv_ability_detail_pokemon_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_type_right_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

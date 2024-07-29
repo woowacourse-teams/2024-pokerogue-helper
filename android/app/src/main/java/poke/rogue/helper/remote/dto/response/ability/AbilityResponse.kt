@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 data class AbilityResponse(
     val id: Long = 0,
     @SerialName("koName")
-    val name: String,
+    val title: String,
     val description: String,
 )
