@@ -5,12 +5,30 @@ on:
     branches: [ an/develop ]
 
 jobs:
+  assign-reviewers-labels:
+    runs-on: ubuntu-latest
+    env:
+      IS_ACTIVE: ${{ github.event.action == 'opened' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: auto-assign-reviews 🙏
+        if: env.IS_ACTIVE
+        uses: kentaro-m/auto-assign-action@v2.0.0
+        with:
+          configuration-path: '.github/actions/reviewers.yml'
+
+      - name: auto-add-labels ✨
+        if: env.IS_ACTIVE
+        uses: ./.github/actions/add_labels
+
   build:
     name: PR Checker
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Gradle cache
         uses: actions/cache@v3
