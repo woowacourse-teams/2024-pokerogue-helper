@@ -26,12 +26,12 @@ class PokemonDetailFragment :
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(
             pokemonDetailRepository =
-                DefaultPokemonDetailRepository(
-                    remotePokemonDetailDataSource =
-                        RemotePokemonDetailDataSource(
-                            pokeDexService = ServiceModule.pokeDexService(),
-                        ),
+            DefaultPokemonDetailRepository(
+                remotePokemonDetailDataSource =
+                RemotePokemonDetailDataSource(
+                    pokeDexService = ServiceModule.pokeDexService(),
                 ),
+            ),
         )
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
@@ -93,6 +93,7 @@ class PokemonDetailFragment :
                     val containerId = arguments?.getInt(CONTAINER_ID) ?: -1
                     if (containerId == -1) {
                         toast(R.string.dex_detail_error_containerId)
+                        return@commit
                     }
                     replace<AbilityDetailFragment>(
                         containerId,
