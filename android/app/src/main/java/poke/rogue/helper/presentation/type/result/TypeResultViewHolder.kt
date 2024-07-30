@@ -6,7 +6,6 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
@@ -22,7 +21,6 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         bindTypeStrengthText(typeMatchedResult, context)
 
         binding.typeResult = typeMatchedResult
-        binding.rvResultMatchedTypes.layoutManager = GridLayoutManager(context, 4)
         binding.rvResultMatchedTypes.adapter = TypeResultItemAdapter(typeMatchedResult.matchedItem)
     }
 
@@ -48,9 +46,9 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         typeMatchedResult: MatchedTypesUiModel,
         context: Context,
     ) {
-        val matchedResultText = context.stringOf(typeMatchedResult.matchedResultDescriptionResId)
+        val matchedResultText = context.stringOf(typeMatchedResult.matchedResultUi.descriptionRes)
         val matchedResultTextTail = context.stringOf(R.string.type_item_result_tail)
-        val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultColorResId)
+        val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultUi.colorRes)
 
         binding.tvResultSelectedTypeStrength.text =
             buildSpannedString {
