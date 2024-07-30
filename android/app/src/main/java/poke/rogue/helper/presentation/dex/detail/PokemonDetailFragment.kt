@@ -7,11 +7,14 @@ import poke.rogue.helper.R
 import poke.rogue.helper.data.datasource.RemotePokemonDetailDataSource
 import poke.rogue.helper.data.repository.DefaultPokemonDetailRepository
 import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
+import poke.rogue.helper.presentation.ability.detail.AbilityDetailActivity
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
+import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.remote.ServiceModule
 
@@ -28,7 +31,7 @@ class PokemonDetailFragment :
                 ),
         )
     }
-
+    private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
     private val pokemonTypeAdapter by lazy { PokemonTypeAdapter() }
     private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
 
@@ -48,24 +51,47 @@ class PokemonDetailFragment :
     }
 
     private fun initAdapter() {
-        binding.rvTypeList.adapter = pokemonTypeAdapter
-        binding.rvStatList.adapter = pokemonStatAdapter
+        with(binding) {
+            rvTypeList.adapter = pokemonTypeAdapter
+            rvStatList.adapter = pokemonStatAdapter
+            rvPokemonAbilities.adapter = abilityAdapter
+            rvPokemonAbilities.addItemDecoration(
+                LinearSpacingItemDecoration(
+                    spacing = 7.dp,
+                    includeEdge = false,
+                    orientation = LinearSpacingItemDecoration.Orientation.HORIZONTAL,
+                ),
+            )
+        }
     }
 
     private fun initObservers() {
+        observePokemonDetailUi()
+        observeNavigateToAbilityDetailEvent()
+    }
+
+    private fun observePokemonDetailUi() {
         repeatOnStarted {
             viewModel.uiState.collect { pokemonDetail ->
                 when (pokemonDetail) {
                     is PokemonDetailUiState.IsLoading -> return@collect
-                    is PokemonDetailUiState.PokemonDetailUiModel -> {
-                        binPokemonDetail(pokemonDetail)
+                    is PokemonDetailUiState.Success -> {
+                        bindPokemonDetail(pokemonDetail)
                     }
                 }
             }
         }
     }
 
-    private fun binPokemonDetail(pokemonDetail: PokemonDetailUiState.PokemonDetailUiModel) {
+    private fun observeNavigateToAbilityDetailEvent() {
+        repeatOnStarted {
+            viewModel.navigationToDetailEvent.collect { abilityId ->
+                AbilityDetailActivity.intent(requireContext(), abilityId).also { startActivity(it) }
+            }
+        }
+    }
+
+    private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
             ivPokemon.setImage(pokemonDetail.pokemon.imageUrl)
             tvPokemonName.text =
@@ -78,6 +104,7 @@ class PokemonDetailFragment :
 
         pokemonTypeAdapter.submitList(pokemonDetail.pokemon.types)
         pokemonStatAdapter.submitList(pokemonDetail.stats)
+        abilityAdapter.submitList(pokemonDetail.abilities)
     }
 
     companion object {

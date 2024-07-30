@@ -50,7 +50,7 @@ class PokemonListViewModelTest {
             viewModel = PokemonListViewModel(repository)
 
             // when
-            viewModel.onQueryName("리자")
+            viewModel.queryName("리자")
             val queriedPokemons =
                 viewModel.uiState.first { pokemons ->
                     pokemons.isNotEmpty()

@@ -50,6 +50,13 @@ data class AbilityUiModel(
 fun Ability.toUi(): AbilityUiModel =
     AbilityUiModel(
         id = id,
-        title = name,
+        title = title,
+        description = description,
+    )
+
+fun AbilityDetailUiModel.toUi(): AbilityUiModel =
+    AbilityUiModel(
+        id = 0,
+        title = title,
         description = description,
     )

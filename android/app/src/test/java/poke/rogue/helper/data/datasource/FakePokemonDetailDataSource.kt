@@ -1,5 +1,6 @@
 package poke.rogue.helper.data.datasource
 
+import poke.rogue.helper.data.model.Ability
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.Stat
@@ -21,7 +22,11 @@ class FakePokemonDetailDataSource {
                         Stat("speed", 45),
                         Stat("total", 318),
                     ),
-                abilities = listOf("그래스메이커", "심록", "엽록소"),
+                abilities =
+                    listOf(
+                        Ability(450, "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다."),
+                        Ability(419, "엽록소", description = "날씨가 맑을 때 스피드가 올라간다."),
+                    ),
                 height = 0.7f,
                 weight = 6.9f,
             )
