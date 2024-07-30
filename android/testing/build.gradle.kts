@@ -1,10 +1,40 @@
 plugins {
-    kotlin("jvm")
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.android.library)
+}
+
+android {
+    namespace = "poke.rogue.helper.testing"
+    compileSdk = libs.versions.compileSdk.get().toInt()
+
+    defaultConfig {
+        minSdk = libs.versions.minSdk.get().toInt()
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
 }
 
 dependencies {
-    implementation(libs.bundles.unit.test)
+    implementation(project(":data"))
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin)
-    implementation(kotlin("test"))
+    implementation(libs.timber)
+    implementation(libs.mockk)
+    api(libs.bundles.unit.test)
+    api(libs.kotlin.test)
 }
