@@ -5,9 +5,7 @@ import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
 import kotlin.test.Test
 
-
 internal class KrStringMatcherTest {
-
     @Test
     fun `검색값이 target의 부분 문자열인지 확인한다`() {
         // given

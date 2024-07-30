@@ -9,7 +9,8 @@ class DefaultPokemonListRepository(
 ) : PokemonListRepository {
     override suspend fun pokemons(): List<Pokemon> = pokemonListDataSource.pokemons()
 
-    override suspend fun pokemons(query: String): List<Pokemon> = pokemonListDataSource.pokemons().filter {
-        it.name.has(query)
-    }
+    override suspend fun pokemons(query: String): List<Pokemon> =
+        pokemonListDataSource.pokemons().filter {
+            it.name.has(query)
+        }
 }
