@@ -5,7 +5,6 @@ import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import poke.rogue.helper.BuildConfig
 import poke.rogue.helper.remote.interceptor.RedirectInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
