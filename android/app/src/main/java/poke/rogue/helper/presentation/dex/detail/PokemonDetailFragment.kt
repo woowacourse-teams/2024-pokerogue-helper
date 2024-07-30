@@ -2,7 +2,6 @@ package poke.rogue.helper.presentation.dex.detail
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -15,12 +14,12 @@ import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
 import poke.rogue.helper.presentation.util.fragment.stringOf
+import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.remote.ServiceModule
-import timber.log.Timber
 
 class PokemonDetailFragment :
     BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
@@ -92,6 +91,9 @@ class PokemonDetailFragment :
             viewModel.navigationToDetailEvent.collect { abilityId ->
                 parentFragmentManager.commit {
                     val containerId = arguments?.getInt(CONTAINER_ID) ?: -1
+                    if (containerId == -1) {
+                        toast(R.string.dex_detail_error_containerId)
+                    }
                     replace<AbilityDetailFragment>(
                         containerId,
                         args = AbilityDetailFragment.bundleOf(abilityId, containerId),

@@ -68,7 +68,7 @@ class AbilityDetailFragment :
 
         repeatOnStarted {
             viewModel.errorEvent.collect {
-                toast(R.string.ability_detail_error)
+                toast(R.string.ability_detail_error_abilityId)
             }
         }
 
@@ -76,6 +76,10 @@ class AbilityDetailFragment :
             viewModel.navigationToPokemonDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
                     val containerId = arguments?.getInt(CONTAINER_ID) ?: -1
+                    if (containerId == -1) {
+                        toast(R.string.ability_detail_error_containerId)
+                        return@commit
+                    }
                     replace<PokemonDetailFragment>(
                         containerId,
                         args = PokemonDetailFragment.bundleOf(pokemonId, containerId),

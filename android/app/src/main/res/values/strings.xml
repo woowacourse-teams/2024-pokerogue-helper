@@ -26,9 +26,11 @@
     <string name="dex_stat_format">%03d/%03d</string>
     <string name="dex_poke_name_format">%s #%d</string>
     <string name="dex_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
+    <string name="dex_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
 
     <!-- ability -->
     <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
-    <string name="ability_detail_error">잘못된 id값(-1) 입니다.</string>
+    <string name="ability_detail_error_abilityId">잘못된 abilityId값(-1) 입니다.</string>
+    <string name="ability_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
 
 </resources>
