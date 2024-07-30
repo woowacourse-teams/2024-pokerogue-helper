@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="abilityUiModel"
+            type="poke.rogue.helper.presentation.ability.model.AbilityUiModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/item_ability_detail"
+            layout="@layout/item_ability_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            bind:ability="@{abilityUiModel}" />
+        <!--   app:layout_constraintTop_toBottomOf="@+id/toolbar_ability_detail"-->
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_ability_detail_pokemon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="23dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_ability_detail"
+            app:spanCount="3"
+            tools:listitem="@layout/item_ability_detail_pokemon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

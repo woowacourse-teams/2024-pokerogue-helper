@@ -19,26 +19,14 @@
             android:id="@+id/toolbar_ability_detail"
             layout="@layout/toolbar" />
 
-        <include
-            android:id="@+id/item_ability_detail"
-            layout="@layout/item_ability_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_ability_detail"
-            bind:ability="@{abilityUiModel}" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_ability_detail_pokemon"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_ability"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="23dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_marginTop="?attr/actionBarSize"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_ability_detail"
-            app:spanCount="3"
-            tools:listitem="@layout/item_ability_detail_pokemon" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_ability_detail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
