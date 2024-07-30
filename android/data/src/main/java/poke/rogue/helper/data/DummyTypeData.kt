@@ -1,4 +1,4 @@
-package poke.rogue.helper.local
+package poke.rogue.helper.data
 
 import poke.rogue.helper.data.model.MatchedResult
 import poke.rogue.helper.data.model.Type

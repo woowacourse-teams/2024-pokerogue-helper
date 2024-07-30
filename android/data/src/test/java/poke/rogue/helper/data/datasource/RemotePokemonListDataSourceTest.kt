@@ -5,10 +5,10 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
+import poke.rogue.helper.data.model.fixture.pokemonResponses
+import poke.rogue.helper.data.model.fixture.pokemons
 import poke.rogue.helper.remote.dto.response.BaseResponse
 import poke.rogue.helper.remote.service.PokeDexService
-import poke.rogue.helper.utils.fixture.pokemonResponses
-import poke.rogue.helper.utils.fixture.pokemons
 
 class RemotePokemonListDataSourceTest {
     private val mockService = mockk<PokeDexService>()
@@ -19,7 +19,8 @@ class RemotePokemonListDataSourceTest {
         runTest {
             // given
             val mockPokemonResponses = pokemonResponses(1, 2, 3, 4, 5)
-            val mockResponse = BaseResponse(message = "포켓몬 리스트 불러오기에 성공했습니다.", data = mockPokemonResponses)
+            val mockResponse =
+                BaseResponse(message = "포켓몬 리스트 불러오기에 성공했습니다.", data = mockPokemonResponses)
             coEvery { mockService.pokemons() } returns mockResponse
 
             // when
@@ -36,7 +37,8 @@ class RemotePokemonListDataSourceTest {
             // given
             val query = "1"
             val mockPokemonResponses = pokemonResponses(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-            val mockResponse = BaseResponse(message = "포켓몬 리스트 불러오기에 성공했습니다.", data = mockPokemonResponses)
+            val mockResponse =
+                BaseResponse(message = "포켓몬 리스트 불러오기에 성공했습니다.", data = mockPokemonResponses)
             coEvery { mockService.pokemons() } returns mockResponse
 
             // when

@@ -1,4 +1,4 @@
-package poke.rogue.helper.utils.fixture
+package poke.rogue.helper.data.model.fixture
 
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.Type

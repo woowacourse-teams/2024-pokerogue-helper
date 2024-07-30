@@ -1,16 +1,15 @@
 package poke.rogue.helper.data.datasource
 
+import poke.rogue.helper.data.DummyTypeData
 import poke.rogue.helper.data.model.MatchedTypes
 import poke.rogue.helper.data.model.Type
-import poke.rogue.helper.local.DummyTypeData
 
 class LocalTypeDataSource(private val typeData: DummyTypeData = DummyTypeData) {
     fun matchedTypesAgainstAttackingType(attackingTypeId: Int): List<MatchedTypes> {
         val allResult = typeData.typeMatchedTable[attackingTypeId]
         val resultMap = allResult.withIndex().groupBy({ it.value }, { typeData.allTypes[it.index] })
         val result =
-            resultMap.entries.map {
-                    (matchedResult, types) ->
+            resultMap.entries.map { (matchedResult, types) ->
                 MatchedTypes(matchedResult, types)
             }
         return result
@@ -20,8 +19,7 @@ class LocalTypeDataSource(private val typeData: DummyTypeData = DummyTypeData) {
         val allResult = typeData.typeMatchedTable.map { it[defendingTypeId] }
         val resultMap = allResult.withIndex().groupBy({ it.value }, { typeData.allTypes[it.index] })
         val result =
-            resultMap.entries.map {
-                    (matchedResult, types) ->
+            resultMap.entries.map { (matchedResult, types) ->
                 MatchedTypes(matchedResult, types)
             }
         return result

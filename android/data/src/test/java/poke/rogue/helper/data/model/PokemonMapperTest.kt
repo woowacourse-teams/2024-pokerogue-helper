@@ -1,14 +1,12 @@
-package poke.rogue.helper.remote.dto.response.pokemon
+package poke.rogue.helper.data.model
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
-import poke.rogue.helper.data.model.Pokemon
-import poke.rogue.helper.data.model.Type
-import poke.rogue.helper.data.model.toData
-import poke.rogue.helper.utils.fixture.pokemonResponses
-import poke.rogue.helper.utils.fixture.pokemonTypeResponses
+import poke.rogue.helper.data.model.fixture.pokemonResponses
+import poke.rogue.helper.data.model.fixture.pokemonTypeResponses
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 
-class PokemonResponseTest {
+class PokemonMapperTest {
     @Test
     fun `포켓몬 응답을 데이터로 매핑한다`() {
         // given

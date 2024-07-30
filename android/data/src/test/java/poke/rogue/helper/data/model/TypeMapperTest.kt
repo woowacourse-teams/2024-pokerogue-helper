@@ -1,15 +1,13 @@
-package poke.rogue.helper.remote.dto.response.type
+package poke.rogue.helper.data.model
 
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import poke.rogue.helper.data.model.Type
-import poke.rogue.helper.data.model.toData
-import poke.rogue.helper.utils.fixture.pokemonTypeResponse
-import poke.rogue.helper.utils.fixture.pokemonTypeResponses
+import poke.rogue.helper.data.model.fixture.pokemonTypeResponse
+import poke.rogue.helper.data.model.fixture.pokemonTypeResponses
 
-class PokemonTypeResponseTest {
+class TypeMapperTest {
     @ParameterizedTest
     @CsvSource(
         "fire, FIRE",
