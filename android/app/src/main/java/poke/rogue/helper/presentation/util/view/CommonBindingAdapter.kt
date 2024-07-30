@@ -19,7 +19,7 @@ fun ImageView.setImage(imageUrl: String?) {
 }
 
 @BindingAdapter("imageRes")
-fun ImageView.setImageRes(imageRes: Int) {
+fun ImageView.setImage(imageRes: Int) {
     setImageResource(imageRes)
 }
 
