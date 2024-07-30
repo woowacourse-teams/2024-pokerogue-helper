@@ -43,7 +43,7 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
             }
 
             android.R.id.home -> {
-                finish()
+                onBackPressedDispatcher.onBackPressed()
             }
         }
         return true

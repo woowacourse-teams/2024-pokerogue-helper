@@ -22,12 +22,12 @@ class PokemonListFragment :
     private val viewModel by viewModels<PokemonListViewModel> {
         PokemonListViewModel.factory(
             pokemonListRepository =
-                DefaultPokemonListRepository(
-                    pokemonListDataSource =
-                        RemotePokemonListDataSource(
-                            pokeDexService = ServiceModule.pokeDexService(),
-                        ),
+            DefaultPokemonListRepository(
+                pokemonListDataSource =
+                RemotePokemonListDataSource(
+                    pokeDexService = ServiceModule.pokeDexService(),
                 ),
+            ),
         )
     }
 
@@ -80,9 +80,10 @@ class PokemonListFragment :
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
+                    val containerId = R.id.fragment_container_pokemon
                     replace<PokemonDetailFragment>(
-                        R.id.fragment_container_pokemon,
-                        args = PokemonDetailFragment.bundleOf(pokemonId),
+                        containerId,
+                        args = PokemonDetailFragment.bundleOf(pokemonId, containerId),
                     )
                     addToBackStack(TAG)
                 }

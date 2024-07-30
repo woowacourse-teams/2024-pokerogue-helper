@@ -66,9 +66,13 @@ class AbilityFragment :
         repeatOnStarted {
             viewModel.navigationToDetailEvent.collect { abilityId ->
                 parentFragmentManager.commit {
+                    val containerId = R.id.fragment_container_ability
                     replace<AbilityDetailFragment>(
-                        R.id.fragment_container_ability,
-                        args = AbilityDetailFragment.bundleOf(abilityId),
+                        containerId,
+                        args = AbilityDetailFragment.bundleOf(
+                            abilityId,
+                            containerId,
+                        ),
                     )
                     addToBackStack(TAG)
                 }
@@ -77,6 +81,6 @@ class AbilityFragment :
     }
 
     companion object {
-        val TAG: String = AbilityFragment::class.java.simpleName
+        private val TAG: String = AbilityFragment::class.java.simpleName
     }
 }

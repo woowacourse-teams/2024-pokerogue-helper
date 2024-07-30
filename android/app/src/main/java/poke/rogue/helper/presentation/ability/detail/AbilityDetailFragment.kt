@@ -3,6 +3,7 @@ package poke.rogue.helper.presentation.ability.detail
 import android.os.Bundle
 import android.text.TextUtils.replace
 import android.view.View
+import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -74,9 +75,10 @@ class AbilityDetailFragment :
         repeatOnStarted {
             viewModel.navigationToPokemonDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
+                    val containerId = arguments?.getInt(CONTAINER_ID) ?: -1
                     replace<PokemonDetailFragment>(
-                        R.id.fragment_container_ability,
-                        args = PokemonDetailFragment.bundleOf(pokemonId),
+                        containerId,
+                        args = PokemonDetailFragment.bundleOf(pokemonId, containerId),
                     )
                     addToBackStack(TAG)
                 }
@@ -86,12 +88,13 @@ class AbilityDetailFragment :
 
     companion object {
         private const val ABILITY_ID = "abilityId"
+        private const val CONTAINER_ID = "containerId"
+        private val TAG = AbilityDetailFragment::class.java.simpleName
 
-        val TAG = AbilityDetailFragment::class.java.simpleName
-
-        fun bundleOf(abilityId: Long) =
+        fun bundleOf(abilityId: Long, containerId: Int) =
             Bundle().apply {
                 putLong(ABILITY_ID, abilityId)
+                putInt(CONTAINER_ID, containerId)
             }
     }
 }
