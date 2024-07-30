@@ -26,12 +26,12 @@ class PokemonDetailFragment :
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(
             pokemonDetailRepository =
-            DefaultPokemonDetailRepository(
-                remotePokemonDetailDataSource =
-                RemotePokemonDetailDataSource(
-                    pokeDexService = ServiceModule.pokeDexService(),
+                DefaultPokemonDetailRepository(
+                    remotePokemonDetailDataSource =
+                        RemotePokemonDetailDataSource(
+                            pokeDexService = ServiceModule.pokeDexService(),
+                        ),
                 ),
-            ),
         )
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
@@ -125,10 +125,12 @@ class PokemonDetailFragment :
         private const val CONTAINER_ID = "containerId"
         val TAG: String = PokemonDetailFragment::class.java.simpleName
 
-        fun bundleOf(pokemonId: Long, containerId: Int) =
-            Bundle().apply {
-                putLong(POKEMON_ID, pokemonId)
-                putInt(CONTAINER_ID, containerId)
-            }
+        fun bundleOf(
+            pokemonId: Long,
+            containerId: Int,
+        ) = Bundle().apply {
+            putLong(POKEMON_ID, pokemonId)
+            putInt(CONTAINER_ID, containerId)
+        }
     }
 }

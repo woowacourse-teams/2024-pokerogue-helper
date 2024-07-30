@@ -1,9 +1,7 @@
 package poke.rogue.helper.presentation.ability.detail
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.View
-import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -19,23 +17,26 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.remote.ServiceModule
-import timber.log.Timber
 
 class AbilityDetailFragment :
     BindingFragment<FragmentAbilityDetailBinding>(R.layout.fragment_ability_detail) {
     private val viewModel by viewModels<AbilityDetailViewModel> {
         AbilityDetailViewModel.factory(
             DefaultAbilityRepository(
-                remoteAbilityDataSource = RemoteAbilityDataSource(
-                    abilityService = ServiceModule.abilityService(),
-                ),
-            )
+                remoteAbilityDataSource =
+                    RemoteAbilityDataSource(
+                        abilityService = ServiceModule.abilityService(),
+                    ),
+            ),
         )
     }
 
     private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter(viewModel) }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         repeatOnStarted {
@@ -95,10 +96,12 @@ class AbilityDetailFragment :
         private const val CONTAINER_ID = "containerId"
         private val TAG = AbilityDetailFragment::class.java.simpleName
 
-        fun bundleOf(abilityId: Long, containerId: Int) =
-            Bundle().apply {
-                putLong(ABILITY_ID, abilityId)
-                putInt(CONTAINER_ID, containerId)
-            }
+        fun bundleOf(
+            abilityId: Long,
+            containerId: Int,
+        ) = Bundle().apply {
+            putLong(ABILITY_ID, abilityId)
+            putInt(CONTAINER_ID, containerId)
+        }
     }
 }

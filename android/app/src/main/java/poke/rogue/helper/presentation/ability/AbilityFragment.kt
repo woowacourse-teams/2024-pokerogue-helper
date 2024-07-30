@@ -18,14 +18,13 @@ import poke.rogue.helper.remote.ServiceModule
 
 class AbilityFragment :
     BindingFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
-
     private val viewModel by viewModels<AbilityViewModel> {
         AbilityViewModel.factory(
             DefaultAbilityRepository(
                 remoteAbilityDataSource =
-                RemoteAbilityDataSource(
-                    abilityService = ServiceModule.abilityService(),
-                ),
+                    RemoteAbilityDataSource(
+                        abilityService = ServiceModule.abilityService(),
+                    ),
             ),
         )
     }
@@ -33,7 +32,8 @@ class AbilityFragment :
     private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
 
     override fun onViewCreated(
-        view: View, savedInstanceState: Bundle?,
+        view: View,
+        savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,10 +69,11 @@ class AbilityFragment :
                     val containerId = R.id.fragment_container_ability
                     replace<AbilityDetailFragment>(
                         containerId,
-                        args = AbilityDetailFragment.bundleOf(
-                            abilityId,
-                            containerId,
-                        ),
+                        args =
+                            AbilityDetailFragment.bundleOf(
+                                abilityId,
+                                containerId,
+                            ),
                     )
                     addToBackStack(TAG)
                 }
