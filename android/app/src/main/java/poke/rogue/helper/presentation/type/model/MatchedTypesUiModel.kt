@@ -22,3 +22,8 @@ fun MatchedTypes.toUi(
         matchedItem = this.types.map { it.toUi() },
     )
 }
+
+fun List<MatchedTypes>.toUi(
+    selectedTypeId: Int,
+    isMyType: Boolean,
+): List<MatchedTypesUiModel> = this.map { it.toUi(selectedTypeId, isMyType) }

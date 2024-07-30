@@ -15,8 +15,8 @@ import poke.rogue.helper.data.datasource.LocalTypeDataSource
 import poke.rogue.helper.data.repository.DefaultTypeRepository
 import poke.rogue.helper.data.repository.TypeRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
-import poke.rogue.helper.presentation.type.mapper.sortedAndMappedToUi
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
+import poke.rogue.helper.presentation.type.model.MatchedTypesUiModelComparator
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
@@ -38,13 +38,13 @@ class TypeViewModel(
         typeSelectionStates.map { states ->
             when {
                 states.isMyTypeEmptyAndAnyOpponentSelected ->
-                    matchedTypesAgainstOpponentSelections(
+                    matchedTypesAgainstOpponent(
                         states.opponentType1,
                         states.opponentType2,
                     )
 
                 states.isMyTypeSelectedAndOpponentsEmpty ->
-                    matchedTypesAgainstMySelection(states.myType as TypeSelectionUiState.Selected)
+                    matchedTypesAgainstMine(states.myType as TypeSelectionUiState.Selected)
 
                 states.isMyTypeSelectedAndAnyOpponentSelected ->
                     matchedTypes(
@@ -54,29 +54,29 @@ class TypeViewModel(
                     )
 
                 else -> emptyList()
-            }
+            }.sortedWith(MatchedTypesUiModelComparator)
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), emptyList())
 
-    private fun matchedTypesAgainstOpponentSelections(
+    private fun matchedTypesAgainstOpponent(
         opponent1: TypeSelectionUiState,
         opponent2: TypeSelectionUiState,
     ): List<MatchedTypesUiModel> {
-        return matchedTypesAgainstOpponentSelection(opponent1) + matchedTypesAgainstOpponentSelection(opponent2)
+        return matchedTypesAgainstOpponent(opponent1) + matchedTypesAgainstOpponent(opponent2)
     }
 
-    private fun matchedTypesAgainstOpponentSelection(opponent: TypeSelectionUiState): List<MatchedTypesUiModel> {
+    private fun matchedTypesAgainstOpponent(opponent: TypeSelectionUiState): List<MatchedTypesUiModel> {
         if (opponent is TypeSelectionUiState.Selected) {
             val selectedTypeId = opponent.selectedType.id
             return typeRepository.matchedTypesAgainstOpponent(selectedTypeId)
-                .sortedAndMappedToUi(selectedTypeId = selectedTypeId, isMyType = false)
+                .toUi(selectedTypeId = selectedTypeId, isMyType = false)
         }
         return emptyList()
     }
 
-    private fun matchedTypesAgainstMySelection(mine: TypeSelectionUiState.Selected): List<MatchedTypesUiModel> {
+    private fun matchedTypesAgainstMine(mine: TypeSelectionUiState.Selected): List<MatchedTypesUiModel> {
         val selectedTypeId = mine.selectedType.id
         return typeRepository.matchedTypesAgainstMyType(selectedTypeId)
-            .sortedAndMappedToUi(selectedTypeId = selectedTypeId, isMyType = true)
+            .toUi(selectedTypeId = selectedTypeId, isMyType = true)
     }
 
     private fun matchedTypes(
@@ -91,7 +91,7 @@ class TypeViewModel(
                 .map { it.selectedType.id }
 
         return typeRepository.matchedTypes(mySelectedId, opponentIds)
-            .sortedAndMappedToUi(selectedTypeId = mySelectedId, isMyType = true)
+            .toUi(selectedTypeId = mySelectedId, isMyType = true)
     }
 
     override fun startSelection(selectorType: SelectorType) {
@@ -99,7 +99,7 @@ class TypeViewModel(
             _typeEvent.emit(
                 TypeEvent.ShowSelection(
                     selectorType,
-                    typeSelectionStates.value.disabledTypeItemSet(selectorType),
+                    typeSelectionStates.value.disabledTypeItems(selectorType),
                 ),
             )
         }

@@ -26,3 +26,22 @@ enum class MatchedResultUiModel(
         }
     }
 }
+
+object MatchedTypesUiModelComparator : Comparator<MatchedTypesUiModel> {
+    private val order =
+        listOf(
+            MatchedResultUiModel.STRONG,
+            MatchedResultUiModel.WEAK,
+            MatchedResultUiModel.INEFFECTIVE,
+            MatchedResultUiModel.NORMAL,
+        )
+
+    override fun compare(
+        a: MatchedTypesUiModel,
+        b: MatchedTypesUiModel,
+    ): Int {
+        val indexA = order.indexOf(a.matchedResultUi)
+        val indexB = order.indexOf(b.matchedResultUi)
+        return indexA.compareTo(indexB)
+    }
+}
