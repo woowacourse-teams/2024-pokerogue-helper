@@ -5,8 +5,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.android.junit5)
-    id("kotlin-parcelize")
 }
 
 val properties =
@@ -67,6 +67,12 @@ android {
 }
 
 dependencies {
+    // module
+    implementation(project(":data"))
+    implementation(project(":remote")) // TODO remove this
+    implementation(project(":local"))
+    testImplementation(project(":testing"))
+    androidTestImplementation(project(":testing"))
     // androidx
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -79,24 +85,12 @@ dependencies {
     implementation(libs.kotlin.coroutines.android)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.flexbox)
-    // room
-    implementation(libs.room)
-    implementation(libs.room.ktx)
-    kapt(libs.room.compiler)
-    // retrofit & okhttp
-    implementation(libs.bundles.retrofit)
-    implementation(platform(libs.okhttp.bom))
-    implementation(libs.okhttp.logging.interceptor)
     // third party
-    implementation(libs.kotlin.serialization.json)
     implementation(libs.timber)
     implementation(libs.coil.core)
     implementation(libs.glide)
     kapt(libs.glide.compiler)
     implementation(libs.splash.screen)
-    // unit test
-    testImplementation(libs.bundles.unit.test)
-    testImplementation(libs.mockk.webserver)
     // android test
     androidTestImplementation(libs.bundles.android.test)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)

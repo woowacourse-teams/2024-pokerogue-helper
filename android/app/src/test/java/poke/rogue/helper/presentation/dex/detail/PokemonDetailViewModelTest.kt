@@ -6,14 +6,13 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import poke.rogue.helper.data.datasource.FakePokemonDetailDataSource
-import poke.rogue.helper.data.repository.FakePokemonDetailRepository
 import poke.rogue.helper.data.repository.PokemonDetailRepository
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
-import poke.rogue.helper.utils.CoroutinesTestExtension
+import poke.rogue.helper.testing.CoroutinesTestExtension
+import poke.rogue.helper.testing.data.repository.FakePokemonDetailRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
@@ -23,7 +22,7 @@ class PokemonDetailViewModelTest {
 
     @BeforeEach
     fun setUp() {
-        repository = FakePokemonDetailRepository(FakePokemonDetailDataSource())
+        repository = FakePokemonDetailRepository()
     }
 
     @Test

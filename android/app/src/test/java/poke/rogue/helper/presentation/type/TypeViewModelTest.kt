@@ -18,7 +18,7 @@ import poke.rogue.helper.data.repository.TypeRepository
 import poke.rogue.helper.presentation.type.mapper.sortedAndMappedToUi
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
-import poke.rogue.helper.utils.CoroutinesTestExtension
+import poke.rogue.helper.testing.CoroutinesTestExtension
 
 @ExperimentalCoroutinesApi
 @ExtendWith(CoroutinesTestExtension::class)
@@ -70,7 +70,8 @@ class TypeViewModelTest {
             // then
             launch {
                 viewModel.type.collect { actual ->
-                    val expected = FakeMatchedResults.sortedAndMappedToUi(Type.FAIRY.id, isMyType = true)
+                    val expected =
+                        FakeMatchedResults.sortedAndMappedToUi(Type.FAIRY.id, isMyType = true)
                     actual shouldBe expected
                     cancel()
                 }
@@ -90,7 +91,8 @@ class TypeViewModelTest {
             // then
             launch {
                 viewModel.type.collect { actual ->
-                    val expected = FakeMatchedResults.sortedAndMappedToUi(Type.FAIRY.id, isMyType = false)
+                    val expected =
+                        FakeMatchedResults.sortedAndMappedToUi(Type.FAIRY.id, isMyType = false)
                     actual shouldBe expected
                     cancel()
                 }
@@ -103,7 +105,12 @@ class TypeViewModelTest {
             // given
             val myType = TypeUiModel.FAIRY
             val opponentType = TypeUiModel.FIGHTING
-            coEvery { typeRepository.matchedTypes(myType.id, listOf(opponentType.id)) } returns FakeMatchedResults
+            coEvery {
+                typeRepository.matchedTypes(
+                    myType.id,
+                    listOf(opponentType.id),
+                )
+            } returns FakeMatchedResults
 
             // when
             viewModel.selectType(SelectorType.MINE, myType)

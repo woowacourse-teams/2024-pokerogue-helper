@@ -16,5 +16,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "PokeRogueHelper"
 include(":app")
+include(":data")
+include(":remote")
+include(":local")
 include(":testing")
  
