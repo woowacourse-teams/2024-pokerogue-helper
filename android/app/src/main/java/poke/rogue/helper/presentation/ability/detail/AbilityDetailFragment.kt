@@ -39,10 +39,8 @@ class AbilityDetailFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        repeatOnStarted {
-            val id = arguments?.getLong(ABILITY_ID) ?: -1
-            viewModel.updateAbilityDetail(id)
-        }
+        val id = arguments?.getLong(ABILITY_ID) ?: INVALID_ABILITY_ID
+        viewModel.updateAbilityDetail(id)
 
         initAdapter()
         initObservers()
@@ -76,8 +74,8 @@ class AbilityDetailFragment :
         repeatOnStarted {
             viewModel.navigationToPokemonDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
-                    val containerId = arguments?.getInt(CONTAINER_ID) ?: -1
-                    if (containerId == -1) {
+                    val containerId = arguments?.getInt(CONTAINER_ID) ?: INVALID_CONTAINER_ID
+                    if (containerId == INVALID_CONTAINER_ID) {
                         toast(R.string.ability_detail_error_containerId)
                         return@commit
                     }
@@ -94,6 +92,8 @@ class AbilityDetailFragment :
     companion object {
         private const val ABILITY_ID = "abilityId"
         private const val CONTAINER_ID = "containerId"
+        private const val INVALID_ABILITY_ID = -1L
+        private const val INVALID_CONTAINER_ID = -1
         private val TAG = AbilityDetailFragment::class.java.simpleName
 
         fun bundleOf(

@@ -90,8 +90,8 @@ class PokemonDetailFragment :
         repeatOnStarted {
             viewModel.navigationToDetailEvent.collect { abilityId ->
                 parentFragmentManager.commit {
-                    val containerId = arguments?.getInt(CONTAINER_ID) ?: -1
-                    if (containerId == -1) {
+                    val containerId = arguments?.getInt(CONTAINER_ID) ?: INVALID_CONTAINER_ID
+                    if (containerId == INVALID_CONTAINER_ID) {
                         toast(R.string.dex_detail_error_containerId)
                         return@commit
                     }
@@ -124,6 +124,7 @@ class PokemonDetailFragment :
     companion object {
         private const val POKEMON_ID = "pokemonId"
         private const val CONTAINER_ID = "containerId"
+        private const val INVALID_CONTAINER_ID = -1
         val TAG: String = PokemonDetailFragment::class.java.simpleName
 
         fun bundleOf(

@@ -12,7 +12,7 @@ import poke.rogue.helper.databinding.FragmentAbilityBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.util.repeatOnStarted
-import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
+import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.remote.ServiceModule
 
@@ -46,7 +46,7 @@ class AbilityFragment :
 
     private fun initAdapter() {
         val decoration =
-            GridSpacingItemDecoration(spanCount = 1, spacing = 23.dp, includeEdge = true)
+            LinearSpacingItemDecoration(spacing = 11.dp, true)
         binding.rvAbilityDescription.adapter = adapter
         binding.rvAbilityDescription.addItemDecoration(decoration)
     }
