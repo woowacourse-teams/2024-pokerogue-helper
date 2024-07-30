@@ -8,6 +8,13 @@ data class TypeSelectionStates(
     val opponentType1: TypeSelectionUiState = TypeSelectionUiState.Empty,
     val opponentType2: TypeSelectionUiState = TypeSelectionUiState.Empty,
 ) {
+    val selectedOpponents: List<TypeSelectionUiState.Selected>
+        get() =
+            listOf(
+                opponentType1,
+                opponentType2,
+            ).filterIsInstance<TypeSelectionUiState.Selected>()
+
     val isMyTypeSelected: Boolean
         get() = myType.isSelected()
 

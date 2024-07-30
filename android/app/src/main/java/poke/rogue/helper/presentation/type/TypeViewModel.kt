@@ -38,10 +38,7 @@ class TypeViewModel(
         typeSelectionStates.map { states ->
             when {
                 states.isMyTypeEmptyAndAnyOpponentSelected ->
-                    matchedTypesAgainstOpponent(
-                        states.opponentType1,
-                        states.opponentType2,
-                    )
+                    matchedTypesAgainstOpponents(states.selectedOpponents)
 
                 states.isMyTypeSelectedAndOpponentsEmpty ->
                     matchedTypesAgainstMine(states.myType as TypeSelectionUiState.Selected)
@@ -49,28 +46,21 @@ class TypeViewModel(
                 states.isMyTypeSelectedAndAnyOpponentSelected ->
                     matchedTypes(
                         states.myType as TypeSelectionUiState.Selected,
-                        states.opponentType1,
-                        states.opponentType2,
+                        states.selectedOpponents,
                     )
 
                 else -> emptyList()
             }.sortedWith(MatchedTypesUiModelComparator)
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), emptyList())
 
-    private fun matchedTypesAgainstOpponent(
-        opponent1: TypeSelectionUiState,
-        opponent2: TypeSelectionUiState,
-    ): List<MatchedTypesUiModel> {
-        return matchedTypesAgainstOpponent(opponent1) + matchedTypesAgainstOpponent(opponent2)
+    private fun matchedTypesAgainstOpponents(opponents: List<TypeSelectionUiState.Selected>): List<MatchedTypesUiModel> {
+        return opponents.flatMap { matchedTypesAgainstOpponent(it) }
     }
 
-    private fun matchedTypesAgainstOpponent(opponent: TypeSelectionUiState): List<MatchedTypesUiModel> {
-        if (opponent is TypeSelectionUiState.Selected) {
-            val selectedTypeId = opponent.selectedType.id
-            return typeRepository.matchedTypesAgainstOpponent(selectedTypeId)
-                .toUi(selectedTypeId = selectedTypeId, isMyType = false)
-        }
-        return emptyList()
+    private fun matchedTypesAgainstOpponent(opponent: TypeSelectionUiState.Selected): List<MatchedTypesUiModel> {
+        val selectedTypeId = opponent.selectedType.id
+        return typeRepository.matchedTypesAgainstOpponent(selectedTypeId)
+            .toUi(selectedTypeId = selectedTypeId, isMyType = false)
     }
 
     private fun matchedTypesAgainstMine(mine: TypeSelectionUiState.Selected): List<MatchedTypesUiModel> {
@@ -81,14 +71,10 @@ class TypeViewModel(
 
     private fun matchedTypes(
         mine: TypeSelectionUiState.Selected,
-        opponent1: TypeSelectionUiState,
-        opponent2: TypeSelectionUiState,
+        opponents: List<TypeSelectionUiState.Selected>,
     ): List<MatchedTypesUiModel> {
         val mySelectedId = mine.selectedType.id
-        val opponentIds =
-            listOf(opponent1, opponent2)
-                .filterIsInstance<TypeSelectionUiState.Selected>()
-                .map { it.selectedType.id }
+        val opponentIds = opponents.map { it.selectedType.id }
 
         return typeRepository.matchedTypes(mySelectedId, opponentIds)
             .toUi(selectedTypeId = mySelectedId, isMyType = true)
