@@ -6,41 +6,25 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import poke.rogue.helper.R
-import poke.rogue.helper.data.datasource.RemoteAbilityDataSource
-import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.ActivityAbilityBinding
-import poke.rogue.helper.presentation.ability.detail.AbilityDetailActivity
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
-import poke.rogue.helper.presentation.util.repeatOnStarted
-import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
-import poke.rogue.helper.presentation.util.view.dp
-import poke.rogue.helper.remote.ServiceModule
 
 class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activity_ability) {
-    private val viewModel by viewModels<AbilityViewModel> {
-        AbilityViewModel.factory(
-            DefaultAbilityRepository(
-                remoteAbilityDataSource =
-                    RemoteAbilityDataSource(
-                        abilityService = ServiceModule.abilityService(),
-                    ),
-            ),
-        )
-    }
-
-    private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initViews()
-        initAdapter()
-        initObservers()
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace<AbilityFragment>(R.id.fragment_container_ability)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -70,39 +54,12 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
             setSupportActionBar(toolbarAbility.toolbar)
             toolbarAbility.toolbar.overflowIcon = drawableOf(R.drawable.ic_menu)
             supportActionBar?.setDisplayShowTitleEnabled(false)
-            vm = viewModel
         }
 
     private fun navigateToPokeRogue() {
         val intent =
             Intent(Intent.ACTION_VIEW, Uri.parse(stringOf(R.string.home_pokerogue_url)))
         startActivity(intent)
-    }
-
-    private fun initAdapter() {
-        val decoration =
-            GridSpacingItemDecoration(spanCount = 1, spacing = 23.dp, includeEdge = true)
-        binding.rvAbilityDescription.adapter = adapter
-        binding.rvAbilityDescription.addItemDecoration(decoration)
-    }
-
-    private fun initObservers() {
-        repeatOnStarted {
-            viewModel.uiState.collect { abilities ->
-                when (abilities) {
-                    is AbilityUiState.Loading -> {}
-                    is AbilityUiState.Success -> {
-                        adapter.submitList(abilities.data)
-                    }
-                }
-            }
-        }
-
-        repeatOnStarted {
-            viewModel.navigationToDetailEvent.collect {
-                AbilityDetailActivity.intent(this, it).also { startActivity(it) }
-            }
-        }
     }
 
     companion object {
