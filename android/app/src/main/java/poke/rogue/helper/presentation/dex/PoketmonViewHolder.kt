@@ -6,7 +6,7 @@ import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 
 class PoketmonViewHolder(
     private val binding: ItemPokemonListPokemonBinding,
-    private val onClickPokeMonItem: PokemonDetailNavigateHandler,
+    private val onClickPokeMonItem: PokemonListNavigateHandler,
 ) : RecyclerView.ViewHolder(binding.root) {
     init {
         binding.listener = onClickPokeMonItem

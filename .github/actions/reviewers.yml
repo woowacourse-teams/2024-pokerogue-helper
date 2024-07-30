@@ -1,0 +1,10 @@
+addReviewers: true
+addAssignees: author
+
+reviewers:
+  - kkosang
+  - sh1mj1
+  - murjune
+  - JoYehyun99
+
+numberOfReviewers: 3

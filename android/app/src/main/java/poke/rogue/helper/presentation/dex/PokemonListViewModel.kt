@@ -19,11 +19,10 @@ import poke.rogue.helper.data.repository.PokemonListRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
-import poke.rogue.helper.presentation.util.view.QueryHandler
 
 class PokemonListViewModel(
     private val pokemonListRepository: PokemonListRepository,
-) : ViewModel(), PokemonDetailNavigateHandler, QueryHandler {
+) : ViewModel(), PokemonListNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
@@ -42,23 +41,23 @@ class PokemonListViewModel(
     private val _navigateToDetailEvent = MutableSharedFlow<Long>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
+    private suspend fun queriedPokemons(query: String): List<PokemonUiModel> {
+        if (query.isEmpty()) {
+            return pokemonListRepository.pokemons().map(Pokemon::toUi)
+        }
+        return pokemonListRepository.pokemons(query).map(Pokemon::toUi)
+    }
+
     override fun navigateToPokemonDetail(pokemonId: Long) {
         viewModelScope.launch {
             _navigateToDetailEvent.emit(pokemonId)
         }
     }
 
-    override fun onQueryName(name: String) {
+    override fun queryName(name: String) {
         viewModelScope.launch {
             searchQuery.emit(name)
         }
-    }
-
-    private suspend fun queriedPokemons(query: String): List<PokemonUiModel> {
-        if (query.isEmpty()) {
-            return pokemonListRepository.pokemons().map(Pokemon::toUi)
-        }
-        return pokemonListRepository.pokemons(query).map(Pokemon::toUi)
     }
 
     companion object {
