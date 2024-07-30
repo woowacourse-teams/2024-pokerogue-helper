@@ -26,12 +26,12 @@ class PokemonDetailFragment :
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(
             pokemonDetailRepository =
-            DefaultPokemonDetailRepository(
-                remotePokemonDetailDataSource =
-                RemotePokemonDetailDataSource(
-                    pokeDexService = ServiceModule.pokeDexService(),
+                DefaultPokemonDetailRepository(
+                    remotePokemonDetailDataSource =
+                        RemotePokemonDetailDataSource(
+                            pokeDexService = ServiceModule.pokeDexService(),
+                        ),
                 ),
-            ),
         )
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
