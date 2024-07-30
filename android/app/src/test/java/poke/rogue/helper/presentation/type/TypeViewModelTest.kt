@@ -17,8 +17,8 @@ import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.TypeRepository
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
-import poke.rogue.helper.testing.CoroutinesTestExtension
 import poke.rogue.helper.presentation.type.model.toUi
+import poke.rogue.helper.testing.CoroutinesTestExtension
 
 @ExperimentalCoroutinesApi
 @ExtendWith(CoroutinesTestExtension::class)
