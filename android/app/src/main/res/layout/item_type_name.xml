@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:iconSize="18dp"
-        app:spacing="8dp"
-        app:nameSize="13dp"
+        app:spacing="4dp"
+        app:nameSize="14dp"
         app:emptyBackGround="true"
         app:type="@{typeItem}" />
 </layout>

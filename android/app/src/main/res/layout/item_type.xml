@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="6dp"
         android:paddingVertical="4dp"
         app:backgroundColorRes="@{isEmptyBackground ? 0 : type.typeColor}"
         tools:background="@color/poke_fairy">

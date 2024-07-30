@@ -16,9 +16,9 @@
 
         <View
             android:id="@+id/vw_spacer_left"
+            visible="@{!typeResult.isMyType}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            visible="@{!typeResult.isMyType}"
             app:layout_constraintEnd_toStartOf="@id/iv_result_selected_type"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,9 +26,9 @@
 
         <ImageView
             android:id="@+id/iv_result_selected_type"
+            imageRes="@{typeResult.selectedType.typeIconResId}"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            imageRes="@{typeResult.selectedType.typeIconResId}"
             app:layout_constraintBottom_toTopOf="@id/vw_result_divider"
             app:layout_constraintEnd_toStartOf="@id/tv_result_selected_type_name"
             app:layout_constraintStart_toEndOf="@id/vw_spacer_left"
@@ -58,9 +58,9 @@
 
         <View
             android:id="@+id/vw_spacer_right"
+            visible="@{typeResult.isMyType}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            visible="@{typeResult.isMyType}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_result_selected_type_strength"
             app:layout_constraintTop_toTopOf="@id/iv_result_selected_type" />
@@ -80,14 +80,16 @@
             android:id="@+id/rv_result_matched_types"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_type_choice_container"
-            android:orientation="horizontal"
-            android:padding="8dp"
             android:layout_marginBottom="28dp"
+            android:background="@drawable/bg_type_choice_container"
+            android:orientation="vertical"
+            android:padding="6dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vw_result_divider"
+            app:spanCount="4"
             tools:itemCount="3"
             tools:listitem="@layout/item_type_name" />
 
