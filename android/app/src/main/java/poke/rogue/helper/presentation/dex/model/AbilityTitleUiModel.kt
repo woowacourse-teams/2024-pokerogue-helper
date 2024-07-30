@@ -10,5 +10,5 @@ data class AbilityTitleUiModel(
 fun Ability.toPokemonDetailUi(): AbilityTitleUiModel =
     AbilityTitleUiModel(
         id = id,
-        name = name,
+        name = title,
     )
