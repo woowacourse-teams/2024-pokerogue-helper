@@ -10,26 +10,27 @@
 
         <variable
             name="listener"
-            type="poke.rogue.helper.presentation.dex.PokemonDetailNavigateHandler" />
+            type="poke.rogue.helper.presentation.dex.PokemonListNavigateHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
         android:background="@drawable/shape_pokemon_corner_radius"
         android:onClick="@{() -> listener.navigateToPokemonDetail(pokemon.id)}"
         android:paddingBottom="6dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_item_poketmon_poketmon"
-            imageUrl="@{pokemon.imageUrl}"
+            cropImageUrl="@{pokemon.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="10dp"
-            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@id/tv_item_poketmon_poketmon_name"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.75"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

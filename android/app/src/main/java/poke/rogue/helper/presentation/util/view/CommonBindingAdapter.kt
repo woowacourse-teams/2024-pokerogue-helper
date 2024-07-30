@@ -18,8 +18,18 @@ fun ImageView.setImage(imageUrl: String?) {
         .into(this)
 }
 
+@BindingAdapter("cropImageUrl")
+fun ImageView.setCroppedImage(imageUrl: String?) {
+    Glide.with(context)
+        .load(imageUrl)
+        .placeholder(R.drawable.icon_poke)
+        .error(R.drawable.icon_error)
+        .transform(CropMarginTransformation())
+        .into(this)
+}
+
 @BindingAdapter("imageRes")
-fun ImageView.setImageRes(imageRes: Int) {
+fun ImageView.setImage(imageRes: Int) {
     setImageResource(imageRes)
 }
 

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.data.datasource.FakePokemonDetailDataSource
 import poke.rogue.helper.data.repository.FakePokemonDetailRepository
 import poke.rogue.helper.data.repository.PokemonDetailRepository
+import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
@@ -50,15 +51,15 @@ class PokemonDetailViewModelTest {
             // then
             val pokemonDetailUiState = viewModel.uiState
             pokemonDetailUiState.value shouldBe
-                PokemonDetailUiState.PokemonDetailUiModel(
+                PokemonDetailUiState.Success(
                     pokemon =
                         PokemonUiModel(
                             id = 1,
                             dexNumber = 1,
                             name = "이상해씨",
                             imageUrl =
-                                "https://raw.githubusercontent.com/PokeAPI/sprites/" +
-                                    "master/sprites/pokemon/other/official-artwork/1.png",
+                                "https://raw.githubusercontent.com" +
+                                    "/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
                             types =
                                 listOf(
                                     TypeUiModel.GRASS,
@@ -75,7 +76,11 @@ class PokemonDetailViewModelTest {
                             StatUiModel("스피드", 45, 300),
                             StatUiModel("총합", 318, 1_000),
                         ),
-                    abilities = listOf("그래스메이커", "심록", "엽록소"),
+                    abilities =
+                        listOf(
+                            AbilityTitleUiModel(450, "심록"),
+                            AbilityTitleUiModel(419, "엽록소"),
+                        ),
                     height = 0.7f,
                     weight = 6.9f,
                 )

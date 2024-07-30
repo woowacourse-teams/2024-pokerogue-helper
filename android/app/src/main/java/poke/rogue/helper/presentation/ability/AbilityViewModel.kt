@@ -19,11 +19,10 @@ import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.presentation.ability.model.AbilityUiModel
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
-import poke.rogue.helper.presentation.util.view.QueryHandler
 
 class AbilityViewModel(private val abilityRepository: AbilityRepository) :
     ViewModel(),
-    QueryHandler,
+    AbilityQueryHandler,
     AbilityUiEventHandler {
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()
     val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
@@ -44,7 +43,7 @@ class AbilityViewModel(private val abilityRepository: AbilityRepository) :
                 AbilityUiState.Loading,
             )
 
-    override fun onQueryName(name: String) {
+    override fun queryName(name: String) {
         viewModelScope.launch {
             searchQuery.emit(name)
         }
