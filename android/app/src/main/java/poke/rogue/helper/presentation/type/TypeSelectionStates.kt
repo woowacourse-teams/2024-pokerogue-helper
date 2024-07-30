@@ -33,7 +33,7 @@ data class TypeSelectionStates(
     val isMyTypeSelectedAndAnyOpponentSelected: Boolean
         get() = isMyTypeSelected && (isOpponent1Selected || isOpponent2Selected)
 
-    val areAllTypesEmpty: Boolean
+    val isAllEmpty: Boolean
         get() = !isMyTypeSelected && !isOpponent1Selected && !isOpponent2Selected
 
     fun disabledTypeItems(selectorType: SelectorType): Set<TypeUiModel> {
@@ -50,5 +50,8 @@ private fun TypeSelectionUiState.isSelected(): Boolean = this is TypeSelectionUi
 private fun TypeSelectionUiState.isEmpty(): Boolean = this is TypeSelectionUiState.Empty
 
 private fun TypeSelectionUiState.selectedTypes(): Set<TypeUiModel> {
-    return (this as? TypeSelectionUiState.Selected)?.let { setOf(it.selectedType) } ?: emptySet()
+    return when (this) {
+        is TypeSelectionUiState.Selected -> setOf(selectedType)
+        else -> emptySet()
+    }
 }
