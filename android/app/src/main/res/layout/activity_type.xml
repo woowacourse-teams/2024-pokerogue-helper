@@ -54,21 +54,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_begin="24dp" />
+                    app:layout_constraintGuide_begin="20dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_end="24dp" />
+                    app:layout_constraintGuide_end="20dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="20dp" />
+                    app:layout_constraintGuide_begin="8dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_bottom"
