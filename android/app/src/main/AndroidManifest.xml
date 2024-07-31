@@ -18,6 +18,9 @@
         android:theme="@style/Theme.PokeRogueHelper"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.tip.TipActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.dex.PokemonActivity"
             android:exported="true" />
         <activity
@@ -32,7 +35,6 @@
         <activity
             android:name=".presentation.type.TypeActivity"
             android:exported="false" />
-
         <activity
             android:name=".presentation.ability.AbilityActivity"
             android:exported="false" />
