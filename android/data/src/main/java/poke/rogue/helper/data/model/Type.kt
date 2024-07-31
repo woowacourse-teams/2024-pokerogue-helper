@@ -22,6 +22,16 @@ enum class Type(val id: Int) {
     DARK(15),
     STEEL(16),
     FAIRY(17),
+    STELLAR(18),
+    ;
+
+    companion object {
+        private val idToType = entries.associateBy { it.id }
+
+        fun fromId(id: Int): Type {
+            return idToType[id] ?: throw IllegalArgumentException("Unknown type ID: $id")
+        }
+    }
 }
 
 fun PokemonTypeResponse.toData(): Type = Type.valueOf(pokemonTypeName.uppercase(Locale.ROOT))
