@@ -43,9 +43,9 @@ class LocalTypeDataSource {
     }
 
     fun allTypes(): List<Type> = Type.entries.toList()
-}
 
-fun Map<MatchedResult, List<Type>>.toMatchedTypesList(): List<MatchedTypes> =
-    this.entries.map { (matchedResult, types) ->
-        MatchedTypes(matchedResult, types)
-    }
+    private fun Map<MatchedResult, List<Type>>.toMatchedTypesList(): List<MatchedTypes> =
+        this.entries.map { (matchedResult, types) ->
+            MatchedTypes(matchedResult, types)
+        }
+}
