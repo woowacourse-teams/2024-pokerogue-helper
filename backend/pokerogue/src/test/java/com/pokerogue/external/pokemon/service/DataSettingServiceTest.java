@@ -1,8 +1,8 @@
 package com.pokerogue.external.pokemon.service;
 
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
-import com.pokerogue.helper.environ.client.FakePokeClient;
-import com.pokerogue.helper.environ.service.ServiceTest;
+import com.pokerogue.external.environ.client.FakePokeClient;
+import com.pokerogue.external.environ.service.ServiceTest;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.repository.PokemonTypeRepository;
 import org.junit.jupiter.api.DisplayName;
