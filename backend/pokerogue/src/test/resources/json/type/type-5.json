@@ -1,0 +1,325 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "water",
+        "url": "https://pokeapi.co/api/v2/type/11/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      },
+      {
+        "name": "ice",
+        "url": "https://pokeapi.co/api/v2/type/15/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      },
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      },
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      },
+      {
+        "name": "electric",
+        "url": "https://pokeapi.co/api/v2/type/13/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      },
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "bug",
+        "url": "https://pokeapi.co/api/v2/type/7/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      }
+    ],
+    "no_damage_from": [
+      {
+        "name": "electric",
+        "url": "https://pokeapi.co/api/v2/type/13/"
+      }
+    ],
+    "no_damage_to": [
+      {
+        "name": "flying",
+        "url": "https://pokeapi.co/api/v2/type/3/"
+      }
+    ]
+  },
+  "game_indices": [
+    {
+      "game_index": 4,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 4,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 4,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 4,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 4,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 4,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 5,
+  "move_damage_class": {
+    "name": "physical",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/2/"
+  },
+  "moves": [
+    {
+      "name": "sand-attack",
+      "url": "https://pokeapi.co/api/v2/move/28/"
+    },
+    {
+      "name": "earthquake",
+      "url": "https://pokeapi.co/api/v2/move/89/"
+    },
+    {
+      "name": "fissure",
+      "url": "https://pokeapi.co/api/v2/move/90/"
+    },
+    {
+      "name": "dig",
+      "url": "https://pokeapi.co/api/v2/move/91/"
+    },
+    {
+      "name": "bone-club",
+      "url": "https://pokeapi.co/api/v2/move/125/"
+    },
+    {
+      "name": "bonemerang",
+      "url": "https://pokeapi.co/api/v2/move/155/"
+    },
+    {
+      "name": "mud-slap",
+      "url": "https://pokeapi.co/api/v2/move/189/"
+    },
+    {
+      "name": "spikes",
+      "url": "https://pokeapi.co/api/v2/move/191/"
+    },
+    {
+      "name": "bone-rush",
+      "url": "https://pokeapi.co/api/v2/move/198/"
+    },
+    {
+      "name": "magnitude",
+      "url": "https://pokeapi.co/api/v2/move/222/"
+    },
+    {
+      "name": "mud-sport",
+      "url": "https://pokeapi.co/api/v2/move/300/"
+    },
+    {
+      "name": "sand-tomb",
+      "url": "https://pokeapi.co/api/v2/move/328/"
+    },
+    {
+      "name": "mud-shot",
+      "url": "https://pokeapi.co/api/v2/move/341/"
+    },
+    {
+      "name": "earth-power",
+      "url": "https://pokeapi.co/api/v2/move/414/"
+    },
+    {
+      "name": "mud-bomb",
+      "url": "https://pokeapi.co/api/v2/move/426/"
+    },
+    {
+      "name": "bulldoze",
+      "url": "https://pokeapi.co/api/v2/move/523/"
+    },
+    {
+      "name": "drill-run",
+      "url": "https://pokeapi.co/api/v2/move/529/"
+    },
+    {
+      "name": "rototiller",
+      "url": "https://pokeapi.co/api/v2/move/563/"
+    },
+    {
+      "name": "thousand-arrows",
+      "url": "https://pokeapi.co/api/v2/move/614/"
+    },
+    {
+      "name": "thousand-waves",
+      "url": "https://pokeapi.co/api/v2/move/615/"
+    },
+    {
+      "name": "lands-wrath",
+      "url": "https://pokeapi.co/api/v2/move/616/"
+    },
+    {
+      "name": "precipice-blades",
+      "url": "https://pokeapi.co/api/v2/move/619/"
+    },
+    {
+      "name": "tectonic-rage--physical",
+      "url": "https://pokeapi.co/api/v2/move/630/"
+    },
+    {
+      "name": "tectonic-rage--special",
+      "url": "https://pokeapi.co/api/v2/move/631/"
+    },
+    {
+      "name": "shore-up",
+      "url": "https://pokeapi.co/api/v2/move/659/"
+    },
+    {
+      "name": "high-horsepower",
+      "url": "https://pokeapi.co/api/v2/move/667/"
+    },
+    {
+      "name": "stomping-tantrum",
+      "url": "https://pokeapi.co/api/v2/move/707/"
+    },
+    {
+      "name": "max-quake",
+      "url": "https://pokeapi.co/api/v2/move/771/"
+    },
+    {
+      "name": "scorching-sands",
+      "url": "https://pokeapi.co/api/v2/move/815/"
+    },
+    {
+      "name": "headlong-rush",
+      "url": "https://pokeapi.co/api/v2/move/838/"
+    },
+    {
+      "name": "sandsear-storm",
+      "url": "https://pokeapi.co/api/v2/move/848/"
+    }
+  ],
+  "name": "ground",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "じめん"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "땅"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "地面"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Sol"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Boden"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Tierra"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Terra"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Ground"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "じめん"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "地面"
+    }
+  ],
+  "past_damage_relations": []
+}

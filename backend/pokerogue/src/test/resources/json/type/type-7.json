@@ -1,0 +1,418 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "flying",
+        "url": "https://pokeapi.co/api/v2/type/3/"
+      },
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      },
+      {
+        "name": "psychic",
+        "url": "https://pokeapi.co/api/v2/type/14/"
+      },
+      {
+        "name": "dark",
+        "url": "https://pokeapi.co/api/v2/type/17/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "ground",
+        "url": "https://pokeapi.co/api/v2/type/5/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "flying",
+        "url": "https://pokeapi.co/api/v2/type/3/"
+      },
+      {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      },
+      {
+        "name": "ghost",
+        "url": "https://pokeapi.co/api/v2/type/8/"
+      },
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      },
+      {
+        "name": "fairy",
+        "url": "https://pokeapi.co/api/v2/type/18/"
+      }
+    ],
+    "no_damage_from": [],
+    "no_damage_to": []
+  },
+  "game_indices": [
+    {
+      "game_index": 7,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 7,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 6,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 6,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 6,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 6,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 7,
+  "move_damage_class": {
+    "name": "physical",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/2/"
+  },
+  "moves": [
+    {
+      "name": "twineedle",
+      "url": "https://pokeapi.co/api/v2/move/41/"
+    },
+    {
+      "name": "pin-missile",
+      "url": "https://pokeapi.co/api/v2/move/42/"
+    },
+    {
+      "name": "string-shot",
+      "url": "https://pokeapi.co/api/v2/move/81/"
+    },
+    {
+      "name": "leech-life",
+      "url": "https://pokeapi.co/api/v2/move/141/"
+    },
+    {
+      "name": "spider-web",
+      "url": "https://pokeapi.co/api/v2/move/169/"
+    },
+    {
+      "name": "fury-cutter",
+      "url": "https://pokeapi.co/api/v2/move/210/"
+    },
+    {
+      "name": "megahorn",
+      "url": "https://pokeapi.co/api/v2/move/224/"
+    },
+    {
+      "name": "tail-glow",
+      "url": "https://pokeapi.co/api/v2/move/294/"
+    },
+    {
+      "name": "silver-wind",
+      "url": "https://pokeapi.co/api/v2/move/318/"
+    },
+    {
+      "name": "signal-beam",
+      "url": "https://pokeapi.co/api/v2/move/324/"
+    },
+    {
+      "name": "u-turn",
+      "url": "https://pokeapi.co/api/v2/move/369/"
+    },
+    {
+      "name": "x-scissor",
+      "url": "https://pokeapi.co/api/v2/move/404/"
+    },
+    {
+      "name": "bug-buzz",
+      "url": "https://pokeapi.co/api/v2/move/405/"
+    },
+    {
+      "name": "bug-bite",
+      "url": "https://pokeapi.co/api/v2/move/450/"
+    },
+    {
+      "name": "attack-order",
+      "url": "https://pokeapi.co/api/v2/move/454/"
+    },
+    {
+      "name": "defend-order",
+      "url": "https://pokeapi.co/api/v2/move/455/"
+    },
+    {
+      "name": "heal-order",
+      "url": "https://pokeapi.co/api/v2/move/456/"
+    },
+    {
+      "name": "rage-powder",
+      "url": "https://pokeapi.co/api/v2/move/476/"
+    },
+    {
+      "name": "quiver-dance",
+      "url": "https://pokeapi.co/api/v2/move/483/"
+    },
+    {
+      "name": "struggle-bug",
+      "url": "https://pokeapi.co/api/v2/move/522/"
+    },
+    {
+      "name": "steamroller",
+      "url": "https://pokeapi.co/api/v2/move/537/"
+    },
+    {
+      "name": "sticky-web",
+      "url": "https://pokeapi.co/api/v2/move/564/"
+    },
+    {
+      "name": "fell-stinger",
+      "url": "https://pokeapi.co/api/v2/move/565/"
+    },
+    {
+      "name": "powder",
+      "url": "https://pokeapi.co/api/v2/move/600/"
+    },
+    {
+      "name": "infestation",
+      "url": "https://pokeapi.co/api/v2/move/611/"
+    },
+    {
+      "name": "savage-spin-out--physical",
+      "url": "https://pokeapi.co/api/v2/move/634/"
+    },
+    {
+      "name": "savage-spin-out--special",
+      "url": "https://pokeapi.co/api/v2/move/635/"
+    },
+    {
+      "name": "first-impression",
+      "url": "https://pokeapi.co/api/v2/move/660/"
+    },
+    {
+      "name": "pollen-puff",
+      "url": "https://pokeapi.co/api/v2/move/676/"
+    },
+    {
+      "name": "lunge",
+      "url": "https://pokeapi.co/api/v2/move/679/"
+    },
+    {
+      "name": "max-flutterby",
+      "url": "https://pokeapi.co/api/v2/move/758/"
+    },
+    {
+      "name": "skitter-smack",
+      "url": "https://pokeapi.co/api/v2/move/806/"
+    },
+    {
+      "name": "silk-trap",
+      "url": "https://pokeapi.co/api/v2/move/852/"
+    },
+    {
+      "name": "pounce",
+      "url": "https://pokeapi.co/api/v2/move/884/"
+    }
+  ],
+  "name": "bug",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "むし"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "벌레"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "蟲"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Insecte"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Käfer"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Bicho"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Coleottero"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Bug"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "むし"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "虫"
+    }
+  ],
+  "past_damage_relations": [
+    {
+      "damage_relations": {
+        "double_damage_from": [
+          {
+            "name": "flying",
+            "url": "https://pokeapi.co/api/v2/type/3/"
+          },
+          {
+            "name": "rock",
+            "url": "https://pokeapi.co/api/v2/type/6/"
+          },
+          {
+            "name": "fire",
+            "url": "https://pokeapi.co/api/v2/type/10/"
+          },
+          {
+            "name": "poison",
+            "url": "https://pokeapi.co/api/v2/type/4/"
+          }
+        ],
+        "double_damage_to": [
+          {
+            "name": "grass",
+            "url": "https://pokeapi.co/api/v2/type/12/"
+          },
+          {
+            "name": "psychic",
+            "url": "https://pokeapi.co/api/v2/type/14/"
+          },
+          {
+            "name": "poison",
+            "url": "https://pokeapi.co/api/v2/type/4/"
+          }
+        ],
+        "half_damage_from": [
+          {
+            "name": "fighting",
+            "url": "https://pokeapi.co/api/v2/type/2/"
+          },
+          {
+            "name": "ground",
+            "url": "https://pokeapi.co/api/v2/type/5/"
+          },
+          {
+            "name": "grass",
+            "url": "https://pokeapi.co/api/v2/type/12/"
+          }
+        ],
+        "half_damage_to": [
+          {
+            "name": "fighting",
+            "url": "https://pokeapi.co/api/v2/type/2/"
+          },
+          {
+            "name": "flying",
+            "url": "https://pokeapi.co/api/v2/type/3/"
+          },
+          {
+            "name": "ghost",
+            "url": "https://pokeapi.co/api/v2/type/8/"
+          },
+          {
+            "name": "fire",
+            "url": "https://pokeapi.co/api/v2/type/10/"
+          }
+        ],
+        "no_damage_from": [],
+        "no_damage_to": []
+      },
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    }
+  ]
+}
