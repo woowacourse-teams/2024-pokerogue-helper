@@ -2,16 +2,19 @@ package poke.rogue.helper.presentation.dex.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.data.datasource.RemotePokemonDetailDataSource
 import poke.rogue.helper.data.repository.DefaultPokemonDetailRepository
 import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
-import poke.rogue.helper.presentation.ability.detail.AbilityDetailActivity
+import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
 import poke.rogue.helper.presentation.util.fragment.stringOf
+import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
@@ -86,7 +89,18 @@ class PokemonDetailFragment :
     private fun observeNavigateToAbilityDetailEvent() {
         repeatOnStarted {
             viewModel.navigationToDetailEvent.collect { abilityId ->
-                AbilityDetailActivity.intent(requireContext(), abilityId).also { startActivity(it) }
+                parentFragmentManager.commit {
+                    val containerId = arguments?.getInt(CONTAINER_ID) ?: INVALID_CONTAINER_ID
+                    if (containerId == INVALID_CONTAINER_ID) {
+                        toast(R.string.dex_detail_error_containerId)
+                        return@commit
+                    }
+                    replace<AbilityDetailFragment>(
+                        containerId,
+                        args = AbilityDetailFragment.bundleOf(abilityId, containerId),
+                    )
+                    addToBackStack(TAG)
+                }
             }
         }
     }
@@ -109,10 +123,16 @@ class PokemonDetailFragment :
 
     companion object {
         private const val POKEMON_ID = "pokemonId"
+        private const val CONTAINER_ID = "containerId"
+        private const val INVALID_CONTAINER_ID = -1
+        val TAG: String = PokemonDetailFragment::class.java.simpleName
 
-        fun bundleOf(pokemonId: Long) =
-            Bundle().apply {
-                putLong(POKEMON_ID, pokemonId)
-            }
+        fun bundleOf(
+            pokemonId: Long,
+            containerId: Int,
+        ) = Bundle().apply {
+            putLong(POKEMON_ID, pokemonId)
+            putInt(CONTAINER_ID, containerId)
+        }
     }
 }

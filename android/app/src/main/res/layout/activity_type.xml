@@ -54,21 +54,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_begin="24dp" />
+                    app:layout_constraintGuide_begin="20dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_end="24dp" />
+                    app:layout_constraintGuide_end="20dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_begin="20dp" />
+                    app:layout_constraintGuide_begin="8dp" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_bottom"
@@ -202,7 +202,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="20dp"
                     android:orientation="vertical"
-                    visible="@{!vm.typeSelectionStates.areAllTypesEmpty}"
+                    visible="@{!vm.typeSelectionStates.allEmpty}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -213,7 +213,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    visible="@{vm.typeSelectionStates.areAllTypesEmpty}"
+                    visible="@{vm.typeSelectionStates.allEmpty}"
                     android:src="@drawable/img_type_empty_view_placeholder"
                     app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
