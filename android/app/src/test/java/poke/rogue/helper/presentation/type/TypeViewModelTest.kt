@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.TypeRepository
+import poke.rogue.helper.presentation.type.model.MatchedTypesUiModelComparator
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
@@ -70,7 +71,7 @@ class TypeViewModelTest {
                         FakeTypeRepository.DUMMY_RESULTS_AGAINST_MINE.toUi(
                             Type.FAIRY.id,
                             isMyType = true,
-                        )
+                        ).sortedWith(MatchedTypesUiModelComparator)
                     actual shouldBe expected
                     cancel()
                 }
@@ -93,7 +94,7 @@ class TypeViewModelTest {
                         FakeTypeRepository.DUMMY_RESULTS_AGAINST_OPPONENT.toUi(
                             Type.FAIRY.id,
                             isMyType = false,
-                        )
+                        ).sortedWith(MatchedTypesUiModelComparator)
                     actual shouldBe expected
                     cancel()
                 }
@@ -116,6 +117,7 @@ class TypeViewModelTest {
                 viewModel.type.collect { actual ->
                     val expected =
                         FakeTypeRepository.DUMMY_RESULTS.toUi(Type.FAIRY.id, isMyType = true)
+                            .sortedWith(MatchedTypesUiModelComparator)
                     actual shouldBe expected
                     cancel()
                 }
