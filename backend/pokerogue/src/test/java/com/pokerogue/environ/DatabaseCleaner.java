@@ -1,4 +1,4 @@
-package com.pokerogue.external.environ;
+package com.pokerogue.environ;
 
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;

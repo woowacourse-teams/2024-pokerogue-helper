@@ -1,4 +1,4 @@
-package com.pokerogue.external.environ.client;
+package com.pokerogue.environ.client;
 
 import com.pokerogue.external.pokemon.client.PokeClient;
 import com.pokerogue.external.s3.service.S3Service;

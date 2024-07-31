@@ -1,4 +1,4 @@
-package com.pokerogue.external.environ.controller;
+package com.pokerogue.environ.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
