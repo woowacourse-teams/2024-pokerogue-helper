@@ -27,6 +27,12 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    packaging {
+        resources {
+            excludes += "META-INF/**"
+            excludes += "win32-x86*/**"
+        }
+    }
 }
 
 dependencies {
