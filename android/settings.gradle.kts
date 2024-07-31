@@ -20,4 +20,6 @@ include(":data")
 include(":remote")
 include(":local")
 include(":testing")
+// libraries
+include(":stringmatcher")
  
