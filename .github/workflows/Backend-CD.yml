@@ -2,7 +2,7 @@ name: Backend CD
 
 on:
   push:
-    branches: [ "be/develop" ]
+    branches: [ "be/refactor/fail2ban" ]
 
 permissions:
   contents: read
@@ -37,7 +37,12 @@ jobs:
           
           docker build -t ${{ secrets.DOCKER_NGINX_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-nginx ./backend/pokerogue/docker
           docker push ${{ secrets.DOCKER_NGINX_IMAGE }}
+          
+          docker build -t ${{ secrets.DOCKER_FAIL2BAN_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-fail2ban ./backend/pokerogue/docker
+          docker push ${{ secrets.DOCKER_FAILE2BAN_IMAGE }}
 
+  
+  
   deploy:
     needs: build
     runs-on: self-hosted
@@ -66,6 +71,7 @@ jobs:
           
           sudo docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
           sudo docker pull ${{ secrets.DOCKER_NGINX_IMAGE }}
+          sudo docker pull ${{ secrets.DOCKER_FAIL2BAN_IMAGE }}
           
           docker-compose -f docker-compose.yml up -d
           docker image prune -f
