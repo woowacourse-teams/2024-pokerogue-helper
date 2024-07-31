@@ -7,14 +7,13 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import poke.rogue.helper.data.datasource.FakePokemonListDataSource
 import poke.rogue.helper.data.model.Pokemon
-import poke.rogue.helper.data.repository.FakePokemonListRepository
 import poke.rogue.helper.data.repository.PokemonListRepository
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.type.model.TypeUiModel
-import poke.rogue.helper.utils.CoroutinesTestExtension
+import poke.rogue.helper.testing.CoroutinesTestExtension
+import poke.rogue.helper.testing.data.repository.FakePokemonListRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
@@ -24,7 +23,7 @@ class PokemonListViewModelTest {
 
     @BeforeEach
     fun setUp() {
-        repository = FakePokemonListRepository(FakePokemonListDataSource())
+        repository = FakePokemonListRepository()
     }
 
     @Test
@@ -40,7 +39,7 @@ class PokemonListViewModelTest {
                 }
 
             // then
-            pokemons shouldBe FakePokemonListDataSource.POKEMONS.map(Pokemon::toUi)
+            pokemons shouldBe FakePokemonListRepository.POKEMONS.map(Pokemon::toUi)
         }
 
     @Test
