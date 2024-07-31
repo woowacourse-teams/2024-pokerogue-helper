@@ -2,7 +2,7 @@ name: Backend CD
 
 on:
   push:
-    branches: [ "be/refactor/fail2ban" ]
+    branches: [ "be/develop" ]
 
 permissions:
   contents: read
