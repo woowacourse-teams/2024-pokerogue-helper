@@ -1,6 +1,6 @@
 package com.pokerogue.helper.pokemon.service;
 
-import com.pokerogue.external.environ.service.ServiceTest;
+import com.pokerogue.environ.service.ServiceTest;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.dto.PokedexResponse;
