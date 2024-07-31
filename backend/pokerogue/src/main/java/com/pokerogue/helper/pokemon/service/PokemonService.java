@@ -12,9 +12,11 @@ import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PokemonService {
@@ -52,11 +54,11 @@ public class PokemonService {
                 .map(PokemonTypeMapping::getPokemonType)
                 .map(PokemonTypeResponse::from)
                 .toList();
-        List<PokemonAbilityResponse> pokemonAbilityNames = pokemon.getPokemonAbilityMappings().stream()
+        List<PokemonAbilityResponse> pokemonAbilityResponses = pokemon.getPokemonAbilityMappings().stream()
                 .map(PokemonAbilityMapping::getPokemonAbility)
                 .map(PokemonAbilityResponse::from)
                 .toList();
 
-        return PokedexResponse.of(pokemon, pokemonTypeResponses, pokemonAbilityNames);
+        return PokedexResponse.of(pokemon, pokemonTypeResponses, pokemonAbilityResponses);
     }
 }
