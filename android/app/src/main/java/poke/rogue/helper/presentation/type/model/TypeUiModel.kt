@@ -33,12 +33,8 @@ enum class TypeUiModel(
     ;
 
     companion object {
-        fun fromId(id: Int): TypeUiModel? {
-            return entries.find { it.id == id }
-        }
-
-        fun fromName(typeName: String): TypeUiModel? {
-            return entries.find { it.typeName.equals(typeName, ignoreCase = true) }
+        fun fromId(id: Int): TypeUiModel {
+            return entries.find { it.id == id } ?: throw IllegalArgumentException("Unknown type ID: $id")
         }
     }
 }
