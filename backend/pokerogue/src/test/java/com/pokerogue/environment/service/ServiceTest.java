@@ -1,6 +1,6 @@
-package com.pokerogue.environ.service;
+package com.pokerogue.environment.service;
 
-import com.pokerogue.environ.client.TestPokeClientConfig;
+import com.pokerogue.environment.client.TestPokeClientConfig;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;

@@ -1,7 +1,7 @@
 package com.pokerogue.external.pokemon.service;
 
-import com.pokerogue.environ.client.FakePokeClient;
-import com.pokerogue.environ.service.ServiceTest;
+import com.pokerogue.environment.client.FakePokeClient;
+import com.pokerogue.environment.service.ServiceTest;
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.repository.PokemonTypeRepository;
