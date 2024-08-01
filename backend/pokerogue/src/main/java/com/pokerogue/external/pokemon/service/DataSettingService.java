@@ -104,11 +104,11 @@ public class DataSettingService {
 
     private void saveAllPokemonTypeMatching(DataUrls typeDataUrls) {
         for (DataUrl dataUrl : typeDataUrls.results()) {
-            PokemonType frompPokemonType = pokemonTypeRepository.findByName(dataUrl.name())
+            PokemonType fromPokemonType = pokemonTypeRepository.findByName(dataUrl.name())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(dataUrl.getUrlId());
 
-            savePokemonTypeMatching(typeMatchingResponse, frompPokemonType);
+            savePokemonTypeMatching(typeMatchingResponse, fromPokemonType);
         }
     }
 
