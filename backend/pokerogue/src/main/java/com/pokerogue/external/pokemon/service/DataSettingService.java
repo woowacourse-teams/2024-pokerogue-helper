@@ -119,8 +119,8 @@ public class DataSettingService {
             TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(dataUrl.getUrlId());
 
             savePokemonTypeMatchingtest(typeMatchingResponse, pokemonType, pokemonTypeMatchings, pokemonTypeMap);
-            jdbcPokemonTypeMatchingRepository.batchInsertPokemonTypeMatching(pokemonTypeMatchings);
         }
+        jdbcPokemonTypeMatchingRepository.batchInsertPokemonTypeMatching(pokemonTypeMatchings);
     }
 
     private void savePokemonTypeMatchingtest(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
