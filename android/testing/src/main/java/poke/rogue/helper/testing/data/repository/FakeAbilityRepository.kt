@@ -2,21 +2,30 @@ package poke.rogue.helper.testing.data.repository
 
 import poke.rogue.helper.data.model.Ability
 import poke.rogue.helper.data.model.AbilityDetail
+import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.stringmatcher.has
 
 class FakeAbilityRepository : AbilityRepository {
     override suspend fun abilities(): List<Ability> = ABILITES
 
-    override suspend fun abilities(query: String): List<Ability> = ABILITES.filter {ability ->
+    override suspend fun abilities(query: String): List<Ability> = ABILITES.filter { ability ->
         ability.title.has(query)
     }
 
-    override suspend fun abilityDetail(id: Long): AbilityDetail {
-        TODO("Not yet implemented")
-    }
+    override suspend fun abilityDetail(id: Long): AbilityDetail = ABILITIES_DETAIL
 
     companion object {
+        private const val FORMAT_POKEMON_IMAGE_URL =
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other" +
+                    "/official-artwork/"
+
+        private const val POSTFIX_PNG = ".png"
+
+        private fun pokemonImageUrl(pokemonId: Long) =
+            FORMAT_POKEMON_IMAGE_URL + pokemonId + POSTFIX_PNG
+
         val ABILITES: List<Ability> =
             listOf(
                 Ability(1, "악취", "악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다."),
@@ -43,6 +52,21 @@ class FakeAbilityRepository : AbilityRepository {
                 Ability(22, "그림자밝기", "상대의 그림자를 밟아 도망치거나 교체할 수 없게 한다."),
                 Ability(23, "까칠한피부", "공격을 받았을 때 자신에게 접촉한 상대를 까칠까칠한 피부로 상처를 입힌다."),
                 Ability(24, "불가사의부적", "효과가 굉장한 기술만 맞는 불가사의한 힘."),
+            )
+
+        val ABILITIES_DETAIL: AbilityDetail =
+            AbilityDetail(
+                title = "악취",
+                description = "악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다.",
+                pokemons = listOf(
+                    Pokemon(
+                        id = 1,
+                        dexNumber = 1,
+                        name = "이상해씨",
+                        imageUrl = pokemonImageUrl(pokemonId = 1),
+                        types = listOf(Type.GRASS, Type.POISON),
+                    ),
+                )
             )
     }
 }

@@ -34,7 +34,7 @@ class AbilityViewModelTest {
 
             // then
             val abilities = (uiState as AbilityUiState.Success<List<AbilityUiModel>>).data
-            abilities shouldBe FakeAbilityRepository.ABILITES.map { it.toUi() }
+            abilities shouldBe repository.abilities().map { it.toUi() }
         }
 
     @Test
@@ -78,9 +78,9 @@ class AbilityViewModelTest {
             launch {
                 viewModel.navigateToDetail(abilityId)
             }
-            val actual = viewModel.navigationToDetailEvent.first()
 
             // then
-            actual shouldBe abilityId
+            val actualId = viewModel.navigationToDetailEvent.first()
+            actualId shouldBe abilityId
         }
 }
