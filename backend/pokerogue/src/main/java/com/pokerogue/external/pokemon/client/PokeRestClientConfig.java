@@ -11,7 +11,7 @@ import org.springframework.web.client.RestClient;
 import java.time.Duration;
 
 @Configuration
-public class PokeClientConfig {
+public class PokeRestClientConfig {
 
     private static final String BASE_URL = "https://pokeapi.co/api/v2";
     private static final int CONNECT_TIME_OUT_DURATION = 3;
