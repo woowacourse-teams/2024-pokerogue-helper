@@ -37,6 +37,7 @@ android {
 
 dependencies {
     implementation(project(":data"))
+    implementation(project(":stringmatcher"))
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin)
     implementation(libs.timber)
