@@ -1,4 +1,4 @@
-package com.pokerogue.environ.client;
+package com.pokerogue.environment.client;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
