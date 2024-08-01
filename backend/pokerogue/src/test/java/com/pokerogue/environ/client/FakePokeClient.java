@@ -31,7 +31,6 @@ public class FakePokeClient extends PokeClient {
             new DataUrl("frisk", "https://pokeapi.co/api/v2/ability/119/"),
             new DataUrl("poison-touch", "https://pokeapi.co/api/v2/ability/143/")
     );
-
     private static final List<DataUrl> pokemonDataUrls = List.of(
             new DataUrl("gloom", "https://pokeapi.co/api/v2/pokemon/44/"),
             new DataUrl("grimer", "https://pokeapi.co/api/v2/pokemon/88/"),
@@ -40,15 +39,15 @@ public class FakePokeClient extends PokeClient {
             new DataUrl("yanma", "https://pokeapi.co/api/v2/pokemon/193/"),
             new DataUrl("torchic", "https://pokeapi.co/api/v2/pokemon/255/")
     );
-
     private static final String JSON_PATH = "src/test/resources/json/";
     private static final String ABILITY_JSON_PATH = JSON_PATH + "ability/ability-%s.json";
     private static final String POKEMON_JSON_PATH = JSON_PATH + "pokemon/pokemon-%s.json";
     private static final String POKEMON_SPECIES_JSON_PATH = JSON_PATH + "pokemon-species/pokemon-species-%s.json";
     private static final String TYPE_JSON_PATH = JSON_PATH + "type/type-%s.json";
-
     private static final ObjectMapper mapper = new ObjectMapper();
-    public static final int TEST_POKEMON_COUNT, TEST_ABILITY_COUNT, TEST_TYPE_COUNT = 19;
+    public static final int TEST_POKEMON_COUNT;
+    public static final int TEST_ABILITY_COUNT;
+    public static final int TEST_TYPE_COUNT = 19;
 
     static {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -73,6 +72,7 @@ public class FakePokeClient extends PokeClient {
     @Override
     public AbilityResponse getAbilityResponse(String id) {
         String path = String.format(ABILITY_JSON_PATH, id);
+
         return deserializeTestFixture(AbilityResponse.class, path);
     }
 
@@ -84,12 +84,14 @@ public class FakePokeClient extends PokeClient {
     @Override
     public DataUrls getTypeResponses(int limit) {
         String path = String.format(TYPE_JSON_PATH, "all");
+
         return deserializeTestFixture(DataUrls.class, path);
     }
 
     @Override
     public TypeResponse getTypeResponse(String id) {
         String path = String.format(TYPE_JSON_PATH, id);
+
         return deserializeTestFixture(TypeResponse.class, path);
     }
 
@@ -106,18 +108,21 @@ public class FakePokeClient extends PokeClient {
     @Override
     public PokemonSaveResponse getPokemonSaveResponse(String id) {
         String path = String.format(POKEMON_JSON_PATH, id);
+
         return deserializeTestFixture(PokemonSaveResponse.class, path);
     }
 
     @Override
     public PokemonSpeciesResponse getPokemonSpeciesResponse(String id) {
         String path = String.format(POKEMON_SPECIES_JSON_PATH, id);
+
         return deserializeTestFixture(PokemonSpeciesResponse.class, path);
     }
 
     @Override
     public TypeMatchingResponse getTypeMatchingResponse(String id) {
         String path = String.format(TYPE_JSON_PATH, id);
+
         return deserializeTestFixture(TypeMatchingResponse.class, path);
     }
 

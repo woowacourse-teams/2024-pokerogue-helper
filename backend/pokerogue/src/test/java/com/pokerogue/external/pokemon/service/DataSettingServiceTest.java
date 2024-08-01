@@ -1,8 +1,8 @@
 package com.pokerogue.external.pokemon.service;
 
-import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
 import com.pokerogue.environ.client.FakePokeClient;
 import com.pokerogue.environ.service.ServiceTest;
+import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.repository.PokemonTypeRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DataSettingServiceTest extends ServiceTest {
+
     @Autowired
     private DataSettingService dataSettingService;
 
