@@ -3,8 +3,10 @@ package com.pokerogue.helper.pokemon.service;
 import com.pokerogue.environment.service.ServiceTest;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ class PokemonServiceTest extends ServiceTest {
     @Autowired
     private PokemonService pokemonService;
 
+    @Autowired
+    private PokemonRepository pokemonRepository;
+
     @Test
     @DisplayName("모든 포켓몬 목록을 조회한다.")
     void findPokemons() {
@@ -31,7 +36,9 @@ class PokemonServiceTest extends ServiceTest {
     @Test
     @DisplayName("한 포켓몬의 도감 상세 정보를 조회한다.")
     void findPokedexDetails() {
-        PokedexResponse pokedexDetails = pokemonService.findPokedexDetails(1L);
+        long lastPokemonId = pokemonService.findPokemons().size();
+
+        PokedexResponse pokedexDetails = pokemonService.findPokedexDetails(lastPokemonId);
 
         assertAll(() -> {
             assertThat(pokedexDetails.pokedexNumber()).isNotNull();
