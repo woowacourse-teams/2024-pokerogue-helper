@@ -8,8 +8,10 @@ import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse
 import com.pokerogue.external.pokemon.dto.type.TypeMatchingResponse;
 import com.pokerogue.external.pokemon.dto.type.TypeResponse;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+@Component
 public class PokeClient {
 
     private final RestClient restClient;

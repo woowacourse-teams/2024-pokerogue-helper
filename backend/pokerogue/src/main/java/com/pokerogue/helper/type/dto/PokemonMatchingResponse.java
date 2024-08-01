@@ -6,8 +6,8 @@ public record PokemonMatchingResponse(String from, String to, Double result) {
 
     public static PokemonMatchingResponse from(PokemonTypeMatching pokemonTypeMatching) {
         return new PokemonMatchingResponse(
-                pokemonTypeMatching.getTypeFrom(),
-                pokemonTypeMatching.getTypeTo(),
+                pokemonTypeMatching.getFromTypeName(),
+                pokemonTypeMatching.getToTypeName(),
                 pokemonTypeMatching.getResult()
         );
     }

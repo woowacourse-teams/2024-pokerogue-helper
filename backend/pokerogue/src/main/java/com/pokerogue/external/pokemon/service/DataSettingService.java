@@ -29,12 +29,12 @@ import com.pokerogue.helper.type.domain.PokemonType;
 import com.pokerogue.helper.type.domain.PokemonTypeMatching;
 import com.pokerogue.helper.type.repository.PokemonTypeMatchingRepository;
 import com.pokerogue.helper.type.repository.PokemonTypeRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -104,68 +104,59 @@ public class DataSettingService {
 
     private void saveAllPokemonTypeMatching(DataUrls typeDataUrls) {
         for (DataUrl dataUrl : typeDataUrls.results()) {
-            PokemonType pokemonType = pokemonTypeRepository.findByName(dataUrl.name()).orElseThrow();
-            String fromTypeName = pokemonType.getName();
+            PokemonType fromPokemonType = pokemonTypeRepository.findByName(dataUrl.name())
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(dataUrl.getUrlId());
 
-            savePokemonTypeMatching(typeMatchingResponse, fromTypeName);
+            savePokemonTypeMatching(typeMatchingResponse, fromPokemonType);
         }
     }
 
-    private void savePokemonTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromTypeName) {
-        List<String> allTypeNames = getAllTypeNames();
+    private void savePokemonTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType) {
+        List<PokemonType> allPokemonTypes = pokemonTypeRepository.findAll();
 
-        saveDoubleDamageTypeMatching(typeMatchingResponse, fromTypeName, allTypeNames);
-        saveHalfDamageTypeMatching(typeMatchingResponse, fromTypeName, allTypeNames);
-        saveNoDamageTypeMatching(typeMatchingResponse, fromTypeName, allTypeNames);
-        saveBasicDamageTypeMatching(fromTypeName, allTypeNames);
+        saveDoubleDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes);
+        saveHalfDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes);
+        saveNoDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes);
+        saveBasicDamageTypeMatching(fromPokemonType, allPokemonTypes);
     }
 
-    private List<String> getAllTypeNames() {
-        return pokemonTypeRepository.findAll().stream()
-                .map(PokemonType::getName)
-                .collect(Collectors.toList());
-    }
-
-    private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromTypeName, List<String> allTypeNames) {
+    private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes) {
         for (DataUrl type : typeMatchingResponse.getDoubleDamageTo()) {
-            PokemonType pokemonType = pokemonTypeRepository.findByName(type.name())
+            PokemonType toPokemonType = pokemonTypeRepository.findByName(type.name())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-            String toTypeName = pokemonType.getName();
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromTypeName, toTypeName, DOUBLE_DAMAGE);
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, DOUBLE_DAMAGE);
 
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
-            allTypeNames.remove(toTypeName);
+            allPokemonTypes.remove(toPokemonType);
         }
     }
 
-    private void saveHalfDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromTypeName, List<String> allTypeNames) {
+    private void saveHalfDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes) {
         for (DataUrl type : typeMatchingResponse.getHalfDamageTo()) {
-            PokemonType pokemonType = pokemonTypeRepository.findByName(type.name())
+            PokemonType toPokemonType = pokemonTypeRepository.findByName(type.name())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-            String toTypeName = pokemonType.getName();
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromTypeName, toTypeName, HALF_DAMAGE);
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, HALF_DAMAGE);
 
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
-            allTypeNames.remove(toTypeName);
+            allPokemonTypes.remove(toPokemonType);
         }
     }
 
-    private void saveNoDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, String fromTypeName, List<String> allTypeNames) {
+    private void saveNoDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes) {
         for (DataUrl type : typeMatchingResponse.getNoDamageTo()) {
-            PokemonType pokemonType = pokemonTypeRepository.findByName(type.name())
+            PokemonType toPokemonType = pokemonTypeRepository.findByName(type.name())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-            String toTypeName = pokemonType.getName();
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromTypeName, toTypeName, NO_DAMAGE);
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, NO_DAMAGE);
 
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
-            allTypeNames.remove(toTypeName);
+            allPokemonTypes.remove(toPokemonType);
         }
     }
 
-    private void saveBasicDamageTypeMatching(String fromTypeName, List<String> allTypeNames) {
-        for (String toTypeName : allTypeNames) {
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromTypeName, toTypeName, BASIC_DAMAGE);
+    private void saveBasicDamageTypeMatching(PokemonType fromPokemonType, List<PokemonType> allPokemonTypes) {
+        for (PokemonType toPokemonType : allPokemonTypes) {
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, BASIC_DAMAGE);
 
             pokemonTypeMatchingRepository.save(pokemonTypeMatching);
         }

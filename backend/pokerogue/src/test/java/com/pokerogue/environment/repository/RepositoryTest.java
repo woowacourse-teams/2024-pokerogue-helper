@@ -1,4 +1,4 @@
-package com.pokerogue.helper.environ.repository;
+package com.pokerogue.environment.repository;
 
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

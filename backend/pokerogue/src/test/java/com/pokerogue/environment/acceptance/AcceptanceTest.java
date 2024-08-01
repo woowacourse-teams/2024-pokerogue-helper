@@ -1,4 +1,4 @@
-package com.pokerogue.helper.environ.acceptance;
+package com.pokerogue.environment.acceptance;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,0 +1,775 @@
+{
+  "base_happiness": 0,
+  "capture_rate": 3,
+  "color": {
+    "name": "blue",
+    "url": "https://pokeapi.co/api/v2/pokemon-color/2/"
+  },
+  "egg_groups": [
+    {
+      "name": "no-eggs",
+      "url": "https://pokeapi.co/api/v2/egg-group/15/"
+    }
+  ],
+  "evolution_chain": {
+    "url": "https://pokeapi.co/api/v2/evolution-chain/198/"
+  },
+  "evolves_from_species": null,
+  "flavor_text_entries": [
+    {
+      "flavor_text": "KYOGRE has the power to create massive\nrain clouds that cover the entire sky\nand bring about torrential downpours.\fThis POKéMON saved people who were\nsuffering from droughts.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "ruby",
+        "url": "https://pokeapi.co/api/v2/version/7/"
+      }
+    },
+    {
+      "flavor_text": "KYOGRE is named in mythology as the\nPOKéMON that expanded the sea by\ncovering the land with torrential rains\fand towering tidal waves.\nIt took to sleep after a cataclysmic\nbattle with GROUDON.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "sapphire",
+        "url": "https://pokeapi.co/api/v2/version/8/"
+      }
+    },
+    {
+      "flavor_text": "KYOGRE has appeared in mythology as the\ncreator of the sea. After long years of\nfeuding with GROUDON, it took to sleep at\nthe bottom of the sea.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "emerald",
+        "url": "https://pokeapi.co/api/v2/version/9/"
+      }
+    },
+    {
+      "flavor_text": "This POKéMON is said to have\nexpanded the sea by bringing heavy rains.\nIt has the power to control water.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "firered",
+        "url": "https://pokeapi.co/api/v2/version/10/"
+      }
+    },
+    {
+      "flavor_text": "This POKéMON is said to have expanded\nthe sea by bringing heavy rains.\nIt has the power to control water.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "leafgreen",
+        "url": "https://pokeapi.co/api/v2/version/11/"
+      }
+    },
+    {
+      "flavor_text": "It is said to have widened the\nseas by causing downpours. It had\nbeen asleep in a marine trench.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "diamond",
+        "url": "https://pokeapi.co/api/v2/version/12/"
+      }
+    },
+    {
+      "flavor_text": "It is said to have widened the\nseas by causing downpours. It had\nbeen asleep in a marine trench.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "pearl",
+        "url": "https://pokeapi.co/api/v2/version/13/"
+      }
+    },
+    {
+      "flavor_text": "It is said to have widened the\nseas by causing downpours. It had\nbeen asleep in a marine trench.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "platinum",
+        "url": "https://pokeapi.co/api/v2/version/14/"
+      }
+    },
+    {
+      "flavor_text": "A mythical Pokémon said to have\nswelled the seas with rain and tidal\nwaves. It battled with GROUDON.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "heartgold",
+        "url": "https://pokeapi.co/api/v2/version/15/"
+      }
+    },
+    {
+      "flavor_text": "A mythical Pokémon said to have\nswelled the seas with rain and tidal\nwaves. It battled with GROUDON.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "soulsilver",
+        "url": "https://pokeapi.co/api/v2/version/16/"
+      }
+    },
+    {
+      "flavor_text": "On dit qu’il a fait monter les eaux\nen causant des pluies diluviennes.\nIl somnolait dans une fosse marine.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "black",
+        "url": "https://pokeapi.co/api/v2/version/17/"
+      }
+    },
+    {
+      "flavor_text": "It is said to have widened the\nseas by causing downpours. It had\nbeen asleep in a marine trench.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "black",
+        "url": "https://pokeapi.co/api/v2/version/17/"
+      }
+    },
+    {
+      "flavor_text": "On dit qu’il a fait monter les eaux\nen causant des pluies diluviennes.\nIl somnolait dans une fosse marine.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "white",
+        "url": "https://pokeapi.co/api/v2/version/18/"
+      }
+    },
+    {
+      "flavor_text": "It is said to have widened the\nseas by causing downpours. It had\nbeen asleep in a marine trench.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "white",
+        "url": "https://pokeapi.co/api/v2/version/18/"
+      }
+    },
+    {
+      "flavor_text": "It is said to have widened the\nseas by causing downpours. It had\nbeen asleep in a marine trench.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "black-2",
+        "url": "https://pokeapi.co/api/v2/version/21/"
+      }
+    },
+    {
+      "flavor_text": "It is said to have widened the\nseas by causing downpours. It had\nbeen asleep in a marine trench.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "white-2",
+        "url": "https://pokeapi.co/api/v2/version/22/"
+      }
+    },
+    {
+      "flavor_text": "おおあめと　おおつなみで　うみを\nひろげた　しんわの　ポケモン。\nグラードンと　はげしく　たたかった。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "많은 비와 큰 해일로 바다를\n넓힌 신화의 포켓몬이다.\n그란돈과 격하게 싸웠다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Ennemi juré de Groudon, la légende dit qu’il a étendu\nles mers en causant déluges et raz de marée.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Der Legende nach erschuf sein Regen das Meer.\nEs und Groudon lieferten sich einen langen Kampf.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Pokémon legendario que aumentó los mares con\ndiluvios y maremotos. Fue un enemigo acérrimo de\nGroudon.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Nella mitologia, Kyogre è il Pokémon che ha\nampliato i mari con megaonde e megapiogge.\nNemico di Groudon.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "A mythical Pokémon said to have swelled the seas\nwith rain and tidal waves. It battled with Groudon.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "大雨と　大津波で　海を　広げた\n神話の　ポケモン。\nグラードンと　激しく　戦った。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "おおあめを　ふらせる　のうりょくで\nうみを　ひろげたと　いわれている。\nかいこうの　そこで　ねむっていた。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "많은 비를 내리게 하는 능력으로\n바다를 넓혔다고 전해진다.\n해구의 밑바닥에서 잠들어 있었다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "On dit qu’il a fait monter les eaux en causant des\npluies diluviennes. Il somnolait dans une fosse marine.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Man sagt, es habe die Meere vergrößert, indem es\nes regnen ließ. Es schlief in einem Meeresgraben.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Se dice que aumentó el nivel del mar a base de\naguaceros. Ha estado durmiendo en una fosa marina.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Si dice che abbia ampliato i mari provocando piogge\ntorrenziali. Si è assopito in una fossa marina.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "It is said to have widened the seas by causing\ndownpours. It had been asleep in a marine trench.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "大雨を　降らせる　能力で\n海を　広げたと　言われている。\n海溝の　底で　眠っていた。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "しぜんのエネルギーに　よって　ゲンシカイキし\nほんらいの　すがたを　とりもどす。そのちからは\nあらしを　よびよせ　うみを　ひろげる。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "자연의 힘에 의해 원시회귀하여\n원래의 모습을 되찾는다. 그 힘은\n폭풍을 불러들이며 바다를 확장한다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Grâce à l’énergie de la nature, il peut accomplir\nsa Primo-Résurgence pour retrouver son apparence originelle.\nCe pouvoir lui permet d’appeler de terribles déluges\npour étendre les mers.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Mithilfe von Naturenergie kann es eine Protomorphose\ndurchführen und so seine ursprüngliche Form zurückerlangen.\nDadurch kann es Stürme erzeugen und das Meer vergrößern.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Kyogre se sirve de la energía de la naturaleza para realizar su\nRegresión Primigenia y recobrar su apariencia primitiva. Con tal\npoder, puede desencadenar tempestades para expandir los\nocéanos.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "L’energia della natura può causare l’archeorisveglio\ndi questo Pokémon, facendolo tornare al suo aspetto\noriginario.\nPuò provocare diluvi torrenziali in grado di espandere\nla superficie dei mari.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Through Primal Reversion and with nature’s\nfull power, it will take back its true form. It can\nsummon storms that cause the sea levels to rise.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "自然のエネルギーに　よって　ゲンシカイキし\n本来の　姿を　取り戻す。その力は\n嵐を　呼び寄せ　海を　広げる。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "うみの　けしん　と つたわる　ポケモン。\nしぜんのエネルギーを　もとめて　グラードンと\nあらそいを　くりかえした　でんせつが　ある。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "바다의 화신이라 전해지는 포켓몬.\n자연의 힘을 갈구하여 그란돈과\n사투를 반복한다는 전설이 있다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Un Pokémon considéré comme l’avatar des océans.\nSelon les légendes, il a disputé de nombreux combats\navec Groudon pour contrôler l’énergie de la nature.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Es heißt, Kyogre sei die Personifizierung des Meeres.\nLegenden zufolge hat es in seinem Bestreben, sich die\nNaturenergie anzueignen, viele Male gegen Groudon gekämpft.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "A Kyogre siempre se le ha descrito como el Pokémon que\nexpandió los océanos. Varias leyendas cuentan que libró\ncombates contra Groudon en repetidas ocasiones para tener\nel control de la energía de la naturaleza.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Si dice che questo Pokémon abbia un profondo\nlegame con le distese dei mari.\nLe leggende narrano dei suoi continui scontri con\nGroudon per ottenere l’energia della natura.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Kyogre is said to be the personification of the sea itself.\nLegends tell of its many clashes against Groudon,\nas each sought to gain the power of nature.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "海の　化身　と 伝わる　ポケモン。\n自然のエネルギーを　求めて　グラードンと\n争いを　繰り返したという　伝説が　ある。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    }
+  ],
+  "form_descriptions": [],
+  "forms_switchable": true,
+  "gender_rate": -1,
+  "genera": [
+    {
+      "genus": "かいていポケモン",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      }
+    },
+    {
+      "genus": "해저포켓몬",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      }
+    },
+    {
+      "genus": "海底寶可夢",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      }
+    },
+    {
+      "genus": "Pokémon Bassinmarin",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      }
+    },
+    {
+      "genus": "Seegründler-Pokémon",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      }
+    },
+    {
+      "genus": "Pokémon Cuenca Mar",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      }
+    },
+    {
+      "genus": "Pokémon Oceano",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      }
+    },
+    {
+      "genus": "Sea Basin Pokémon",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    },
+    {
+      "genus": "かいていポケモン",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      }
+    },
+    {
+      "genus": "海底宝可梦",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-iii",
+    "url": "https://pokeapi.co/api/v2/generation/3/"
+  },
+  "growth_rate": {
+    "name": "slow",
+    "url": "https://pokeapi.co/api/v2/growth-rate/1/"
+  },
+  "habitat": {
+    "name": "sea",
+    "url": "https://pokeapi.co/api/v2/pokemon-habitat/7/"
+  },
+  "has_gender_differences": false,
+  "hatch_counter": 120,
+  "id": 382,
+  "is_baby": false,
+  "is_legendary": true,
+  "is_mythical": false,
+  "name": "kyogre",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "カイオーガ"
+    },
+    {
+      "language": {
+        "name": "roomaji",
+        "url": "https://pokeapi.co/api/v2/language/2/"
+      },
+      "name": "Kyogre"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "가이오가"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "蓋歐卡"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Kyogre"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Kyogre"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Kyogre"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Kyogre"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Kyogre"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "カイオーガ"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "盖欧卡"
+    }
+  ],
+  "order": 412,
+  "pal_park_encounters": [
+    {
+      "area": {
+        "name": "sea",
+        "url": "https://pokeapi.co/api/v2/pal-park-area/5/"
+      },
+      "base_score": 90,
+      "rate": 3
+    }
+  ],
+  "pokedex_numbers": [
+    {
+      "entry_number": 382,
+      "pokedex": {
+        "name": "national",
+        "url": "https://pokeapi.co/api/v2/pokedex/1/"
+      }
+    },
+    {
+      "entry_number": 198,
+      "pokedex": {
+        "name": "hoenn",
+        "url": "https://pokeapi.co/api/v2/pokedex/4/"
+      }
+    },
+    {
+      "entry_number": 207,
+      "pokedex": {
+        "name": "updated-hoenn",
+        "url": "https://pokeapi.co/api/v2/pokedex/15/"
+      }
+    }
+  ],
+  "shape": {
+    "name": "fish",
+    "url": "https://pokeapi.co/api/v2/pokemon-shape/3/"
+  },
+  "varieties": [
+    {
+      "is_default": true,
+      "pokemon": {
+        "name": "kyogre",
+        "url": "https://pokeapi.co/api/v2/pokemon/382/"
+      }
+    },
+    {
+      "is_default": false,
+      "pokemon": {
+        "name": "kyogre-primal",
+        "url": "https://pokeapi.co/api/v2/pokemon/10077/"
+      }
+    }
+  ]
+}
