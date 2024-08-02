@@ -15,7 +15,8 @@ class FakeAbilityRepository : AbilityRepository {
             ability.title.has(query)
         }
 
-    override suspend fun abilityDetail(id: Long): AbilityDetail = ABILITIES_DETAIL
+    override suspend fun abilityDetail(id: Long): AbilityDetail =
+        ABILITY_DETAILS[id] ?: throw IllegalArgumentException("Invalid Ability Id")
 
     companion object {
         private const val FORMAT_POKEMON_IMAGE_URL =
@@ -54,19 +55,37 @@ class FakeAbilityRepository : AbilityRepository {
                 Ability(24, "불가사의부적", "효과가 굉장한 기술만 맞는 불가사의한 힘."),
             )
 
-        val ABILITIES_DETAIL: AbilityDetail =
-            AbilityDetail(
-                title = "악취",
-                description = "악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다.",
-                pokemons =
-                    listOf(
-                        Pokemon(
-                            id = 1,
-                            dexNumber = 1,
-                            name = "이상해씨",
-                            imageUrl = pokemonImageUrl(pokemonId = 1),
-                            types = listOf(Type.GRASS, Type.POISON),
-                        ),
+        private val ABILITY_DETAILS: Map<Long, AbilityDetail> =
+            mapOf(
+                1L to
+                    AbilityDetail(
+                        title = "악취",
+                        description = "악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다.",
+                        pokemons =
+                            listOf(
+                                Pokemon(
+                                    id = 1,
+                                    dexNumber = 1,
+                                    name = "이상해씨",
+                                    imageUrl = pokemonImageUrl(pokemonId = 1),
+                                    types = listOf(Type.GRASS, Type.POISON),
+                                ),
+                            ),
+                    ),
+                2L to
+                    AbilityDetail(
+                        title = "잔비",
+                        description = "등장했을 때 날씨를 비로 만든다.",
+                        pokemons =
+                            listOf(
+                                Pokemon(
+                                    id = 2,
+                                    dexNumber = 2,
+                                    name = "이상해풀",
+                                    imageUrl = pokemonImageUrl(pokemonId = 2),
+                                    types = listOf(Type.GRASS, Type.POISON),
+                                ),
+                            ),
                     ),
             )
     }

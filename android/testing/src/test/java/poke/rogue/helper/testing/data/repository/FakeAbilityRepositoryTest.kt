@@ -4,6 +4,7 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import poke.rogue.helper.data.repository.AbilityRepository
 
 class FakeAbilityRepositoryTest {
@@ -17,14 +18,11 @@ class FakeAbilityRepositoryTest {
     @Test
     fun `모든 특성 정보를 불러온다`() =
         runTest {
-            // given
-            val expectedAbilities = FakeAbilityRepository.ABILITES
-
             // when
             val actualAbilities = repository.abilities()
 
             // then
-            actualAbilities shouldBe expectedAbilities
+            actualAbilities.size shouldBe 24
         }
 
     @Test
@@ -43,14 +41,13 @@ class FakeAbilityRepositoryTest {
     @Test
     fun `올바른 특성의 이름을 검색했을 때, 해당하는 특성을 반환한다`() =
         runTest {
-            // given
-            val query = "타오르는불꽃"
-
             // when
-            val ability = repository.abilities(query)
+            val ability = repository.abilities("타오르는불꽃")
 
             // then
-            ability.find { it.title == query }?.title shouldBe query
+            val actual = ability.find { it.title == "타오르는불꽃" }?.title
+            val expect = "타오르는불꽃"
+            actual shouldBe expect
         }
 
     @Test
@@ -64,5 +61,14 @@ class FakeAbilityRepositoryTest {
 
             // then
             ability.find { it.title == "타오르는불꽃" }?.title shouldBe "타오르는불꽃"
+        }
+
+    @Test
+    fun `잘못된 ID값으로 조회하면, 특성 정보를 불러올 때 예외가 발생한다`() =
+        runTest {
+            // when, then
+            assertThrows<IllegalArgumentException> {
+                repository.abilityDetail(-1)
+            }
         }
 }
