@@ -26,10 +26,10 @@ enum class Type(val id: Int) {
     ;
 
     companion object {
-        private val idToType = entries.associateBy { it.id }
+        private val typeById = entries.associateBy { it.id }
 
         fun fromId(id: Int): Type {
-            return idToType[id] ?: throw IllegalArgumentException("Unknown type ID: $id")
+            return typeById[id] ?: throw IllegalArgumentException("Unknown type ID: $id")
         }
     }
 }

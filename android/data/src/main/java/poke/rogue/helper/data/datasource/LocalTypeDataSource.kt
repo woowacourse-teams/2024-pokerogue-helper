@@ -19,12 +19,11 @@ class LocalTypeDataSource {
 
     fun matchedTypesAgainstDefendingType(defendingTypeId: Int): List<MatchedTypes> {
         val defendingType = Type.fromId(defendingTypeId)
-        val result = hashMapOf<MatchedResult, MutableList<Type>>()
-
-        TypeMatchedTable.typeMatchedTable.entries.forEach { (attackerType, defenderMap) ->
-            val matchedResult = defenderMap.getValue(defendingType)
-            result.getOrPut(matchedResult) { mutableListOf() }.add(attackerType)
-        }
+        val result =
+            TypeMatchedTable.typeMatchedTable.entries.groupBy(
+                keySelector = { (_, defenderMap) -> defenderMap.getValue(defendingType) },
+                valueTransform = { (attackerType, _) -> attackerType },
+            )
 
         return result.toMatchedTypesList()
     }
