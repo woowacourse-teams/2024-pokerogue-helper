@@ -46,6 +46,7 @@ jobs:
           sudo touch docker-compose.yml
           echo "${{ vars.DOCKER_COMPOSE_TEST_DB }}" | sudo tee docker-compose.yml > /dev/null
           docker-compose -f docker-compose.yml up -d
+          docker ps
 
       - name: Run Test
         run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
