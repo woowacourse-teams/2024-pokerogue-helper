@@ -43,7 +43,7 @@ public class PokemonService {
 
     @Transactional(readOnly = true)
     public PokedexResponse findPokedexDetails(Long id) {
-        Pokemon pokemon = pokemonRepository.findById(id)
+        Pokemon pokemon = pokemonRepository.findDetailsById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
         return toPokedexResponse(pokemon);
