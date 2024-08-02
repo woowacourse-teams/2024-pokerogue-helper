@@ -46,6 +46,7 @@ jobs:
           sudo touch docker-compose.yml
           echo "${{ vars.DOCKER_COMPOSE_TEST_DB }}" | sudo tee docker-compose.yml > /dev/null
           docker-compose -f docker-compose.yml up -d
+        working-directory: ./backend/pokerogue
 
       - name: Wait for Test MySQL to be ready
         run: |
@@ -58,6 +59,7 @@ jobs:
           sleep 5
           fi
           done
+        working-directory: ./backend/pokerogue
 
       - name: Run Test
         run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
