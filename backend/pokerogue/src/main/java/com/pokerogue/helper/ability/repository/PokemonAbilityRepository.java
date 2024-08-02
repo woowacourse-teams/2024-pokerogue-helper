@@ -13,6 +13,9 @@ public interface PokemonAbilityRepository extends JpaRepository<PokemonAbility, 
     @Query("""
             select a from PokemonAbility a
             join fetch a.pokemonAbilityMappings m
+            join fetch m.pokemon p
+            join fetch p.pokemonTypeMappings pt
+            join fetch pt.pokemonType t
             where a.id = :id
             """)
     Optional<PokemonAbility> findByIdWithPokemonMappings(@NonNull @Param("id") Long id);

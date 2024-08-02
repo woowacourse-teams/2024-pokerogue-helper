@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.List;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +37,7 @@ public class PokemonAbility {
     private String detailDescription;
 
     @OneToMany(mappedBy = "pokemonAbility", fetch = FetchType.LAZY)
-    private List<PokemonAbilityMapping> pokemonAbilityMappings;
+    private Set<PokemonAbilityMapping> pokemonAbilityMappings;
 
     public PokemonAbility(String name, String koName, String description, String detailDescription) {
         this.name = name;
