@@ -45,6 +45,7 @@ public class PokemonController {
     public ApiResponse<Void> savePokemonDataSetting() {
         log.info("---- 포켓몬 전체 데이터 Pre 테스트 시작");
         dataSettingService.setData();
+        log.info("---- 포켓몬 전체 데이터 Pre 테스트 종료");
 
         return new ApiResponse<>("포켓몬 전체 데이터 Pre 테스트에 성공했습니다.", null);
     }
@@ -53,6 +54,7 @@ public class PokemonController {
     public ApiResponse<Void> savePokemonDataBatch() {
         log.info("---- 포켓몬 전체 데이터 Batch 테스트 시작");
         dataSettingService.setDataBatch();
+        log.info("---- 포켓몬 전체 데이터 Batch 테스트 종료");
 
         return new ApiResponse<>("포켓몬 전체 데이터 Batch 테스트에 성공했습니다.", null);
     }
@@ -61,6 +63,7 @@ public class PokemonController {
     public ApiResponse<Void> savePokemonDataTypeSetting() {
         log.info("---- 포켓몬 타입 데이터 Pre 테스트 시작");
         dataSettingService.setDataTestTypePre();
+        log.info("---- 포켓몬 타입 데이터 Pre 테스트 종료");
 
         return new ApiResponse<>("포켓몬 타입 데이터 Pre 테스트에 성공했습니다.", null);
     }
@@ -69,6 +72,7 @@ public class PokemonController {
     public ApiResponse<Void> savePokemonDataPokemonSetting() {
         log.info("---- 포켓몬 데이터 Pre 테스트 시작");
         dataSettingService.setDataTestPokemonPre();
+        log.info("---- 포켓몬 데이터 Pre 테스트 종료");
 
         return new ApiResponse<>("포켓몬 데이터 Pre 테스트에 성공했습니다.", null);
     }
@@ -77,6 +81,7 @@ public class PokemonController {
     public ApiResponse<Void> savePokemonDataAbilitySetting() {
         log.info("---- 포켓몬 특성 데이터 Pre 테스트 시작");
         dataSettingService.setDataTestAbilityPre();
+        log.info("---- 포켓몬 특성 데이터 Pre 테스트 종료");
 
         return new ApiResponse<>("포켓몬 특성 데이터 Pre 테스트에 성공했습니다.", null);
     }
@@ -85,6 +90,7 @@ public class PokemonController {
     public ApiResponse<Void> savePokemonDataType() {
         log.info("---- 포켓몬 타입 데이터 Batch 테스트 시작");
         dataSettingService.setDataTestTypeBatch();
+        log.info("---- 포켓몬 타입 데이터 Batch 테스트 종료");
 
         return new ApiResponse<>("포켓몬 타입 데이터 Batch 테스트에 성공했습니다.", null);
     }
@@ -93,6 +99,7 @@ public class PokemonController {
     public ApiResponse<Void> savePokemonDataPokemon() {
         log.info("---- 포켓몬 데이터 Batch 테스트 시작");
         dataSettingService.setDataTestPokemonBatch();
+        log.info("---- 포켓몬 데이터 Batch 테스트 종료");
 
         return new ApiResponse<>("포켓몬 데이터 Batch 테스트에 성공했습니다.", null);
     }
@@ -101,6 +108,7 @@ public class PokemonController {
     public ApiResponse<Void> savePokemonDataAbility() {
         log.info("---- 포켓몬 특성 데이터 Batch 테스트 시작");
         dataSettingService.setDataTestAbilityBatch();
+        log.info("---- 포켓몬 특성 데이터 Batch 테스트 종료");
 
         return new ApiResponse<>("포켓몬 특성 데이터 Batch 테스트에 성공했습니다.", null);
     }
