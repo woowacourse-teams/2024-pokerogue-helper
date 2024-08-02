@@ -73,6 +73,15 @@ public class DataSettingService {
     private final JDBCPokemonRepository jdbcPokemonRepository;
 
     @Transactional
+    public void setDataBatch() {
+        deleteAll();
+
+        savePokemonTypesTestBatch();
+        savePokemonAbilitiesTestBatch();
+        savePokemonsTestBatch();
+    }
+
+    @Transactional
     public void setDataTestTypePre() {
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonTypeMatchingRepository.deleteAllInBatch();
