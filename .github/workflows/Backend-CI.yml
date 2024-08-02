@@ -26,12 +26,26 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Set up MySQL
+      - name: Set up Local MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
           mysql database: 'pokerogue'
           mysql user: ${{ secrets.TEST_DB_USERNAME }}
           mysql password: ${{ secrets.TEST_DB_PASSWORD }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      - name: Set up Test MySQL
+        run: |
+          sudo touch docker-compose.yml
+          echo "${{ vars.DOCKER_COMPOSE_TEST_DB }}" | sudo tee docker-compose.yml > /dev/null
+          docker-compose -f docker-compose.yml up -d
 
       - name: Run Test
         run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
