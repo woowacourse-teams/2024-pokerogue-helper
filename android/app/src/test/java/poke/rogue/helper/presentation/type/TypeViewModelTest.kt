@@ -8,12 +8,11 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.TypeRepository
-import poke.rogue.helper.presentation.type.model.MatchedTypesUiModelComparator
+import poke.rogue.helper.presentation.type.model.MatchedResultUiModel
+import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
-import poke.rogue.helper.presentation.type.model.toUi
 import poke.rogue.helper.testing.CoroutinesTestExtension
 import poke.rogue.helper.testing.data.repository.FakeTypeRepository
 
@@ -68,10 +67,20 @@ class TypeViewModelTest {
             launch {
                 viewModel.type.collect { actual ->
                     val expected =
-                        FakeTypeRepository.DUMMY_RESULTS_AGAINST_MINE.toUi(
-                            Type.FAIRY.id,
-                            isMyType = true,
-                        ).sortedWith(MatchedTypesUiModelComparator)
+                        listOf(
+                            MatchedTypesUiModel(
+                                TypeUiModel.FAIRY,
+                                true,
+                                MatchedResultUiModel.STRONG,
+                                listOf(TypeUiModel.ICE, TypeUiModel.DRAGON),
+                            ),
+                            MatchedTypesUiModel(
+                                TypeUiModel.FAIRY,
+                                true,
+                                MatchedResultUiModel.WEAK,
+                                listOf(TypeUiModel.FIRE, TypeUiModel.POISON),
+                            ),
+                        )
                     actual shouldBe expected
                     cancel()
                 }
@@ -91,10 +100,20 @@ class TypeViewModelTest {
             launch {
                 viewModel.type.collect { actual ->
                     val expected =
-                        FakeTypeRepository.DUMMY_RESULTS_AGAINST_OPPONENT.toUi(
-                            Type.FAIRY.id,
-                            isMyType = false,
-                        ).sortedWith(MatchedTypesUiModelComparator)
+                        listOf(
+                            MatchedTypesUiModel(
+                                TypeUiModel.FAIRY,
+                                false,
+                                MatchedResultUiModel.STRONG,
+                                listOf(TypeUiModel.POISON, TypeUiModel.STEEL),
+                            ),
+                            MatchedTypesUiModel(
+                                TypeUiModel.FAIRY,
+                                false,
+                                MatchedResultUiModel.NORMAL,
+                                listOf(TypeUiModel.WATER, TypeUiModel.GRASS),
+                            ),
+                        )
                     actual shouldBe expected
                     cancel()
                 }
@@ -116,8 +135,15 @@ class TypeViewModelTest {
             launch {
                 viewModel.type.collect { actual ->
                     val expected =
-                        FakeTypeRepository.DUMMY_RESULTS.toUi(Type.FAIRY.id, isMyType = true)
-                            .sortedWith(MatchedTypesUiModelComparator)
+                        listOf(
+                            MatchedTypesUiModel(
+                                TypeUiModel.FAIRY,
+                                true,
+                                MatchedResultUiModel.STRONG,
+                                listOf(TypeUiModel.FIGHTING),
+                            ),
+                        )
+
                     actual shouldBe expected
                     cancel()
                 }
