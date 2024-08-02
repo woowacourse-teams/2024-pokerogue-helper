@@ -10,8 +10,11 @@ import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
 import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
+import com.pokerogue.helper.type.domain.PokemonType;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,17 +36,35 @@ public class PokemonAbilityService {
         PokemonAbility ability = pokemonAbilityRepository.findByIdWithPokemonMappings(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
 
-        List<SameAbilityPokemonResponse> pokemonResponses = ability.getPokemonAbilityMappings().stream()
+        List<Pokemon> pokemons = ability.getPokemonAbilityMappings().stream()
                 .map(PokemonAbilityMapping::getPokemon)
-                .map(pokemon -> SameAbilityPokemonResponse.from(pokemon, toPokemonTypeResponse(pokemon)))
                 .toList();
+        List<SameAbilityPokemonResponse> pokemonResponses = toSameAbilityPokemonResponses(
+                pokemons);
 
         return new PokemonAbilityWithPokemonsResponse(ability.getKoName(), ability.getDescription(), pokemonResponses);
     }
 
-    private List<PokemonTypeResponse> toPokemonTypeResponse(Pokemon pokemon) {
-        return pokemon.getPokemonTypeMappings().stream()
-                .map(PokemonTypeMapping::getPokemonType)
+    private List<SameAbilityPokemonResponse> toSameAbilityPokemonResponses(List<Pokemon> pokemons) {
+        Map<Pokemon, List<PokemonType>> pokemonTypeMappings = mapTypeWithPokemons(pokemons);
+
+        return pokemons.stream()
+                .map(pokemon -> SameAbilityPokemonResponse.from(pokemon,
+                        toPokemonTypeResponse(pokemonTypeMappings.get(pokemon)))).toList();
+    }
+
+    private Map<Pokemon, List<PokemonType>> mapTypeWithPokemons(List<Pokemon> pokemons) {
+        return pokemons.stream()
+                .collect(Collectors.toMap(
+                        pokemon -> pokemon,
+                        pokemon -> pokemon.getPokemonTypeMappings().stream()
+                                .map(PokemonTypeMapping::getPokemonType)
+                                .collect(Collectors.toList())
+                ));
+    }
+
+    private List<PokemonTypeResponse> toPokemonTypeResponse(List<PokemonType> pokemonTypes) {
+        return pokemonTypes.stream()
                 .map(PokemonTypeResponse::from)
                 .toList();
     }
