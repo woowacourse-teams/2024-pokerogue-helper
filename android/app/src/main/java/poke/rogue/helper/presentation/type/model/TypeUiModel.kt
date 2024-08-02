@@ -29,15 +29,12 @@ enum class TypeUiModel(
     DARK(15, "악", R.color.poke_dark, R.drawable.icon_type_dark),
     STEEL(16, "강철", R.color.poke_steel, R.drawable.icon_type_steel),
     FAIRY(17, "페어리", R.color.poke_fairy, R.drawable.icon_type_fairy),
+    STELLAR(18, "스텔라", R.color.poke_white, R.drawable.icon_type_stellar),
     ;
 
     companion object {
-        fun fromId(id: Int): TypeUiModel? {
-            return entries.find { it.id == id }
-        }
-
-        fun fromName(typeName: String): TypeUiModel? {
-            return entries.find { it.typeName.equals(typeName, ignoreCase = true) }
+        fun fromId(id: Int): TypeUiModel {
+            return entries.find { it.id == id } ?: throw IllegalArgumentException("Unknown type ID: $id")
         }
     }
 }

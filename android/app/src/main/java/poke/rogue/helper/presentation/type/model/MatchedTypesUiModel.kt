@@ -13,7 +13,7 @@ fun MatchedTypes.toUi(
     typeId: Int,
     isMyType: Boolean,
 ): MatchedTypesUiModel {
-    val inputTypeUi = TypeUiModel.fromId(typeId) ?: throw IllegalArgumentException("Unknown type ID: $typeId")
+    val inputTypeUi = TypeUiModel.fromId(typeId)
     val matchedResultUi = MatchedResultUiModel.fromMatchedResult(this.matchedResult)
     return MatchedTypesUiModel(
         selectedType = inputTypeUi,
