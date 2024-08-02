@@ -46,7 +46,13 @@ jobs:
           sudo touch docker-compose.yml
           echo "${{ vars.DOCKER_COMPOSE_TEST_DB }}" | sudo tee docker-compose.yml > /dev/null
           docker-compose -f docker-compose.yml up -d
-          docker ps
+
+      - name: Wait for Test MySQL to be ready
+        run: |
+          until docker-compose exec pokerogue-db mysqladmin ping --host 127.0.0.1 --user ${{ secrets.TEST_DB_USERNAME }} --password=${{ secrets.TEST_DB_PASSWORD }}; do
+          echo "Waiting for Test MySQL to be ready..."
+          sleep 5
+          done
 
       - name: Run Test
         run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
