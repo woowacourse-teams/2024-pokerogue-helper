@@ -42,50 +42,50 @@ public class PokemonController {
     }
 
     @PostMapping("/api/v1/pre/type")
-    public ApiResponse<Void> savePokemonDatatypesetting() {
-        log.info("---- 포켓몬 데이터 세팅 시작");
+    public ApiResponse<Void> savePokemonDataTypeSetting() {
+        log.info("---- 포켓몬 타입 데이터 Pre 테스트 시작");
         dataSettingService.setDataTestTypePre();
 
-        return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
+        return new ApiResponse<>("포켓몬 타입 데이터 Pre 테스트에 성공했습니다.", null);
     }
 
     @PostMapping("/api/v1/pre/pokemon")
-    public ApiResponse<Void> savePokemonDatapokemonsetting() {
-        log.info("---- 포켓몬 데이터 세팅 시작");
+    public ApiResponse<Void> savePokemonDataPokemonSetting() {
+        log.info("---- 포켓몬 데이터 Pre 테스트 시작");
         dataSettingService.setDataTestPokemonPre();
 
-        return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
+        return new ApiResponse<>("포켓몬 데이터 Pre 테스트에 성공했습니다.", null);
     }
 
     @PostMapping("/api/v1/pre/ability")
-    public ApiResponse<Void> savePokemonDataabilitysetting() {
-        log.info("---- 포켓몬 데이터 세팅 시작");
+    public ApiResponse<Void> savePokemonDataAbilitySetting() {
+        log.info("---- 포켓몬 특성 데이터 Pre 테스트 시작");
         dataSettingService.setDataTestAbilityPre();
 
-        return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
+        return new ApiResponse<>("포켓몬 특성 데이터 Pre 테스트에 성공했습니다.", null);
     }
 
     @PostMapping("/api/v1/batch/type")
-    public ApiResponse<Void> savePokemonDatatype() {
-        log.info("---- 포켓몬 데이터 세팅 시작");
+    public ApiResponse<Void> savePokemonDataType() {
+        log.info("---- 포켓몬 타입 데이터 Batch 테스트 시작");
         dataSettingService.setDataTestTypeBatch();
 
-        return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
+        return new ApiResponse<>("포켓몬 타입 데이터 Batch 테스트에 성공했습니다.", null);
     }
 
     @PostMapping("/api/v1/batch/pokemon")
-    public ApiResponse<Void> savePokemonDatapokemon() {
-        log.info("---- 포켓몬 데이터 세팅 시작");
+    public ApiResponse<Void> savePokemonDataPokemon() {
+        log.info("---- 포켓몬 데이터 Batch 테스트 시작");
         dataSettingService.setDataTestPokemonBatch();
 
-        return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
+        return new ApiResponse<>("포켓몬 데이터 Batch 테스트에 성공했습니다.", null);
     }
 
     @PostMapping("/api/v1/batch/ability")
-    public ApiResponse<Void> savePokemonDataability() {
-        log.info("---- 포켓몬 데이터 세팅 시작");
+    public ApiResponse<Void> savePokemonDataAbility() {
+        log.info("---- 포켓몬 특성 데이터 Batch 테스트 시작");
         dataSettingService.setDataTestAbilityBatch();
 
-        return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
+        return new ApiResponse<>("포켓몬 특성 데이터 Batch 테스트에 성공했습니다.", null);
     }
 }
