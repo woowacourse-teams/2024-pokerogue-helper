@@ -41,6 +41,22 @@ public class PokemonController {
         return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
     }
 
+    @PostMapping("/api/v1/pre")
+    public ApiResponse<Void> savePokemonDataSetting() {
+        log.info("---- 포켓몬 전체 데이터 Pre 테스트 시작");
+        dataSettingService.setData();
+
+        return new ApiResponse<>("포켓몬 전체 데이터 Pre 테스트에 성공했습니다.", null);
+    }
+
+    @PostMapping("/api/v1/batch")
+    public ApiResponse<Void> savePokemonDataBatch() {
+        log.info("---- 포켓몬 전체 데이터 Batch 테스트 시작");
+        dataSettingService.setDataBatch();
+
+        return new ApiResponse<>("포켓몬 전체 데이터 Batch 테스트에 성공했습니다.", null);
+    }
+
     @PostMapping("/api/v1/pre/type")
     public ApiResponse<Void> savePokemonDataTypeSetting() {
         log.info("---- 포켓몬 타입 데이터 Pre 테스트 시작");
