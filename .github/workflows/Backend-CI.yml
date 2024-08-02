@@ -49,9 +49,14 @@ jobs:
 
       - name: Wait for Test MySQL to be ready
         run: |
-          until docker-compose exec pokerogue-db mysqladmin ping --host 127.0.0.1 --user ${{ secrets.TEST_DB_USERNAME }} --password=${{ secrets.TEST_DB_PASSWORD }}; do
-          echo "Waiting for Test MySQL to be ready..."
+          for i in {1..30}; do
+          if docker-compose exec -T pokerogue-db mysqladmin ping --host 127.0.0.1 --user ${{ secrets.TEST_DB_USERNAME }} --password=${{ secrets.TEST_DB_PASSWORD }} --silent; then
+          echo "MySQL is up and running!"
+          break
+          else
+          echo "Waiting for MySQL to be ready..."
           sleep 5
+          fi
           done
 
       - name: Run Test
