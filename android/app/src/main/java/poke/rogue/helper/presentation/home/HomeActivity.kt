@@ -11,6 +11,7 @@ import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.dex.PokemonActivity
+import poke.rogue.helper.presentation.tip.TipActivity
 import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
@@ -72,10 +73,8 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
                             .also { startActivity(it) }
 
                     is HomeNavigateEvent.ToTip ->
-                        Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse(stringOf(R.string.home_pokerogue_tip_url)),
-                        ).also { startActivity(it) }
+                        TipActivity.intent(this)
+                            .also { startActivity(it) }
 
                     is HomeNavigateEvent.ToLogo -> navigateToPokeRogue()
                 }
