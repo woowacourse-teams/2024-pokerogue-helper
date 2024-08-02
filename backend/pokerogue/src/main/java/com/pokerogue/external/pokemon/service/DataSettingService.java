@@ -48,8 +48,8 @@ import org.springframework.web.client.HttpClientErrorException;
 @Service
 @AllArgsConstructor
 public class DataSettingService {
-    private static final int PACKET_SIZE = 500;
 
+    private static final int PACKET_SIZE = 500;
     private static final double DOUBLE_DAMAGE = 2.0;
     private static final double HALF_DAMAGE = 0.5;
     private static final double NO_DAMAGE = 0.0;
@@ -98,19 +98,19 @@ public class DataSettingService {
         pokemonTypeMappingRepository.deleteAllInBatch();
         pokemonTypeMatchingRepository.deleteAllInBatch();
         pokemonTypeRepository.deleteAllInBatch();
-        savePokemonTypestest();
+        savePokemonTypesTestBatch();
     }
 
-    private void savePokemonTypestest() {
+    private void savePokemonTypesTestBatch() {
         DataUrls typeDataUrls = getTypeDataUrls();
         List<TypeResponse> typeResponses = getTypeResponses(typeDataUrls);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
 
         jdbcPokemonTypeRepository.batchInsertPokemonType(pokemonTypes);
-        saveAllPokemonTypeMatchingtest(typeDataUrls);
+        saveAllPokemonTypeMatchingTestBatch(typeDataUrls);
     }
 
-    private void saveAllPokemonTypeMatchingtest(DataUrls typeDataUrls) {
+    private void saveAllPokemonTypeMatchingTestBatch(DataUrls typeDataUrls) {
         Map<String, PokemonType> pokemonTypeMap = pokemonTypeRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
         List<PokemonTypeMatching> pokemonTypeMatchings = new ArrayList<>();
@@ -118,21 +118,21 @@ public class DataSettingService {
             PokemonType pokemonType = pokemonTypeRepository.findByName(dataUrl.name()).orElseThrow();
             TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(dataUrl.getUrlId());
 
-            savePokemonTypeMatchingtest(typeMatchingResponse, pokemonType, pokemonTypeMatchings, pokemonTypeMap);
+            savePokemonTypeMatchingTestBatch(typeMatchingResponse, pokemonType, pokemonTypeMatchings, pokemonTypeMap);
         }
         jdbcPokemonTypeMatchingRepository.batchInsertPokemonTypeMatching(pokemonTypeMatchings);
     }
 
-    private void savePokemonTypeMatchingtest(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
+    private void savePokemonTypeMatchingTestBatch(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
         List<PokemonType> allPokemonTypes = pokemonTypeRepository.findAll();
 
-        saveDoubleDamageTypeMatchingtest(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
-        saveHalfDamageTypeMatchingtest(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
-        saveNoDamageTypeMatchingtest(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
-        saveBasicDamageTypeMatchingtest(fromPokemonType, allPokemonTypes, pokemonTypeMatchings);
+        saveDoubleDamageTypeMatchingTestBatch(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
+        saveHalfDamageTypeMatchingTestBatch(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
+        saveNoDamageTypeMatchingTestBatch(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
+        saveBasicDamageTypeMatchingTestBatch(fromPokemonType, allPokemonTypes, pokemonTypeMatchings);
     }
 
-    private void saveDoubleDamageTypeMatchingtest(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
+    private void saveDoubleDamageTypeMatchingTestBatch(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
         for (DataUrl type : typeMatchingResponse.getDoubleDamageTo()) {
             PokemonType toPokemonType = pokemonTypeMap.get(type.name());
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, DOUBLE_DAMAGE);
@@ -142,7 +142,7 @@ public class DataSettingService {
         }
     }
 
-    private void saveHalfDamageTypeMatchingtest(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
+    private void saveHalfDamageTypeMatchingTestBatch(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
         for (DataUrl type : typeMatchingResponse.getHalfDamageTo()) {
             PokemonType toPokemonType = pokemonTypeMap.get(type.name());
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, HALF_DAMAGE);
@@ -152,7 +152,7 @@ public class DataSettingService {
         }
     }
 
-    private void saveNoDamageTypeMatchingtest(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
+    private void saveNoDamageTypeMatchingTestBatch(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
         for (DataUrl type : typeMatchingResponse.getNoDamageTo()) {
             PokemonType toPokemonType = pokemonTypeMap.get(type.name());
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, NO_DAMAGE);
@@ -162,7 +162,7 @@ public class DataSettingService {
         }
     }
 
-    private void saveBasicDamageTypeMatchingtest(PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings) {
+    private void saveBasicDamageTypeMatchingTestBatch(PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings) {
         for (PokemonType toPokemonType : allPokemonTypes) {
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, BASIC_DAMAGE);
 
@@ -174,10 +174,10 @@ public class DataSettingService {
     public void setDataTestAbilityBatch() {
         pokemonAbilityMappingRepository.deleteAllInBatch();
         pokemonAbilityRepository.deleteAllInBatch();
-        savePokemonAbilitiestest();
+        savePokemonAbilitiesTestBatch();
     }
 
-    private void savePokemonAbilitiestest() {
+    private void savePokemonAbilitiesTestBatch() {
         DataUrls abilityDataUrls = getAbilityDataUrls();
         List<AbilityResponse> abilityResponses = getAbilityResponses(abilityDataUrls);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
@@ -188,15 +188,15 @@ public class DataSettingService {
     @Transactional
     public void setDataTestPokemonBatch() {
         pokemonRepository.deleteAllInBatch();
-        savePokemonstest();
+        savePokemonsTestBatch();
     }
 
-    private void savePokemonstest() {
+    private void savePokemonsTestBatch() {
         List<Pokemon> pokemons = new ArrayList<>();
         List<PokemonSaveResponse> pokemonSaveResponses = new ArrayList<>();
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += PACKET_SIZE) {
-            savePokemonsByOffsettest(offset, pokemons);
+            savePokemonsByOffsetTestBatch(offset, pokemons);
         }
         jdbcPokemonRepository.batchInsertPokemon(pokemons);
         Map<String, Pokemon> pokemonMap = pokemonRepository.findAll().stream()
@@ -206,21 +206,21 @@ public class DataSettingService {
         Map<String, PokemonAbility> pokemonAbilityMap = pokemonAbilityRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonAbility::getName, Function.identity()));
 
-        savePokemonTypeMappingtest(pokemonSaveResponses, pokemonMap, pokemonTypeMap);
-        savePokemonAbilityMappingtest(pokemonSaveResponses, pokemonMap, pokemonAbilityMap);
+        savePokemonTypeMappingTestBatch(pokemonSaveResponses, pokemonMap, pokemonTypeMap);
+        savePokemonAbilityMappingTestBatch(pokemonSaveResponses, pokemonMap, pokemonAbilityMap);
     }
 
-    private void savePokemonsByOffsettest(int offset, List<Pokemon> pokemons) {
+    private void savePokemonsByOffsetTestBatch(int offset, List<Pokemon> pokemons) {
         DataUrls pokemonDataUrls = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
         for (DataUrl dataUrl : pokemonDataUrls.results()) {
             String id = dataUrl.getUrlId();
             PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(id);
 
-            savePokemontest(pokemonSaveResponse, id, pokemons);
+            savePokemonTestBatch(pokemonSaveResponse, id, pokemons);
         }
     }
 
-    private void savePokemontest(PokemonSaveResponse pokemonSaveResponse, String id, List<Pokemon> pokemons) {
+    private void savePokemonTestBatch(PokemonSaveResponse pokemonSaveResponse, String id, List<Pokemon> pokemons) {
         PokemonDetail pokemonDetail = dtoParser.getPokemonDetails(pokemonSaveResponse);
         DataUrl species = pokemonDetail.species();
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(getPokemonSpeciesResponse(species));
@@ -237,7 +237,7 @@ public class DataSettingService {
         pokemons.add(pokemon);
     }
 
-    private void savePokemonTypeMappingtest(List<PokemonSaveResponse> pokemonSaveResponses, Map<String, Pokemon> pokemonMap, Map<String, PokemonType> pokemonTypeMap) {
+    private void savePokemonTypeMappingTestBatch(List<PokemonSaveResponse> pokemonSaveResponses, Map<String, Pokemon> pokemonMap, Map<String, PokemonType> pokemonTypeMap) {
         List<PokemonTypeMapping> pokemonTypeMappings = new ArrayList<>();
         for (PokemonSaveResponse pokemonSaveResponse : pokemonSaveResponses) {
             List<TypeDataUrl> types = pokemonSaveResponse.types();
@@ -252,7 +252,7 @@ public class DataSettingService {
         jdbcPokemonTypeMappingRepository.batchInsertPokemonTypeMapping(pokemonTypeMappings);
     }
 
-    private void savePokemonAbilityMappingtest(List<PokemonSaveResponse> pokemonSaveResponses, Map<String, Pokemon> pokemonMap, Map<String, PokemonAbility> pokemonAbilityMap) {
+    private void savePokemonAbilityMappingTestBatch(List<PokemonSaveResponse> pokemonSaveResponses, Map<String, Pokemon> pokemonMap, Map<String, PokemonAbility> pokemonAbilityMap) {
         List<PokemonAbilityMapping> pokemonAbilityMappings = new ArrayList<>();
         for (PokemonSaveResponse pokemonSaveResponse : pokemonSaveResponses) {
             List<AbilityDataUrl> abilities = pokemonSaveResponse.abilities();
@@ -313,61 +313,66 @@ public class DataSettingService {
     }
 
     private void saveAllPokemonTypeMatching(DataUrls typeDataUrls) {
+        Map<String, PokemonType> pokemonTypeMap = pokemonTypeRepository.findAll().stream()
+                .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
+        List<PokemonTypeMatching> pokemonTypeMatchings = new ArrayList<>();
         for (DataUrl dataUrl : typeDataUrls.results()) {
             PokemonType fromPokemonType = pokemonTypeRepository.findByName(dataUrl.name()).orElseThrow();
             TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(dataUrl.getUrlId());
 
-            savePokemonTypeMatching(typeMatchingResponse, fromPokemonType);
+            savePokemonTypeMatching(typeMatchingResponse, fromPokemonType, pokemonTypeMatchings, pokemonTypeMap);
         }
+
+        pokemonTypeMatchingRepository.saveAll(pokemonTypeMatchings);
     }
 
-    private void savePokemonTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType) {
+    private void savePokemonTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
         List<PokemonType> allPokemonTypes = pokemonTypeRepository.findAll();
 
-        saveDoubleDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes);
-        saveHalfDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes);
-        saveNoDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes);
-        saveBasicDamageTypeMatching(fromPokemonType, allPokemonTypes);
+        saveDoubleDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
+        saveHalfDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
+        saveNoDamageTypeMatching(typeMatchingResponse, fromPokemonType, allPokemonTypes, pokemonTypeMatchings, pokemonTypeMap);
+        saveBasicDamageTypeMatching(fromPokemonType, allPokemonTypes, pokemonTypeMatchings);
     }
 
-    private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes) {
+    private void saveDoubleDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMaps) {
         for (DataUrl type : typeMatchingResponse.getDoubleDamageTo()) {
             PokemonType toPokemonType = pokemonTypeRepository.findByName(type.name())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, DOUBLE_DAMAGE);
 
-            pokemonTypeMatchingRepository.save(pokemonTypeMatching);
+            pokemonTypeMatchings.add(pokemonTypeMatching);
             allPokemonTypes.remove(toPokemonType);
         }
     }
 
-    private void saveHalfDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes) {
+    private void saveHalfDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
         for (DataUrl type : typeMatchingResponse.getHalfDamageTo()) {
             PokemonType toPokemonType = pokemonTypeRepository.findByName(type.name())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, HALF_DAMAGE);
 
-            pokemonTypeMatchingRepository.save(pokemonTypeMatching);
+            pokemonTypeMatchings.add(pokemonTypeMatching);
             allPokemonTypes.remove(toPokemonType);
         }
     }
 
-    private void saveNoDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes) {
+    private void saveNoDamageTypeMatching(TypeMatchingResponse typeMatchingResponse, PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings, Map<String, PokemonType> pokemonTypeMap) {
         for (DataUrl type : typeMatchingResponse.getNoDamageTo()) {
             PokemonType toPokemonType = pokemonTypeRepository.findByName(type.name())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, NO_DAMAGE);
 
-            pokemonTypeMatchingRepository.save(pokemonTypeMatching);
+            pokemonTypeMatchings.add(pokemonTypeMatching);
             allPokemonTypes.remove(toPokemonType);
         }
     }
 
-    private void saveBasicDamageTypeMatching(PokemonType fromPokemonType, List<PokemonType> allPokemonTypes) {
+    private void saveBasicDamageTypeMatching(PokemonType fromPokemonType, List<PokemonType> allPokemonTypes, List<PokemonTypeMatching> pokemonTypeMatchings) {
         for (PokemonType toPokemonType : allPokemonTypes) {
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, BASIC_DAMAGE);
 
-            pokemonTypeMatchingRepository.save(pokemonTypeMatching);
+            pokemonTypeMatchings.add(pokemonTypeMatching);
         }
     }
 
