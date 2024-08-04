@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.type.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.Dimension
@@ -56,14 +57,16 @@ class TypeChip
             fun setTypeName(
                 view: TypeChip,
                 typeUiModel: TypeUiModel,
-                isEmptyBackGround: Boolean = true,
+                isEmptyBackGround: Boolean? = true,
                 nameSize: Float? = null,
                 iconSize: Float? = null,
             ) {
-                view.binding.type = typeUiModel
                 with(view.binding) {
                     type = typeUiModel
-                    this.isEmptyBackground = isEmptyBackGround
+                    isEmptyBackGround?.let {
+                        this.isEmptyBackground = isEmptyBackGround
+                        this.layoutItemType.gravity = Gravity.CENTER
+                    }
                     nameSize?.let { tvTypeName.textSize = nameSize }
                     iconSize?.let {
                         ivTypeNameIcon.layoutParams.apply {
@@ -75,3 +78,10 @@ class TypeChip
             }
         }
     }
+
+data class PokemonTypeViewConfiguration(
+    val isEmptyBackground: Boolean,
+    val nameSize: Float,
+    val iconSize: Float,
+    val marginBetweenTypes: Int,
+)

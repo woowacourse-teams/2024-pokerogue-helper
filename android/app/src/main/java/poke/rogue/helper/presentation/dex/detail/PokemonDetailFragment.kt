@@ -12,6 +12,7 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
+import poke.rogue.helper.presentation.type.view.PokemonTypeViewConfiguration
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -122,7 +123,10 @@ class PokemonDetailFragment :
 
         pokemonStatAdapter.submitList(pokemonDetail.stats)
         abilityAdapter.submitList(pokemonDetail.abilities)
-        pokemonTypesAdapter.addTypes(pokemonDetail.pokemon.types)
+        pokemonTypesAdapter.addTypes(
+            types = pokemonDetail.pokemon.types,
+            config = TypesUiConfig,
+        )
     }
 
     companion object {
@@ -130,6 +134,14 @@ class PokemonDetailFragment :
         private const val CONTAINER_ID = "containerId"
         private const val INVALID_CONTAINER_ID = -1
         val TAG: String = PokemonDetailFragment::class.java.simpleName
+
+        private val TypesUiConfig =
+            PokemonTypeViewConfiguration(
+                isEmptyBackground = false,
+                nameSize = 17f,
+                iconSize = 40f,
+                marginBetweenTypes = 10,
+            )
 
         fun bundleOf(
             pokemonId: Long,

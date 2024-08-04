@@ -15,9 +15,10 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/layout_item_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="start"
         android:orientation="horizontal"
         android:paddingHorizontal="6dp"
         android:paddingVertical="4dp"
