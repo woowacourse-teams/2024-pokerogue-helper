@@ -37,7 +37,6 @@
                         android:id="@+id/iv_pokemon"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:scaleType="center"
                         android:translationZ="10dp"
                         app:layout_constraintDimensionRatio="1"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -46,38 +45,32 @@
                         app:layout_constraintWidth_percent="0.66"
                         tools:src="@tools:sample/avatars" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+
+                    <TextView
+                        android:id="@+id/tv_pokemon_detail_pokemon_name"
+                        style="@style/TextAppearance.Poke.TitleBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintBottom_toTopOf="@id/rv_pokemon_detail_types"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/iv_pokemon">
+                        app:layout_constraintTop_toBottomOf="@+id/iv_pokemon"
+                        tools:text="이상해씨 #1" />
 
-                        <TextView
-                            android:id="@+id/tv_pokemon_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/pretendard_semibold"
-                            android:paddingEnd="5dp"
-                            android:textSize="24sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="리자몽 #1" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_pokemon_detail_types"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_detail_pokemon_name"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_type_right_name" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_type_list"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_name"
-                            app:layout_constraintStart_toEndOf="@id/tv_pokemon_name"
-                            app:layout_constraintTop_toTopOf="@id/tv_pokemon_name"
-                            tools:itemCount="2"
-                            tools:listitem="@layout/item_type_right_name" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

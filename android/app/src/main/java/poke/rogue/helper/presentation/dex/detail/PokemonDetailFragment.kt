@@ -18,7 +18,7 @@ import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
-import poke.rogue.helper.presentation.util.view.setImage
+import poke.rogue.helper.presentation.util.view.setCroppedImage
 import poke.rogue.helper.remote.ServiceModule
 
 class PokemonDetailFragment :
@@ -26,12 +26,12 @@ class PokemonDetailFragment :
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(
             pokemonDetailRepository =
-                DefaultPokemonDetailRepository(
-                    remotePokemonDetailDataSource =
-                        RemotePokemonDetailDataSource(
-                            pokeDexService = ServiceModule.pokeDexService(),
-                        ),
+            DefaultPokemonDetailRepository(
+                remotePokemonDetailDataSource =
+                RemotePokemonDetailDataSource(
+                    pokeDexService = ServiceModule.pokeDexService(),
                 ),
+            ),
         )
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
@@ -55,7 +55,7 @@ class PokemonDetailFragment :
 
     private fun initAdapter() {
         with(binding) {
-            rvTypeList.adapter = pokemonTypeAdapter
+            rvPokemonDetailTypes.adapter = pokemonTypeAdapter
             rvStatList.adapter = pokemonStatAdapter
             rvPokemonAbilities.adapter = abilityAdapter
             rvPokemonAbilities.addItemDecoration(
@@ -107,13 +107,13 @@ class PokemonDetailFragment :
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
-            ivPokemon.setImage(pokemonDetail.pokemon.imageUrl)
-            tvPokemonName.text =
-                stringOf(
-                    R.string.dex_poke_name_format,
-                    pokemonDetail.pokemon.name,
-                    pokemonDetail.pokemon.dexNumber,
-                )
+            ivPokemon.setCroppedImage(pokemonDetail.pokemon.imageUrl)
+
+            tvPokemonDetailPokemonName.text = stringOf(
+                R.string.dex_poke_name_format,
+                pokemonDetail.pokemon.name,
+                pokemonDetail.pokemon.dexNumber,
+            )
         }
 
         pokemonTypeAdapter.submitList(pokemonDetail.pokemon.types)
