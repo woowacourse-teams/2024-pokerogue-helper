@@ -44,7 +44,7 @@ jobs:
       - name: Set up Test MySQL
         run: |
           sudo touch docker-compose.yml
-          echo "${{ vars.DOCKER_COMPOSE_TEST_DB }}" | sudo tee docker-compose.yml > /dev/null
+          echo "${{ secrets.DOCKER_COMPOSE_TEST_DB }}" | sudo tee docker-compose.yml > /dev/null
           docker-compose -f docker-compose.yml up -d
 
       - name: Wait for Test MySQL to be ready
