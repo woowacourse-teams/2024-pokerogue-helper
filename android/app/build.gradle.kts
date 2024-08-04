@@ -23,15 +23,14 @@ android {
         getByName("debug") {
             keyAlias = "androiddebugkey"
             keyPassword = "android"
-            storeFile = file(System.getProperty("user.home") + "/.android/debug.keystore")
+            storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
             storePassword = "android"
         }
-
 //        create("release") {
-//            keyAlias = properties.getProperty("keyAlias")
-//            keyPassword = properties.getProperty("keyPassword")
-//            storeFile = file("${project.rootDir.absolutePath}/keystore/key.jks")
-//            storePassword = properties.getProperty("storePassword")
+//            keyAlias = properties.getProperty("KEY_ALIAS")
+//            keyPassword = properties.getProperty("KEY_PASSWORD")
+//            storeFile = file("${project.rootDir.absolutePath}/keystore/poke_key.jks")
+//            storePassword = properties.getProperty("STORE_PASSWORD")
 //        }
     }
     defaultConfig {
@@ -52,8 +51,19 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".dev"
+            //            firebaseAppDistribution {
+//                artifactType = "APK"
+//                releaseNotesFile = "firebase/releaseNote.txt"
+//                groupsFile = "firebase/testers.txt"
+//            }
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
             isMinifyEnabled = false
+//            isShrinkResources = true
+//            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
