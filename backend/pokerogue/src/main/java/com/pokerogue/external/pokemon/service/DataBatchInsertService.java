@@ -39,11 +39,13 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class DataBatchInsertService {
 
@@ -97,11 +99,15 @@ public class DataBatchInsertService {
     }
 
     private void savePokemonTypesTestBatch() {
+        log.info("********타입 API 정보 수신 및 가공 시작********");
         DataUrls typeDataUrls = getTypeDataUrls();
         List<TypeResponse> typeResponses = getTypeResponses(typeDataUrls);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
+        log.info("********타입 API 정보 수신 및 가공 종료********");
 
+        log.info("********타입 Batch Insert 시작********");
         jdbcPokemonTypeRepository.batchInsertPokemonType(pokemonTypes);
+        log.info("********타입 Batch Insert 종료********");
         saveAllPokemonTypeMatchingTestBatch(typeDataUrls);
     }
 
@@ -125,6 +131,7 @@ public class DataBatchInsertService {
     }
 
     private void saveAllPokemonTypeMatchingTestBatch(DataUrls typeDataUrls) {
+        log.info("********타입 상성 API 정보 수신 및 가공 시작********");
         Map<String, PokemonType> pokemonTypeMap = pokemonTypeRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
         List<PokemonTypeMatching> pokemonTypeMatchings = new ArrayList<>();
@@ -134,7 +141,10 @@ public class DataBatchInsertService {
 
             savePokemonTypeMatchingTestBatch(typeMatchingResponse, pokemonType, pokemonTypeMatchings, pokemonTypeMap);
         }
+        log.info("********타입 상성 API 정보 수신 및 가공 종료********");
+        log.info("********타입 상성 Batch Insert 시작********");
         jdbcPokemonTypeMatchingRepository.batchInsertPokemonTypeMatching(pokemonTypeMatchings);
+        log.info("********타입 상성 Batch Insert 종료********");
     }
 
     private void savePokemonTypeMatchingTestBatch(
@@ -234,11 +244,15 @@ public class DataBatchInsertService {
     }
 
     private void savePokemonAbilitiesTestBatch() {
+        log.info("********특성 API 정보 수신 및 가공 시작********");
         DataUrls abilityDataUrls = getAbilityDataUrls();
         List<AbilityResponse> abilityResponses = getAbilityResponses(abilityDataUrls);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
+        log.info("********특성 API 정보 수신 및 가공 종료********");
 
+        log.info("********특성 Batch Insert 시작********");
         jdbcPokemonAbilityRepository.batchInsertPokemonAbility(pokemonAbilities);
+        log.info("********특성 Batch Insert 종료********");
     }
 
     private DataUrls getAbilityDataUrls() {
@@ -266,29 +280,36 @@ public class DataBatchInsertService {
     }
 
     private void savePokemonsTestBatch() {
+        log.info("********포켓몬 API 정보 수신 및 가공 시작********");
         List<Pokemon> pokemons = new ArrayList<>();
         List<PokemonSaveResponse> pokemonSaveResponses = new ArrayList<>();
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += PACKET_SIZE) {
-            savePokemonsByOffsetTestBatch(offset, pokemons);
+            savePokemonsByOffsetTestBatch(offset, pokemons, pokemonSaveResponses);
         }
+        log.info("********포켓몬 API 정보 수신 및 가공 종료********");
+        log.info("********포켓몬 Batch Insert 시작********");
         jdbcPokemonRepository.batchInsertPokemon(pokemons);
+        log.info("********포켓몬 Batch Insert 종료********");
+        log.info("********포켓몬, 타입, 특성 정보 캐싱 시작********");
         Map<String, Pokemon> pokemonMap = pokemonRepository.findAll().stream()
                 .collect(Collectors.toMap(Pokemon::getName, Function.identity()));
         Map<String, PokemonType> pokemonTypeMap = pokemonTypeRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
         Map<String, PokemonAbility> pokemonAbilityMap = pokemonAbilityRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonAbility::getName, Function.identity()));
+        log.info("********포켓몬, 타입, 특성 정보 캐싱 종료********");
 
         savePokemonTypeMappingTestBatch(pokemonSaveResponses, pokemonMap, pokemonTypeMap);
         savePokemonAbilityMappingTestBatch(pokemonSaveResponses, pokemonMap, pokemonAbilityMap);
     }
 
-    private void savePokemonsByOffsetTestBatch(int offset, List<Pokemon> pokemons) {
+    private void savePokemonsByOffsetTestBatch(int offset, List<Pokemon> pokemons, List<PokemonSaveResponse> pokemonSaveResponses) {
         DataUrls pokemonDataUrls = pokeClient.getPokemonResponses(offset, PACKET_SIZE);
         for (DataUrl dataUrl : pokemonDataUrls.results()) {
             String id = dataUrl.getUrlId();
             PokemonSaveResponse pokemonSaveResponse = pokeClient.getPokemonSaveResponse(id);
+            pokemonSaveResponses.add(pokemonSaveResponse);
 
             savePokemonTestBatch(pokemonSaveResponse, id, pokemons);
         }
@@ -335,6 +356,7 @@ public class DataBatchInsertService {
             Map<String, Pokemon> pokemonMap,
             Map<String, PokemonType> pokemonTypeMap
     ) {
+        log.info("********포켓몬 타입 매핑 정보 가공 시작********");
         List<PokemonTypeMapping> pokemonTypeMappings = new ArrayList<>();
         for (PokemonSaveResponse pokemonSaveResponse : pokemonSaveResponses) {
             List<TypeDataUrl> types = pokemonSaveResponse.types();
@@ -346,8 +368,10 @@ public class DataBatchInsertService {
                 pokemonTypeMappings.add(pokemonTypeMapping);
             }
         }
-
+        log.info("********포켓몬 타입 매핑 정보 가공 종료********");
+        log.info("********포켓몬 타입 매핑 Batch Insert 시작********");
         jdbcPokemonTypeMappingRepository.batchInsertPokemonTypeMapping(pokemonTypeMappings);
+        log.info("********포켓몬 타입 매핑 Batch Insert 종료********");
     }
 
     private void savePokemonAbilityMappingTestBatch(
@@ -355,6 +379,7 @@ public class DataBatchInsertService {
             Map<String, Pokemon> pokemonMap,
             Map<String, PokemonAbility> pokemonAbilityMap
     ) {
+        log.info("********포켓몬 특성 매핑 정보 가공 시작********");
         List<PokemonAbilityMapping> pokemonAbilityMappings = new ArrayList<>();
         for (PokemonSaveResponse pokemonSaveResponse : pokemonSaveResponses) {
             List<AbilityDataUrl> abilities = pokemonSaveResponse.abilities();
@@ -366,7 +391,9 @@ public class DataBatchInsertService {
                 pokemonAbilityMappings.add(pokemonAbilityMapping);
             }
         }
-
+        log.info("********포켓몬 특성 매핑 정보 가공 종료********");
+        log.info("********포켓몬 특성 매핑 Batch Insert 시작********");
         jdbcPokemonAbilityMappingRepository.batchInsertPokemonAbilityMapping(pokemonAbilityMappings);
+        log.info("********포켓몬 특성 매핑 Batch Insert 종료********");
     }
 }
