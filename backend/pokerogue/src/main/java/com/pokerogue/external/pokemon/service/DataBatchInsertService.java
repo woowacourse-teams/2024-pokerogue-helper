@@ -90,14 +90,6 @@ public class DataBatchInsertService {
         pokemonRepository.deleteAllInBatch();
     }
 
-    @Transactional
-    public void setDataTestTypeBatch() {
-        pokemonTypeMappingRepository.deleteAllInBatch();
-        pokemonTypeMatchingRepository.deleteAllInBatch();
-        pokemonTypeRepository.deleteAllInBatch();
-        savePokemonTypesTestBatch();
-    }
-
     private void savePokemonTypesTestBatch() {
         log.info("********타입 API 정보 수신 및 가공 시작********");
         DataUrls typeDataUrls = getTypeDataUrls();
@@ -236,13 +228,6 @@ public class DataBatchInsertService {
         }
     }
 
-    @Transactional
-    public void setDataTestAbilityBatch() {
-        pokemonAbilityMappingRepository.deleteAllInBatch();
-        pokemonAbilityRepository.deleteAllInBatch();
-        savePokemonAbilitiesTestBatch();
-    }
-
     private void savePokemonAbilitiesTestBatch() {
         log.info("********특성 API 정보 수신 및 가공 시작********");
         DataUrls abilityDataUrls = getAbilityDataUrls();
@@ -271,12 +256,6 @@ public class DataBatchInsertService {
         return abilityResponses.stream()
                 .map(dtoParser::getPokemonAbility)
                 .toList();
-    }
-
-    @Transactional
-    public void setDataTestPokemonBatch() {
-        pokemonRepository.deleteAllInBatch();
-        savePokemonsTestBatch();
     }
 
     private void savePokemonsTestBatch() {

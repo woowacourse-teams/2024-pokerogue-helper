@@ -78,14 +78,6 @@ public class DataSettingService {
         pokemonRepository.deleteAllInBatch();
     }
 
-    @Transactional
-    public void setDataTestTypePre() {
-        pokemonTypeMappingRepository.deleteAllInBatch();
-        pokemonTypeMatchingRepository.deleteAllInBatch();
-        pokemonTypeRepository.deleteAllInBatch();
-        savePokemonTypes();
-    }
-
     private void savePokemonTypes() {
         log.info("********타입 API 정보 수신 및 가공 시작********");
         DataUrls typeDataUrls = getTypeDataUrls();
@@ -228,13 +220,6 @@ public class DataSettingService {
         }
     }
 
-    @Transactional
-    public void setDataTestAbilityPre() {
-        pokemonAbilityMappingRepository.deleteAllInBatch();
-        pokemonAbilityRepository.deleteAllInBatch();
-        savePokemonAbilities();
-    }
-
     private void savePokemonAbilities() {
         log.info("********특성 API 정보 수신 및 가공 시작********");
         DataUrls abilityDataUrls = getAbilityDataUrls();
@@ -263,12 +248,6 @@ public class DataSettingService {
         return abilityResponses.stream()
                 .map(dtoParser::getPokemonAbility)
                 .toList();
-    }
-
-    @Transactional
-    public void setDataTestPokemonPre() {
-        pokemonRepository.deleteAllInBatch();
-        savePokemons();
     }
 
     private void savePokemons() {
