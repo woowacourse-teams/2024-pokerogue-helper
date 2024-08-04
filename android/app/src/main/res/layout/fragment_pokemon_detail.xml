@@ -52,24 +52,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        app:layout_constraintBottom_toTopOf="@id/rv_pokemon_detail_types"
+                        app:layout_constraintBottom_toTopOf="@id/layout_pokemon_detail_pokemon_types"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/iv_pokemon"
                         tools:text="이상해씨 #1" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_pokemon_detail_types"
+                    <LinearLayout
+                        android:id="@+id/layout_pokemon_detail_pokemon_types"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_detail_pokemon_name"
-                        tools:itemCount="2"
-                        tools:listitem="@layout/item_type" />
+                        tools:layout_height="50dp" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

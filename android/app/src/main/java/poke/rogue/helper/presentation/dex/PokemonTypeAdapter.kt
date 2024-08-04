@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import poke.rogue.helper.databinding.ItemTypeBinding
+import poke.rogue.helper.databinding.ItemTypeRightNameBinding
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
@@ -15,7 +15,7 @@ class PokemonTypeAdapter :
         viewType: Int,
     ): PokemonTypeViewHolder =
         PokemonTypeViewHolder(
-            ItemTypeBinding.inflate(
+            ItemTypeRightNameBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false,
@@ -29,11 +29,10 @@ class PokemonTypeAdapter :
         viewHolder.bind(getItem(position))
     }
 
-    class PokemonTypeViewHolder(private val binding: ItemTypeBinding) :
+    class PokemonTypeViewHolder(private val binding: ItemTypeRightNameBinding) :
         ViewHolder(binding.root) {
         fun bind(type: TypeUiModel) {
             binding.type = type
-            binding.isEmptyBackground = false
         }
     }
 

@@ -52,12 +52,26 @@ class TypeChip
 
         companion object {
             @JvmStatic
-            @BindingAdapter("type")
+            @BindingAdapter("type", "isEmptyBackground", "nameSize", "iconSize", requireAll = false)
             fun setTypeName(
                 view: TypeChip,
                 typeUiModel: TypeUiModel,
+                isEmptyBackGround: Boolean = true,
+                nameSize: Float? = null,
+                iconSize: Float? = null,
             ) {
                 view.binding.type = typeUiModel
+                with(view.binding) {
+                    type = typeUiModel
+                    this.isEmptyBackground = isEmptyBackGround
+                    nameSize?.let { tvTypeName.textSize = nameSize }
+                    iconSize?.let {
+                        ivTypeNameIcon.layoutParams.apply {
+                            width = iconSize.toInt()
+                            height = iconSize.toInt()
+                        }
+                    }
+                }
             }
         }
     }
