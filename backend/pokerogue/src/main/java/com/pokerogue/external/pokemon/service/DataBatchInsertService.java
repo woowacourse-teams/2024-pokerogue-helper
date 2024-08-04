@@ -295,8 +295,7 @@ public class DataBatchInsertService {
     private void savePokemonTestBatch(PokemonSaveResponse pokemonSaveResponse, String id, List<Pokemon> pokemons) {
         PokemonDetail pokemonDetail = dtoParser.getPokemonDetails(pokemonSaveResponse);
         DataUrl species = pokemonDetail.species();
-        PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(
-                getPokemonSpeciesResponse(species));
+        PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(species);
         String image;
         try {
             image = s3Service.postImageToS3(pokeClient.getImage(id));
@@ -320,11 +319,8 @@ public class DataBatchInsertService {
         pokemons.add(pokemon);
     }
 
-    private PokemonSpeciesResponse getPokemonSpeciesResponse(DataUrl species) {
-        return pokeClient.getPokemonSpeciesResponse(species.getUrlId());
-    }
-
-    private PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
+    private PokemonNameAndDexNumber getPokemonNameAndDexNumber(DataUrl species) {
+        PokemonSpeciesResponse pokemonSpeciesResponse = pokeClient.getPokemonSpeciesResponse(species.getUrlId());
         return dtoParser.getPokemonNameAndDexNumber(pokemonSpeciesResponse);
     }
 
