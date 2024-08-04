@@ -2,7 +2,6 @@ package poke.rogue.helper.presentation.dex
 
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemPokemonListPokemonBinding
-import poke.rogue.helper.presentation.dex.detail.PokemonTypesAdapter
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.type.view.PokemonTypeViewConfiguration
 

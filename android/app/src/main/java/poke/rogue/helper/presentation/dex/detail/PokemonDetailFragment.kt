@@ -12,6 +12,7 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
+import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.type.view.PokemonTypeViewConfiguration
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
