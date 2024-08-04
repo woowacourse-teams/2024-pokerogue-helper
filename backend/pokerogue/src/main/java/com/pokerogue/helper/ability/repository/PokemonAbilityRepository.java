@@ -11,12 +11,12 @@ public interface PokemonAbilityRepository extends JpaRepository<PokemonAbility, 
 
     @NonNull
     @Query("""
-            select a from PokemonAbility a
-            join fetch a.pokemonAbilityMappings m
-            join fetch m.pokemon p
-            join fetch p.pokemonTypeMappings pt
-            join fetch pt.pokemonType t
-            where a.id = :id
+            select pa from PokemonAbility pa
+            join fetch pa.pokemonAbilityMappings pam
+            join fetch pam.pokemon p
+            join fetch p.pokemonTypeMappings ptm
+            join fetch ptm.pokemonType pt
+            where pa.id = :id
             """)
     Optional<PokemonAbility> findByIdWithPokemonAndPokemonTypes(@NonNull @Param("id") Long id);
 
