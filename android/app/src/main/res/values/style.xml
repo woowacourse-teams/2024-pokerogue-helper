@@ -24,4 +24,13 @@
         <item name="android:textColor">#40A1F0</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="CustomToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:backgroundTint">@color/poke_black</item>
+        <item name="titleCentered">true</item>
+        <item name="titleTextColor">@color/poke_white</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Poke.TitleLargeBold</item>
+        <item name="popupTheme">@style/toolbar_menu_text</item>
+        <item name="navigationIcon">@drawable/ic_arrow_back_24</item>
+    </style>
 </resources>

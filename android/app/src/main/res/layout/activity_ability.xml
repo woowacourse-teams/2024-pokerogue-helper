@@ -7,9 +7,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_ability"
-            layout="@layout/toolbar" />
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/CustomToolbarStyle"
+            app:title="@string/ability_title_name" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_ability"

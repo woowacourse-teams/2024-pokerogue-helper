@@ -9,9 +9,13 @@
         android:layout_height="match_parent"
         tools:context=".presentation.dex.PokemonActivity">
 
-        <include
-            android:id="@+id/toolbar_home"
-            layout="@layout/toolbar" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_dex"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/CustomToolbarStyle"
+            app:title="@string/dex_title_name" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_pokemon"
