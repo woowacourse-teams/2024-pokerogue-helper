@@ -5,10 +5,8 @@ import com.pokerogue.external.pokemon.dto.CountResponse;
 import com.pokerogue.external.pokemon.dto.DataUrl;
 import com.pokerogue.external.pokemon.dto.DataUrls;
 import com.pokerogue.external.pokemon.dto.ability.AbilityResponse;
-import com.pokerogue.external.pokemon.dto.pokemon.AbilityDataUrl;
 import com.pokerogue.external.pokemon.dto.pokemon.PokemonDetail;
 import com.pokerogue.external.pokemon.dto.pokemon.PokemonSaveResponse;
-import com.pokerogue.external.pokemon.dto.pokemon.TypeDataUrl;
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonNameAndDexNumber;
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.external.pokemon.dto.type.TypeMatchingResponse;
@@ -336,17 +334,13 @@ public class DataBatchInsertService {
             Map<String, PokemonType> pokemonTypeMap
     ) {
         log.info("********포켓몬 타입 매핑 정보 가공 시작********");
-        List<PokemonTypeMapping> pokemonTypeMappings = new ArrayList<>();
-        for (PokemonSaveResponse pokemonSaveResponse : pokemonSaveResponses) {
-            List<TypeDataUrl> types = pokemonSaveResponse.types();
-            for (TypeDataUrl typeDataUrl : types) {
-                String name = typeDataUrl.getName();
-                Pokemon pokemon = pokemonMap.get(pokemonSaveResponse.name());
-                PokemonType pokemonType = pokemonTypeMap.get(name);
-                PokemonTypeMapping pokemonTypeMapping = new PokemonTypeMapping(pokemon, pokemonType);
-                pokemonTypeMappings.add(pokemonTypeMapping);
-            }
-        }
+        List<PokemonTypeMapping> pokemonTypeMappings = pokemonSaveResponses.stream()
+                .flatMap(pokemonSaveResponse -> pokemonSaveResponse.types().stream()
+                        .map(typeDataUrl -> new PokemonTypeMapping(
+                                pokemonMap.get(pokemonSaveResponse.name()),
+                                pokemonTypeMap.get(typeDataUrl.getName())
+                        ))
+                ).toList();
         log.info("********포켓몬 타입 매핑 정보 가공 종료********");
         log.info("********포켓몬 타입 매핑 Batch Insert 시작********");
         jdbcPokemonTypeMappingRepository.batchInsertPokemonTypeMapping(pokemonTypeMappings);
@@ -359,17 +353,13 @@ public class DataBatchInsertService {
             Map<String, PokemonAbility> pokemonAbilityMap
     ) {
         log.info("********포켓몬 특성 매핑 정보 가공 시작********");
-        List<PokemonAbilityMapping> pokemonAbilityMappings = new ArrayList<>();
-        for (PokemonSaveResponse pokemonSaveResponse : pokemonSaveResponses) {
-            List<AbilityDataUrl> abilities = pokemonSaveResponse.abilities();
-            for (AbilityDataUrl abilityDataUrl : abilities) {
-                String name = abilityDataUrl.getName();
-                Pokemon pokemon = pokemonMap.get(pokemonSaveResponse.name());
-                PokemonAbility pokemonAbility = pokemonAbilityMap.get(name);
-                PokemonAbilityMapping pokemonAbilityMapping = new PokemonAbilityMapping(pokemon, pokemonAbility);
-                pokemonAbilityMappings.add(pokemonAbilityMapping);
-            }
-        }
+        List<PokemonAbilityMapping> pokemonAbilityMappings = pokemonSaveResponses.stream()
+                .flatMap(pokemonSaveResponse -> pokemonSaveResponse.abilities().stream()
+                        .map(abilityDataUrl -> new PokemonAbilityMapping(
+                                pokemonMap.get(pokemonSaveResponse.name()),
+                                pokemonAbilityMap.get(abilityDataUrl.getName())
+                        ))
+                ).toList();
         log.info("********포켓몬 특성 매핑 정보 가공 종료********");
         log.info("********포켓몬 특성 매핑 Batch Insert 시작********");
         jdbcPokemonAbilityMappingRepository.batchInsertPokemonAbilityMapping(pokemonAbilityMappings);
