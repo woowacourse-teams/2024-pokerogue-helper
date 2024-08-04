@@ -1,10 +1,7 @@
 package poke.rogue.helper.presentation.dex.detail
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.widget.LinearLayout
-import androidx.core.view.setMargins
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -15,7 +12,6 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
-import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -39,6 +35,12 @@ class PokemonDetailFragment :
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
     private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
+    private val pokemonTypesAdapter by lazy {
+        PokemonTypesAdapter(
+            context = requireContext(),
+            viewGroup = binding.layoutPokemonDetailPokemonTypes,
+        )
+    }
 
     override fun onViewCreated(
         view: View,
@@ -120,28 +122,7 @@ class PokemonDetailFragment :
 
         pokemonStatAdapter.submitList(pokemonDetail.stats)
         abilityAdapter.submitList(pokemonDetail.abilities)
-
-        // TODO 아래 코드를 기존에 어댑터 사용하듯이? 리사이클러뷰를 안 쓸 뿐이지, 어댑터 아닐까?
-        val typesLayout = binding.layoutPokemonDetailPokemonTypes
-
-        pokemonDetail.pokemon.types.forEach { type ->
-            val typeChip =
-                TypeChip(context = requireContext()).apply {
-                    layoutParams =
-                        LinearLayout.LayoutParams(
-                            0,
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            1f,
-                        ).apply {
-                            setMargins(10)
-                        }
-
-                    gravity = Gravity.CENTER
-                    TypeChip.setTypeName(this, type, isEmptyBackGround = false, nameSize = 17f, iconSize = 40f)
-                }
-
-            typesLayout.addView(typeChip)
-        }
+        pokemonTypesAdapter.addTypes(pokemonDetail.pokemon.types)
     }
 
     companion object {
