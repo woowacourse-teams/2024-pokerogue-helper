@@ -322,8 +322,7 @@ public class DataSettingService {
                 getPokemonSpeciesResponse(species));
         String image;
         try {
-            byte[] image1 = pokeClient.getImage(id);
-            image = s3Service.postImageToS3(image1);
+            image = s3Service.postImageToS3(pokeClient.getImage(id));
         } catch (HttpClientErrorException e) {
             image = "이미지가 없습니다ㅠㅠ";
         }
