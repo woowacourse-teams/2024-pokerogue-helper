@@ -60,7 +60,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_pokemon_detail_types"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -69,8 +69,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_pokemon_detail_pokemon_name"
                         tools:itemCount="2"
-                        tools:listitem="@layout/item_type_right_name" />
-
+                        tools:listitem="@layout/item_type" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
