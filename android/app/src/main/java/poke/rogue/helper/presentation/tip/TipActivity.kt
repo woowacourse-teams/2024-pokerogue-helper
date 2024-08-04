@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebViewClient
+import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTipBinding
 import poke.rogue.helper.presentation.base.BindingActivity
@@ -14,6 +15,8 @@ class TipActivity : BindingActivity<ActivityTipBinding>(R.layout.activity_tip) {
         super.onCreate(savedInstanceState)
         initView()
     }
+
+    override fun toolBar(): Toolbar? = null
 
     private fun initView() {
         with(binding.webView) {
