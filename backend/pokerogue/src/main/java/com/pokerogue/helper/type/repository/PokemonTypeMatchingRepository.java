@@ -8,6 +8,7 @@ import org.springframework.lang.NonNull;
 
 public interface PokemonTypeMatchingRepository extends JpaRepository<PokemonTypeMatching, Long> {
 
+    @Override
     @NonNull
     @Query("""
             select ptm from PokemonTypeMatching ptm
