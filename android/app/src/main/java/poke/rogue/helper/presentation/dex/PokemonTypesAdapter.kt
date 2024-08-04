@@ -13,6 +13,8 @@ class PokemonTypesAdapter(private val context: Context, private val viewGroup: V
         types: List<TypeUiModel>,
         config: PokemonTypeViewConfiguration,
     ) {
+        viewGroup.removeAllViews()
+
         types.forEach { type ->
             val typeChip =
                 TypeChip(context).apply {
