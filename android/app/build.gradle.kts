@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.android.junit5)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics.plugin)
 }
 
 val properties =
@@ -17,7 +19,21 @@ val properties =
 android {
     namespace = libs.versions.applicationId.get()
     compileSdk = libs.versions.compileSdk.get().toInt()
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+            storeFile = file(System.getProperty("user.home") + "/.android/debug.keystore")
+            storePassword = "android"
+        }
 
+//        create("release") {
+//            keyAlias = properties.getProperty("keyAlias")
+//            keyPassword = properties.getProperty("keyPassword")
+//            storeFile = file("${project.rootDir.absolutePath}/keystore/key.jks")
+//            storePassword = properties.getProperty("storePassword")
+//        }
+    }
     defaultConfig {
         applicationId = libs.versions.applicationId.get()
         minSdk = libs.versions.minSdk.get().toInt()
@@ -91,6 +107,9 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
     implementation(libs.splash.screen)
+    // google & firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase)
     // android test
     androidTestImplementation(libs.bundles.android.test)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
