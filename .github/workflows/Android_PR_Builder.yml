@@ -77,6 +77,6 @@ jobs:
         run: ./gradlew test
         working-directory: android
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
         working-directory: android
