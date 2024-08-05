@@ -28,7 +28,7 @@ jobs:
 
       - name: Remove Containers
         run: |
-          sudo docker rm -v -f $(docker ps -qa)
+          docker ps -aq | xargs -r docker rm -vf
 
       - name: Set up Local MySQL
         uses: mirromutth/mysql-action@v1.1
