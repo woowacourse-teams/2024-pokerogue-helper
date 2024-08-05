@@ -112,6 +112,9 @@ public class DataSettingService {
     private void saveAllPokemonTypeMatching(DataUrls typeDataUrls, Map<String, PokemonType> pokemonTypeCacheByName) {
         List<PokemonTypeMatching> pokemonTypeMatchings = new ArrayList<>();
         for (DataUrl dataUrl : typeDataUrls.results()) {
+            if (!pokemonTypeCacheByName.containsKey(dataUrl.name())) {
+                throw new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND);
+            }
             PokemonType fromPokemonType = pokemonTypeCacheByName.get(dataUrl.name());
             TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(dataUrl.getUrlId());
 
@@ -311,10 +314,17 @@ public class DataSettingService {
     ) {
         List<PokemonAbilityMapping> pokemonAbilityMappings = pokemonSaveResponses.stream()
                 .flatMap(pokemonSaveResponse -> pokemonSaveResponse.abilities().stream()
-                        .map(abilityDataUrl -> new PokemonAbilityMapping(
+                        .map(abilityDataUrl -> {
+                            if (!pokemonCacheByName.containsKey(pokemonSaveResponse.name())) {
+                                throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
+                            }
+                            if (!pokemonAbilityCacheByName.containsKey(abilityDataUrl.getName())) {
+                                throw new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND);
+                            }
+                            return new PokemonAbilityMapping(
                                 pokemonCacheByName.get(pokemonSaveResponse.name()),
-                                pokemonAbilityCacheByName.get(abilityDataUrl.getName())
-                        ))
+                                pokemonAbilityCacheByName.get(abilityDataUrl.getName()));
+                        })
                 ).toList();
         pokemonAbilityMappingRepository.saveAll(pokemonAbilityMappings);
     }
