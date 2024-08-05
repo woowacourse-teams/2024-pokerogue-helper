@@ -19,7 +19,7 @@ class PokemonListFragment :
     BindingFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
     private val viewModel by viewModels<PokemonListViewModel> {
         PokemonListViewModel.factory(
-            DefaultPokemonListRepository.instance()
+            DefaultPokemonListRepository.instance(),
         )
     }
 
