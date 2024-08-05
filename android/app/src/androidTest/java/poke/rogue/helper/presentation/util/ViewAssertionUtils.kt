@@ -1,4 +1,4 @@
-package poke.rogue.helper.util
+package poke.rogue.helper.presentation.util
 
 import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.assertion.ViewAssertions

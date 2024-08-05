@@ -1,4 +1,4 @@
-package poke.rogue.helper.util
+package poke.rogue.helper.presentation.util
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
