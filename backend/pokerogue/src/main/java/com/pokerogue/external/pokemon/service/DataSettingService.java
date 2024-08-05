@@ -306,13 +306,13 @@ public class DataSettingService {
 
     private void savePokemonTypeMapping(
             List<PokemonSaveResponse> pokemonSaveResponses,
-            Map<String, Pokemon> pokemonMap,
+            Map<String, Pokemon> pokemonCacheByName,
             Map<String, PokemonType> pokemonTypeCacheByName
     ) {
         List<PokemonTypeMapping> pokemonTypeMappings = pokemonSaveResponses.stream()
                 .flatMap(pokemonSaveResponse -> pokemonSaveResponse.types().stream()
                         .map(typeDataUrl -> new PokemonTypeMapping(
-                                pokemonMap.get(pokemonSaveResponse.name()),
+                                pokemonCacheByName.get(pokemonSaveResponse.name()),
                                 pokemonTypeCacheByName.get(typeDataUrl.getName())
                         ))
                 ).toList();
