@@ -31,13 +31,11 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.HttpClientErrorException;
 
 @Service
-@Slf4j
 @AllArgsConstructor
 public class DataSettingService {
 
@@ -77,15 +75,11 @@ public class DataSettingService {
     }
 
     private void savePokemonTypes() {
-        log.info("********타입 API 정보 수신 및 가공 시작********");
         DataUrls typeDataUrls = getTypeDataUrls();
         List<TypeResponse> typeResponses = getTypeResponses(typeDataUrls);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
-        log.info("********타입 API 정보 수신 및 가공 종료********");
 
-        log.info("********포켓몬 타입 saveAll 시작********");
         pokemonTypeRepository.saveAll(pokemonTypes);
-        log.info("********포켓몬 타입 saveAll 종료********");
         saveAllPokemonTypeMatching(typeDataUrls);
     }
 
@@ -109,7 +103,6 @@ public class DataSettingService {
     }
 
     private void saveAllPokemonTypeMatching(DataUrls typeDataUrls) {
-        log.info("********타입 상성 API 정보 수신 및 가공 시작********");
         Map<String, PokemonType> pokemonTypeMap = pokemonTypeRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
         List<PokemonTypeMatching> pokemonTypeMatchings = new ArrayList<>();
@@ -119,10 +112,7 @@ public class DataSettingService {
 
             savePokemonTypeMatching(typeMatchingResponse, fromPokemonType, pokemonTypeMatchings, pokemonTypeMap);
         }
-        log.info("********타입 상성 API 정보 수신 및 가공 종료********");
-        log.info("********포켓몬 타입 상성 saveAll 시작********");
         pokemonTypeMatchingRepository.saveAll(pokemonTypeMatchings);
-        log.info("********포켓몬 타입 상성 saveAll 종료********");
     }
 
     private void savePokemonTypeMatching(
@@ -219,15 +209,11 @@ public class DataSettingService {
     }
 
     private void savePokemonAbilities() {
-        log.info("********특성 API 정보 수신 및 가공 시작********");
         DataUrls abilityDataUrls = getAbilityDataUrls();
         List<AbilityResponse> abilityResponses = getAbilityResponses(abilityDataUrls);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
-        log.info("********특성 API 정보 수신 및 가공 종료********");
 
-        log.info("********포켓몬 특성 saveAll 시작********");
         pokemonAbilityRepository.saveAll(pokemonAbilities);
-        log.info("********포켓몬 특성 saveAll 종료********");
     }
 
     private DataUrls getAbilityDataUrls() {
@@ -249,25 +235,19 @@ public class DataSettingService {
     }
 
     private void savePokemons() {
-        log.info("********포켓몬 API 정보 수신 및 가공 시작********");
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
         List<Pokemon> pokemons = new ArrayList<>();
         List<PokemonSaveResponse> pokemonSaveResponses = new ArrayList<>();
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += PACKET_SIZE) {
             savePokemonsByOffset(offset, pokemons, pokemonSaveResponses);
         }
-        log.info("********포켓몬 API 정보 수신 및 가공 종료********");
-        log.info("********포켓몬 saveAll 시작********");
         pokemonRepository.saveAll(pokemons);
-        log.info("********포켓몬 saveAll 종료********");
-        log.info("********포켓몬, 타입, 특성 정보 캐싱 시작********");
         Map<String, Pokemon> pokemonMap = pokemonRepository.findAll().stream()
                 .collect(Collectors.toMap(Pokemon::getName, Function.identity()));
         Map<String, PokemonType> pokemonTypeMap = pokemonTypeRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
         Map<String, PokemonAbility> pokemonAbilityMap = pokemonAbilityRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonAbility::getName, Function.identity()));
-        log.info("********포켓몬, 타입, 특성 정보 캐싱 종료********");
 
         savePokemonTypeMapping(pokemonSaveResponses, pokemonMap, pokemonTypeMap);
         savePokemonAbilityMapping(pokemonSaveResponses, pokemonMap, pokemonAbilityMap);
@@ -330,7 +310,6 @@ public class DataSettingService {
             Map<String, Pokemon> pokemonMap,
             Map<String, PokemonType> pokemonTypeMap
     ) {
-        log.info("********포켓몬 타입 매핑 정보 가공 시작********");
         List<PokemonTypeMapping> pokemonTypeMappings = pokemonSaveResponses.stream()
                 .flatMap(pokemonSaveResponse -> pokemonSaveResponse.types().stream()
                         .map(typeDataUrl -> new PokemonTypeMapping(
@@ -338,10 +317,7 @@ public class DataSettingService {
                                 pokemonTypeMap.get(typeDataUrl.getName())
                         ))
                 ).toList();
-        log.info("********포켓몬 타입 매핑 정보 가공 종료********");
-        log.info("********포켓몬 타입 매핑 saveAll 시작********");
         pokemonTypeMappingRepository.saveAll(pokemonTypeMappings);
-        log.info("********포켓몬 타입 매핑 saveAll 종료********");
     }
 
     private void savePokemonAbilityMapping(
@@ -349,7 +325,6 @@ public class DataSettingService {
             Map<String, Pokemon> pokemonMap,
             Map<String, PokemonAbility> pokemonAbilityMap
     ) {
-        log.info("********포켓몬 특성 매핑 정보 가공 시작********");
         List<PokemonAbilityMapping> pokemonAbilityMappings = pokemonSaveResponses.stream()
                 .flatMap(pokemonSaveResponse -> pokemonSaveResponse.abilities().stream()
                         .map(abilityDataUrl -> new PokemonAbilityMapping(
@@ -357,9 +332,6 @@ public class DataSettingService {
                                 pokemonAbilityMap.get(abilityDataUrl.getName())
                         ))
                 ).toList();
-        log.info("********포켓몬 특성 매핑 정보 가공 종료********");
-        log.info("********포켓몬 특성 매핑 saveAll 시작********");
         pokemonAbilityMappingRepository.saveAll(pokemonAbilityMappings);
-        log.info("********포켓몬 특성 매핑 saveAll 종료********");
     }
 }
