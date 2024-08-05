@@ -67,22 +67,22 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
                 when (state) {
                     is HomeNavigateEvent.ToType ->
                         startActivity<TypeActivity> {
-                            logger.logClickEvent("Navigate_To_Type")
+                            logger.logClickEvent(NAVIGATE_TO_TYPE)
                         }
 
                     is HomeNavigateEvent.ToDex ->
                         startActivity<PokemonActivity> {
-                            logger.logClickEvent("Navigate_To_Dex")
+                            logger.logClickEvent(NAVIGATE_TO_DEX)
                         }
 
                     is HomeNavigateEvent.ToAbility ->
                         startActivity<AbilityActivity> {
-                            logger.logClickEvent("Navigate_To_Ability")
+                            logger.logClickEvent(NAVIGATE_TO_ABILITY)
                         }
 
                     is HomeNavigateEvent.ToTip ->
                         startActivity<TipActivity> {
-                            logger.logClickEvent("Navigate_To_Tip")
+                            logger.logClickEvent(NAVIGATE_TO_TIP)
                         }
 
                     is HomeNavigateEvent.ToLogo -> navigateToPokeRogue()
@@ -95,6 +95,17 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
         Intent(
             Intent.ACTION_VIEW,
             Uri.parse(stringOf(R.string.home_pokerogue_url)),
-        ).also { startActivity(it) }
+        ).also {
+            startActivity(it)
+            logger.logClickEvent(NAVIGATE_TO_POKE_ROGUE)
+        }
+    }
+
+    companion object {
+        private const val NAVIGATE_TO_POKE_ROGUE = "To_PokeRogue_Game"
+        private const val NAVIGATE_TO_TYPE = "To_Type"
+        private const val NAVIGATE_TO_DEX = "To_Dex"
+        private const val NAVIGATE_TO_ABILITY = "To_Ability"
+        private const val NAVIGATE_TO_TIP = "To_Tip"
     }
 }
