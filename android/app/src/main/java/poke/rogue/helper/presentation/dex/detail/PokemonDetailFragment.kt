@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.dex.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -37,6 +38,8 @@ class PokemonDetailFragment :
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
     private val pokemonTypeAdapter by lazy { PokemonTypeAdapter() }
     private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
+
+    override fun toolbar(): Toolbar? = null
 
     override fun onViewCreated(
         view: View,

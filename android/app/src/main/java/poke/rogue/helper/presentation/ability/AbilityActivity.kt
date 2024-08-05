@@ -20,7 +20,7 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
         }
     }
 
-    override fun toolBar(): Toolbar = binding.toolbarAbility
+    override fun toolBar(): Toolbar? = null
 
     companion object {
         fun intent(context: Context): Intent {

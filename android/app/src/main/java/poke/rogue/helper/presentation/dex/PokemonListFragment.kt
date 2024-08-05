@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.dex
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -34,6 +35,8 @@ class PokemonListFragment :
     private val pokemonAdapter: PokemonAdapter by lazy {
         PokemonAdapter(viewModel)
     }
+
+    override fun toolbar(): Toolbar = binding.toolbarDex
 
     override fun onViewCreated(
         view: View,

@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.ability
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -16,8 +17,7 @@ import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.remote.ServiceModule
 
-class AbilityFragment :
-    BindingFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
+class AbilityFragment : BindingFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
     private val viewModel by viewModels<AbilityViewModel> {
         AbilityViewModel.factory(
             DefaultAbilityRepository(
@@ -30,6 +30,8 @@ class AbilityFragment :
     }
 
     private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
+
+    override fun toolbar(): Toolbar = binding.toolbarAbility
 
     override fun onViewCreated(
         view: View,

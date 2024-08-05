@@ -20,7 +20,7 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
         }
     }
 
-    override fun toolBar(): Toolbar = binding.toolbarDex
+    override fun toolBar(): Toolbar? = null
 
     companion object {
         fun intent(context: Context): Intent {

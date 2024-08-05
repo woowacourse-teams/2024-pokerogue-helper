@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="type_choice_title_text">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
@@ -25,12 +26,21 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="CustomToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+    <style name="CustomSearchViewStyle" type="Widget.AppCompat.SearchView">
+        <item name="android:editTextColor">@color/poke_white</item>
+        <item name="android:textColorHint">@color/poke_grey_60</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="CustomToolbarStyle">
         <item name="android:backgroundTint">@color/poke_black</item>
         <item name="titleCentered">true</item>
         <item name="titleTextColor">@color/poke_white</item>
+        <item name="textFillColor">@color/poke_white</item>
         <item name="titleTextAppearance">@style/TextAppearance.Poke.TitleLargeBold</item>
-        <item name="popupTheme">@style/toolbar_menu_text</item>
         <item name="navigationIcon">@drawable/ic_arrow_back_24</item>
+        <item name="popupTheme">@style/toolbar_menu_text</item>
     </style>
+
 </resources>

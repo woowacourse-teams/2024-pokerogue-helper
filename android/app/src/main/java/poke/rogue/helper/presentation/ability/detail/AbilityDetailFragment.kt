@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.ability.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -32,6 +33,8 @@ class AbilityDetailFragment :
     }
 
     private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter(viewModel) }
+
+    override fun toolbar(): Toolbar = binding.toolbarAbilityDetail
 
     override fun onViewCreated(
         view: View,
