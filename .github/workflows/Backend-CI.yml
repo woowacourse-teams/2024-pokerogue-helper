@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ci
     steps:
 
       - name: Checkout
@@ -26,17 +26,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Remove Containers
+        run: |
+          docker ps -aq | xargs -r docker rm -vf
+
       - name: Set up Local MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
           mysql database: 'pokerogue'
           mysql user: ${{ secrets.TEST_DB_USERNAME }}
           mysql password: ${{ secrets.TEST_DB_PASSWORD }}
-
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
 
       - name: Set up Test MySQL
         run: |
