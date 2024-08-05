@@ -53,13 +53,33 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".dev"
-            //            firebaseAppDistribution {
+            signingConfig = signingConfigs.getByName("debug")
+        }
+
+        create("beta") {
+            initWith(getByName("debug"))
+            versionNameSuffix = "-beta"
+            applicationIdSuffix = ".beta"
+            signingConfig = signingConfigs.getByName("debug")
+//            firebaseAppDistribution {
 //                artifactType = "APK"
 //                releaseNotesFile = "firebase/releaseNote.txt"
 //                groupsFile = "firebase/testers.txt"
 //            }
-            signingConfig = signingConfigs.getByName("debug")
         }
+
+        create("alpha") {
+            initWith(getByName("debug"))
+            versionNameSuffix = "-alpha"
+            applicationIdSuffix = ".alpha"
+            signingConfig = signingConfigs.getByName("debug")
+//            firebaseAppDistribution {
+//                artifactType = "APK"
+//                releaseNotesFile = "firebase/releaseNote.txt"
+//                groupsFile = "firebase/testers.txt"
+//            }
+        }
+
         release {
             isMinifyEnabled = false
 //            isShrinkResources = true
@@ -70,6 +90,16 @@ android {
             )
         }
     }
+
+    productFlavors {
+//        demo {
+//            applicationIdSuffix = ".demo"
+//            versionNameSuffix = "-demo"
+//        }
+//        full {
+//        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -97,6 +127,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":remote")) // TODO remove this
     implementation(project(":local"))
+    implementation(project(":analytics"))
     testImplementation(project(":testing"))
     androidTestImplementation(project(":testing"))
     // androidx

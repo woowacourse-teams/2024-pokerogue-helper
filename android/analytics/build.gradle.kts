@@ -18,6 +18,12 @@ android {
                 "proguard-rules.pro",
             )
         }
+        create("alpha") {
+            initWith(getByName("debug"))
+        }
+        create("beta") {
+            initWith(getByName("debug"))
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -32,10 +38,14 @@ android {
             excludes += "win32-x86*/**"
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
     implementation(libs.timber)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 }
