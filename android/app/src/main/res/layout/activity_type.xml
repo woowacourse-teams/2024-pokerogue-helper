@@ -25,16 +25,20 @@
         <variable
             name="opponent2Type"
             type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar_home"
-            layout="@layout/toolbar" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_type"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/CustomToolbarStyle"
+            app:title="@string/type_title_name" />
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

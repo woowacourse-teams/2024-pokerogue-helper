@@ -16,26 +16,36 @@
         android:layout_height="match_parent"
         tools:context=".presentation.dex.PokemonListFragment">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_bar_pokemon_list"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_dex"
+            style="@style/CustomToolbarStyle"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:layout_marginHorizontal="15dp"
-            android:background="@drawable/rounded_searchbar_background"
-            app:iconifiedByDefault="false"
+            android:contentInsetStartWithNavigation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:onQueryTextChange="@{viewModel}"
-            app:queryHint="@string/dex_list_search_pokemon_hint" />
+            app:title="@string/dex_title_name">
+
+            <androidx.appcompat.widget.SearchView
+                style="@style/CustomSearchViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:theme="@style/CustomSearchViewTheme"
+                app:onQueryTextChange="@{viewModel}"
+                app:queryHint="@string/dex_list_search_pokemon_hint" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_bar_pokemon_list"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_dex"
             tools:listitem="@layout/item_pokemon_list_pokemon"
             tools:spanCount="3" />
 
