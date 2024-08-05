@@ -62,9 +62,9 @@ public class DataSettingService {
     public void setData() {
         deleteAll();
 
-        savePokemonTypes();
-        savePokemonAbilities();
-        savePokemons();
+        Map<String, PokemonType> pokemonTypeCacheByName = savePokemonTypes();
+        Map<String, PokemonAbility> pokemonAbilityCacheByName = savePokemonAbilities();
+        savePokemons(pokemonTypeCacheByName, pokemonAbilityCacheByName);
     }
 
     private void deleteAll() {
@@ -76,7 +76,7 @@ public class DataSettingService {
         pokemonRepository.deleteAllInBatch();
     }
 
-    private void savePokemonTypes() {
+    private Map<String, PokemonType> savePokemonTypes() {
         DataUrls typeDataUrls = getTypeDataUrls();
         List<TypeResponse> typeResponses = getTypeResponses(typeDataUrls);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
@@ -85,6 +85,8 @@ public class DataSettingService {
                 .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
 
         saveAllPokemonTypeMatching(typeDataUrls, pokemonTypeCacheByName);
+
+        return pokemonTypeCacheByName;
     }
 
     private DataUrls getTypeDataUrls() {
@@ -182,12 +184,13 @@ public class DataSettingService {
         }
     }
 
-    private void savePokemonAbilities() {
+    private Map<String, PokemonAbility> savePokemonAbilities() {
         DataUrls abilityDataUrls = getAbilityDataUrls();
         List<AbilityResponse> abilityResponses = getAbilityResponses(abilityDataUrls);
         List<PokemonAbility> pokemonAbilities = getPokemonAbilities(abilityResponses);
 
-        pokemonAbilityRepository.saveAll(pokemonAbilities);
+        return pokemonAbilityRepository.saveAll(pokemonAbilities).stream()
+                .collect(Collectors.toMap(PokemonAbility::getName, Function.identity()));
     }
 
     private DataUrls getAbilityDataUrls() {
@@ -208,7 +211,10 @@ public class DataSettingService {
                 .toList();
     }
 
-    private void savePokemons() {
+    private void savePokemons(
+            Map<String, PokemonType> pokemonTypeCacheByName,
+            Map<String, PokemonAbility> pokemonAbilityCacheByName
+    ) {
         CountResponse pokemonCountResponse = pokeClient.getPokemonResponsesCount();
         List<Pokemon> pokemons = new ArrayList<>();
         List<PokemonSaveResponse> pokemonSaveResponses = new ArrayList<>();
@@ -217,10 +223,6 @@ public class DataSettingService {
         }
         Map<String, Pokemon> pokemonCacheByName = pokemonRepository.saveAll(pokemons).stream()
                 .collect(Collectors.toMap(Pokemon::getName, Function.identity()));
-        Map<String, PokemonType> pokemonTypeCacheByName = pokemonTypeRepository.findAll().stream()
-                .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
-        Map<String, PokemonAbility> pokemonAbilityCacheByName = pokemonAbilityRepository.findAll().stream()
-                .collect(Collectors.toMap(PokemonAbility::getName, Function.identity()));
 
         savePokemonTypeMapping(pokemonSaveResponses, pokemonCacheByName, pokemonTypeCacheByName);
         savePokemonAbilityMapping(pokemonSaveResponses, pokemonCacheByName, pokemonAbilityCacheByName);
