@@ -15,6 +15,8 @@ import com.pokerogue.external.pokemon.parser.DtoParser;
 import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.ability.repository.PokemonAbilityRepository;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
 import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
@@ -311,10 +313,18 @@ public class DataSettingService {
     ) {
         List<PokemonTypeMapping> pokemonTypeMappings = pokemonSaveResponses.stream()
                 .flatMap(pokemonSaveResponse -> pokemonSaveResponse.types().stream()
-                        .map(typeDataUrl -> new PokemonTypeMapping(
+                        .map(typeDataUrl -> {
+                            if (!pokemonCacheByName.containsKey(pokemonSaveResponse.name())) {
+                                throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
+                            }
+                            if (!pokemonTypeCacheByName.containsKey(typeDataUrl.getName())) {
+                                throw new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND);
+                            }
+                            return new PokemonTypeMapping(
                                 pokemonCacheByName.get(pokemonSaveResponse.name()),
                                 pokemonTypeCacheByName.get(typeDataUrl.getName())
-                        ))
+                            );
+                        })
                 ).toList();
         pokemonTypeMappingRepository.saveAll(pokemonTypeMappings);
     }
