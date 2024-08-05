@@ -7,18 +7,21 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTypeBinding
-import poke.rogue.helper.presentation.base.BindingActivity
+import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.model.SelectorType
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.result.TypeResultAdapter
 import poke.rogue.helper.presentation.type.selection.TypeSelectionBottomSheetFragment
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
-class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type) {
+class TypeActivity : ToolbarActivity<ActivityTypeBinding>(R.layout.activity_type) {
     private val viewModel: TypeViewModel by viewModels {
         TypeViewModel.factory()
     }
     private val typeResultAdapter by lazy { TypeResultAdapter() }
+
+    override val toolbar: Toolbar
+        get() = binding.toolbarType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +29,6 @@ class TypeActivity : BindingActivity<ActivityTypeBinding>(R.layout.activity_type
         initAdapter()
         initObserver()
     }
-
-    override fun toolBar(): Toolbar = binding.toolbarType
 
     private fun initViews() =
         with(binding) {

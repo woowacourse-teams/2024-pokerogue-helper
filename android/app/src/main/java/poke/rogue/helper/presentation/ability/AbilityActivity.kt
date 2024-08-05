@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.ability
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import poke.rogue.helper.R
@@ -19,8 +18,6 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
             }
         }
     }
-
-    override fun toolBar(): Toolbar? = null
 
     companion object {
         fun intent(context: Context): Intent {

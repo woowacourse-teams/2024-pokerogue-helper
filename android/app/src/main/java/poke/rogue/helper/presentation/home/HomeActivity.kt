@@ -8,23 +8,24 @@ import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
-import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.dex.PokemonActivity
 import poke.rogue.helper.presentation.tip.TipActivity
+import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
-class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
+class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel by viewModels<HomeViewModel>()
+
+    override val toolbar: Toolbar
+        get() = binding.toolbarHome
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
         initObservers()
     }
-
-    override fun toolBar(): Toolbar = binding.toolbarHome
 
     private fun initViews() =
         with(binding) {
