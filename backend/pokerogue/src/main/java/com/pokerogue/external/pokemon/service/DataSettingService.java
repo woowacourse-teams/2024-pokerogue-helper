@@ -103,9 +103,10 @@ public class DataSettingService {
 
     private List<PokemonType> getPokemonTypes(List<TypeResponse> typeResponses) {
         return typeResponses.stream()
-                .map(typeResponse -> dtoParser.getPokemonType(typeResponse,
-                        s3Service.getTypeImageFromS3(typeResponse.name())))
-                .toList();
+                .map(typeResponse -> dtoParser.getPokemonType(
+                        typeResponse,
+                        s3Service.getTypeImageFromS3(typeResponse.name()))
+                ).toList();
     }
 
     private void saveAllPokemonTypeMatching(DataUrls typeDataUrls, Map<String, PokemonType> pokemonTypeCacheByName) {
@@ -116,6 +117,7 @@ public class DataSettingService {
 
             savePokemonTypeMatching(typeMatchingResponse, fromPokemonType, pokemonTypeMatchings, pokemonTypeCacheByName);
         }
+
         pokemonTypeMatchingRepository.saveAll(pokemonTypeMatchings);
     }
 
@@ -177,8 +179,7 @@ public class DataSettingService {
             List<PokemonTypeMatching> pokemonTypeMatchings
     ) {
         for (PokemonType toPokemonType : allPokemonTypes) {
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType,
-                    BASIC_DAMAGE);
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, BASIC_DAMAGE);
 
             pokemonTypeMatchings.add(pokemonTypeMatching);
         }
