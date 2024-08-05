@@ -63,21 +63,28 @@ class TypeChip
             ) {
                 with(view.binding) {
                     type = typeUiModel
-                    isEmptyBackGround?.let {
-                        this.isEmptyBackground = isEmptyBackGround
-                        this.layoutItemType.gravity = Gravity.CENTER
-                    }
-                    nameSize?.let { tvTypeName.textSize = nameSize }
-                    iconSize?.let {
-                        ivTypeNameIcon.layoutParams.apply {
-                            width = iconSize.toInt()
-                            height = iconSize.toInt()
-                        }
-                    }
+                    viewConfiguration = typeViewConfiguration
                 }
             }
+
+            @JvmStatic
+            @BindingAdapter("layoutWidth")
+            fun setLayoutWidth(
+                view: View,
+                width: Int,
+            ) {
+                view.layoutParams.width = width
+            }
+
+            @JvmStatic
+            @BindingAdapter("layoutHeight")
+            fun setLayoutHeight(
+                view: View,
+                height: Int,
+            ) {
+                view.layoutParams.height = height
+            }
         }
-    }
 
 data class PokemonTypeViewConfiguration(
     val isEmptyBackground: Boolean,
