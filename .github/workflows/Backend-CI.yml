@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ci
     steps:
 
       - name: Checkout
@@ -26,12 +26,34 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Set up MySQL
+      - name: Remove Containers
+        run: |
+          docker ps -aq | xargs -r docker rm -vf
+
+      - name: Set up Local MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
           mysql database: 'pokerogue'
           mysql user: ${{ secrets.TEST_DB_USERNAME }}
           mysql password: ${{ secrets.TEST_DB_PASSWORD }}
+
+      - name: Set up Test MySQL
+        run: |
+          sudo touch docker-compose.yml
+          echo "${{ secrets.DOCKER_COMPOSE_TEST_DB }}" | sudo tee docker-compose.yml > /dev/null
+          docker-compose -f docker-compose.yml up -d
+
+      - name: Wait for Test MySQL to be ready
+        run: |
+          for i in {1..30}; do
+          if docker-compose exec -T pokerogue-db mysqladmin ping --host 127.0.0.1 --user ${{ secrets.TEST_DB_USERNAME }} --password=${{ secrets.TEST_DB_PASSWORD }} --silent; then
+          echo "MySQL is up and running!"
+          break
+          else
+          echo "Waiting for MySQL to be ready..."
+          sleep 5
+          fi
+          done
 
       - name: Run Test
         run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
