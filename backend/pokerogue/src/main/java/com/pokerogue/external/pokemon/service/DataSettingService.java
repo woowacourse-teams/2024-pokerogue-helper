@@ -79,8 +79,10 @@ public class DataSettingService {
         List<TypeResponse> typeResponses = getTypeResponses(typeDataUrls);
         List<PokemonType> pokemonTypes = getPokemonTypes(typeResponses);
 
-        pokemonTypeRepository.saveAll(pokemonTypes);
-        saveAllPokemonTypeMatching(typeDataUrls);
+        Map<String, PokemonType> pokemonTypeCacheByName = pokemonTypeRepository.saveAll(pokemonTypes).stream()
+                .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
+
+        saveAllPokemonTypeMatching(typeDataUrls, pokemonTypeCacheByName);
     }
 
     private DataUrls getTypeDataUrls() {
@@ -102,15 +104,13 @@ public class DataSettingService {
                 .toList();
     }
 
-    private void saveAllPokemonTypeMatching(DataUrls typeDataUrls) {
-        Map<String, PokemonType> pokemonTypeMap = pokemonTypeRepository.findAll().stream()
-                .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
+    private void saveAllPokemonTypeMatching(DataUrls typeDataUrls, Map<String, PokemonType> pokemonTypeCacheByName) {
         List<PokemonTypeMatching> pokemonTypeMatchings = new ArrayList<>();
         for (DataUrl dataUrl : typeDataUrls.results()) {
-            PokemonType fromPokemonType = pokemonTypeRepository.findByName(dataUrl.name()).orElseThrow();
+            PokemonType fromPokemonType = pokemonTypeCacheByName.get(dataUrl.name());
             TypeMatchingResponse typeMatchingResponse = pokeClient.getTypeMatchingResponse(dataUrl.getUrlId());
 
-            savePokemonTypeMatching(typeMatchingResponse, fromPokemonType, pokemonTypeMatchings, pokemonTypeMap);
+            savePokemonTypeMatching(typeMatchingResponse, fromPokemonType, pokemonTypeMatchings, pokemonTypeCacheByName);
         }
         pokemonTypeMatchingRepository.saveAll(pokemonTypeMatchings);
     }
@@ -119,28 +119,28 @@ public class DataSettingService {
             TypeMatchingResponse typeMatchingResponse,
             PokemonType fromPokemonType,
             List<PokemonTypeMatching> pokemonTypeMatchings,
-            Map<String, PokemonType> pokemonTypeMap
+            Map<String, PokemonType> pokemonTypeCacheByName
     ) {
-        List<PokemonType> allPokemonTypes = pokemonTypeRepository.findAll();
+        List<PokemonType> allPokemonTypes = new ArrayList<>(pokemonTypeCacheByName.values());
 
         saveDoubleDamageTypeMatching(
                 typeMatchingResponse,
                 fromPokemonType,
                 allPokemonTypes,
                 pokemonTypeMatchings,
-                pokemonTypeMap);
+                pokemonTypeCacheByName);
         saveHalfDamageTypeMatching(
                 typeMatchingResponse,
                 fromPokemonType,
                 allPokemonTypes,
                 pokemonTypeMatchings,
-                pokemonTypeMap);
+                pokemonTypeCacheByName);
         saveNoDamageTypeMatching(
                 typeMatchingResponse,
                 fromPokemonType,
                 allPokemonTypes,
                 pokemonTypeMatchings,
-                pokemonTypeMap);
+                pokemonTypeCacheByName);
         saveBasicDamageTypeMatching(fromPokemonType, allPokemonTypes, pokemonTypeMatchings);
     }
 
@@ -149,10 +149,10 @@ public class DataSettingService {
             PokemonType fromPokemonType,
             List<PokemonType> allPokemonTypes,
             List<PokemonTypeMatching> pokemonTypeMatchings,
-            Map<String, PokemonType> pokemonTypeMap
+            Map<String, PokemonType> pokemonTypeCacheByName
     ) {
         for (DataUrl type : typeMatchingResponse.getDoubleDamageTo()) {
-            PokemonType toPokemonType = pokemonTypeMap.get(type.name());
+            PokemonType toPokemonType = pokemonTypeCacheByName.get(type.name());
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType,
                     DOUBLE_DAMAGE);
 
@@ -166,10 +166,10 @@ public class DataSettingService {
             PokemonType fromPokemonType,
             List<PokemonType> allPokemonTypes,
             List<PokemonTypeMatching> pokemonTypeMatchings,
-            Map<String, PokemonType> pokemonTypeMap
+            Map<String, PokemonType> pokemonTypeCacheByName
     ) {
         for (DataUrl type : typeMatchingResponse.getHalfDamageTo()) {
-            PokemonType toPokemonType = pokemonTypeMap.get(type.name());
+            PokemonType toPokemonType = pokemonTypeCacheByName.get(type.name());
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType,
                     HALF_DAMAGE);
 
@@ -183,10 +183,10 @@ public class DataSettingService {
             PokemonType fromPokemonType,
             List<PokemonType> allPokemonTypes,
             List<PokemonTypeMatching> pokemonTypeMatchings,
-            Map<String, PokemonType> pokemonTypeMap
+            Map<String, PokemonType> pokemonTypeCacheByName
     ) {
         for (DataUrl type : typeMatchingResponse.getNoDamageTo()) {
-            PokemonType toPokemonType = pokemonTypeMap.get(type.name());
+            PokemonType toPokemonType = pokemonTypeCacheByName.get(type.name());
             PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType,
                     NO_DAMAGE);
 
@@ -241,16 +241,15 @@ public class DataSettingService {
         for (int offset = 0; offset < pokemonCountResponse.count(); offset += PACKET_SIZE) {
             savePokemonsByOffset(offset, pokemons, pokemonSaveResponses);
         }
-        pokemonRepository.saveAll(pokemons);
-        Map<String, Pokemon> pokemonMap = pokemonRepository.findAll().stream()
+        Map<String, Pokemon> pokemonCacheByName = pokemonRepository.saveAll(pokemons).stream()
                 .collect(Collectors.toMap(Pokemon::getName, Function.identity()));
-        Map<String, PokemonType> pokemonTypeMap = pokemonTypeRepository.findAll().stream()
+        Map<String, PokemonType> pokemonTypeCacheByName = pokemonTypeRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonType::getName, Function.identity()));
-        Map<String, PokemonAbility> pokemonAbilityMap = pokemonAbilityRepository.findAll().stream()
+        Map<String, PokemonAbility> pokemonAbilityCacheByName = pokemonAbilityRepository.findAll().stream()
                 .collect(Collectors.toMap(PokemonAbility::getName, Function.identity()));
 
-        savePokemonTypeMapping(pokemonSaveResponses, pokemonMap, pokemonTypeMap);
-        savePokemonAbilityMapping(pokemonSaveResponses, pokemonMap, pokemonAbilityMap);
+        savePokemonTypeMapping(pokemonSaveResponses, pokemonCacheByName, pokemonTypeCacheByName);
+        savePokemonAbilityMapping(pokemonSaveResponses, pokemonCacheByName, pokemonAbilityCacheByName);
     }
 
     private void savePokemonsByOffset(
@@ -308,13 +307,13 @@ public class DataSettingService {
     private void savePokemonTypeMapping(
             List<PokemonSaveResponse> pokemonSaveResponses,
             Map<String, Pokemon> pokemonMap,
-            Map<String, PokemonType> pokemonTypeMap
+            Map<String, PokemonType> pokemonTypeCacheByName
     ) {
         List<PokemonTypeMapping> pokemonTypeMappings = pokemonSaveResponses.stream()
                 .flatMap(pokemonSaveResponse -> pokemonSaveResponse.types().stream()
                         .map(typeDataUrl -> new PokemonTypeMapping(
                                 pokemonMap.get(pokemonSaveResponse.name()),
-                                pokemonTypeMap.get(typeDataUrl.getName())
+                                pokemonTypeCacheByName.get(typeDataUrl.getName())
                         ))
                 ).toList();
         pokemonTypeMappingRepository.saveAll(pokemonTypeMappings);
@@ -322,14 +321,14 @@ public class DataSettingService {
 
     private void savePokemonAbilityMapping(
             List<PokemonSaveResponse> pokemonSaveResponses,
-            Map<String, Pokemon> pokemonMap,
-            Map<String, PokemonAbility> pokemonAbilityMap
+            Map<String, Pokemon> pokemonCacheByName,
+            Map<String, PokemonAbility> pokemonAbilityCacheByName
     ) {
         List<PokemonAbilityMapping> pokemonAbilityMappings = pokemonSaveResponses.stream()
                 .flatMap(pokemonSaveResponse -> pokemonSaveResponse.abilities().stream()
                         .map(abilityDataUrl -> new PokemonAbilityMapping(
-                                pokemonMap.get(pokemonSaveResponse.name()),
-                                pokemonAbilityMap.get(abilityDataUrl.getName())
+                                pokemonCacheByName.get(pokemonSaveResponse.name()),
+                                pokemonAbilityCacheByName.get(abilityDataUrl.getName())
                         ))
                 ).toList();
         pokemonAbilityMappingRepository.saveAll(pokemonAbilityMappings);
