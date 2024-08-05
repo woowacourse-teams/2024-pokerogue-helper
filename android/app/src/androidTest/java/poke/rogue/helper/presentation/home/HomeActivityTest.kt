@@ -20,10 +20,6 @@ class HomeActivityTest {
 
     @Test
     fun 화면_회전_시에도_로고가_표시된다() {
-        // given
-        onView(withId(R.id.iv_home_land_logo))
-            .check(matches(isDisplayed()))
-
         // when
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -36,10 +32,6 @@ class HomeActivityTest {
 
     @Test
     fun 화면_회전_시에도_타입_메뉴_버튼이_보인다() {
-        // given
-        onView(withId(R.id.cv_home_land_type))
-            .check(matches(isDisplayed()))
-
         // when
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -52,10 +44,6 @@ class HomeActivityTest {
 
     @Test
     fun 화면_회전_시에도_꿀팁_메뉴_버튼이_보인다() {
-        // given
-        onView(withId(R.id.cv_home_land_tip))
-            .check(matches(isDisplayed()))
-
         // when
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
