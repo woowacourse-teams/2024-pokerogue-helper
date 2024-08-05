@@ -1,29 +1,23 @@
 package com.pokerogue.helper.pokemon.service;
 
-import com.pokerogue.environment.service.ServiceTest;
-import com.pokerogue.helper.global.exception.ErrorMessage;
-import com.pokerogue.helper.global.exception.GlobalCustomException;
-import com.pokerogue.helper.pokemon.domain.Pokemon;
-import com.pokerogue.helper.pokemon.dto.PokedexResponse;
-import com.pokerogue.helper.pokemon.dto.PokemonResponse;
-import com.pokerogue.helper.pokemon.repository.PokemonRepository;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
+
+import com.pokerogue.environment.service.ServiceTest;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.pokemon.dto.PokedexResponse;
+import com.pokerogue.helper.pokemon.dto.PokemonResponse;
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 class PokemonServiceTest extends ServiceTest {
 
     @Autowired
     private PokemonService pokemonService;
-
-    @Autowired
-    private PokemonRepository pokemonRepository;
 
     @Test
     @DisplayName("모든 포켓몬 목록을 조회한다.")
@@ -36,9 +30,9 @@ class PokemonServiceTest extends ServiceTest {
     @Test
     @DisplayName("한 포켓몬의 도감 상세 정보를 조회한다.")
     void findPokedexDetails() {
-        long lastPokemonId = pokemonService.findPokemons().size();
+        long pokemonId = pokemonService.findPokemons().get(0).id();
 
-        PokedexResponse pokedexDetails = pokemonService.findPokedexDetails(lastPokemonId);
+        PokedexResponse pokedexDetails = pokemonService.findPokedexDetails(pokemonId);
 
         assertAll(() -> {
             assertThat(pokedexDetails.pokedexNumber()).isNotNull();
@@ -50,10 +44,7 @@ class PokemonServiceTest extends ServiceTest {
     @Test
     @DisplayName("존재하지 않는 포켓몬의 상세 정보를 조회하면 예외가 발생한다.")
     void findPokedexDetailsWhenNotExist() {
-        long totalPokemonCount = pokemonService.findPokemons().size();
-        Long pokemonId = totalPokemonCount + 1;
-
-        assertThatThrownBy(() -> pokemonService.findPokedexDetails(pokemonId))
+        assertThatThrownBy(() -> pokemonService.findPokedexDetails(Long.MAX_VALUE))
                 .isInstanceOf(GlobalCustomException.class)
                 .hasMessage(ErrorMessage.POKEMON_NOT_FOUND.getMessage());
     }
