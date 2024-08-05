@@ -63,6 +63,62 @@ android {
     }
     testOptions {
         animationsDisabled = true
+        managedDevices {
+            localDevices {
+                create("pixel4api27") {
+                    device = "Pixel 4"
+                    apiLevel = 27
+                    systemImageSource = "aosp"
+                }
+                create("pixel4api28") {
+                    device = "Pixel 4"
+                    apiLevel = 28
+                    systemImageSource = "aosp"
+                }
+                create("pixel4api29") {
+                    device = "Pixel 4"
+                    apiLevel = 29
+                    systemImageSource = "aosp"
+                }
+                create("pixel4api30") {
+                    device = "Pixel 4"
+                    apiLevel = 30
+                    systemImageSource = "aosp"
+                }
+                create("pixel4api31") {
+                    device = "Pixel 4"
+                    apiLevel = 31
+                    systemImageSource = "aosp"
+                }
+                create("pixel4api32") {
+                    device = "Pixel 4"
+                    apiLevel = 32
+                    systemImageSource = "aosp"
+                }
+                create("pixel4api33") {
+                    device = "Pixel 4"
+                    apiLevel = 33
+                    systemImageSource = "aosp"
+                }
+                create("pixel4api34") {
+                    device = "Pixel 4"
+                    apiLevel = 34
+                    systemImageSource = "aosp"
+                }
+            }
+            groups {
+                create("phones") {
+                    targetDevices.add(devices["pixel4api27"])
+                    targetDevices.add(devices["pixel4api28"])
+                    targetDevices.add(devices["pixel4api29"])
+                    targetDevices.add(devices["pixel4api30"])
+                    targetDevices.add(devices["pixel4api31"])
+                    targetDevices.add(devices["pixel4api32"])
+                    targetDevices.add(devices["pixel4api33"])
+                    targetDevices.add(devices["pixel4api34"])
+                }
+            }
+        }
     }
 }
 
