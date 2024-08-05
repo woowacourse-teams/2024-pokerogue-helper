@@ -26,12 +26,20 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="CustomSearchViewStyle" type="Widget.AppCompat.SearchView">
+    <style name="CustomSearchViewTheme" parent="Widget.AppCompat.SearchView">
         <item name="android:editTextColor">@color/poke_white</item>
         <item name="android:textColorHint">@color/poke_grey_60</item>
         <item name="android:textSize">14sp</item>
+        <item name="closeIcon">@drawable/icon_close</item>
+
     </style>
 
+    <style name="CustomSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/icon_search</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="closeIcon">@drawable/icon_close</item>
+        <item name="queryBackground">@drawable/bg_search_view</item>
+    </style>
 
     <style name="CustomToolbarStyle">
         <item name="android:backgroundTint">@color/poke_black</item>

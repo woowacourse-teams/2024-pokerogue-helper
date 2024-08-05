@@ -28,16 +28,13 @@
             app:title="@string/dex_title_name">
 
             <androidx.appcompat.widget.SearchView
+                style="@style/CustomSearchViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
-                android:theme="@style/CustomSearchViewStyle"
-                app:closeIcon="@drawable/icon_close"
-                app:queryBackground="@drawable/bg_search_view"
-                app:queryHint="@string/dex_list_search_pokemon_hint"
-                app:searchHintIcon="@null"
+                android:theme="@style/CustomSearchViewTheme"
                 app:onQueryTextChange="@{viewModel}"
-                app:searchIcon="@drawable/icon_search" />
+                app:queryHint="@string/dex_list_search_pokemon_hint" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
