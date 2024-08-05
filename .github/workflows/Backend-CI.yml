@@ -33,11 +33,6 @@ jobs:
           mysql user: ${{ secrets.TEST_DB_USERNAME }}
           mysql password: ${{ secrets.TEST_DB_PASSWORD }}
 
-      - name: Set up Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
-
       - name: Set up Test MySQL
         run: |
           sudo touch docker-compose.yml
