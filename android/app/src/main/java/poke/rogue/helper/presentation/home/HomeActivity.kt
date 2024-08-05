@@ -7,6 +7,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import poke.rogue.helper.R
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.BindingActivity
@@ -14,12 +16,16 @@ import poke.rogue.helper.presentation.dex.PokemonActivity
 import poke.rogue.helper.presentation.tip.TipActivity
 import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
+import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
+import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
+
 
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel by viewModels<HomeViewModel>()
+    private val logger: AnalyticsLogger = analyticsLogger()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,20 +67,24 @@ class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home
             viewModel.navigationEvent.collect { state ->
                 when (state) {
                     is HomeNavigateEvent.ToType ->
-                        TypeActivity.intent(this)
-                            .also { startActivity(it) }
+                        startActivity<TypeActivity> {
+                            logger.logClickEvent("Navigate_To_Type")
+                        }
 
                     is HomeNavigateEvent.ToDex ->
-                        PokemonActivity.intent(this)
-                            .also { startActivity(it) }
+                        startActivity<PokemonActivity> {
+                            logger.logClickEvent("Navigate_To_Dex")
+                        }
 
                     is HomeNavigateEvent.ToAbility ->
-                        AbilityActivity.intent(this)
-                            .also { startActivity(it) }
+                        startActivity<AbilityActivity> {
+                            logger.logClickEvent("Navigate_To_Ability")
+                        }
 
                     is HomeNavigateEvent.ToTip ->
-                        TipActivity.intent(this)
-                            .also { startActivity(it) }
+                        startActivity<TipActivity> {
+                            logger.logClickEvent("Navigate_To_Tip")
+                        }
 
                     is HomeNavigateEvent.ToLogo -> navigateToPokeRogue()
                 }
