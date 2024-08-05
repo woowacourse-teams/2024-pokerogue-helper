@@ -125,72 +125,44 @@ public class DataSettingService {
     ) {
         List<PokemonType> allPokemonTypes = new ArrayList<>(pokemonTypeCacheByName.values());
 
-        saveDoubleDamageTypeMatching(
-                typeMatchingResponse,
+        saveNotBasicDamageTypeMatching(
+                typeMatchingResponse.getDoubleDamageTo(),
                 fromPokemonType,
+                DOUBLE_DAMAGE,
                 allPokemonTypes,
                 pokemonTypeMatchings,
-                pokemonTypeCacheByName);
-        saveHalfDamageTypeMatching(
-                typeMatchingResponse,
+                pokemonTypeCacheByName
+        );
+        saveNotBasicDamageTypeMatching(
+                typeMatchingResponse.getHalfDamageTo(),
                 fromPokemonType,
+                HALF_DAMAGE,
                 allPokemonTypes,
                 pokemonTypeMatchings,
-                pokemonTypeCacheByName);
-        saveNoDamageTypeMatching(
-                typeMatchingResponse,
+                pokemonTypeCacheByName
+        );
+        saveNotBasicDamageTypeMatching(
+                typeMatchingResponse.getNoDamageTo(),
                 fromPokemonType,
+                NO_DAMAGE,
                 allPokemonTypes,
                 pokemonTypeMatchings,
-                pokemonTypeCacheByName);
+                pokemonTypeCacheByName
+        );
         saveBasicDamageTypeMatching(fromPokemonType, allPokemonTypes, pokemonTypeMatchings);
     }
 
-    private void saveDoubleDamageTypeMatching(
-            TypeMatchingResponse typeMatchingResponse,
+    private void saveNotBasicDamageTypeMatching(
+            List<DataUrl> dataUrls,
             PokemonType fromPokemonType,
+            double multiply,
             List<PokemonType> allPokemonTypes,
             List<PokemonTypeMatching> pokemonTypeMatchings,
             Map<String, PokemonType> pokemonTypeCacheByName
     ) {
-        for (DataUrl type : typeMatchingResponse.getDoubleDamageTo()) {
+        for (DataUrl type : dataUrls) {
             PokemonType toPokemonType = pokemonTypeCacheByName.get(type.name());
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType,
-                    DOUBLE_DAMAGE);
-
-            pokemonTypeMatchings.add(pokemonTypeMatching);
-            allPokemonTypes.remove(toPokemonType);
-        }
-    }
-
-    private void saveHalfDamageTypeMatching(
-            TypeMatchingResponse typeMatchingResponse,
-            PokemonType fromPokemonType,
-            List<PokemonType> allPokemonTypes,
-            List<PokemonTypeMatching> pokemonTypeMatchings,
-            Map<String, PokemonType> pokemonTypeCacheByName
-    ) {
-        for (DataUrl type : typeMatchingResponse.getHalfDamageTo()) {
-            PokemonType toPokemonType = pokemonTypeCacheByName.get(type.name());
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType,
-                    HALF_DAMAGE);
-
-            pokemonTypeMatchings.add(pokemonTypeMatching);
-            allPokemonTypes.remove(toPokemonType);
-        }
-    }
-
-    private void saveNoDamageTypeMatching(
-            TypeMatchingResponse typeMatchingResponse,
-            PokemonType fromPokemonType,
-            List<PokemonType> allPokemonTypes,
-            List<PokemonTypeMatching> pokemonTypeMatchings,
-            Map<String, PokemonType> pokemonTypeCacheByName
-    ) {
-        for (DataUrl type : typeMatchingResponse.getNoDamageTo()) {
-            PokemonType toPokemonType = pokemonTypeCacheByName.get(type.name());
-            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType,
-                    NO_DAMAGE);
+            PokemonTypeMatching pokemonTypeMatching = new PokemonTypeMatching(fromPokemonType, toPokemonType, multiply);
 
             pokemonTypeMatchings.add(pokemonTypeMatching);
             allPokemonTypes.remove(toPokemonType);
