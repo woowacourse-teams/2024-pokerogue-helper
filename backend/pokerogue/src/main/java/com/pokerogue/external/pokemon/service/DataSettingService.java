@@ -211,9 +211,13 @@ public class DataSettingService {
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(getPokemonSpeciesResponse(species));
         String image;
         try {
-            image = s3Service.postImageToS3(pokeClient.getImage(id));
-        } catch (HttpClientErrorException e) {
-            image = "이미지가 없습니다ㅠㅠ";
+            image = s3Service.postImageToS3(pokeClient.getDotImage(id));
+        } catch (HttpClientErrorException e1) {
+            try {
+                image = s3Service.postImageToS3(pokeClient.getArtImage(id));
+            } catch (HttpClientErrorException e2) {
+                image = "이미지가 없습니다ㅠㅠ";
+            }
         }
         Pokemon pokemon = new Pokemon(pokemonNameAndDexNumber.pokedexNumber(), pokemonDetail.name(),
                 pokemonNameAndDexNumber.koName(), pokemonDetail.weight(), pokemonDetail.height(), pokemonDetail.hp(),

@@ -108,9 +108,17 @@ public class PokeClient {
                 .body(TypeMatchingResponse.class);
     }
 
-    public byte[] getImage(String id) {
+    public byte[] getDotImage(String id) {
         return restClient.get()
                 .uri("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png", id)
+                .accept(MediaType.IMAGE_PNG)
+                .retrieve()
+                .body(byte[].class);
+    }
+
+    public byte[] getArtImage(String id) {
+        return restClient.get()
+                .uri("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png", id)
                 .accept(MediaType.IMAGE_PNG)
                 .retrieve()
                 .body(byte[].class);
