@@ -26,17 +26,22 @@ class PokemonDetailFragment :
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(
             pokemonDetailRepository =
-                DefaultPokemonDetailRepository(
-                    remotePokemonDetailDataSource =
-                        RemotePokemonDetailDataSource(
-                            pokeDexService = ServiceModule.pokeDexService(),
-                        ),
+            DefaultPokemonDetailRepository(
+                remotePokemonDetailDataSource =
+                RemotePokemonDetailDataSource(
+                    pokeDexService = ServiceModule.pokeDexService(),
                 ),
+            ),
         )
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
     private val pokemonTypeAdapter by lazy { PokemonTypeAdapter() }
     private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
+    }
 
     override fun onViewCreated(
         view: View,
@@ -46,9 +51,6 @@ class PokemonDetailFragment :
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        repeatOnStarted {
-            viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
-        }
         initAdapter()
         initObservers()
     }
