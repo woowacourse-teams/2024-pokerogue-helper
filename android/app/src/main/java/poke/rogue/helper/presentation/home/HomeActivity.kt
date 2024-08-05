@@ -22,7 +22,6 @@ import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
-
 class HomeActivity : BindingActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel by viewModels<HomeViewModel>()
     private val logger: AnalyticsLogger = analyticsLogger()

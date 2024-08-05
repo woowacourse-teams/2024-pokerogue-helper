@@ -9,7 +9,10 @@ internal object AlphaAnalyticsLogger : AnalyticsLogger {
         Timber.d("Event: $event")
     }
 
-    override fun logError(throwable: Throwable, message: String?) {
+    override fun logError(
+        throwable: Throwable,
+        message: String?,
+    ) {
         Timber.e(throwable, message)
         message ?: Firebase.crashlytics.log("Error: $message")
         Firebase.crashlytics.recordException(throwable)

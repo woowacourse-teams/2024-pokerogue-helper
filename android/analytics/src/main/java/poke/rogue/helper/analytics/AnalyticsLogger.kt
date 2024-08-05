@@ -9,7 +9,10 @@ private const val RELEASE_MODE = "release"
 interface AnalyticsLogger {
     fun logEvent(event: AnalyticsEvent)
 
-    fun logError(throwable: Throwable, message: String? = null)
+    fun logError(
+        throwable: Throwable,
+        message: String? = null,
+    )
 }
 
 fun analyticsLogger(): AnalyticsLogger {

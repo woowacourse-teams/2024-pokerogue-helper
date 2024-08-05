@@ -1,7 +1,5 @@
 package poke.rogue.helper.analytics
 
-import com.google.firebase.analytics.FirebaseAnalytics
-
 /**
  * 분석 이벤트를 나타냅니다.
  *

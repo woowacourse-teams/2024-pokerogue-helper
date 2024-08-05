@@ -17,7 +17,10 @@ internal object FireBaseAnalyticsLogger : AnalyticsLogger {
         }
     }
 
-    override fun logError(throwable: Throwable, message: String?) {
+    override fun logError(
+        throwable: Throwable,
+        message: String?,
+    ) {
         message ?: Firebase.crashlytics.log("Error: $message")
         Firebase.crashlytics.recordException(throwable)
     }

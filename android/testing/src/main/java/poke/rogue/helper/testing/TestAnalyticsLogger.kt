@@ -4,7 +4,6 @@ import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.analytics.AnalyticsLogger
 
 class TestAnalyticsLogger : AnalyticsLogger {
-
     private val events = mutableListOf<AnalyticsEvent>()
     private val errors = mutableListOf<Throwable>()
 
@@ -12,7 +11,10 @@ class TestAnalyticsLogger : AnalyticsLogger {
         events.add(event)
     }
 
-    override fun logError(throwable: Throwable, message: String?) {
+    override fun logError(
+        throwable: Throwable,
+        message: String?,
+    ) {
         errors.add(throwable)
     }
 

@@ -7,7 +7,10 @@ internal object DebugAnalyticsLogger : AnalyticsLogger {
         Timber.d("Event: $event")
     }
 
-    override fun logError(throwable: Throwable, message: String?) {
+    override fun logError(
+        throwable: Throwable,
+        message: String?,
+    ) {
         Timber.e(throwable, message)
     }
 }
