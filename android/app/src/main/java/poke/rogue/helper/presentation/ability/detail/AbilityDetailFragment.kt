@@ -22,12 +22,7 @@ class AbilityDetailFragment :
     BindingFragment<FragmentAbilityDetailBinding>(R.layout.fragment_ability_detail) {
     private val viewModel by viewModels<AbilityDetailViewModel> {
         AbilityDetailViewModel.factory(
-            DefaultAbilityRepository(
-                remoteAbilityDataSource =
-                    RemoteAbilityDataSource(
-                        abilityService = ServiceModule.abilityService(),
-                    ),
-            ),
+            DefaultAbilityRepository.instance()
         )
     }
 
