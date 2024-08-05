@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.Dimension
 import androidx.core.content.res.use
@@ -11,6 +13,7 @@ import androidx.databinding.BindingAdapter
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeBinding
 import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.px
 
 class TypeChip
@@ -29,9 +32,7 @@ class TypeChip
                 val iconSize = attributes.getDimension(R.styleable.TypeChip_iconSize, 18f)
                 val spacing = attributes.getDimension(R.styleable.TypeChip_spacing, 7f)
                 val nameSize = attributes.getDimension(R.styleable.TypeChip_nameSize, 8f).px
-                val isEmptyBackGround =
-                    attributes.getBoolean(R.styleable.TypeChip_emptyBackGround, true)
-                initViews(iconSize, spacing, nameSize, isEmptyBackGround)
+                initViews(iconSize, spacing, nameSize)
             }
         }
 
@@ -39,7 +40,6 @@ class TypeChip
             @Dimension iconSize: Float,
             @Dimension spacing: Float,
             @Dimension nameSize: Float,
-            isEmptyBackGround: Boolean,
         ) = with(binding) {
             orientation = HORIZONTAL
             ivTypeNameIcon.layoutParams.apply {
@@ -48,18 +48,15 @@ class TypeChip
             }
             spaceType.layoutParams.width = spacing.toInt()
             tvTypeName.textSize = nameSize
-            isEmptyBackground = isEmptyBackGround
         }
 
         companion object {
             @JvmStatic
-            @BindingAdapter("type", "isEmptyBackground", "nameSize", "iconSize", requireAll = false)
-            fun setTypeName(
+            @BindingAdapter("type", "PokemonTypeViewConfiguration")
+            fun setTypeUiConfiguration(
                 view: TypeChip,
                 typeUiModel: TypeUiModel,
-                isEmptyBackGround: Boolean? = true,
-                nameSize: Float? = null,
-                iconSize: Float? = null,
+                typeViewConfiguration: PokemonTypeViewConfiguration,
             ) {
                 with(view.binding) {
                     type = typeUiModel
@@ -86,9 +83,13 @@ class TypeChip
             }
         }
 
-data class PokemonTypeViewConfiguration(
-    val isEmptyBackground: Boolean,
-    val nameSize: Float,
-    val iconSize: Float,
-    val marginBetweenTypes: Int,
-)
+        data class PokemonTypeViewConfiguration(
+            val nameSize: Int = 8.dp,
+            val iconSize: Int = 18.dp,
+            val layoutWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT,
+            val layoutGravity: Int = Gravity.CENTER,
+            val spacing: Int = 7.dp,
+            val hasBackGround: Boolean = false,
+            val marginBetweenTypes: Float = 8f,
+        )
+    }

@@ -13,7 +13,7 @@ import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
-import poke.rogue.helper.presentation.type.view.PokemonTypeViewConfiguration
+import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -137,11 +137,11 @@ class PokemonDetailFragment :
         val TAG: String = PokemonDetailFragment::class.java.simpleName
 
         private val TypesUiConfig =
-            PokemonTypeViewConfiguration(
-                isEmptyBackground = false,
-                nameSize = 17f,
-                iconSize = 40f,
-                marginBetweenTypes = 10,
+            TypeChip.PokemonTypeViewConfiguration(
+                nameSize = 17.dp,
+                iconSize = 30.dp,
+                hasBackGround = true,
+                marginBetweenTypes = 10f,
             )
 
         fun bundleOf(
