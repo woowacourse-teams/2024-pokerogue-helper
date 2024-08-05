@@ -24,7 +24,7 @@ public class PokemonService {
     private final PokemonRepository pokemonRepository;
 
     public List<PokemonResponse> findPokemons() {
-        List<Pokemon> pokemons = pokemonRepository.findAll();
+        List<Pokemon> pokemons = pokemonRepository.findAllWithTypes();
 
         return pokemons.stream()
                 .map(this::toPokemonResponse)
@@ -43,7 +43,7 @@ public class PokemonService {
 
     @Transactional(readOnly = true)
     public PokedexResponse findPokedexDetails(Long id) {
-        Pokemon pokemon = pokemonRepository.findById(id)
+        Pokemon pokemon = pokemonRepository.findDetailsById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
         return toPokedexResponse(pokemon);
