@@ -3,8 +3,8 @@ package com.pokerogue.helper.ability.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.pokerogue.environment.repository.RepositoryTest;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
-import com.pokerogue.helper.environ.repository.RepositoryTest;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
 import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;

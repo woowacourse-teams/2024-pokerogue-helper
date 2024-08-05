@@ -2,7 +2,7 @@ package com.pokerogue.helper.ability.service;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.pokerogue.helper.environ.service.ServiceTest;
+import com.pokerogue.environment.service.ServiceTest;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import org.junit.jupiter.api.DisplayName;
