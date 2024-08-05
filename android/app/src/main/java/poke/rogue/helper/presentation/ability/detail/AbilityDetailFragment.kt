@@ -24,24 +24,26 @@ class AbilityDetailFragment :
         AbilityDetailViewModel.factory(
             DefaultAbilityRepository(
                 remoteAbilityDataSource =
-                    RemoteAbilityDataSource(
-                        abilityService = ServiceModule.abilityService(),
-                    ),
+                RemoteAbilityDataSource(
+                    abilityService = ServiceModule.abilityService(),
+                ),
             ),
         )
     }
 
     private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter(viewModel) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val id = arguments?.getLong(ABILITY_ID) ?: INVALID_ABILITY_ID
+        viewModel.updateAbilityDetail(id)
+    }
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-
-        val id = arguments?.getLong(ABILITY_ID) ?: INVALID_ABILITY_ID
-        viewModel.updateAbilityDetail(id)
-
         initAdapter()
         initObservers()
     }
