@@ -10,47 +10,51 @@
             type="poke.rogue.helper.presentation.ability.AbilityViewModel" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_ability"
+            style="@style/CustomToolbarStyle"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:contentInsetStartWithNavigation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/ability_title_name">
 
             <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_bar_ability"
-                android:layout_width="0dp"
-                android:layout_height="37dp"
-                android:layout_marginHorizontal="31dp"
-                android:background="@drawable/rounded_searchbar_background"
-                app:iconifiedByDefault="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                style="@style/CustomSearchViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:theme="@style/CustomSearchViewTheme"
                 app:onQueryTextChange="@{vm}"
                 app:queryHint="@string/ability_search_hint" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_ability_description"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="30dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_bar_ability"
-                tools:listitem="@layout/item_ability_description" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gl_ability_toolbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="64dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_ability_description"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_ability"
+            tools:listitem="@layout/item_ability_description" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_ability_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="64dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
