@@ -1,6 +1,5 @@
 package com.pokerogue.helper.pokemon.controller;
 
-import com.pokerogue.external.pokemon.service.DataBatchInsertService;
 import com.pokerogue.external.pokemon.service.DataSettingService;
 import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
@@ -21,7 +20,6 @@ public class PokemonController {
 
     private final PokemonService pokemonService;
     private final DataSettingService dataSettingService;
-    private final DataBatchInsertService dataBatchInsertService;
 
     @GetMapping("/api/v1/pokemons")
     public ApiResponse<List<PokemonResponse>> pokemonList() {
@@ -41,23 +39,5 @@ public class PokemonController {
         dataSettingService.setData();
 
         return new ApiResponse<>("포켓몬 데이터 저장에 성공했습니다.", null);
-    }
-
-    @PostMapping("/api/v1/pre")
-    public ApiResponse<Void> savePokemonDataSetting() {
-        log.info("---- 포켓몬 전체 데이터 Pre 테스트 시작");
-        dataSettingService.setData();
-        log.info("---- 포켓몬 전체 데이터 Pre 테스트 종료");
-
-        return new ApiResponse<>("포켓몬 전체 데이터 Pre 테스트에 성공했습니다.", null);
-    }
-
-    @PostMapping("/api/v1/batch")
-    public ApiResponse<Void> savePokemonDataBatch() {
-        log.info("---- 포켓몬 전체 데이터 Batch 테스트 시작");
-        dataBatchInsertService.setDataBatch();
-        log.info("---- 포켓몬 전체 데이터 Batch 테스트 종료");
-
-        return new ApiResponse<>("포켓몬 전체 데이터 Batch 테스트에 성공했습니다.", null);
     }
 }
