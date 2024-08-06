@@ -21,28 +21,37 @@ import org.springframework.stereotype.Component;
 @Component
 public class DtoParser {
 
-    private static final String NOT_EXIST_KOREAN_NAME = "존재하지 않습니다";
+    private static final String NOT_EXIST_IN_API_RESPONSE = "존재하지 않습니다";
 
     public PokemonAbility getPokemonAbility(AbilityResponse abilityResponse) {
-        String koName = getKoName(abilityResponse.names());
+        String koName = getPossibleName(abilityResponse.names());
 
         List<FlavorTextEntry> flavorTextEntries = abilityResponse.flavor_text_entries();
-        String description = getLatestVersionDescription(flavorTextEntries).replace("\n", " ");
+        String description = getPossibleDescription(flavorTextEntries).replace("\n", " ");
 
         return new PokemonAbility(abilityResponse.name(), koName, description, "자세한 설명입니다.");
     }
 
-    private static String getLatestVersionDescription(List<FlavorTextEntry> flavorTextEntries) {
+    private String getPossibleDescription(List<FlavorTextEntry> flavorTextEntries) {
         return flavorTextEntries.stream()
                 .sorted(Comparator.comparingInt(flavorTextEntries::indexOf).reversed())
                 .filter(entry -> entry.language().isKorean())
                 .map(FlavorTextEntry::flavor_text)
                 .findFirst()
-                .orElse(NOT_EXIST_KOREAN_NAME);
+                .orElseGet(() -> getEnDescription(flavorTextEntries));
+    }
+
+    private String getEnDescription(List<FlavorTextEntry> flavorTextEntries) {
+        return flavorTextEntries.stream()
+                .sorted(Comparator.comparingInt(flavorTextEntries::indexOf).reversed())
+                .filter(entry -> entry.language().isEnglish())
+                .map(FlavorTextEntry::flavor_text)
+                .findFirst()
+                .orElse(NOT_EXIST_IN_API_RESPONSE);
     }
 
     public PokemonType getPokemonType(TypeResponse typeResponse, String typeImage) {
-        String koName = getKoName(typeResponse.names());
+        String koName = getPossibleName(typeResponse.names());
 
         return new PokemonType(typeResponse.name(), koName, typeImage);
     }
@@ -72,16 +81,24 @@ public class DtoParser {
     }
 
     public PokemonNameAndDexNumber getPokemonNameAndDexNumber(PokemonSpeciesResponse pokemonSpeciesResponse) {
-        String koName = getKoName(pokemonSpeciesResponse.names());
+        String koName = getPossibleName(pokemonSpeciesResponse.names());
 
         return new PokemonNameAndDexNumber(pokemonSpeciesResponse.id(), koName);
     }
 
-    private static String getKoName(List<Name> names) {
+    private String getPossibleName(List<Name> names) {
         return names.stream()
                 .filter(Name::isKorean)
                 .map(Name::name)
                 .findFirst()
-                .orElse(NOT_EXIST_KOREAN_NAME);
+                .orElseGet(() -> getEnName(names));
+    }
+
+    private String getEnName(List<Name> names) {
+        return names.stream()
+                .filter(Name::isEnglish)
+                .map(Name::name)
+                .findFirst()
+                .orElse(NOT_EXIST_IN_API_RESPONSE);
     }
 }
