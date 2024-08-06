@@ -73,7 +73,7 @@
 
         <TextView
             android:id="@+id/tv_type_choice_name"
-            style="@style/type_choice_title_text"
+            style="@style/TextAppearance.Poke.TitleBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

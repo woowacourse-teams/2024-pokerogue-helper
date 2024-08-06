@@ -13,7 +13,8 @@ import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.stringOf
 
-class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : RecyclerView.ViewHolder(binding.root) {
+class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun bind(typeMatchedResult: MatchedTypesUiModel) {
         val context = binding.root.context
 
@@ -28,17 +29,22 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) : Recycle
         typeMatchedResult: MatchedTypesUiModel,
         context: Context,
     ) {
-        binding.tvResultSelectedTypeName.text =
+        val typeName = typeMatchedResult.selectedType.typeName
+        val typeNameTail =
             if (typeMatchedResult.isMyType) {
-                context.getString(
-                    R.string.type_item_result_subject_mine,
-                    typeMatchedResult.selectedType.typeName,
-                )
+                context.getString(R.string.type_item_result_subject_mine)
             } else {
-                context.getString(
-                    R.string.type_item_result_subject_opponent,
-                    typeMatchedResult.selectedType.typeName,
-                )
+                context.getString(R.string.type_item_result_subject_opponent)
+            }
+
+        binding.tvResultSelectedTypeName.text =
+            buildSpannedString {
+                inSpans(
+                    StyleSpan(Typeface.BOLD),
+                ) {
+                    append(typeName)
+                }
+                append(typeNameTail)
             }
     }
 

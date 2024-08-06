@@ -80,10 +80,10 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
     }
 
     companion object {
-        private const val NAVIGATE_TO_POKE_ROGUE = "To_PokeRogue_Game"
-        private const val NAVIGATE_TO_TYPE = "To_Type"
-        private const val NAVIGATE_TO_DEX = "To_Dex"
-        private const val NAVIGATE_TO_ABILITY = "To_Ability"
-        private const val NAVIGATE_TO_TIP = "To_Tip"
+        private const val NAVIGATE_TO_POKE_ROGUE = "Nav_Logo_To_PokeRogue_Game"
+        private const val NAVIGATE_TO_TYPE = "Nav_Type"
+        private const val NAVIGATE_TO_DEX = "Nav_Dex"
+        private const val NAVIGATE_TO_ABILITY = "Nav_Ability"
+        private const val NAVIGATE_TO_TIP = "Nav_Tip"
     }
 }
