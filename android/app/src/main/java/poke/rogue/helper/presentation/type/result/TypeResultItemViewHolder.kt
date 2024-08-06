@@ -24,7 +24,7 @@ class TypeResultItemViewHolder(
                 hasBackGround = false,
                 nameSize = 14.dp,
                 iconSize = 18.dp,
-                marginBetweenTypes = 8f,
+                spacingBetweenTypes = 8f,
             )
     }
 }

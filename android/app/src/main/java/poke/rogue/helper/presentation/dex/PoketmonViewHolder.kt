@@ -37,7 +37,7 @@ class PoketmonViewHolder(
                 nameSize = 8.dp,
                 iconSize = 18.dp,
                 spacing = 0.dp,
-                marginBetweenTypes = 0f,
+                spacingBetweenTypes = 0f,
             )
     }
 }

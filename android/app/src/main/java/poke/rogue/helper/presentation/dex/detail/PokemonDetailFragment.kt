@@ -141,7 +141,7 @@ class PokemonDetailFragment :
                 nameSize = 17.dp,
                 iconSize = 30.dp,
                 hasBackGround = true,
-                marginBetweenTypes = 10f,
+                spacingBetweenTypes = 10f,
             )
 
         fun bundleOf(
