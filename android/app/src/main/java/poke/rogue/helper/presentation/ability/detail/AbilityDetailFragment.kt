@@ -25,23 +25,23 @@ class AbilityDetailFragment :
         AbilityDetailViewModel.factory(
             DefaultAbilityRepository(
                 remoteAbilityDataSource =
-                RemoteAbilityDataSource(
-                    abilityService = ServiceModule.abilityService(),
-                ),
+                    RemoteAbilityDataSource(
+                        abilityService = ServiceModule.abilityService(),
+                    ),
             ),
         )
     }
 
     private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter(viewModel) }
 
+    override val toolbar: Toolbar?
+        get() = binding.toolbarAbilityDetail
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val id = arguments?.getLong(ABILITY_ID) ?: INVALID_ABILITY_ID
         viewModel.updateAbilityDetail(id)
     }
-
-    override val toolbar: Toolbar?
-        get() = binding.toolbarAbilityDetail
 
     override fun onViewCreated(
         view: View,

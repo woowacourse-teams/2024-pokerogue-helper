@@ -10,24 +10,26 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
+import org.junit.jupiter.api.DisplayName
 import org.junit.runner.RunWith
 import poke.rogue.helper.R
 
 @RunWith(AndroidJUnit4::class)
 class HomeActivityTest {
-
     @get:Rule
     val activityRule = ActivityScenarioRule(HomeActivity::class.java)
 
     @Test
-    fun 앱이_실행되면_포켓로그_로고가_보인다() {
+    @DisplayName("앱이 실행되면 포켓로그 로고가 보인다")
+    fun test1() {
         // then
         onView(withId(R.id.iv_home_logo))
             .check(matches(isDisplayed()))
     }
 
     @Test
-    fun 화면_회전_시에도_포켓로그_로고가_보인다() {
+    @DisplayName("화면 회전 시에도 포켓로그 로고가 보인다")
+    fun test2() {
         // when
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -40,7 +42,8 @@ class HomeActivityTest {
     }
 
     @Test
-    fun 화면_회전_시에도_타입_메뉴_버튼이_보인다() {
+    @DisplayName("화면 회전 시에도 타입 메뉴 버튼이 보인다")
+    fun test3() {
         // when
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -53,7 +56,8 @@ class HomeActivityTest {
     }
 
     @Test
-    fun 화면_회전_시에도_꿀팁_메뉴_버튼이_보인다() {
+    @DisplayName("화면 회전 시에도 꿀팁 메뉴 버튼이 보인다")
+    fun test4() {
         // when
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
