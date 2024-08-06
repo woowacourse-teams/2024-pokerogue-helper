@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DtoParser {
 
-    private static final String NOT_EXIST_NAME = "존재하지 않습니다";
+    private static final String NOT_EXIST_IN_API_RESPONSE = "존재하지 않습니다";
 
     public PokemonAbility getPokemonAbility(AbilityResponse abilityResponse) {
         String koName = getKoName(abilityResponse.names());
@@ -38,7 +38,7 @@ public class DtoParser {
                 .filter(entry -> entry.language().isEnglish())
                 .map(FlavorTextEntry::flavor_text)
                 .findFirst()
-                .orElse(NOT_EXIST_NAME);
+                .orElse(NOT_EXIST_IN_API_RESPONSE);
 
         return flavorTextEntries.stream()
                 .sorted(Comparator.comparingInt(flavorTextEntries::indexOf).reversed())
@@ -89,7 +89,7 @@ public class DtoParser {
                 .filter(Name::isEnglish)
                 .map(Name::name)
                 .findFirst()
-                .orElse(NOT_EXIST_NAME);
+                .orElse(NOT_EXIST_IN_API_RESPONSE);
 
         return names.stream()
                 .filter(Name::isKorean)
