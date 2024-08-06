@@ -32,7 +32,7 @@ public class DtoParser {
         return new PokemonAbility(abilityResponse.name(), koName, description, "자세한 설명입니다.");
     }
 
-    private static String getPossibleDescription(List<FlavorTextEntry> flavorTextEntries) {
+    private String getPossibleDescription(List<FlavorTextEntry> flavorTextEntries) {
         return flavorTextEntries.stream()
                 .sorted(Comparator.comparingInt(flavorTextEntries::indexOf).reversed())
                 .filter(entry -> entry.language().isKorean())
@@ -86,7 +86,7 @@ public class DtoParser {
         return new PokemonNameAndDexNumber(pokemonSpeciesResponse.id(), koName);
     }
 
-    private static String getPossibleName(List<Name> names) {
+    private String getPossibleName(List<Name> names) {
         return names.stream()
                 .filter(Name::isKorean)
                 .map(Name::name)
@@ -94,7 +94,7 @@ public class DtoParser {
                 .orElseGet(() -> getEnName(names));
     }
 
-    private static String getEnName(List<Name> names) {
+    private String getEnName(List<Name> names) {
         return names.stream()
                 .filter(Name::isEnglish)
                 .map(Name::name)
