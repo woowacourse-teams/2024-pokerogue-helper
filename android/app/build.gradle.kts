@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.android.junit5)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics.plugin)
 }
 
 val properties =
@@ -17,7 +19,20 @@ val properties =
 android {
     namespace = libs.versions.applicationId.get()
     compileSdk = libs.versions.compileSdk.get().toInt()
-
+    signingConfigs {
+        getByName("debug") {
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+            storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
+            storePassword = "android"
+        }
+//        create("release") {
+//            keyAlias = properties.getProperty("KEY_ALIAS")
+//            keyPassword = properties.getProperty("KEY_PASSWORD")
+//            storeFile = file("${project.rootDir.absolutePath}/keystore/poke_key.jks")
+//            storePassword = properties.getProperty("STORE_PASSWORD")
+//        }
+    }
     defaultConfig {
         applicationId = libs.versions.applicationId.get()
         minSdk = libs.versions.minSdk.get().toInt()
@@ -36,14 +51,55 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".dev"
+            signingConfig = signingConfigs.getByName("debug")
+        }
+
+        create("beta") {
+            initWith(getByName("debug"))
+            versionNameSuffix = "-beta"
+            applicationIdSuffix = ".beta"
+            signingConfig = signingConfigs.getByName("debug")
+//            firebaseAppDistribution {
+//                artifactType = "APK"
+//                releaseNotesFile = "firebase/releaseNote.txt"
+//                groupsFile = "firebase/testers.txt"
+//            }
+        }
+
+        create("alpha") {
+            initWith(getByName("debug"))
+            versionNameSuffix = "-alpha"
+            applicationIdSuffix = ".alpha"
+            signingConfig = signingConfigs.getByName("debug")
+//            firebaseAppDistribution {
+//                artifactType = "APK"
+//                releaseNotesFile = "firebase/releaseNote.txt"
+//                groupsFile = "firebase/testers.txt"
+//            }
+        }
+
         release {
             isMinifyEnabled = false
+//            isShrinkResources = true
+//            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
         }
     }
+
+    productFlavors {
+//        demo {
+//            applicationIdSuffix = ".demo"
+//            versionNameSuffix = "-demo"
+//        }
+//        full {
+//        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -71,6 +127,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":remote")) // TODO remove this
     implementation(project(":local"))
+    implementation(project(":analytics"))
     testImplementation(project(":testing"))
     androidTestImplementation(project(":testing"))
     // androidx
@@ -91,6 +148,9 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
     implementation(libs.splash.screen)
+    // google & firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase)
     // android test
     androidTestImplementation(libs.bundles.android.test)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)

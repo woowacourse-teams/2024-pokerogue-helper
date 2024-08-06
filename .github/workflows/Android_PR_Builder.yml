@@ -30,14 +30,24 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      #    - name: Create Google-Services.json
-      #      env:
-      #        GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
-      #      run: |
-      #        touch ./app/google-services.json
-      #        echo $GOOGLE_SERVICES >> ./app/google-services.json
-      #        cat ./app/google-services.json
-      #
+      - name: Create Google-Services.json
+        env:
+          GOOGLE_SERVICES_ALPHA: ${{ secrets.GOOGLE_SERVICES_ALPHA }}
+          GOOGLE_SERVICES_BETA: ${{ secrets.GOOGLE_SERVICES_BETA }}
+          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+        run: |
+          touch ./app/src/debug/google-services.json
+          touch ./app/src/alpha/google-services.json
+          touch ./app/src/beta/google-services.json
+          mkdir ./app/src/release
+          touch ./app/src/release/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/debug/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
+          echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
+          echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
+        working-directory: android
+
+
       - name: Create Local Properties
         run: touch local.properties
         working-directory: android
@@ -77,6 +87,6 @@ jobs:
         run: ./gradlew test
         working-directory: android
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
         working-directory: android

@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.ability
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -9,13 +10,12 @@ import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
-import poke.rogue.helper.presentation.base.BindingFragment
+import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class AbilityFragment :
-    BindingFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
+class AbilityFragment : ToolbarFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
     private val viewModel by viewModels<AbilityViewModel> {
         AbilityViewModel.factory(
             DefaultAbilityRepository.instance(),
@@ -24,12 +24,14 @@ class AbilityFragment :
 
     private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
 
+    override val toolbar: Toolbar?
+        get() = binding.toolbarAbility
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
