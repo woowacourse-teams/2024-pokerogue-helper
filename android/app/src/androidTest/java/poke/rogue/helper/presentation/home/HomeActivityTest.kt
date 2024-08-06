@@ -19,7 +19,14 @@ class HomeActivityTest {
     val activityRule = ActivityScenarioRule(HomeActivity::class.java)
 
     @Test
-    fun 화면_회전_시에도_로고가_표시된다() {
+    fun 앱이_실행되면_포켓로그_로고가_보인다() {
+        // then
+        onView(withId(R.id.iv_home_logo))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun 화면_회전_시에도_포켓로그_로고가_보인다() {
         // when
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
