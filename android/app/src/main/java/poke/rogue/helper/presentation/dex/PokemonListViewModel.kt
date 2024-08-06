@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -37,6 +38,12 @@ class PokemonListViewModel(
                 SharingStarted.WhileSubscribed(5000L),
                 emptyList(),
             )
+
+    val isLoading: StateFlow<Boolean> = uiState.map { it.isEmpty() }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000L),
+        true,
+    )
 
     private val _navigateToDetailEvent = MutableSharedFlow<Long>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
