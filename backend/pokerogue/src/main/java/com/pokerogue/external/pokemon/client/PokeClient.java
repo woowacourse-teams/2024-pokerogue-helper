@@ -112,7 +112,7 @@ public class PokeClient {
 
     public byte[] getPixelImage(String id) {
         return restClient.get()
-                .uri("BASE_IMAGE_URL/{id}.png", id)
+                .uri(BASE_IMAGE_URL + "/{id}.png", id)
                 .accept(MediaType.IMAGE_PNG)
                 .retrieve()
                 .body(byte[].class);
@@ -120,7 +120,7 @@ public class PokeClient {
 
     public byte[] getArtImage(String id) {
         return restClient.get()
-                .uri("BASE_IMAGE_URL/other/official-artwork/{id}.png", id)
+                .uri(BASE_IMAGE_URL + "/other/official-artwork/{id}.png", id)
                 .accept(MediaType.IMAGE_PNG)
                 .retrieve()
                 .body(byte[].class);
