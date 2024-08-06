@@ -6,8 +6,8 @@
     <string name="type_opponent_type_title">상대 타입</string>
     <string name="type_result_title">상성 결과</string>
     <string name="type_result_sub_title">* 1배는 표시되지 않습니다.</string>
-    <string name="type_item_result_subject_mine">%s이(가)</string>
-    <string name="type_item_result_subject_opponent">%s에게</string>
+    <string name="type_item_result_subject_mine">&#160;이(가)</string>
+    <string name="type_item_result_subject_opponent">&#160;에게</string>
     <string name="type_item_result_tail">&#160;타입</string>
     <string name="type_result_strong">강한</string>
     <string name="type_result_weak">약한</string>

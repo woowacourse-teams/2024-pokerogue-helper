@@ -83,7 +83,7 @@
 
                 <TextView
                     android:id="@+id/tv_type_my_type_title"
-                    style="@style/type_choice_title_text"
+                    style="@style/TextAppearance.Poke.TitleLargeBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/type_my_type_title"
@@ -129,7 +129,7 @@
 
                 <TextView
                     android:id="@+id/tv_type_opponent_type_title"
-                    style="@style/type_choice_title_text"
+                    style="@style/TextAppearance.Poke.TitleLargeBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -190,7 +190,7 @@
 
                 <TextView
                     android:id="@+id/tv_type_result_title"
-                    style="@style/type_choice_title_text"
+                    style="@style/TextAppearance.Poke.TitleLargeBold"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
