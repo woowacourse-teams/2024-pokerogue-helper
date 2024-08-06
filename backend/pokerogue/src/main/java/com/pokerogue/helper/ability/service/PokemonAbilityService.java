@@ -63,8 +63,8 @@ public class PokemonAbilityService {
                         pokemon -> pokemon,
                         pokemon -> pokemon.getPokemonTypeMappings().stream()
                                 .map(PokemonTypeMapping::getPokemonType)
-                                .toList(),
-                        (p1, p2) -> p1
+                                .distinct()
+                                .toList()
                 ));
     }
 
