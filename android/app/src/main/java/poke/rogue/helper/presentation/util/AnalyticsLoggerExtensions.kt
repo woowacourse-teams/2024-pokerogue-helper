@@ -24,7 +24,11 @@ fun <T : ViewDataBinding> AnalyticsLogger.logScreenView(clz: Class<T>) {
                 listOf(
                     AnalyticsEvent.Param(
                         AnalyticsEvent.ParamKeys.SCREEN_NAME,
-                        clz.componentType.name,
+                        clz.simpleName // ex: FragmentPokemonDetailBindingImpl -> Screen_PokemonDetail
+                            .replace("BindingImpl", "")
+                            .replace("Fragment", "Screen_")
+                            .replace("Activity", "Screen_")
+                            .replace("Binding", ""),
                     ),
                 ),
         ),
