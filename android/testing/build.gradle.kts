@@ -19,6 +19,12 @@ android {
                 "proguard-rules.pro",
             )
         }
+        create("alpha") {
+            initWith(getByName("debug"))
+        }
+        create("beta") {
+            initWith(getByName("debug"))
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -36,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":analytics"))
     implementation(project(":data"))
     implementation(project(":stringmatcher"))
     implementation(libs.kotlin.coroutines.core)

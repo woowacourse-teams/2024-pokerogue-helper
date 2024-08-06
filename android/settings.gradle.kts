@@ -20,6 +20,7 @@ include(":data")
 include(":remote")
 include(":local")
 include(":testing")
+include(":analytics")
 // libraries
 include(":stringmatcher")
  

@@ -1,7 +1,9 @@
 package poke.rogue.helper.presentation.util.context
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
 import android.os.Build
 import android.view.View
@@ -94,4 +96,8 @@ fun Context.deviceSize(): IntArray {
     val size = Point()
     display?.getSize(size)
     return intArrayOf(size.x, size.y)
+}
+
+inline fun <reified T : Activity> Context.startActivity(argusBuilder: Intent.() -> Unit) {
+    startActivity(Intent(this, T::class.java).apply(argusBuilder))
 }

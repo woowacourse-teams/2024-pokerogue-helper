@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.ability.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -10,8 +11,8 @@ import poke.rogue.helper.data.datasource.RemoteAbilityDataSource
 import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityDetailBinding
 import poke.rogue.helper.presentation.ability.model.toUi
-import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
+import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
@@ -19,7 +20,7 @@ import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.remote.ServiceModule
 
 class AbilityDetailFragment :
-    BindingFragment<FragmentAbilityDetailBinding>(R.layout.fragment_ability_detail) {
+    ToolbarFragment<FragmentAbilityDetailBinding>(R.layout.fragment_ability_detail) {
     private val viewModel by viewModels<AbilityDetailViewModel> {
         AbilityDetailViewModel.factory(
             DefaultAbilityRepository(
@@ -38,6 +39,9 @@ class AbilityDetailFragment :
         val id = arguments?.getLong(ABILITY_ID) ?: INVALID_ABILITY_ID
         viewModel.updateAbilityDetail(id)
     }
+
+    override val toolbar: Toolbar?
+        get() = binding.toolbarAbilityDetail
 
     override fun onViewCreated(
         view: View,

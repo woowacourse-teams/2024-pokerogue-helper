@@ -27,9 +27,12 @@
                 android:layout_height="wrap_content"
                 tools:context=".presentation.home.HomeActivity">
 
-                <include
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar_home"
-                    layout="@layout/toolbar" />
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/CustomToolbarStyle" />
 
                 <ImageView
                     android:id="@+id/iv_home_land_logo"
