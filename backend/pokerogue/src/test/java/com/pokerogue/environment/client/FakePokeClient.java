@@ -131,6 +131,11 @@ public class FakePokeClient extends PokeClient {
         return null;
     }
 
+    @Override
+    public byte[] getArtImage(String id) {
+        return null;
+    }
+
     private <T> T deserializeTestFixture(Class<T> dtoType, String path) {
         try {
             return mapper.readValue(new File(path), dtoType);
