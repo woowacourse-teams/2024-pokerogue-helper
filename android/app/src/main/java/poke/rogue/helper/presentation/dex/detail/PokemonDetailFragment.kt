@@ -19,7 +19,7 @@ import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
-import poke.rogue.helper.presentation.util.view.setCroppedImage
+import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.remote.ServiceModule
 
 class PokemonDetailFragment :
@@ -112,7 +112,7 @@ class PokemonDetailFragment :
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
-            ivPokemon.setCroppedImage(pokemonDetail.pokemon.imageUrl)
+            ivPokemonDetailPokemon.setImage(pokemonDetail.pokemon.imageUrl)
 
             tvPokemonDetailPokemonName.text =
                 stringOf(
