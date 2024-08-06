@@ -257,7 +257,7 @@ public class DataSettingService {
         PokemonNameAndDexNumber pokemonNameAndDexNumber = getPokemonNameAndDexNumber(species);
         String image;
         try {
-            image = s3Service.postImageToS3(pokeClient.getDotImage(id));
+            image = s3Service.postImageToS3(pokeClient.getPixelImage(id));
         } catch (HttpClientErrorException e1) {
             try {
                 image = s3Service.postImageToS3(pokeClient.getArtImage(id));

@@ -108,7 +108,7 @@ public class PokeClient {
                 .body(TypeMatchingResponse.class);
     }
 
-    public byte[] getDotImage(String id) {
+    public byte[] getPixelImage(String id) {
         return restClient.get()
                 .uri("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png", id)
                 .accept(MediaType.IMAGE_PNG)

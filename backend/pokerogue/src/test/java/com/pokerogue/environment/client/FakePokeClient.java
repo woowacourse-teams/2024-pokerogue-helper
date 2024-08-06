@@ -127,7 +127,7 @@ public class FakePokeClient extends PokeClient {
     }
 
     @Override
-    public byte[] getDotImage(String id) {
+    public byte[] getPixelImage(String id) {
         return null;
     }
 
