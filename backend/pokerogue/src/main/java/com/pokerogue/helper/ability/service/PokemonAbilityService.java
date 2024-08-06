@@ -40,6 +40,7 @@ public class PokemonAbilityService {
 
         List<Pokemon> pokemons = ability.getPokemonAbilityMappings().stream()
                 .map(PokemonAbilityMapping::getPokemon)
+                .distinct()
                 .sorted(Comparator.comparingLong(Pokemon::getId))
                 .toList();
         List<SameAbilityPokemonResponse> pokemonResponses = toSameAbilityPokemonResponses(pokemons);
@@ -52,7 +53,8 @@ public class PokemonAbilityService {
 
         return pokemons.stream()
                 .map(pokemon -> SameAbilityPokemonResponse.from(pokemon,
-                        toPokemonTypeResponse(pokemonTypeMappings.get(pokemon)))).toList();
+                        toPokemonTypeResponse(pokemonTypeMappings.get(pokemon))))
+                .toList();
     }
 
     private Map<Pokemon, List<PokemonType>> mapTypeWithPokemons(List<Pokemon> pokemons) {
@@ -61,8 +63,7 @@ public class PokemonAbilityService {
                         pokemon -> pokemon,
                         pokemon -> pokemon.getPokemonTypeMappings().stream()
                                 .map(PokemonTypeMapping::getPokemonType)
-                                .toList(),
-                        (p1, p2) -> p1
+                                .toList()
                 ));
     }
 
