@@ -1,6 +1,6 @@
 [nginx-limit-req]
 ignoreip = 39.125.9.126/32 39.125.9.64/30 218.39.176.142/32
-maxtry = 3
+maxtry = 2
 enabled=true
 chain=DOCKER-USER
 port=http,https
