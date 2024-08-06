@@ -24,7 +24,7 @@ class PokemonTypesAdapter(private val context: Context, private val viewGroup: V
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             1f,
                         ).apply {
-                            setMargins(horizontalMargin = config.spacingBetweenTypes.toInt())
+                            setMargins(horizontalMargin = config.spacingBetweenTypes)
                         }
                     TypeChip.setTypeUiConfiguration(
                         view = this,

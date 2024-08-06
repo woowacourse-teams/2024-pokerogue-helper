@@ -90,6 +90,6 @@ class TypeChip
             val layoutGravity: Int = Gravity.CENTER,
             val spacing: Int = 7.dp,
             val hasBackGround: Boolean = false,
-            val spacingBetweenTypes: Float = 8f,
+            val spacingBetweenTypes: Int = 8.dp,
         )
     }

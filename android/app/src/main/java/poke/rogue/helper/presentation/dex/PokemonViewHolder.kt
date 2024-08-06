@@ -37,7 +37,7 @@ class PokemonViewHolder(
                 nameSize = 8.dp,
                 iconSize = 18.dp,
                 spacing = 0.dp,
-                spacingBetweenTypes = 0f,
+                spacingBetweenTypes = 0.dp,
             )
     }
 }
