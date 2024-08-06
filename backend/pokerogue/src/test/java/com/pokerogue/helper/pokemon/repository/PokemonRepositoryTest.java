@@ -40,6 +40,17 @@ class PokemonRepositoryTest extends RepositoryTest {
     }
 
     @Test
+    @DisplayName("모든 포켓몬을 id 순으로 조회한다.")
+    void findAllWithTypesOrderById() {
+        List<Pokemon> pokemons = pokemonRepository.findAllWithTypes();
+
+        List<Long> pokemonIds = pokemons.stream()
+                .map(Pokemon::getId)
+                .toList();
+        assertThat(pokemonIds).isSortedAccordingTo(Long::compare);
+    }
+
+    @Test
     @DisplayName("id로 포켓몬 상세 정보를 타입, 특성 정보와 함께 조회한다.")
     void findDetailsById() {
         Pokemon pokemon = pokemonRepository.findAllWithTypes().get(0);
