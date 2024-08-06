@@ -23,6 +23,7 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
             select p from Pokemon p
             join fetch p.pokemonTypeMappings ptm
             join fetch ptm.pokemonType
+            order by p.id
             """)
     List<Pokemon> findAllWithTypes();
 }
