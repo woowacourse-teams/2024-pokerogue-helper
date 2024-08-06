@@ -12,7 +12,6 @@ import poke.rogue.helper.R
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
-import poke.rogue.helper.presentation.util.context.toast
 
 abstract class ToolbarActivity<T : ViewDataBinding>(
     @LayoutRes layoutRes: Int,
@@ -40,11 +39,11 @@ abstract class ToolbarActivity<T : ViewDataBinding>(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_toolbar_pokerogue -> {
-                navigateToPokeRogue()
+                navigateToLink(R.string.home_pokerogue_url)
             }
 
             R.id.item_toolbar_feedback -> {
-                toast(R.string.toolbar_feedback)
+                navigateToLink(R.string.home_pokeroque_surey_url)
             }
 
             android.R.id.home -> {
@@ -54,10 +53,10 @@ abstract class ToolbarActivity<T : ViewDataBinding>(
         return true
     }
 
-    private fun navigateToPokeRogue() {
+    private fun navigateToLink(urlRes: Int) {
         Intent(
             Intent.ACTION_VIEW,
-            Uri.parse(stringOf(R.string.home_pokerogue_url)),
+            Uri.parse(stringOf(urlRes)),
         ).also { startActivity(it) }
     }
 }

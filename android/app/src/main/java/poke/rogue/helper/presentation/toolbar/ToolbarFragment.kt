@@ -34,18 +34,20 @@ abstract class ToolbarFragment<T : ViewDataBinding>(
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.item_toolbar_pokerogue -> {
-                        navigateToPokeRogue()
+                        navigateToLink(R.string.home_pokerogue_url)
                     }
 
-                    R.id.item_toolbar_feedback -> {}
+                    R.id.item_toolbar_feedback -> {
+                        navigateToLink(R.string.home_pokeroque_surey_url)
+                    }
                 }
                 true
             }
         }
     }
 
-    private fun navigateToPokeRogue() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.home_pokerogue_url)))
+    private fun navigateToLink(urlRes: Int) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(urlRes)))
         startActivity(intent)
     }
 }
