@@ -23,8 +23,8 @@ class PokemonDetailViewModel(private val dexRepository: DexRepository) :
     val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
 
     fun updatePokemonDetail(pokemonId: Long?) {
+        requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch {
-            requireNotNull(pokemonId) { "Pokemon ID must not be null" }
             _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
         }
     }
