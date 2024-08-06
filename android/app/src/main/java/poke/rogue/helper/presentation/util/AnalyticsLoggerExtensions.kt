@@ -1,6 +1,6 @@
 package poke.rogue.helper.presentation.util
 
-import androidx.fragment.app.Fragment
+import androidx.databinding.ViewDataBinding
 import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.analytics.AnalyticsLogger
 
@@ -16,7 +16,7 @@ fun AnalyticsLogger.logClickEvent(eventName: String) {
     )
 }
 
-inline fun <reified T : Fragment> AnalyticsLogger.logScreenView() {
+fun <T : ViewDataBinding> AnalyticsLogger.logScreenView(clz: Class<T>) {
     logEvent(
         AnalyticsEvent(
             type = AnalyticsEvent.Types.SCREEN_VIEW,
@@ -24,7 +24,7 @@ inline fun <reified T : Fragment> AnalyticsLogger.logScreenView() {
                 listOf(
                     AnalyticsEvent.Param(
                         AnalyticsEvent.ParamKeys.SCREEN_NAME,
-                        T::class.java.simpleName,
+                        clz.componentType.name,
                     ),
                 ),
         ),
