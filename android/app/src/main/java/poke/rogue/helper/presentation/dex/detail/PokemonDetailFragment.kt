@@ -28,12 +28,8 @@ class PokemonDetailFragment :
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
     private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
-    private val pokemonTypesAdapter by lazy {
-        PokemonTypesAdapter(
-            context = requireContext(),
-            viewGroup = binding.layoutPokemonDetailPokemonTypes,
-        )
-    }
+    private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
+
     override val toolbar: Toolbar
         get() = binding.toolbarDexDetail
 
@@ -49,7 +45,11 @@ class PokemonDetailFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
+        pokemonTypesAdapter =
+            PokemonTypesAdapter(
+                context = requireContext(),
+                viewGroup = binding.layoutPokemonDetailPokemonTypes,
+            )
         initAdapter()
         initObservers()
     }
