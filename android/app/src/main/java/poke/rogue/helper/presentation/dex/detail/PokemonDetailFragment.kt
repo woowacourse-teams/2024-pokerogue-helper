@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.dex.detail
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -9,9 +10,9 @@ import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
-import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
+import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
@@ -21,7 +22,7 @@ import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 
 class PokemonDetailFragment :
-    BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
+    ToolbarFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
@@ -33,6 +34,8 @@ class PokemonDetailFragment :
             viewGroup = binding.layoutPokemonDetailPokemonTypes,
         )
     }
+    override val toolbar: Toolbar
+        get() = binding.toolbarDexDetail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
