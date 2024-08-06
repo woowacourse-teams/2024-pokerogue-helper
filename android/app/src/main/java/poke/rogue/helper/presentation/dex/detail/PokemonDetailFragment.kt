@@ -12,7 +12,8 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
-import poke.rogue.helper.presentation.dex.PokemonTypeAdapter
+import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
+import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -35,8 +36,13 @@ class PokemonDetailFragment :
         )
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
-    private val pokemonTypeAdapter by lazy { PokemonTypeAdapter() }
     private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
+    private val pokemonTypesAdapter by lazy {
+        PokemonTypesAdapter(
+            context = requireContext(),
+            viewGroup = binding.layoutPokemonDetailPokemonTypes,
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +63,6 @@ class PokemonDetailFragment :
 
     private fun initAdapter() {
         with(binding) {
-            rvTypeList.adapter = pokemonTypeAdapter
             rvStatList.adapter = pokemonStatAdapter
             rvPokemonAbilities.adapter = abilityAdapter
             rvPokemonAbilities.addItemDecoration(
@@ -109,8 +114,9 @@ class PokemonDetailFragment :
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
-            ivPokemon.setImage(pokemonDetail.pokemon.imageUrl)
-            tvPokemonName.text =
+            ivPokemonDetailPokemon.setImage(pokemonDetail.pokemon.imageUrl)
+
+            tvPokemonDetailPokemonName.text =
                 stringOf(
                     R.string.dex_poke_name_format,
                     pokemonDetail.pokemon.name,
@@ -118,9 +124,13 @@ class PokemonDetailFragment :
                 )
         }
 
-        pokemonTypeAdapter.submitList(pokemonDetail.pokemon.types)
         pokemonStatAdapter.submitList(pokemonDetail.stats)
         abilityAdapter.submitList(pokemonDetail.abilities)
+        pokemonTypesAdapter.addTypes(
+            types = pokemonDetail.pokemon.types,
+            config = typesUiConfig,
+            spacingBetweenTypes = 10.dp,
+        )
     }
 
     companion object {
@@ -128,6 +138,13 @@ class PokemonDetailFragment :
         private const val CONTAINER_ID = "containerId"
         private const val INVALID_CONTAINER_ID = -1
         val TAG: String = PokemonDetailFragment::class.java.simpleName
+
+        private val typesUiConfig =
+            TypeChip.PokemonTypeViewConfiguration(
+                nameSize = 17.dp,
+                iconSize = 30.dp,
+                hasBackGround = true,
+            )
 
         fun bundleOf(
             pokemonId: Long,

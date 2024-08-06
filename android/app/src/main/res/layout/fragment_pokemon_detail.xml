@@ -23,63 +23,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/iv_pokemon_surface"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="9dp"
-                    android:paddingHorizontal="30dp"
-                    android:paddingBottom="10dp"
+                <ImageView
+                    android:id="@+id/iv_pokemon_detail_pokemon"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:translationZ="10dp"
+                    app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_pokemon_name"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.66"
+                    tools:src="@tools:sample/avatars" />
 
-                    <ImageView
-                        android:id="@+id/iv_pokemon"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:scaleType="center"
-                        android:translationZ="10dp"
-                        app:layout_constraintDimensionRatio="1"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/iv_pokemon_surface"
-                        app:layout_constraintWidth_percent="0.66"
-                        tools:src="@tools:sample/avatars" />
+                <TextView
+                    android:id="@+id/tv_pokemon_detail_pokemon_name"
+                    style="@style/TextAppearance.Poke.TitleBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@id/layout_pokemon_detail_pokemon_types"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_pokemon_detail_pokemon"
+                    tools:text="이상해씨 #1" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/iv_pokemon">
-
-                        <TextView
-                            android:id="@+id/tv_pokemon_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/pretendard_semibold"
-                            android:paddingEnd="5dp"
-                            android:textSize="24sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:text="리자몽 #1" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_type_list"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_name"
-                            app:layout_constraintStart_toEndOf="@id/tv_pokemon_name"
-                            app:layout_constraintTop_toTopOf="@id/tv_pokemon_name"
-                            tools:itemCount="2"
-                            tools:listitem="@layout/item_type_right_name" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/layout_pokemon_detail_pokemon_types"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@id/rv_pokemon_abilities"
+                    app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
+                    app:layout_constraintStart_toStartOf="@+id/iv_pokemon_detail_pokemon"
+                    app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_pokemon_name"
+                    tools:layout_height="50dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_pokemon_abilities"
@@ -91,7 +70,7 @@
                     app:layout_constraintBottom_toTopOf="@id/layout_stats"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_pokemon_surface"
+                    app:layout_constraintTop_toBottomOf="@id/layout_pokemon_detail_pokemon_types"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_ability_title">
 
