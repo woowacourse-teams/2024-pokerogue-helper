@@ -126,7 +126,8 @@ class PokemonDetailFragment :
         abilityAdapter.submitList(pokemonDetail.abilities)
         pokemonTypesAdapter.addTypes(
             types = pokemonDetail.pokemon.types,
-            config = TypesUiConfig,
+            config = typesUiConfig,
+            spacingBetweenTypes = 10.dp,
         )
     }
 
@@ -136,12 +137,11 @@ class PokemonDetailFragment :
         private const val INVALID_CONTAINER_ID = -1
         val TAG: String = PokemonDetailFragment::class.java.simpleName
 
-        private val TypesUiConfig =
+        private val typesUiConfig =
             TypeChip.PokemonTypeViewConfiguration(
                 nameSize = 17.dp,
                 iconSize = 30.dp,
                 hasBackGround = true,
-                spacingBetweenTypes = 10.dp,
             )
 
         fun bundleOf(

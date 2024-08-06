@@ -86,10 +86,9 @@ class TypeChip
         data class PokemonTypeViewConfiguration(
             val nameSize: Int = 8.dp,
             val iconSize: Int = 18.dp,
-            val layoutWidth: Int = ViewGroup.LayoutParams.MATCH_PARENT,
-            val layoutGravity: Int = Gravity.CENTER,
+            val width: Int = ViewGroup.LayoutParams.MATCH_PARENT,
+            val contentAlignment: Int = Gravity.CENTER,
             val spacing: Int = 7.dp,
             val hasBackGround: Boolean = false,
-            val spacingBetweenTypes: Int = 8.dp,
         )
     }

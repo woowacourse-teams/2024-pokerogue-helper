@@ -19,29 +19,29 @@
         android:id="@+id/layout_item_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="@{viewConfiguration.layoutGravity}"
+        android:gravity="@{viewConfiguration.contentAlignment}"
         android:orientation="horizontal"
         android:paddingHorizontal="6dp"
         android:paddingVertical="4dp"
         app:backgroundColorRes="@{viewConfiguration.hasBackGround ? type.typeColor : 0 }"
-        tools:layout_width="match_parent"
+        tools:background="@color/poke_fairy"
         tools:gravity="center"
-        tools:background="@color/poke_fairy">
+        tools:layout_width="match_parent">
 
         <ImageView
             android:id="@+id/iv_type_name_icon"
+            layoutHeight="@{viewConfiguration.iconSize}"
+            layoutWidth="@{viewConfiguration.iconSize}"
             android:layout_width="18dp"
             android:layout_height="18dp"
-            layoutWidth="@{viewConfiguration.iconSize}"
-            layoutHeight="@{viewConfiguration.iconSize}"
             android:layout_gravity="center_vertical"
             app:imageRes="@{type.typeIconResId}"
             tools:src="@drawable/icon_type_fairy" />
 
         <Space
             android:id="@+id/space_type"
-            android:layout_width="wrap_content"
             layoutWidth="@{viewConfiguration.spacing}"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
@@ -49,8 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{type.typeName}"
-            android:textSize="@{viewConfiguration.nameSize}"
             android:textAppearance="@style/TextAppearance.Poke.CaptionLarge"
+            android:textSize="@{viewConfiguration.nameSize}"
             tools:text="페어리" />
     </LinearLayout>
 </layout>

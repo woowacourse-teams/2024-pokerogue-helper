@@ -19,12 +19,11 @@ class TypeResultItemViewHolder(
     companion object {
         private val typeViewConfiguration =
             TypeChip.PokemonTypeViewConfiguration(
-                layoutWidth = ViewGroup.LayoutParams.MATCH_PARENT,
-                layoutGravity = Gravity.START,
+                width = ViewGroup.LayoutParams.MATCH_PARENT,
+                contentAlignment = Gravity.START,
                 hasBackGround = false,
                 nameSize = 14.dp,
                 iconSize = 18.dp,
-                spacingBetweenTypes = 8.dp,
             )
     }
 }

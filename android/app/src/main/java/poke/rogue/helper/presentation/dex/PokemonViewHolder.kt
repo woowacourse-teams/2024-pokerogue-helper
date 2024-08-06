@@ -27,6 +27,7 @@ class PokemonViewHolder(
         pokemonTypesAdapter.addTypes(
             types = pokemonUiModel.types,
             config = typesUiConfig,
+            spacingBetweenTypes = 0.dp,
         )
     }
 
@@ -37,7 +38,6 @@ class PokemonViewHolder(
                 nameSize = 8.dp,
                 iconSize = 18.dp,
                 spacing = 0.dp,
-                spacingBetweenTypes = 0.dp,
             )
     }
 }
