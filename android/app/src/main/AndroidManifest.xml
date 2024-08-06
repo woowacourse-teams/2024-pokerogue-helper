@@ -37,8 +37,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ability.AbilityActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:exported="false" />
     </application>
 
 </manifest>
