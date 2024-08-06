@@ -14,10 +14,8 @@ import poke.rogue.helper.presentation.dex.PokemonActivity
 import poke.rogue.helper.presentation.tip.TipActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.TypeActivity
-import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringOf
-import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
