@@ -14,6 +14,8 @@ import org.springframework.web.client.RestClient;
 @Component
 public class PokeClient {
 
+    private static final String BASE_IMAGE_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon";
+
     private final RestClient restClient;
 
     public PokeClient(RestClient restClient) {
@@ -110,7 +112,7 @@ public class PokeClient {
 
     public byte[] getPixelImage(String id) {
         return restClient.get()
-                .uri("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png", id)
+                .uri("BASE_IMAGE_URL/{id}.png", id)
                 .accept(MediaType.IMAGE_PNG)
                 .retrieve()
                 .body(byte[].class);
@@ -118,7 +120,7 @@ public class PokeClient {
 
     public byte[] getArtImage(String id) {
         return restClient.get()
-                .uri("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png", id)
+                .uri("BASE_IMAGE_URL/other/official-artwork/{id}.png", id)
                 .accept(MediaType.IMAGE_PNG)
                 .retrieve()
                 .body(byte[].class);
