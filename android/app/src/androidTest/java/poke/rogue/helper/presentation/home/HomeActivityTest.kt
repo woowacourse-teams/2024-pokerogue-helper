@@ -1,6 +1,7 @@
 package poke.rogue.helper.presentation.home
 
 import android.content.pm.ActivityInfo
+import androidx.test.espresso.Espresso.onIdle
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -31,6 +32,7 @@ class HomeActivityTest {
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
+        onIdle()
 
         // then
         onView(withId(R.id.iv_home_land_logo))
@@ -43,6 +45,7 @@ class HomeActivityTest {
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
+        onIdle()
 
         // then
         onView(withId(R.id.cv_home_land_type))
@@ -55,6 +58,7 @@ class HomeActivityTest {
         activityRule.scenario.onActivity { activity ->
             activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
+        onIdle()
 
         // then
         onView(withId(R.id.cv_home_land_tip))
