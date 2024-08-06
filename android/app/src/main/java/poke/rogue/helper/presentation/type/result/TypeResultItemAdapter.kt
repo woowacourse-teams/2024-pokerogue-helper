@@ -3,7 +3,7 @@ package poke.rogue.helper.presentation.type.result
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import poke.rogue.helper.databinding.ItemTypeNameBinding
+import poke.rogue.helper.databinding.ItemTypeBinding
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 
 class TypeResultItemAdapter(private val types: List<TypeUiModel> = listOf()) :
@@ -12,7 +12,7 @@ class TypeResultItemAdapter(private val types: List<TypeUiModel> = listOf()) :
         parent: ViewGroup,
         viewType: Int,
     ): TypeResultItemViewHolder {
-        val view = ItemTypeNameBinding.inflate(LayoutInflater.from(parent.context))
+        val view = ItemTypeBinding.inflate(LayoutInflater.from(parent.context))
         return TypeResultItemViewHolder(view)
     }
 

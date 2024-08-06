@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@id/vw_result_divider"
             app:spanCount="4"
             tools:itemCount="3"
-            tools:listitem="@layout/item_type_name" />
+            tools:listitem="@layout/item_type" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
