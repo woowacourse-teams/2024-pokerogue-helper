@@ -15,17 +15,12 @@ class PokemonTypeMatchingRepositoryTest extends RepositoryTest {
     @Autowired
     private PokemonTypeMatchingRepository pokemonTypeMatchingRepository;
 
+    @Test
+    @DisplayName("포켓몬의 모든 타입 매칭 정보를 조회한다.")
+    void findAll() {
+        List<PokemonTypeMatching> pokemonTypeMatchings = pokemonTypeMatchingRepository.findAll();
 
-    /*
-        PR: [BE-REFACTOR] Pokemon 쿼리 개선 #133
-        위 PR이 먼저 머지되어야 실행 가능한 테스트라서 주석 처리함.
-     */
-//    @Test
-//    @DisplayName("포켓몬의 모든 타입 매칭 정보를 조회한다.")
-//    void findAll() {
-//        List<PokemonTypeMatching> pokemonTypeMatchings = pokemonTypeMatchingRepository.findAll();
-//
-//        Assertions.assertThat(pokemonTypeMatchings).isNotEmpty();
-//    }
+        Assertions.assertThat(pokemonTypeMatchings).isNotEmpty();
+    }
 
 }
