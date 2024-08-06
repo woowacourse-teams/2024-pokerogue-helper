@@ -53,7 +53,7 @@ class AbilityDetailFragment :
     }
 
     private fun initAdapter() {
-        val decoration = GridSpacingItemDecoration(3, 15.dp, false)
+        val decoration = GridSpacingItemDecoration(3, 15.dp, true)
         binding.rvAbilityDetailPokemon.adapter = adapter
         binding.rvAbilityDetailPokemon.addItemDecoration(decoration)
     }
