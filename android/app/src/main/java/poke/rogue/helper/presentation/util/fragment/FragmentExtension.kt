@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.util.fragment
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -80,3 +82,7 @@ val Fragment.viewLifeCycle
 
 val Fragment.viewLifeCycleScope
     get() = viewLifecycleOwner.lifecycleScope
+
+inline fun <reified T : Activity> Fragment.startActivity(argusBuilder: Intent.() -> Unit) {
+    startActivity(Intent(requireContext(), T::class.java).apply(argusBuilder))
+}
