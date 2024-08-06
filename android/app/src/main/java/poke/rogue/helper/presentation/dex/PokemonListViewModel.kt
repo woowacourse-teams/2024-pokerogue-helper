@@ -39,11 +39,12 @@ class PokemonListViewModel(
                 emptyList(),
             )
 
-    val isLoading: StateFlow<Boolean> = uiState.map { it.isEmpty() }.stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(5000L),
-        true,
-    )
+    val isLoading: StateFlow<Boolean> =
+        uiState.map { it.isEmpty() }.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000L),
+            true,
+        )
 
     private val _navigateToDetailEvent = MutableSharedFlow<Long>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
