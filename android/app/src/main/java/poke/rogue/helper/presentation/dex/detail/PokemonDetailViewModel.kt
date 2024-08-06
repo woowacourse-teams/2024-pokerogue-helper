@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import poke.rogue.helper.data.repository.PokemonDetailRepository
+import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 
-class PokemonDetailViewModel(private val pokemonDetailRepository: PokemonDetailRepository) :
+class PokemonDetailViewModel(private val dexRepository: DexRepository) :
     ViewModel(),
     PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
@@ -23,7 +23,7 @@ class PokemonDetailViewModel(private val pokemonDetailRepository: PokemonDetailR
 
     suspend fun updatePokemonDetail(pokemonId: Long?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
-        _uiState.value = pokemonDetailRepository.pokemonDetail(pokemonId).toUi()
+        _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
     }
 
     override fun navigateToAbilityDetail(abilityId: Long) {
@@ -33,7 +33,7 @@ class PokemonDetailViewModel(private val pokemonDetailRepository: PokemonDetailR
     }
 
     companion object {
-        fun factory(pokemonDetailRepository: PokemonDetailRepository): ViewModelProvider.Factory =
-            BaseViewModelFactory { PokemonDetailViewModel(pokemonDetailRepository) }
+        fun factory(dexRepository: DexRepository): ViewModelProvider.Factory =
+            BaseViewModelFactory { PokemonDetailViewModel(dexRepository) }
     }
 }

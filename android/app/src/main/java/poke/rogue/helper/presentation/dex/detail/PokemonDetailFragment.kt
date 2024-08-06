@@ -6,8 +6,7 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
-import poke.rogue.helper.data.datasource.RemotePokemonDetailDataSource
-import poke.rogue.helper.data.repository.DefaultPokemonDetailRepository
+import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.BindingFragment
@@ -20,20 +19,11 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
-import poke.rogue.helper.remote.ServiceModule
 
 class PokemonDetailFragment :
     BindingFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
-        PokemonDetailViewModel.factory(
-            pokemonDetailRepository =
-                DefaultPokemonDetailRepository(
-                    remotePokemonDetailDataSource =
-                        RemotePokemonDetailDataSource(
-                            pokeDexService = ServiceModule.pokeDexService(),
-                        ),
-                ),
-        )
+        PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
     private val abilityAdapter by lazy { AbilityTitleAdapter(viewModel) }
     private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
