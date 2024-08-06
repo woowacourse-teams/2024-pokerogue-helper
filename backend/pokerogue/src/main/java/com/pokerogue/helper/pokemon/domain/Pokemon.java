@@ -98,4 +98,21 @@ public class Pokemon {
         this.totalStats = totalStats;
         this.image = image;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Pokemon pokemon = (Pokemon) o;
+        return Objects.equals(name, pokemon.name);
+    }
 }
