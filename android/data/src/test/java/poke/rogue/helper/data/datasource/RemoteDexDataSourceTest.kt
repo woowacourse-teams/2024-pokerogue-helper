@@ -10,9 +10,9 @@ import poke.rogue.helper.data.model.fixture.pokemons
 import poke.rogue.helper.remote.dto.response.BaseResponse
 import poke.rogue.helper.remote.service.PokeDexService
 
-class RemotePokemonListDataSourceTest {
+class RemoteDexDataSourceTest {
     private val mockService = mockk<PokeDexService>()
-    private val dataSource = RemotePokemonListDataSource(mockService)
+    private val dataSource = RemoteDexDataSource(mockService)
 
     @Test
     fun `모든 포켓몬 목록을 불러온다`() =

@@ -8,22 +8,22 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.data.model.Pokemon
-import poke.rogue.helper.data.repository.PokemonListRepository
+import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
-import poke.rogue.helper.testing.data.repository.FakePokemonListRepository
+import poke.rogue.helper.testing.data.repository.FakeDexRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
 class PokemonListViewModelTest {
-    private lateinit var repository: PokemonListRepository
+    private lateinit var repository: DexRepository
     private lateinit var viewModel: PokemonListViewModel
 
     @BeforeEach
     fun setUp() {
-        repository = FakePokemonListRepository()
+        repository = FakeDexRepository()
     }
 
     @Test
@@ -39,7 +39,7 @@ class PokemonListViewModelTest {
                 }
 
             // then
-            pokemons shouldBe FakePokemonListRepository.POKEMONS.map(Pokemon::toUi)
+            pokemons shouldBe FakeDexRepository.POKEMONS.map(Pokemon::toUi)
         }
 
     @Test

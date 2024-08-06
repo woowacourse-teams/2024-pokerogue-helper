@@ -15,13 +15,13 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.data.model.Pokemon
-import poke.rogue.helper.data.repository.PokemonListRepository
+import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 
 class PokemonListViewModel(
-    private val pokemonListRepository: PokemonListRepository,
+    private val pokemonListRepository: DexRepository,
 ) : ViewModel(), PokemonListNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
 
@@ -61,7 +61,7 @@ class PokemonListViewModel(
     }
 
     companion object {
-        fun factory(pokemonListRepository: PokemonListRepository): ViewModelProvider.Factory =
+        fun factory(pokemonListRepository: DexRepository): ViewModelProvider.Factory =
             BaseViewModelFactory {
                 PokemonListViewModel(pokemonListRepository)
             }

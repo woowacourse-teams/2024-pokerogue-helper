@@ -1,20 +1,23 @@
 package poke.rogue.helper.data.datasource
 
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.remote.ServiceModule
 import poke.rogue.helper.remote.service.PokeDexService
 
-class RemotePokemonListDataSource(
+class RemoteDexDataSource(
     private val pokeDexService: PokeDexService,
 ) {
     suspend fun pokemons(): List<Pokemon> = pokeDexService.pokemons().data.toData()
 
-    companion object {
-        private var instance: RemotePokemonListDataSource? = null
+    suspend fun pokemon(id: Long): PokemonDetail = pokeDexService.pokemon(id).data.toData(id)
 
-        fun instance(): RemotePokemonListDataSource {
-            return instance ?: RemotePokemonListDataSource(ServiceModule.pokeDexService()).also {
+    companion object {
+        private var instance: RemoteDexDataSource? = null
+
+        fun instance(): RemoteDexDataSource {
+            return instance ?: RemoteDexDataSource(ServiceModule.pokeDexService()).also {
                 instance = it
             }
         }
