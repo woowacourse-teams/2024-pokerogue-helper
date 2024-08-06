@@ -24,7 +24,7 @@
             cropImageUrl="@{pokemon.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="10dp"
+            android:paddingTop="10dp"
             app:layout_constraintBottom_toTopOf="@id/tv_item_poketmon_poketmon_name"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintWidth_percent="0.75"
+            app:layout_constraintWidth_percent="0.60"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView

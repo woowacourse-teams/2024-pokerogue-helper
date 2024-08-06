@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.LinearLayout
+import androidx.core.view.setMargins
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
 
@@ -23,7 +24,7 @@ class PokemonTypesAdapter(private val context: Context, private val viewGroup: V
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             1f,
                         ).apply {
-                            setMargins(restMargin = config.spacingBetweenTypes.toInt(), bottomMargin = 0)
+                            setMargins(horizontalMargin = config.spacingBetweenTypes.toInt())
                         }
                     TypeChip.setTypeUiConfiguration(
                         view = this,
@@ -37,8 +38,9 @@ class PokemonTypesAdapter(private val context: Context, private val viewGroup: V
 }
 
 private fun MarginLayoutParams.setMargins(
-    bottomMargin: Int,
-    restMargin: Int,
+    topMargin: Int = 0,
+    bottomMargin: Int = 0,
+    horizontalMargin: Int,
 ) {
-    setMargins(restMargin, restMargin, restMargin, bottomMargin)
+    setMargins(horizontalMargin, topMargin, horizontalMargin, bottomMargin)
 }
