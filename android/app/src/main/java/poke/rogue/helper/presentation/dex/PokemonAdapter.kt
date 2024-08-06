@@ -8,12 +8,12 @@ import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class PokemonAdapter(private val onClickPokeMonItem: PokemonListNavigateHandler) :
-    ListAdapter<PokemonUiModel, PoketmonViewHolder>(poketmonComparator) {
+    ListAdapter<PokemonUiModel, PokemonViewHolder>(poketmonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): PoketmonViewHolder =
-        PoketmonViewHolder(
+    ): PokemonViewHolder =
+        PokemonViewHolder(
             ItemPokemonListPokemonBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -23,7 +23,7 @@ class PokemonAdapter(private val onClickPokeMonItem: PokemonListNavigateHandler)
         )
 
     override fun onBindViewHolder(
-        viewHolder: PoketmonViewHolder,
+        viewHolder: PokemonViewHolder,
         position: Int,
     ) {
         viewHolder.bind(getItem(position))

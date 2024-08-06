@@ -51,7 +51,7 @@ class PokemonListFragment :
             addItemDecoration(
                 GridSpacingItemDecoration(
                     spanCount = spanCount,
-                    spacing = 7.dp,
+                    spacing = 9.dp,
                     includeEdge = false,
                 ),
             )
