@@ -7,7 +7,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
-import poke.rogue.helper.data.datasource.RemoteAbilityDataSource
 import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
@@ -15,17 +14,11 @@ import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
-import poke.rogue.helper.remote.ServiceModule
 
 class AbilityFragment : ToolbarFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
     private val viewModel by viewModels<AbilityViewModel> {
         AbilityViewModel.factory(
-            DefaultAbilityRepository(
-                remoteAbilityDataSource =
-                    RemoteAbilityDataSource(
-                        abilityService = ServiceModule.abilityService(),
-                    ),
-            ),
+            DefaultAbilityRepository.instance(),
         )
     }
 

@@ -7,12 +7,31 @@ import poke.rogue.helper.stringmatcher.has
 
 class DefaultAbilityRepository(private val remoteAbilityDataSource: RemoteAbilityDataSource) :
     AbilityRepository {
-    override suspend fun abilities(): List<Ability> = remoteAbilityDataSource.abilities()
+    private var cachedAbilities: List<Ability> = emptyList()
 
-    override suspend fun abilities(query: String): List<Ability> =
-        remoteAbilityDataSource.abilities().filter { ability ->
-            ability.title.has(query)
+    override suspend fun abilities(): List<Ability> {
+        if (cachedAbilities.isEmpty()) {
+            cachedAbilities = remoteAbilityDataSource.abilities()
         }
+        return cachedAbilities
+    }
+
+    override suspend fun abilities(query: String): List<Ability> {
+        if (query.isBlank()) {
+            return abilities()
+        }
+        return abilities().filter { it.title.has(query) }
+    }
 
     override suspend fun abilityDetail(id: Long): AbilityDetail = remoteAbilityDataSource.abilityDetail(id)
+
+    companion object {
+        private var instance: AbilityRepository? = null
+
+        fun instance(): AbilityRepository {
+            return instance ?: DefaultAbilityRepository(RemoteAbilityDataSource.instance()).also {
+                instance = it
+            }
+        }
+    }
 }
