@@ -12,6 +12,8 @@ import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
 import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
 import com.pokerogue.helper.type.domain.PokemonType;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -38,9 +40,9 @@ public class PokemonAbilityService {
 
         List<Pokemon> pokemons = ability.getPokemonAbilityMappings().stream()
                 .map(PokemonAbilityMapping::getPokemon)
+                .sorted(Comparator.comparingLong(Pokemon::getId))
                 .toList();
-        List<SameAbilityPokemonResponse> pokemonResponses = toSameAbilityPokemonResponses(
-                pokemons);
+        List<SameAbilityPokemonResponse> pokemonResponses = toSameAbilityPokemonResponses(pokemons);
 
         return new PokemonAbilityWithPokemonsResponse(ability.getKoName(), ability.getDescription(), pokemonResponses);
     }
