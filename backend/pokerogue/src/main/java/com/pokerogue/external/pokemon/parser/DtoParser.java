@@ -41,7 +41,7 @@ public class DtoParser {
                 .orElseGet(() -> getEnDescription(flavorTextEntries));
     }
 
-    private static String getEnDescription(List<FlavorTextEntry> flavorTextEntries) {
+    private String getEnDescription(List<FlavorTextEntry> flavorTextEntries) {
         return flavorTextEntries.stream()
                 .sorted(Comparator.comparingInt(flavorTextEntries::indexOf).reversed())
                 .filter(entry -> entry.language().isEnglish())
