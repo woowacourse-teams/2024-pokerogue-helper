@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.ability.detail
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -99,11 +98,7 @@ class AbilityDetailFragment :
         repeatOnStarted {
             viewModel.navigateToHomeEvent.collect {
                 if (it) {
-                    requireActivity().finishAffinity()
-                    startActivity<HomeActivity> {
-                        HomeActivity.intent(requireContext())
-                            .apply { flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT }
-                    }
+                    startActivity(HomeActivity.intent(requireContext()))
                 }
             }
         }
