@@ -6,6 +6,7 @@ import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
+import poke.rogue.helper.presentation.dex.model.statUi
 import poke.rogue.helper.presentation.dex.model.toPokemonDetailUi
 import poke.rogue.helper.presentation.dex.model.toUi
 
@@ -24,7 +25,7 @@ sealed interface PokemonDetailUiState {
 fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
     PokemonDetailUiState.Success(
         pokemon = pokemon.toUi(),
-        stats = stats.map(Stat::toUi),
+        stats = stats.map(Stat::statUi),
         abilities = abilities.map(Ability::toPokemonDetailUi),
         height = height,
         weight = weight,

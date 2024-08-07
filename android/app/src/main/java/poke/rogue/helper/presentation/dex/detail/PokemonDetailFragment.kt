@@ -1,8 +1,14 @@
 package poke.rogue.helper.presentation.dex.detail
 
+import android.graphics.drawable.ClipDrawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.ProgressBar
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -14,6 +20,7 @@ import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -145,6 +152,32 @@ class PokemonDetailFragment :
         ) = Bundle().apply {
             putLong(POKEMON_ID, pokemonId)
             putInt(CONTAINER_ID, containerId)
+        }
+
+        @JvmStatic
+        @BindingAdapter("progressColor"/*, "cornerRadius"*/)
+        fun ProgressBar.setProgressDrawable(color: Int/*, cornerRadius: Float*/) {
+            val background =
+                GradientDrawable().apply {
+                    setColor(context.colorOf(R.color.poke_white))
+                    cornerRadius = resources.getDimension(R.dimen.progress_bar_corner_radius)
+                }
+
+            val progress =
+                GradientDrawable().apply {
+                    setColor(context.colorOf(color))
+                    cornerRadius = resources.getDimension(R.dimen.progress_bar_corner_radius)
+                }
+
+            val clipDrawable = ClipDrawable(progress, Gravity.START, ClipDrawable.HORIZONTAL)
+
+            val layerDrawable =
+                LayerDrawable(arrayOf(background, clipDrawable)).apply {
+                    setId(0, android.R.id.background)
+                    setId(1, android.R.id.progress)
+                }
+
+            progressDrawable = layerDrawable
         }
     }
 }

@@ -32,4 +32,14 @@
     <color name="poke_fairy">#E08CE0</color>
     <color name="item_pokemon_background_gray">#242627</color>
 
+    <!--    stats -->
+    <color name="stat_hp">#D63A45</color>
+    <color name="stat_attack">#FDA832</color>
+    <color name="stat_defense">#F4C53D</color>
+    <color name="stat_special_attack">#4AA0DD</color>
+    <color name="stat_special_defense">#3568FF</color>
+    <color name="stat_speed">#5FC253</color>
+    <color name="stat_total">#964DF0</color>
+
+
 </resources>
