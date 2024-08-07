@@ -63,6 +63,7 @@ public class PokemonAbilityService {
                         pokemon -> pokemon,
                         pokemon -> pokemon.getPokemonTypeMappings().stream()
                                 .map(PokemonTypeMapping::getPokemonType)
+                                .sorted(Comparator.comparingLong(PokemonType::getId))
                                 .distinct()
                                 .toList()
                 ));
