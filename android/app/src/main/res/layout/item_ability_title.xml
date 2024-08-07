@@ -25,7 +25,7 @@
         android:backgroundTint="@color/poke_grey_80"
         android:gravity="center"
         android:text="@{ability.name}"
-        android:onClick="@{()->onClickAbility.navigateToAbilityDetail(ability.id)}"
+        onSingleClick="@{()->onClickAbility.navigateToAbilityDetail(ability.id)}"
         android:textAppearance="@style/TextAppearance.Poke.TitleBold"
         android:textColor="@color/poke_white"
         app:layout_constraintBottom_toBottomOf="parent"

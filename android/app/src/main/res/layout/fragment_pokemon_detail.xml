@@ -68,6 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:textSize="28sp"
                     app:layout_constraintBottom_toTopOf="@id/layout_pokemon_detail_pokemon_types"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -76,8 +77,9 @@
 
                 <LinearLayout
                     android:id="@+id/layout_pokemon_detail_pokemon_types"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toTopOf="@id/rv_pokemon_abilities"
                     app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
