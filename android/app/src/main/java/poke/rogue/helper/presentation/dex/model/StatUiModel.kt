@@ -14,27 +14,7 @@ data class StatUiModel(
         get() = amount * 100 / limit
 }
 
-fun Stat.toUi(): StatUiModel =
-    StatUiModel(
-        name = statNameUi(),
-        amount = amount,
-        limit = if (name == "total") MAX_PROGRESS_FOR_TOTAL_STAT else MAX_PROGRESS_FOR_SINGLE_STAT,
-        color = R.color.stat_hp,
-    )
-
-private fun Stat.statNameUi() =
-    when (name) {
-        "hp" -> "HP"
-        "attack" -> "공격"
-        "defense" -> "방어"
-        "specialAttack" -> "특수공격"
-        "specialDefense" -> "특수방어"
-        "speed" -> "스피드"
-        "total" -> "총합"
-        else -> name
-    }
-
-fun Stat.statUi() =
+fun Stat.toUi() =
     when (name) {
         "hp" ->
             StatUiModel(
@@ -94,9 +74,6 @@ fun Stat.statUi() =
 
         else -> error("Unknown stat name: $name")
     }
-
-private const val MAX_PROGRESS_FOR_SINGLE_STAT = 300
-private const val MAX_PROGRESS_FOR_TOTAL_STAT = 1_000
 
 private const val MAX_HP_LIMIT = 255
 private const val MAX_ATTACK_LIMIT = 190
