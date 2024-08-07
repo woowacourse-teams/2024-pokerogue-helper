@@ -184,6 +184,7 @@ dependencies {
     implementation(project(":remote")) // TODO remove this
     implementation(project(":local"))
     implementation(project(":analytics"))
+    implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(project(":testing"))
     androidTestImplementation(project(":testing"))
     // androidx
@@ -199,6 +200,10 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.flexbox)
     // third party
+    // TODO remove this
+    implementation(libs.bundles.retrofit)
+    // TODO remove this
+    implementation(platform(libs.okhttp.bom))
     implementation(libs.timber)
     implementation(libs.coil.core)
     implementation(libs.glide)
