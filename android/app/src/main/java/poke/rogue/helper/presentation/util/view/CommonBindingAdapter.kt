@@ -1,11 +1,16 @@
 package poke.rogue.helper.presentation.util.view
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import poke.rogue.helper.R
 import poke.rogue.helper.presentation.util.context.colorOf
 
@@ -25,6 +30,43 @@ fun ImageView.setCroppedImage(imageUrl: String?) {
         .placeholder(R.drawable.icon_poke)
         .error(R.drawable.icon_error)
         .transform(CropMarginTransformation())
+        .into(this)
+}
+
+@BindingAdapter("imageUrl", "progressIndicator")
+fun ImageView.loadImageWithProgress(
+    url: String?,
+    progressIndicator: CircularProgressIndicator,
+) {
+    progressIndicator.visibility = View.VISIBLE
+
+    Glide.with(context)
+        .load(url)
+        .listener(
+            object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    progressIndicator.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    progressIndicator.visibility = View.GONE
+                    return false
+                }
+            },
+        )
+//        .error(R.drawable.icon_error)
         .into(this)
 }
 

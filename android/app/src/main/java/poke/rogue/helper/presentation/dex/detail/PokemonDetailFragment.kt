@@ -19,7 +19,7 @@ import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
-import poke.rogue.helper.presentation.util.view.setImage
+import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 
 class PokemonDetailFragment :
     ToolbarFragment<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail) {
@@ -107,7 +107,8 @@ class PokemonDetailFragment :
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
-            ivPokemonDetailPokemon.setImage(pokemonDetail.pokemon.imageUrl)
+//            ivPokemonDetailPokemon.setImage(pokemonDetail.pokemon.imageUrl)
+            ivPokemonDetailPokemon.loadImageWithProgress(pokemonDetail.pokemon.imageUrl, progressIndicatorPokemonDetail)
 
             tvPokemonDetailPokemonName.text =
                 stringOf(
