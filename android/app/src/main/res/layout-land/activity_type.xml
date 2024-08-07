@@ -213,6 +213,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
 
         <ImageView
+            android:id="@+id/iv_no_selection"
             visible="@{vm.typeSelectionStates.allEmpty}"
             android:layout_width="0dp"
             android:layout_height="0dp"
