@@ -3,7 +3,7 @@ applicationId = "poke.rogue.helper"
 compileSdk = "34"
 minSdk = "26"
 targetSdk = "34"
-appVersion = "0.1.0"
+appVersion = "0.1.1"
 versionCode = "00100"
 agp = "8.3.2"
 
