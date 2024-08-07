@@ -8,6 +8,10 @@
         <variable
             name="vm"
             type="poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel" />
+
+        <variable
+            name="eventHandler"
+            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +27,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/dex_title_name" />
+            app:title="@string/dex_title_name">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:padding="12dp"
+                android:onClick="@{() -> eventHandler.navigateToHome()}"
+                android:src="@drawable/icon_home" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <ScrollView
             android:layout_width="match_parent"

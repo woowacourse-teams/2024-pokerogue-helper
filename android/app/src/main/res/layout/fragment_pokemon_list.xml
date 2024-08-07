@@ -8,7 +8,6 @@
         <variable
             name="viewModel"
             type="poke.rogue.helper.presentation.dex.PokemonListViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
                 android:theme="@style/CustomSearchViewTheme"
+                android:imeOptions="actionSearch|flagNoExtractUi|flagNoFullscreen"
                 app:onQueryTextChange="@{viewModel}"
                 app:queryHint="@string/dex_list_search_pokemon_hint" />
 

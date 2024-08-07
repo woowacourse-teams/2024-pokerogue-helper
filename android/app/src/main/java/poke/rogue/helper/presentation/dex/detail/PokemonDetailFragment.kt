@@ -19,6 +19,7 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
+import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.context.colorOf
@@ -52,6 +53,7 @@ class PokemonDetailFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
+        binding.eventHandler = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         pokemonTypesAdapter =
             PokemonTypesAdapter(
@@ -79,6 +81,7 @@ class PokemonDetailFragment :
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigateToAbilityDetailEvent()
+        observeNavigateToHomeEvent()
     }
 
     private fun observePokemonDetailUi() {
@@ -108,6 +111,16 @@ class PokemonDetailFragment :
                         args = AbilityDetailFragment.bundleOf(abilityId, containerId),
                     )
                     addToBackStack(TAG)
+                }
+            }
+        }
+    }
+
+    private fun observeNavigateToHomeEvent() {
+        repeatOnStarted {
+            viewModel.navigateToHomeEvent.collect {
+                if (it) {
+                    startActivity(HomeActivity.intent(requireContext()))
                 }
             }
         }

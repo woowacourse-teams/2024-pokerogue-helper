@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.dex.detail
 
-fun interface PokemonDetailNavigateHandler {
+interface PokemonDetailNavigateHandler {
     fun navigateToAbilityDetail(abilityId: Long)
+
+    fun navigateToHome()
 }
