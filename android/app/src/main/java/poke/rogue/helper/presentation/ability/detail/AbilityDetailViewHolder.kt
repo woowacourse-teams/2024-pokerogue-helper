@@ -2,7 +2,6 @@ package poke.rogue.helper.presentation.ability.detail
 
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemAbilityDetailPokemonBinding
-import poke.rogue.helper.presentation.ability.detail.type.AbilityDetailTypeAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
@@ -16,10 +15,6 @@ class AbilityDetailViewHolder(
     fun bind(pokemonUiModel: PokemonUiModel) {
         binding.pokemon = pokemonUiModel
         binding.uiEventHandler = onClickPokemonItem
-        binding.rvPokeTypeList.adapter =
-            AbilityDetailTypeAdapter().apply {
-                submitList(pokemonUiModel.types)
-            }
 
         val typesLayout = binding.layoutAbilityDetailPokemonTypes
 

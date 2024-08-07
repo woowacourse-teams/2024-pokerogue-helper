@@ -61,17 +61,5 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_ability_detail_pokemon_name"
             tools:layout_height="50dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_poke_type_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/tv_ability_detail_pokemon_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_type_right_name" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
