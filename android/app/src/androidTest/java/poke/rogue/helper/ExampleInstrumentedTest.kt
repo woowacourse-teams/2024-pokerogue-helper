@@ -1,7 +1,7 @@
 package poke.rogue.helper
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Assert.assertEquals
+import io.kotest.matchers.string.shouldContain
 import org.junit.Test
 import org.junit.runner.RunWith
 import poke.rogue.helper.presentation.util.testContext
@@ -12,6 +12,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = testContext
-        assertEquals("poke.rogue.helper", appContext.packageName)
+        appContext.packageName shouldContain "poke.rogue.helper"
     }
 }

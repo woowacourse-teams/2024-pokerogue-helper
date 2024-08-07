@@ -38,11 +38,6 @@ class PokemonDetailFragment :
         viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
-    }
-
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
