@@ -10,7 +10,7 @@ import kotlin.time.TimeSource
 @BindingAdapter("onSingleClick", "duration", requireAll = false)
 fun View.setOnSingleClickListener(
     listener: View.OnClickListener?,
-    duration: Int
+    duration: Int,
 ) {
     val throttleDuration = if (duration == 0) 500 else duration
     val singleEventHandler: SingleEventHandler =
