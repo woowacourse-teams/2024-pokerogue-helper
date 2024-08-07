@@ -8,13 +8,11 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.ConnectException
 
-// TODO 수정 : analyticsLogger() -> analyticsLogger
-abstract class ErrorViewModel(logger: AnalyticsLogger = analyticsLogger()) : ViewModel() {
+abstract class ErrorViewModel(logger: AnalyticsLogger) : ViewModel() {
     private val _commonErrorEvent = MutableSharedFlow<ErrorEvent>()
     val commonErrorEvent: SharedFlow<ErrorEvent> = _commonErrorEvent.asSharedFlow()
 

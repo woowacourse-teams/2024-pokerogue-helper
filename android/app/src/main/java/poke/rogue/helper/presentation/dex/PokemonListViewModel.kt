@@ -15,6 +15,8 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
@@ -24,7 +26,8 @@ import poke.rogue.helper.presentation.error.ErrorViewModel
 
 class PokemonListViewModel(
     private val pokemonListRepository: DexRepository,
-) : ErrorViewModel(), PokemonListNavigateHandler, PokemonQueryHandler {
+    logger: AnalyticsLogger = analyticsLogger(),
+) : ErrorViewModel(logger), PokemonListNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)

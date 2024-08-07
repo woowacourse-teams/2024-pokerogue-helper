@@ -15,14 +15,18 @@ import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.presentation.ability.model.AbilityUiModel
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.error.ErrorViewModel
 
-class AbilityViewModel(private val abilityRepository: AbilityRepository) :
-    ErrorViewModel(),
+class AbilityViewModel(
+    private val abilityRepository: AbilityRepository,
+    logger: AnalyticsLogger = analyticsLogger(),
+) : ErrorViewModel(logger),
     AbilityQueryHandler,
     AbilityUiEventHandler {
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()

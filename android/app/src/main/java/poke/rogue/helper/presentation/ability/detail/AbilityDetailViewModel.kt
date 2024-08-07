@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.presentation.ability.model.AbilityDetailUiModel
 import poke.rogue.helper.presentation.ability.model.toUi
@@ -16,7 +18,8 @@ import poke.rogue.helper.presentation.error.ErrorViewModel
 
 class AbilityDetailViewModel(
     private val abilityRepository: AbilityRepository,
-) : ErrorViewModel(), AbilityDetailUiEventHandler {
+    logger: AnalyticsLogger = analyticsLogger(),
+) : ErrorViewModel(logger), AbilityDetailUiEventHandler {
     private val _abilityDetail =
         MutableStateFlow<AbilityDetailUiState<AbilityDetailUiModel>>(AbilityDetailUiState.Loading)
     val abilityDetail = _abilityDetail.asStateFlow()
