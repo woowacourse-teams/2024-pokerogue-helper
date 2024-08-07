@@ -107,7 +107,6 @@ class PokemonDetailFragment :
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
-//            ivPokemonDetailPokemon.setImage(pokemonDetail.pokemon.imageUrl)
             ivPokemonDetailPokemon.loadImageWithProgress(pokemonDetail.pokemon.imageUrl, progressIndicatorPokemonDetail)
 
             tvPokemonDetailPokemonName.text =

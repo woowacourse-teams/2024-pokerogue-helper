@@ -66,7 +66,7 @@ fun ImageView.loadImageWithProgress(
                 }
             },
         )
-//        .error(R.drawable.icon_error)
+        .error(R.drawable.icon_error)
         .into(this)
 }
 
