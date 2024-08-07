@@ -103,5 +103,5 @@ private const val MAX_ATTACK_LIMIT = 190
 private const val MAX_DEFENSE_LIMIT = 250
 private const val MAX_SPECIAL_ATTACK_LIMIT = 194
 private const val MAX_SPECIAL_DEFENSE_LIMIT = 250
-private const val MAX_SPEED_LIMIT = 160
+private const val MAX_SPEED_LIMIT = 200
 private const val MAX_TOTAL_LIMIT = 800
