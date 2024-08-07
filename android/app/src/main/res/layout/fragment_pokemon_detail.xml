@@ -46,8 +46,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.66"
-                    tools:src="@tools:sample/avatars" />
+                    app:layout_constraintWidth_percent="0.66" />
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progress_indicator_pokemon_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:padding="100dp"
+                    android:visibility="gone"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_pokemon_detail_pokemon"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_pokemon_detail_pokemon"
+                    app:layout_constraintStart_toStartOf="@+id/iv_pokemon_detail_pokemon"
+                    app:layout_constraintTop_toTopOf="@+id/iv_pokemon_detail_pokemon"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/tv_pokemon_detail_pokemon_name"
