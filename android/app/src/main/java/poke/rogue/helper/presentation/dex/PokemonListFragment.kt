@@ -28,7 +28,7 @@ class PokemonListFragment :
         PokemonAdapter(viewModel)
     }
 
-    override val toolbar: Toolbar?
+    override val toolbar: Toolbar
         get() = binding.toolbarDex
 
     override fun onViewCreated(

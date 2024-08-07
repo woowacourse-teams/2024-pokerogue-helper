@@ -13,7 +13,6 @@ import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
-import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
@@ -29,7 +28,7 @@ class AbilityDetailFragment :
 
     private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter(viewModel) }
 
-    override val toolbar: Toolbar?
+    override val toolbar: Toolbar
         get() = binding.toolbarAbilityDetail
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +53,7 @@ class AbilityDetailFragment :
     }
 
     private fun initAdapter() {
-        val decoration = GridSpacingItemDecoration(3, 15.dp, true)
+        val decoration = GridSpacingItemDecoration(3, 9.dp, false)
         binding.rvAbilityDetailPokemon.adapter = adapter
         binding.rvAbilityDetailPokemon.addItemDecoration(decoration)
     }
