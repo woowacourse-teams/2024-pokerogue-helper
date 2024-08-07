@@ -24,7 +24,7 @@ abstract class ErrorViewModel(logger: AnalyticsLogger = analyticsLogger()) : Vie
         when (throwable) {
             is HttpException -> emitErrorEvent(ErrorEvent.HttpException(throwable))
             is ConnectException, is IOException -> emitErrorEvent(ErrorEvent.NetworkConnection)
-            else -> emitErrorEvent(ErrorEvent.UnknownError)
+            else -> emitErrorEvent(ErrorEvent.UnknownError(throwable))
         }
     }
 
@@ -35,8 +35,8 @@ abstract class ErrorViewModel(logger: AnalyticsLogger = analyticsLogger()) : Vie
     }
 }
 
-sealed interface ErrorEvent {
-    data class HttpException(val error: Throwable) : ErrorEvent
-    data object NetworkConnection : ErrorEvent
-    data object UnknownError : ErrorEvent
+sealed class ErrorEvent(val msg: String? = null) {
+    data class HttpException(val error: Throwable) : ErrorEvent(error.message)
+    data object NetworkConnection : ErrorEvent()
+    data class UnknownError(val error: Throwable) : ErrorEvent(error.message)
 }
