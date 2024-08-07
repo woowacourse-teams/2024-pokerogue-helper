@@ -9,13 +9,12 @@ import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
-import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
 import com.pokerogue.helper.type.domain.PokemonType;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,14 +58,7 @@ public class PokemonAbilityService {
 
     private Map<Pokemon, List<PokemonType>> mapTypeWithPokemons(List<Pokemon> pokemons) {
         return pokemons.stream()
-                .collect(Collectors.toMap(
-                        pokemon -> pokemon,
-                        pokemon -> pokemon.getPokemonTypeMappings().stream()
-                                .map(PokemonTypeMapping::getPokemonType)
-                                .sorted(Comparator.comparingLong(PokemonType::getId))
-                                .distinct()
-                                .toList()
-                ));
+                .collect(Collectors.toMap(Function.identity(), Pokemon::getSortedPokemonTypes));
     }
 
     private List<PokemonTypeResponse> toPokemonTypeResponse(List<PokemonType> pokemonTypes) {
