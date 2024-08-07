@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.dex.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -12,8 +13,10 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
+import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -44,6 +47,7 @@ class PokemonDetailFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
+        binding.eventHandler = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         pokemonTypesAdapter =
             PokemonTypesAdapter(
@@ -71,6 +75,7 @@ class PokemonDetailFragment :
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigateToAbilityDetailEvent()
+        observeNavigateToHomeEvent()
     }
 
     private fun observePokemonDetailUi() {
@@ -100,6 +105,20 @@ class PokemonDetailFragment :
                         args = AbilityDetailFragment.bundleOf(abilityId, containerId),
                     )
                     addToBackStack(TAG)
+                }
+            }
+        }
+    }
+
+    private fun observeNavigateToHomeEvent() {
+        repeatOnStarted {
+            viewModel.navigateToHomeEvent.collect {
+                if (it) {
+                    requireActivity().finishAffinity()
+                    startActivity<HomeActivity> {
+                        HomeActivity.intent(requireContext())
+                            .apply { flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT }
+                    }
                 }
             }
         }
