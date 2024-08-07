@@ -32,9 +32,9 @@ class PokemonAbilityRepositoryTest extends RepositoryTest {
         PokemonAbility pokemonAbility = pokemonAbilityRepository.findAll().get(0);
         Long pokemonAbilityId = pokemonAbility.getId();
 
-        PokemonAbility queriedPokemon = pokemonAbilityRepository.findByIdWithPokemonAndPokemonTypes(pokemonAbilityId)
+        PokemonAbility queriedAbility = pokemonAbilityRepository.findByIdWithPokemonAndPokemonTypes(pokemonAbilityId)
                 .get();
-        Set<PokemonAbilityMapping> pokemonAbilityMappings = queriedPokemon.getPokemonAbilityMappings();
+        Set<PokemonAbilityMapping> pokemonAbilityMappings = queriedAbility.getPokemonAbilityMappings();
         List<Pokemon> pokemons = pokemonAbilityMappings.stream()
                 .map(PokemonAbilityMapping::getPokemon)
                 .toList();
