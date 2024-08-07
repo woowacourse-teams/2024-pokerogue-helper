@@ -6,6 +6,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
@@ -67,13 +68,13 @@ class PokemonDetailViewModelTest {
                         ),
                     stats =
                         listOf(
-                            StatUiModel("HP", 45, 300),
-                            StatUiModel("공격", 49, 300),
-                            StatUiModel("방어", 49, 300),
-                            StatUiModel("특수공격", 65, 300),
-                            StatUiModel("특수방어", 65, 300),
-                            StatUiModel("스피드", 45, 300),
-                            StatUiModel("총합", 318, 1_000),
+                            StatUiModel("HP", 45, 255, R.color.stat_hp),
+                            StatUiModel("공격", 49, 190, R.color.stat_attack),
+                            StatUiModel("방어", 49, 250, R.color.stat_defense),
+                            StatUiModel("특수공격", 65, 194, R.color.stat_special_attack),
+                            StatUiModel("특수방어", 65, 250, R.color.stat_special_defense),
+                            StatUiModel("스피드", 45, 200, R.color.stat_speed),
+                            StatUiModel("총합", 318, 800, R.color.stat_total),
                         ),
                     abilities =
                         listOf(

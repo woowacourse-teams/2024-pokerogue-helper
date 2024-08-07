@@ -8,7 +8,7 @@ data class StatUiModel(
     val name: String,
     val amount: Int,
     val limit: Int,
-    @ColorRes val color: Int,
+    @ColorRes val color: Int = 0,
 ) {
     val progress: Int
         get() = amount * 100 / limit
