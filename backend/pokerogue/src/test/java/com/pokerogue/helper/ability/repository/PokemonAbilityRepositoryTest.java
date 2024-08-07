@@ -67,6 +67,7 @@ class PokemonAbilityRepositoryTest extends RepositoryTest {
                 .map(PokemonAbilityMapping::getPokemonAbility)
                 .map(PokemonAbility::getId)
                 .collect(Collectors.toCollection(HashSet::new));
+
         return allAbilityIds.stream()
                 .filter(id -> !abilityIdsHavingPokemon.contains(id))
                 .findAny()
