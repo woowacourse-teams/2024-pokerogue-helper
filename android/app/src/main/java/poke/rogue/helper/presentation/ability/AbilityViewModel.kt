@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.ability
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,13 +14,15 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.presentation.ability.model.AbilityUiModel
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
+import poke.rogue.helper.presentation.error.ErrorViewModel
 
 class AbilityViewModel(private val abilityRepository: AbilityRepository) :
-    ViewModel(),
+    ErrorViewModel(),
     AbilityQueryHandler,
     AbilityUiEventHandler {
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()
@@ -38,7 +39,7 @@ class AbilityViewModel(private val abilityRepository: AbilityRepository) :
                 AbilityUiState.Success(abilities)
             }
             .stateIn(
-                viewModelScope,
+                viewModelScope + errorHandler,
                 SharingStarted.WhileSubscribed(5000L),
                 AbilityUiState.Loading,
             )
@@ -49,7 +50,8 @@ class AbilityViewModel(private val abilityRepository: AbilityRepository) :
         }
     }
 
-    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> = abilityRepository.abilities(query).map { it.toUi() }
+    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> =
+        abilityRepository.abilities(query).map { it.toUi() }
 
     override fun navigateToDetail(abilityId: Long) {
         viewModelScope.launch {
