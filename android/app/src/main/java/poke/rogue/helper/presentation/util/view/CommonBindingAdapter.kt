@@ -33,7 +33,7 @@ fun ImageView.setCroppedImage(imageUrl: String?) {
         .into(this)
 }
 
-@BindingAdapter("imageUrl", "progressIndicator")
+@BindingAdapter("imageUrlWithProgress", "progressIndicator")
 fun ImageView.loadImageWithProgress(
     url: String?,
     progressIndicator: CircularProgressIndicator,
@@ -67,6 +67,44 @@ fun ImageView.loadImageWithProgress(
             },
         )
         .error(R.drawable.icon_error)
+        .into(this)
+}
+
+@BindingAdapter("cropImageUrlWithProgress", "progressIndicator")
+fun ImageView.setCroppedImageWithProgressIndicator(
+    imageUrl: String?,
+    progressIndicator: CircularProgressIndicator,
+) {
+    progressIndicator.visibility = View.VISIBLE
+
+    Glide.with(context)
+        .load(imageUrl)
+        .listener(
+            object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    progressIndicator.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    progressIndicator.visibility = View.GONE
+                    return false
+                }
+            },
+        )
+        .error(R.drawable.icon_error)
+        .transform(CropMarginTransformation())
         .into(this)
 }
 
