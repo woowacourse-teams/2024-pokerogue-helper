@@ -7,6 +7,8 @@
     <color name="poke_black">#000000</color>
     <color name="poke_grey_80">#242627</color>
     <color name="poke_grey_60">#969696</color>
+    <color name="poke_grey_20">#DCDCDC</color>
+
     <color name="poke_green_20">#74CC73</color>
     <color name="poke_red_20">#F66868</color>
 
