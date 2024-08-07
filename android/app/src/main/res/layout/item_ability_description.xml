@@ -21,7 +21,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{()->uiEventHandler.navigateToDetail(ability.id)}"
+            onSingleClick="@{()->uiEventHandler.navigateToDetail(ability.id)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_ability_end"
             app:layout_constraintStart_toStartOf="@+id/gl_ability_start"
