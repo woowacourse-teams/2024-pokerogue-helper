@@ -5,7 +5,6 @@ import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.domain.Pokemon;
 import com.pokerogue.helper.pokemon.domain.PokemonAbilityMapping;
-import com.pokerogue.helper.pokemon.domain.PokemonTypeMapping;
 import com.pokerogue.helper.pokemon.dto.PokedexResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
@@ -32,9 +31,7 @@ public class PokemonService {
     }
 
     private PokemonResponse toPokemonResponse(Pokemon pokemon) {
-        List<PokemonTypeMapping> pokemonTypeMappings = pokemon.getPokemonTypeMappings();
-        List<PokemonTypeResponse> pokemonTypeResponses = pokemonTypeMappings.stream()
-                .map(PokemonTypeMapping::getPokemonType)
+        List<PokemonTypeResponse> pokemonTypeResponses = pokemon.getSortedPokemonTypes().stream()
                 .map(PokemonTypeResponse::from)
                 .toList();
 
@@ -50,8 +47,7 @@ public class PokemonService {
     }
 
     private PokedexResponse toPokedexResponse(Pokemon pokemon) {
-        List<PokemonTypeResponse> pokemonTypeResponses = pokemon.getPokemonTypeMappings().stream()
-                .map(PokemonTypeMapping::getPokemonType)
+        List<PokemonTypeResponse> pokemonTypeResponses = pokemon.getSortedPokemonTypes().stream()
                 .map(PokemonTypeResponse::from)
                 .toList();
         List<PokemonAbilityResponse> pokemonAbilityResponses = pokemon.getPokemonAbilityMappings().stream()
