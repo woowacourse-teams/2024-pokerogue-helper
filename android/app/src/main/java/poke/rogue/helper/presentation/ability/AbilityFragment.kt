@@ -89,7 +89,6 @@ class AbilityFragment : ToolbarFragment<FragmentAbilityBinding>(R.layout.fragmen
                 }
             }
         }
-
     }
 
     companion object {

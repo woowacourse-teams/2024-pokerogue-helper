@@ -129,7 +129,6 @@ class TypeViewModel(
     }
 
     companion object {
-        fun factory() =
-            BaseViewModelFactory { TypeViewModel(DefaultTypeRepository(LocalTypeDataSource())) }
+        fun factory() = BaseViewModelFactory { TypeViewModel(DefaultTypeRepository(LocalTypeDataSource())) }
     }
 }

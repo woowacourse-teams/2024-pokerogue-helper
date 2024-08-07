@@ -10,7 +10,6 @@ import poke.rogue.helper.presentation.util.view.setOnSingleClickListener
 
 class NetworkErrorActivity :
     BindingActivity<ActivityNetworkErrorBinding>(R.layout.activity_network_error) {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         checkNetworkConnect()

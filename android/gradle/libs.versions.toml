@@ -53,6 +53,7 @@ junit = "4.13.2"
 junit5-jupiter = "5.10.2"
 kotest-runner-junit5 = "5.8.0"
 mockk = "1.13.9"
+firebaseCrashlyticsBuildtools = "3.0.2"
 
 [libraries]
 agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -119,6 +120,7 @@ coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen" }
+firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

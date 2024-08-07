@@ -100,7 +100,7 @@ fun Context.deviceSize(): IntArray {
     return intArrayOf(size.x, size.y)
 }
 
-inline fun <reified T : Activity> Context.startActivity(argusBuilder: Intent.() -> Unit={}) {
+inline fun <reified T : Activity> Context.startActivity(argusBuilder: Intent.() -> Unit = {}) {
     startActivity(Intent(this, T::class.java).apply(argusBuilder))
 }
 
@@ -110,8 +110,9 @@ fun Context.isNetworkConnected(): Boolean {
     val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
     if (capabilities != null) {
         isConnected =
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || capabilities.hasTransport(
-                NetworkCapabilities.TRANSPORT_CELLULAR
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+            capabilities.hasTransport(
+                NetworkCapabilities.TRANSPORT_CELLULAR,
             )
     }
     return isConnected

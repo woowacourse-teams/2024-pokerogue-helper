@@ -12,8 +12,11 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
+import poke.rogue.helper.presentation.error.ErrorEvent
+import poke.rogue.helper.presentation.error.NetworkErrorActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -71,6 +74,16 @@ class PokemonDetailFragment :
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigateToAbilityDetailEvent()
+        repeatOnStarted {
+            viewModel.commonErrorEvent.collect {
+                when (it) {
+                    is ErrorEvent.NetworkConnection -> startActivity<NetworkErrorActivity>()
+                    is ErrorEvent.UnknownError, is ErrorEvent.HttpException -> {
+                        toast(it.msg ?: getString(R.string.error_IO_Exception))
+                    }
+                }
+            }
+        }
     }
 
     private fun observePokemonDetailUi() {
