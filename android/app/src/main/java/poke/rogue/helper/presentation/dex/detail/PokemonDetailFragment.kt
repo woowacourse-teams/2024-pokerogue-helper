@@ -34,6 +34,11 @@ class PokemonDetailFragment :
         )
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
+    }
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
@@ -42,9 +47,6 @@ class PokemonDetailFragment :
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        repeatOnStarted {
-            viewModel.updatePokemonDetail(arguments?.getLong(POKEMON_ID))
-        }
         initAdapter()
         initObservers()
     }

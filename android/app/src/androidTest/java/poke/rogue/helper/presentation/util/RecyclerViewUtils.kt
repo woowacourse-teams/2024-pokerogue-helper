@@ -1,4 +1,4 @@
-package poke.rogue.helper.util
+package poke.rogue.helper.presentation.util
 
 import android.view.View
 import androidx.annotation.IdRes

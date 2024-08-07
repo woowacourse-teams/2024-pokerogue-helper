@@ -15,15 +15,18 @@ import poke.rogue.helper.presentation.base.BaseViewModelFactory
 class PokemonDetailViewModel(private val dexRepository: DexRepository) :
     ViewModel(),
     PokemonDetailNavigateHandler {
-    private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
+    private val _uiState: MutableStateFlow<PokemonDetailUiState> =
+        MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()
     val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
 
-    suspend fun updatePokemonDetail(pokemonId: Long?) {
+    fun updatePokemonDetail(pokemonId: Long?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
-        _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
+        viewModelScope.launch {
+            _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
+        }
     }
 
     override fun navigateToAbilityDetail(abilityId: Long) {

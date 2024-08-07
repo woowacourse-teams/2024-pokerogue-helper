@@ -30,21 +30,23 @@ class AbilityDetailFragment :
     override val toolbar: Toolbar?
         get() = binding.toolbarAbilityDetail
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val id = arguments?.getLong(ABILITY_ID) ?: INVALID_ABILITY_ID
+        viewModel.updateAbilityDetail(id)
+    }
+
     override fun onViewCreated(
         view: View,
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
-
-        val id = arguments?.getLong(ABILITY_ID) ?: INVALID_ABILITY_ID
-        viewModel.updateAbilityDetail(id)
-
         initAdapter()
         initObservers()
     }
 
     private fun initAdapter() {
-        val decoration = GridSpacingItemDecoration(3, 15.dp, false)
+        val decoration = GridSpacingItemDecoration(3, 15.dp, true)
         binding.rvAbilityDetailPokemon.adapter = adapter
         binding.rvAbilityDetailPokemon.addItemDecoration(decoration)
     }
