@@ -19,9 +19,9 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            onSingleClick="@{()->uiEventHandler.navigateToDetail(ability.id)}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            onSingleClick="@{()->uiEventHandler.navigateToDetail(ability.id)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/gl_ability_end"
             app:layout_constraintStart_toStartOf="@+id/gl_ability_start"
@@ -46,9 +46,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:text="@{ability.description}"
                 android:textAppearance="@style/TextAppearance.Poke.Description"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_ability_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_ability_title"
                 app:layout_constraintTop_toTopOf="@id/tv_ability_title"
