@@ -6,6 +6,7 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout.LayoutParams
 import android.widget.ProgressBar
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.BindingAdapter
@@ -129,7 +130,7 @@ class PokemonDetailFragment :
         pokemonTypesAdapter.addTypes(
             types = pokemonDetail.pokemon.types,
             config = typesUiConfig,
-            spacingBetweenTypes = 10.dp,
+            spacingBetweenTypes = 0.dp,
         )
     }
 
@@ -141,9 +142,10 @@ class PokemonDetailFragment :
 
         private val typesUiConfig =
             TypeChip.PokemonTypeViewConfiguration(
-                nameSize = 17.dp,
-                iconSize = 30.dp,
-                hasBackGround = true,
+                width = LayoutParams.WRAP_CONTENT,
+                nameSize = 16.dp,
+                iconSize = 20.dp,
+                hasBackGround = false,
             )
 
         fun bundleOf(
@@ -155,11 +157,11 @@ class PokemonDetailFragment :
         }
 
         @JvmStatic
-        @BindingAdapter("progressColor"/*, "cornerRadius"*/)
-        fun ProgressBar.setProgressDrawable(color: Int/*, cornerRadius: Float*/) {
+        @BindingAdapter("progressColor")
+        fun ProgressBar.setProgressDrawable(color: Int) {
             val background =
                 GradientDrawable().apply {
-                    setColor(context.colorOf(R.color.poke_white))
+                    setColor(context.colorOf(R.color.poke_grey_20))
                     cornerRadius = resources.getDimension(R.dimen.progress_bar_corner_radius)
                 }
 
