@@ -100,7 +100,7 @@ fun Context.deviceSize(): IntArray {
     return intArrayOf(size.x, size.y)
 }
 
-inline fun <reified T : Activity> Context.startActivity(argusBuilder: Intent.() -> Unit) {
+inline fun <reified T : Activity> Context.startActivity(argusBuilder: Intent.() -> Unit={}) {
     startActivity(Intent(this, T::class.java).apply(argusBuilder))
 }
 
