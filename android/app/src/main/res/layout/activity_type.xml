@@ -33,10 +33,10 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_type"
+            style="@style/CustomToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/CustomToolbarStyle"
             app:title="@string/type_title_name" />
 
 
@@ -82,14 +82,13 @@
                     app:layout_constraintGuide_end="40dp" />
 
                 <TextView
-                    android:id="@+id/tv_type_my_type_title"
+                    android:id="@+id/tv_type_opponent_type_title"
                     style="@style/TextAppearance.Poke.TitleLargeBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/type_my_type_title"
+                    android:text="@string/type_opponent_type_title"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toTopOf="@id/gl_top" />
-
+                    app:layout_constraintTop_toBottomOf="@id/gl_top" />
 
                 <ImageButton
                     android:id="@+id/btn_refresh"
@@ -99,49 +98,15 @@
                     android:onClick="@{() -> typeHandler.removeAllSelections()}"
                     android:padding="2dp"
                     android:src="@drawable/ic_type_reset"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_type_my_type_title"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_type_opponent_type_title"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintTop_toTopOf="@id/tv_type_my_type_title" />
-
-                <View
-                    android:id="@+id/vw_type_my_type_container"
-                    android:layout_width="0dp"
-                    android:layout_height="68dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/bg_type_choice_container"
-                    android:onClick="@{() -> typeHandler.startSelection(SelectorType.MINE)}"
-                    app:layout_constraintEnd_toEndOf="@id/gl_end"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_type_my_type_title" />
-
-                <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
-                    android:id="@+id/parallelogram_type_my_type_content"
-                    typeSelection="@{myType}"
-                    typeSelectionListener="@{() -> typeHandler.removeSelection(SelectorType.MINE)}"
-                    visible="@{vm.typeSelectionStates.isMyTypeSelected}"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    app:layout_constraintBottom_toBottomOf="@id/vw_type_my_type_container"
-                    app:layout_constraintEnd_toEndOf="@id/vw_type_my_type_container"
-                    app:layout_constraintStart_toStartOf="@id/vw_type_my_type_container"
-                    app:layout_constraintTop_toTopOf="@id/vw_type_my_type_container" />
-
-                <TextView
-                    android:id="@+id/tv_type_opponent_type_title"
-                    style="@style/TextAppearance.Poke.TitleLargeBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/type_opponent_type_title"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/vw_type_my_type_container" />
+                    app:layout_constraintTop_toTopOf="@id/tv_type_opponent_type_title" />
 
                 <View
                     android:id="@+id/vw_type_opponent_type_container_1"
                     android:layout_width="0dp"
                     android:layout_height="68dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="12dp"
                     android:layout_marginEnd="4dp"
                     android:background="@drawable/bg_type_choice_container"
                     android:onClick="@{() -> typeHandler.startSelection(SelectorType.OPPONENT1)}"
@@ -189,6 +154,40 @@
                     app:layout_constraintTop_toTopOf="@id/vw_type_opponent_type_container_2" />
 
                 <TextView
+                    android:id="@+id/tv_type_my_type_title"
+                    style="@style/TextAppearance.Poke.TitleLargeBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/type_my_type_title"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/vw_type_opponent_type_container_1" />
+
+                <View
+                    android:id="@+id/vw_type_my_type_container"
+                    android:layout_width="0dp"
+                    android:layout_height="68dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_type_choice_container"
+                    android:onClick="@{() -> typeHandler.startSelection(SelectorType.MINE)}"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_type_my_type_title" />
+
+                <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
+                    android:id="@+id/parallelogram_type_my_type_content"
+                    typeSelection="@{myType}"
+                    typeSelectionListener="@{() -> typeHandler.removeSelection(SelectorType.MINE)}"
+                    visible="@{vm.typeSelectionStates.isMyTypeSelected}"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/vw_type_my_type_container"
+                    app:layout_constraintEnd_toEndOf="@id/vw_type_my_type_container"
+                    app:layout_constraintStart_toStartOf="@id/vw_type_my_type_container"
+                    app:layout_constraintTop_toTopOf="@id/vw_type_my_type_container" />
+
+                <TextView
                     android:id="@+id/tv_type_result_title"
                     style="@style/TextAppearance.Poke.TitleLargeBold"
                     android:layout_width="0dp"
@@ -198,15 +197,15 @@
                     android:text="@string/type_result_title"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/vw_type_opponent_type_container_1" />
+                    app:layout_constraintTop_toBottomOf="@id/vw_type_my_type_container" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_type_result"
+                    visible="@{!vm.typeSelectionStates.allEmpty}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="20dp"
                     android:orientation="vertical"
-                    visible="@{!vm.typeSelectionStates.allEmpty}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -214,10 +213,10 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
 
                 <ImageView
+                    visible="@{vm.typeSelectionStates.allEmpty}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    visible="@{vm.typeSelectionStates.allEmpty}"
+                    android:layout_margin="16dp"
                     android:src="@drawable/img_type_empty_view_placeholder"
                     app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
