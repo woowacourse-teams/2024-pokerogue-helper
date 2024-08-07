@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="29dp"
                 android:ellipsize="end"
-                android:maxLines="3"
+                android:maxLines="@{ability.shortening ? 3 : Integer.MAX_VALUE}"
                 android:text="@{ability.description}"
                 android:textAppearance="@style/TextAppearance.Poke.Description"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_ability_title"

@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="abilityUiModel"
+            type="poke.rogue.helper.presentation.ability.model.AbilityUiModel" />
+
+        <variable
             name="uiEventHandler"
             type="poke.rogue.helper.presentation.ability.detail.AbilityDetailUiEventHandler" />
     </data>
@@ -29,8 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center_vertical"
-                android:padding="12dp"
                 android:onClick="@{() -> uiEventHandler.navigateToHome()}"
+                android:padding="12dp"
                 android:src="@drawable/icon_home" />
 
         </com.google.android.material.appbar.MaterialToolbar>
