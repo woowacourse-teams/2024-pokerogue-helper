@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.home
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -85,5 +86,9 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
         private const val NAVIGATE_TO_DEX = "Nav_Dex"
         private const val NAVIGATE_TO_ABILITY = "Nav_Ability"
         private const val NAVIGATE_TO_TIP = "Nav_Tip"
+
+        fun intent(context: Context): Intent {
+            return Intent(context, HomeActivity::class.java)
+        }
     }
 }

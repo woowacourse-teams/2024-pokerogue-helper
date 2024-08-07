@@ -11,7 +11,9 @@ import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityDetailBinding
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
+import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
+import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
@@ -41,8 +43,14 @@ class AbilityDetailFragment :
         savedInstanceState: Bundle?,
     ) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
         initAdapter()
         initObservers()
+    }
+
+    private fun initView() {
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.uiEventHandler = viewModel
     }
 
     private fun initAdapter() {
@@ -83,6 +91,14 @@ class AbilityDetailFragment :
                         args = PokemonDetailFragment.bundleOf(pokemonId, containerId),
                     )
                     addToBackStack(TAG)
+                }
+            }
+        }
+
+        repeatOnStarted {
+            viewModel.navigateToHomeEvent.collect {
+                if (it) {
+                    startActivity(HomeActivity.intent(requireContext()))
                 }
             }
         }
