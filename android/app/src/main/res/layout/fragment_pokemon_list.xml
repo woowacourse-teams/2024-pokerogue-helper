@@ -66,14 +66,15 @@
                 android:src="@drawable/img_tmp_loading"
                 app:layout_constraintBottom_toTopOf="@id/tv_loading"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tv_loading"
                 style="@style/TextAppearance.Poke.TitleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Loading..."
+                android:text="@string/dex_list_loading_guide"
                 android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
