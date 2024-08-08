@@ -14,8 +14,8 @@ import poke.rogue.helper.presentation.util.context.colorOf
 fun ImageView.setImage(imageUrl: String?) {
     Glide.with(context)
         .load(imageUrl)
-        .placeholder(R.drawable.icon_poke)
-        .error(R.drawable.icon_error)
+        .placeholder(R.drawable.ic_pikachu_silhouette)
+        .error(R.drawable.ic_pikachu_silhouette)
         .into(this)
 }
 
@@ -23,8 +23,8 @@ fun ImageView.setImage(imageUrl: String?) {
 fun ImageView.setCroppedImage(imageUrl: String?) {
     Glide.with(context)
         .load(imageUrl)
-        .placeholder(R.drawable.icon_poke)
-        .error(R.drawable.icon_error)
+        .placeholder(R.drawable.ic_pikachu_silhouette)
+        .error(R.drawable.ic_ditto_silhouette)
         .transform(CropMarginTransformation())
         .into(this)
 }
@@ -39,7 +39,7 @@ fun ImageView.loadImageWithProgress(
     Glide.with(context)
         .load(imageUrl)
         .listener(createProgressListener(progressIndicator))
-        .error(R.drawable.icon_error)
+        .error(R.drawable.ic_ditto_silhouette)
         .into(this)
 }
 
@@ -53,7 +53,7 @@ fun ImageView.setCroppedImageWithProgressIndicator(
     Glide.with(context)
         .load(imageUrl)
         .listener(createProgressListener(progressIndicator))
-        .error(R.drawable.icon_error)
+        .error(R.drawable.ic_pikachu_silhouette)
         .transform(CropMarginTransformation())
         .into(this)
 }
