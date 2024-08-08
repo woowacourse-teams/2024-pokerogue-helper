@@ -5,7 +5,7 @@ on:
     branches: [ an/develop ]
   push:
     branches: [ an/develop ]
-    
+
 jobs:
   build:
     name: PR Checker
@@ -79,11 +79,15 @@ jobs:
         run: chmod +x gradlew
         working-directory: android
 
+      - name: esspresso test
+        run: ./gradlew phonesGroupDebugAndroidTest --stacktrace
+        working-directory: android
+
       - name: Lint Check
         run: ./gradlew ktlintCheck
         working-directory: android
 
-      - name: run rest
+      - name: run test
         run: ./gradlew test
         working-directory: android
 
