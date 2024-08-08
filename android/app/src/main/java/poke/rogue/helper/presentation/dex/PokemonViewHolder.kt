@@ -12,7 +12,6 @@ class PokemonViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     init {
         binding.listener = onClickPokeMonItem
-        binding.progressIndicator = binding.progressIndicatorPokemonListPokemon
     }
 
     fun bind(pokemonUiModel: PokemonUiModel) {

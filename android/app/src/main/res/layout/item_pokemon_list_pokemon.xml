@@ -9,10 +9,6 @@
             type="poke.rogue.helper.presentation.dex.model.PokemonUiModel" />
 
         <variable
-            name="progressIndicator"
-            type="com.google.android.material.progressindicator.CircularProgressIndicator" />
-
-        <variable
             name="listener"
             type="poke.rogue.helper.presentation.dex.PokemonListNavigateHandler" />
     </data>
@@ -25,8 +21,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_item_poketmon_poketmon"
-            cropImageUrlWithProgress="@{pokemon.imageUrl}"
-            progressIndicator="@{progressIndicator}"
+            cropImageUrl="@{pokemon.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingTop="10dp"
@@ -39,18 +34,6 @@
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintWidth_percent="0.60"
             tools:srcCompat="@tools:sample/avatars" />
-
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progress_indicator_pokemon_list_pokemon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="gone"
-            app:indicatorColor="@color/poke_grey_20"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_item_poketmon_poketmon"
-            app:layout_constraintEnd_toEndOf="@+id/iv_item_poketmon_poketmon"
-            app:layout_constraintStart_toStartOf="@+id/iv_item_poketmon_poketmon"
-            app:layout_constraintTop_toTopOf="@+id/iv_item_poketmon_poketmon" />
 
         <TextView
             android:id="@+id/tv_item_poketmon_poketmon_name"
