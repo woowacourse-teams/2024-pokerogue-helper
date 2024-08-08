@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.ability.detail
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -9,13 +8,18 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.presentation.ability.model.AbilityDetailUiModel
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
+import poke.rogue.helper.presentation.error.ErrorViewModel
 
-class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
-    ViewModel(), AbilityDetailUiEventHandler {
+class AbilityDetailViewModel(
+    private val abilityRepository: AbilityRepository,
+    logger: AnalyticsLogger = analyticsLogger(),
+) : ErrorViewModel(logger), AbilityDetailUiEventHandler {
     private val _abilityDetail =
         MutableStateFlow<AbilityDetailUiState<AbilityDetailUiModel>>(AbilityDetailUiState.Loading)
     val abilityDetail = _abilityDetail.asStateFlow()
@@ -47,7 +51,7 @@ class AbilityDetailViewModel(private val abilityRepository: AbilityRepository) :
             _errorEvent.tryEmit(Unit)
             return
         }
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             val abilityDetail = abilityRepository.abilityDetail(abilityId).toUi()
             _abilityDetail.value = AbilityDetailUiState.Success(abilityDetail)
         }

@@ -5,6 +5,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Point
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.view.View
 import android.view.WindowInsets
@@ -98,6 +100,20 @@ fun Context.deviceSize(): IntArray {
     return intArrayOf(size.x, size.y)
 }
 
-inline fun <reified T : Activity> Context.startActivity(argusBuilder: Intent.() -> Unit) {
+inline fun <reified T : Activity> Context.startActivity(argusBuilder: Intent.() -> Unit = {}) {
     startActivity(Intent(this, T::class.java).apply(argusBuilder))
+}
+
+fun Context.isNetworkConnected(): Boolean {
+    var isConnected = false
+    val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val capabilities = cm.getNetworkCapabilities(cm.activeNetwork)
+    if (capabilities != null) {
+        isConnected =
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
+            capabilities.hasTransport(
+                NetworkCapabilities.TRANSPORT_CELLULAR,
+            )
+    }
+    return isConnected
 }

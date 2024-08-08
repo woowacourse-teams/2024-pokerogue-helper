@@ -83,6 +83,6 @@ val Fragment.viewLifeCycle
 val Fragment.viewLifeCycleScope
     get() = viewLifecycleOwner.lifecycleScope
 
-inline fun <reified T : Activity> Fragment.startActivity(argusBuilder: Intent.() -> Unit) {
+inline fun <reified T : Activity> Fragment.startActivity(argusBuilder: Intent.() -> Unit = {}) {
     startActivity(Intent(requireContext(), T::class.java).apply(argusBuilder))
 }
