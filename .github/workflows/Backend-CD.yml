@@ -2,7 +2,7 @@ name: Backend CD
 
 on:
   push:
-    branches: [ "be/develop" ]
+    branches: [ "be/infra/#188-set-monitoring-server" ]
 
 permissions:
   contents: read
