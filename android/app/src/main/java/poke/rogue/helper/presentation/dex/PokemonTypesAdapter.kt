@@ -21,7 +21,7 @@ class PokemonTypesAdapter(private val context: Context, private val viewGroup: V
                 TypeChip(context).apply {
                     layoutParams =
                         LinearLayout.LayoutParams(
-                            0,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             1f,
                         ).apply {
