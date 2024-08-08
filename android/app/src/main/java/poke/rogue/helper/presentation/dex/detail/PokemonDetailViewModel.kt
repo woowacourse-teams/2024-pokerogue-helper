@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.dex.detail
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -9,12 +8,18 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
+import poke.rogue.helper.presentation.error.ErrorViewModel
 
-class PokemonDetailViewModel(private val dexRepository: DexRepository) :
-    ViewModel(),
-    PokemonDetailNavigateHandler {
+class PokemonDetailViewModel(
+    private val dexRepository: DexRepository,
+    logger: AnalyticsLogger = analyticsLogger(),
+) :
+    ErrorViewModel(logger),
+        PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> =
         MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
@@ -27,7 +32,7 @@ class PokemonDetailViewModel(private val dexRepository: DexRepository) :
 
     fun updatePokemonDetail(pokemonId: Long?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
-        viewModelScope.launch {
+        viewModelScope.launch(errorHandler) {
             _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
         }
     }

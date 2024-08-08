@@ -23,6 +23,7 @@ import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.context.colorOf
+import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -81,7 +82,6 @@ class PokemonDetailFragment :
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigateToAbilityDetailEvent()
-        observeNavigateToHomeEvent()
     }
 
     private fun observePokemonDetailUi() {

@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.dex
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,15 +14,20 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
+import poke.rogue.helper.presentation.error.ErrorViewModel
 
 class PokemonListViewModel(
     private val pokemonListRepository: DexRepository,
-) : ViewModel(), PokemonListNavigateHandler, PokemonQueryHandler {
+    logger: AnalyticsLogger = analyticsLogger(),
+) : ErrorViewModel(logger), PokemonListNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
@@ -34,7 +38,7 @@ class PokemonListViewModel(
                 queriedPokemons(query)
             }
             .stateIn(
-                viewModelScope,
+                viewModelScope + errorHandler,
                 SharingStarted.WhileSubscribed(5000L),
                 emptyList(),
             )
