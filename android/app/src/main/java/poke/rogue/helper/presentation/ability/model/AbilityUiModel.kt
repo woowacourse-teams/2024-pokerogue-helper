@@ -6,6 +6,7 @@ data class AbilityUiModel(
     val id: Long,
     val title: String,
     val description: String,
+    val shortening: Boolean = true,
 ) {
     companion object {
         private const val DUMMY_ABILITY_NAME = "악취"
@@ -59,4 +60,5 @@ fun AbilityDetailUiModel.toUi(): AbilityUiModel =
         id = 0,
         title = title,
         description = description,
+        shortening = false,
     )
