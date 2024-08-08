@@ -14,7 +14,7 @@
                 android:useIntrinsicSizeAsMinimum="true">
                 <shape>
                     <corners android:radius="8dp" />
-                    <solid android:color="@color/poke_grey_60" />
+                    <solid android:color="@color/stat_hp" />
                 </shape>
             </scale>
         </clip>

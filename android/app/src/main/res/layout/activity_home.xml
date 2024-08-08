@@ -28,17 +28,17 @@
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar_home"
+                    style="@style/CustomToolbarStyle"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="@style/CustomToolbarStyle" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/iv_home_logo"
+                    onSingleClick="@{() -> actionHandler.navigateToPokeRogue()}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="?attr/actionBarSize"
-                    android:onClick="@{() -> actionHandler.navigateToPokeRogue()}"
                     android:src="@drawable/img_home_logo"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -66,7 +66,7 @@
                         android:layout_gravity="fill"
                         android:layout_margin="6dp"
                         android:backgroundTint="@color/poke_grey_80"
-                        android:onClick="@{() -> actionHandler.navigateToType()}"
+                        onSingleClick="@{() -> actionHandler.navigateToType()}"
                         app:cardCornerRadius="16dp">
 
                         <LinearLayout
@@ -104,7 +104,7 @@
                         android:layout_gravity="fill"
                         android:layout_margin="6dp"
                         android:backgroundTint="@color/poke_grey_80"
-                        android:onClick="@{() -> actionHandler.navigateToDex()}"
+                        onSingleClick="@{() -> actionHandler.navigateToDex()}"
                         app:cardCornerRadius="16dp">
 
                         <LinearLayout
@@ -142,7 +142,7 @@
                         android:layout_gravity="fill"
                         android:layout_margin="6dp"
                         android:backgroundTint="@color/poke_grey_80"
-                        android:onClick="@{() -> actionHandler.navigateToAbility()}"
+                        onSingleClick="@{() -> actionHandler.navigateToAbility()}"
                         app:cardCornerRadius="16dp">
 
                         <LinearLayout
@@ -181,7 +181,7 @@
                         android:layout_gravity="fill"
                         android:layout_margin="6dp"
                         android:backgroundTint="@color/poke_grey_80"
-                        android:onClick="@{() -> actionHandler.navigateToTip()}"
+                        onSingleClick="@{() -> actionHandler.navigateToTip()}"
                         app:cardCornerRadius="16dp">
 
                         <LinearLayout
