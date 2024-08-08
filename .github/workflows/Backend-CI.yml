@@ -37,20 +37,9 @@ jobs:
           mysql user: ${{ secrets.TEST_DB_USERNAME }}
           mysql password: ${{ secrets.TEST_DB_PASSWORD }}
 
-      - name: Upload Docker Compose File
-        uses: actions/upload-artifact@v4
-        with:
-          name: pokerogue-helper-ci-yml
-          path: ./backend/pokerogue/src/main/resources/docker-compose-ci.yml
-
-      - name: Download Docker Compose File
-        uses: actions/download-artifact@v4
-        with:
-          name: pokerogue-helper-ci-yml
-          path: .
-
       - name: Set up Test MySQL
         run: docker-compose -f docker-compose-ci.yml up -d
+        working-directory: ./backend/pokerogue/src/main/resources/
 
       - name: Wait for Test MySQL to be ready
         run: |
