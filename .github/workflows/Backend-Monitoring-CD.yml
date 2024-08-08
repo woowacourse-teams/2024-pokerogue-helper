@@ -3,8 +3,8 @@ name: Backend Monitoring CD
 on:
   push:
     branches: [ "be/infra/#188-set-monitoring-server" ]
-    paths:
-      - 'backend/pokerogue/src/main/resources/monitoring/**'
+    tags:
+      - monitoring
 
 permissions:
   contents: read
