@@ -1,0 +1,25 @@
+name: Backend Monitoring CD
+
+on:
+  push:
+    branches: [ "be/infra/#188-set-monitoring-server" ]
+    paths:
+      - 'backend/pokerogue/src/main/resources/monitoring/**'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: monitoring
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ACTION_TOKEN }}
+          submodules: true
+
+      - name: Docker Compose Up
+        working-directory: ./backend/pokerogue/src/main/resources/monitoring
+        run: docker-compose -f docker-compose-monitoring.yml up -d
