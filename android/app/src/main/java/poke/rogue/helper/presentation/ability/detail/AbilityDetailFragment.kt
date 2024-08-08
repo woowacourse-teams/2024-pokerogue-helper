@@ -52,7 +52,7 @@ class AbilityDetailFragment :
 
     private fun initView() {
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.uiEventHandler = viewModel
+        binding.vm = viewModel
     }
 
     private fun initAdapter() {
