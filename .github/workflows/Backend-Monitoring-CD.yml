@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "be/infra/#188-set-monitoring-server" ]
     tags:
-      - monitoring
+      - monitoring.**
 
 permissions:
   contents: read
