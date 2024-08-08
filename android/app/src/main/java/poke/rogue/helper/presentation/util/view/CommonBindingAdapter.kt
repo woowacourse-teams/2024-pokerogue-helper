@@ -6,6 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import poke.rogue.helper.R
 import poke.rogue.helper.presentation.util.context.colorOf
 
@@ -13,8 +14,8 @@ import poke.rogue.helper.presentation.util.context.colorOf
 fun ImageView.setImage(imageUrl: String?) {
     Glide.with(context)
         .load(imageUrl)
-        .placeholder(R.drawable.icon_poke)
-        .error(R.drawable.icon_error)
+        .placeholder(R.drawable.ic_pikachu_silhouette)
+        .error(R.drawable.ic_pikachu_silhouette)
         .into(this)
 }
 
@@ -22,8 +23,37 @@ fun ImageView.setImage(imageUrl: String?) {
 fun ImageView.setCroppedImage(imageUrl: String?) {
     Glide.with(context)
         .load(imageUrl)
-        .placeholder(R.drawable.icon_poke)
-        .error(R.drawable.icon_error)
+        .placeholder(R.drawable.ic_pikachu_silhouette)
+        .error(R.drawable.ic_ditto_silhouette)
+        .transform(CropMarginTransformation())
+        .into(this)
+}
+
+@BindingAdapter("imageUrlWithProgress", "progressIndicator")
+fun ImageView.loadImageWithProgress(
+    imageUrl: String?,
+    progressIndicator: CircularProgressIndicator,
+) {
+    progressIndicator.visibility = View.VISIBLE
+
+    Glide.with(context)
+        .load(imageUrl)
+        .listener(createProgressListener(progressIndicator))
+        .error(R.drawable.ic_ditto_silhouette)
+        .into(this)
+}
+
+@BindingAdapter("cropImageUrlWithProgress", "progressIndicator")
+fun ImageView.setCroppedImageWithProgressIndicator(
+    imageUrl: String?,
+    progressIndicator: CircularProgressIndicator,
+) {
+    progressIndicator.visibility = View.VISIBLE
+
+    Glide.with(context)
+        .load(imageUrl)
+        .listener(createProgressListener(progressIndicator))
+        .error(R.drawable.ic_pikachu_silhouette)
         .transform(CropMarginTransformation())
         .into(this)
 }

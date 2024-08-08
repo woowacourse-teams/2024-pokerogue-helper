@@ -14,10 +14,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        onSingleClick="@{() -> listener.navigateToPokemonDetail(pokemon.id)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_pokemon_corner_radius"
-        onSingleClick="@{() -> listener.navigateToPokemonDetail(pokemon.id)}">
+        android:background="@drawable/shape_pokemon_corner_radius">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_item_poketmon_poketmon"

@@ -32,7 +32,7 @@ class PokemonListFragment :
         PokemonAdapter(viewModel)
     }
 
-    override val toolbar: Toolbar?
+    override val toolbar: Toolbar
         get() = binding.toolbarDex
 
     override fun onViewCreated(
@@ -49,7 +49,7 @@ class PokemonListFragment :
 
     private fun initAdapter() {
         binding.rvPokemonList.apply {
-            val spanCount = 3
+            val spanCount = 2
             adapter = pokemonAdapter
             layoutManager = GridLayoutManager(context, spanCount)
             addItemDecoration(
