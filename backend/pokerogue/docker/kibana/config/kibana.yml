@@ -1,3 +1,0 @@
-server.name: kibana
-server.host: "0.0.0.0"
-elasticsearch.hosts: http://elasticsearch:9200 # 같은 네트워크라 이렇게 사용 가능
