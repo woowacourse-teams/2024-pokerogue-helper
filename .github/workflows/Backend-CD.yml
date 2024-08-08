@@ -20,7 +20,7 @@ jobs:
 
       - name: Copy docker-compose.yml to home directory
         working-directory: ./backend/pokerogue/src/main/resources
-        run: sudo cp ./docker-compose-cd.yml /home/ubuntu/docker-compose.yml
+        run: sudo cp ./docker-compose-prod.yml /home/ubuntu/docker-compose.yml
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
