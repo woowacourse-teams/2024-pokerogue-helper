@@ -38,4 +38,11 @@
     <string name="ability_detail_error_abilityId">잘못된 abilityId값(-1) 입니다.</string>
     <string name="ability_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
 
+    <!--    error-->
+    <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>
+    <string name="network_error_img_desc">네트워크 에러 이미지</string>
+    <string name="network_error_title">인터넷에 연결되어 있지 않아요!</string>
+    <string name="network_error_desc">인터넷 연결이 불안정해요.\nWi-Fi를 다시 한 번 확인해 주세요!!</string>
+    <string name="network_error_retry">다시 시도하기</string>
+    <string name="network_error_toast">인터넷 연결 후 다시 시도해 주세요.</string>
 </resources>
