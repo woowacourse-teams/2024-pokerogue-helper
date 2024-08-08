@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [ "be/develop" ]
   push:
-    branches: [ "be/infra/#182-manage-yml-files" ]
+    branches: [ "be/develop" ]
 
 permissions:
   contents: read
