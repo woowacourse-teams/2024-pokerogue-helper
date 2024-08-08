@@ -27,6 +27,9 @@ class PokemonDetailViewModel(
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()
     val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
 
+    private val _navigateToHomeEvent = MutableSharedFlow<Boolean>()
+    val navigateToHomeEvent = _navigateToHomeEvent.asSharedFlow()
+
     fun updatePokemonDetail(pokemonId: Long?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch(errorHandler) {
@@ -37,6 +40,12 @@ class PokemonDetailViewModel(
     override fun navigateToAbilityDetail(abilityId: Long) {
         viewModelScope.launch {
             _navigationToDetailEvent.emit(abilityId)
+        }
+    }
+
+    override fun navigateToHome() {
+        viewModelScope.launch {
+            _navigateToHomeEvent.emit(true)
         }
     }
 

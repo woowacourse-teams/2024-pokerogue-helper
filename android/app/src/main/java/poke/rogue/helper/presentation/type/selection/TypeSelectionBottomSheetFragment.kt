@@ -1,10 +1,13 @@
 package poke.rogue.helper.presentation.type.selection
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.databinding.FragmentTypeSelectionBottomSheetBinding
 import poke.rogue.helper.presentation.type.TypeEvent
@@ -31,13 +34,19 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
 
     private val sharedViewModel by activityViewModels<TypeViewModel>()
 
-    private val adapter by lazy {
+    private val typeSelectionAdapter by lazy {
         TypeSelectionAdapter(
             sharedViewModel.allTypes,
             selectorType,
             disabledTypes,
             sharedViewModel,
         )
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val behavior = BottomSheetBehavior.from(requireView().parent as View)
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     override fun onCreateView(
@@ -59,9 +68,16 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun initAdapter() {
-        binding.rvTypeSelection.adapter = adapter
-        val decoration = GridSpacingItemDecoration(spanCount = 4, spacing = 20.dp, includeEdge = false)
-        binding.rvTypeSelection.addItemDecoration(decoration)
+        with(binding.rvTypeSelection) {
+            adapter = typeSelectionAdapter
+
+            val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 6 else 4
+            val gridLayoutManager = GridLayoutManager(requireContext(), spanCount)
+            layoutManager = gridLayoutManager
+
+            val decoration = GridSpacingItemDecoration(spanCount = spanCount, spacing = 20.dp, includeEdge = false)
+            addItemDecoration(decoration)
+        }
     }
 
     private fun initObserver() {

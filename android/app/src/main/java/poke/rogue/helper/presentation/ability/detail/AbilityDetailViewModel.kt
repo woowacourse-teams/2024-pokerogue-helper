@@ -28,12 +28,21 @@ class AbilityDetailViewModel(
     val navigationToPokemonDetailEvent: SharedFlow<Long> =
         _navigationToPokemonDetailEvent.asSharedFlow()
 
+    private val _navigateToHomeEvent = MutableSharedFlow<Boolean>()
+    val navigateToHomeEvent: SharedFlow<Boolean> = _navigateToHomeEvent.asSharedFlow()
+
     private val _errorEvent: MutableSharedFlow<Unit> = MutableSharedFlow()
     val errorEvent = _errorEvent.asSharedFlow()
 
     override fun navigateToPokemonDetail(pokemonId: Long) {
         viewModelScope.launch {
             _navigationToPokemonDetailEvent.emit(pokemonId)
+        }
+    }
+
+    override fun navigateToHome() {
+        viewModelScope.launch {
+            _navigateToHomeEvent.emit(true)
         }
     }
 

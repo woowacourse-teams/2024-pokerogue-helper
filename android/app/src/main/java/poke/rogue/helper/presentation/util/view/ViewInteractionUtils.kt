@@ -1,19 +1,23 @@
 package poke.rogue.helper.presentation.util.view
 
 import android.view.View
+import androidx.databinding.BindingAdapter
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.TimeMark
 import kotlin.time.TimeSource
 
-inline fun View.setOnSingleClickListener(
-    delay: Long = 500L,
-    crossinline block: (View) -> Unit,
+@BindingAdapter("duration", "onSingleClick", requireAll = false)
+fun View.setOnSingleClickListener(
+    duration: Int = 500,
+    listener: View.OnClickListener?,
 ) {
-    val singleEventHandler: SingleEventHandler = DefaultSingleEventHandler(delay.milliseconds)
+    val throttleDuration = if (duration == 0) 500 else duration
+    val singleEventHandler: SingleEventHandler =
+        DefaultSingleEventHandler(throttleDuration.milliseconds)
     setOnClickListener { view ->
         singleEventHandler.handle {
-            block(view)
+            listener?.onClick(view)
         }
     }
 }

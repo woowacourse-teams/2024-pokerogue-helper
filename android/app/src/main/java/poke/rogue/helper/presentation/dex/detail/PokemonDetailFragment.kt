@@ -1,8 +1,15 @@
 package poke.rogue.helper.presentation.dex.detail
 
+import android.graphics.drawable.ClipDrawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout.LayoutParams
+import android.widget.ProgressBar
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -12,10 +19,10 @@ import poke.rogue.helper.databinding.FragmentPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
-import poke.rogue.helper.presentation.error.ErrorEvent
-import poke.rogue.helper.presentation.error.NetworkErrorActivity
+import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.fragment.toast
@@ -47,6 +54,7 @@ class PokemonDetailFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
+        binding.eventHandler = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         pokemonTypesAdapter =
             PokemonTypesAdapter(
@@ -74,16 +82,6 @@ class PokemonDetailFragment :
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigateToAbilityDetailEvent()
-        repeatOnStarted {
-            viewModel.commonErrorEvent.collect {
-                when (it) {
-                    is ErrorEvent.NetworkConnection -> startActivity<NetworkErrorActivity>()
-                    is ErrorEvent.UnknownError, is ErrorEvent.HttpException -> {
-                        toast(it.msg ?: getString(R.string.error_IO_Exception))
-                    }
-                }
-            }
-        }
     }
 
     private fun observePokemonDetailUi() {
@@ -118,6 +116,16 @@ class PokemonDetailFragment :
         }
     }
 
+    private fun observeNavigateToHomeEvent() {
+        repeatOnStarted {
+            viewModel.navigateToHomeEvent.collect {
+                if (it) {
+                    startActivity(HomeActivity.intent(requireContext()))
+                }
+            }
+        }
+    }
+
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
             ivPokemonDetailPokemon.setImage(pokemonDetail.pokemon.imageUrl)
@@ -135,7 +143,7 @@ class PokemonDetailFragment :
         pokemonTypesAdapter.addTypes(
             types = pokemonDetail.pokemon.types,
             config = typesUiConfig,
-            spacingBetweenTypes = 10.dp,
+            spacingBetweenTypes = 0.dp,
         )
     }
 
@@ -147,9 +155,10 @@ class PokemonDetailFragment :
 
         private val typesUiConfig =
             TypeChip.PokemonTypeViewConfiguration(
-                nameSize = 17.dp,
-                iconSize = 30.dp,
-                hasBackGround = true,
+                width = LayoutParams.WRAP_CONTENT,
+                nameSize = 16.dp,
+                iconSize = 20.dp,
+                hasBackGround = false,
             )
 
         fun bundleOf(
@@ -158,6 +167,32 @@ class PokemonDetailFragment :
         ) = Bundle().apply {
             putLong(POKEMON_ID, pokemonId)
             putInt(CONTAINER_ID, containerId)
+        }
+
+        @JvmStatic
+        @BindingAdapter("progressColor")
+        fun ProgressBar.setProgressDrawable(color: Int) {
+            val background =
+                GradientDrawable().apply {
+                    setColor(context.colorOf(R.color.poke_grey_20))
+                    cornerRadius = resources.getDimension(R.dimen.progress_bar_corner_radius)
+                }
+
+            val progress =
+                GradientDrawable().apply {
+                    setColor(context.colorOf(color))
+                    cornerRadius = resources.getDimension(R.dimen.progress_bar_corner_radius)
+                }
+
+            val clipDrawable = ClipDrawable(progress, Gravity.START, ClipDrawable.HORIZONTAL)
+
+            val layerDrawable =
+                LayerDrawable(arrayOf(background, clipDrawable)).apply {
+                    setId(0, android.R.id.background)
+                    setId(1, android.R.id.progress)
+                }
+
+            progressDrawable = layerDrawable
         }
     }
 }
