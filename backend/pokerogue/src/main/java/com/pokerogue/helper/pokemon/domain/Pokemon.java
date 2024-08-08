@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.domain;
 
+import com.pokerogue.helper.type.domain.PokemonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,15 +9,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @Table(name = "pokemon")
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Pokemon {
 
@@ -99,20 +102,11 @@ public class Pokemon {
         this.image = image;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Pokemon pokemon = (Pokemon) o;
-        return Objects.equals(name, pokemon.name);
+    public List<PokemonType> getSortedPokemonTypes() {
+        return this.pokemonTypeMappings.stream()
+                .map(PokemonTypeMapping::getPokemonType)
+                .sorted(Comparator.comparingLong(PokemonType::getId))
+                .distinct()
+                .toList();
     }
 }
