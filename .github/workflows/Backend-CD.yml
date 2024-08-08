@@ -18,6 +18,10 @@ jobs:
           token: ${{ secrets.ACTION_TOKEN }}
           submodules: true
 
+      - name: Copy docker-compose.yml to home directory
+        working-directory: ./backend/pokerogue/src/main/resources
+        run: cp ./docker-compose-cd.yml /home/ubuntu/docker-compose.yml
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -57,9 +61,6 @@ jobs:
           cd /home/ubuntu
           
           sudo mkdir -p log/nginx && sudo touch log/nginx/error.log && sudo touch log/nginx/access.log
-          
-          sudo touch docker-compose.yml
-          echo "${{ secrets.DOCKER_COMPOSE_PROD }}" | sudo tee docker-compose.yml > /dev/null
           
           sudo chmod 666 /var/run/docker.sock
           
