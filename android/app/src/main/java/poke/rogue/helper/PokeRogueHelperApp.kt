@@ -45,7 +45,6 @@ class PokeRogueHelperApp : Application() {
 
             else -> error("Unknown build type")
         }
-
     }
 
     companion object {
