@@ -80,7 +80,7 @@ jobs:
         working-directory: android
 
       - name: esspresso test
-        run: ./gradlew phonesGroupDebugAndroidTest --stacktrace
+        run: ./gradlew pixel4api30DebugAndroidTest --stacktrace
         working-directory: android
 
       - name: Lint Check
