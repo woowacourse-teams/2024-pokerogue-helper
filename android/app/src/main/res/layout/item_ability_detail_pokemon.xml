@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        
+
         <variable
             name="uiEventHandler"
             type="poke.rogue.helper.presentation.ability.detail.AbilityDetailUiEventHandler" />
@@ -16,48 +16,52 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="12dp"
         android:background="@drawable/shape_pokemon_corner_radius">
 
         <ImageView
             android:id="@+id/iv_ability_detail_pokemon"
-            onSingleClick="@{()->uiEventHandler.navigateToPokemonDetail(pokemon.id)}"
             cropImageUrl="@{pokemon.imageUrl}"
+            onSingleClick="@{()->uiEventHandler.navigateToPokemonDetail(pokemon.id)}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="20dp"
+            android:padding="2dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintWidth_percent="0.60"
+            tools:ignore="ContentDescription"
             tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
-                android:id="@+id/tv_ability_detail_pokemon_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/iv_ability_detail_pokemon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="5dp"
-                android:text="@{pokemon.name}"
-                android:textAlignment="center"
-                tools:text="피카츄" />
+        <TextView
+            android:id="@+id/tv_ability_detail_pokemon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:text="@{pokemon.name}"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_ability_detail_pokemon"
+            tools:text="피카츄" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_poke_type_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@id/tv_ability_detail_pokemon_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_type_right_name" />
+        <LinearLayout
+            android:id="@+id/layout_ability_detail_pokemon_types"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_pokemon_corner_radius"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_ability_detail_pokemon_name"
+            tools:layout_height="50dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

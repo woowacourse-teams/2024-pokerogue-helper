@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.dex
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -49,7 +50,7 @@ class PokemonListFragment :
 
     private fun initAdapter() {
         binding.rvPokemonList.apply {
-            val spanCount = 2
+            val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 4 else 2
             adapter = pokemonAdapter
             layoutManager = GridLayoutManager(context, spanCount)
             addItemDecoration(

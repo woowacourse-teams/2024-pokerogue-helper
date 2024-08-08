@@ -11,7 +11,6 @@ class PokeRogueHelperApp : Application() {
         super.onCreate()
         initTimber()
         initFirebase()
-        error("This is an error")
     }
 
     private fun initTimber() {

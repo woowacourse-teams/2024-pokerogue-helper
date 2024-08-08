@@ -30,6 +30,7 @@
     <string name="dex_poke_name_format">%s #%d</string>
     <string name="dex_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
     <string name="dex_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
+    <string name="dex_list_loading_guide">Loading…</string>
 
     <!-- ability -->
     <string name="ability_title_name">특성 도감</string>

@@ -15,7 +15,7 @@ fun ImageView.setImage(imageUrl: String?) {
     Glide.with(context)
         .load(imageUrl)
         .placeholder(R.drawable.ic_pikachu_silhouette)
-        .error(R.drawable.ic_pikachu_silhouette)
+        .error(R.drawable.ic_ditto_silhouette)
         .into(this)
 }
 
@@ -40,21 +40,6 @@ fun ImageView.loadImageWithProgress(
         .load(imageUrl)
         .listener(createProgressListener(progressIndicator))
         .error(R.drawable.ic_ditto_silhouette)
-        .into(this)
-}
-
-@BindingAdapter("cropImageUrlWithProgress", "progressIndicator")
-fun ImageView.setCroppedImageWithProgressIndicator(
-    imageUrl: String?,
-    progressIndicator: CircularProgressIndicator,
-) {
-    progressIndicator.visibility = View.VISIBLE
-
-    Glide.with(context)
-        .load(imageUrl)
-        .listener(createProgressListener(progressIndicator))
-        .error(R.drawable.ic_pikachu_silhouette)
-        .transform(CropMarginTransformation())
         .into(this)
 }
 

@@ -31,7 +31,7 @@ class AbilityDetailFragment :
 
     private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter(viewModel) }
 
-    override val toolbar: Toolbar?
+    override val toolbar: Toolbar
         get() = binding.toolbarAbilityDetail
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,11 +52,11 @@ class AbilityDetailFragment :
 
     private fun initView() {
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.uiEventHandler = viewModel
+        binding.vm = viewModel
     }
 
     private fun initAdapter() {
-        val decoration = GridSpacingItemDecoration(3, 15.dp, true)
+        val decoration = GridSpacingItemDecoration(3, 9.dp, false)
         binding.rvAbilityDetailPokemon.adapter = adapter
         binding.rvAbilityDetailPokemon.addItemDecoration(decoration)
     }

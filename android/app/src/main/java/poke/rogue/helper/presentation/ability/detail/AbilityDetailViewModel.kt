@@ -5,8 +5,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
@@ -33,6 +37,10 @@ class AbilityDetailViewModel(
 
     private val _errorEvent: MutableSharedFlow<Unit> = MutableSharedFlow()
     val errorEvent = _errorEvent.asSharedFlow()
+
+    val isEmpty: StateFlow<Boolean> =
+        abilityDetail.map { it is AbilityDetailUiState.Success && it.data.pokemons.isEmpty() }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), false)
 
     override fun navigateToPokemonDetail(pokemonId: Long) {
         viewModelScope.launch {
