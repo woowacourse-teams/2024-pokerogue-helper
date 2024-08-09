@@ -1,3 +1,0 @@
-FROM kibana:8.14.3
-
-COPY ./kibana/config/kibana.yml /usr/share/kibana/config/kibana.yml
