@@ -1,6 +1,3 @@
 [submodule "backend/pokerogue/src/main/resources"]
 	path = backend/pokerogue/src/main/resources
 	url = https://github.com/team-timmyroom/be-config.git
-[submodule "backend/monitoring/config"]
-	path = backend/monitoring/config
-	url = https://github.com/team-timmyroom/be-monitoring-config.git
