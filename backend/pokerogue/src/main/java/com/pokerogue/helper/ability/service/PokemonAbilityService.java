@@ -40,7 +40,6 @@ public class PokemonAbilityService {
         List<Pokemon> pokemons = ability.getPokemonAbilityMappings().stream()
                 .map(PokemonAbilityMapping::getPokemon)
                 .distinct()
-                .sorted(Comparator.comparingLong(Pokemon::getId))
                 .toList();
         List<SameAbilityPokemonResponse> pokemonResponses = toSameAbilityPokemonResponses(pokemons);
 

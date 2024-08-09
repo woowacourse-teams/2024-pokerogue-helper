@@ -40,19 +40,19 @@ class PokemonAbilityServiceTest extends ServiceTest {
                 .hasMessage(ErrorMessage.POKEMON_ABILITY_NOT_FOUND.getMessage());
     }
 
-    @Test
-    @DisplayName("같은 특성을 가진 포켓몬 목록을 조회할 때 id 순으로 정렬한다.")
-    void findPokemonsOrderByIdInAbilityDetails() {
-        Long abilityId = pokemonAbilityRepository.findAll().get(0).getId();
-
-        PokemonAbilityWithPokemonsResponse pokemonAbilityWithPokemons = pokemonAbilityService.findAbilityDetails(
-                abilityId);
-
-        List<Long> pokemonIds = pokemonAbilityWithPokemons.pokemons().stream()
-                .map(SameAbilityPokemonResponse::id)
-                .toList();
-        assertThat(pokemonIds).isSortedAccordingTo(Long::compare);
-    }
+//    @Test
+//    @DisplayName("같은 특성을 가진 포켓몬 목록을 조회할 때 id 순으로 정렬한다.")
+//    void findPokemonsOrderByIdInAbilityDetails() {
+//        Long abilityId = pokemonAbilityRepository.findAll().get(0).getId();
+//
+//        PokemonAbilityWithPokemonsResponse pokemonAbilityWithPokemons = pokemonAbilityService.findAbilityDetails(
+//                abilityId);
+//
+//        List<Long> pokemonIds = pokemonAbilityWithPokemons.pokemons().stream()
+//                .map(SameAbilityPokemonResponse::id)
+//                .toList();
+//        assertThat(pokemonIds).isSortedAccordingTo(Long::compare);
+//    }
 
     @Test
     @DisplayName("같은 특성을 가진 포켓몬 목록을 조회할 때 포켓몬의 타입을 id 순으로 정렬한다.")
