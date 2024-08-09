@@ -3,8 +3,8 @@ applicationId = "poke.rogue.helper"
 compileSdk = "34"
 minSdk = "26"
 targetSdk = "34"
-appVersion = "0.1.20"
-versionCode = "00120"
+appVersion = "0.1.30"
+versionCode = "00130"
 agp = "8.3.2"
 
 # kotlin
