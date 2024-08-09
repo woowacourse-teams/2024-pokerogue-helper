@@ -6,6 +6,8 @@ on:
     paths:
       - 'backend/monitoring/**'
 
+  workflow_dispatch:
+
 permissions:
   contents: read
 
