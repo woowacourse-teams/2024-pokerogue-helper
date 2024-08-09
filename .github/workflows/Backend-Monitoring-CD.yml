@@ -3,10 +3,6 @@ name: Backend Monitoring CD
 on:
   push:
     branches: [ "be/infra/#188-set-monitoring-server" ]
-    paths:
-      - 'backend/monitoring/**'
-
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,6 +18,15 @@ jobs:
           token: ${{ secrets.ACTION_TOKEN }}
           submodules: true
 
-      - name: Docker Compose Up
+      - name: Remove Docker Containers
+        working-directory: ./backend/monitoring/config
+        run: |
+          if [ "$(docker ps -qa)" ]; then
+          docker rm -f $(docker ps -qa)
+          else
+          echo "No containers to remove."
+          fi
+
+      - name: Run Docker Containers
         working-directory: ./backend/monitoring/config
         run: docker-compose -f docker-compose.yml up -d
