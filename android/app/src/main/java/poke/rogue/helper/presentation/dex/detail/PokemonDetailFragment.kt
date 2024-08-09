@@ -82,6 +82,7 @@ class PokemonDetailFragment :
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigateToAbilityDetailEvent()
+        observeNavigateToHomeEvent()
     }
 
     private fun observePokemonDetailUi() {
