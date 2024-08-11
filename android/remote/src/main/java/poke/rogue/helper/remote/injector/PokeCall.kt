@@ -1,4 +1,4 @@
-package poke.rogue.helper.remote.call
+package poke.rogue.helper.remote.injector
 
 import okhttp3.Request
 import okio.Timeout
@@ -13,16 +13,18 @@ class PokeCall<T : Any>(private val call: Call<T>) : Call<ApiResponse<T>> {
     override fun enqueue(callback: Callback<ApiResponse<T>>) {
         call.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
+                val apiResponse = response.toApiResponse()
                 return callback.onResponse(
                     this@PokeCall,
-                    Response.success(response.toApiResponse())
+                    Response.success(apiResponse)
                 )
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
+                val errorResponse = t.toErrorResponse()
                 return callback.onResponse(
                     this@PokeCall,
-                    Response.success(t.toErrorResponse())
+                    Response.success(errorResponse)
                 )
             }
         }

@@ -1,4 +1,4 @@
-package poke.rogue.helper.remote.call
+package poke.rogue.helper.remote.injector
 
 import poke.rogue.helper.remote.dto.base.ApiResponse
 import retrofit2.Call
