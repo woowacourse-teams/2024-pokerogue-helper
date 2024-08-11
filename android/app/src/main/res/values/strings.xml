@@ -44,6 +44,8 @@
     <!--    biome -->
     <string name="biome_title_name">바이옴 도감</string>
 
+    <!--    item -->
+    <string name="item_title_name">아이템 도감</string>
 
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>
