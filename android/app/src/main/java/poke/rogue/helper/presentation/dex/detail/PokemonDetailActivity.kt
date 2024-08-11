@@ -5,13 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
-import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
+import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -19,7 +20,7 @@ import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 import timber.log.Timber
 
-class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
+class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
@@ -27,9 +28,15 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
 
+    override val toolbar: Toolbar
+        get() = binding.toolbarPokemonDetail
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.updatePokemonDetail(intent.getLongExtra(POKEMON_ID, 2606))
+
+        binding.eventHandler = viewModel
+        binding.lifecycleOwner = this
 
         initAdapter()
         initObservers()
@@ -74,6 +81,7 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
         repeatOnStarted {
             viewModel.navigateToHomeEvent.collect {
                 if (it) {
+                    Timber.d("navigate to Home")
                     startActivity(HomeActivity.intent(this))
                 }
             }

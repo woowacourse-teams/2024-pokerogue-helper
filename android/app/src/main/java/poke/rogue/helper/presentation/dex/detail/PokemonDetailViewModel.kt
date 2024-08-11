@@ -21,9 +21,7 @@ import poke.rogue.helper.presentation.error.ErrorViewModel
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
     logger: AnalyticsLogger = analyticsLogger(),
-) :
-    ErrorViewModel(logger),
-        PokemonDetailNavigateHandler {
+) : ErrorViewModel(logger), PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> =
         MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
