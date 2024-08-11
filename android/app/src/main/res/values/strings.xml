@@ -41,6 +41,10 @@
     <string name="ability_detail_error_abilityId">잘못된 abilityId값(-1) 입니다.</string>
     <string name="ability_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
 
+    <!--    biome -->
+    <string name="biome_title_name">바이옴 도감</string>
+
+
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>
     <string name="network_error_img_desc">네트워크 에러 이미지</string>
