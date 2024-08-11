@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import poke.rogue.helper.R
 
 class PokemonStatFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -16,5 +15,4 @@ class PokemonStatFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_pokemon_stat, container, false)
     }
-
 }

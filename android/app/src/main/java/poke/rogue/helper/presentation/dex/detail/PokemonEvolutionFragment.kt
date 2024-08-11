@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import poke.rogue.helper.R
 
 class PokemonEvolutionFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

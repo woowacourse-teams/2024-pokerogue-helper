@@ -13,5 +13,4 @@ class PokemonInformationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? = inflater.inflate(R.layout.fragment_pokemon_information, container, false)
-
 }
