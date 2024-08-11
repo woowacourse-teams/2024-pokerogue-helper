@@ -10,9 +10,15 @@ import poke.rogue.helper.remote.service.PokeDexService
 class RemoteDexDataSource(
     private val pokeDexService: PokeDexService,
 ) {
-    suspend fun pokemons(): List<Pokemon> = pokeDexService.pokemons().getOrThrow().toData()
+    suspend fun pokemons(): List<Pokemon> =
+        pokeDexService.pokemons()
+            .getOrThrow()
+            .toData()
 
-    suspend fun pokemon(id: Long): PokemonDetail = pokeDexService.pokemon(id).getOrThrow().toData(id)
+    suspend fun pokemon(id: Long): PokemonDetail =
+        pokeDexService.pokemon(id)
+            .getOrThrow()
+            .toData(id)
 
     companion object {
         private var instance: RemoteDexDataSource? = null

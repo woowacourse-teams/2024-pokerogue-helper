@@ -9,7 +9,8 @@ import poke.rogue.helper.remote.service.AbilityService
 
 class RemoteAbilityDataSource(private val abilityService: AbilityService) {
     suspend fun abilities(): List<Ability> =
-        abilityService.abilities().getOrThrow()
+        abilityService.abilities()
+            .getOrThrow()
             .map { it.toData() }
 
     suspend fun abilityDetail(id: Long): AbilityDetail = abilityService.ability(id).getOrThrow().toData()
