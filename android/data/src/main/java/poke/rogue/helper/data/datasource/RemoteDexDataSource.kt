@@ -1,5 +1,6 @@
 package poke.rogue.helper.data.datasource
 
+import poke.rogue.helper.data.exception.getOrThrow
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.toData
@@ -9,9 +10,9 @@ import poke.rogue.helper.remote.service.PokeDexService
 class RemoteDexDataSource(
     private val pokeDexService: PokeDexService,
 ) {
-    suspend fun pokemons(): List<Pokemon> = pokeDexService.pokemons().data.toData()
+    suspend fun pokemons(): List<Pokemon> = pokeDexService.pokemons().getOrThrow().toData()
 
-    suspend fun pokemon(id: Long): PokemonDetail = pokeDexService.pokemon(id).data.toData(id)
+    suspend fun pokemon(id: Long): PokemonDetail = pokeDexService.pokemon(id).getOrThrow().toData(id)
 
     companion object {
         private var instance: RemoteDexDataSource? = null

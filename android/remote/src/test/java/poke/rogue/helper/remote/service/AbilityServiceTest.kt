@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 import poke.rogue.helper.remote.dto.base.ApiResponse
 import poke.rogue.helper.remote.dto.response.ability.AbilityDetailResponse
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
-import poke.rogue.helper.remote.injector.RetrofitModule2
+import poke.rogue.helper.remote.injector.RetrofitModule
 import poke.rogue.helper.remote.service.utils.getOrThrow
 import poke.rogue.helper.remote.service.utils.httpErrorResponse
 import poke.rogue.helper.remote.service.utils.shouldBeHttpException
@@ -31,7 +31,7 @@ class AbilityServiceTest {
     @BeforeEach
     fun setUp() {
         mockWebServer = MockWebServer()
-        service = RetrofitModule2.testRetrofit(mockWebServer.url("")).create()
+        service = RetrofitModule.testRetrofit(mockWebServer.url("")).create()
     }
 
     @Test
