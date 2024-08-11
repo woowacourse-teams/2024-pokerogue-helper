@@ -8,7 +8,6 @@ import poke.rogue.helper.databinding.ActivityItemBinding
 import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 
 class ItemActivity : ToolbarActivity<ActivityItemBinding>(R.layout.activity_item) {
-
     override val toolbar: Toolbar
         get() = binding.toolbarItem
 

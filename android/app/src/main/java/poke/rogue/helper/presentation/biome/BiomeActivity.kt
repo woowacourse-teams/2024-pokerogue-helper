@@ -8,7 +8,6 @@ import poke.rogue.helper.databinding.ActivityBiomeBinding
 import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 
 class BiomeActivity : ToolbarActivity<ActivityBiomeBinding>(R.layout.activity_biome) {
-
     override val toolbar: Toolbar
         get() = binding.toolbarBiome
 
