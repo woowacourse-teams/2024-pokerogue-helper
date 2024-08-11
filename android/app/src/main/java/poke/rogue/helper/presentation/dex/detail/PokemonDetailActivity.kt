@@ -8,8 +8,9 @@ import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
-import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.context.stringOf
+import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 
@@ -22,7 +23,7 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.updatePokemonDetail(intent.getLongExtra(POKEMON_ID, 1))
+        viewModel.updatePokemonDetail(intent.getLongExtra(POKEMON_ID, 2606))
 
         pokemonTypesAdapter =
             PokemonTypesAdapter(
@@ -35,16 +36,34 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
             progressIndicator = binding.progressIndicatorPokemonDetail,
         )
 
-        initAdapter()
+        repeatOnStarted {
+            viewModel.uiState.collect { pokemonDetail ->
+                when (pokemonDetail) {
+                    is PokemonDetailUiState.IsLoading -> return@collect
+                    is PokemonDetailUiState.Success -> {
+                        bindPokemonDetail(pokemonDetail)
+                    }
+                }
+            }
+        }
     }
 
-    private fun initAdapter() {
+    private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
+        with(binding) {
+            ivPokemonDetailPokemon.loadImageWithProgress(pokemonDetail.pokemon.imageUrl, progressIndicatorPokemonDetail)
+
+            tvPokemonDetailPokemonName.text =
+                stringOf(
+                    R.string.dex_poke_name_format,
+                    pokemonDetail.pokemon.name,
+                    pokemonDetail.pokemon.dexNumber,
+                )
+        }
+
         pokemonTypesAdapter.addTypes(
-            listOf(
-                TypeUiModel.GRASS,
-                TypeUiModel.POISON,
-            ),
-            typesUiConfig,
+            types = pokemonDetail.pokemon.types,
+            config = typesUiConfig,
+            spacingBetweenTypes = 0.dp,
         )
     }
 
