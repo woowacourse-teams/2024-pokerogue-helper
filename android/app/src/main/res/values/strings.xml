@@ -23,6 +23,9 @@
     <string name="home_menu_dex">포켓몬 도감</string>
     <string name="home_menu_ability">특성 도감</string>
     <string name="home_menu_tip">꿀팁</string>
+    <string name="home_menu_battle">배틀 구도</string>
+    <string name="home_menu_biome">바이옴 도감</string>
+    <string name="home_menu_item">아이템 도감</string>
 
     <!--    dex-->
     <string name="dex_title_name">포켓몬 도감</string>
