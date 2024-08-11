@@ -34,8 +34,8 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
 
     private fun initAdapter() {
         binding.apply {
-            rvPokemonStatsAbilities.adapter = abilityAdapter
-            rvStatList.adapter = pokemonStatAdapter
+            rvPokemonAbilities.adapter = abilityAdapter
+            rvPokemonStats.adapter = pokemonStatAdapter
         }
     }
 

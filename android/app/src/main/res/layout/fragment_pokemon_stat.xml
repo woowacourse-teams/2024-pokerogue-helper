@@ -10,7 +10,7 @@
         tools:context=".presentation.dex.detail.PokemonStatFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_pokemon_stats_abilities"
+            android:id="@+id/rv_pokemon_abilities"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_pokemon_stats_abilities">
+            app:layout_constraintTop_toBottomOf="@+id/rv_pokemon_abilities">
 
             <TextView
                 android:id="@+id/tv_title_stats"
@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_stat_list"
+                android:id="@+id/rv_pokemon_stats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
