@@ -12,8 +12,7 @@ class RemoteAbilityDataSource(private val abilityService: AbilityService) {
         abilityService.abilities().getOrThrow()
             .map { it.toData() }
 
-    suspend fun abilityDetail(id: Long): AbilityDetail =
-        abilityService.ability(id).getOrThrow().toData()
+    suspend fun abilityDetail(id: Long): AbilityDetail = abilityService.ability(id).getOrThrow().toData()
 
     companion object {
         private var instance: RemoteAbilityDataSource? = null

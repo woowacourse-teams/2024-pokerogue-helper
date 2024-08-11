@@ -5,7 +5,6 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
-
 fun <T> ApiResponse<T>.getOrNull(): T? {
     return when (this) {
         is ApiResponse.Success -> data

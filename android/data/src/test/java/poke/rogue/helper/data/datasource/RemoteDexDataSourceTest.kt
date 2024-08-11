@@ -7,7 +7,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import poke.rogue.helper.data.model.fixture.pokemonResponses
 import poke.rogue.helper.data.model.fixture.pokemons
-import poke.rogue.helper.remote.dto.response.BaseResponse
+import poke.rogue.helper.remote.dto.base.ApiResponse
 import poke.rogue.helper.remote.service.PokeDexService
 
 class RemoteDexDataSourceTest {
@@ -19,9 +19,8 @@ class RemoteDexDataSourceTest {
         runTest {
             // given
             val mockPokemonResponses = pokemonResponses(1, 2, 3, 4, 5)
-            val mockResponse =
-                BaseResponse(message = "포켓몬 리스트 불러오기에 성공했습니다.", data = mockPokemonResponses)
-            coEvery { mockService.pokemons() } returns mockResponse
+            val mockResponse = mockPokemonResponses
+            coEvery { mockService.pokemons() } returns ApiResponse.Success(mockResponse)
 
             // when
             val actualPokemonDatas = dataSource.pokemons()

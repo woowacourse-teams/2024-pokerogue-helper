@@ -26,7 +26,7 @@ import java.net.ConnectException
 
 class AbilityServiceTest {
     private lateinit var mockWebServer: MockWebServer
-    private lateinit var service: AbilityService2
+    private lateinit var service: AbilityService
 
     @BeforeEach
     fun setUp() {

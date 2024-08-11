@@ -11,7 +11,6 @@ import poke.rogue.helper.remote.dto.base.ApiResponse.Success
  * - [HttpException] : 네트워크 에러 (서버와 관련된 에러, 404, 401...)
  * - [NetworkException] : 알 수 없는 에러 (IOException, ConnectException, SocketTimeoutException 이외의 에러)
  */
-// remote module
 sealed interface ApiResponse<out T> {
     data class Success<T : Any>(val data: T) : ApiResponse<T>
 
