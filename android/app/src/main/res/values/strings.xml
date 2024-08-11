@@ -32,6 +32,8 @@
     <string name="dex_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
     <string name="dex_list_loading_guide">Loading…</string>
 
+    <string name="dex_detail_pokemon_stats_title">기본 스탯</string>
+
     <!-- ability -->
     <string name="ability_title_name">특성 도감</string>
     <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
