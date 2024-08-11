@@ -1,17 +1,17 @@
 package poke.rogue.helper.remote.injector
 
 import kotlinx.serialization.json.Json
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.jetbrains.annotations.VisibleForTesting
 import poke.rogue.helper.remote.BuildConfig
 import poke.rogue.helper.remote.interceptor.RedirectInterceptor
-import poke.rogue.helper.remote.service.AbilityService2
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
-import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 object RetrofitModule {
@@ -72,7 +72,7 @@ object RetrofitModule2 {
             .baseUrl(BuildConfig.POKE_BASE_URL)
             .client(client)
             .addCallAdapterFactory(PokeCallAdapterFactory())
-            .addConverterFactory(PokeConverterFactory(json(),converterFactory))
+            .addConverterFactory(PokeConverterFactory(json(), converterFactory))
             .build()
     }
 
@@ -112,5 +112,12 @@ object RetrofitModule2 {
 
     fun retrofit(): Retrofit = retrofit
 
-    fun service(): AbilityService2 = retrofit().create()
+    @VisibleForTesting
+    fun testRetrofit(path: HttpUrl): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(path)
+            .addCallAdapterFactory(PokeCallAdapterFactory())
+            .addConverterFactory(PokeConverterFactory(json(), jsonConverterFactory(json())))
+            .build()
+    }
 }
