@@ -2,56 +2,11 @@ name: Backend CI
 
 on:
   pull_request:
-    branches: [ "be/develop" ]
+    branches: [ "be/infra/#200-update-ci-cd-workflows" ]
 
 permissions:
   contents: read
 
 jobs:
   test:
-    runs-on: ci
-    steps:
-
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.ACTION_TOKEN }}
-          submodules: true
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Remove Containers
-        run: |
-          docker ps -aq | xargs -r docker rm -vf
-
-      - name: Set up Local MySQL
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql database: 'pokerogue'
-          mysql user: ${{ secrets.TEST_DB_USERNAME }}
-          mysql password: ${{ secrets.TEST_DB_PASSWORD }}
-
-      - name: Set up Test MySQL
-        working-directory: ./backend/pokerogue/src/main/resources/
-        run: docker-compose -f docker-compose-ci.yml up -d
-
-      - name: Wait for Test MySQL to be ready
-        working-directory: ./backend/pokerogue/src/main/resources/
-        run: |
-          for i in {1..30}; do
-          if docker-compose -f docker-compose-ci.yml exec -T pokerogue-db mysqladmin ping --host 127.0.0.1 --user ${{ secrets.TEST_DB_USERNAME }} --password=${{ secrets.TEST_DB_PASSWORD }} --silent; then
-          echo "MySQL is up and running!"
-          break
-          else
-          echo "Waiting for MySQL to be ready..."
-          sleep 5
-          fi
-          done
-
-      - name: Run Test
-        working-directory: ./backend/pokerogue
-        run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
+    uses: ./.github/workflows/Backend-Test.yml
