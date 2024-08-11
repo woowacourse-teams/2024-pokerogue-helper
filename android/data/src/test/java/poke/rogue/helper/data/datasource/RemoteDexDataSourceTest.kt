@@ -5,6 +5,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
+import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.data.model.fixture.pokemonResponses
 import poke.rogue.helper.data.model.fixture.pokemons
 import poke.rogue.helper.remote.dto.base.ApiResponse
@@ -12,7 +13,7 @@ import poke.rogue.helper.remote.service.PokeDexService
 
 class RemoteDexDataSourceTest {
     private val mockService = mockk<PokeDexService>()
-    private val dataSource = RemoteDexDataSource(mockService)
+    private val dataSource = RemoteDexDataSource(mockService, AnalyticsLogger.Stub)
 
     @Test
     fun `모든 포켓몬 목록을 불러온다`() =
