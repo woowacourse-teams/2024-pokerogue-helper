@@ -40,4 +40,22 @@ class HomeViewModel : ViewModel(), HomeActionHandler {
             _navigationEvent.emit(HomeNavigateEvent.ToLogo)
         }
     }
+
+    override fun navigateToBiome() {
+        viewModelScope.launch {
+            _navigationEvent.emit(HomeNavigateEvent.ToBiome)
+        }
+    }
+
+    override fun navigateToItem() {
+        viewModelScope.launch {
+            _navigationEvent.emit(HomeNavigateEvent.ToItem)
+        }
+    }
+
+    override fun navigateToBattle() {
+        viewModelScope.launch {
+            _navigationEvent.emit(HomeNavigateEvent.ToBattle)
+        }
+    }
 }

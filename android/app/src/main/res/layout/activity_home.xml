@@ -234,7 +234,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_home_biome"
-                        onSingleClick="@{() -> actionHandler.navigateToType()}"
+                        onSingleClick="@{() -> actionHandler.navigateToBiome()}"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_row="2"
@@ -276,7 +276,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_home_item"
-                        onSingleClick="@{() -> actionHandler.navigateToTip()}"
+                        onSingleClick="@{() -> actionHandler.navigateToItem()}"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:layout_row="2"
