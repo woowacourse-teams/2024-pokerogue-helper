@@ -56,6 +56,11 @@ fun Context.stringOf(
     @StringRes resId: Int,
 ) = getString(resId)
 
+fun Context.stringOf(
+    @StringRes resId: Int,
+    vararg formatArgs: Any?,
+) = getString(resId, *formatArgs)
+
 fun Context.colorOf(
     @ColorRes resId: Int,
 ) = ContextCompat.getColor(this, resId)
