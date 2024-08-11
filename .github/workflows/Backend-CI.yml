@@ -10,3 +10,4 @@ permissions:
 jobs:
   test:
     uses: ./.github/workflows/Backend-Test.yml
+    secrets: inherit
