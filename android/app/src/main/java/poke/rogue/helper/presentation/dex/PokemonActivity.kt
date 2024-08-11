@@ -20,8 +20,6 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
     }
 
     companion object {
-        fun intent(context: Context): Intent {
-            return Intent(context, PokemonActivity::class.java)
-        }
+        fun intent(context: Context): Intent = Intent(context, PokemonActivity::class.java)
     }
 }

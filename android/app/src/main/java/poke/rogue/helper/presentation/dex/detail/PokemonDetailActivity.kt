@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.dex.detail
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
@@ -9,6 +11,7 @@ import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
+import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -32,7 +35,7 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
         initObservers()
     }
 
-    private fun initAdapter()  {
+    private fun initAdapter() {
         pokemonTypesAdapter =
             PokemonTypesAdapter(
                 context = this,
@@ -63,6 +66,15 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
                     is PokemonDetailUiState.Success -> {
                         bindPokemonDetail(pokemonDetail)
                     }
+                }
+            }
+        }
+
+        // navigate to Home
+        repeatOnStarted {
+            viewModel.navigateToHomeEvent.collect {
+                if (it) {
+                    startActivity(HomeActivity.intent(this))
                 }
             }
         }
@@ -98,5 +110,13 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
                 iconSize = 20.dp,
                 hasBackGround = false,
             )
+
+        fun intent(
+            context: Context,
+            pokemonId: Long,
+        ): Intent =
+            Intent(context, PokemonDetailActivity::class.java).apply {
+                putExtra(POKEMON_ID, pokemonId)
+            }
     }
 }
