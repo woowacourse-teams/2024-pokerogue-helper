@@ -32,7 +32,7 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
         initObservers()
     }
 
-    private fun initAdapter(){
+    private fun initAdapter()  {
         pokemonTypesAdapter =
             PokemonTypesAdapter(
                 context = this,
@@ -100,4 +100,3 @@ class PokemonDetailActivity : BindingActivity<ActivityPokemonDetailBinding>(R.la
             )
     }
 }
-

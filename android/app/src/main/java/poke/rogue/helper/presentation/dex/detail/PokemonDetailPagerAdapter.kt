@@ -5,15 +5,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class PokemonDetailPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
-    private val fragments: ArrayList<Fragment> = arrayListOf(
-        PokemonStatFragment(),
-        PokemonEvolutionFragment(),
-        PokemonMovesFragment(),
-        PokemonInformationFragment(),
-    )
+    private val fragments: ArrayList<Fragment> =
+        arrayListOf(
+            PokemonStatFragment(),
+            PokemonEvolutionFragment(),
+            PokemonMovesFragment(),
+            PokemonInformationFragment(),
+        )
 
     override fun getItemCount(): Int = fragments.size
 
     override fun createFragment(position: Int): Fragment = fragments[position]
-
 }
