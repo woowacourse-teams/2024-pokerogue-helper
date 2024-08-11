@@ -8,6 +8,11 @@ permissions:
   contents: read
 
 jobs:
+  test:
+    uses: ./.github/workflows/Backend-CI.yml
+    secrets: inherit
+
+
   build:
     runs-on: cd
     steps:
