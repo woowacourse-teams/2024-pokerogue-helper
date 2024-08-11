@@ -9,25 +9,31 @@ import retrofit2.Response
 import java.io.IOException
 
 class PokeCall<T : Any>(private val call: Call<T>) : Call<ApiResponse<T>> {
-
     override fun enqueue(callback: Callback<ApiResponse<T>>) {
-        call.enqueue(object : Callback<T> {
-            override fun onResponse(call: Call<T>, response: Response<T>) {
-                val apiResponse = response.toApiResponse()
-                return callback.onResponse(
-                    this@PokeCall,
-                    Response.success(apiResponse)
-                )
-            }
+        call.enqueue(
+            object : Callback<T> {
+                override fun onResponse(
+                    call: Call<T>,
+                    response: Response<T>,
+                ) {
+                    val apiResponse = response.toApiResponse()
+                    return callback.onResponse(
+                        this@PokeCall,
+                        Response.success(apiResponse),
+                    )
+                }
 
-            override fun onFailure(call: Call<T>, t: Throwable) {
-                val errorResponse = t.toErrorResponse()
-                return callback.onResponse(
-                    this@PokeCall,
-                    Response.success(errorResponse)
-                )
-            }
-        }
+                override fun onFailure(
+                    call: Call<T>,
+                    t: Throwable,
+                ) {
+                    val errorResponse = t.toErrorResponse()
+                    return callback.onResponse(
+                        this@PokeCall,
+                        Response.success(errorResponse),
+                    )
+                }
+            },
         )
     }
 
@@ -36,20 +42,23 @@ class PokeCall<T : Any>(private val call: Call<T>) : Call<ApiResponse<T>> {
         val error: String? = errorBody()?.string()
         return if (isSuccessful) { // 200..300
             val body = body()
-            if (body != null) ApiResponse.Success(body)
-            else ApiResponse.Failure.UnknownError(IllegalStateException("body == null"))
+            if (body != null) {
+                ApiResponse.Success(body)
+            } else {
+                ApiResponse.Failure.UnknownError(IllegalStateException("body == null"))
+            }
         } else { // 300..400
             ApiResponse.Failure.HttpException(code, IOException(error))
         }
     }
 
-    private fun Throwable.toErrorResponse(): ApiResponse<T> = when (this) {
-        // Network Error - ex) UnknownHostException, SocketTimeoutException, ConnectException
-        is IOException -> ApiResponse.Failure.NetworkException(this)
-        // 통신 이슈 외 - ex) JsonSyntaxException, IllegalStateException
-        else -> ApiResponse.Failure.UnknownError(this)
-    }
-
+    private fun Throwable.toErrorResponse(): ApiResponse<T> =
+        when (this) {
+            // Network Error - ex) UnknownHostException, SocketTimeoutException, ConnectException
+            is IOException -> ApiResponse.Failure.NetworkException(this)
+            // 통신 이슈 외 - ex) JsonSyntaxException, IllegalStateException
+            else -> ApiResponse.Failure.UnknownError(this)
+        }
 
     override fun clone(): Call<ApiResponse<T>> = PokeCall(call.clone())
 

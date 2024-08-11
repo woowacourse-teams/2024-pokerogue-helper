@@ -1,6 +1,5 @@
 package poke.rogue.helper.remote.service.utils
 
-import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
 import poke.rogue.helper.remote.dto.base.ApiResponse
 import poke.rogue.helper.remote.dto.base.isFailure

@@ -14,9 +14,12 @@ import poke.rogue.helper.remote.dto.base.ApiResponse.Success
 // remote module
 sealed interface ApiResponse<out T> {
     data class Success<T : Any>(val data: T) : ApiResponse<T>
+
     sealed class Failure(val throwable: Throwable) : ApiResponse<Nothing> {
         data class HttpException(val code: Int, private val error: Throwable) : Failure(error)
+
         data class NetworkException(private val error: Throwable) : Failure(error)
+
         data class UnknownError(private val error: Throwable) : Failure(error)
     }
 }

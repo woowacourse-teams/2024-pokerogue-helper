@@ -17,20 +17,20 @@ class PokeCallAdapterFactory : CallAdapter.Factory() {
     override fun get(
         returnType: Type,
         annotations: Array<Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): CallAdapter<*, *>? {
         // 1) getRawType - Call<ApiResponse<Foo>>
         val rawType: Type = getRawType(returnType)
         if (rawType != Call::class.java) return null
-        require(returnType is ParameterizedType) { //2
-            "returnType(=${returnType}) 은 반드시 Call<ApiResponse<Foo>> 형태여야 함"
+        require(returnType is ParameterizedType) { // 2
+            "returnType(=$returnType) 은 반드시 Call<ApiResponse<Foo>> 형태여야 함"
         }
 
         // 2) responseType - ApiResponse<Foo>
         val responseType: Type = getParameterUpperBound(0, returnType)
-        if(getRawType(responseType) != ApiResponse::class.java) return null
+        if (getRawType(responseType) != ApiResponse::class.java) return null
         require(responseType is ParameterizedType) {
-            "responseType(=${responseType}) 은 반드시 ApiResponse<Foo> or ApiResponse<out Foo> 형태여야 함"
+            "responseType(=$responseType) 은 반드시 ApiResponse<Foo> or ApiResponse<out Foo> 형태여야 함"
         }
 
         // 3) bodyType - Foo

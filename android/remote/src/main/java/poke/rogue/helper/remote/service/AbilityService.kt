@@ -18,7 +18,6 @@ interface AbilityService {
 }
 
 interface AbilityService2 {
-
     @GET("api/v1/abilities")
     suspend fun abilities(): ApiResponse<List<AbilityResponse>>
 

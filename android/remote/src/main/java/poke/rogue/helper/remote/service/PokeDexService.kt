@@ -18,7 +18,6 @@ interface PokeDexService {
 }
 
 interface PokeDexService2 {
-
     @GET("api/v1/pokemons")
     suspend fun pokemons(): ApiResponse<List<PokemonResponse>>
 

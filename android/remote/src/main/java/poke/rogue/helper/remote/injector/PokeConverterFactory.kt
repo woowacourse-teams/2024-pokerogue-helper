@@ -12,12 +12,12 @@ import java.lang.reflect.Type
 
 class PokeConverterFactory(
     private val json: Json,
-    private val delegate: Converter.Factory
+    private val delegate: Converter.Factory,
 ) : Converter.Factory() {
     override fun responseBodyConverter(
         type: Type,
         annotations: Array<Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): Converter<ResponseBody, *> {
         return Converter { body: ResponseBody ->
             // type 이 BaseResponse 이라면 BaseResponse 로 변환
@@ -40,13 +40,13 @@ class PokeConverterFactory(
         type: Type,
         parameterAnnotations: Array<out Annotation>,
         methodAnnotations: Array<out Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): Converter<*, RequestBody>? {
         return delegate.requestBodyConverter(
             type,
             parameterAnnotations,
             methodAnnotations,
-            retrofit
+            retrofit,
         )
     }
 }
