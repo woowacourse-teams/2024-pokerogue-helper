@@ -32,7 +32,6 @@
                 android:layout_gravity="end|center_vertical"
                 android:importantForAccessibility="no"
                 android:onClick="@{() -> eventHandler.navigateToHome()}"
-                android:padding="12dp"
                 android:src="@drawable/icon_home" />
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -40,8 +39,6 @@
             android:id="@+id/iv_pokemon_detail_pokemon"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:padding="30dp"
             android:src="@drawable/ic_ditto_silhouette"
             android:translationZ="10dp"
             app:layout_constraintDimensionRatio="1"
@@ -49,8 +46,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_pokemon_detail"
             app:layout_constraintWidth_percent="0.66"
-            tools:src="@tools:sample/avatars"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/avatars" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progress_indicator_pokemon_detail"
@@ -86,6 +83,24 @@
             app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_pokemon_name"
             tools:layout_height="50dp"
             tools:layout_width="100dp" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_pokemon_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_pokemon" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager_pokemon_detail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout_pokemon_detail" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
