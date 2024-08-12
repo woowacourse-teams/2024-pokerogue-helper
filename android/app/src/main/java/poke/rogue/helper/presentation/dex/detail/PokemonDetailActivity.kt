@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
+import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarActivity
@@ -65,7 +66,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
     private fun initObservers() {
         observePokemonDetailUi()
-
+        observeNavigateToHomeEvent()
         observeNavigateToAbilityDetailEvent()
     }
 
@@ -82,12 +83,24 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
         }
     }
 
-    private fun observeNavigateToAbilityDetailEvent() {
+    private fun observeNavigateToHomeEvent() {
         repeatOnStarted {
             viewModel.navigateToHomeEvent.collect {
                 if (it) {
                     startActivity(HomeActivity.intent(this))
                 }
+            }
+        }
+    }
+
+    private fun observeNavigateToAbilityDetailEvent() {
+        repeatOnStarted {
+            viewModel.navigationToDetailEvent.collect { abilityId ->
+                val intent =
+                    Intent(this, AbilityActivity::class.java).apply {
+                        putExtra(AbilityActivity.ABILITY_ID, abilityId)
+                    }
+                startActivity(intent)
             }
         }
     }
