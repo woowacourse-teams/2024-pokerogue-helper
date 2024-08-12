@@ -8,6 +8,8 @@ import poke.rogue.helper.databinding.FragmentPokemonStatBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
+import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout.fragment_pokemon_stat) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModels()
@@ -36,6 +38,14 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
         binding.apply {
             rvPokemonAbilities.adapter = abilityAdapter
             rvPokemonStats.adapter = pokemonStatAdapter
+
+            rvPokemonAbilities.addItemDecoration(
+                LinearSpacingItemDecoration(
+                    spacing = 7.dp,
+                    includeEdge = false,
+                    orientation = LinearSpacingItemDecoration.Orientation.HORIZONTAL,
+                ),
+            )
         }
     }
 
