@@ -131,5 +131,10 @@ class AbilityDetailFragment :
             putLong(ABILITY_ID, abilityId)
             putInt(CONTAINER_ID, containerId)
         }
+
+        fun bundleOf(abilityId: Long) =
+            Bundle().apply {
+                putLong(ABILITY_ID, abilityId)
+            }
     }
 }
