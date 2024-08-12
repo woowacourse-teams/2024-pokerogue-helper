@@ -1,0 +1,25 @@
+{
+  "message": "특성 정보 불러오기에 성공했습니다.",
+  "data": {
+    "koName": "악취",
+    "description": "악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다.",
+    "pokemons": [
+      {
+        "id": 2648,
+        "pokedexNumber": 44,
+        "koName": "냄새꼬",
+        "image": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/image/be4b7db8-0cae-4479-85cb-286b71192756",
+        "pokemonTypeResponses": [
+          {
+            "pokemonTypeName": "poison",
+            "pokemonTypeLogo": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/poison.svg"
+          },
+          {
+            "pokemonTypeName": "grass",
+            "pokemonTypeLogo": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/grass.svg"
+          }
+        ]
+      }
+    ]
+  }
+}

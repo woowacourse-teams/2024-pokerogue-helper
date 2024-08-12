@@ -11,7 +11,9 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
+import poke.rogue.helper.presentation.biome.BiomeActivity
 import poke.rogue.helper.presentation.dex.PokemonActivity
+import poke.rogue.helper.presentation.item.ItemActivity
 import poke.rogue.helper.presentation.tip.TipActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.TypeActivity
@@ -64,6 +66,19 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
                             logger.logClickEvent(NAVIGATE_TO_TIP)
                         }
 
+                    is HomeNavigateEvent.ToBiome ->
+                        startActivity<BiomeActivity> {
+                            logger.logClickEvent(NAVIGATE_TO_BIOME)
+                        }
+
+                    is HomeNavigateEvent.ToItem -> {
+                        startActivity<ItemActivity> {
+                            logger.logClickEvent(NAVIGATE_TO_ITEM)
+                        }
+                    }
+
+                    is HomeNavigateEvent.ToBattle -> {}
+
                     is HomeNavigateEvent.ToLogo -> navigateToPokeRogue()
                 }
             }
@@ -86,6 +101,9 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
         private const val NAVIGATE_TO_DEX = "Nav_Dex"
         private const val NAVIGATE_TO_ABILITY = "Nav_Ability"
         private const val NAVIGATE_TO_TIP = "Nav_Tip"
+        private const val NAVIGATE_TO_BIOME = "Nav_Biome"
+        private const val NAVIGATE_TO_ITEM = "Nav_Item"
+        private const val NAVIGATE_TO_BATTLE = "Nav_Battle" // todo 배틀 화면
 
         fun intent(context: Context): Intent {
             return Intent(context, HomeActivity::class.java)

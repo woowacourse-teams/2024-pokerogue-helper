@@ -79,13 +79,6 @@ class PokemonListFragment :
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
-//                    val containerId = R.id.fragment_container_pokemon
-//                    replace<PokemonDetailFragment>(
-//                        containerId,
-//                        args = PokemonDetailFragment.bundleOf(pokemonId, containerId),
-//                    )
-//                    addToBackStack(TAG)
-
                     startActivity(PokemonDetailActivity.intent(requireContext(), pokemonId))
                 }
             }
@@ -93,7 +86,7 @@ class PokemonListFragment :
         repeatOnStarted {
             viewModel.commonErrorEvent.collect {
                 when (it) {
-                    is ErrorEvent.NetworkConnection -> startActivity<NetworkErrorActivity>()
+                    is ErrorEvent.NetworkException -> startActivity<NetworkErrorActivity>()
                     is ErrorEvent.UnknownError, is ErrorEvent.HttpException -> {
                         toast(it.msg ?: getString(R.string.error_IO_Exception))
                     }

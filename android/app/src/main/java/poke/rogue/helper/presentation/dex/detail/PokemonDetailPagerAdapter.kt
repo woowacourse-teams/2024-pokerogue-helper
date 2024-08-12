@@ -5,8 +5,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class PokemonDetailPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
-    private val fragments: ArrayList<Fragment> =
-        arrayListOf(
+    private val fragments =
+        listOf(
             PokemonStatFragment(),
             PokemonEvolutionFragment(),
             PokemonMovesFragment(),

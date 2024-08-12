@@ -40,6 +40,12 @@
             android:name=".presentation.ability.AbilityActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.biome.BiomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.item.ItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.error.NetworkErrorActivity"
             android:exported="false" />
 
