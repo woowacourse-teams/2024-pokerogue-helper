@@ -3,14 +3,12 @@ package poke.rogue.helper.presentation.ability.detail
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityDetailBinding
 import poke.rogue.helper.presentation.ability.model.toUi
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.error.ErrorEvent
 import poke.rogue.helper.presentation.error.NetworkErrorActivity
 import poke.rogue.helper.presentation.home.HomeActivity
@@ -93,18 +91,7 @@ class AbilityDetailFragment :
 
         repeatOnStarted {
             viewModel.navigationToPokemonDetailEvent.collect { pokemonId ->
-                parentFragmentManager.commit {
-                    val containerId = arguments?.getInt(CONTAINER_ID) ?: INVALID_CONTAINER_ID
-                    if (containerId == INVALID_CONTAINER_ID) {
-                        toast(R.string.ability_detail_error_containerId)
-                        return@commit
-                    }
-                    replace<PokemonDetailFragment>(
-                        containerId,
-                        args = PokemonDetailFragment.bundleOf(pokemonId, containerId),
-                    )
-                    addToBackStack(TAG)
-                }
+                PokemonDetailActivity.intent(requireContext(), pokemonId).let(::startActivity)
             }
         }
 
@@ -121,7 +108,6 @@ class AbilityDetailFragment :
         private const val ABILITY_ID = "abilityId"
         private const val CONTAINER_ID = "containerId"
         private const val INVALID_ABILITY_ID = -1L
-        private const val INVALID_CONTAINER_ID = -1
         private val TAG = AbilityDetailFragment::class.java.simpleName
 
         fun bundleOf(
