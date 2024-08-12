@@ -11,23 +11,22 @@ import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.FragmentPokemonListBinding
+import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
+import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
-import poke.rogue.helper.presentation.error.ErrorEvent
-import poke.rogue.helper.presentation.error.NetworkErrorActivity
-import poke.rogue.helper.presentation.toolbar.ToolbarFragment
-import poke.rogue.helper.presentation.util.fragment.startActivity
-import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonListFragment :
-    ToolbarFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
+    ErrorHandleFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
     private val viewModel by viewModels<PokemonListViewModel> {
         PokemonListViewModel.factory(
             DefaultDexRepository.instance(),
         )
     }
+    override val errorViewModel: ErrorHandleViewModel
+        get() = viewModel
 
     private val pokemonAdapter: PokemonAdapter by lazy {
         PokemonAdapter(viewModel)
@@ -50,7 +49,8 @@ class PokemonListFragment :
 
     private fun initAdapter() {
         binding.rvPokemonList.apply {
-            val spanCount = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 4 else 2
+            val spanCount =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 4 else 2
             adapter = pokemonAdapter
             layoutManager = GridLayoutManager(context, spanCount)
             addItemDecoration(
@@ -64,19 +64,11 @@ class PokemonListFragment :
     }
 
     private fun initObservers() {
-        observeDisplayedPokemons()
-        observeNavigateToDetail()
-    }
-
-    private fun observeDisplayedPokemons() {
         repeatOnStarted {
             viewModel.uiState.collect { pokemonUiModels ->
                 pokemonAdapter.submitList(pokemonUiModels)
             }
         }
-    }
-
-    private fun observeNavigateToDetail() {
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
@@ -86,16 +78,6 @@ class PokemonListFragment :
                         args = PokemonDetailFragment.bundleOf(pokemonId, containerId),
                     )
                     addToBackStack(TAG)
-                }
-            }
-        }
-        repeatOnStarted {
-            viewModel.commonErrorEvent.collect {
-                when (it) {
-                    is ErrorEvent.NetworkException -> startActivity<NetworkErrorActivity>()
-                    is ErrorEvent.UnknownError, is ErrorEvent.HttpException -> {
-                        toast(it.msg ?: getString(R.string.error_IO_Exception))
-                    }
                 }
             }
         }
