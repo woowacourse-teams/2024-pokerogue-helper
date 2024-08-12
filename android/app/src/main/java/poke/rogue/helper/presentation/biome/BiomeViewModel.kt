@@ -20,7 +20,4 @@ class BiomeViewModel(logger: AnalyticsLogger = analyticsLogger()) :
             _navigationToDetailEvent.emit(biomeId)
         }
     }
-
-    companion object {
-    }
 }
