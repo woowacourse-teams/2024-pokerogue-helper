@@ -23,6 +23,8 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
     ) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.eventHandler = activityViewModel
+
         initAdapter()
         repeatOnStarted {
             activityViewModel.uiState.collect { uiState ->
