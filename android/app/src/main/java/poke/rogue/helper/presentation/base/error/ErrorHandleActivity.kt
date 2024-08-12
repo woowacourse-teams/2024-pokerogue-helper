@@ -9,7 +9,9 @@ import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
-abstract class ErrorHandleActivity<T : ViewDataBinding>(@LayoutRes layoutRes: Int) :
+abstract class ErrorHandleActivity<T : ViewDataBinding>(
+    @LayoutRes layoutRes: Int,
+) :
     ToolbarActivity<T>(layoutRes) {
     abstract val errorViewModel: ErrorHandleViewModel
 

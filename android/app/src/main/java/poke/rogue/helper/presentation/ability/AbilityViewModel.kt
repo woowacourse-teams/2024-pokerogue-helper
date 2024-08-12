@@ -62,8 +62,7 @@ class AbilityViewModel(
         }
     }
 
-    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> =
-        abilityRepository.abilities(query).map { it.toUi() }
+    private suspend fun queriedAbilities(query: String): List<AbilityUiModel> = abilityRepository.abilities(query).map { it.toUi() }
 
     override fun navigateToDetail(abilityId: Long) {
         viewModelScope.launch {

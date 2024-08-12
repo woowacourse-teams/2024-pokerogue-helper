@@ -15,7 +15,10 @@ abstract class ErrorHandleFragment<T : ViewDataBinding>(
 ) : ToolbarFragment<T>(layoutRes) {
     abstract val errorViewModel: ErrorHandleViewModel
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         observeErrorEvent()
     }
