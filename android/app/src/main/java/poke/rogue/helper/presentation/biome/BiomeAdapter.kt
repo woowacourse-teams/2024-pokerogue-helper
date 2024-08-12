@@ -7,7 +7,7 @@ import poke.rogue.helper.databinding.ItemBiomeBinding
 import poke.rogue.helper.presentation.biome.model.BiomeUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class BiomeAdapter(/*private val onClickBiomeItem: BiomeUiEventHandler*/) :
+class BiomeAdapter(private val onClickBiomeItem: BiomeUiEventHandler) :
     ListAdapter<BiomeUiModel, BiomeViewHolder>(biomeComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -19,7 +19,7 @@ class BiomeAdapter(/*private val onClickBiomeItem: BiomeUiEventHandler*/) :
                 parent,
                 false,
             ),
-           // onClickBiomeItem,
+            onClickBiomeItem,
         )
     }
 

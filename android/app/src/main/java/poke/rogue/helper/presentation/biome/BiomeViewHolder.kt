@@ -7,13 +7,13 @@ import poke.rogue.helper.presentation.util.view.dp
 
 class BiomeViewHolder(
     private val binding: ItemBiomeBinding,
-    // private val onClickBiomeItem: BiomeUiEventHandler,
+    private val onClickBiomeItem: BiomeUiEventHandler,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(biomeUiModel: BiomeUiModel) {
         binding.apply {
             biome = biomeUiModel
-            //       uiEventHandler = onClickBiomeItem
+            uiEventHandler = onClickBiomeItem
         }
 
         val typesLayout = binding.flBiomeTypeIcons
