@@ -9,7 +9,6 @@ class BiomeViewHolder(
     private val binding: ItemBiomeBinding,
     private val onClickBiomeItem: BiomeUiEventHandler,
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bind(biomeUiModel: BiomeUiModel) {
         binding.apply {
             biome = biomeUiModel
@@ -17,10 +16,11 @@ class BiomeViewHolder(
         }
 
         val typesLayout = binding.flBiomeTypeIcons
-        val biomeTypesAdapter = BiomeTypesAdapter(
-            context = binding.root.context,
-            viewGroup = typesLayout,
-        )
+        val biomeTypesAdapter =
+            BiomeTypesAdapter(
+                context = binding.root.context,
+                viewGroup = typesLayout,
+            )
         biomeTypesAdapter.addTypes(
             types = biomeUiModel.types,
             spacingBetweenTypes = TYPES_SPACING,

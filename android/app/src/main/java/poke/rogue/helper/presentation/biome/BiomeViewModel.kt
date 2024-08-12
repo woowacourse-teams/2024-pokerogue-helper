@@ -12,7 +12,6 @@ import poke.rogue.helper.presentation.error.ErrorViewModel
 class BiomeViewModel(logger: AnalyticsLogger = analyticsLogger()) :
     ErrorViewModel(logger),
     BiomeUiEventHandler {
-
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()
     val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
 

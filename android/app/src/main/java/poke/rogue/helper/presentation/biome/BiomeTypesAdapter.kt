@@ -7,7 +7,6 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.view.dp
 
 class BiomeTypesAdapter(private val context: Context, private val viewGroup: FlexboxLayout) {
-
     fun addTypes(
         types: List<TypeUiModel>,
         spacingBetweenTypes: Int = 0.dp,
@@ -16,21 +15,23 @@ class BiomeTypesAdapter(private val context: Context, private val viewGroup: Fle
         viewGroup.removeAllViews()
 
         types.forEach { type ->
-            val imageView = ImageView(context).apply {
-                setImageResource(type.typeIconResId)
+            val imageView =
+                ImageView(context).apply {
+                    setImageResource(type.typeIconResId)
 
-                layoutParams = FlexboxLayout.LayoutParams(
-                    iconSize,
-                    iconSize
-                ).apply {
-                    setMargins(
-                        spacingBetweenTypes,
-                        0,
-                        0,
-                        0,
-                    )
+                    layoutParams =
+                        FlexboxLayout.LayoutParams(
+                            iconSize,
+                            iconSize,
+                        ).apply {
+                            setMargins(
+                                spacingBetweenTypes,
+                                0,
+                                0,
+                                0,
+                            )
+                        }
                 }
-            }
 
             viewGroup.addView(imageView)
         }

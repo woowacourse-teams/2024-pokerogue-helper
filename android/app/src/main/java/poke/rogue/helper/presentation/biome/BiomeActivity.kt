@@ -1,7 +1,5 @@
 package poke.rogue.helper.presentation.biome
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
@@ -17,10 +15,8 @@ import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
-import timber.log.Timber
 
 class BiomeActivity : ToolbarActivity<ActivityBiomeBinding>(R.layout.activity_biome) {
-
     private val logger: AnalyticsLogger = analyticsLogger()
     private val viewModel by viewModels<BiomeViewModel>()
     private val adapter: BiomeAdapter by lazy { BiomeAdapter(viewModel) }
