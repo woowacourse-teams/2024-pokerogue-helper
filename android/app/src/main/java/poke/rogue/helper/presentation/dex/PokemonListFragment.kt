@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.FragmentPokemonListBinding
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.error.ErrorEvent
 import poke.rogue.helper.presentation.error.NetworkErrorActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarFragment
@@ -80,12 +79,7 @@ class PokemonListFragment :
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
-                    val containerId = R.id.fragment_container_pokemon
-                    replace<PokemonDetailFragment>(
-                        containerId,
-                        args = PokemonDetailFragment.bundleOf(pokemonId, containerId),
-                    )
-                    addToBackStack(TAG)
+                    startActivity(PokemonDetailActivity.intent(requireContext(), pokemonId))
                 }
             }
         }
