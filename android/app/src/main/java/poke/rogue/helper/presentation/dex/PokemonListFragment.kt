@@ -92,7 +92,7 @@ class PokemonListFragment :
         repeatOnStarted {
             viewModel.commonErrorEvent.collect {
                 when (it) {
-                    is ErrorEvent.NetworkConnection -> startActivity<NetworkErrorActivity>()
+                    is ErrorEvent.NetworkException -> startActivity<NetworkErrorActivity>()
                     is ErrorEvent.UnknownError, is ErrorEvent.HttpException -> {
                         toast(it.msg ?: getString(R.string.error_IO_Exception))
                     }
