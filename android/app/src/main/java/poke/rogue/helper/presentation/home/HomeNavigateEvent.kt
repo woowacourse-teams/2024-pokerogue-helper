@@ -10,4 +10,10 @@ sealed interface HomeNavigateEvent {
     data object ToTip : HomeNavigateEvent
 
     data object ToLogo : HomeNavigateEvent
+
+    data object ToBiome : HomeNavigateEvent
+
+    data object ToItem : HomeNavigateEvent
+
+    data object ToBattle : HomeNavigateEvent
 }
