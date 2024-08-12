@@ -18,7 +18,6 @@ import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
-import timber.log.Timber
 
 class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
@@ -65,6 +64,12 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
     }
 
     private fun initObservers() {
+        observePokemonDetailUi()
+
+        observeNavigateToAbilityDetailEvent()
+    }
+
+    private fun observePokemonDetailUi() {
         repeatOnStarted {
             viewModel.uiState.collect { pokemonDetail ->
                 when (pokemonDetail) {
@@ -75,12 +80,12 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
                 }
             }
         }
+    }
 
-        // navigate to Home
+    private fun observeNavigateToAbilityDetailEvent() {
         repeatOnStarted {
             viewModel.navigateToHomeEvent.collect {
                 if (it) {
-                    Timber.d("navigate to Home")
                     startActivity(HomeActivity.intent(this))
                 }
             }
