@@ -55,12 +55,11 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
         }
 
         TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
-            Timber.d("ViewPager position: $position")
             when (position) {
-                0 -> tab.text = "능력치"
-                1 -> tab.text = "진화 정보"
-                2 -> tab.text = "기술 정보"
-                3 -> tab.text = "정보"
+                0 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_stats_title)
+                1 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_moves_title)
+                2 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_evolution_title)
+                3 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_information_title)
             }
         }.attach()
     }
