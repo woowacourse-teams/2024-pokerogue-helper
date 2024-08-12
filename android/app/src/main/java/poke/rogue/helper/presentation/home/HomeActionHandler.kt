@@ -10,4 +10,10 @@ interface HomeActionHandler {
     fun navigateToTip()
 
     fun navigateToPokeRogue()
+
+    fun navigateToBiome()
+
+    fun navigateToItem()
+
+    fun navigateToBattle()
 }
