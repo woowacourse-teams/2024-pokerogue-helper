@@ -18,12 +18,12 @@ import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.presentation.ability.model.AbilityDetailUiModel
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
-import poke.rogue.helper.presentation.error.ErrorViewModel
+import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 
 class AbilityDetailViewModel(
     private val abilityRepository: AbilityRepository,
     logger: AnalyticsLogger = analyticsLogger(),
-) : ErrorViewModel(logger), AbilityDetailUiEventHandler {
+) : ErrorHandleViewModel(logger), AbilityDetailUiEventHandler {
     private val _abilityDetail =
         MutableStateFlow<AbilityDetailUiState<AbilityDetailUiModel>>(AbilityDetailUiState.Loading)
     val abilityDetail = _abilityDetail.asStateFlow()

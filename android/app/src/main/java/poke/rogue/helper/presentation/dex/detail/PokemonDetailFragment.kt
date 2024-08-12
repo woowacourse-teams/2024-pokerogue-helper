@@ -20,7 +20,7 @@ import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.dex.PokemonStatAdapter
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
-import poke.rogue.helper.presentation.toolbar.ToolbarFragment
+import poke.rogue.helper.presentation.base.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.fragment.startActivity
