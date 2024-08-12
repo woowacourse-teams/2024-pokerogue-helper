@@ -1,10 +1,13 @@
-package poke.rogue.helper.remote
+package poke.rogue.helper.remote.injector
 
 import kotlinx.serialization.json.Json
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.jetbrains.annotations.VisibleForTesting
+import poke.rogue.helper.remote.BuildConfig
 import poke.rogue.helper.remote.interceptor.RedirectInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -14,12 +17,11 @@ import java.util.concurrent.TimeUnit
 object RetrofitModule {
     private const val LOCAL_HOST_BASE_URL = "http://10.0.2.2:8080"
     private val retrofit by lazy {
-        val converterFactory = jsonConverterFactory(json())
-        val client = okHttpClient(loggingInterceptor())
         Retrofit.Builder()
             .baseUrl(BuildConfig.POKE_BASE_URL)
-            .client(client)
-            .addConverterFactory(converterFactory)
+            .client(okHttpClient(loggingInterceptor()))
+            .addCallAdapterFactory(PokeCallAdapterFactory())
+            .addConverterFactory(PokeConverterFactory(json(), jsonConverterFactory(json())))
             .build()
     }
 
@@ -58,4 +60,13 @@ object RetrofitModule {
             .build()
 
     fun retrofit(): Retrofit = retrofit
+
+    @VisibleForTesting
+    fun testRetrofit(path: HttpUrl): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(path)
+            .addCallAdapterFactory(PokeCallAdapterFactory())
+            .addConverterFactory(PokeConverterFactory(json(), jsonConverterFactory(json())))
+            .build()
+    }
 }

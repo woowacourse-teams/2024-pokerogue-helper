@@ -1,4 +1,4 @@
-package poke.rogue.helper.remote
+package poke.rogue.helper.remote.injector
 
 import poke.rogue.helper.remote.service.AbilityService
 import poke.rogue.helper.remote.service.PokeDexService
