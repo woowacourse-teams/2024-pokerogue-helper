@@ -15,6 +15,7 @@ import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
@@ -96,11 +97,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
     private fun observeNavigateToAbilityDetailEvent() {
         repeatOnStarted {
             viewModel.navigationToDetailEvent.collect { abilityId ->
-                val intent =
-                    Intent(this, AbilityActivity::class.java).apply {
-                        putExtra(AbilityActivity.ABILITY_ID, abilityId)
-                    }
-                startActivity(intent)
+                startActivity(AbilityActivity.intent(this, abilityId))
             }
         }
     }

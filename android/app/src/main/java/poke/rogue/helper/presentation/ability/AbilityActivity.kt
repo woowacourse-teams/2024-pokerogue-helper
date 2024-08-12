@@ -20,8 +20,18 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
     }
 
     companion object {
+        private const val ABILITY_ID = "ABILITY_ID"
+
         fun intent(context: Context): Intent {
             return Intent(context, AbilityActivity::class.java)
         }
+
+        fun intent(
+            context: Context,
+            abilityId: Long,
+        ): Intent =
+            Intent(context, AbilityActivity::class.java).apply {
+                putExtra(ABILITY_ID, abilityId)
+            }
     }
 }
