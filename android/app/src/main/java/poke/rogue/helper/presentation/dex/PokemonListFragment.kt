@@ -79,13 +79,6 @@ class PokemonListFragment :
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 parentFragmentManager.commit {
-//                    val containerId = R.id.fragment_container_pokemon
-//                    replace<PokemonDetailFragment>(
-//                        containerId,
-//                        args = PokemonDetailFragment.bundleOf(pokemonId, containerId),
-//                    )
-//                    addToBackStack(TAG)
-
                     startActivity(PokemonDetailActivity.intent(requireContext(), pokemonId))
                 }
             }
