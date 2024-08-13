@@ -1,6 +1,6 @@
 package poke.rogue.helper.presentation.ability.detail
 
- import android.os.Bundle
+import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels

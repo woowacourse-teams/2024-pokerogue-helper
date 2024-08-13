@@ -40,7 +40,7 @@
     <string name="dex_detail_pokemon_stats_title">기본 스탯</string>
     <string name="pokemon_detail_pokemon_stats_title">능력치</string>
     <string name="pokemon_detail_pokemon_moves_title">기술 정보</string>
-    <string name="pokemon_detail_pokemon_evolution_title">기술 정보</string>
+    <string name="pokemon_detail_pokemon_evolution_title">진화 정보</string>
     <string name="pokemon_detail_pokemon_information_title">정보</string>
 
     <!-- ability -->
