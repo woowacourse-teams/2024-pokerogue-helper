@@ -13,6 +13,18 @@ interface AnalyticsLogger {
         throwable: Throwable,
         message: String? = null,
     )
+
+    companion object {
+        val Stub =
+            object : AnalyticsLogger {
+                override fun logEvent(event: AnalyticsEvent) = Unit
+
+                override fun logError(
+                    throwable: Throwable,
+                    message: String?,
+                ) = Unit
+            }
+    }
 }
 
 fun analyticsLogger(): AnalyticsLogger {
