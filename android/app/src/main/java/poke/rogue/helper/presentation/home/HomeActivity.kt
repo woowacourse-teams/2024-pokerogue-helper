@@ -13,7 +13,7 @@ import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.biome.BiomeActivity
-import poke.rogue.helper.presentation.dex.PokemonActivity
+import poke.rogue.helper.presentation.dex.PokemonListActivity
 import poke.rogue.helper.presentation.item.ItemActivity
 import poke.rogue.helper.presentation.tip.TipActivity
 import poke.rogue.helper.presentation.type.TypeActivity
@@ -52,7 +52,7 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
                         }
 
                     is HomeNavigateEvent.ToDex ->
-                        startActivity<PokemonActivity> {
+                        startActivity<PokemonListActivity> {
                             logger.logClickEvent(NAVIGATE_TO_DEX)
                         }
 
