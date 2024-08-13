@@ -1,7 +1,5 @@
 package poke.rogue.helper.presentation.dex
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -16,12 +14,6 @@ class PokemonActivity : BindingActivity<ActivityPokemonBinding>(R.layout.activit
             supportFragmentManager.commit {
                 replace<PokemonListFragment>(R.id.fragment_container_pokemon)
             }
-        }
-    }
-
-    companion object {
-        fun intent(context: Context): Intent {
-            return Intent(context, PokemonActivity::class.java)
         }
     }
 }
