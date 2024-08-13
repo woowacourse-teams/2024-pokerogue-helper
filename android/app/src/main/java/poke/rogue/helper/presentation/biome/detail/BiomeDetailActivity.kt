@@ -8,7 +8,6 @@ import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
 import poke.rogue.helper.presentation.biome.BiomeDetailPagerAdapter
 import poke.rogue.helper.presentation.biome.model.BiomeUiModel
 import poke.rogue.helper.presentation.toolbar.ToolbarActivity
-import timber.log.Timber
 
 class BiomeDetailActivity :
     ToolbarActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {
