@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":local"))
     implementation(project(":remote"))
     implementation(project(":stringmatcher"))
+    implementation(project(":analytics"))
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin)
     // third-party

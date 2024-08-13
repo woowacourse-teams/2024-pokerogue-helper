@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.toolbar
+package poke.rogue.helper.presentation.base.toolbar
 
 import android.content.Intent
 import android.net.Uri

@@ -16,12 +16,14 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
-import poke.rogue.helper.presentation.error.ErrorViewModel
+import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
     logger: AnalyticsLogger = analyticsLogger(),
-) : ErrorViewModel(logger), PokemonDetailNavigateHandler {
+) :
+    ErrorHandleViewModel(logger),
+        PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> =
         MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()

@@ -11,14 +11,15 @@ import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
+import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
-import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
+import timber.log.Timber
 
 class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
@@ -87,6 +88,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
         repeatOnStarted {
             viewModel.navigateToHomeEvent.collect {
                 if (it) {
+                    Timber.d("navigate to Home")
                     startActivity(HomeActivity.intent(this))
                 }
             }
@@ -103,7 +105,10 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
-            ivPokemonDetailPokemon.loadImageWithProgress(pokemonDetail.pokemon.imageUrl, progressIndicatorPokemonDetail)
+            ivPokemonDetailPokemon.loadImageWithProgress(
+                pokemonDetail.pokemon.imageUrl,
+                progressIndicatorPokemonDetail,
+            )
 
             tvPokemonDetailPokemonName.text =
                 stringOf(
