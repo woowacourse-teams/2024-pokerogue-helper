@@ -43,10 +43,17 @@
             android:name=".presentation.biome.BiomeActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.biome.detail.BiomeDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.item.ItemActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.base.error.NetworkErrorActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.dex.detail.PokemonDetailActivity"
             android:exported="false" />
     </application>
 
