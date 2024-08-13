@@ -10,21 +10,24 @@ import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
-import poke.rogue.helper.presentation.error.ErrorEvent
-import poke.rogue.helper.presentation.error.NetworkErrorActivity
-import poke.rogue.helper.presentation.toolbar.ToolbarFragment
+import poke.rogue.helper.presentation.base.error.ErrorEvent
+import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
+import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.base.error.NetworkErrorActivity
 import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class AbilityFragment : ToolbarFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
+class AbilityFragment : ErrorHandleFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
     private val viewModel by viewModels<AbilityViewModel> {
         AbilityViewModel.factory(
             DefaultAbilityRepository.instance(),
         )
     }
+    override val errorViewModel: ErrorHandleViewModel
+        get() = viewModel
 
     private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
 

@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
-import poke.rogue.helper.presentation.error.ErrorViewModel
+import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 
 class BiomeViewModel(logger: AnalyticsLogger = analyticsLogger()) :
-    ErrorViewModel(logger),
+    ErrorHandleViewModel(logger),
     BiomeUiEventHandler {
     private val _navigationToDetailEvent = MutableSharedFlow<Long>()
     val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()

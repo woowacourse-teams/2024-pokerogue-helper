@@ -7,9 +7,9 @@ import poke.rogue.helper.R
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.databinding.ActivityBiomeBinding
+import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.biome.model.BiomeUiModel
-import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted

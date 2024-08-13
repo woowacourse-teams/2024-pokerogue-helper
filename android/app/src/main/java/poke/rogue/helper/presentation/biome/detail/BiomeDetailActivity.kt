@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
-import poke.rogue.helper.presentation.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 
 class BiomeDetailActivity :
     ToolbarActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {

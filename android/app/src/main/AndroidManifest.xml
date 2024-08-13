@@ -49,7 +49,7 @@
             android:name=".presentation.item.ItemActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.error.NetworkErrorActivity"
+            android:name=".presentation.base.error.NetworkErrorActivity"
             android:exported="false" />
 
         <activity

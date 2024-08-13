@@ -34,6 +34,7 @@
     <string name="dex_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
     <string name="dex_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
     <string name="dex_list_loading_guide">Loading…</string>
+    <string name="dex_list_empty_guide">해당하는 포켓몬이 없어요</string>
 
     <string name="dex_detail_pokemon_stats_title">기본 스탯</string>
 
