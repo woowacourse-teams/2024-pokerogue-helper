@@ -43,6 +43,15 @@
     <string name="pokemon_detail_pokemon_evolution_title">진화 정보</string>
     <string name="pokemon_detail_pokemon_information_title">정보</string>
 
+    <!--    moves-->
+    <string name="pokemon_detail_moves_level">레벨</string>
+    <string name="pokemon_detail_moves_name">기술명</string>
+    <string name="pokemon_detail_moves_power">위력</string>
+    <string name="pokemon_detail_moves_accuracy">명중률</string>
+    <string name="pokemon_detail_moves_type">타입</string>
+    <string name="pokemon_detail_moves_category">기술 뷴류</string>
+
+
     <!-- ability -->
     <string name="ability_title_name">특성 도감</string>
     <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
