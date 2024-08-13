@@ -49,6 +49,9 @@
     <!--    item -->
     <string name="item_title_name">아이템 도감</string>
 
+    <!--    battle -->
+    <string name="battle_title_name">배틀 구도</string>
+
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>
     <string name="network_error_img_desc">네트워크 에러 이미지</string>
