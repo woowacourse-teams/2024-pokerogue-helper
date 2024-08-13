@@ -5,7 +5,7 @@ import poke.rogue.helper.data.model.PokemonMove
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
 
-data class PokemonMovesUiModel(
+data class PokemonMoveUiModel(
     val id: Long,
     val name: String,
     val level: Int,
@@ -15,8 +15,8 @@ data class PokemonMovesUiModel(
     val category: MoveCategory,
 )
 
-fun PokemonMove.toUi(): PokemonMovesUiModel =
-    PokemonMovesUiModel(
+fun PokemonMove.toUi(): PokemonMoveUiModel =
+    PokemonMoveUiModel(
         id = id,
         name = name,
         level = level,
@@ -25,3 +25,5 @@ fun PokemonMove.toUi(): PokemonMovesUiModel =
         accuracy = accuracy,
         category = category,
     )
+
+fun List<PokemonMove>.toUi(): List<PokemonMoveUiModel> = map(PokemonMove::toUi)
