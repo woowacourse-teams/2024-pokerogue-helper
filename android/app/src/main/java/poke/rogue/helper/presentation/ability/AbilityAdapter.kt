@@ -31,7 +31,7 @@ class AbilityAdapter(private val onClickAbilityItem: AbilityUiEventHandler) :
     }
 
     companion object {
-        val abilityComparator =
+        private val abilityComparator =
             ItemDiffCallback<AbilityUiModel>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
