@@ -10,7 +10,7 @@ data class PokemonMove(
     val category: MoveCategory,
 ) {
     companion object {
-        private const val NO_POWER = -1
+        const val NO_POWER = -1
 
         val FAKE_MOVES =
             listOf(

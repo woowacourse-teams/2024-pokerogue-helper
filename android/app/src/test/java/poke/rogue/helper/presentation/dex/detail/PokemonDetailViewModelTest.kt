@@ -7,6 +7,10 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.R
+import poke.rogue.helper.data.model.MoveCategory
+import poke.rogue.helper.data.model.PokemonMove
+import poke.rogue.helper.data.model.PokemonMove.Companion.NO_POWER
+import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
@@ -51,22 +55,22 @@ class PokemonDetailViewModelTest {
             // then
             val pokemonDetailUiState = viewModel.uiState
             pokemonDetailUiState.value shouldBe
-                PokemonDetailUiState.Success(
-                    pokemon =
+                    PokemonDetailUiState.Success(
+                        pokemon =
                         PokemonUiModel(
                             id = 1,
                             dexNumber = 1,
                             name = "이상해씨",
                             imageUrl =
-                                "https://raw.githubusercontent.com" +
+                            "https://raw.githubusercontent.com" +
                                     "/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
                             types =
-                                listOf(
-                                    TypeUiModel.GRASS,
-                                    TypeUiModel.POISON,
-                                ),
+                            listOf(
+                                TypeUiModel.GRASS,
+                                TypeUiModel.POISON,
+                            ),
                         ),
-                    stats =
+                        stats =
                         listOf(
                             StatUiModel("HP", 45, 255, R.color.stat_hp),
                             StatUiModel("공격", 49, 190, R.color.stat_attack),
@@ -76,13 +80,150 @@ class PokemonDetailViewModelTest {
                             StatUiModel("스피드", 45, 200, R.color.stat_speed),
                             StatUiModel("총합", 318, 800, R.color.stat_total),
                         ),
-                    abilities =
+                        abilities =
                         listOf(
                             AbilityTitleUiModel(450, "심록"),
                             AbilityTitleUiModel(419, "엽록소"),
                         ),
-                    height = 0.7f,
-                    weight = 6.9f,
-                )
+                        moves = listOf(
+                            PokemonMove(
+                                id = 1,
+                                name = "몸통박치기",
+                                level = 1,
+                                power = 40,
+                                type = Type.NORMAL,
+                                accuracy = 100,
+                                category = MoveCategory.physicalMove,
+                            ),
+                            PokemonMove(
+                                id = 2,
+                                name = "울음소리",
+                                level = 1,
+                                power = NO_POWER,
+                                type = Type.NORMAL,
+                                accuracy = 100,
+                                category = MoveCategory.statusMove,
+                            ),
+                            PokemonMove(
+                                id = 3,
+                                name = "덩굴채찍",
+                                level = 1,
+                                power = 45,
+                                type = Type.GRASS,
+                                accuracy = 100,
+                                category = MoveCategory.physicalMove,
+                            ),
+                            PokemonMove(
+                                id = 4,
+                                name = "성장",
+                                level = 6,
+                                power = NO_POWER,
+                                type = Type.NORMAL,
+                                accuracy = 100,
+                                category = MoveCategory.statusMove,
+                            ),
+                            PokemonMove(
+                                id = 5,
+                                name = "씨뿌리기",
+                                level = 9,
+                                power = NO_POWER,
+                                type = Type.GRASS,
+                                accuracy = 90,
+                                category = MoveCategory.statusMove,
+                            ),
+                            PokemonMove(
+                                id = 6,
+                                name = "앞날가르기",
+                                level = 12,
+                                power = 55,
+                                type = Type.GRASS,
+                                accuracy = 95,
+                                category = MoveCategory.physicalMove,
+                            ),
+                            PokemonMove(
+                                id = 7,
+                                name = "독가루",
+                                level = 15,
+                                power = NO_POWER,
+                                type = Type.POISON,
+                                accuracy = 75,
+                                category = MoveCategory.specialMove,
+                            ),
+                            PokemonMove(
+                                id = 8,
+                                name = "수면가루",
+                                level = 15,
+                                power = NO_POWER,
+                                type = Type.GRASS,
+                                accuracy = 75,
+                                category = MoveCategory.specialMove,
+                            ),
+                            PokemonMove(
+                                id = 9,
+                                name = "씨폭탄",
+                                level = 18,
+                                power = 80,
+                                type = Type.GRASS,
+                                accuracy = 100,
+                                category = MoveCategory.physicalMove,
+                            ),
+                            PokemonMove(
+                                id = 10,
+                                name = "돌진",
+                                level = 21,
+                                power = 90,
+                                type = Type.NORMAL,
+                                accuracy = 85,
+                                category = MoveCategory.physicalMove,
+                            ),
+                            PokemonMove(
+                                id = 11,
+                                name = "달콤한향기",
+                                level = 24,
+                                power = NO_POWER,
+                                type = Type.NORMAL,
+                                accuracy = 100,
+                                category = MoveCategory.specialMove,
+                            ),
+                            PokemonMove(
+                                id = 12,
+                                name = "광합성",
+                                level = 27,
+                                power = NO_POWER,
+                                type = Type.GRASS,
+                                accuracy = 100,
+                                category = MoveCategory.specialMove,
+                            ),
+                            PokemonMove(
+                                id = 13,
+                                name = "고민씨",
+                                level = 30,
+                                power = NO_POWER,
+                                type = Type.GRASS,
+                                accuracy = 100,
+                                category = MoveCategory.specialMove,
+                            ),
+                            PokemonMove(
+                                id = 14,
+                                name = "파워휩",
+                                level = 33,
+                                power = 120,
+                                type = Type.GRASS,
+                                accuracy = 85,
+                                category = MoveCategory.physicalMove,
+                            ),
+                            PokemonMove(
+                                id = 15,
+                                name = "솔라빔",
+                                level = 36,
+                                power = 120,
+                                type = Type.GRASS,
+                                accuracy = 100,
+                                category = MoveCategory.specialMove,
+                            ),
+                        ),
+                        height = 0.7f,
+                        weight = 6.9f,
+                    )
         }
 }
