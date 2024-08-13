@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_biome_next_biome" />
+            tools:listitem="@layout/item_biome_map" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
