@@ -22,6 +22,11 @@ class PokemonMovesFragment : BindingFragment<FragmentPokemonMovesBinding>(R.layo
         initObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
+
     private fun initAdapter() {
         binding.rvPokemonDetailMoves.adapter = movesAdapter
     }

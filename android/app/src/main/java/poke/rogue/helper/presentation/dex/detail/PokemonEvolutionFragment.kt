@@ -1,16 +1,12 @@
 package poke.rogue.helper.presentation.dex.detail
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import poke.rogue.helper.R
+import poke.rogue.helper.databinding.FragmentPokemonEvolutionBinding
+import poke.rogue.helper.presentation.base.BindingFragment
 
-class PokemonEvolutionFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? = inflater.inflate(R.layout.fragment_pokemon_evolution, container, false)
+class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding>(R.layout.fragment_pokemon_evolution) {
+    override fun onResume() {
+        super.onResume()
+        binding.root.requestLayout()
+    }
 }
