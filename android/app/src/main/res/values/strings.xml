@@ -51,6 +51,9 @@
 
     <!--    battle -->
     <string name="battle_title_name">배틀 구도</string>
+    <string name="battle_result_title">결과</string>
+    <string name="battle_calculated_power_title">계산된 위력</string>
+    <string name="battle_accuracy_title">명중 확률</string>
 
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>

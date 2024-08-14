@@ -28,7 +28,6 @@
         <item name="android:textColorHint">@color/poke_grey_60</item>
         <item name="android:textSize">14sp</item>
         <item name="closeIcon">@drawable/icon_close</item>
-
     </style>
 
     <style name="CustomSearchViewStyle" parent="Widget.AppCompat.SearchView">
@@ -56,5 +55,11 @@
         <item name="tabSelectedTextColor">@color/poke_black</item>
     </style>
 
-</resources>
+    <style name="HighlightTextStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/poke_red_20</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
+
+</resources>
