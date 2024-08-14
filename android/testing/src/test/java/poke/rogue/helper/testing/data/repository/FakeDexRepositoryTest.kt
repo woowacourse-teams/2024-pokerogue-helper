@@ -20,70 +20,79 @@ class FakeDexRepositoryTest {
     }
 
     @Test
-    fun `기본적으로 도감 번호순, 모든 세대의 포켓몬을 가져온다`() = runTest {
-        // given
-        val sort = PokemonSort.BySpeed
-        // when
-        val actual = repository.filteredPokemons()
-        // then
-        val expect = repository.pokemons()
-        actual shouldBe expect
-    }
+    fun `기본적으로 도감 번호순, 모든 세대의 포켓몬을 가져온다`() =
+        runTest {
+            // given
+            val sort = PokemonSort.BySpeed
+            // when
+            val actual = repository.filteredPokemons()
+            // then
+            val expect = repository.pokemons()
+            actual shouldBe expect
+        }
 
     @Test
-    fun `불 타입을 가지고 있는 포켓몬을 가져온다`() = runTest {
-        // given
-        val type = Type.FIRE
-        // when
-        val actual = repository.filteredPokemons(filter = PokemonFilter.ByType(type))
-        // then
-        val expect = repository.pokemons().filter { it.types.contains(type) }
-        actual shouldBe expect
-        actual shouldNotBe repository.pokemons()
-    }
+    fun `불 타입을 가지고 있는 포켓몬을 가져온다`() =
+        runTest {
+            // given
+            val type = Type.FIRE
+            // when
+            val actual = repository.filteredPokemons(filter = PokemonFilter.ByType(type))
+            // then
+            val expect = repository.pokemons().filter { it.types.contains(type) }
+            actual shouldBe expect
+            actual shouldNotBe repository.pokemons()
+        }
 
     @Test
-    fun `3 세대에 해당하는 포켓몬을 가져온다`() = runTest {
-        // given
-        val generation = PokemonGeneration.of(3)
-        // when
-        val actual = repository.filteredPokemons(filter = PokemonFilter.ByGeneration(generation))
-        // then
-        val expect = repository.pokemons().filter { it.generation == generation }
-        actual shouldBe expect
-        actual shouldNotBe repository.pokemons()
-    }
+    fun `3 세대에 해당하는 포켓몬을 가져온다`() =
+        runTest {
+            // given
+            val generation = PokemonGeneration.of(3)
+            // when
+            val actual = repository.filteredPokemons(filter = PokemonFilter.ByGeneration(generation))
+            // then
+            val expect = repository.pokemons().filter { it.generation == generation }
+            actual shouldBe expect
+            actual shouldNotBe repository.pokemons()
+        }
 
     @Test
-    fun `Speed 수치가 높은 순서대로 정렬된 포켓몬을 가져온다`() = runTest {
-        // given
-        val sort = PokemonSort.BySpeed
-        // when
-        val actual = repository.filteredPokemons(
-            sort = sort,
-        )
-        // then
-        val expect = repository.pokemons()
-            .sortedByDescending { it.speed }
-        actual shouldBe expect
-        actual shouldNotBe repository.pokemons()
-    }
+    fun `Speed 수치가 높은 순서대로 정렬된 포켓몬을 가져온다`() =
+        runTest {
+            // given
+            val sort = PokemonSort.BySpeed
+            // when
+            val actual =
+                repository.filteredPokemons(
+                    sort = sort,
+                )
+            // then
+            val expect =
+                repository.pokemons()
+                    .sortedByDescending { it.speed }
+            actual shouldBe expect
+            actual shouldNotBe repository.pokemons()
+        }
 
     @Test
-    fun `ㄹㅈ 초성에 해당하고 1세대에 해당하는 포켓몬을 가져온다`() = runTest {
-        // given
-        val name = "ㄹㅈ"
-        val generation = PokemonGeneration.of(1)
-        // when
-        val actual = repository.filteredPokemons(
-            name = name,
-            filter = PokemonFilter.ByGeneration(generation),
-        )
-        // then
-        val expect = repository.pokemons()
-            .filter { it.name.has("ㄹㅈ") }
-            .filter { it.generation == generation }
-        actual shouldBe expect
-        actual shouldNotBe repository.pokemons()
-    }
+    fun `ㄹㅈ 초성에 해당하고 1세대에 해당하는 포켓몬을 가져온다`() =
+        runTest {
+            // given
+            val name = "ㄹㅈ"
+            val generation = PokemonGeneration.of(1)
+            // when
+            val actual =
+                repository.filteredPokemons(
+                    name = name,
+                    filter = PokemonFilter.ByGeneration(generation),
+                )
+            // then
+            val expect =
+                repository.pokemons()
+                    .filter { it.name.has("ㄹㅈ") }
+                    .filter { it.generation == generation }
+            actual shouldBe expect
+            actual shouldNotBe repository.pokemons()
+        }
 }

@@ -12,13 +12,12 @@ import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.stringmatcher.has
 
 class FakeDexRepository : DexRepository {
-
     override suspend fun pokemons(): List<Pokemon> = POKEMONS
 
     override suspend fun filteredPokemons(
         name: String,
         sort: PokemonSort,
-        filter: PokemonFilter
+        filter: PokemonFilter,
     ): List<Pokemon> {
         return if (name.isEmpty()) {
             pokemons()
@@ -28,7 +27,6 @@ class FakeDexRepository : DexRepository {
     }
 
     override suspend fun pokemonDetail(id: Long): PokemonDetail = DUMMY_POKEMON_DETAIL
-
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
@@ -50,16 +48,14 @@ class FakeDexRepository : DexRepository {
             .sortedWith(sort)
     }
 
-
     companion object {
         private const val FORMAT_POKEMON_IMAGE_URL =
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other" +
-                    "/official-artwork/"
+                "/official-artwork/"
 
         private const val POSTFIX_PNG = ".png"
 
-        private fun pokemonImageUrl(pokemonId: Long) =
-            FORMAT_POKEMON_IMAGE_URL + pokemonId + POSTFIX_PNG
+        private fun pokemonImageUrl(pokemonId: Long) = FORMAT_POKEMON_IMAGE_URL + pokemonId + POSTFIX_PNG
 
         val POKEMONS: List<Pokemon> =
             listOf(
@@ -212,27 +208,27 @@ class FakeDexRepository : DexRepository {
                     specialAttack = 110,
                     specialDefense = 80,
                     speed = 100,
-                )
+                ),
             )
 
         val DUMMY_POKEMON_DETAIL =
             PokemonDetail(
                 pokemon = Pokemon.DUMMY,
                 stats =
-                listOf(
-                    Stat("hp", 45),
-                    Stat("attack", 49),
-                    Stat("defense", 49),
-                    Stat("specialAttack", 65),
-                    Stat("specialDefense", 65),
-                    Stat("speed", 45),
-                    Stat("total", 318),
-                ),
+                    listOf(
+                        Stat("hp", 45),
+                        Stat("attack", 49),
+                        Stat("defense", 49),
+                        Stat("specialAttack", 65),
+                        Stat("specialDefense", 65),
+                        Stat("speed", 45),
+                        Stat("total", 318),
+                    ),
                 abilities =
-                listOf(
-                    Ability(450, "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다."),
-                    Ability(419, "엽록소", description = "날씨가 맑을 때 스피드가 올라간다."),
-                ),
+                    listOf(
+                        Ability(450, "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다."),
+                        Ability(419, "엽록소", description = "날씨가 맑을 때 스피드가 올라간다."),
+                    ),
                 height = 0.7f,
                 weight = 6.9f,
             )

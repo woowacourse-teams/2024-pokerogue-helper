@@ -32,7 +32,6 @@ class DefaultDexRepository(
         }.toFilteredPokemons(sort, filter)
     }
 
-
     override suspend fun pokemonDetail(id: Long): PokemonDetail {
         val cached = cachedPokemonDetails[id]
         if (cached != null) {

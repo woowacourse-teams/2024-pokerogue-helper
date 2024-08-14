@@ -1,6 +1,5 @@
 package poke.rogue.helper.data.model
 
-
 enum class PokemonGeneration(val number: Int) {
     ONE(1),
     TWO(2),
@@ -10,7 +9,8 @@ enum class PokemonGeneration(val number: Int) {
     SIX(6),
     SEVEN(7),
     EIGHT(8),
-    NINE(9);
+    NINE(9),
+    ;
 
     companion object {
         fun of(number: Int): PokemonGeneration {
