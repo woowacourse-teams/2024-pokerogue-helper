@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.battle.BattleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,10 +66,10 @@
             android:id="@+id/spinner_weather"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:background="@drawable/bg_spinner"
             android:padding="0dp"
             android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@id/tv_weather_description"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/gl_top"
@@ -78,8 +81,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:text="@{vm.weather.effect}"
             android:textStyle="italic"
-            android:text="* 날씨 상세 설명"
             app:layout_constraintEnd_toEndOf="@id/spinner_weather"
             app:layout_constraintStart_toStartOf="@id/spinner_weather"
             app:layout_constraintTop_toBottomOf="@id/spinner_weather" />
@@ -92,7 +95,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:gravity="end"
-            android:text="상대 포켓몬"
+            android:text="@string/battle_opponent_pokemon_selection"
             app:layout_constraintEnd_toStartOf="@id/iv_opponent_pokemon"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="@id/iv_opponent_pokemon" />
@@ -110,7 +113,7 @@
             android:id="@+id/iv_opponent_pokemon"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/icon_pokemon_selection_op"
             app:layout_constraintBottom_toTopOf="@id/iv_mine_pokemon"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -124,7 +127,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
             android:gravity="start"
-            android:text="내 포켓몬"
+            android:text="@string/battle_mine_pokemon_selection"
             app:layout_constraintBottom_toTopOf="@id/tv_moves_title"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toEndOf="@id/iv_mine_pokemon" />
@@ -157,11 +160,11 @@
             android:background="@drawable/bg_battle_selection"
             android:paddingHorizontal="4dp"
             android:paddingVertical="8dp"
-            android:text="기술 이름"
+            android:text="@string/battle_move_selection"
+            app:drawableStartCompat="@drawable/icon_arrow_right"
             app:layout_constraintBottom_toBottomOf="@id/iv_mine_pokemon"
             app:layout_constraintEnd_toEndOf="@id/tv_mine_pokemon"
-            app:layout_constraintStart_toStartOf="@id/tv_mine_pokemon"
-            app:drawableStartCompat="@drawable/icon_arrow_right" />
+            app:layout_constraintStart_toStartOf="@id/tv_mine_pokemon" />
 
         <TextView
             android:id="@+id/tv_result_title"
