@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class WeatherRepository {
+
     private final Map<String, Weather> weathers = new HashMap<>();
 
     public void save(Weather weather) {
