@@ -116,9 +116,9 @@ fun Context.isNetworkConnected(): Boolean {
     if (capabilities != null) {
         isConnected =
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-            capabilities.hasTransport(
-                NetworkCapabilities.TRANSPORT_CELLULAR,
-            )
+                    capabilities.hasTransport(
+                        NetworkCapabilities.TRANSPORT_CELLULAR,
+                    )
     }
     return isConnected
 }

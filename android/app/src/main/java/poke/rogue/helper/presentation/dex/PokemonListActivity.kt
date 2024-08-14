@@ -11,6 +11,7 @@ import poke.rogue.helper.databinding.ActivityPokemonListBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
+import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
@@ -38,6 +39,9 @@ class PokemonListActivity :
         binding.lifecycleOwner = this
         initAdapter()
         initObservers()
+        binding.root.setOnClickListener{
+            hideKeyboard()
+        }
     }
 
     private fun initAdapter() {
@@ -64,6 +68,7 @@ class PokemonListActivity :
         }
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
+                hideKeyboard()
                 startActivity(PokemonDetailActivity.intent(this, pokemonId))
             }
         }
