@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class DataInitializer implements ApplicationRunner {
+
     private static final int FIRST_LINE = 3;
     private static final String FIELD_DELIMITER = "/";
     private static final String LIST_DELIMITER = ",";
