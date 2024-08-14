@@ -51,7 +51,7 @@
     <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
         <item name="tabMode">fixed</item>
         <item name="tabSelectedTextColor">@color/poke_white</item>
-        <item name="tabBackground">@drawable/bg_tab_background</item>
+        <item name="tabBackground">@color/tablayout_background</item>
         <item name="tabIndicatorColor">@color/poke_electric</item>
     </style>
 

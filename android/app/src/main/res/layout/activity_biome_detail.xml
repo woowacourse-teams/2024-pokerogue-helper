@@ -52,6 +52,8 @@
             style="@style/TabLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_tab_background"
+            android:paddingVertical="5dp"
             app:layout_constraintTop_toTopOf="@id/gl_top"
             app:tabIndicatorFullWidth="false" />
 
