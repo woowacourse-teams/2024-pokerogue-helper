@@ -4,7 +4,7 @@ import poke.rogue.helper.data.model.Ability
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
-import poke.rogue.helper.presentation.dex.model.PokemonMoveUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonSkillUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.dex.model.toPokemonDetailUi
@@ -15,7 +15,7 @@ sealed interface PokemonDetailUiState {
         val pokemon: PokemonUiModel,
         val stats: List<StatUiModel>,
         val abilities: List<AbilityTitleUiModel>,
-        val moves: List<PokemonMoveUiModel>,
+        val skills: List<PokemonSkillUiModel>,
         val height: Float,
         val weight: Float,
     ) : PokemonDetailUiState
@@ -28,7 +28,7 @@ fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
         pokemon = pokemon.toUi(),
         stats = stats.map(Stat::toUi),
         abilities = abilities.map(Ability::toPokemonDetailUi),
-        moves = moves.toUi(),
+        skills = skills.toUi(),
         height = height,
         weight = weight,
     )

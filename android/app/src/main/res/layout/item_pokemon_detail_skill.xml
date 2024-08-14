@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="move"
-            type="poke.rogue.helper.presentation.dex.model.PokemonMoveUiModel" />
+            name="skill"
+            type="poke.rogue.helper.presentation.dex.model.PokemonSkillUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,31 +16,31 @@
         android:layout_marginVertical="5dp">
 
         <TextView
-            android:id="@+id/tv_pokemon_detail_move_level"
+            android:id="@+id/tv_item_pokemon_detail_skill_level"
             style="@style/TextAppearance.Poke.Description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{String.valueOf(move.level)}"
+            android:text="@{String.valueOf(skill.level)}"
             android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_name"
-            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
+            app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
+            app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintWidth_percent="0.1"
             tools:ignore="SpUsage"
             tools:text="1" />
 
         <TextView
-            android:id="@+id/tv_pokemon_detail_move_name"
+            android:id="@+id/tv_item_pokemon_detail_skill_name"
             style="@style/TextAppearance.Poke.Description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{move.name}"
+            android:text="@{skill.name}"
             android:textSize="14dp"
-            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_power"
-            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_level"
+            app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_power"
+            app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_level"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.25"
             tools:ignore="SpUsage"
@@ -48,65 +48,65 @@
 
 
         <TextView
-            android:id="@+id/tv_pokemon_detail_move_power"
+            android:id="@+id/tv_item_pokemon_detail_skill_power"
             style="@style/TextAppearance.Poke.Description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{move.power}"
+            android:text="@{skill.power}"
             android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_name"
-            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_accuracy"
-            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_name"
-            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_level"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
+            app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_accuracy"
+            app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_name"
+            app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_level"
             app:layout_constraintWidth_percent="0.1"
             tools:ignore="SpUsage"
             tools:text="40" />
 
         <TextView
-            android:id="@+id/tv_pokemon_detail_move_accuracy"
+            android:id="@+id/tv_item_pokemon_detail_skill_accuracy"
             style="@style/TextAppearance.Poke.Description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{String.valueOf(move.accuracy)}"
+            android:text="@{String.valueOf(skill.accuracy)}"
             android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_name"
-            app:layout_constraintEnd_toStartOf="@id/iv_pokemon_detail_move_type"
-            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_power"
-            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
+            app:layout_constraintEnd_toStartOf="@id/iv_item_pokemon_detail_skill_type"
+            app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_power"
+            app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintWidth_percent="0.2"
             tools:ignore="SpUsage"
             tools:text="100" />
 
         <ImageView
-            android:id="@+id/iv_pokemon_detail_move_type"
-            imageRes="@{move.type.typeIconResId}"
+            android:id="@+id/iv_item_pokemon_detail_skill_type"
+            imageRes="@{skill.type.typeIconResId}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
             android:importantForAccessibility="no"
-            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_name"
-            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_category"
-            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_accuracy"
-            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
+            app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_category"
+            app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_accuracy"
+            app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintWidth_percent="0.2"
             tools:src="@drawable/icon_type_normal" />
 
         <ImageView
-            android:id="@+id/tv_pokemon_detail_move_category"
+            android:id="@+id/tv_item_pokemon_detail_skill_category"
             style="@style/TextAppearance.Poke.Description"
-            imageRes="@{move.category.iconResId}"
+            imageRes="@{skill.category.iconResId}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
             android:importantForAccessibility="no"
-            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_pokemon_detail_move_type"
-            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
+            app:layout_constraintStart_toEndOf="@id/iv_item_pokemon_detail_skill_type"
+            app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintWidth_percent="0.2"
-            tools:src="@drawable/ic_physical_attack_move" />
+            tools:src="@drawable/ic_physical_attack_skill" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

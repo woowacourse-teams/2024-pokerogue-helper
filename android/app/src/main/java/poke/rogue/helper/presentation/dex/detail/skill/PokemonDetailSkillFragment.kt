@@ -6,7 +6,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.android.material.divider.MaterialDividerItemDecoration.VERTICAL
 import poke.rogue.helper.R
-import poke.rogue.helper.databinding.FragmentPokemonMovesBinding
+import poke.rogue.helper.databinding.FragmentPokemonSkillsBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
@@ -14,10 +14,10 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonMovesBinding>(R.layout.fragment_pokemon_moves) {
+class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>(R.layout.fragment_pokemon_skills) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModels()
 
-    private val movesAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
+    private val skillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
 
     override fun onViewCreated(
         view: View,
@@ -34,8 +34,8 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonMovesBinding>(
     }
 
     private fun initAdapter() {
-        binding.rvPokemonDetailMoves.apply {
-            adapter = movesAdapter
+        binding.rvPokemonDetailSkills.apply {
+            adapter = skillsAdapter
             val spacingItemDecoration =
                 LinearSpacingItemDecoration(
                     spacing = 8.dp,
@@ -57,7 +57,7 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonMovesBinding>(
             activityViewModel.uiState.collect { state ->
                 when (state) {
                     is PokemonDetailUiState.IsLoading -> {}
-                    is PokemonDetailUiState.Success -> movesAdapter.submitList(state.moves)
+                    is PokemonDetailUiState.Success -> skillsAdapter.submitList(state.skills)
                 }
             }
         }

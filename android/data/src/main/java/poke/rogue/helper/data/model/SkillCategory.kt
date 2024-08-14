@@ -1,24 +1,24 @@
 package poke.rogue.helper.data.model
 
-data class MoveCategory(
+data class SkillCategory(
     val id: Long,
     val name: String,
 ) {
     companion object {
-        val physicalMove =
-            MoveCategory(
+        val physicalAttackSkill =
+            SkillCategory(
                 id = 1,
                 name = "물리",
             )
 
-        val specialMove =
-            MoveCategory(
+        val specialAttackSkill =
+            SkillCategory(
                 id = 2,
                 name = "특수",
             )
 
-        val statusMove =
-            MoveCategory(
+        val changeStatusSkill =
+            SkillCategory(
                 id = 3,
                 name = "변화",
             )

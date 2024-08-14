@@ -58,7 +58,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
             when (position) {
                 0 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_stats_title)
                 1 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_evolution_title)
-                2 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_moves_title)
+                2 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_skills_title)
                 3 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_information_title)
             }
         }.attach()

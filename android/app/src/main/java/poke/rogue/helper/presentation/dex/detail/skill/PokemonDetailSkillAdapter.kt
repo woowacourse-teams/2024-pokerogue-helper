@@ -3,17 +3,17 @@ package poke.rogue.helper.presentation.dex.detail.skill
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import poke.rogue.helper.databinding.ItemPokemonDetailMovesBinding
-import poke.rogue.helper.presentation.dex.model.PokemonMoveUiModel
+import poke.rogue.helper.databinding.ItemPokemonDetailSkillBinding
+import poke.rogue.helper.presentation.dex.model.PokemonSkillUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class PokemonDetailSkillAdapter : ListAdapter<PokemonMoveUiModel, PokemonDetailSkillViewHolder>(moveComparator) {
+class PokemonDetailSkillAdapter : ListAdapter<PokemonSkillUiModel, PokemonDetailSkillViewHolder>(skillsComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): PokemonDetailSkillViewHolder =
         PokemonDetailSkillViewHolder(
-            ItemPokemonDetailMovesBinding.inflate(
+            ItemPokemonDetailSkillBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false,
@@ -28,8 +28,8 @@ class PokemonDetailSkillAdapter : ListAdapter<PokemonMoveUiModel, PokemonDetailS
     }
 
     companion object {
-        private val moveComparator =
-            ItemDiffCallback<PokemonMoveUiModel>(
+        private val skillsComparator =
+            ItemDiffCallback<PokemonSkillUiModel>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
