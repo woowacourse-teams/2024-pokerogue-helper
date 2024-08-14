@@ -10,18 +10,17 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.data.exception.PokeException
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
@@ -35,33 +34,26 @@ class PokemonListViewModel(
 ) : ErrorHandleViewModel(logger), PokemonListNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
 
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
-
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<List<PokemonUiModel>> =
-        refreshEvent
+        merge(refreshEvent.map { "" }, searchQuery)
             .onStart {
-                _isLoading.value = true
-                emit(Unit)
+                if (isEmpty.value) {
+                    _isLoading.value = true
+                }
             }
-            .flatMapLatest {
-                searchQuery
-                    .debounce(300L)
-                    .mapLatest { query ->
-                        queriedPokemons(query)
-                    }
-                    .catch { e ->
-                        handlePokemonError(e)
-                    }
-            }.onEach {
-                _isLoading.value = false
+            .debounce(300L)
+            .mapLatest { query ->
+                queriedPokemons(query)
             }
             .stateIn(
                 viewModelScope + errorHandler,
                 SharingStarted.WhileSubscribed(5000),
                 emptyList(),
             )
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
     val isEmpty: StateFlow<Boolean> =
         uiState.map { it.isEmpty() && !isLoading.value }
             .stateIn(
@@ -74,10 +66,15 @@ class PokemonListViewModel(
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
     private suspend fun queriedPokemons(query: String): List<PokemonUiModel> {
-        if (query.isEmpty()) {
-            return pokemonListRepository.pokemons().map(Pokemon::toUi)
+        return try {
+            if (query.isEmpty()) pokemonListRepository.pokemons().map(Pokemon::toUi)
+            else pokemonListRepository.pokemons(query).map(Pokemon::toUi)
+        } catch (e: PokeException) {
+            handlePokemonError(e)
+            emptyList()
+        } finally {
+            _isLoading.value = false
         }
-        return pokemonListRepository.pokemons(query).map(Pokemon::toUi)
     }
 
     override fun navigateToPokemonDetail(pokemonId: Long) {
