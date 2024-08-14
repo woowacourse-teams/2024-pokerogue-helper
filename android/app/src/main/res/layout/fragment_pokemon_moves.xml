@@ -11,12 +11,11 @@
 
         <TextView
             android:id="@+id/tv_pokemon_detail_move_level"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_level"
-            android:textColor="@color/poke_white"
-            android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
@@ -24,26 +23,25 @@
 
         <TextView
             android:id="@+id/tv_pokemon_detail_move_name"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_name"
-            android:textColor="@color/poke_white"
-            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_power"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.3" />
-
+            app:layout_constraintWidth_percent="0.25" />
 
         <TextView
             android:id="@+id/tv_pokemon_detail_move_power"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_power"
-            android:textColor="@color/poke_white"
-            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_accuracy"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
@@ -51,25 +49,25 @@
 
         <TextView
             android:id="@+id/tv_pokemon_detail_move_accuracy"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_accuracy"
-            android:textColor="@color/poke_white"
-            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_type"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_power"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
-            app:layout_constraintWidth_percent="0.1" />
+            app:layout_constraintWidth_percent="0.15" />
 
         <TextView
             android:id="@+id/tv_pokemon_detail_move_type"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_type"
-            android:textColor="@color/poke_white"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_category"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_accuracy"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
@@ -77,12 +75,12 @@
 
         <TextView
             android:id="@+id/tv_pokemon_detail_move_category"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_category"
-            android:textColor="@color/poke_white"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_type"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
@@ -90,10 +88,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_detail_moves"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_move_level"
             tools:listitem="@layout/item_pokemon_detail_moves" />
     </androidx.constraintlayout.widget.ConstraintLayout>
