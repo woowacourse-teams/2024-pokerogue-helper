@@ -8,18 +8,22 @@ data class PokemonMoveUiModel(
     val id: Long,
     val name: String,
     val level: Int,
-    val power: Int,
+    val power: String,
     val type: TypeUiModel,
     val accuracy: Int,
     val category: MoveCategoryUiModel,
-)
+) {
+    companion object {
+        const val NO_POWER = "-"
+    }
+}
 
 fun PokemonMove.toUi(): PokemonMoveUiModel =
     PokemonMoveUiModel(
         id = id,
         name = name,
         level = level,
-        power = power,
+        power = if (power == PokemonMove.NO_POWER_VALUE) PokemonMoveUiModel.NO_POWER else power.toString(),
         type = type.toUi(),
         accuracy = accuracy,
         category = category.toUi(),

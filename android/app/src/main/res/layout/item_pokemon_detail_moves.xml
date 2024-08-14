@@ -28,6 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintWidth_percent="0.1"
+            tools:ignore="SpUsage"
             tools:text="1" />
 
         <TextView
@@ -42,6 +43,7 @@
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.25"
+            tools:ignore="SpUsage"
             tools:text="몸통박치기" />
 
 
@@ -51,13 +53,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{String.valueOf(move.power)}"
+            android:text="@{move.power}"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_accuracy"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintWidth_percent="0.1"
+            tools:ignore="SpUsage"
             tools:text="40" />
 
         <TextView
@@ -73,6 +76,7 @@
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_power"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintWidth_percent="0.2"
+            tools:ignore="SpUsage"
             tools:text="100" />
 
         <ImageView
