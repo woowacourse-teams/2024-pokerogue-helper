@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.dex.detail
+package poke.rogue.helper.presentation.dex.detail.skill
 
 import android.os.Bundle
 import android.view.View
@@ -8,14 +8,16 @@ import com.google.android.material.divider.MaterialDividerItemDecoration.VERTICA
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonMovesBinding
 import poke.rogue.helper.presentation.base.BindingFragment
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class PokemonMovesFragment : BindingFragment<FragmentPokemonMovesBinding>(R.layout.fragment_pokemon_moves) {
+class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonMovesBinding>(R.layout.fragment_pokemon_moves) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModels()
 
-    private val movesAdapter: PokemonMovesAdapter by lazy { PokemonMovesAdapter() }
+    private val movesAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
 
     override fun onViewCreated(
         view: View,

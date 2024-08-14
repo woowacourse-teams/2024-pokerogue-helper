@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.dex.detail
+package poke.rogue.helper.presentation.dex.detail.stat
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,8 @@ import androidx.fragment.app.activityViewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonStatBinding
 import poke.rogue.helper.presentation.base.BindingFragment
-import poke.rogue.helper.presentation.dex.PokemonStatAdapter
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp

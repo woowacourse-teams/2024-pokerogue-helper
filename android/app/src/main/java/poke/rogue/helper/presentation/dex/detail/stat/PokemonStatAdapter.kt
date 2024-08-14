@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.dex
+package poke.rogue.helper.presentation.dex.detail.stat
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

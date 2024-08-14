@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.dex.detail
+package poke.rogue.helper.presentation.dex.detail.skill
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,12 +7,12 @@ import poke.rogue.helper.databinding.ItemPokemonDetailMovesBinding
 import poke.rogue.helper.presentation.dex.model.PokemonMoveUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class PokemonMovesAdapter : ListAdapter<PokemonMoveUiModel, PokemonMoveViewHolder>(moveComparator) {
+class PokemonDetailSkillAdapter : ListAdapter<PokemonMoveUiModel, PokemonDetailSkillViewHolder>(moveComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): PokemonMoveViewHolder =
-        PokemonMoveViewHolder(
+    ): PokemonDetailSkillViewHolder =
+        PokemonDetailSkillViewHolder(
             ItemPokemonDetailMovesBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -21,7 +21,7 @@ class PokemonMovesAdapter : ListAdapter<PokemonMoveUiModel, PokemonMoveViewHolde
         )
 
     override fun onBindViewHolder(
-        holder: PokemonMoveViewHolder,
+        holder: PokemonDetailSkillViewHolder,
         position: Int,
     ) {
         holder.bind(getItem(position))

@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.dex.detail
+package poke.rogue.helper.presentation.dex.detail.information
 
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonInformationBinding

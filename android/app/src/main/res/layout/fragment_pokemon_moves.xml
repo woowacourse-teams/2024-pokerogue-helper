@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
-        tools:context=".presentation.dex.detail.PokemonMovesFragment">
+        tools:context=".presentation.dex.detail.skill.PokemonDetailSkillFragment">
 
         <TextView
             android:id="@+id/tv_pokemon_detail_move_level"
