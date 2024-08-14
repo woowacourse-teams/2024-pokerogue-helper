@@ -1,13 +1,9 @@
 package poke.rogue.helper.presentation.util.event
 
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.util.concurrent.atomic.AtomicBoolean
 
 interface EventFlow<out T> : Flow<T> {
@@ -19,7 +15,8 @@ interface EventFlow<out T> : Flow<T> {
 interface MutableEventFlow<T> : EventFlow<T>, FlowCollector<T>
 
 @Suppress("FunctionName")
-fun <T> MutableEventFlow(capacity: Int = EventFlow.DEFAULT_BUFFER): MutableEventFlow<T> = EventFlowImpl(capacity)
+fun <T> MutableEventFlow(capacity: Int = EventFlow.DEFAULT_BUFFER): MutableEventFlow<T> =
+    EventFlowImpl(capacity)
 
 fun <T> MutableEventFlow<T>.asEventFlow(): EventFlow<T> = ReadOnlyEventFlow(this)
 
@@ -48,34 +45,4 @@ private class EventFlowSlot<T>(val value: T) {
     private val consumed: AtomicBoolean = AtomicBoolean(false)
 
     fun markConsumed(): Boolean = consumed.getAndSet(true)
-}
-
-fun main() {
-    runBlocking {
-        val eventFlow = MutableSharedFlow<String>(3)
-        eventFlow.emit("Hello")
-        eventFlow.emit("Hello2")
-        eventFlow.emit("Hello3")
-        launch {
-            var count = 2
-            eventFlow.collect {
-                count--
-                println(it)
-                if (count == 0) cancel()
-            }
-        }
-        launch {
-            var count = 2
-            eventFlow.collect {
-                count--
-                println(it)
-                if (count == 0) cancel()
-            }
-        }
-        delay(100)
-        launch {
-            println("Second collector")
-            eventFlow.collect { println(it) }
-        }
-    }
 }

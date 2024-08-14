@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 
 object RefreshEventBus {
     private val coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob())
-    private val _event = MutableEventFlow<Unit>(capacity = 1)
+    private val _event = MutableEventFlow<Unit>()
     val event: EventFlow<Unit> = _event.asEventFlow()
 
     fun send() {
