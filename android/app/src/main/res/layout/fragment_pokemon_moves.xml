@@ -92,16 +92,23 @@
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintWidth_percent="0.2" />
 
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_pokemon_moves_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerThickness="2dp"
+            app:layout_constraintBottom_toTopOf="@id/rv_pokemon_detail_moves"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_move_name" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_detail_moves"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_move_level"
+            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_moves_title"
             tools:listitem="@layout/item_pokemon_detail_moves" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
