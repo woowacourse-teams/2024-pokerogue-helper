@@ -22,6 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{String.valueOf(move.level)}"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{move.name}"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_power"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_level"
@@ -50,6 +52,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{String.valueOf(move.power)}"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_accuracy"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_name"
@@ -64,11 +67,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@{String.valueOf(move.accuracy)}"
+            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/iv_pokemon_detail_move_type"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_power"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
-            app:layout_constraintWidth_percent="0.15"
+            app:layout_constraintWidth_percent="0.2"
             tools:text="100" />
 
         <ImageView

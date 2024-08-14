@@ -49,7 +49,7 @@
     <string name="pokemon_detail_moves_power">위력</string>
     <string name="pokemon_detail_moves_accuracy">명중률</string>
     <string name="pokemon_detail_moves_type">타입</string>
-    <string name="pokemon_detail_moves_category">기술 분류</string>
+    <string name="pokemon_detail_moves_category">분류</string>
 
 
     <!-- ability -->

@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_level"
+            android:textSize="16dp"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_name"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_power"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_level"
@@ -41,6 +43,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_power"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_accuracy"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_name"
@@ -54,11 +57,12 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_accuracy"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_type"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_power"
             app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_move_name"
-            app:layout_constraintWidth_percent="0.15" />
+            app:layout_constraintWidth_percent="0.2" />
 
         <TextView
             android:id="@+id/tv_pokemon_detail_move_type"
@@ -67,6 +71,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_type"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_move_category"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_accuracy"
@@ -80,6 +85,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_moves_category"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_move_level"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_move_type"
