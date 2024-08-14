@@ -39,7 +39,7 @@ class PokemonListActivity :
         binding.lifecycleOwner = this
         initAdapter()
         initObservers()
-        binding.root.setOnClickListener{
+        binding.root.setOnClickListener {
             hideKeyboard()
         }
     }

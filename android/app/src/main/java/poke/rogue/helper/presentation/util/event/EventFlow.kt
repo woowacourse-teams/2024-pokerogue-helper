@@ -15,8 +15,7 @@ interface EventFlow<out T> : Flow<T> {
 interface MutableEventFlow<T> : EventFlow<T>, FlowCollector<T>
 
 @Suppress("FunctionName")
-fun <T> MutableEventFlow(capacity: Int = EventFlow.DEFAULT_BUFFER): MutableEventFlow<T> =
-    EventFlowImpl(capacity)
+fun <T> MutableEventFlow(capacity: Int = EventFlow.DEFAULT_BUFFER): MutableEventFlow<T> = EventFlowImpl(capacity)
 
 fun <T> MutableEventFlow<T>.asEventFlow(): EventFlow<T> = ReadOnlyEventFlow(this)
 

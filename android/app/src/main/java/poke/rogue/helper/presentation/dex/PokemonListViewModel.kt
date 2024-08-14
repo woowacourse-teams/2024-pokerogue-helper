@@ -67,8 +67,11 @@ class PokemonListViewModel(
 
     private suspend fun queriedPokemons(query: String): List<PokemonUiModel> {
         return try {
-            if (query.isEmpty()) pokemonListRepository.pokemons().map(Pokemon::toUi)
-            else pokemonListRepository.pokemons(query).map(Pokemon::toUi)
+            if (query.isEmpty()) {
+                pokemonListRepository.pokemons().map(Pokemon::toUi)
+            } else {
+                pokemonListRepository.pokemons(query).map(Pokemon::toUi)
+            }
         } catch (e: PokeException) {
             handlePokemonError(e)
             emptyList()

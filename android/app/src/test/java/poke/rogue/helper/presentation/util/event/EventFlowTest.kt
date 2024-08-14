@@ -12,47 +12,48 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 
 class EventFlowTest {
-
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `EventFlow 는 소비할 때까지 element 가 삭제되지 않는다`() = runTest(UnconfinedTestDispatcher()) {
-        // given
-        val eventFlow = MutableEventFlow<Int>()
-        // when
-        eventFlow.emit(1)
-        delay(10)
-        // then
-        eventFlow
-            .onEach {
-                println(">>> onEach: $it")
-                it shouldBe 1
-            }
-            .launchIn(backgroundScope)
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Test
-    fun `EventFlow 는 element 를 공유하지 않는다`() = runTest {
-        // given
-        val eventFlow = MutableEventFlow<Int>()
-        // when
-        eventFlow.emit(1)
-        delay(10)
-        // then
-        backgroundScope.launch {
-            launch {
-                eventFlow.collect {
-                    println(">>> collect: $it")
+    fun `EventFlow 는 소비할 때까지 element 가 삭제되지 않는다`() =
+        runTest(UnconfinedTestDispatcher()) {
+            // given
+            val eventFlow = MutableEventFlow<Int>()
+            // when
+            eventFlow.emit(1)
+            delay(10)
+            // then
+            eventFlow
+                .onEach {
+                    println(">>> onEach: $it")
                     it shouldBe 1
                 }
-            }
-            launch {
-                eventFlow.collect {
-                    println(">>> Never Collect AnyThing")
-                    it shouldBe Int.MAX_VALUE
+                .launchIn(backgroundScope)
+        }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `EventFlow 는 element 를 공유하지 않는다`() =
+        runTest {
+            // given
+            val eventFlow = MutableEventFlow<Int>()
+            // when
+            eventFlow.emit(1)
+            delay(10)
+            // then
+            backgroundScope.launch {
+                launch {
+                    eventFlow.collect {
+                        println(">>> collect: $it")
+                        it shouldBe 1
+                    }
+                }
+                launch {
+                    eventFlow.collect {
+                        println(">>> Never Collect AnyThing")
+                        it shouldBe Int.MAX_VALUE
+                    }
                 }
             }
+            advanceTimeBy(100)
         }
-        advanceTimeBy(100)
-    }
 }
