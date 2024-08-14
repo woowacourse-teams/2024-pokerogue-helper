@@ -41,10 +41,19 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private Weather createWeather(String data) {
-        String[] fields = data.split(FIELD_DELIMITER);
-        List<String> effects = Arrays.stream(fields[2].split(LIST_DELIMITER))
+        List<String> fields = Arrays.stream(data.split(FIELD_DELIMITER))
                 .map(String::trim)
                 .toList();
-        return new Weather(fields[0].trim(), fields[0].trim(), fields[1].trim(), effects);
+        String id = createId(fields.get(0));
+        String name = fields.get(0);
+        String description = fields.get(1);
+        List<String> effects = Arrays.stream(fields.get(2).split(LIST_DELIMITER))
+                .map(String::trim)
+                .toList();
+        return new Weather(id, name, description, effects);
+    }
+
+    private String createId(String data) {
+        return data.replace(' ', '-');
     }
 }
