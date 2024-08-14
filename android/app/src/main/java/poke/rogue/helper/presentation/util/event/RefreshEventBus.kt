@@ -9,7 +9,7 @@ object RefreshEventBus {
     private val _event = MutableEventFlow<Unit>()
     val event: EventFlow<Unit> = _event.asEventFlow()
 
-    fun send() {
+    fun refresh() {
         coroutineScope.launch {
             _event.emit(Unit)
         }
