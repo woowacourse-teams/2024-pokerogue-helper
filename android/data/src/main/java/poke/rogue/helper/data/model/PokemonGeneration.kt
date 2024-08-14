@@ -2,7 +2,6 @@ package poke.rogue.helper.data.model
 
 
 enum class PokemonGeneration(val number: Int) {
-    ALL(0),
     ONE(1),
     TWO(2),
     THREE(3),

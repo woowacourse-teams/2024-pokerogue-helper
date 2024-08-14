@@ -20,17 +20,18 @@ class DefaultDexRepository(
         return cachedPokemons
     }
 
-    override suspend fun pokemons(
+    override suspend fun filteredPokemons(
         name: String,
         sort: PokemonSort,
         filter: PokemonFilter,
     ): List<Pokemon> {
-        val filteredPokemons = pokemons().toFilteredPokemons(sort, filter)
-        if (name.isBlank()) {
-            return filteredPokemons
-        }
-        return filteredPokemons.filter { it.name.has(name) }
+        return if (name.isEmpty()) {
+            pokemons()
+        } else {
+            pokemons().filter { it.name.has(name) }
+        }.toFilteredPokemons(sort, filter)
     }
+
 
     override suspend fun pokemonDetail(id: Long): PokemonDetail {
         val cached = cachedPokemonDetails[id]
@@ -46,7 +47,7 @@ class DefaultDexRepository(
         sort: PokemonSort,
         filter: PokemonFilter,
     ): List<Pokemon> {
-        return this.sortedWith(sort)
+        return this
             .filter {
                 when (filter) {
                     is PokemonFilter.ByAll -> true
@@ -58,7 +59,7 @@ class DefaultDexRepository(
                         it.generation == filter.generation
                     }
                 }
-            }
+            }.sortedWith(sort)
     }
 
     companion object {

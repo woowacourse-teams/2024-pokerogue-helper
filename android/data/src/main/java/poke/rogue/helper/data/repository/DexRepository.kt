@@ -8,8 +8,8 @@ import poke.rogue.helper.data.model.PokemonSort
 interface DexRepository {
     suspend fun pokemons(): List<Pokemon>
 
-    suspend fun pokemons(
-        name: String,
+    suspend fun filteredPokemons(
+        name: String = "",
         sort: PokemonSort = PokemonSort.ByDexNumber,
         filter: PokemonFilter = PokemonFilter.ByAll,
     ): List<Pokemon>

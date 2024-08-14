@@ -9,7 +9,7 @@ data class Pokemon(
     val name: String,
     val imageUrl: String,
     val types: List<Type>,
-    val generation: PokemonGeneration = PokemonGeneration.ALL,
+    val generation: PokemonGeneration = PokemonGeneration.ONE,
     val baseStat: Int = 0,
     val hp: Int = 0,
     val attack: Int = 0,

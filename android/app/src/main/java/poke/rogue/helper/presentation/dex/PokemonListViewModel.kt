@@ -70,7 +70,7 @@ class PokemonListViewModel(
             if (query.isEmpty()) {
                 pokemonListRepository.pokemons().map(Pokemon::toUi)
             } else {
-                pokemonListRepository.pokemons(query).map(Pokemon::toUi)
+                pokemonListRepository.filteredPokemons(query).map(Pokemon::toUi)
             }
         } catch (e: PokeException) {
             handlePokemonError(e)
