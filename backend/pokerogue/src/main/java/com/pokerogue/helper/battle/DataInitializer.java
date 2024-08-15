@@ -87,7 +87,7 @@ public class DataInitializer implements ApplicationRunner {
 
     private Move createMove(List<String> fields) {
         return new Move(
-                createId(fields.get(1)) + fields.get(0),
+                createId(fields.get(1)),
                 fields.get(1),
                 fields.get(2),
                 fields.get(3),

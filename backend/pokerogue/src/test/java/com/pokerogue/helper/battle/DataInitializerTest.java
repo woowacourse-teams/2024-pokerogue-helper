@@ -25,7 +25,7 @@ class DataInitializerTest {
 
         assertAll(() -> {
             assertThat(weatherRepository.findAll()).hasSize(10);
-            assertThat(moveRepository.findAll()).hasSize(920);
+            assertThat(moveRepository.findAll()).hasSize(902);
             /*
             현재 이름 중복되는 포켓몬 때문에 개수 확인을 하지 않았음
              */

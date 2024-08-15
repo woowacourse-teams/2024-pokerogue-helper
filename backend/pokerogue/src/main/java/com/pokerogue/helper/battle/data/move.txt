@@ -623,41 +623,23 @@ EMPTY / EMPTY / EMPTY / EMPTY / 노말 / 노말 / STATUS / USER / -1 / 2 / -1 / 
 620 / 화룡점정 / EMPTY / 넓은 하늘에서 급속으로 강하하여 상대를 공격한다. 자신의 방어와 특수방어가 떨어진다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 6 / MAKES_CONTACT
 621 / 이차원러시 / EMPTY / 많은 팔로 방어와 판별 등을 무시하는 연속 공격이다. 자신의 방어가 떨어진다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 100 / -1 / 5 / -1 / EMPTY / 6 / IGNORE_PROTECT
 622 / 울트라대시어택 /  (N) / Z파워로 기세를 몰아 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-623 / 울트라대시어택 /  (N) / Dummy Data / 노말 / 노말 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 624 / 전력무쌍격렬권 /  (N) / Z파워로 만든 에너지 구슬을 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-625 / 전력무쌍격렬권 /  (N) / Dummy Data / 격투 / 격투 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 626 / 파이널다이브클래시 /  (N) / Z파워로 기세 좋게 날아올라 상대를 향해 전력으로 낙하한다. 원래 기술에 따라 위력이 변한다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-627 / 파이널다이브클래시 /  (N) / Dummy Data / 비행 / 비행 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 628 / 애시드포이즌딜리트 /  (N) / Z파워로 독의 늪을 만들어 전력으로 상대를 가라앉힌다. 원래 기술에 따라 위력이 변한다. / 독 / 독 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-629 / 애시드포이즌딜리트 /  (N) / Dummy Data / 독 / 독 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 630 / 라이징랜드오버 /  (N) / Z파워로 땅 깊숙이 파고들어 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-631 / 라이징랜드오버 /  (N) / Dummy Data / 땅 / 땅 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 632 / 월즈엔드폴 /  (N) / Z파워로 큰 바위산을 불러내 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-633 / 월즈엔드폴 /  (N) / Dummy Data / 바위 / 바위 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 634 / 절대포식회전참 /  (N) / Z파워로 뱉어낸 실이 전력으로 상대를 붙들어 맨다. 원래 기술에 따라 위력이 변한다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-635 / 절대포식회전참 /  (N) / Dummy Data / 벌레 / 벌레 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 636 / 무한암야로의유인 /  (N) / Z파워로 불러낸 강한 원념이 전력으로 상대에게 쏟아진다. 원래 기술에 따라 위력이 변한다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-637 / 무한암야로의유인 /  (N) / Dummy Data / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 638 / 초월나선연격 /  (N) / Z파워로 고속 회전을 하여 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-639 / 초월나선연격 /  (N) / Dummy Data / 강철 / 강철 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 640 / 다이내믹풀플레임 /  (N) / Z파워로 활활 타는 불꽃을 뱉어내 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-641 / 다이내믹풀플레임 /  (N) / Dummy Data / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 642 / 슈퍼아쿠아토네이도 /  (N) / Z파워로 큰 바다회오리를 만들어 전력으로 상대를 집어삼킨다. 원래 기술에 따라 위력이 변한다. / 물 / 물 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-643 / 슈퍼아쿠아토네이도 /  (N) / Dummy Data / 물 / 물 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 644 / 블룸샤인엑스트라 /  (N) / Z파워로 화초들의 에너지를 빌려 전력으로 상대를 공격한다. 원래 기술에 따라 위력이 변한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-645 / 블룸샤인엑스트라 /  (N) / Dummy Data / 풀 / 풀 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 646 / 스파킹기가볼트 /  (N) / Z파워로 비축한 강한 전기를 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-647 / 스파킹기가볼트 /  (N) / Dummy Data / 전기 / 전기 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 648 / 맥시멈사이브레이커 /  (N) / Z파워로 상대를 조종해 전력으로 매서운 맛을 보여준다. 원래 기술에 따라 위력이 변한다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-649 / 맥시멈사이브레이커 /  (N) / Dummy Data / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 650 / 레이징지오프리즈 /  (N) / Z파워로 기온을 급격하게 떨어뜨려 전력으로 상대를 얼린다. 원래 기술에 따라 위력이 변한다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-651 / 레이징지오프리즈 /  (N) / Dummy Data / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 652 / 얼티메이트드래곤번 /  (N) / Z파워로 오라를 실체화시켜 전력으로 상대를 공격한다. 원래 기술에 따라 위력이 변한다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-653 / 얼티메이트드래곤번 /  (N) / Dummy Data / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 654 / 블랙홀이클립스 /  (N) / Z파워로 어둠의 에너지를 모아 전력으로 상대를 끌어당긴다. 원래 기술에 따라 위력이 변한다. / 악 / 악 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-655 / 블랙홀이클립스 /  (N) / Dummy Data / 악 / 악 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 656 / 러블리스타임팩트 /  (N) / Z파워로 매혹의 공간을 만들어 전력으로 상대를 가지고 논다. 원래 기술에 따라 위력이 변한다. / 페어리 / 페어리 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
-657 / 러블리스타임팩트 /  (N) / Dummy Data / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
 658 / 필살피카슛 /  (N) / Z파워로 최대 전력을 몸에 두른 피카츄가 전력으로 상대에게 덤벼든다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 210 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
 659 / 모래모으기 / EMPTY / 자신의 최대 HP 절반을 회복한다. 모래바람일 때는 많이 회복한다. / 땅 / 땅 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 7 / EMPTY
 660 / 만나자마자 / EMPTY / 위력이 높은 기술이지만 배틀에 나가서 바로 쓰지 않으면 성공할 수 없다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 90 / 100 / 10 / -1 / 2 / 7 / MAKES_CONTACT
