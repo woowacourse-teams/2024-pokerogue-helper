@@ -1,7 +1,8 @@
-package poke.rogue.helper.presentation.dex.detail
+package poke.rogue.helper.presentation.dex.detail.stat
 
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemAbilityTitleBinding
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 
 class AbilityTitleViewHolder(

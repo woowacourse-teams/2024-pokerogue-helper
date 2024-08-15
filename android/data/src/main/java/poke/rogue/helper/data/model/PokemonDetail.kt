@@ -8,6 +8,7 @@ data class PokemonDetail(
     val pokemon: Pokemon,
     val stats: List<Stat>,
     val abilities: List<Ability>,
+    val skills: List<PokemonSkill> = PokemonSkill.FAKE_SKILLS,
     val height: Float,
     val weight: Float,
 )
