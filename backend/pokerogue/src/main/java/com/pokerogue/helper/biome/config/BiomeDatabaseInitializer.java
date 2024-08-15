@@ -18,7 +18,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(
-                "C:\\Users\\s_osang0731\\precourse\\2024-pokerogue-helper\\backend\\pokerogue\\src\\main\\java\\com\\pokerogue\\helper\\biome\\config\\biome.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/biome.txt")
         );
         while (true) {
             String biome = bufferedReader.readLine();
@@ -29,7 +29,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         }
 
         bufferedReader = new BufferedReader(new FileReader(
-                "C:\\Users\\s_osang0731\\precourse\\2024-pokerogue-helper\\backend\\pokerogue\\src\\main\\java\\com\\pokerogue\\helper\\biome\\config\\biome-links.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/biome-links.txt")
         );
         while (true) {
             String biomeLink = bufferedReader.readLine();
@@ -40,7 +40,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         }
 
         bufferedReader = new BufferedReader(new FileReader(
-                "C:\\Users\\s_osang0731\\precourse\\2024-pokerogue-helper\\backend\\pokerogue\\src\\main\\java\\com\\pokerogue\\helper\\biome\\config\\biome-trainer.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/biome-trainer.txt")
         );
         while (true) {
             String biomeTrainer = bufferedReader.readLine();
@@ -51,7 +51,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         }
 
         bufferedReader = new BufferedReader(new FileReader(
-                "C:\\Users\\s_osang0731\\precourse\\2024-pokerogue-helper\\backend\\pokerogue\\src\\main\\java\\com\\pokerogue\\helper\\biome\\config\\trainer-species.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/trainer-species.txt")
         );
         while (true) {
             String trainerSpecie = bufferedReader.readLine();
@@ -62,7 +62,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         }
 
         bufferedReader = new BufferedReader(new FileReader(
-                "C:\\Users\\s_osang0731\\precourse\\2024-pokerogue-helper\\backend\\pokerogue\\src\\main\\java\\com\\pokerogue\\helper\\biome\\config\\biome-type.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/biome-type.txt")
         );
         while (true) {
             String biomeType = bufferedReader.readLine();
@@ -73,7 +73,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         }
 
         bufferedReader = new BufferedReader(new FileReader(
-                "C:\\Users\\s_osang0731\\precourse\\2024-pokerogue-helper\\backend\\pokerogue\\src\\main\\java\\com\\pokerogue\\helper\\biome\\config\\trainer-type.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/trainer-type.txt")
         );
         while (true) {
             String trainerType = bufferedReader.readLine();
