@@ -1,6 +1,5 @@
 package com.pokerogue.helper.battle;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,5 +25,9 @@ public class BattlePokemonRepository {
         return battlePokemons.values().stream()
                 .filter(pokemon -> pokemon.name().equals(name))
                 .findAny();
+    }
+
+    public Optional<BattlePokemon> findById(String id) {
+        return Optional.ofNullable(battlePokemons.get(id));
     }
 }
