@@ -1,9 +1,15 @@
 package com.pokerogue.helper.biome.config;
 
+import com.pokerogue.helper.biome.domain.BiomeLink;
+import com.pokerogue.helper.biome.domain.BiomePokemon;
+import com.pokerogue.helper.biome.domain.BiomeTypeAndTrainer;
+import com.pokerogue.helper.biome.domain.TrainerPokemon;
+import com.pokerogue.helper.biome.domain.TrainerType;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -14,18 +20,23 @@ import org.springframework.stereotype.Component;
 public class BiomeDatabaseInitializer implements ApplicationRunner {
 
     private final BiomeRepository biomeRepository;
+    private final List<BiomePokemon> biomePokemons;
+    private final List<BiomeLink> biomeLinks;
+    private final List<BiomeTypeAndTrainer> biomeTypesAndTrainers;
+    private final List<TrainerType> trainerTypes;
+    private final List<TrainerPokemon> trainerPokemons;
 
     @Override
     public void run(ApplicationArguments args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/biome.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/biome-pokemons.txt")
         );
         while (true) {
-            String biome = bufferedReader.readLine();
-            if (biome == null) {
+            String biomePokemon = bufferedReader.readLine();
+            if (biomePokemon == null) {
                 break;
             }
-            biomeRepository.saveBiome(biome);
+            biomePokemons.add(new BiomePokemon(biomePokemon));
         }
 
         bufferedReader = new BufferedReader(new FileReader(
@@ -36,51 +47,40 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             if (biomeLink == null) {
                 break;
             }
-            biomeRepository.saveBiomeLink(biomeLink);
+            biomeLinks.add(new BiomeLink(biomeLink));
         }
 
         bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/biome-trainer.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/biome-types-trainers.txt")
         );
         while (true) {
-            String biomeTrainer = bufferedReader.readLine();
-            if (biomeTrainer == null) {
+            String biomeTypeAndTrainer = bufferedReader.readLine();
+            if (biomeTypeAndTrainer == null) {
                 break;
             }
-            biomeRepository.saveBiomeTrainer(biomeTrainer);
+            biomeTypesAndTrainers.add(new BiomeTypeAndTrainer(biomeTypeAndTrainer));
         }
 
         bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/trainer-species.txt")
-        );
-        while (true) {
-            String trainerSpecie = bufferedReader.readLine();
-            if (trainerSpecie == null) {
-                break;
-            }
-            biomeRepository.saveTrainerSpecie(trainerSpecie);
-        }
-
-        bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/biome-type.txt")
-        );
-        while (true) {
-            String biomeType = bufferedReader.readLine();
-            if (biomeType == null) {
-                break;
-            }
-            biomeRepository.saveBiomeType(biomeType);
-        }
-
-        bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/trainer-type.txt")
+                "src/main/java/com/pokerogue/helper/biome/config/trainer-types.txt")
         );
         while (true) {
             String trainerType = bufferedReader.readLine();
             if (trainerType == null) {
                 break;
             }
-            biomeRepository.saveTrainerType(trainerType);
+            trainerTypes.add(new TrainerType(trainerType));
+        }
+
+        bufferedReader = new BufferedReader(new FileReader(
+                "src/main/java/com/pokerogue/helper/biome/config/trainer-pokemons.txt")
+        );
+        while (true) {
+            String trainerPokemon = bufferedReader.readLine();
+            if (trainerPokemon == null) {
+                break;
+            }
+            trainerPokemons.add(new TrainerPokemon(trainerPokemon));
         }
     }
 }
