@@ -10,11 +10,11 @@ import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityDetailBinding
 import poke.rogue.helper.presentation.ability.model.toUi
+import poke.rogue.helper.presentation.base.error.ErrorEvent
+import poke.rogue.helper.presentation.base.error.NetworkErrorActivity
+import poke.rogue.helper.presentation.base.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailFragment
-import poke.rogue.helper.presentation.error.ErrorEvent
-import poke.rogue.helper.presentation.error.NetworkErrorActivity
 import poke.rogue.helper.presentation.home.HomeActivity
-import poke.rogue.helper.presentation.toolbar.ToolbarFragment
 import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
