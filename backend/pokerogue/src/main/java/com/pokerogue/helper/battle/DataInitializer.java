@@ -1,5 +1,7 @@
 package com.pokerogue.helper.battle;
 
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,11 +24,15 @@ public class DataInitializer implements ApplicationRunner {
 
     private final WeatherRepository weatherRepository;
     private final MoveRepository moveRepository;
+    private final BattlePokemonRepository battlePokemonRepository;
+    private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
 
     @Override
     public void run(ApplicationArguments args) {
         String weatherFilePath = "src/main/java/com/pokerogue/helper/battle/data/weather.txt";
         String moveFilePath = "src/main/java/com/pokerogue/helper/battle/data/move.txt";
+        String pokemonFilePath = "src/main/java/com/pokerogue/helper/battle/data/pokemon.txt";
+        String tmsFilePath = "src/main/java/com/pokerogue/helper/battle/data/tms.txt";
 
         saveData(weatherFilePath, fields -> {
             Weather weather = createWeather(fields);
@@ -35,6 +41,14 @@ public class DataInitializer implements ApplicationRunner {
         saveData(moveFilePath, fields -> {
             Move move = createMove(fields);
             moveRepository.save(move);
+        });
+        saveData(pokemonFilePath, fields -> {
+            BattlePokemon battlePokemon = createBattlePokemon(fields);
+            battlePokemonRepository.save(battlePokemon);
+        });
+        saveData(tmsFilePath, fields -> {
+            PokemonMovesByMachine pokemonMovesByMachine = createPokemonMovesByMachine(fields);
+            pokemonMovesByMachineRepository.save(pokemonMovesByMachine);
         });
     }
 
@@ -89,6 +103,26 @@ public class DataInitializer implements ApplicationRunner {
                 convertToInteger(fields.get(13)),
                 fields.get(14)
         );
+    }
+
+    private BattlePokemon createBattlePokemon(List<String> fields) {
+        Integer pokedexNumber = convertToInteger(fields.get(0));
+        String name = fields.get(1);
+        String id = createId(name);
+        List<String> moveNames = Arrays.stream(fields.get(19).split(LIST_DELIMITER))
+                .map(String::trim)
+                .toList();
+        return new BattlePokemon(id, pokedexNumber, name, moveNames);
+    }
+
+    private PokemonMovesByMachine createPokemonMovesByMachine(List<String> fields) {
+        String pokemonName = fields.get(0);
+        List<String> moveNames = Arrays.stream(fields.get(1).split(LIST_DELIMITER))
+                .map(String::trim)
+                .toList();
+        BattlePokemon battlePokemon = battlePokemonRepository.findByName(pokemonName)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
+        return new PokemonMovesByMachine(battlePokemon.pokedexNumber(), moveNames);
     }
 
     private Integer convertToInteger(String data) {

@@ -14,12 +14,23 @@ class DataInitializerTest {
     void setWeathersData() {
         WeatherRepository weatherRepository = new WeatherRepository();
         MoveRepository moveRepository = new MoveRepository();
-        DataInitializer dataInitializer = new DataInitializer(weatherRepository, moveRepository);
+        BattlePokemonRepository battlePokemonRepository = new BattlePokemonRepository();
+        PokemonMovesByMachineRepository pokemonMovesByMachineRepository = new PokemonMovesByMachineRepository();
+        DataInitializer dataInitializer = new DataInitializer(
+                weatherRepository,
+                moveRepository,
+                battlePokemonRepository,
+                pokemonMovesByMachineRepository);
         dataInitializer.run(new DefaultApplicationArguments());
 
         assertAll(() -> {
             assertThat(weatherRepository.findAll()).hasSize(10);
             assertThat(moveRepository.findAll()).hasSize(920);
+            /*
+            현재 이름 중복되는 포켓몬 때문에 개수 확인을 하지 않았음
+             */
+            assertThat(pokemonMovesByMachineRepository.findAll()).isNotEmpty();
+            assertThat(battlePokemonRepository.findAll()).isNotEmpty();
         });
     }
 }
