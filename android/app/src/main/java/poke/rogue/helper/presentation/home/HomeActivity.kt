@@ -11,8 +11,8 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
-import poke.rogue.helper.presentation.battle.BattleActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.battle.BattleActivity
 import poke.rogue.helper.presentation.biome.BiomeActivity
 import poke.rogue.helper.presentation.dex.PokemonActivity
 import poke.rogue.helper.presentation.item.ItemActivity

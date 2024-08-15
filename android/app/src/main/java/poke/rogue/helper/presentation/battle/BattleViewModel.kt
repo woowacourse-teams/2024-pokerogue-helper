@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
-import poke.rogue.helper.presentation.error.ErrorViewModel
 
-class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) : ErrorViewModel(logger) {
+class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) : ErrorHandleViewModel(logger) {
     private val _weathers = MutableStateFlow(WeatherUiModel.DUMMY)
     val weathers = _weathers.asStateFlow()
 
