@@ -10,9 +10,13 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBattleBinding
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModels<BattleViewModel>()
+    private val weatherAdapter by lazy {
+        WeatherSpinnerAdapter(this)
+    }
     override val toolbar: Toolbar
         get() = binding.toolbarBattle
 
@@ -20,6 +24,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         super.onCreate(savedInstanceState)
         initView()
         initSpinner()
+        initObserver()
     }
 
     private fun initView() {
@@ -28,7 +33,6 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     }
 
     private fun initSpinner() {
-        val weatherAdapter = WeatherSpinnerAdapter(this, WeatherUiModel.DUMMY)
         binding.spinnerWeather.adapter = weatherAdapter
         binding.spinnerWeather.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -45,5 +49,13 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
             }
+    }
+
+    private fun initObserver() {
+        repeatOnStarted {
+            viewModel.weathers.collect {
+                weatherAdapter.updateWeathers(it)
+            }
+        }
     }
 }

@@ -10,9 +10,15 @@ import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 
 class WeatherSpinnerAdapter(
     context: Context,
-    private val items: List<WeatherUiModel>,
+    private val items: MutableList<WeatherUiModel> = mutableListOf(),
 ) : ArrayAdapter<WeatherUiModel>(context, R.layout.item_spinner_weather, items) {
     private class WeatherViewHolder(val binding: ItemSpinnerWeatherBinding)
+
+    fun updateWeathers(updated: List<WeatherUiModel>) {
+        items.clear()
+        items.addAll(updated)
+        notifyDataSetChanged()
+    }
 
     override fun getCount(): Int = items.size
 
@@ -54,7 +60,10 @@ class WeatherSpinnerAdapter(
             view = convertView
             viewHolder = view.tag as WeatherViewHolder
         }
-        viewHolder.binding.weather = getItem(position)
+        val weather = getItem(position)
+        if (weather != null) {
+            viewHolder.binding.weather = weather
+        }
         return view
     }
 }
