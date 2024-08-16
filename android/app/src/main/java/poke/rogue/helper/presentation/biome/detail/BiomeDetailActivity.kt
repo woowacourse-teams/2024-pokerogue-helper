@@ -34,7 +34,7 @@ class BiomeDetailActivity :
 
         TabLayoutMediator(binding.tablayoutBiomeDetail, binding.vpBiome) { tab, position ->
             when (position) {
-                0 -> tab.text = "출현 포켓몬"
+                0 -> tab.text = "야생"
                 1 -> tab.text = "보스"
                 2 -> tab.text = "다음 바이옴"
                 3 -> tab.text = "관장"

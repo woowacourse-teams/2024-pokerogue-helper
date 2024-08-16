@@ -1,14 +1,15 @@
 package poke.rogue.helper.presentation.biome.model
 
+import androidx.annotation.DrawableRes
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 
 class BiomeDetailUiModel(
     val id: Long,
     val name: String,
-    val wildPokemons: List<WildPokemonUiPokemon>,
-    val bossPokemons: List<WildPokemonUiPokemon>,
-    val trainerPokemons: List<WildPokemonUiPokemon>,
+    val wildPokemons: List<BiomePokemonUiModel>,
+    val bossPokemons: List<BiomePokemonUiModel>,
+    val trainerPokemons: List<WildPokemonUiModel>,
     val map: List<NextBiomeUiModel>,
 ) {
     companion object {
@@ -16,51 +17,55 @@ class BiomeDetailUiModel(
             id = 1,
             name = "풀숲",
             wildPokemons = listOf(
-                WildPokemonUiPokemon(
-                    tier = "일반",
+                BiomePokemonUiModel(
+                    grade = "일반",
+                    typeUrl = null,
                     pokemons = // id 1번부터
                     (1..9).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
-                            name = "일반 포켓몬 $it",
-                            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$it.png",
-                            types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
+                            name = "일반 $it",
+                            imageUrl = "",
+                            types = listOf(TypeUiModel.GRASS),
                         )
                     }
                 ),
-                WildPokemonUiPokemon(
-                    tier = "희귀",
+                BiomePokemonUiModel(
+                    grade = "희귀",
+                    typeUrl = null,
                     pokemons = // id 10번부터
-                    (10..15).map {
+                    (10..40).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
-                            name = "희귀 포켓몬 $it",
-                            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$it.png",
-                            types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
+                            name = "희귀 $it",
+                            imageUrl = "",
+                            types = listOf(TypeUiModel.POISON),
                         )
                     }
                 ),
-                WildPokemonUiPokemon(
-                    tier = "전설",
+                BiomePokemonUiModel(
+                    grade = "전설",
+                    typeUrl = null,
                     pokemons = // id 16번부터
                     (16..20).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
-                            name = "전설 포켓몬 $it",
-                            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$it.png",
+                            name = "전설 $it",
+                            imageUrl = "",
                             types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
                         )
                     }
                 )
             ),
             bossPokemons = listOf(
-                WildPokemonUiPokemon(
-                    tier = "일반",
+                BiomePokemonUiModel(
+                    grade = "일반",
+                    typeUrl = null,
                     pokemons = // id 21번부터
-                    (21..25).map {
+                    (1..10).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
@@ -70,10 +75,11 @@ class BiomeDetailUiModel(
                         )
                     }
                 ),
-                WildPokemonUiPokemon(
-                    tier = "희귀",
+                BiomePokemonUiModel(
+                    grade = "희귀",
+                    typeUrl = null,
                     pokemons = // id 26번부터
-                    (26..30).map {
+                    (11..14).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
@@ -83,10 +89,11 @@ class BiomeDetailUiModel(
                         )
                     }
                 ),
-                WildPokemonUiPokemon(
-                    tier = "전설",
+                BiomePokemonUiModel(
+                    grade = "전설",
+                    typeUrl = null,
                     pokemons = // id 31번부터
-                    (31..35).map {
+                    (15..20).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
@@ -98,7 +105,7 @@ class BiomeDetailUiModel(
                 )
             ),
             trainerPokemons = listOf(
-                WildPokemonUiPokemon(
+                WildPokemonUiModel(
                     tier = "일반",
                     pokemons = // id 36번부터
                     (36..40).map {
@@ -111,7 +118,7 @@ class BiomeDetailUiModel(
                         )
                     }
                 ),
-                WildPokemonUiPokemon(
+                WildPokemonUiModel(
                     tier = "희귀",
                     pokemons = // id 41번부터
                     (41..45).map {
@@ -124,7 +131,7 @@ class BiomeDetailUiModel(
                         )
                     }
                 ),
-                WildPokemonUiPokemon(
+                WildPokemonUiModel(
                     tier = "전설",
                     pokemons = // id 46번부터
                     (46..50).map {
@@ -161,9 +168,17 @@ data class NextBiomeUiModel(
     val probability: Double
 )
 
-class WildPokemonUiPokemon(
+data class WildPokemonUiModel(
     val tier: String,
     val pokemons: List<PokemonUiModel>,
+) {
+
+}
+
+data class BiomePokemonUiModel(
+    val grade: String,
+    val typeUrl: String?,
+    val pokemons: List<PokemonUiModel>
 ) {
 
 }

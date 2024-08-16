@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="wildPokemon"
-            type="poke.rogue.helper.presentation.biome.model.WildPokemonUiModel" />
+            name="biomePokemon"
+            type="poke.rogue.helper.presentation.biome.model.BiomePokemonUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,15 +19,24 @@
         <TextView
             android:id="@+id/tv_biome_detail_pokemon_tier"
             style="@style/TextAppearance.Poke.TitleLargeBold"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="30dp"
-            android:text="@{wildPokemon.tier}"
+            android:paddingStart="30dp"
+            android:text="@{biomePokemon.grade}"
             android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="보통" />
+            tools:text="희귀도" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/fl_biome_detail_grade_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:flexDirection="row"
+            app:layout_constraintBottom_toBottomOf="@id/tv_biome_detail_pokemon_tier"
+            app:layout_constraintStart_toEndOf="@id/tv_biome_detail_pokemon_tier"
+            app:layout_constraintTop_toTopOf="@id/tv_biome_detail_pokemon_tier" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_biome_wild_pokemon"
