@@ -12,6 +12,7 @@ import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
@@ -64,6 +65,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
         observePokemonDetailUi()
         observeNavigateToHomeEvent()
         observeNavigateToAbilityDetailEvent()
+        observeNavigateToBiomeDetailEvent()
     }
 
     private fun observePokemonDetailUi() {
@@ -91,8 +93,16 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
     private fun observeNavigateToAbilityDetailEvent() {
         repeatOnStarted {
-            viewModel.navigationToDetailEvent.collect { abilityId ->
+            viewModel.navigationToAbilityDetailEvent.collect { abilityId ->
                 startActivity(AbilityActivity.intent(this, abilityId))
+            }
+        }
+    }
+
+    private fun observeNavigateToBiomeDetailEvent() {
+        repeatOnStarted {
+            viewModel.navigationToDetailEvent.collect { biomeId ->
+                startActivity(BiomeDetailActivity.intent(this, biomeId))
             }
         }
     }
