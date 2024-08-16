@@ -30,10 +30,9 @@
             style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:paddingHorizontal="30dp"
             android:text="@{biomeUiModel.name}"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintStart_toStartOf="@id/iv_biome_detail_image"
             app:layout_constraintTop_toBottomOf="@id/toolbar_biome_detail"
             tools:text="눈덮인 숲" />
 

@@ -17,7 +17,7 @@
         android:paddingVertical="15dp">
 
         <TextView
-            android:id="@+id/tv_biome_detail_pokemon_tier"
+            android:id="@+id/tv_biome_detail_pokemon_grade"
             style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,9 +34,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             app:flexDirection="row"
-            app:layout_constraintBottom_toBottomOf="@id/tv_biome_detail_pokemon_tier"
-            app:layout_constraintStart_toEndOf="@id/tv_biome_detail_pokemon_tier"
-            app:layout_constraintTop_toTopOf="@id/tv_biome_detail_pokemon_tier" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_biome_detail_pokemon_grade"
+            app:layout_constraintStart_toEndOf="@id/tv_biome_detail_pokemon_grade"
+            app:layout_constraintTop_toTopOf="@id/tv_biome_detail_pokemon_grade" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_biome_wild_pokemon"
@@ -47,7 +47,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_biome_detail_pokemon_tier"
+            app:layout_constraintTop_toBottomOf="@id/tv_biome_detail_pokemon_grade"
             app:spanCount="3"
             tools:listitem="@layout/item_ability_detail_pokemon" />
 
