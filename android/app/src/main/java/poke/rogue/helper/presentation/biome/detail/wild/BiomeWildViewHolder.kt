@@ -1,13 +1,12 @@
 package poke.rogue.helper.presentation.biome.detail.wild
 
 import androidx.recyclerview.widget.RecyclerView
-import poke.rogue.helper.databinding.ItemBiomeWildBinding
+import poke.rogue.helper.databinding.ItemBiomePokemonBinding
 import poke.rogue.helper.presentation.biome.model.BiomePokemonUiModel
-import poke.rogue.helper.presentation.biome.model.WildPokemonUiModel
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class BiomeWildViewHolder(private val binding: ItemBiomeWildBinding) :
+class BiomeWildViewHolder(private val binding: ItemBiomePokemonBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     private val wildPokemonAdapter: BiomeWildItemAdapter by lazy { BiomeWildItemAdapter() }
