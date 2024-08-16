@@ -10,18 +10,18 @@ data class Biome(
             listOf(
                 Biome(
                     "1",
-                    "풀숲",
-                    "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
+                    "평야",
+                    "https://pokeroguedex.com/biomes/plains.png",
                 ),
                 Biome(
                     "2",
                     "높은 풀숲",
-                    "https://wiki.pokerogue.net/_media/ko:biomes:ko_tall_grass_bg.png?w=200&tok=b3497c",
+                    "https://pokeroguedex.com/biomes/tall-grass.png",
                 ),
                 Biome(
                     "3",
                     "동굴",
-                    "https://wiki.pokerogue.net/_media/ko:biomes:ko_cave_bg.png?w=200&tok=905d8b",
+                    "https://pokeroguedex.com/biomes/cave.png",
                 ),
             )
     }
