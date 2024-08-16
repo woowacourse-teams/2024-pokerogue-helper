@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.biome.model
 
-import androidx.annotation.DrawableRes
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 
@@ -65,11 +64,11 @@ class BiomeDetailUiModel(
                     grade = "일반",
                     typeUrl = null,
                     pokemons = // id 21번부터
-                    (1..10).map {
+                    (990..1005).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
-                            name = "일반 보스 포켓몬 $it",
+                            name = "일반 보스 $it",
                             imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$it.png",
                             types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
                         )
@@ -79,11 +78,11 @@ class BiomeDetailUiModel(
                     grade = "희귀",
                     typeUrl = null,
                     pokemons = // id 26번부터
-                    (11..14).map {
+                    (1006..1011).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
-                            name = "희귀 보스 포켓몬 $it",
+                            name = "희귀 보스 $it",
                             imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$it.png",
                             types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
                         )
@@ -93,11 +92,11 @@ class BiomeDetailUiModel(
                     grade = "전설",
                     typeUrl = null,
                     pokemons = // id 31번부터
-                    (15..20).map {
+                    (1012..1015).map {
                         PokemonUiModel(
                             id = it.toLong(),
                             dexNumber = it.toLong(),
-                            name = "전설 보스 포켓몬 $it",
+                            name = "전설 보스 $it",
                             imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$it.png",
                             types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
                         )
