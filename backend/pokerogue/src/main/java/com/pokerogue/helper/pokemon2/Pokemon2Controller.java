@@ -21,7 +21,7 @@ public class Pokemon2Controller {
     }
 
     @GetMapping("/api/v1/pokemon2/{stringId}")
-    public ApiResponse<Map<Object, Object>> findAll(@PathVariable("stringId") String stringId) {
-        return new ApiResponse<>("포켓몬 정보 불러오기에 성공했습니다.", pokemon2Service.findById(stringId));
+    public ApiResponse<Map<Object, Object>> findAll(@PathVariable("stringId") String id) {
+        return new ApiResponse<>("포켓몬 정보 불러오기에 성공했습니다.", pokemon2Service.findById(id));
     }
 }
