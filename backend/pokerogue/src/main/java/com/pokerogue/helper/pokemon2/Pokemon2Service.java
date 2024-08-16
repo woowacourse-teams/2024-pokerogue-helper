@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,31 +41,12 @@ public class Pokemon2Service {
             cur.put("id", name);
             cur.put("pokedexNumber", Integer.parseInt(value.get("speciesId")));
             cur.put("name", name);
-            cur.put("pokemonFrontImage",
-                    "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/front/" + value.get(
-                            "speciesId") + ".png");
-            cur.put("pokemonBackImage",
-                    "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/back/" + value.get(
-                            "speciesId") + ".png");
-
-
-
-            var a = Arrays.stream("unknown,벌레,악,드래곤,전기,페어리,격투,불꽃,비행,고스트,풀,땅,얼음,노말,독,에스퍼,바위,강철,물,스텔라".split(",")).toList();
-            var b = Arrays.stream("unknown,BUG,DARK,DRAGON,ELECTRIC,FAIRY,FIGHTING,FIRE,FLYING,GHOST,GRASS,GROUND,ICE,NORMAL,POISON,PSYCHIC,ROCK,STEEL,WATER,STELLAR".split(","))
-                    .map(String::toLowerCase)
-                    .toList();
-
-            Map<String, String> typeMapper = IntStream.range(0, a.size())
-                    .boxed()
-                    .collect(Collectors.toMap(a::get, b::get));
-
-            String type1 = value.get("type1");
-            String type2 = value.get("type2");
-            cur.put("pokemonTypeResponses", List.of(
-                    new PokemonTypeResponse(type1,
-                            "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/" + typeMapper.get(type1) + "-1.png")
-                    , new PokemonTypeResponse(type2, "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/" + typeMapper.get(type2) + "-1.png")
-            ));
+            cur.put("image", "todo:imageLink");
+            List<PokemonTypeResponse> pokemonTypeResponses = List.of(
+                    new PokemonTypeResponse(value.get("type1"), "todo:logo"),
+                    new PokemonTypeResponse(value.get("type2"), "todo:logo")
+            );
+            cur.put("pokemonTypeResponse", pokemonTypeResponses);
 
             cur.put("generation", Integer.parseInt(value.get("generation")));
             cur.put("totalStats", Integer.parseInt(value.get("baseTotal")));
@@ -109,12 +88,7 @@ public class Pokemon2Service {
             tmp.put("id", name);
             tmp.put("pokeDexNumber", Integer.parseInt(value.get("speciesId")));
             tmp.put("name", value.get("name"));
-            tmp.put("pokemonFrontImage",
-                    "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/front/" + value.get(
-                            "speciesId") + ".png");
-            tmp.put("pokemonBackImage",
-                    "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/back/" + value.get(
-                            "speciesId") + ".png");
+            tmp.put("pokemonImage", "dummy-image");
 
             String ability1 = value.get("ability1");
             String ability2 = value.get("ability2");
@@ -128,21 +102,11 @@ public class Pokemon2Service {
                     new PokemonAbilityResponse(abilityHidden, abilityHidden, "description", false, true)
             ));
 
-            var a = Arrays.stream("unknown,벌레,악,드래곤,전기,페어리,격투,불꽃,비행,고스트,풀,땅,얼음,노말,독,에스퍼,바위,강철,물,스텔라".split(",")).toList();
-            var b = Arrays.stream("unknown,BUG,DARK,DRAGON,ELECTRIC,FAIRY,FIGHTING,FIRE,FLYING,GHOST,GRASS,GROUND,ICE,NORMAL,POISON,PSYCHIC,ROCK,STEEL,WATER,STELLAR".split(","))
-                    .map(String::toLowerCase)
-                    .toList();
-
-            Map<String, String> typeMapper = IntStream.range(0, a.size())
-                    .boxed()
-                    .collect(Collectors.toMap(a::get, b::get));
-
             String type1 = value.get("type1");
             String type2 = value.get("type2");
             tmp.put("pokemonTypeResponses", List.of(
-                    new PokemonTypeResponse(type1,
-                            "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/" + typeMapper.get(type1) + "-1.png")
-                    , new PokemonTypeResponse(type2, "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/" + typeMapper.get(type2) + "-1.png")
+                    new PokemonTypeResponse(type1, "dummy-logo")
+                    , new PokemonTypeResponse(type2, "dummy-logo")
             ));
 
             tmp.put("totalStats", Integer.parseInt(value.get("baseTotal")));

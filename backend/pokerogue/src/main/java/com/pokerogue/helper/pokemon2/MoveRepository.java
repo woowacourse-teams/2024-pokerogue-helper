@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Component
 public class MoveRepository {
     private final Map<String, Map<String, String>> data = new TreeMap<>();
 
