@@ -1,6 +1,5 @@
 package com.pokerogue.helper.biome.controller;
 
-import com.pokerogue.helper.ability.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
 import com.pokerogue.helper.biome.service.BiomeService;
 import com.pokerogue.helper.util.dto.ApiResponse;

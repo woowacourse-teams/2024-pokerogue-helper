@@ -16,8 +16,14 @@ public class Biome {
     private final List<Trainer> trainers;
     private final List<String> nextBiomeNames;
 
-    public Biome(String id, String name, Map<Tier, List<String>> pokemons, List<String> mainTypes, List<Trainer> trainers,
-                 List<String> nextBiomeNames) {
+    public Biome(
+            String id,
+            String name,
+            Map<Tier, List<String>> pokemons,
+            List<String> mainTypes,
+            List<Trainer> trainers,
+            List<String> nextBiomeNames
+    ) {
         this.id = id;
         this.name = name;
         this.pokemons = pokemons;
@@ -28,7 +34,6 @@ public class Biome {
 
     public List<String> getTrainerTypes() {
         Set<String> trainerTypes = new HashSet<>();
-
         trainers.forEach(trainer -> trainerTypes.addAll(trainer.getTrainerTypes()));
 
         return trainerTypes.stream()

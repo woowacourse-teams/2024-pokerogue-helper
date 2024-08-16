@@ -22,6 +22,7 @@ public class BiomeRepository {
     }
 
     public List<Biome> findAllBiomes() {
-        return biomes.values().stream().toList();
+        return biomes.values().stream()
+                .toList();
     }
 }
