@@ -14,11 +14,11 @@ import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.biome.BiomeActivity
 import poke.rogue.helper.presentation.dex.PokemonListActivity
-import poke.rogue.helper.presentation.item.ItemActivity
 import poke.rogue.helper.presentation.tip.TipActivity
 import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringOf
+import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
@@ -72,12 +72,12 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
                         }
 
                     is HomeNavigateEvent.ToItem -> {
-                        startActivity<ItemActivity> {
-                            logger.logClickEvent(NAVIGATE_TO_ITEM)
-                        }
+                        toast("Coming soon")
                     }
 
-                    is HomeNavigateEvent.ToBattle -> {}
+                    is HomeNavigateEvent.ToBattle -> {
+                        toast("Coming soon")
+                    }
 
                     is HomeNavigateEvent.ToLogo -> navigateToPokeRogue()
                 }
