@@ -45,10 +45,10 @@ public class DataInitializer implements ApplicationRunner {
         List<String> fields = Arrays.stream(data.split(FIELD_DELIMITER))
                 .map(String::trim)
                 .toList();
-        String id = createId(fields.get(0));
-        String name = fields.get(0);
-        String description = fields.get(1);
-        List<String> effects = Arrays.stream(fields.get(2).split(LIST_DELIMITER))
+        String id = fields.get(0);
+        String name = fields.get(1);
+        String description = fields.get(2);
+        List<String> effects = Arrays.stream(fields.get(3).split(LIST_DELIMITER))
                 .map(String::trim)
                 .toList();
         return new Weather(id, name, description, effects);
