@@ -5,8 +5,9 @@ data class NewPokemonDetail(
     val abilities: List<NewAbility>,
     val stats: List<Stat>,
     val pokemonCategory: PokemonCategory,
-    val height: Double,
-    val weight: Double,
     val evolutions: List<Evolution>,
     val skills: NewPokemonSkills,
+    val biomes: List<Biome>,
+    val height: Double,
+    val weight: Double,
 )
