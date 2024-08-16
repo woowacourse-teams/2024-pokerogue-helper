@@ -3,6 +3,8 @@ package com.pokerogue.helper.battle;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +26,8 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        String weatherFilePath = System.getProperty("user.dir") + "/" + "src/main/java/com/pokerogue/helper/battle/data/weather.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(weatherFilePath))) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("weather.txt");
+             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             int lineCount = 0;
             String line;
             while ((line = br.readLine()) != null) {
