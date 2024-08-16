@@ -19,10 +19,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class BiomeDatabaseInitializer implements ApplicationRunner {
@@ -30,66 +32,81 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
     private final BiomeRepository biomeRepository;
 
     @Override
-    public void run(ApplicationArguments args) throws IOException {
+    public void run(ApplicationArguments args) {
         List<BiomePokemon> biomePokemons = new ArrayList<>();
         List<BiomeLink> biomeLinks = new ArrayList<>();
         List<BiomeTypeAndTrainer> biomeTypesAndTrainers = new ArrayList<>();
         List<TrainerType> trainerTypes = new ArrayList<>();
         List<TrainerPokemon> trainerPokemons = new ArrayList<>();
 
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
                 "src/main/java/com/pokerogue/helper/biome/config/biome-pokemons.txt")
-        );
-        while (true) {
-            String biomePokemon = bufferedReader.readLine();
-            if (biomePokemon == null) {
-                break;
+        )) {
+            while (true) {
+                String biomePokemon = bufferedReader.readLine();
+                if (biomePokemon == null) {
+                    break;
+                }
+                biomePokemons.add(new BiomePokemon(biomePokemon));
             }
-            biomePokemons.add(new BiomePokemon(biomePokemon));
+        } catch (IOException e) {
+            log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        bufferedReader = new BufferedReader(new FileReader(
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
                 "src/main/java/com/pokerogue/helper/biome/config/biome-links.txt")
-        );
-        while (true) {
-            String biomeLink = bufferedReader.readLine();
-            if (biomeLink == null) {
-                break;
+        )) {
+            while (true) {
+                String biomeLink = bufferedReader.readLine();
+                if (biomeLink == null) {
+                    break;
+                }
+                biomeLinks.add(new BiomeLink(biomeLink));
             }
-            biomeLinks.add(new BiomeLink(biomeLink));
+        } catch (IOException e) {
+            log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        bufferedReader = new BufferedReader(new FileReader(
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
                 "src/main/java/com/pokerogue/helper/biome/config/biome-types-trainers.txt")
-        );
-        while (true) {
-            String biomeTypeAndTrainer = bufferedReader.readLine();
-            if (biomeTypeAndTrainer == null) {
-                break;
+        )) {
+            while (true) {
+                String biomeTypeAndTrainer = bufferedReader.readLine();
+                if (biomeTypeAndTrainer == null) {
+                    break;
+                }
+                biomeTypesAndTrainers.add(new BiomeTypeAndTrainer(biomeTypeAndTrainer));
             }
-            biomeTypesAndTrainers.add(new BiomeTypeAndTrainer(biomeTypeAndTrainer));
+        } catch (IOException e) {
+            log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        bufferedReader = new BufferedReader(new FileReader(
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
                 "src/main/java/com/pokerogue/helper/biome/config/trainer-types.txt")
-        );
-        while (true) {
-            String trainerType = bufferedReader.readLine();
-            if (trainerType == null) {
-                break;
+        )) {
+            while (true) {
+                String trainerType = bufferedReader.readLine();
+                if (trainerType == null) {
+                    break;
+                }
+                trainerTypes.add(new TrainerType(trainerType));
             }
-            trainerTypes.add(new TrainerType(trainerType));
+        } catch (IOException e) {
+            log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        bufferedReader = new BufferedReader(new FileReader(
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
                 "src/main/java/com/pokerogue/helper/biome/config/trainer-pokemons.txt")
-        );
-        while (true) {
-            String trainerPokemon = bufferedReader.readLine();
-            if (trainerPokemon == null) {
-                break;
+        )) {
+            while (true) {
+                String trainerPokemon = bufferedReader.readLine();
+                if (trainerPokemon == null) {
+                    break;
+                }
+                trainerPokemons.add(new TrainerPokemon(trainerPokemon));
             }
-            trainerPokemons.add(new TrainerPokemon(trainerPokemon));
+        } catch (IOException e) {
+            log.error("error message : {}", e.getStackTrace()[0]);
         }
 
         List<Trainer> trainers = trainerTypes.stream()
