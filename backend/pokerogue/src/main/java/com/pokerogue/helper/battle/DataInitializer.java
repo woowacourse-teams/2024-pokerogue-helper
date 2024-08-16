@@ -34,7 +34,7 @@ public class DataInitializer implements ApplicationRunner {
             Weather weather = createWeather(fields);
             weatherRepository.save(weather);
         });
-        saveData("move.txt", fields -> {
+        saveData("battle-move.txt", fields -> {
             Move move = createMove(fields);
             moveRepository.save(move);
         });
