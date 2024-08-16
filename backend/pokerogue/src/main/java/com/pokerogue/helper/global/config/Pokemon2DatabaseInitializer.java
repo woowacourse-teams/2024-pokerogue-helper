@@ -2,8 +2,10 @@ package com.pokerogue.helper.global.config;
 
 import com.pokerogue.helper.pokemon2.MoveRepository;
 import com.pokerogue.helper.pokemon2.Pokemon2Repository;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.Store;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
@@ -34,61 +37,56 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
             "abilityPassive", "generation", "legendary", "subLegendary", "mythical", "getEvolutionLevels", "baseTotal",
             "baseStats", "height", "weight", "canChangeForm", "eggMoves", "moves", "biomes");
 
-    private Scanner scanner;
-
     @Override
     public void run(ApplicationArguments args) {
-        File file = new File("src/main/java/com/pokerogue/helper/global/config/pokemon.txt");
-        try {
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("pokemon.txt");
+             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                List<String> values = new ArrayList<>();
+                StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
+
+                while (stringTokenizer.hasMoreTokens()) {
+                    values.add(stringTokenizer.nextToken().strip());
+                }
+
+                if (values.size() != pokemonKeys.size()) {
+                    values.add("EMPTY");
+                }
+                Map<String, String> map = IntStream.range(0, pokemonKeys.size())
+                        .boxed()
+                        .collect(Collectors.toMap(pokemonKeys::get, values::get));
+
+                pokemon2Repository.save(map.get("name"), map);
+            }
+            saveMove();
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        while (scanner.hasNextLine()) {
-            var line = scanner.nextLine();
-            List<String> values = new ArrayList<>();
-            StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
-
-            while (stringTokenizer.hasMoreTokens()) {
-                values.add(stringTokenizer.nextToken().strip());
-            }
-
-            if (values.size() != pokemonKeys.size()) {
-                values.add("EMPTY");
-            }
-            Map<String, String> map = IntStream.range(0, pokemonKeys.size())
-                    .boxed()
-                    .collect(Collectors.toMap(pokemonKeys::get, values::get));
-
-            pokemon2Repository.save(map.get("name"), map);
-        }
-        saveMove();
     }
 
     private void saveMove() {
-        File file = new File("src/main/java/com/pokerogue/helper/global/config/move.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("move.txt");
+             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 
-        try {
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+            String line;
+            while ((line = br.readLine()) != null) {
+                List<String> values = new ArrayList<>();
+                StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
 
-        while (scanner.hasNextLine()) {
-            var line = scanner.nextLine();
-            List<String> values = new ArrayList<>();
-            StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
+                while (stringTokenizer.hasMoreTokens()) {
+                    values.add(stringTokenizer.nextToken().strip());
+                }
 
-            while (stringTokenizer.hasMoreTokens()) {
-                values.add(stringTokenizer.nextToken().strip());
+                Map<String, String> map = IntStream.range(0, values.size())
+                        .boxed()
+                        .collect(Collectors.toMap(moveKeys::get, values::get));
+
+                moveRepository.save(map.get("name"), map);
             }
-
-            Map<String, String> map = IntStream.range(0, values.size())
-                    .boxed()
-                    .collect(Collectors.toMap(moveKeys::get, values::get));
-
-            moveRepository.save(map.get("name"), map);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
