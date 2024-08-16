@@ -21,7 +21,7 @@ public class BiomeRepository {
         biomes.put(biome.getId(), biome);
     }
 
-    public List<Biome> findAllBiomes() {
+    public List<Biome> findAll() {
         return biomes.values().stream()
                 .toList();
     }

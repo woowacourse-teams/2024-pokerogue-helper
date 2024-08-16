@@ -13,7 +13,7 @@ public class BiomeService {
     private final BiomeRepository biomeRepository;
 
     public List<BiomeResponse> findBiomes() {
-        return biomeRepository.findAllBiomes().stream()
+        return biomeRepository.findAll().stream()
                 .map(BiomeResponse::from)
                 .toList();
     }
