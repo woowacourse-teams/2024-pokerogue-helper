@@ -13,13 +13,20 @@ class BattleServiceTest extends ServiceTest {
     @Autowired
     private BattleService battleService;
 
+    @Autowired
+    private PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
+
     @Test
-    @DisplayName("포켓몬의 기술(자력 기술, 머신 기술) 목록을 조회한다.")
+    @DisplayName("포켓몬의 기술(자력 기술, 머신 기술, 알 기술) 리스트를 조회한다.")
     void findMovesByPokemon() {
-        Integer pokedexNumber = 1;
+        List<Integer> pokedexNumbers = pokemonMovesByMachineRepository.findAll()
+                .stream()
+                .map(PokemonMovesByMachine::pokedexNumber)
+                .toList();
 
-        List<MoveResponse> moveResponses = battleService.findMovesByPokemon(pokedexNumber);
-
-        assertThat(moveResponses).isNotEmpty();
+        pokedexNumbers.forEach(pokedexNumber -> {
+            List<MoveResponse> moveResponses = battleService.findMovesByPokemon(pokedexNumber);
+            assertThat(moveResponses).isNotEmpty();
+        });
     }
 }
