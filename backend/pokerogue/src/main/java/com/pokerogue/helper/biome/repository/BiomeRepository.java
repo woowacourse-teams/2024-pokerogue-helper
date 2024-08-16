@@ -17,6 +17,10 @@ public class BiomeRepository {
         this.biomes = new HashMap<>();
     }
 
+    public void save(Biome biome) {
+        biomes.put(biome.getId(), biome);
+    }
+
     public List<Biome> findAllBiomes() {
         return biomes.values().stream().toList();
     }

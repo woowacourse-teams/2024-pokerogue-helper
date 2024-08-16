@@ -1,7 +1,9 @@
 package com.pokerogue.helper.biome.domain;
 
 import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class BiomePokemon {
 
     private final String biomeName;
