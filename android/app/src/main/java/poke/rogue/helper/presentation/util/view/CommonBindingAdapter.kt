@@ -5,6 +5,9 @@ import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.bumptech.glide.Glide
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import poke.rogue.helper.R
@@ -17,6 +20,22 @@ fun ImageView.setImage(imageUrl: String?) {
         .placeholder(R.drawable.ic_pikachu_silhouette)
         .error(R.drawable.ic_ditto_silhouette)
         .into(this)
+}
+
+@BindingAdapter("svgUrl")
+fun ImageView.loadSvgFromUrl(url: String?) {
+    val imageLoader = ImageLoader.Builder(context)
+        .components { add(SvgDecoder.Factory()) }
+        .build()
+
+    val request = ImageRequest.Builder(context)
+        .data(url)
+        .placeholder(R.drawable.ic_pikachu_silhouette)
+        .error(R.drawable.ic_ditto_silhouette)
+        .target(this)
+        .build()
+
+    imageLoader.enqueue(request)
 }
 
 @BindingAdapter("cropImageUrl")
