@@ -48,11 +48,22 @@ public class DatabaseInitializer implements ApplicationRunner {
         List<PokemonType> pokemonTypes = pokemonTypeRepository.saveAll(List.of(
                 new PokemonType("grass", "풀", "grass dummy image"),
                 new PokemonType("poison", "독", "poison dummy image"),
-                new PokemonType("fire", "불", "fire dummy image"),
+                new PokemonType("fire", "불꽃", "fire dummy image"),
                 new PokemonType("water", "물", "water dummy image"),
                 new PokemonType("electric", "전기", "electric dummy image"),
-                new PokemonType("normal", "물", "normal dummy image"),
-                new PokemonType("fairy", "페어리", "fairy dummy image")
+                new PokemonType("normal", "노말", "normal dummy image"),
+                new PokemonType("fairy", "페어리", "fairy dummy image"),
+                new PokemonType("bug", "벌레", "fairy dummy image"),
+                new PokemonType("dark", "악", "fairy dummy image"),
+                new PokemonType("dragon", "드래곤", "fairy dummy image"),
+                new PokemonType("fighting", "격투", "fairy dummy image"),
+                new PokemonType("flying", "비행", "fairy dummy image"),
+                new PokemonType("ghost", "고스트", "fairy dummy image"),
+                new PokemonType("ground", "땅", "fairy dummy image"),
+                new PokemonType("ice", "얼음", "fairy dummy image"),
+                new PokemonType("rock", "바위", "fairy dummy image"),
+                new PokemonType("psychic", "에스퍼", "fairy dummy image"),
+                new PokemonType("steel", "강철", "fairy dummy image")
         ));
 
         List<PokemonAbility> pokemonAbilities = pokemonAbilityRepository.saveAll(List.of(

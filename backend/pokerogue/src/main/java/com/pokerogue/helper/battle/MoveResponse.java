@@ -10,12 +10,12 @@ public record MoveResponse(
         String effect
 ) {
 
-    public static MoveResponse from(Move move) {
+    public static MoveResponse of(Move move, String typeLogo, String categoryLogo) {
         return new MoveResponse(
                 move.id(),
                 move.name(),
-                "dummy",
-                "dummy",
+                typeLogo,
+                categoryLogo,
                 move.power(),
                 move.accuracy(),
                 move.effect()

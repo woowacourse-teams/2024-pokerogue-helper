@@ -5,7 +5,7 @@ public record Move(
         String name,
         String nameAppend,
         String effect,
-        String typeId,
+        String type,
         String defaultTypeId,
         String category,
         String moveTarget,
