@@ -14,7 +14,7 @@ public class PokemonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(GlobalCustomException.class)
     public ResponseEntity<String> handleViolationException(GlobalCustomException e) {
-        log.error("error message : {}", e.getMessage());
+        log.error("error message : {}", e.getStackTrace()[0]);
 
         return ResponseEntity.status(e.getHttpStatus())
                 .body(e.getMessage());
