@@ -10,6 +10,8 @@ import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
+import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonInformationFragment :
     BindingFragment<FragmentPokemonInformationBinding>(R.layout.fragment_pokemon_information) {
@@ -29,6 +31,7 @@ class PokemonInformationFragment :
     private fun initAdapter() {
         binding.rvPokemonDetailInformation.apply {
             adapter = biomesAdapter
+            addItemDecoration(GridSpacingItemDecoration(2, 9.dp, false))
         }
     }
 
