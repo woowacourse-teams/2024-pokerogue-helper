@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,12 +43,31 @@ public class Pokemon2Service {
             cur.put("id", name);
             cur.put("pokedexNumber", Integer.parseInt(value.get("speciesId")));
             cur.put("name", name);
-            cur.put("image", "todo:imageLink");
-            List<PokemonTypeResponse> pokemonTypeResponses = List.of(
-                    new PokemonTypeResponse(value.get("type1"), "todo:logo"),
-                    new PokemonTypeResponse(value.get("type2"), "todo:logo")
-            );
-            cur.put("pokemonTypeResponse", pokemonTypeResponses);
+            cur.put("pokemonFrontImage",
+                    "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/front/" + value.get(
+                            "speciesId") + ".png");
+            cur.put("pokemonBackImage",
+                    "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/back/" + value.get(
+                            "speciesId") + ".png");
+
+
+
+            var a = Arrays.stream("unknown,벌레,악,드래곤,전기,페어리,격투,불꽃,비행,고스트,풀,땅,얼음,노말,독,에스퍼,바위,강철,물,스텔라".split(",")).toList();
+            var b = Arrays.stream("unknown,BUG,DARK,DRAGON,ELECTRIC,FAIRY,FIGHTING,FIRE,FLYING,GHOST,GRASS,GROUND,ICE,NORMAL,POISON,PSYCHIC,ROCK,STEEL,WATER,STELLAR".split(","))
+                    .map(String::toLowerCase)
+                    .toList();
+
+            Map<String, String> typeMapper = IntStream.range(0, a.size())
+                    .boxed()
+                    .collect(Collectors.toMap(a::get, b::get));
+
+            String type1 = value.get("type1");
+            String type2 = value.get("type2");
+            cur.put("pokemonTypeResponses", List.of(
+                    new PokemonTypeResponse(type1,
+                            "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/" + typeMapper.get(type1) + "-1.png")
+                    , new PokemonTypeResponse(type2, "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/" + typeMapper.get(type2) + "-1.png")
+            ));
 
             cur.put("generation", Integer.parseInt(value.get("generation")));
             cur.put("totalStats", Integer.parseInt(value.get("baseTotal")));
@@ -88,7 +109,12 @@ public class Pokemon2Service {
             tmp.put("id", name);
             tmp.put("pokeDexNumber", Integer.parseInt(value.get("speciesId")));
             tmp.put("name", value.get("name"));
-            tmp.put("pokemonImage", "dummy-image");
+            tmp.put("pokemonFrontImage",
+                    "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/front/" + value.get(
+                            "speciesId") + ".png");
+            tmp.put("pokemonBackImage",
+                    "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/back/" + value.get(
+                            "speciesId") + ".png");
 
             String ability1 = value.get("ability1");
             String ability2 = value.get("ability2");
@@ -102,11 +128,21 @@ public class Pokemon2Service {
                     new PokemonAbilityResponse(abilityHidden, abilityHidden, "description", false, true)
             ));
 
+            var a = Arrays.stream("unknown,벌레,악,드래곤,전기,페어리,격투,불꽃,비행,고스트,풀,땅,얼음,노말,독,에스퍼,바위,강철,물,스텔라".split(",")).toList();
+            var b = Arrays.stream("unknown,BUG,DARK,DRAGON,ELECTRIC,FAIRY,FIGHTING,FIRE,FLYING,GHOST,GRASS,GROUND,ICE,NORMAL,POISON,PSYCHIC,ROCK,STEEL,WATER,STELLAR".split(","))
+                    .map(String::toLowerCase)
+                    .toList();
+
+            Map<String, String> typeMapper = IntStream.range(0, a.size())
+                    .boxed()
+                    .collect(Collectors.toMap(a::get, b::get));
+
             String type1 = value.get("type1");
             String type2 = value.get("type2");
             tmp.put("pokemonTypeResponses", List.of(
-                    new PokemonTypeResponse(type1, "dummy-logo")
-                    , new PokemonTypeResponse(type2, "dummy-logo")
+                    new PokemonTypeResponse(type1,
+                            "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/" + typeMapper.get(type1) + "-1.png")
+                    , new PokemonTypeResponse(type2, "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/" + typeMapper.get(type2) + "-1.png")
             ));
 
             tmp.put("totalStats", Integer.parseInt(value.get("baseTotal")));
@@ -166,3 +202,43 @@ public class Pokemon2Service {
         }
     }
 }
+
+
+/*
+  1 / unknownLocation / 기억할 수 없는 곳,
+  1 / TOWN / 마을,
+  1 / PLAINS / 평야,
+  1 / GRASS / 풀숲,
+  1 / TALL_GRASS / 높은 풀숲,
+  1 / METROPOLIS / 대도시,
+  1 / FOREST / 숲,
+  1 / SEA / 바다,
+  1 / SWAMP / 늪지,
+  1 / BEACH / 해변,
+  1 / LAKE / 호수,
+  1 / SEABED / 해저,
+  1 / MOUNTAIN / 산,
+  1 / BADLANDS / 악지,
+  1 / CAVE / 동굴,
+  1 / DESERT / 사막,
+  1 / ICE_CAVE / 얼음 동굴,
+  1 / MEADOW / 목초지,
+  1 / POWER_PLANT / 발전소,
+  1 / VOLCANO / 화산,
+  1 / GRAVEYARD / 묘지,
+  1 / DOJO / 도장,
+  1 / FACTORY / 공장,
+  1 / RUINS / 고대 유적,
+  1 / WASTELAND / 황무지,
+  1 / ABYSS / 심연,
+  1 / SPACE / 우주,
+  1 / CONSTRUCTION_SITE / 공사장,
+  1 / JUNGLE / 정글,
+  1 / FAIRY_CAVE / 페어리 동굴,
+  1 / TEMPLE / 사원,
+  1 / SLUM / 슬럼,
+  1 / SNOWY_FOREST / 눈덮인 숲,
+  1 / ISLAND / 섬,
+  1 / LABORATORY / 연구소,
+  1 / END / ???,
+ */
