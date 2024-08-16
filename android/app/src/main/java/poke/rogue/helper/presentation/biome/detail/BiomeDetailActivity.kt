@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.biome.detail
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
@@ -17,5 +19,12 @@ class BiomeDetailActivity :
 
     companion object {
         const val BIOME_ID = "biomeId"
+
+        fun intent(
+            context: Context,
+            biomeId: String,
+        ): Intent =
+            Intent(context, BiomeDetailActivity::class.java)
+                .putExtra(BIOME_ID, biomeId)
     }
 }
