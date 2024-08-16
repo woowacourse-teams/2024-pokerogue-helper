@@ -28,7 +28,7 @@ abstract class BindingFragment<T : ViewDataBinding>(
         if (savedInstanceState == null) {
             logger.logScreenView(binding::class.java)
         }
-        return binding?.root
+        return binding.root
     }
 
     override fun onDestroyView() {

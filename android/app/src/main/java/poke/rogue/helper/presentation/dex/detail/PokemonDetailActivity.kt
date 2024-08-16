@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
+import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
@@ -18,10 +19,8 @@ import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
-import timber.log.Timber
 
-class PokemonDetailActivity :
-    ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
+class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
@@ -55,21 +54,23 @@ class PokemonDetailActivity :
             adapter = pokemonDetailPagerAdapter
         }
 
-        TabLayoutMediator(
-            binding.tabLayoutPokemonDetail,
-            binding.pagerPokemonDetail,
-        ) { tab, position ->
-            Timber.d("ViewPager position: $position")
+        TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
             when (position) {
-                0 -> tab.text = "능력치"
-                1 -> tab.text = "진화 정보"
-                2 -> tab.text = "기술 정보"
-                3 -> tab.text = "정보"
+                0 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_stats_title)
+                1 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_evolution_title)
+                2 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_skills_title)
+                3 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_information_title)
             }
         }.attach()
     }
 
     private fun initObservers() {
+        observePokemonDetailUi()
+        observeNavigateToHomeEvent()
+        observeNavigateToAbilityDetailEvent()
+    }
+
+    private fun observePokemonDetailUi() {
         repeatOnStarted {
             viewModel.uiState.collect { pokemonDetail ->
                 when (pokemonDetail) {
@@ -80,14 +81,22 @@ class PokemonDetailActivity :
                 }
             }
         }
+    }
 
-        // navigate to Home
+    private fun observeNavigateToHomeEvent() {
         repeatOnStarted {
             viewModel.navigateToHomeEvent.collect {
                 if (it) {
-                    Timber.d("navigate to Home")
                     startActivity(HomeActivity.intent(this))
                 }
+            }
+        }
+    }
+
+    private fun observeNavigateToAbilityDetailEvent() {
+        repeatOnStarted {
+            viewModel.navigationToDetailEvent.collect { abilityId ->
+                startActivity(AbilityActivity.intent(this, abilityId))
             }
         }
     }
