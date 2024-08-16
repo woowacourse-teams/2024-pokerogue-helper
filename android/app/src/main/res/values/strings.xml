@@ -20,21 +20,21 @@
     <string name="home_pokerogue_tip_url">https://namu.wiki/w/Pok%C3%A9Rogue</string>
     <string name="home_pokeroque_surey_url">https://docs.google.com/forms/d/e/1FAIpQLScd-Kp5zCzrcWKO6eXR7Ujgm0TscGrwuCPNCX1na0enhtVZaw/viewform</string>
     <string name="home_menu_type">상성 보기</string>
-    <string name="home_menu_dex">포켓몬 도감</string>
+    <string name="home_menu_pokemon_detail">포켓몬 도감</string>
     <string name="home_menu_ability">특성 도감</string>
     <string name="home_menu_tip">꿀팁</string>
     <string name="home_menu_battle">배틀 구도</string>
     <string name="home_menu_biome">바이옴 도감</string>
     <string name="home_menu_item">아이템 도감</string>
 
-    <!--    dex-->
-    <string name="dex_title_name">포켓몬 도감</string>
-    <string name="dex_stat_format">%03d/%03d</string>
-    <string name="dex_poke_name_format">%s #%d</string>
-    <string name="dex_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
-    <string name="dex_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
-    <string name="dex_list_loading_guide">Loading…</string>
-    <string name="dex_list_empty_guide">해당하는 포켓몬이 없어요</string>
+    <!--    pokemon list-->
+    <string name="pokemon_list_title_name">포켓몬 도감</string>
+    <string name="pokemon_list_stat_format">%03d/%03d</string>
+    <string name="pokemon_list_poke_name_format">%s #%d</string>
+    <string name="pokemon_list_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
+    <string name="pokemon_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
+    <string name="pokemon_list_loading_guide">Loading…</string>
+    <string name="pokemon_list_empty_guide">해당하는 포켓몬이 없어요</string>
 
     <!--    detail-->
     <string name="dex_detail_pokemon_stats_title">기본 스탯</string>

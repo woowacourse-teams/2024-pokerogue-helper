@@ -106,7 +106,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
             tvPokemonDetailPokemonName.text =
                 stringOf(
-                    R.string.dex_poke_name_format,
+                    R.string.pokemon_list_poke_name_format,
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
