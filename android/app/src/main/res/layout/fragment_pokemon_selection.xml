@@ -10,18 +10,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.battle.selection.PokemonSelectionFragment">
+        tools:context=".presentation.battle.selection.pokemon.PokemonSelectionFragment">
 
         <EditText
             android:id="@+id/et_pokemon_selection_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_battle_selection"
+            android:background="@drawable/bg_search_view"
             android:hint="@string/battle_selection_pokemon_hint"
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
-            android:textSize="14sp"
             android:textColorHint="@color/poke_white"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,9 +36,12 @@
             app:layout_constraintTop_toTopOf="@id/et_pokemon_selection_search" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pokemons"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

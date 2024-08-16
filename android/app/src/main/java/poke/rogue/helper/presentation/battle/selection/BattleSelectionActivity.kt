@@ -23,7 +23,10 @@ class BattleSelectionActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initViews()
+    }
 
+    private fun initViews() {
         binding.pagerBattleSelection.adapter = selectionPagerAdapter
     }
 }

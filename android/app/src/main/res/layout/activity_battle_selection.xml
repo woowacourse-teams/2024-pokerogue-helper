@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/battle_selection_title"/>
+            app:title="@string/battle_selection_title" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_start"
@@ -77,13 +77,27 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginVertical="24dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_complete_selection"
+            app:layout_constraintBottom_toTopOf="@id/btn_prev"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/iv_arena" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_complete_selection"
+            android:id="@+id/btn_prev"
+            style="@style/TextAppearance.Poke.TitleBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_button_enabled_selector"
+            android:enabled="false"
+            android:text="이전"
+            android:textColor="@color/poke_black"
+            app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
+            app:layout_constraintEnd_toStartOf="@id/btn_next"
+            app:layout_constraintStart_toStartOf="@id/gl_start" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
             style="@style/TextAppearance.Poke.TitleBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -93,7 +107,7 @@
             android:textColor="@color/poke_black"
             app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
-            app:layout_constraintStart_toStartOf="@id/gl_start" />
+            app:layout_constraintStart_toEndOf="@id/btn_prev" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
