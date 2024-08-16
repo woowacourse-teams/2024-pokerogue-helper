@@ -10,16 +10,28 @@ import org.springframework.boot.DefaultApplicationArguments;
 class DataInitializerTest {
 
     @Test
-    @DisplayName("날씨 데이터를 세팅한다.")
+    @DisplayName("날씨, 기술 데이터를 세팅한다.")
     void setWeathersData() {
         WeatherRepository weatherRepository = new WeatherRepository();
         MoveRepository moveRepository = new MoveRepository();
-        DataInitializer dataInitializer = new DataInitializer(weatherRepository, moveRepository);
+        PokemonMovesByMachineRepository pokemonMovesByMachineRepository = new PokemonMovesByMachineRepository();
+        PokemonMovesBySelfRepository pokemonMovesBySelfRepository = new PokemonMovesBySelfRepository();
+        PokemonMovesByEggRepository pokemonMovesByEggRepository = new PokemonMovesByEggRepository();
+        DataInitializer dataInitializer = new DataInitializer(
+                weatherRepository,
+                moveRepository,
+                pokemonMovesByMachineRepository,
+                pokemonMovesBySelfRepository,
+                pokemonMovesByEggRepository
+        );
         dataInitializer.run(new DefaultApplicationArguments());
 
         assertAll(() -> {
             assertThat(weatherRepository.findAll()).hasSize(10);
             assertThat(moveRepository.findAll()).hasSize(902);
+            assertThat(pokemonMovesByMachineRepository.findAll()).hasSize(1082);
+            assertThat(pokemonMovesBySelfRepository.findAll()).hasSize(1082);
+            assertThat(pokemonMovesByEggRepository.findAll()).hasSize(1082);
         });
     }
 }

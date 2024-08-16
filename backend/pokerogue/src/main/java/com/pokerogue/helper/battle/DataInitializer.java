@@ -24,6 +24,9 @@ public class DataInitializer implements ApplicationRunner {
 
     private final WeatherRepository weatherRepository;
     private final MoveRepository moveRepository;
+    private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
+    private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
+    private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -34,6 +37,16 @@ public class DataInitializer implements ApplicationRunner {
         saveData("move.txt", fields -> {
             Move move = createMove(fields);
             moveRepository.save(move);
+        });
+        saveData("tms.txt", fields -> {
+            PokemonMovesByMachine pokemonMovesByMachine = createPokemonMovesByMachine(fields);
+            pokemonMovesByMachineRepository.save(pokemonMovesByMachine);
+        });
+        saveData("battle-pokemon.txt", fields -> {
+            PokemonMovesBySelf pokemonMovesBySelf = createPokemonMovesBySelf(fields);
+            pokemonMovesBySelfRepository.save(pokemonMovesBySelf);
+            PokemonMovesByEgg pokemonMovesByEgg = createPokemonMovesByEgg(fields);
+            pokemonMovesByEggRepository.save(pokemonMovesByEgg);
         });
     }
 
@@ -89,6 +102,30 @@ public class DataInitializer implements ApplicationRunner {
                 convertToInteger(fields.get(13)),
                 fields.get(14)
         );
+    }
+
+    private PokemonMovesByMachine createPokemonMovesByMachine(List<String> fields) {
+        Integer pokedexNumber = convertToInteger(fields.get(0));
+        List<String> moveIds = Arrays.stream(fields.get(2).split(LIST_DELIMITER))
+                .map(String::trim)
+                .toList();
+        return new PokemonMovesByMachine(pokedexNumber, moveIds);
+    }
+
+    private PokemonMovesBySelf createPokemonMovesBySelf(List<String> fields) {
+        Integer pokedexNumber = convertToInteger(fields.get(0));
+        List<String> moveIds = Arrays.stream(fields.get(19).split(LIST_DELIMITER))
+                .map(String::trim)
+                .toList();
+        return new PokemonMovesBySelf(pokedexNumber, moveIds);
+    }
+
+    private PokemonMovesByEgg createPokemonMovesByEgg(List<String> fields) {
+        Integer pokedexNumber = convertToInteger(fields.get(0));
+        List<String> moveIds = Arrays.stream(fields.get(18).split(LIST_DELIMITER))
+                .map(String::trim)
+                .toList();
+        return new PokemonMovesByEgg(pokedexNumber, moveIds);
     }
 
     private Integer convertToInteger(String data) {
