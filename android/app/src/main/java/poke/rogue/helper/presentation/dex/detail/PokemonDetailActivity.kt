@@ -54,13 +54,9 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
             adapter = pokemonDetailPagerAdapter
         }
 
+        val tabTitles = resources.getStringArray(R.array.pokemon_detail_tab_titles)
         TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
-            when (position) {
-                0 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_stats_title)
-                1 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_evolution_title)
-                2 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_skills_title)
-                3 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_information_title)
-            }
+            tab.text = tabTitles[position]
         }.attach()
     }
 
