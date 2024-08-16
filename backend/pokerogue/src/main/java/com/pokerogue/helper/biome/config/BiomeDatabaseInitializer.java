@@ -106,14 +106,20 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         }
 
         List<Trainer> trainers = trainerTypes.stream()
-                .map(trainerType -> new Trainer(trainerType.getId(), trainerType.getTrainerName(), trainerType.getTrainerTypes(),
-                        getTrainerPokemons(trainerPokemons, trainerType.getTrainerName())))
+                .map(trainerType -> new Trainer(
+                        trainerType.getId(),
+                        trainerType.getTrainerName(),
+                        "트레이너 이미지",
+                        trainerType.getTrainerTypes(),
+                        getTrainerPokemons(trainerPokemons, trainerType.getTrainerName()))
+                )
                 .toList();
 
         biomeTypesAndTrainers.stream()
                 .map(biomeTypeAndTrainer -> new Biome(
                         biomeTypeAndTrainer.getId(),
                         biomeTypeAndTrainer.getBiomeName(),
+                        "바이옴 이미지",
                         getBiomePokemons(biomePokemons, biomeTypeAndTrainer.getBiomeName()),
                         biomeTypeAndTrainer.getBiomeTypes(),
                         getBiomeTrainers(trainers, biomeTypeAndTrainer.getTrainerNames()),
@@ -137,6 +143,9 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
 
         Map<Tier, List<String>> ret = new HashMap<>();
         for (BiomePokemon biomePokemon : allBiomePokemons) {
+            if (biomePokemon.getPokemons().contains("없음")) {
+                continue;
+            }
             if (ret.containsKey(biomePokemon.getPokemonTier())) {
                 List<String> pokemons = ret.get(biomePokemon.getPokemonTier());
                 pokemons.addAll(biomePokemon.getPokemons());

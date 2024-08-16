@@ -25,4 +25,8 @@ public class BiomeRepository {
         return biomes.values().stream()
                 .toList();
     }
+
+    public Biome findById(String id) {
+        return biomes.get(id);
+    }
 }
