@@ -2,7 +2,6 @@ package com.pokerogue.helper.battle;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
-import com.pokerogue.helper.type.repository.PokemonTypeRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +19,6 @@ public class BattleService {
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
-    private final PokemonTypeRepository pokemonTypeRepository;
 
     public List<WeatherResponse> findWeathers() {
         return weatherRepository.findAll().stream()
@@ -54,9 +52,7 @@ public class BattleService {
     }
 
     private MoveResponse toMoveResponseWithLogo(Move move) {
-        System.out.println(move.type());
-        String typeName = pokemonTypeRepository.findByKoName(move.type())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)).getName();
+        String typeName = PokemonType.findEnglishNameByKoreanName(move.type());
         String typeLogo = String.format(TYPE_LOGO_URL_FORMAT, typeName);
         String categoryLogo = String.format(MOVE_CATEGORY_LOGO_URL_FORMAT, move.category().toLowerCase());
         return MoveResponse.of(move, typeLogo, categoryLogo);
