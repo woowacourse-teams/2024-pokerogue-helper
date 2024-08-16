@@ -200,6 +200,7 @@ dependencies {
     implementation(libs.flexbox)
     implementation(libs.timber)
     implementation(libs.coil.core)
+    implementation(libs.coil.svg)
     implementation(libs.glide)
     kapt(libs.glide.compiler)
     implementation(libs.splash.screen)
