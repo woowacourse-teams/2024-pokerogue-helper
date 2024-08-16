@@ -28,14 +28,15 @@ import org.springframework.stereotype.Component;
 public class BiomeDatabaseInitializer implements ApplicationRunner {
 
     private final BiomeRepository biomeRepository;
-    private final List<BiomePokemon> biomePokemons;
-    private final List<BiomeLink> biomeLinks;
-    private final List<BiomeTypeAndTrainer> biomeTypesAndTrainers;
-    private final List<TrainerType> trainerTypes;
-    private final List<TrainerPokemon> trainerPokemons;
 
     @Override
     public void run(ApplicationArguments args) throws IOException {
+        List<BiomePokemon> biomePokemons = new ArrayList<>();
+        List<BiomeLink> biomeLinks = new ArrayList<>();
+        List<BiomeTypeAndTrainer> biomeTypesAndTrainers = new ArrayList<>();
+        List<TrainerType> trainerTypes = new ArrayList<>();
+        List<TrainerPokemon> trainerPokemons = new ArrayList<>();
+
         BufferedReader bufferedReader = new BufferedReader(new FileReader(
                 "src/main/java/com/pokerogue/helper/biome/config/biome-pokemons.txt")
         );
@@ -93,18 +94,18 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
 
         List<Trainer> trainers = trainerTypes.stream()
                 .map(trainerType -> new Trainer(trainerType.getTrainerName(), trainerType.getTrainerTypes(),
-                        getTrainerPokemons(trainerType.getTrainerName())))
+                        getTrainerPokemons(trainerPokemons, trainerType.getTrainerName())))
                 .toList();
 
         biomeTypesAndTrainers.stream()
                 .map(biomeTypeAndTrainer -> new Biome(
                         biomeTypeAndTrainer.getBiomeName(), biomeTypeAndTrainer.getBiomeName(),
-                        getBiomePokemons(biomeTypeAndTrainer.getBiomeName()), biomeTypeAndTrainer.getBiomeTypes(),
-                        getBiomeTrainers(trainers, biomeTypeAndTrainer.getTrainerNames()), getNextBiomes(biomeTypeAndTrainer.getBiomeName())))
+                        getBiomePokemons(biomePokemons, biomeTypeAndTrainer.getBiomeName()), biomeTypeAndTrainer.getBiomeTypes(),
+                        getBiomeTrainers(trainers, biomeTypeAndTrainer.getTrainerNames()), getNextBiomes(biomeLinks, biomeTypeAndTrainer.getBiomeName())))
                 .forEach(biomeRepository::save);
     }
 
-    private Map<Tier, List<String>> getBiomePokemons(String biomeName) {
+    private Map<Tier, List<String>> getBiomePokemons(List<BiomePokemon> biomePokemons, String biomeName) {
         List<BiomePokemon> allBiomePokemons = biomePokemons.stream()
                 .filter(biomePokemon -> biomePokemon.getBiomeName().equals(biomeName))
                 .toList();
@@ -128,7 +129,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .toList();
     }
 
-    private List<String> getNextBiomes(String biomeName) {
+    private List<String> getNextBiomes(List<BiomeLink> biomeLinks, String biomeName) {
         return biomeLinks.stream()
                 .filter(biomeLink -> biomeLink.getCurrentBiome().equals(biomeName))
                 .map(BiomeLink::getNextBiomes)
@@ -136,7 +137,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .orElseThrow();
     }
 
-    private List<String> getTrainerPokemons(String trainerName) {
+    private List<String> getTrainerPokemons(List<TrainerPokemon> trainerPokemons, String trainerName) {
         return trainerPokemons.stream()
                 .filter(trainerPokemon -> trainerPokemon.getTrainerName().equals(trainerName))
                 .map(TrainerPokemon::getTrainerPokemons)
