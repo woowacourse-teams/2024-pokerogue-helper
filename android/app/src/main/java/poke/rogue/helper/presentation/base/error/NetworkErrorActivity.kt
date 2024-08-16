@@ -19,7 +19,7 @@ class NetworkErrorActivity :
     private fun checkNetworkConnect() {
         binding.btnNetworkErrorRetry.setOnSingleClickListener {
             if (isNetworkConnected()) {
-                RefreshEventBus.send()
+                RefreshEventBus.refresh()
                 finish()
                 return@setOnSingleClickListener
             }
