@@ -34,8 +34,23 @@
     <string name="dex_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
     <string name="dex_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
     <string name="dex_list_loading_guide">Loading…</string>
+    <string name="dex_list_empty_guide">해당하는 포켓몬이 없어요</string>
 
+    <!--    detail-->
     <string name="dex_detail_pokemon_stats_title">기본 스탯</string>
+    <string name="pokemon_detail_pokemon_stats_title">능력치</string>
+    <string name="pokemon_detail_pokemon_skills_title">기술 정보</string>
+    <string name="pokemon_detail_pokemon_evolution_title">진화 정보</string>
+    <string name="pokemon_detail_pokemon_information_title">정보</string>
+
+    <!--    skills-->
+    <string name="pokemon_detail_skill_level">레벨</string>
+    <string name="pokemon_detail_skill_name">기술명</string>
+    <string name="pokemon_detail_skill_power">위력</string>
+    <string name="pokemon_detail_skill_accuracy">명중률</string>
+    <string name="pokemon_detail_skill_type">타입</string>
+    <string name="pokemon_detail_skill_category">분류</string>
+
 
     <!-- ability -->
     <string name="ability_title_name">특성 도감</string>
@@ -54,6 +69,15 @@
 
     <!--    item -->
     <string name="item_title_name">아이템 도감</string>
+
+    <!--    battle -->
+    <string name="battle_title_name">배틀 구도</string>
+    <string name="battle_result_title">결과</string>
+    <string name="battle_calculated_power_title">계산된 위력</string>
+    <string name="battle_accuracy_title">명중 확률</string>
+    <string name="battle_mine_pokemon_selection">내 포켓몬을 선택해주세요!</string>
+    <string name="battle_opponent_pokemon_selection">상대 포켓몬을 선택해주세요!</string>
+    <string name="battle_move_selection">기술을 선택해주세요!</string>
 
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>

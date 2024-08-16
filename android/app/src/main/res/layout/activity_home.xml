@@ -102,7 +102,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_home_battle"
-                        onSingleClick="@{() -> actionHandler.navigateToType()}"
+                        onSingleClick="@{() -> actionHandler.navigateToBattle()}"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_row="0"

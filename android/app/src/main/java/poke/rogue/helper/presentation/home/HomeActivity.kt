@@ -11,14 +11,15 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
+import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.battle.BattleActivity
 import poke.rogue.helper.presentation.biome.BiomeActivity
-import poke.rogue.helper.presentation.dex.PokemonActivity
-import poke.rogue.helper.presentation.item.ItemActivity
+import poke.rogue.helper.presentation.dex.PokemonListActivity
 import poke.rogue.helper.presentation.tip.TipActivity
-import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringOf
+import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
@@ -52,7 +53,7 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
                         }
 
                     is HomeNavigateEvent.ToDex ->
-                        startActivity<PokemonActivity> {
+                        startActivity<PokemonListActivity> {
                             logger.logClickEvent(NAVIGATE_TO_DEX)
                         }
 
@@ -72,12 +73,14 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
                         }
 
                     is HomeNavigateEvent.ToItem -> {
-                        startActivity<ItemActivity> {
-                            logger.logClickEvent(NAVIGATE_TO_ITEM)
-                        }
+                        toast("Coming soon")
                     }
 
-                    is HomeNavigateEvent.ToBattle -> {}
+                    is HomeNavigateEvent.ToBattle -> {
+                        startActivity<BattleActivity> {
+                            logger.logClickEvent(NAVIGATE_TO_BATTLE)
+                        }
+                    }
 
                     is HomeNavigateEvent.ToLogo -> navigateToPokeRogue()
                 }
@@ -103,7 +106,7 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
         private const val NAVIGATE_TO_TIP = "Nav_Tip"
         private const val NAVIGATE_TO_BIOME = "Nav_Biome"
         private const val NAVIGATE_TO_ITEM = "Nav_Item"
-        private const val NAVIGATE_TO_BATTLE = "Nav_Battle" // todo 배틀 화면
+        private const val NAVIGATE_TO_BATTLE = "Nav_Battle"
 
         fun intent(context: Context): Intent {
             return Intent(context, HomeActivity::class.java)
