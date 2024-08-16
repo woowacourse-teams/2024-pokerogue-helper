@@ -23,13 +23,13 @@ class DefaultDexRepository(
     override suspend fun filteredPokemons(
         name: String,
         sort: PokemonSort,
-        filter: PokemonFilter,
+        filters: List<PokemonFilter>,
     ): List<Pokemon> {
         return if (name.isEmpty()) {
             pokemons()
         } else {
             pokemons().filter { it.name.has(name) }
-        }.toFilteredPokemons(sort, filter)
+        }.toFilteredPokemons(sort, filters)
     }
 
     override suspend fun pokemonDetail(id: Long): PokemonDetail {
@@ -44,21 +44,18 @@ class DefaultDexRepository(
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
-        filter: PokemonFilter,
+        filters: List<PokemonFilter>,
     ): List<Pokemon> {
         return this
-            .filter {
-                when (filter) {
-                    is PokemonFilter.ByAll -> true
-                    is PokemonFilter.ByType -> {
-                        it.types.contains(filter.type)
-                    }
-
-                    is PokemonFilter.ByGeneration -> {
-                        it.generation == filter.generation
+            .filter { pokemon ->
+                filters.all { filter ->
+                    when (filter) {
+                        is PokemonFilter.ByType -> pokemon.types.contains(filter.type)
+                        is PokemonFilter.ByGeneration -> pokemon.generation == filter.generation
                     }
                 }
-            }.sortedWith(sort)
+            }
+            .sortedWith(sort)
     }
 
     companion object {

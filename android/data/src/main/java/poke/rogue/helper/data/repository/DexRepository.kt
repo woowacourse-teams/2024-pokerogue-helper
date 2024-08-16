@@ -11,7 +11,7 @@ interface DexRepository {
     suspend fun filteredPokemons(
         name: String = "",
         sort: PokemonSort = PokemonSort.ByDexNumber,
-        filter: PokemonFilter = PokemonFilter.ByAll,
+        filters: List<PokemonFilter> = emptyList(),
     ): List<Pokemon>
 
     suspend fun pokemonDetail(id: Long): PokemonDetail
