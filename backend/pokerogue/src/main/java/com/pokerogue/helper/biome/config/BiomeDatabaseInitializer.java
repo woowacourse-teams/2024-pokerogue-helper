@@ -12,8 +12,9 @@ import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,9 +40,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         List<TrainerType> trainerTypes = new ArrayList<>();
         List<TrainerPokemon> trainerPokemons = new ArrayList<>();
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/biome-pokemons.txt")
-        )) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-pokemons.txt");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomePokemon = bufferedReader.readLine();
                 if (biomePokemon == null) {
@@ -53,9 +53,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/biome-links.txt")
-        )) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-links.txt");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomeLink = bufferedReader.readLine();
                 if (biomeLink == null) {
@@ -67,9 +66,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/biome-types-trainers.txt")
-        )) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-types-trainers.txt");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomeTypeAndTrainer = bufferedReader.readLine();
                 if (biomeTypeAndTrainer == null) {
@@ -81,9 +79,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/trainer-types.txt")
-        )) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer-types.txt");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String trainerType = bufferedReader.readLine();
                 if (trainerType == null) {
@@ -95,9 +92,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
-                "src/main/java/com/pokerogue/helper/biome/config/trainer-pokemons.txt")
-        )) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer-types.txt");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String trainerPokemon = bufferedReader.readLine();
                 if (trainerPokemon == null) {
