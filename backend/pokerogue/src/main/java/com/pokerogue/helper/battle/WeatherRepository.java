@@ -3,9 +3,9 @@ package com.pokerogue.helper.battle;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class WeatherRepository {
 
     private final Map<String, Weather> weathers = new HashMap<>();
