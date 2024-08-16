@@ -1,38 +1,35 @@
-package poke.rogue.helper.presentation.ability
+package poke.rogue.helper.presentation.dex.detail.skill
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import poke.rogue.helper.databinding.ItemAbilityDescriptionBinding
-import poke.rogue.helper.presentation.ability.model.AbilityUiModel
+import poke.rogue.helper.databinding.ItemPokemonDetailSkillBinding
+import poke.rogue.helper.presentation.dex.model.PokemonSkillUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class AbilityAdapter(private val onClickAbilityItem: AbilityUiEventHandler) :
-    ListAdapter<AbilityUiModel, AbilityViewHolder>(abilityComparator) {
+class PokemonDetailSkillAdapter : ListAdapter<PokemonSkillUiModel, PokemonDetailSkillViewHolder>(skillsComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): AbilityViewHolder {
-        return AbilityViewHolder(
-            ItemAbilityDescriptionBinding.inflate(
+    ): PokemonDetailSkillViewHolder =
+        PokemonDetailSkillViewHolder(
+            ItemPokemonDetailSkillBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false,
             ),
-            onClickAbilityItem,
         )
-    }
 
     override fun onBindViewHolder(
-        holder: AbilityViewHolder,
+        holder: PokemonDetailSkillViewHolder,
         position: Int,
     ) {
         holder.bind(getItem(position))
     }
 
     companion object {
-        private val abilityComparator =
-            ItemDiffCallback<AbilityUiModel>(
+        private val skillsComparator =
+            ItemDiffCallback<PokemonSkillUiModel>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
