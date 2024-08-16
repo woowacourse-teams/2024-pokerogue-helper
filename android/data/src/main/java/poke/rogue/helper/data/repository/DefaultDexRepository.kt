@@ -44,14 +44,14 @@ class DefaultDexRepository(
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
-        filters: List<PokemonFilter>,
+        pokemonFilters: List<PokemonFilter>,
     ): List<Pokemon> {
         return this
             .filter { pokemon ->
-                filters.all { filter ->
-                    when (filter) {
-                        is PokemonFilter.ByType -> pokemon.types.contains(filter.type)
-                        is PokemonFilter.ByGeneration -> pokemon.generation == filter.generation
+                pokemonFilters.all { pokemonFilter ->
+                    when (pokemonFilter) {
+                        is PokemonFilter.ByType -> pokemon.types.contains(pokemonFilter.type)
+                        is PokemonFilter.ByGeneration -> pokemon.generation == pokemonFilter.generation
                     }
                 }
             }
