@@ -1,4 +1,4 @@
-package com.pokerogue.helper.global.config;
+package com.pokerogue.helper.pokemon2;
 
 import com.pokerogue.helper.pokemon2.MoveRepository;
 import com.pokerogue.helper.pokemon2.Pokemon2Repository;
