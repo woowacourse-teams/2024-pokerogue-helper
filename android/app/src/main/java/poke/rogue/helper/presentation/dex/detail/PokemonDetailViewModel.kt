@@ -32,8 +32,11 @@ class PokemonDetailViewModel(
         uiState.map { it is PokemonDetailUiState.IsLoading }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), true)
 
-    private val _navigationToDetailEvent = MutableSharedFlow<Long>()
-    val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
+    private val _navigationToAbilityDetailEvent = MutableSharedFlow<Long>()
+    val navigationToAbilityDetailEvent: SharedFlow<Long> = _navigationToAbilityDetailEvent.asSharedFlow()
+
+    private val _navigationToBiomeDetailEvent = MutableSharedFlow<String>()
+    val navigationToDetailEvent: SharedFlow<String> = _navigationToBiomeDetailEvent.asSharedFlow()
 
     private val _navigateToHomeEvent = MutableSharedFlow<Boolean>()
     val navigateToHomeEvent = _navigateToHomeEvent.asSharedFlow()
@@ -47,7 +50,13 @@ class PokemonDetailViewModel(
 
     override fun navigateToAbilityDetail(abilityId: Long) {
         viewModelScope.launch {
-            _navigationToDetailEvent.emit(abilityId)
+            _navigationToAbilityDetailEvent.emit(abilityId)
+        }
+    }
+
+    override fun navigateToBiomeDetail(biomeId: String) {
+        viewModelScope.launch {
+            _navigationToBiomeDetailEvent.emit(biomeId)
         }
     }
 
