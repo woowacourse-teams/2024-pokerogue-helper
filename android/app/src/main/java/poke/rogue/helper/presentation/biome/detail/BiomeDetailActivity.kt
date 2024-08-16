@@ -32,13 +32,9 @@ class BiomeDetailActivity :
             adapter = pagerAdapter
         }
 
+        val tabTitles = resources.getStringArray(R.array.biome_tab_titles)
         TabLayoutMediator(binding.tablayoutBiomeDetail, binding.vpBiome) { tab, position ->
-            when (position) {
-                0 -> tab.text = "야생"
-                1 -> tab.text = "보스"
-                2 -> tab.text = "다음 바이옴"
-                3 -> tab.text = "관장"
-            }
+            tab.text = tabTitles[position]
         }.attach()
     }
 
