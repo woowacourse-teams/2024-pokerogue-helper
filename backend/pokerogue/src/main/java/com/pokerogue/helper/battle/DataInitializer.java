@@ -108,6 +108,7 @@ public class DataInitializer implements ApplicationRunner {
         Integer pokedexNumber = convertToInteger(fields.get(0));
         List<String> moveIds = Arrays.stream(fields.get(2).split(LIST_DELIMITER))
                 .map(String::trim)
+                .filter(s -> !s.isEmpty())
                 .toList();
         return new PokemonMovesByMachine(pokedexNumber, moveIds);
     }
@@ -116,6 +117,7 @@ public class DataInitializer implements ApplicationRunner {
         Integer pokedexNumber = convertToInteger(fields.get(0));
         List<String> moveIds = Arrays.stream(fields.get(19).split(LIST_DELIMITER))
                 .map(String::trim)
+                .filter(s -> !s.isEmpty())
                 .toList();
         return new PokemonMovesBySelf(pokedexNumber, moveIds);
     }
@@ -124,6 +126,7 @@ public class DataInitializer implements ApplicationRunner {
         Integer pokedexNumber = convertToInteger(fields.get(0));
         List<String> moveIds = Arrays.stream(fields.get(18).split(LIST_DELIMITER))
                 .map(String::trim)
+                .filter(s -> !s.isEmpty())
                 .toList();
         return new PokemonMovesByEgg(pokedexNumber, moveIds);
     }
