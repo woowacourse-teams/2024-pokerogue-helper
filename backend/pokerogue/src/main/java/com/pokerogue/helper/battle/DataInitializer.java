@@ -73,7 +73,7 @@ public class DataInitializer implements ApplicationRunner {
 
     private Move createMove(List<String> fields) {
         return new Move(
-                fields.get(0),
+                fields.get(1), /* 우선은 한글 이름을 id로 설정, 추후 숫자로 변경 */
                 fields.get(1),
                 fields.get(2),
                 fields.get(3),
