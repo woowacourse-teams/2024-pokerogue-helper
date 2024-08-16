@@ -21,7 +21,7 @@
             android:name=".presentation.tip.TipActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.dex.PokemonActivity"
+            android:name=".presentation.dex.PokemonListActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.home.HomeActivity"

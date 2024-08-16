@@ -2,23 +2,22 @@ package poke.rogue.helper.presentation.dex
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
-import poke.rogue.helper.databinding.FragmentPokemonListBinding
-import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
+import poke.rogue.helper.databinding.ActivityPokemonListBinding
+import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
+import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class PokemonListFragment :
-    ErrorHandleFragment<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list) {
+class PokemonListActivity :
+    ErrorHandleActivity<ActivityPokemonListBinding>(R.layout.activity_pokemon_list) {
     private val viewModel by viewModels<PokemonListViewModel> {
         PokemonListViewModel.factory(
             DefaultDexRepository.instance(),
@@ -34,16 +33,15 @@ class PokemonListFragment :
     override val toolbar: Toolbar
         get() = binding.toolbarDex
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-
+        binding.lifecycleOwner = this
         initAdapter()
         initObservers()
+        binding.root.setOnClickListener {
+            hideKeyboard()
+        }
     }
 
     private fun initAdapter() {
@@ -70,14 +68,13 @@ class PokemonListFragment :
         }
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
-                parentFragmentManager.commit {
-                    startActivity(PokemonDetailActivity.intent(requireContext(), pokemonId))
-                }
+                hideKeyboard()
+                startActivity(PokemonDetailActivity.intent(this, pokemonId))
             }
         }
     }
 
     companion object {
-        val TAG: String = PokemonListFragment::class.java.simpleName
+        val TAG: String = PokemonListActivity::class.java.simpleName
     }
 }
