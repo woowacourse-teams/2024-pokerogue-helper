@@ -12,9 +12,12 @@ public enum ErrorMessage {
     POKEMON_ABILITY_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 특성을 찾지 못했습니다."),
     POKEMON_TYPE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 타입을 찾지 못했습니다."),
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 꿀팁을 찾지 못했습니다."),
-  
-    FILE_EXTENSION_NOT_APPLY(HttpStatus.BAD_REQUEST, "지원하지 않는 파일 형식입니다."),
-    FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다.");
+    TIER_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 티어를 찾지 못했습니다."),
+    TRAINER_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 트레이너를 찾지 못했습니다."),
+    BIOME_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 바이옴을 찾지 못했습니다."),
+    FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다."),
+
+    FILE_EXTENSION_NOT_APPLY(HttpStatus.BAD_REQUEST, "지원하지 않는 파일 형식입니다.");
 
     private final HttpStatus httpStatus;
     private final String message;
