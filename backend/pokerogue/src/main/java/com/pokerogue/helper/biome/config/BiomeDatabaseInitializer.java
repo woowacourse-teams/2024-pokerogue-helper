@@ -1,5 +1,6 @@
 package com.pokerogue.helper.biome.config;
 
+import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.BiomeLink;
 import com.pokerogue.helper.biome.data.BiomePokemon;
@@ -31,6 +32,7 @@ import org.springframework.stereotype.Component;
 public class BiomeDatabaseInitializer implements ApplicationRunner {
 
     private final BiomeRepository biomeRepository;
+    private final S3Service s3Service;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -109,7 +111,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .map(trainerType -> new Trainer(
                         trainerType.getId(),
                         trainerType.getTrainerName(),
-                        "트레이너 이미지",
+                        s3Service.getTrainerImageFromS3(trainerType.getId()),
                         trainerType.getTrainerTypes(),
                         getTrainerPokemons(trainerPokemons, trainerType.getTrainerName()))
                 )
@@ -119,7 +121,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .map(biomeTypeAndTrainer -> new Biome(
                         biomeTypeAndTrainer.getId(),
                         biomeTypeAndTrainer.getBiomeName(),
-                        "바이옴 이미지",
+                        s3Service.getBiomeImageFromS3(biomeTypeAndTrainer.getId()),
                         getBiomePokemons(biomePokemons, biomeTypeAndTrainer.getBiomeName()),
                         biomeTypeAndTrainer.getBiomeTypes(),
                         getBiomeTrainers(trainers, biomeTypeAndTrainer.getTrainerNames()),

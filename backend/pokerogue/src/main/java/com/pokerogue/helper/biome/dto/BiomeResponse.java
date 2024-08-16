@@ -15,7 +15,7 @@ public record BiomeResponse(
         return new BiomeResponse(
                 biome.getId(),
                 biome.getName(),
-                "바이옴 이미지",
+                biome.getImage(),
                 biome.getMainTypes(),
                 biome.getTrainerTypes()
         );
