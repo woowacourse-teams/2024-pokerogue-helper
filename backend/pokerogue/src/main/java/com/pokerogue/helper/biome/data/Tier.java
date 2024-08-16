@@ -1,4 +1,4 @@
-package com.pokerogue.helper.biome.domain;
+package com.pokerogue.helper.biome.data;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;

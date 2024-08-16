@@ -1,5 +1,6 @@
-package com.pokerogue.helper.biome.domain;
+package com.pokerogue.helper.biome.data;
 
+import com.pokerogue.helper.biome.data.Tier;
 import java.util.List;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.pokerogue.helper.biome.domain;
+package com.pokerogue.helper.biome.data;
 
 import java.util.HashSet;
 import java.util.List;

@@ -1,13 +1,13 @@
 package com.pokerogue.helper.biome.config;
 
-import com.pokerogue.helper.biome.domain.Biome;
-import com.pokerogue.helper.biome.domain.BiomeLink;
-import com.pokerogue.helper.biome.domain.BiomePokemon;
-import com.pokerogue.helper.biome.domain.BiomeTypeAndTrainer;
-import com.pokerogue.helper.biome.domain.Tier;
-import com.pokerogue.helper.biome.domain.Trainer;
-import com.pokerogue.helper.biome.domain.TrainerPokemon;
-import com.pokerogue.helper.biome.domain.TrainerType;
+import com.pokerogue.helper.biome.data.Biome;
+import com.pokerogue.helper.biome.data.BiomeLink;
+import com.pokerogue.helper.biome.data.BiomePokemon;
+import com.pokerogue.helper.biome.data.BiomeTypeAndTrainer;
+import com.pokerogue.helper.biome.data.Tier;
+import com.pokerogue.helper.biome.data.Trainer;
+import com.pokerogue.helper.biome.data.TrainerPokemon;
+import com.pokerogue.helper.biome.data.TrainerType;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;

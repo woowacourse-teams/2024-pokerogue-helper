@@ -1,6 +1,6 @@
 package com.pokerogue.helper.biome.dto;
 
-import com.pokerogue.helper.biome.domain.Biome;
+import com.pokerogue.helper.biome.data.Biome;
 import java.util.List;
 
 public record BiomeResponse(

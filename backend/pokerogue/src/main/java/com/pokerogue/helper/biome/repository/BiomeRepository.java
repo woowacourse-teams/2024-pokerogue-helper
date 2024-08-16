@@ -1,6 +1,6 @@
 package com.pokerogue.helper.biome.repository;
 
-import com.pokerogue.helper.biome.domain.Biome;
+import com.pokerogue.helper.biome.data.Biome;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
