@@ -7,7 +7,6 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
 import poke.rogue.helper.presentation.biome.BiomeDetailPagerAdapter
 import poke.rogue.helper.presentation.biome.model.BiomeUiModel
-import poke.rogue.helper.presentation.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 
 class BiomeDetailActivity :

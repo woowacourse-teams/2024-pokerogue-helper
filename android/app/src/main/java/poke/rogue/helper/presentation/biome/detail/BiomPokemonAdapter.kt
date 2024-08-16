@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.biome.detail.wild
+package poke.rogue.helper.presentation.biome.detail
 
 
 import android.view.LayoutInflater
@@ -8,14 +8,13 @@ import poke.rogue.helper.databinding.ItemPokemonListPokemonBinding
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-// todo uiHandler
-class BiomeWildItemAdapter() :
-    ListAdapter<PokemonUiModel, BiomeWildItemViewHolder>(poketmonComparator) {
+class BiomPokemonAdapter :
+    ListAdapter<PokemonUiModel, BiomePokemonViewHolder>(poketmonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): BiomeWildItemViewHolder =
-        BiomeWildItemViewHolder(
+    ): BiomePokemonViewHolder =
+        BiomePokemonViewHolder(
             ItemPokemonListPokemonBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -24,7 +23,7 @@ class BiomeWildItemAdapter() :
         )
 
     override fun onBindViewHolder(
-        holder: BiomeWildItemViewHolder,
+        holder: BiomePokemonViewHolder,
         position: Int,
     ) {
         holder.bind(getItem(position))
