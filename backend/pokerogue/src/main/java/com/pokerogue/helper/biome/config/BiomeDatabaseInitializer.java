@@ -92,7 +92,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer-types.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer-pokemons.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String trainerPokemon = bufferedReader.readLine();
@@ -106,20 +106,28 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         }
 
         List<Trainer> trainers = trainerTypes.stream()
-                .map(trainerType -> new Trainer(trainerType.getTrainerName(), trainerType.getTrainerTypes(),
+                .map(trainerType -> new Trainer(trainerType.getId(), trainerType.getTrainerName(), trainerType.getTrainerTypes(),
                         getTrainerPokemons(trainerPokemons, trainerType.getTrainerName())))
                 .toList();
 
         biomeTypesAndTrainers.stream()
                 .map(biomeTypeAndTrainer -> new Biome(
-                        biomeTypeAndTrainer.getBiomeName(),
+                        biomeTypeAndTrainer.getId(),
                         biomeTypeAndTrainer.getBiomeName(),
                         getBiomePokemons(biomePokemons, biomeTypeAndTrainer.getBiomeName()),
                         biomeTypeAndTrainer.getBiomeTypes(),
                         getBiomeTrainers(trainers, biomeTypeAndTrainer.getTrainerNames()),
-                        getNextBiomes(biomeLinks, biomeTypeAndTrainer.getBiomeName()))
+                        getNextBiomes(biomeLinks, biomeTypeAndTrainer.getId()))
                 )
                 .forEach(biomeRepository::save);
+    }
+
+    private List<String> getTrainerPokemons(List<TrainerPokemon> trainerPokemons, String trainerName) {
+        return trainerPokemons.stream()
+                .filter(trainerPokemon -> trainerPokemon.getTrainerName().equals(trainerName))
+                .map(TrainerPokemon::getTrainerPokemons)
+                .findFirst()
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TRAINER_NOT_FOUND));
     }
 
     private Map<Tier, List<String>> getBiomePokemons(List<BiomePokemon> biomePokemons, String biomeName) {
@@ -146,19 +154,11 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .toList();
     }
 
-    private List<String> getNextBiomes(List<BiomeLink> biomeLinks, String biomeName) {
+    private List<String> getNextBiomes(List<BiomeLink> biomeLinks, String biomeId) {
         return biomeLinks.stream()
-                .filter(biomeLink -> biomeLink.getCurrentBiome().equals(biomeName))
+                .filter(biomeLink -> biomeLink.getId().equals(biomeId))
                 .map(BiomeLink::getNextBiomes)
                 .findFirst()
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
-    }
-
-    private List<String> getTrainerPokemons(List<TrainerPokemon> trainerPokemons, String trainerName) {
-        return trainerPokemons.stream()
-                .filter(trainerPokemon -> trainerPokemon.getTrainerName().equals(trainerName))
-                .map(TrainerPokemon::getTrainerPokemons)
-                .findFirst()
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TRAINER_NOT_FOUND));
     }
 }
