@@ -9,7 +9,10 @@ import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class BiomeWildAdapter :
     ListAdapter<BiomePokemonUiModel, BiomeWildViewHolder>(wildPokemonComparator) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BiomeWildViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): BiomeWildViewHolder {
         return BiomeWildViewHolder(
             ItemBiomePokemonBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -19,7 +22,10 @@ class BiomeWildAdapter :
         )
     }
 
-    override fun onBindViewHolder(holder: BiomeWildViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: BiomeWildViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 

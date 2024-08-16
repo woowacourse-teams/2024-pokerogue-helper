@@ -9,10 +9,12 @@ import poke.rogue.helper.presentation.biome.model.BiomeDetailUiModel
 
 class BiomeMapFragment :
     BindingFragment<FragmentBiomeNextBiomeBinding>(R.layout.fragment_biome_next_biome) {
-
     private val nextBiomeAdapter: BiomeMapAdapter by lazy { BiomeMapAdapter() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
     }

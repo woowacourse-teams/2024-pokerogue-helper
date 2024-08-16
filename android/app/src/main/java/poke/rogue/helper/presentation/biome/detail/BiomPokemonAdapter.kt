@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.biome.detail
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -37,5 +36,3 @@ class BiomPokemonAdapter :
             )
     }
 }
-
-

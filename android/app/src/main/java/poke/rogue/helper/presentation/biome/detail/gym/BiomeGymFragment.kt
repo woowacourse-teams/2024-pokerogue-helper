@@ -9,9 +9,12 @@ import poke.rogue.helper.presentation.biome.model.BiomeDetailUiModel
 
 class BiomeGymFragment :
     BindingFragment<FragmentBiomeGymPokemonBinding>(R.layout.fragment_biome_gym_pokemon) {
-
     private val gymPokemonAdapter: BiomeGymAdapter by lazy { BiomeGymAdapter() }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()

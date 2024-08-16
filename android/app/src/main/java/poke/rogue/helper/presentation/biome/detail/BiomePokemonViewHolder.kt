@@ -8,9 +8,8 @@ import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.view.dp
 
 class BiomePokemonViewHolder(
-    private val binding: ItemPokemonListPokemonBinding
+    private val binding: ItemPokemonListPokemonBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bind(pokemonItem: PokemonUiModel) {
         binding.pokemon = pokemonItem
 

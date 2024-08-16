@@ -8,13 +8,15 @@ import poke.rogue.helper.presentation.biome.detail.map.BiomeMapFragment
 import poke.rogue.helper.presentation.biome.detail.wild.BiomeWildPokemonFragment
 
 class BiomeDetailPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
-    private val fragment = listOf(
-        BiomeGymFragment(),
-        BiomeBossFragment(),
-        BiomeWildPokemonFragment(),
-        BiomeMapFragment(),
-    )
+    private val fragment =
+        listOf(
+            BiomeGymFragment(),
+            BiomeBossFragment(),
+            BiomeWildPokemonFragment(),
+            BiomeMapFragment(),
+        )
 
     override fun getItemCount(): Int = fragment.size
+
     override fun createFragment(position: Int) = fragment[position]
 }

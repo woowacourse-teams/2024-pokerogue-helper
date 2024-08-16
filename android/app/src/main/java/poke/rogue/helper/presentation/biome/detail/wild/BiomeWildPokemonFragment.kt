@@ -9,10 +9,12 @@ import poke.rogue.helper.presentation.biome.model.BiomeDetailUiModel
 
 class BiomeWildPokemonFragment :
     BindingFragment<FragmentBiomeWildPokemonBinding>(R.layout.fragment_biome_wild_pokemon) {
-
     private val wildPokemonAdapter: BiomeWildAdapter by lazy { BiomeWildAdapter() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()

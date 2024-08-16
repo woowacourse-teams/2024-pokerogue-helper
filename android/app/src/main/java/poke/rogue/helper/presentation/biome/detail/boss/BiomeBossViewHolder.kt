@@ -9,7 +9,6 @@ import poke.rogue.helper.presentation.util.view.dp
 
 class BiomeBossViewHolder(private val binding: ItemBiomePokemonBinding) :
     RecyclerView.ViewHolder(binding.root) {
-
     private val pokemonAdapter: BiomPokemonAdapter by lazy { BiomPokemonAdapter() }
 
     fun bind(bossPokemon: BiomePokemonUiModel) {

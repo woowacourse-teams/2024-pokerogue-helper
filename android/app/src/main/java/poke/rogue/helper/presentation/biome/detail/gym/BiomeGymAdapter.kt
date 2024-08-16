@@ -8,8 +8,10 @@ import poke.rogue.helper.presentation.biome.model.BiomePokemonUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class BiomeGymAdapter : ListAdapter<BiomePokemonUiModel, BiomeGymViewHolder>(gymPokemonComparator) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BiomeGymViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): BiomeGymViewHolder {
         return BiomeGymViewHolder(
             ItemBiomeGymBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -19,7 +21,10 @@ class BiomeGymAdapter : ListAdapter<BiomePokemonUiModel, BiomeGymViewHolder>(gym
         )
     }
 
-    override fun onBindViewHolder(holder: BiomeGymViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: BiomeGymViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 

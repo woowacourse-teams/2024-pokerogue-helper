@@ -24,16 +24,18 @@ fun ImageView.setImage(imageUrl: String?) {
 
 @BindingAdapter("svgUrl")
 fun ImageView.loadSvgFromUrl(url: String?) {
-    val imageLoader = ImageLoader.Builder(context)
-        .components { add(SvgDecoder.Factory()) }
-        .build()
+    val imageLoader =
+        ImageLoader.Builder(context)
+            .components { add(SvgDecoder.Factory()) }
+            .build()
 
-    val request = ImageRequest.Builder(context)
-        .data(url)
-        .placeholder(R.drawable.ic_pikachu_silhouette)
-        .error(R.drawable.ic_ditto_silhouette)
-        .target(this)
-        .build()
+    val request =
+        ImageRequest.Builder(context)
+            .data(url)
+            .placeholder(R.drawable.ic_pikachu_silhouette)
+            .error(R.drawable.ic_ditto_silhouette)
+            .target(this)
+            .build()
 
     imageLoader.enqueue(request)
 }

@@ -5,9 +5,9 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
+import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.biome.BiomeDetailPagerAdapter
 import poke.rogue.helper.presentation.biome.model.BiomeUiModel
-import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 
 class BiomeDetailActivity :
     ToolbarActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {
@@ -20,7 +20,6 @@ class BiomeDetailActivity :
         super.onCreate(savedInstanceState)
         val biomeId = intent.getIntExtra(BIOME_ID, 1)
         initAdapter()
-
     }
 
     private fun initAdapter() {

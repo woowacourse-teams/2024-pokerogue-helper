@@ -8,7 +8,7 @@ import poke.rogue.helper.presentation.util.view.dp
 
 class BiomeMapViewHolder(private val binding: ItemBiomeMapBinding) :
     RecyclerView.ViewHolder(
-        binding.root
+        binding.root,
     ) {
     fun bind(nextBiome: NextBiomeUiModel) {
         binding.nextBiome = nextBiome

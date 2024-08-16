@@ -9,9 +9,12 @@ import poke.rogue.helper.presentation.biome.model.BiomeDetailUiModel
 
 class BiomeBossFragment :
     BindingFragment<FragmentBiomeBossPokemonBinding>(R.layout.fragment_biome_boss_pokemon) {
-
     private val bossPokemonAdapter: BiomeBossAdapter by lazy { BiomeBossAdapter() }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
