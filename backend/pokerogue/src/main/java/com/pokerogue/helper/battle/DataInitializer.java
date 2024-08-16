@@ -24,7 +24,7 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        String weatherFilePath = "src/main/java/com/pokerogue/helper/battle/data/weather.txt";
+        String weatherFilePath = System.getProperty("user.dir") + "/" + "src/main/java/com/pokerogue/helper/battle/data/weather.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(weatherFilePath))) {
             int lineCount = 0;
             String line;
