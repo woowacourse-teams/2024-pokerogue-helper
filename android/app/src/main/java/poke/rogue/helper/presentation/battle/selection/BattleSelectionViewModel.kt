@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 

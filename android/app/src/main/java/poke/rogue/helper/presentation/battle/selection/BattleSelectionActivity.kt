@@ -7,6 +7,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBattleSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
 
