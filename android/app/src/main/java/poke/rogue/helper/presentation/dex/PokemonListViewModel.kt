@@ -69,9 +69,9 @@ class PokemonListViewModel(
     private suspend fun queriedPokemons(query: String): List<NewPokemonUiModel> {
         return try {
             if (query.isEmpty()) {
-                pokemonListRepository.pokemons().toUi2()
+                pokemonListRepository.pokemons().toUi()
             } else {
-                pokemonListRepository.pokemons(query).toUi2()
+                pokemonListRepository.pokemons(query).toUi()
             }
         } catch (e: PokeException) {
             handlePokemonError(e)
@@ -100,14 +100,3 @@ class PokemonListViewModel(
             }
     }
 }
-
-
-// TODO: 바로 삭제해야 함 Repository 에서 NewPokemon 으로 리턴하기 전에 잠깐 사용
-fun Pokemon.toUi2(): NewPokemonUiModel =
-    NewPokemonUiModel(
-        id = id.toString(),
-        dexNumber = dexNumber,
-        name = name,
-        imageUrl = imageUrl,
-        types = types.toUi(),
-    )
