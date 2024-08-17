@@ -8,20 +8,20 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
+import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonSelectionFragment :
     ErrorHandleFragment<FragmentPokemonSelectionBinding>(R.layout.fragment_pokemon_selection) {
-    private val activityViewModel: BattleSelectionViewModel by activityViewModels()
+    private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
     private val pokemonAdapter: PokemonSelectionAdapter by lazy {
-        PokemonSelectionAdapter()
+        PokemonSelectionAdapter(sharedViewModel)
     }
 
     override val errorViewModel: ErrorHandleViewModel
-        get() = activityViewModel
+        get() = sharedViewModel
     override val toolbar: Toolbar?
         get() = null
 
@@ -31,7 +31,8 @@ class PokemonSelectionFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        pokemonAdapter.submitList(PokemonSelectionUiModel.DUMMY)
+        initObserver()
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun initViews() {
@@ -40,6 +41,20 @@ class PokemonSelectionFragment :
             addItemDecoration(
                 LinearSpacingItemDecoration(spacing = 4.dp, false),
             )
+        }
+    }
+
+    private fun initObserver() {
+        repeatOnStarted {
+            sharedViewModel.pokemons.collect {
+                pokemonAdapter.submitList(it)
+            }
+        }
+
+        repeatOnStarted {
+            sharedViewModel.selectedPokemon.collect {
+                it?.let { pokemonAdapter.updateSelectedPokemon(it.id) }
+            }
         }
     }
 }
