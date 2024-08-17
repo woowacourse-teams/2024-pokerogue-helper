@@ -1,7 +1,7 @@
 package poke.rogue.helper.presentation.dex.detail
 
 import poke.rogue.helper.data.model.PokemonDetail
-import poke.rogue.helper.data.model.NewPokemonSkills
+import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.presentation.dex.model.NewAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
@@ -14,7 +14,7 @@ sealed interface PokemonDetailUiState {
         val pokemon: PokemonUiModel,
         val stats: List<StatUiModel>,
         val abilities: List<NewAbilityUiModel>,
-        val skills: NewPokemonSkills,
+        val skills: PokemonDetailSkills,
         val height: Float,
         val weight: Float,
     ) : PokemonDetailUiState
