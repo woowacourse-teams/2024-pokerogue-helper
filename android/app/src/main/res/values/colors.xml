@@ -6,9 +6,12 @@
     <color name="poke_white">#FDFDFDFD</color>
     <color name="poke_black">#000000</color>
     <color name="poke_grey_80">#242627</color>
+    <color name="poke_grey_70">#4B4B4B</color>
     <color name="poke_grey_60">#969696</color>
     <color name="poke_grey_20">#DCDCDC</color>
-
+    <color name="poke_blue_30">#6C7EE2</color>
+    <color name="poke_blue_40">#5981F2</color>
+    <color name="poke_blue_50">#182E6A</color>
     <color name="poke_green_20">#74CC73</color>
     <color name="poke_red_20">#F66868</color>
 
@@ -44,4 +47,13 @@
     <color name="stat_total">#964DF0</color>
 
 
+    <!--    chip-->
+    <color name="poke_chip_background_selected">@color/poke_grey_70</color>
+    <color name="poke_chip_background_default">@color/poke_grey_80</color>
+
+    <color name="poke_chip_text_selected">@color/poke_white</color>
+    <color name="poke_chip_text_default">@color/poke_white</color>
+    
+    <color name="poke_chip_stroke_selected">@color/poke_white</color>
+    <color name="poke_chip_stroke_default">@color/poke_grey_80</color>
 </resources>

@@ -9,9 +9,37 @@
     </declare-styleable>
 
     <declare-styleable name="TypeChip">
-        <attr name="iconSize" format="dimension"/>
+        <attr name="iconSize" format="dimension" />
         <attr name="spacing" format="dimension" />
         <attr name="nameSize" format="dimension" />
         <attr name="emptyBackGround" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PokeChip">
+        <attr name="label" format="string" />
+        <attr name="leadingIcon" format="reference" />
+        <attr name="leadingSpacing" format="dimension" />
+        <attr name="trailingIcon" format="reference" />
+        <attr name="trailingSpacing" format="dimension" />
+        <!--        size-->
+        <attr name="leadingIconSize" format="dimension" />
+        <attr name="labelSize" format="dimension" />
+        <attr name="trailingIconSize" format="dimension" />
+        <!--        color-->
+        <attr name="labelColor" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="containerColor" format="color" />
+        <attr name="selectedLabelColor" format="color" />
+        <attr name="selectedStrokeColor" format="color" />
+        <attr name="selectedContainerColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="PokeChipGroup">
+        <attr name="direction" format="enum">
+            <enum name="row" value="0" />
+            <enum name="column" value="1" />
+        </attr>
+        <attr name="itemSpacing" format="dimension" />
+        <attr name="lineSpacing" format="dimension" />
     </declare-styleable>
 </resources>
