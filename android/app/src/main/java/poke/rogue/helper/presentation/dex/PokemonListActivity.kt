@@ -15,6 +15,7 @@ import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
+import timber.log.Timber
 
 class PokemonListActivity :
     ErrorHandleActivity<ActivityPokemonListBinding>(R.layout.activity_pokemon_list) {

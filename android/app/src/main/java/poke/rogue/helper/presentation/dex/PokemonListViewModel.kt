@@ -25,8 +25,9 @@ import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.dex.model.PokemonUiModel
+import poke.rogue.helper.presentation.dex.model.NewPokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
+import poke.rogue.helper.presentation.type.model.toUi
 
 class PokemonListViewModel(
     private val pokemonListRepository: DexRepository,
@@ -35,7 +36,7 @@ class PokemonListViewModel(
     private val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    val uiState: StateFlow<List<PokemonUiModel>> =
+    val uiState: StateFlow<List<NewPokemonUiModel>> =
         merge(refreshEvent.map { "" }, searchQuery)
             .onStart {
                 if (isEmpty.value) {
@@ -62,15 +63,15 @@ class PokemonListViewModel(
                 true,
             )
 
-    private val _navigateToDetailEvent = MutableSharedFlow<Long>()
+    private val _navigateToDetailEvent = MutableSharedFlow<String>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
-    private suspend fun queriedPokemons(query: String): List<PokemonUiModel> {
+    private suspend fun queriedPokemons(query: String): List<NewPokemonUiModel> {
         return try {
             if (query.isEmpty()) {
-                pokemonListRepository.pokemons().map(Pokemon::toUi)
+                pokemonListRepository.pokemons().toUi2()
             } else {
-                pokemonListRepository.pokemons(query).map(Pokemon::toUi)
+                pokemonListRepository.pokemons(query).toUi2()
             }
         } catch (e: PokeException) {
             handlePokemonError(e)
@@ -80,7 +81,7 @@ class PokemonListViewModel(
         }
     }
 
-    override fun navigateToPokemonDetail(pokemonId: Long) {
+    override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
             _navigateToDetailEvent.emit(pokemonId)
         }
@@ -99,3 +100,14 @@ class PokemonListViewModel(
             }
     }
 }
+
+
+// TODO: 바로 삭제해야 함 Repository 에서 NewPokemon 으로 리턴하기 전에 잠깐 사용
+fun Pokemon.toUi2(): NewPokemonUiModel =
+    NewPokemonUiModel(
+        id = id.toString(),
+        dexNumber = dexNumber,
+        name = name,
+        imageUrl = imageUrl,
+        types = types.toUi(),
+    )

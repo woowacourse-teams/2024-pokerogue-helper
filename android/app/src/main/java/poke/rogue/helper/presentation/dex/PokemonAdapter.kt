@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemPokemonListPokemonBinding
-import poke.rogue.helper.presentation.dex.model.PokemonUiModel
+import poke.rogue.helper.presentation.dex.model.NewPokemonUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class PokemonAdapter(private val onClickPokeMonItem: PokemonListNavigateHandler) :
-    ListAdapter<PokemonUiModel, PokemonViewHolder>(poketmonComparator) {
+    ListAdapter<NewPokemonUiModel, PokemonViewHolder>(poketmonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -31,7 +31,7 @@ class PokemonAdapter(private val onClickPokeMonItem: PokemonListNavigateHandler)
 
     companion object {
         val poketmonComparator =
-            ItemDiffCallback<PokemonUiModel>(
+            ItemDiffCallback<NewPokemonUiModel>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
