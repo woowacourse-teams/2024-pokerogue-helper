@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
-    private static final String MOVE_CATEGORY_LOGO_URL_FORMAT = "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/move-category/%s.png";
-
     private final WeatherRepository weatherRepository;
     private final MoveRepository moveRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
@@ -55,7 +53,8 @@ public class BattleService {
         PokemonType pokemonType = battlePokemonTypeRepository.findByName(move.type())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
         String typeLogo = pokemonType.image();
-        String categoryLogo = String.format(MOVE_CATEGORY_LOGO_URL_FORMAT, move.category().toLowerCase());
+        MoveCategory moveCategory = MoveCategory.findByName(move.category().toLowerCase());
+        String categoryLogo = moveCategory.getName();
         return MoveResponse.of(move, typeLogo, categoryLogo);
     }
 }
