@@ -106,6 +106,7 @@ class PokeChip @JvmOverloads constructor(
     private fun initPokeChip(chipSpec: PokeChipSpec) {
         removeAllViews()
         chipId = chipSpec.id
+        isSelected = chipSpec.isSelected
         val (leadingIconSize, leadingSpacing, labelSize, trailingSpacing, trailingIconSize) =
             chipSpec.sizes
 
@@ -124,7 +125,6 @@ class PokeChip @JvmOverloads constructor(
         )
         initColors(chipSpec.colors)
         initLayout(chipSpec.padding)
-        isSelected = chipSpec.isSelected
         setOnClickListener {
             chipSpec.onSelect?.invoke(chipId)
         }
@@ -160,6 +160,7 @@ class PokeChip @JvmOverloads constructor(
         this.label.layoutParams =
             LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         this.label.textSize = labelSize
+        this.label.paint.isFakeBoldText = isSelected
         if (label.isNotBlank()) {
             addView(this.label)
         }
