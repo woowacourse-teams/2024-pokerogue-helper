@@ -1,5 +1,6 @@
 package com.pokerogue.helper.battle;
 
+import com.pokerogue.external.s3.service.S3Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +28,8 @@ public class DataInitializer implements ApplicationRunner {
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
+    private final BattlePokemonTypeRepository battlePokemonTypeRepository;
+    private final S3Service s3Service;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -47,6 +50,10 @@ public class DataInitializer implements ApplicationRunner {
             pokemonMovesBySelfRepository.save(pokemonMovesBySelf);
             PokemonMovesByEgg pokemonMovesByEgg = createPokemonMovesByEgg(fields);
             pokemonMovesByEggRepository.save(pokemonMovesByEgg);
+        });
+        saveData("type.txt", fields -> {
+            PokemonType pokemonType = createPokemonType(fields);
+            battlePokemonTypeRepository.save(pokemonType);
         });
     }
 
@@ -130,6 +137,14 @@ public class DataInitializer implements ApplicationRunner {
                 .toList();
         return new PokemonMovesByEgg(pokedexNumber, moveIds);
     }
+
+    private PokemonType createPokemonType(List<String> fields) {
+        String name = fields.get(0);
+        String engName = fields.get(1);
+        String image = s3Service.getPokerogueTypeImageFromS3(engName);
+        return new PokemonType(name, engName, image);
+    }
+
 
     private Integer convertToInteger(String data) {
         try {

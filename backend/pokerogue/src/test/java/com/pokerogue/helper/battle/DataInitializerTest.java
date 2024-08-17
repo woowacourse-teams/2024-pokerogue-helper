@@ -3,6 +3,8 @@ package com.pokerogue.helper.battle;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import com.pokerogue.environment.client.FakeS3ImageClient;
+import com.pokerogue.external.s3.service.S3Service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.DefaultApplicationArguments;
@@ -17,12 +19,16 @@ class DataInitializerTest {
         PokemonMovesByMachineRepository pokemonMovesByMachineRepository = new PokemonMovesByMachineRepository();
         PokemonMovesBySelfRepository pokemonMovesBySelfRepository = new PokemonMovesBySelfRepository();
         PokemonMovesByEggRepository pokemonMovesByEggRepository = new PokemonMovesByEggRepository();
+        BattlePokemonTypeRepository battlePokemonTypeRepository = new BattlePokemonTypeRepository();
+        S3Service s3Service = new S3Service(new FakeS3ImageClient());
         DataInitializer dataInitializer = new DataInitializer(
                 weatherRepository,
                 moveRepository,
                 pokemonMovesByMachineRepository,
                 pokemonMovesBySelfRepository,
-                pokemonMovesByEggRepository
+                pokemonMovesByEggRepository,
+                battlePokemonTypeRepository,
+                s3Service
         );
         dataInitializer.run(new DefaultApplicationArguments());
 
@@ -32,6 +38,7 @@ class DataInitializerTest {
             assertThat(pokemonMovesByMachineRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesBySelfRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesByEggRepository.findAll()).hasSize(1082);
+            assertThat(battlePokemonTypeRepository.findAll()).hasSize(20);
         });
     }
 }
