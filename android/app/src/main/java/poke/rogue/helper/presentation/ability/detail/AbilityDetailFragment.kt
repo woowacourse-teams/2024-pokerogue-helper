@@ -108,9 +108,9 @@ class AbilityDetailFragment :
         private const val ABILITY_ID = "abilityId"
         private val TAG = AbilityDetailFragment::class.java.simpleName
 
-
-        fun bundleOf(abilityId: String) = Bundle().apply {
-            putString(ABILITY_ID, abilityId)
-        }
+        fun bundleOf(abilityId: String) =
+            Bundle().apply {
+                putString(ABILITY_ID, abilityId)
+            }
     }
 }

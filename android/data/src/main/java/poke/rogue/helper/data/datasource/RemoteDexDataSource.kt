@@ -6,7 +6,6 @@ import poke.rogue.helper.data.exception.getOrThrow
 import poke.rogue.helper.data.exception.onFailure
 import poke.rogue.helper.data.model.NewPokemon
 import poke.rogue.helper.data.model.NewPokemonDetail
-import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.data.model.toNewData
 import poke.rogue.helper.remote.injector.ServiceModule
@@ -46,4 +45,3 @@ class RemoteDexDataSource(
         }
     }
 }
-

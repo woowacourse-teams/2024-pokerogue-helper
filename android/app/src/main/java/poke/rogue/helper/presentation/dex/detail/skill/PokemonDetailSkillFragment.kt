@@ -80,4 +80,4 @@ fun NewSkill.toUi(): PokemonSkillUiModel =
         category = category.toUi(),
     )
 
-fun List<NewSkill>.toUi() : List<PokemonSkillUiModel> = map(NewSkill::toUi)
+fun List<NewSkill>.toUi(): List<PokemonSkillUiModel> = map(NewSkill::toUi)

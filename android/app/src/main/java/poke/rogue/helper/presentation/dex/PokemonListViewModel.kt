@@ -21,13 +21,11 @@ import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.PokeException
-import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.dex.model.NewPokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
-import poke.rogue.helper.presentation.type.model.toUi
 
 class PokemonListViewModel(
     private val pokemonListRepository: DexRepository,

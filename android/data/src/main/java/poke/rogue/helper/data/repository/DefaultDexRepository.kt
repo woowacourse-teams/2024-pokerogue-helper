@@ -3,7 +3,6 @@ package poke.rogue.helper.data.repository
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
 import poke.rogue.helper.data.model.NewPokemon
 import poke.rogue.helper.data.model.NewPokemonDetail
-import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.stringmatcher.has
 
 class DefaultDexRepository(
