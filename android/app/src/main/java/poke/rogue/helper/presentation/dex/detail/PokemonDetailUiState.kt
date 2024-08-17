@@ -3,7 +3,7 @@ package poke.rogue.helper.presentation.dex.detail
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.Stat
-import poke.rogue.helper.presentation.dex.model.NewAbilityUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonDetailUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.dex.model.toPokemonDetailUi
@@ -13,7 +13,7 @@ sealed interface PokemonDetailUiState {
     data class Success(
         val pokemon: PokemonUiModel,
         val stats: List<StatUiModel>,
-        val abilities: List<NewAbilityUiModel>,
+        val abilities: List<PokemonDetailUiModel>,
         val skills: PokemonDetailSkills,
         val height: Float,
         val weight: Float,

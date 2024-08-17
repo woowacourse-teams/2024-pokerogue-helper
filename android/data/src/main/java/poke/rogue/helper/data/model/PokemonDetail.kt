@@ -6,7 +6,7 @@ import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 data class PokemonDetail(
     val pokemon: Pokemon,
-    val abilities: List<NewAbility>,
+    val abilities: List<PokemonDetailAbility>,
     val stats: List<Stat>,
     val pokemonCategory: PokemonCategory,
     val evolutions: List<Evolution>,

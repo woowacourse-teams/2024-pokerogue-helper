@@ -2,7 +2,7 @@ package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
 
-data class NewAbility(
+data class PokemonDetailAbility(
     val id: String,
     val name: String,
     val description: String,
@@ -10,8 +10,8 @@ data class NewAbility(
     val hidden: Boolean,
 )
 
-fun AbilityResponse.toNewData(): NewAbility =
-    NewAbility(
+fun AbilityResponse.toNewData(): PokemonDetailAbility =
+    PokemonDetailAbility(
         id = id.toString(),
         name = title,
         description = description,
