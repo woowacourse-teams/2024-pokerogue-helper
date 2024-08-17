@@ -5,4 +5,13 @@ data class PokemonCategory(
     val subLegendary: Boolean,
     val mythical: Boolean,
     val canChangeForm: Boolean,
-)
+){
+    companion object {
+        val EMPTY = PokemonCategory(
+            legendary = false,
+            subLegendary = false,
+            mythical = false,
+            canChangeForm = false,
+        )
+    }
+}
