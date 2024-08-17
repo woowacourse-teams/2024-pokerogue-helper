@@ -2,7 +2,7 @@ package poke.rogue.helper.testing.data.repository
 
 import poke.rogue.helper.data.model.Ability
 import poke.rogue.helper.data.model.AbilityDetail
-import poke.rogue.helper.data.model.NewPokemon
+import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.stringmatcher.has
@@ -15,7 +15,7 @@ class FakeAbilityRepository : AbilityRepository {
             ability.title.has(query)
         }
 
-    override suspend fun abilityDetail(id: Long): AbilityDetail =
+    override suspend fun abilityDetail(id: String): AbilityDetail =
         ABILITY_DETAILS[id] ?: throw IllegalArgumentException("Invalid Ability Id")
 
     companion object {
@@ -55,15 +55,15 @@ class FakeAbilityRepository : AbilityRepository {
                 Ability("24", "불가사의부적", "효과가 굉장한 기술만 맞는 불가사의한 힘."),
             )
 
-        private val ABILITY_DETAILS: Map<Long, AbilityDetail> =
+        private val ABILITY_DETAILS: Map<String, AbilityDetail> =
             mapOf(
-                1L to
+                "1" to
                     AbilityDetail(
                         title = "악취",
                         description = "악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다.",
                         pokemons =
                             listOf(
-                                NewPokemon(
+                                Pokemon(
                                     id = "1",
                                     dexNumber = 1,
                                     name = "이상해씨",
@@ -72,13 +72,13 @@ class FakeAbilityRepository : AbilityRepository {
                                 ),
                             ),
                     ),
-                2L to
+                "2" to
                     AbilityDetail(
                         title = "잔비",
                         description = "등장했을 때 날씨를 비로 만든다.",
                         pokemons =
                             listOf(
-                                NewPokemon(
+                                Pokemon(
                                     id = "2",
                                     dexNumber = 2,
                                     name = "이상해풀",

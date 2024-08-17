@@ -6,7 +6,7 @@
 
         <variable
             name="pokemon"
-            type="poke.rogue.helper.presentation.dex.model.NewPokemonUiModel" />
+            type="poke.rogue.helper.presentation.dex.model.PokemonUiModel" />
 
         <variable
             name="listener"

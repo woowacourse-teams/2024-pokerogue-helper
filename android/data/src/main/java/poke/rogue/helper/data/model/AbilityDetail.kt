@@ -5,7 +5,7 @@ import poke.rogue.helper.remote.dto.response.ability.AbilityDetailResponse
 class AbilityDetail(
     val title: String,
     val description: String,
-    val pokemons: List<NewPokemon>,
+    val pokemons: List<Pokemon>,
 )
 
 fun AbilityDetailResponse.toData(): AbilityDetail =

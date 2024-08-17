@@ -5,7 +5,7 @@ import poke.rogue.helper.remote.dto.response.pokemon.PokemonDetailResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 data class NewPokemonDetail(
-    val pokemon: NewPokemon,
+    val pokemon: Pokemon,
     val abilities: List<NewAbility>,
     val stats: List<Stat>,
     val pokemonCategory: PokemonCategory,
@@ -19,7 +19,7 @@ data class NewPokemonDetail(
 fun PokemonDetailResponse.toNewData(id: Long): NewPokemonDetail =
     NewPokemonDetail(
         pokemon =
-            NewPokemon(
+            Pokemon(
                 id = id.toString(),
                 dexNumber = dexNumber,
                 name = name,

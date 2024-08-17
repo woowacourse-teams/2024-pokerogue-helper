@@ -4,8 +4,8 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.getOrThrow
 import poke.rogue.helper.data.exception.onFailure
-import poke.rogue.helper.data.model.NewPokemon
 import poke.rogue.helper.data.model.NewPokemonDetail
+import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.data.model.toNewData
 import poke.rogue.helper.remote.injector.ServiceModule
@@ -15,7 +15,7 @@ class RemoteDexDataSource(
     private val pokeDexService: PokeDexService,
     private val logger: AnalyticsLogger,
 ) {
-    suspend fun pokemons(): List<NewPokemon> =
+    suspend fun pokemons(): List<Pokemon> =
         pokeDexService.pokemons()
             .onFailure {
                 logger.logError(throwable, "pokeDexService - pokemons() 에서 발생")

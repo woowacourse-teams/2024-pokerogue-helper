@@ -4,14 +4,14 @@ import poke.rogue.helper.data.model.NewPokemonDetail
 import poke.rogue.helper.data.model.NewPokemonSkills
 import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.presentation.dex.model.NewAbilityUiModel
-import poke.rogue.helper.presentation.dex.model.NewPokemonUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.dex.model.toPokemonDetailUi
 import poke.rogue.helper.presentation.dex.model.toUi
 
 sealed interface PokemonDetailUiState {
     data class Success(
-        val pokemon: NewPokemonUiModel,
+        val pokemon: PokemonUiModel,
         val stats: List<StatUiModel>,
         val abilities: List<NewAbilityUiModel>,
         val skills: NewPokemonSkills,

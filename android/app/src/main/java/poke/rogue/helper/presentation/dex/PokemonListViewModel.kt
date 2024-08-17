@@ -24,7 +24,7 @@ import poke.rogue.helper.data.exception.PokeException
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.dex.model.NewPokemonUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 
 class PokemonListViewModel(
@@ -34,7 +34,7 @@ class PokemonListViewModel(
     private val searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    val uiState: StateFlow<List<NewPokemonUiModel>> =
+    val uiState: StateFlow<List<PokemonUiModel>> =
         merge(refreshEvent.map { "" }, searchQuery)
             .onStart {
                 if (isEmpty.value) {
@@ -64,7 +64,7 @@ class PokemonListViewModel(
     private val _navigateToDetailEvent = MutableSharedFlow<String>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
-    private suspend fun queriedPokemons(query: String): List<NewPokemonUiModel> {
+    private suspend fun queriedPokemons(query: String): List<PokemonUiModel> {
         return try {
             if (query.isEmpty()) {
                 pokemonListRepository.pokemons().toUi()

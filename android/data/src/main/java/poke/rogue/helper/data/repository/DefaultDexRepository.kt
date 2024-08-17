@@ -1,24 +1,24 @@
 package poke.rogue.helper.data.repository
 
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
-import poke.rogue.helper.data.model.NewPokemon
+import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.NewPokemonDetail
 import poke.rogue.helper.stringmatcher.has
 
 class DefaultDexRepository(
     private val dexDataSource: RemoteDexDataSource,
 ) : DexRepository {
-    private var cachedPokemons: List<NewPokemon> = emptyList()
+    private var cachedPokemons: List<Pokemon> = emptyList()
     private var cachedPokemonDetails: MutableMap<String, NewPokemonDetail> = mutableMapOf()
 
-    override suspend fun pokemons(): List<NewPokemon> {
+    override suspend fun pokemons(): List<Pokemon> {
         if (cachedPokemons.isEmpty()) {
             cachedPokemons = dexDataSource.pokemons()
         }
         return cachedPokemons
     }
 
-    override suspend fun pokemons(query: String): List<NewPokemon> {
+    override suspend fun pokemons(query: String): List<Pokemon> {
         if (query.isBlank()) {
             return pokemons()
         }

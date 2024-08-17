@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemAbilityDetailPokemonBinding
-import poke.rogue.helper.presentation.dex.model.NewPokemonUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class AbilityDetailAdapter(private val onClickPokemonItem: AbilityDetailUiEventHandler) :
-    ListAdapter<NewPokemonUiModel, AbilityDetailViewHolder>(poketmonComparator) {
+    ListAdapter<PokemonUiModel, AbilityDetailViewHolder>(poketmonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -31,7 +31,7 @@ class AbilityDetailAdapter(private val onClickPokemonItem: AbilityDetailUiEventH
 
     companion object {
         val poketmonComparator =
-            ItemDiffCallback<NewPokemonUiModel>(
+            ItemDiffCallback<PokemonUiModel>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
