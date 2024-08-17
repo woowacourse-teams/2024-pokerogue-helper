@@ -9,15 +9,15 @@ class BiomeDetailResponse(
     val id: String,
     val name: String,
     val image: String,
-    val wildPokemons: List<WildPokemon>,
-    val bossPokemons: List<BossPokemon>,
+    val wildPokemons: List<WildPokemonResponse>,
+    val bossPokemons: List<BossPokemonResponse>,
     @SerialName("trainerPokemons")
-    val gymPokemons: List<GymPokemon>,
-    val map: List<Map>
+    val gymPokemons: List<GymPokemonResponse>,
+    val map: List<MapResponse>
 )
 
 @Serializable
-data class biomePokemon(
+data class BiomePokemonResponse(
     val name: String,
     val image: String,
     @SerialName("pokemonTypeResponses")
@@ -25,31 +25,30 @@ data class biomePokemon(
 )
 
 @Serializable
-data class WildPokemon(
+data class WildPokemonResponse(
     val tier: String,
-    val pokemons: List<biomePokemon>
+    val pokemons: List<BiomePokemonResponse>
 )
 
 @Serializable
-data class BossPokemon(
+data class BossPokemonResponse(
     val tier: String,
-    val pokemons: List<biomePokemon>
+    val pokemons: List<BiomePokemonResponse>
 )
 
-
 @Serializable
-data class GymPokemon(
+data class GymPokemonResponse(
     @SerialName("trainerName")
     val gymLeaderName: String,
     @SerialName("trainerImage")
     val gymLeaderImage: String,
     @SerialName("trainerTypeLogos")
     val gymLeaderLogos: List<String>,
-    val pokemons: List<biomePokemon>
+    val pokemons: List<BiomePokemonResponse>
 )
 
 @Serializable
-data class Map(
+data class MapResponse(
     val id: String,
     val name: String,
     val image: String,
