@@ -4,7 +4,7 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.getOrThrow
 import poke.rogue.helper.data.exception.onFailure
-import poke.rogue.helper.data.model.NewPokemonDetail
+import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.data.model.toNewData
@@ -24,7 +24,7 @@ class RemoteDexDataSource(
             .toData()
 
     // TODO: Long 제거?
-    suspend fun pokemon(id: String): NewPokemonDetail =
+    suspend fun pokemon(id: String): PokemonDetail =
         pokeDexService.pokemon(id.toLong())
             .onFailure {
                 logger.logError(throwable, "pokeDexService - pokemon($id) 에서 발생")

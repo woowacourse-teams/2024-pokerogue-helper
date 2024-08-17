@@ -1,6 +1,6 @@
 package poke.rogue.helper.data.repository
 
-import poke.rogue.helper.data.model.NewPokemonDetail
+import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.Pokemon
 
 interface DexRepository {
@@ -8,5 +8,5 @@ interface DexRepository {
 
     suspend fun pokemons(query: String): List<Pokemon>
 
-    suspend fun pokemonDetail(id: String): NewPokemonDetail
+    suspend fun pokemonDetail(id: String): PokemonDetail
 }
