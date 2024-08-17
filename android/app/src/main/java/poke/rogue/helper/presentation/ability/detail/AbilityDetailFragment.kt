@@ -34,8 +34,8 @@ class AbilityDetailFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val id = arguments?.getLong(ABILITY_ID) ?: INVALID_ABILITY_ID
-        viewModel.updateAbilityDetail(id)
+        val abilityId = arguments?.getString(ABILITY_ID).toString()
+        viewModel.updateAbilityDetail(abilityId)
     }
 
     override fun onViewCreated(
@@ -106,15 +106,8 @@ class AbilityDetailFragment :
 
     companion object {
         private const val ABILITY_ID = "abilityId"
-        private const val CONTAINER_ID = "containerId"
-        private const val INVALID_ABILITY_ID = -1L
-        private const val INVALID_CONTAINER_ID = -1
         private val TAG = AbilityDetailFragment::class.java.simpleName
 
-        fun bundleOf(abilityId: Long) =
-            Bundle().apply {
-                putLong(ABILITY_ID, abilityId)
-            }
 
         fun bundleOf(abilityId: String) = Bundle().apply {
             putString(ABILITY_ID, abilityId)

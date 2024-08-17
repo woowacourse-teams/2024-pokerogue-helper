@@ -54,8 +54,8 @@ class AbilityDetailViewModel(
         }
     }
 
-    fun updateAbilityDetail(abilityId: Long) {
-        if (abilityId == -1L) {
+    fun updateAbilityDetail(abilityId: String) {
+        if (abilityId.isBlank()) {
             _errorEvent.tryEmit(Unit)
             return
         }

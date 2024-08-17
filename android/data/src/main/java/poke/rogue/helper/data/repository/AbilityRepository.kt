@@ -8,5 +8,5 @@ interface AbilityRepository {
 
     suspend fun abilities(query: String): List<Ability>
 
-    suspend fun abilityDetail(id: Long): AbilityDetail
+    suspend fun abilityDetail(id: String): AbilityDetail
 }
