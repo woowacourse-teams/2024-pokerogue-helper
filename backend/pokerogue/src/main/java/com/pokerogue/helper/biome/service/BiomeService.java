@@ -8,6 +8,8 @@ import com.pokerogue.helper.biome.dto.BiomeResponse2;
 import com.pokerogue.helper.biome.dto.NextBiomeResponse;
 import com.pokerogue.helper.biome.dto.TrainerPokemonResponse;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +28,8 @@ public class BiomeService {
     }
 
     public BiomeResponse2 findBiome(String id) {
-        Biome biome = biomeRepository.findById(id);
+        Biome biome = biomeRepository.findById(id)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
         return BiomeResponse2.of(
                 biome,
                 getWildPokemons(biome),
@@ -59,7 +62,8 @@ public class BiomeService {
 
     private List<NextBiomeResponse> getNextBiomes(Biome biome) {
         return biome.getNextBiome().stream()
-                .map(id -> new NextBiomeResponse(id, biomeRepository.findById(id).getName()))
+                .map(id -> new NextBiomeResponse(id, biomeRepository.findById(id)
+                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND)).getName()))
                 .toList();
     }
 }
