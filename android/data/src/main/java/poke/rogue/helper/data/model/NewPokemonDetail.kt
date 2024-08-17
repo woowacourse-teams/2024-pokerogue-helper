@@ -41,9 +41,9 @@ fun PokemonDetailResponse.toNewData(id: Long): NewPokemonDetail =
         evolutions = emptyList(),
         skills =
             NewPokemonSkills(
-                selfLearn = NewSkill.FAKE_SELF_LEARN_SKILLS,
-                tmLearn = NewSkill.FAKE_SELF_LEARN_SKILLS,
-                eggLearn = NewSkill.FAKE_EGG_LEARN_SKILLS,
+                selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                tmLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
             ),
         biomes = Biome.DUMMYS,
         height = height.toDouble(),

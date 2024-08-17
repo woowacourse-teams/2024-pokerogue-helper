@@ -6,7 +6,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.android.material.divider.MaterialDividerItemDecoration.VERTICAL
 import poke.rogue.helper.R
-import poke.rogue.helper.data.model.NewSkill
+import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.databinding.FragmentPokemonSkillsBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
@@ -69,15 +69,15 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
 }
 
 // TODO: skill 을 현재는 한 종류의 스킬 목록만 사용하고 있음..... 이후에는 여러개의 스킬을 받아야함
-fun NewSkill.toUi(): PokemonSkillUiModel =
+fun PokemonSkill.toUi(): PokemonSkillUiModel =
     PokemonSkillUiModel(
         id = id,
         name = name,
         level = level,
-        power = if (power == NewSkill.NO_POWER_VALUE) PokemonSkillUiModel.NO_POWER else power.toString(),
+        power = if (power == PokemonSkill.NO_POWER_VALUE) PokemonSkillUiModel.NO_POWER else power.toString(),
         type = type.toUi(),
         accuracy = accuracy,
         category = category.toUi(),
     )
 
-fun List<NewSkill>.toUi(): List<PokemonSkillUiModel> = map(NewSkill::toUi)
+fun List<PokemonSkill>.toUi(): List<PokemonSkillUiModel> = map(PokemonSkill::toUi)

@@ -1,7 +1,7 @@
 package poke.rogue.helper.data.model
 
 data class NewPokemonSkills(
-    val selfLearn: List<NewSkill>,
-    val eggLearn: List<NewSkill>,
-    val tmLearn: List<NewSkill>,
+    val selfLearn: List<PokemonSkill>,
+    val eggLearn: List<PokemonSkill>,
+    val tmLearn: List<PokemonSkill>,
 )
