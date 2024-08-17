@@ -7,6 +7,8 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBattleSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.setImage
 
 class BattleSelectionActivity :
     ErrorHandleActivity<ActivityBattleSelectionBinding>(R.layout.activity_battle_selection) {
@@ -23,10 +25,23 @@ class BattleSelectionActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding.lifecycleOwner = this
         initViews()
+        initObserver()
     }
 
     private fun initViews() {
         binding.pagerBattleSelection.adapter = selectionPagerAdapter
+    }
+
+    private fun initObserver() {
+        repeatOnStarted {
+            viewModel.selectedPokemon.collect {
+                it?.let {
+                    binding.ivPokemon.setImage(it.frontImageUrl)
+                    binding.toolbarBattleSelection.title = it.name
+                }
+            }
+        }
     }
 }

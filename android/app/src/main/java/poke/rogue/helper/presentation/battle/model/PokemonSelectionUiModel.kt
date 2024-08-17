@@ -49,6 +49,14 @@ data class PokemonSelectionUiModel(
                     backImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png",
                     types = listOf(TypeUiModel.ELECTRIC),
                 ),
+                PokemonSelectionUiModel(
+                    id = "Charizard",
+                    dexNumber = 6,
+                    name = "리자몽",
+                    frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+                    backImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/6.png",
+                    types = listOf(TypeUiModel.FIRE, TypeUiModel.FLYING),
+                ),
             )
     }
 }
