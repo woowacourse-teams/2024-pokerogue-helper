@@ -1,4 +1,4 @@
-package poke.rogue.helper.component
+package poke.rogue.helper.ui.component
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -18,10 +18,13 @@ import androidx.annotation.Dimension.Companion.DP
 import androidx.annotation.Dimension.Companion.PX
 import androidx.annotation.DrawableRes
 import androidx.core.content.res.use
+import androidx.core.graphics.ColorUtils
 import androidx.databinding.BindingAdapter
 import poke.rogue.helper.R
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.ui.layout.PaddingValues
+import poke.rogue.helper.ui.layout.applyTo
 
 class PokeChip @JvmOverloads constructor(
     context: Context,
@@ -80,9 +83,14 @@ class PokeChip @JvmOverloads constructor(
                     context.colorOf(R.color.poke_chip_background_selected)
                 )
                 // init views
-                initLeadingIcon(leadingIcon, leadingIconSize, leadingSpacing)
+                initLeadingIcon(leadingIcon, leadingIconSize, leadingSpacing, label.isNotBlank())
                 initLabel(label, labelSize)
-                initTrailingIcon(trailingIcon, trailingIconSize, trailingSpacing)
+                initTrailingIcon(
+                    trailingIcon,
+                    trailingIconSize,
+                    trailingSpacing,
+                    label.isNotBlank()
+                )
                 initDrawableBackground(
                     containerColor,
                     selectedContainerColor,
@@ -92,6 +100,33 @@ class PokeChip @JvmOverloads constructor(
                 initLabelColor(labelColor, selectedLabelColor)
                 initLayout()
             }
+        }
+    }
+
+    private fun initPokeChip(chipSpec: PokeChipSpec) {
+        removeAllViews()
+        chipId = chipSpec.id
+        val (leadingIconSize, leadingSpacing, labelSize, trailingSpacing, trailingIconSize) =
+            chipSpec.sizes
+
+        initLeadingIcon(
+            chipSpec.leadingIconRes ?: NO_ICON,
+            leadingIconSize,
+            leadingSpacing,
+            chipSpec.label.isNotBlank()
+        )
+        initLabel(chipSpec.label, labelSize.toFloat())
+        initTrailingIcon(
+            chipSpec.trailingIconRes ?: NO_ICON,
+            trailingIconSize,
+            trailingSpacing,
+            chipSpec.label.isNotBlank()
+        )
+        initColors(chipSpec.colors)
+        initLayout(chipSpec.padding)
+        isSelected = chipSpec.isSelected
+        setOnClickListener {
+            chipSpec.onSelect?.invoke(chipId)
         }
     }
 
@@ -105,14 +140,15 @@ class PokeChip @JvmOverloads constructor(
     private fun initLeadingIcon(
         @DrawableRes leadingIconRes: Int,
         @Dimension(DP) leadingIconSize: Int,
-        @Dimension(DP) leadingSpacing: Int
+        @Dimension(DP) leadingSpacing: Int,
+        hasLabel: Boolean
     ) {
         leadingIcon.setImageResource(leadingIconRes)
         leadingIcon.layoutParams = LayoutParams(leadingIconSize, leadingIconSize)
         leadingSpacer.layoutParams = LayoutParams(leadingSpacing, LayoutParams.WRAP_CONTENT)
         if (leadingIconRes != NO_ICON) {
             addView(leadingIcon)
-            addView(leadingSpacer)
+            if (hasLabel) addView(leadingSpacer)
         }
     }
 
@@ -132,20 +168,15 @@ class PokeChip @JvmOverloads constructor(
     private fun initTrailingIcon(
         @DrawableRes trailingIconRes: Int,
         @Dimension(DP) trailingIconSize: Int,
-        @Dimension(DP) trailingSpacing: Int
+        @Dimension(DP) trailingSpacing: Int,
+        hasLabel: Boolean,
     ) {
         trailingIcon.setImageResource(trailingIconRes)
         trailingIcon.layoutParams = LayoutParams(trailingIconSize, trailingIconSize)
         trailingSpacer.layoutParams = LayoutParams(trailingSpacing, LayoutParams.WRAP_CONTENT)
         if (trailingIconRes != NO_ICON) {
-            addView(trailingSpacer)
+            if (hasLabel) addView(trailingSpacer)
             addView(trailingIcon)
-        }
-    }
-
-    private fun setupListeners() {
-        this.setOnClickListener {
-            isSelected = !isSelected
         }
     }
 
@@ -194,7 +225,7 @@ class PokeChip @JvmOverloads constructor(
             addState(states[0], selectedDrawable)
             addState(states[1], unSelectedDrawable)
         }
-        val rippleColor = context.colorOf(R.color.poke_grey_60)
+        val rippleColor = ColorUtils.setAlphaComponent(selectedContainerColor, 128)
         this.background = RippleDrawable(
             ColorStateList.valueOf(rippleColor),
             stateListDrawable,
@@ -219,20 +250,6 @@ class PokeChip @JvmOverloads constructor(
         label.setTextColor(textColorList)
     }
 
-    fun setChipSpec(chipSpec: PokeChipSpec) {
-        removeAllViews()
-        chipId = chipSpec.id
-        val (leadingIconSize, leadingSpacing, labelSize, trailingSpacing, trailingIconSize) =
-            chipSpec.sizes
-
-        initLeadingIcon(chipSpec.leadingIconRes ?: NO_ICON, leadingIconSize, leadingSpacing)
-        initLabel(chipSpec.label, labelSize.toFloat())
-        initTrailingIcon(chipSpec.trailingIconRes ?: NO_ICON, trailingIconSize, trailingSpacing)
-        initColors(chipSpec.colors)
-        initLayout(chipSpec.padding)
-        isSelected = chipSpec.isSelected
-    }
-
     data class PokeChipSpec(
         val id: Int,
         val label: String,
@@ -241,7 +258,8 @@ class PokeChip @JvmOverloads constructor(
         val colors: PokeChipColors = PokeChipColors(),
         val sizes: PokeChipSizes = PokeChipSizes(),
         val padding: PaddingValues = PaddingValues(8.dp),
-        val isSelected: Boolean = false
+        val isSelected: Boolean = false,
+        val onSelect: ((chipId: Int) -> Unit)? = null
     ) {
         init {
             require(leadingIconRes != null || label.isNotBlank()) {
@@ -266,7 +284,7 @@ class PokeChip @JvmOverloads constructor(
         @JvmStatic
         @BindingAdapter("pokeChipSpec")
         fun PokeChip.bindPokeChip(chipSpec: PokeChipSpec) {
-            setChipSpec(chipSpec)
+            initPokeChip(chipSpec)
         }
     }
 

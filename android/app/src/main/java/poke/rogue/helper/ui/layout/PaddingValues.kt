@@ -1,4 +1,4 @@
-package poke.rogue.helper.component
+package poke.rogue.helper.ui.layout
 
 import android.view.View
 import androidx.annotation.Dimension

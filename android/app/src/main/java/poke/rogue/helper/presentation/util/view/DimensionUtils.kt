@@ -4,6 +4,8 @@ import android.content.res.Resources
 
 val density = Resources.getSystem().displayMetrics.density
 
+// TODO : move to ui/unit/Dimension.kt
+
 val Int.dp
     get(): Int = (density * this).toInt()
 

@@ -1,4 +1,4 @@
-package poke.rogue.helper.component
+package poke.rogue.helper.ui.component
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -17,6 +17,7 @@ import com.google.android.flexbox.JustifyContent
 import poke.rogue.helper.R
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.ui.component.PokeChip.Companion.bindPokeChip
 
 class PokeChipGroup @JvmOverloads constructor(
     context: Context,
@@ -55,38 +56,44 @@ class PokeChipGroup @JvmOverloads constructor(
     }
 
     fun submitList(
-        specs: List<PokeChip.PokeChipSpec>
+        specs: List<PokeChip.PokeChipSpec>,
+        onSelect: ((chipId: Int) -> Unit)? = null
     ) {
         if (chipViews.isEmpty()) {
-            addChips(specs)
+            addChips(specs, onSelect)
         } else {
             updateChips(specs)
         }
     }
 
     private fun addChips(
-        specs: List<PokeChip.PokeChipSpec>
+        specs: List<PokeChip.PokeChipSpec>,
+        onSelect: ((chipId: Int) -> Unit)?
     ) {
         removeAllViews()
         chipViews.clear()
         specs.forEach { spec ->
-            addChip(spec, chipViews.toList())
+            addChip(spec, chipViews.toList(), onSelect)
         }
     }
 
     private fun addChip(
         spec: PokeChip.PokeChipSpec,
-        originalChipViews: List<PokeChip>
+        originalChipViews: List<PokeChip>,
+        onSelect: ((chipId: Int) -> Unit)?
     ) {
         require(originalChipViews.any { it.chipId == spec.id }.not()) {
             "id=${spec.id}인 chip이 이미 존재합니다."
         }
         val chip = PokeChip(context)
+        onSelect?.let {
+            chip.setOnClickListener { onSelect(spec.id) }
+        }
         chip.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
-        chip.setChipSpec(spec)
+        chip.bindPokeChip(spec)
         addView(chip)
         val spacer = Space(context)
         spacer.layoutParams = LinearLayout.LayoutParams(itemSpacing, itemSpacing)
@@ -100,7 +107,7 @@ class PokeChipGroup @JvmOverloads constructor(
         }
 
         specs.forEach { spec ->
-            chipViews.find { it.chipId == spec.id }?.setChipSpec(spec)
+            chipViews.find { it.chipId == spec.id }?.bindPokeChip(spec)
         }
     }
 
@@ -123,14 +130,6 @@ class PokeChipGroup @JvmOverloads constructor(
             require(lineSpacing >= 0) {
                 "line 사이 간격은 0 이상이어야 합니다."
             }
-        }
-
-        companion object {
-            val DEFAULT = PokeChipGroupSpec(
-                direction = PokeChipGroupDirection.ROW,
-                itemSpacing = 8.dp,
-                lineSpacing = 8.dp
-            )
         }
     }
 

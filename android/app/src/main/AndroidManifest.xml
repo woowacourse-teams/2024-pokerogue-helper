@@ -18,7 +18,7 @@
         android:theme="@style/Theme.PokeRogueHelper"
         tools:targetApi="31">
         <activity
-            android:name=".component.MainActivity"
+            android:name=".ui.component.MainActivity"
             android:exported="true" />
         <activity
             android:name=".presentation.tip.TipActivity"
