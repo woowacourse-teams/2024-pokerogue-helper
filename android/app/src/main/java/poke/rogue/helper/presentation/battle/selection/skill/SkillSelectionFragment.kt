@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
-import kotlinx.coroutines.flow.collect
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentSkillSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
+import poke.rogue.helper.presentation.battle.selection.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
@@ -54,8 +54,11 @@ class SkillSelectionFragment :
         }
 
         repeatOnStarted {
-            sharedViewModel.selectedSkill.collect {
-                it?.let { skillAdapter.updateSelectedSkill(it.id) }
+            sharedViewModel.selectedSkill.collect { selectionState ->
+                if (selectionState is BattleSelectionUiState.Selected) {
+                    val selected = selectionState.selected
+                    skillAdapter.updateSelectedSkill(selected.id)
+                }
             }
         }
     }

@@ -25,22 +25,31 @@ class BattleSelectionActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.lifecycleOwner = this
         initViews()
         initObserver()
     }
 
     private fun initViews() {
+        binding.lifecycleOwner = this
+        binding.vm = viewModel
         binding.pagerBattleSelection.adapter = selectionPagerAdapter
+        binding.pagerBattleSelection.isUserInputEnabled = false
     }
 
     private fun initObserver() {
         repeatOnStarted {
-            viewModel.selectedPokemon.collect {
-                it?.let {
-                    binding.ivPokemon.setImage(it.frontImageUrl)
-                    binding.toolbarBattleSelection.title = it.name
+            viewModel.selectedPokemon.collect { selectionState ->
+                if (selectionState is BattleSelectionUiState.Selected) {
+                    val selected = selectionState.selected
+                    binding.ivPokemon.setImage(selected.frontImageUrl)
+                    binding.toolbarBattleSelection.title = selected.name
                 }
+            }
+        }
+
+        repeatOnStarted {
+            viewModel.currentStep.collect {
+                binding.pagerBattleSelection.currentItem = it.ordinal
             }
         }
     }

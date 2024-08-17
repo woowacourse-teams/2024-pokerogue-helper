@@ -8,6 +8,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.battle.selection.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
@@ -52,8 +53,11 @@ class PokemonSelectionFragment :
         }
 
         repeatOnStarted {
-            sharedViewModel.selectedPokemon.collect {
-                it?.let { pokemonAdapter.updateSelectedPokemon(it.id) }
+            sharedViewModel.selectedPokemon.collect { selectionState ->
+                if (selectionState is BattleSelectionUiState.Selected) {
+                    val selected = selectionState.selected
+                    pokemonAdapter.updateSelectedPokemon(selected.id)
+                }
             }
         }
     }
