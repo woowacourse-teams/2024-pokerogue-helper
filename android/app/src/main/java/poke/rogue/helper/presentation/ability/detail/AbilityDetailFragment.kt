@@ -115,5 +115,9 @@ class AbilityDetailFragment :
             Bundle().apply {
                 putLong(ABILITY_ID, abilityId)
             }
+
+        fun bundleOf(abilityId: String) = Bundle().apply {
+            putString(ABILITY_ID, abilityId)
+        }
     }
 }

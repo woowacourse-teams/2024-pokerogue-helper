@@ -50,5 +50,9 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
             Intent(context, AbilityActivity::class.java).apply {
                 putExtra(ABILITY_ID, abilityId)
             }
+
+        fun intent(context: Context, abilityId: String): Intent = Intent(context, AbilityActivity::class.java).apply {
+            putExtra(ABILITY_ID, abilityId)
+        }
     }
 }

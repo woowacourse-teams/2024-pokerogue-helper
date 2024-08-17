@@ -105,7 +105,7 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
 
 private fun NewAbilityUiModel.toUi(): AbilityTitleUiModel =
     AbilityTitleUiModel(
-        id = id.toLong(),
+        id = id,
         name = name,
     )
 
