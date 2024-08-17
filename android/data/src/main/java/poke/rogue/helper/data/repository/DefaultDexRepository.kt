@@ -2,6 +2,7 @@ package poke.rogue.helper.data.repository
 
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
 import poke.rogue.helper.data.model.NewPokemon
+import poke.rogue.helper.data.model.NewPokemonDetail
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.stringmatcher.has
 
@@ -9,7 +10,7 @@ class DefaultDexRepository(
     private val dexDataSource: RemoteDexDataSource,
 ) : DexRepository {
     private var cachedPokemons: List<NewPokemon> = emptyList()
-    private var cachedPokemonDetails: MutableMap<Long, PokemonDetail> = mutableMapOf()
+    private var cachedPokemonDetails: MutableMap<String, NewPokemonDetail> = mutableMapOf()
 
     override suspend fun pokemons(): List<NewPokemon> {
         if (cachedPokemons.isEmpty()) {
@@ -25,7 +26,7 @@ class DefaultDexRepository(
         return pokemons().filter { it.name.has(query) }
     }
 
-    override suspend fun pokemonDetail(id: Long): PokemonDetail {
+    override suspend fun pokemonDetail(id: String): NewPokemonDetail {
         val cached = cachedPokemonDetails[id]
         if (cached != null) {
             return cached
