@@ -34,7 +34,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.updatePokemonDetail(intent.getLongExtra(POKEMON_ID, 2606))
+        viewModel.updatePokemonDetail(intent.getStringExtra(POKEMON_ID).toString())
 
         binding.eventHandler = viewModel
         binding.lifecycleOwner = this
@@ -143,7 +143,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
         fun intent(
             context: Context,
-            pokemonId: Long,
+            pokemonId: String,
         ): Intent =
             Intent(context, PokemonDetailActivity::class.java).apply {
                 putExtra(POKEMON_ID, pokemonId)

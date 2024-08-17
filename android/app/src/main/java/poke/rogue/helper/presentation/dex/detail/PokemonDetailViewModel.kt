@@ -41,7 +41,7 @@ class PokemonDetailViewModel(
     private val _navigateToHomeEvent = MutableSharedFlow<Boolean>()
     val navigateToHomeEvent = _navigateToHomeEvent.asSharedFlow()
 
-    fun updatePokemonDetail(pokemonId: Long?) {
+    fun updatePokemonDetail(pokemonId: String) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch(errorHandler) {
             _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
