@@ -5,6 +5,7 @@ import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonGeneration
+import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.data.model.PokemonSort
 import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.data.model.Type
@@ -17,31 +18,27 @@ class FakeDexRepository : DexRepository {
     override suspend fun filteredPokemons(
         name: String,
         sort: PokemonSort,
-        filter: PokemonFilter,
+        filters: List<PokemonFilter>,
     ): List<Pokemon> {
         return if (name.isEmpty()) {
             pokemons()
         } else {
             pokemons().filter { it.name.has(name) }
-        }.toFilteredPokemons(sort, filter)
+        }.toFilteredPokemons(sort, filters)
     }
 
     override suspend fun pokemonDetail(id: Long): PokemonDetail = DUMMY_POKEMON_DETAIL
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
-        filter: PokemonFilter,
+        filters: List<PokemonFilter>,
     ): List<Pokemon> {
         return this
-            .filter {
-                when (filter) {
-                    is PokemonFilter.ByAll -> true
-                    is PokemonFilter.ByType -> {
-                        it.types.contains(filter.type)
-                    }
-
-                    is PokemonFilter.ByGeneration -> {
-                        it.generation == filter.generation
+            .filter { pokemon ->
+                filters.all { filter ->
+                    when (filter) {
+                        is PokemonFilter.ByType -> pokemon.types.contains(filter.type)
+                        is PokemonFilter.ByGeneration -> pokemon.generation == filter.generation
                     }
                 }
             }
@@ -229,6 +226,7 @@ class FakeDexRepository : DexRepository {
                         Ability(450, "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다."),
                         Ability(419, "엽록소", description = "날씨가 맑을 때 스피드가 올라간다."),
                     ),
+                skills = PokemonSkill.FAKE_SKILLS,
                 height = 0.7f,
                 weight = 6.9f,
             )

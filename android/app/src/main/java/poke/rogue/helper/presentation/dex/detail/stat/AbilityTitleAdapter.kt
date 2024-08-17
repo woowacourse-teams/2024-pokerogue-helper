@@ -1,9 +1,10 @@
-package poke.rogue.helper.presentation.dex.detail
+package poke.rogue.helper.presentation.dex.detail.stat
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemAbilityTitleBinding
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 

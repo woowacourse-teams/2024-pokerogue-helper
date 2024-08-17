@@ -37,7 +37,7 @@ class FakeDexRepositoryTest {
             // given
             val type = Type.FIRE
             // when
-            val actual = repository.filteredPokemons(filter = PokemonFilter.ByType(type))
+            val actual = repository.filteredPokemons(filters = listOf(PokemonFilter.ByType(type)))
             // then
             val expect = repository.pokemons().filter { it.types.contains(type) }
             actual shouldBe expect
@@ -50,7 +50,8 @@ class FakeDexRepositoryTest {
             // given
             val generation = PokemonGeneration.of(3)
             // when
-            val actual = repository.filteredPokemons(filter = PokemonFilter.ByGeneration(generation))
+            val actual =
+                repository.filteredPokemons(filters = listOf(PokemonFilter.ByGeneration(generation)))
             // then
             val expect = repository.pokemons().filter { it.generation == generation }
             actual shouldBe expect
@@ -85,13 +86,39 @@ class FakeDexRepositoryTest {
             val actual =
                 repository.filteredPokemons(
                     name = name,
-                    filter = PokemonFilter.ByGeneration(generation),
+                    filters =
+                        listOf(
+                            PokemonFilter.ByGeneration(generation),
+                        ),
                 )
             // then
             val expect =
                 repository.pokemons()
                     .filter { it.name.has("ㄹㅈ") }
                     .filter { it.generation == generation }
+            actual shouldBe expect
+            actual shouldNotBe repository.pokemons()
+        }
+
+    @Test
+    fun `불 속성 타입과 1세대에 해당하는 포켓몬을 가져온다`() =
+        runTest {
+            // given
+            val generation = PokemonGeneration.of(1)
+            // when
+            val actual =
+                repository.filteredPokemons(
+                    filters =
+                        listOf(
+                            PokemonFilter.ByGeneration(generation),
+                            PokemonFilter.ByType(Type.FIRE),
+                        ),
+                )
+            // then
+            val expect =
+                repository.pokemons()
+                    .filter { it.generation == generation }
+                    .filter { it.types.contains(Type.FIRE) }
             actual shouldBe expect
             actual shouldNotBe repository.pokemons()
         }
