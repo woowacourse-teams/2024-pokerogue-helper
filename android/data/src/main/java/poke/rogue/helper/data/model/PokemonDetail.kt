@@ -16,7 +16,8 @@ data class PokemonDetail(
     val weight: Double,
 )
 
-fun PokemonDetailResponse.toNewData(id: Long): PokemonDetail =
+// TODO: 서버에서 String 으로 주면 id: Long -> id.String() 으로 변경
+fun PokemonDetailResponse.toData(id: Long): PokemonDetail =
     PokemonDetail(
         pokemon =
             Pokemon(

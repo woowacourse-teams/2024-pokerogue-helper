@@ -7,7 +7,6 @@ import poke.rogue.helper.data.exception.onFailure
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.toData
-import poke.rogue.helper.data.model.toNewData
 import poke.rogue.helper.remote.injector.ServiceModule
 import poke.rogue.helper.remote.service.PokeDexService
 
@@ -30,7 +29,7 @@ class RemoteDexDataSource(
                 logger.logError(throwable, "pokeDexService - pokemon($id) 에서 발생")
             }
             .getOrThrow()
-            .toNewData(id.toLong())
+            .toData(id.toLong())
 
     companion object {
         private var instance: RemoteDexDataSource? = null
