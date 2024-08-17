@@ -2,7 +2,6 @@ package poke.rogue.helper.data.repository
 
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
 import poke.rogue.helper.data.model.NewPokemon
-import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.stringmatcher.has
 
@@ -14,7 +13,7 @@ class DefaultDexRepository(
 
     override suspend fun pokemons(): List<NewPokemon> {
         if (cachedPokemons.isEmpty()) {
-            cachedPokemons = dexDataSource.pokemons().toNew()
+            cachedPokemons = dexDataSource.pokemons()
         }
         return cachedPokemons
     }
@@ -47,16 +46,3 @@ class DefaultDexRepository(
         }
     }
 }
-
-// TODO: 리턴을 NewPokemon 으로 변경
-fun Pokemon.toNew(): NewPokemon =
-    NewPokemon(
-        id = id.toString(),
-        dexNumber = dexNumber,
-        name = name,
-        imageUrl = imageUrl,
-        types = types,
-    )
-
-fun List<Pokemon>.toNew(): List<NewPokemon> = map(Pokemon::toNew)
-

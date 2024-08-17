@@ -27,13 +27,14 @@ data class Pokemon(
     }
 }
 
-fun PokemonResponse.toData(): Pokemon =
-    Pokemon(
-        id = id,
-        dexNumber = pokedexNumber,
-        name = name,
-        imageUrl = image,
-        types = types.map(PokemonTypeResponse::toData),
-    )
-
-fun List<PokemonResponse>.toData(): List<Pokemon> = map(PokemonResponse::toData)
+// TODO: test 지금 터질 거임 제거하고 수정
+//fun PokemonResponse.toData(): Pokemon =
+//    Pokemon(
+//        id = id,
+//        dexNumber = pokedexNumber,
+//        name = name,
+//        imageUrl = image,
+//        types = types.map(PokemonTypeResponse::toData),
+//    )
+//
+//fun List<PokemonResponse>.toData(): List<Pokemon> = map(PokemonResponse::toData)
