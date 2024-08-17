@@ -2,7 +2,7 @@ package poke.rogue.helper.testing.data.repository
 
 import poke.rogue.helper.data.model.Ability
 import poke.rogue.helper.data.model.AbilityDetail
-import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.NewPokemon
 import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.AbilityRepository
 import poke.rogue.helper.stringmatcher.has
@@ -63,8 +63,8 @@ class FakeAbilityRepository : AbilityRepository {
                         description = "악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다.",
                         pokemons =
                             listOf(
-                                Pokemon(
-                                    id = 1,
+                                NewPokemon(
+                                    id = "1",
                                     dexNumber = 1,
                                     name = "이상해씨",
                                     imageUrl = pokemonImageUrl(pokemonId = 1),
@@ -78,8 +78,8 @@ class FakeAbilityRepository : AbilityRepository {
                         description = "등장했을 때 날씨를 비로 만든다.",
                         pokemons =
                             listOf(
-                                Pokemon(
-                                    id = 2,
+                                NewPokemon(
+                                    id = "2",
                                     dexNumber = 2,
                                     name = "이상해풀",
                                     imageUrl = pokemonImageUrl(pokemonId = 2),

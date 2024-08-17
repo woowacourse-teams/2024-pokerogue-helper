@@ -1,13 +1,13 @@
 package poke.rogue.helper.presentation.ability.model
 
 import poke.rogue.helper.data.model.AbilityDetail
-import poke.rogue.helper.presentation.dex.model.PokemonUiModel
+import poke.rogue.helper.presentation.dex.model.NewPokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 
 class AbilityDetailUiModel(
     val title: String,
     val description: String,
-    val pokemons: List<PokemonUiModel>,
+    val pokemons: List<NewPokemonUiModel>,
 ) {
     companion object {
         private const val DUMMY_ABILITY_NAME = "악취"
@@ -26,5 +26,5 @@ fun AbilityDetail.toUi(): AbilityDetailUiModel =
     AbilityDetailUiModel(
         title = this.title,
         description = this.description,
-        pokemons = this.pokemons.map { it.toUi() },
+        pokemons = pokemons.toUi(),
     )
