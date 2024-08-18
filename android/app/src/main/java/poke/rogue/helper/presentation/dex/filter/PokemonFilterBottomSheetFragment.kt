@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.SavedStateViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.R
@@ -22,7 +23,12 @@ import poke.rogue.helper.ui.component.PokeChip
 class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: BottomSheetPokemonFilterBinding? = null
     private val binding get() = requireNotNull(_binding)
-    private val viewModel by viewModels<PokeFilterViewModel>()
+    private val viewModel by viewModels<PokeFilterViewModel> {
+        SavedStateViewModelFactory(
+            requireActivity().application,
+            this,
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
