@@ -57,7 +57,7 @@ class FakeAbilityRepository : AbilityRepository {
 
         private val ABILITY_DETAILS: Map<String, AbilityDetail> =
             mapOf(
-                "1" to
+                "1L" to
                     AbilityDetail(
                         title = "악취",
                         description = "악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다.",
@@ -72,7 +72,7 @@ class FakeAbilityRepository : AbilityRepository {
                                 ),
                             ),
                     ),
-                "2" to
+                "2L" to
                     AbilityDetail(
                         title = "잔비",
                         description = "등장했을 때 날씨를 비로 만든다.",

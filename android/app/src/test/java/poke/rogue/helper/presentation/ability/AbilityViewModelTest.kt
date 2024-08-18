@@ -52,17 +52,17 @@ class AbilityViewModelTest {
             abilities shouldBe
                 listOf(
                     AbilityUiModel(
-                        id = 14,
+                        id = "14",
                         title = "불면",
                         description = "잠들지 못하는 체질이라 잠듦 상태가 되지 않는다.",
                     ),
                     AbilityUiModel(
-                        id = 17,
+                        id = "17",
                         title = "타오르는불꽃",
                         description = "불꽃타입의 기술을 받으면 불꽃을 받아서 자신이 사용하는 불꽃타입의 기술이 강해진다.",
                     ),
                     AbilityUiModel(
-                        id = 24,
+                        id = "24",
                         title = "불가사의부적",
                         description = "효과가 굉장한 기술만 맞는 불가사의한 힘.",
                     ),
@@ -73,7 +73,7 @@ class AbilityViewModelTest {
     fun `특성 id값으로 특성 상세 화면으로 이동한다`() =
         runTest {
             // given
-            val abilityId = 15L
+            val abilityId = "15L"
 
             // when
             launch {
