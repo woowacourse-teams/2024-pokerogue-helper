@@ -9,6 +9,14 @@ data class Pokemon(
     val name: String,
     val imageUrl: String,
     val types: List<Type>,
+    val generation: PokemonGeneration = PokemonGeneration.ONE,
+    val baseStat: Int = 0,
+    val hp: Int = 0,
+    val attack: Int = 0,
+    val defense: Int = 0,
+    val specialAttack: Int = 0,
+    val specialDefense: Int = 0,
+    val speed: Int = 0,
 ) {
     companion object {
         private const val DUMMY_POKEMON_NAME = "이상해씨"
