@@ -114,7 +114,6 @@ class PokeFilterViewModel : ViewModel() {
 
     fun applyFiltering() {
         viewModelScope.launch {
-            Timber.d("applyFiltering: ${uiState.value.selectedTypes}")
             _uiEvent.emit(
                 PokeFilterUiEvent.ApplyFiltering(
                     selectedTypes = uiState.value.selectedTypes,

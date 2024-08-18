@@ -90,7 +90,6 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
                 when (event) {
                     is PokeFilterUiEvent.CloseFilter -> dismiss()
                     is PokeFilterUiEvent.ApplyFiltering -> {
-                        Timber.d("ApplyFiltering: $event")
                         val args = PokeFilterUiModel(event.selectedTypes, event.generation)
                         setFragmentResult(
                             RESULT_KEY,
