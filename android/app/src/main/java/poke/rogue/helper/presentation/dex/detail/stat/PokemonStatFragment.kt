@@ -15,7 +15,7 @@ import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
-import poke.rogue.helper.presentation.dex.model.PokemonDetailUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
@@ -102,10 +102,10 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
     }
 }
 
-private fun PokemonDetailUiModel.toUi(): AbilityTitleUiModel =
+private fun PokemonDetailAbilityUiModel.toUi(): AbilityTitleUiModel =
     AbilityTitleUiModel(
         id = id,
         name = name,
     )
 
-private fun List<PokemonDetailUiModel>.toUi(): List<AbilityTitleUiModel> = map(PokemonDetailUiModel::toUi)
+private fun List<PokemonDetailAbilityUiModel>.toUi(): List<AbilityTitleUiModel> = map(PokemonDetailAbilityUiModel::toUi)
