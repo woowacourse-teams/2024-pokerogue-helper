@@ -1,12 +1,12 @@
-package poke.rogue.helper.presentation.biome.detail.map
+package poke.rogue.helper.presentation.biome.detail.nextbiomes
 
 import androidx.recyclerview.widget.RecyclerView
-import poke.rogue.helper.databinding.ItemBiomeMapBinding
+import poke.rogue.helper.databinding.ItemBiomeNextBiomesBinding
 import poke.rogue.helper.presentation.biome.BiomeTypesAdapter
 import poke.rogue.helper.presentation.biome.model.NextBiomeUiModel
 import poke.rogue.helper.presentation.util.view.dp
 
-class BiomeMapViewHolder(private val binding: ItemBiomeMapBinding) :
+class BiomeNextBiomesViewHolder(private val binding: ItemBiomeNextBiomesBinding) :
     RecyclerView.ViewHolder(
         binding.root,
     ) {

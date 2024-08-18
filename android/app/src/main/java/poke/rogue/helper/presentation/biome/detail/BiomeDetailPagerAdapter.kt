@@ -4,7 +4,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import poke.rogue.helper.presentation.biome.detail.boss.BiomeBossFragment
 import poke.rogue.helper.presentation.biome.detail.gym.BiomeGymFragment
-import poke.rogue.helper.presentation.biome.detail.map.BiomeMapFragment
+import poke.rogue.helper.presentation.biome.detail.nextbiomes.BiomeNextBiomesFragment
 import poke.rogue.helper.presentation.biome.detail.wild.BiomeWildPokemonFragment
 
 class BiomeDetailPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
@@ -13,7 +13,7 @@ class BiomeDetailPagerAdapter(fm: FragmentActivity) : FragmentStateAdapter(fm) {
             BiomeGymFragment(),
             BiomeBossFragment(),
             BiomeWildPokemonFragment(),
-            BiomeMapFragment(),
+            BiomeNextBiomesFragment(),
         )
 
     override fun getItemCount(): Int = fragment.size

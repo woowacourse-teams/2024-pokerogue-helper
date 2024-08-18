@@ -1,4 +1,4 @@
-package poke.rogue.helper.presentation.biome.detail.map
+package poke.rogue.helper.presentation.biome.detail.nextbiomes
 
 import android.os.Bundle
 import android.view.View
@@ -7,9 +7,9 @@ import poke.rogue.helper.databinding.FragmentBiomeNextBiomeBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.biome.model.BiomeDetailUiModel
 
-class BiomeMapFragment :
+class BiomeNextBiomesFragment :
     BindingFragment<FragmentBiomeNextBiomeBinding>(R.layout.fragment_biome_next_biome) {
-    private val nextBiomeAdapter: BiomeMapAdapter by lazy { BiomeMapAdapter() }
+    private val nextBiomeAdapter: BiomeNextBiomesAdapter by lazy { BiomeNextBiomesAdapter() }
 
     override fun onViewCreated(
         view: View,
@@ -20,7 +20,7 @@ class BiomeMapFragment :
     }
 
     private fun initAdapter() {
-        BiomeDetailUiModel.DUMMY.map.let(nextBiomeAdapter::submitList)
+        BiomeDetailUiModel.DUMMY.nextBiomes.let(nextBiomeAdapter::submitList)
         binding.rvBiomeNextBiome.adapter = nextBiomeAdapter
     }
 }
