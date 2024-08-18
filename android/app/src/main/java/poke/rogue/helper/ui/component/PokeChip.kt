@@ -91,6 +91,9 @@ class PokeChip
                             R.styleable.PokeChip_selectedContainerColor,
                             context.colorOf(R.color.poke_chip_background_selected),
                         )
+
+                    val cornerRadius = getDimensionPixelSize(R.styleable.PokeChip_cornerRadius, 10.dp)
+                    val strokeWidth = getDimensionPixelSize(R.styleable.PokeChip_strokeWidth, 1.dp)
                     // init views
                     initLeadingIcon(leadingIcon, leadingIconSize, leadingSpacing, label.isNotBlank())
                     initLabel(label, labelSize)
@@ -105,6 +108,8 @@ class PokeChip
                         selectedContainerColor,
                         strokeColor,
                         selectedStrokeColor,
+                        cornerRadius,
+                        strokeWidth,
                     )
                     initLabelColor(labelColor, selectedLabelColor)
                     initLayout()
@@ -118,7 +123,7 @@ class PokeChip
             isSelected = chipSpec.isSelected
             val (leadingIconSize, leadingSpacing, labelSize, trailingSpacing, trailingIconSize) =
                 chipSpec.sizes
-
+            val colorSpec = chipSpec.colors
             initLeadingIcon(
                 chipSpec.leadingIconRes ?: NO_ICON,
                 leadingIconSize,
@@ -132,7 +137,18 @@ class PokeChip
                 trailingSpacing,
                 chipSpec.label.isNotBlank(),
             )
-            initColors(chipSpec.colors)
+            initDrawableBackground(
+                containerColor = context.colorOf(colorSpec.containerColor),
+                selectedContainerColor = context.colorOf(colorSpec.selectedContainerColor),
+                strokeColor = context.colorOf(colorSpec.strokeColor),
+                selectedStrokeColor = context.colorOf(colorSpec.selectedStrokeColor),
+                cornerRadius = chipSpec.cornerRadius,
+                strokeWidth = chipSpec.strokeWidth,
+            )
+            initLabelColor(
+                labelColor = context.colorOf(colorSpec.labelColor),
+                selectedLabelColor = context.colorOf(colorSpec.selectedLabelColor),
+            )
             initLayout(chipSpec.padding)
             setOnSingleClickListener(duration = 200) {
                 chipSpec.onSelect?.invoke(chipId)
@@ -190,31 +206,18 @@ class PokeChip
             }
         }
 
-        private fun initColors(colorSpec: PokeChipColors) {
-            initDrawableBackground(
-                containerColor = context.colorOf(colorSpec.containerColor),
-                selectedContainerColor = context.colorOf(colorSpec.selectedContainerColor),
-                strokeColor = context.colorOf(colorSpec.strokeColor),
-                selectedStrokeColor = context.colorOf(colorSpec.selectedStrokeColor),
-            )
-            initLabelColor(
-                labelColor = context.colorOf(colorSpec.labelColor),
-                selectedLabelColor = context.colorOf(colorSpec.selectedLabelColor),
-            )
-        }
-
         private fun initDrawableBackground(
             @ColorInt containerColor: Int,
             @ColorInt selectedContainerColor: Int,
             @ColorInt strokeColor: Int,
             @ColorInt selectedStrokeColor: Int,
-            @Dimension(DP) radius: Int = 10.dp,
+            @Dimension(DP) cornerRadius: Int = 10.dp,
             @Dimension(DP) strokeWidth: Int = 1.dp,
         ) {
             val unSelectedDrawable =
                 GradientDrawable().apply {
                     shape = GradientDrawable.RECTANGLE
-                    cornerRadius = radius.toFloat()
+                    this.cornerRadius = cornerRadius.toFloat()
                     setColor(containerColor)
                     setStroke(strokeWidth, strokeColor)
                 }
@@ -222,7 +225,7 @@ class PokeChip
             val selectedDrawable =
                 GradientDrawable().apply {
                     shape = GradientDrawable.RECTANGLE
-                    cornerRadius = radius.toFloat()
+                    this.cornerRadius = cornerRadius.toFloat()
                     setColor(selectedContainerColor)
                     setStroke(strokeWidth, selectedStrokeColor)
                 }
@@ -272,6 +275,8 @@ class PokeChip
             val colors: PokeChipColors = PokeChipColors(),
             val sizes: PokeChipSizes = PokeChipSizes(),
             val padding: PaddingValues = PaddingValues(8.dp),
+            @Dimension(DP) val strokeWidth: Int = 1.dp,
+            @Dimension(DP) val cornerRadius: Int = 10.dp,
             val isSelected: Boolean = false,
             val onSelect: ((chipId: Int) -> Unit)? = null,
         ) {
@@ -291,17 +296,6 @@ class PokeChip
             @ColorRes val selectedContainerColor: Int = R.color.poke_chip_background_selected,
         )
 
-        companion object {
-            private const val NO_ICON = 0
-            private const val NO_ID = -1
-
-            @JvmStatic
-            @BindingAdapter("pokeChipSpec")
-            fun PokeChip.bindPokeChip(chipSpec: Spec) {
-                initPokeChip(chipSpec)
-            }
-        }
-
         data class PokeChipSizes(
             @Dimension(DP) val leadingIconSize: Int = 24.dp,
             @Dimension(DP) val leadingSpacing: Int = 8.dp,
@@ -315,6 +309,17 @@ class PokeChip
                 require(trailingIconSize >= 0) { "trailingIconSize can't be negative" }
                 require(trailingSpacing >= 0) { "trailingSpacing can't be negative" }
                 require(labelSize >= 0) { "labelSize can't be negative" }
+            }
+        }
+
+        companion object {
+            private const val NO_ICON = 0
+            private const val NO_ID = -1
+
+            @JvmStatic
+            @BindingAdapter("pokeChipSpec")
+            fun PokeChip.bindPokeChip(chipSpec: Spec) {
+                initPokeChip(chipSpec)
             }
         }
     }

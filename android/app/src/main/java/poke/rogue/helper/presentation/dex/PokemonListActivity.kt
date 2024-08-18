@@ -79,15 +79,16 @@ class PokemonListActivity :
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
-                    ) {
-                        PokemonFilterBottomSheetFragment.newInstance(
-                            uiState.filteredTypes,
-                            uiState.filteredGeneration,
-                        ).show(
-                            supportFragmentManager,
-                            PokemonFilterBottomSheetFragment.TAG,
-                        )
-                    },
+                        onSelect = {
+                            PokemonFilterBottomSheetFragment.newInstance(
+                                uiState.filteredTypes,
+                                uiState.filteredGeneration,
+                            ).show(
+                                supportFragmentManager,
+                                PokemonFilterBottomSheetFragment.TAG,
+                            )
+                        },
+                    ),
                 )
             }
         }
