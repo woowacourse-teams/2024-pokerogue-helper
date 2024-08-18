@@ -11,11 +11,11 @@ data class PaddingValues(
     @Dimension(DP) val end: Int = 0.dp,
     @Dimension(DP) val bottom: Int = 0.dp
 ) {
-    constructor(horizontal: Int = 0.dp, vertical: Int = 0.dp) : this(
+    constructor(horizontal: Int , vertical: Int) : this(
         horizontal, vertical, horizontal, vertical
     )
 
-    constructor(all: Int = 0.dp) : this(all, all, all, all)
+    constructor(all: Int) : this(all, all, all, all)
 
     init {
         require(start >= 0) { "start padding can't be negative" }

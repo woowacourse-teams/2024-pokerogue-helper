@@ -23,6 +23,7 @@ import androidx.databinding.BindingAdapter
 import poke.rogue.helper.R
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.presentation.util.view.setOnSingleClickListener
 import poke.rogue.helper.ui.layout.PaddingValues
 import poke.rogue.helper.ui.layout.applyTo
 
@@ -125,7 +126,7 @@ class PokeChip @JvmOverloads constructor(
         )
         initColors(chipSpec.colors)
         initLayout(chipSpec.padding)
-        setOnClickListener {
+        setOnSingleClickListener(duration = 200) {
             chipSpec.onSelect?.invoke(chipId)
         }
     }
@@ -252,7 +253,7 @@ class PokeChip @JvmOverloads constructor(
     }
 
     data class PokeChipSpec(
-        val id: Int,
+        val id: Int = NO_ID,
         val label: String,
         @DrawableRes val leadingIconRes: Int? = null,
         @DrawableRes val trailingIconRes: Int? = null,

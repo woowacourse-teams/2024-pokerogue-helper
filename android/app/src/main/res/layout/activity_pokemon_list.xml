@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="vm"
             type="poke.rogue.helper.presentation.dex.PokemonListViewModel" />
     </data>
 
@@ -33,25 +33,39 @@
                 android:layout_gravity="end|center_vertical"
                 android:imeOptions="actionSearch|flagNoExtractUi|flagNoFullscreen"
                 android:theme="@style/CustomSearchViewTheme"
-                app:onQueryTextChange="@{viewModel}"
+                app:onQueryTextChange="@{vm}"
                 app:queryHint="@string/dex_list_search_pokemon_hint" />
 
         </com.google.android.material.appbar.MaterialToolbar>
+
+        <poke.rogue.helper.ui.component.PokeChip
+            android:id="@+id/chip_poke_fiter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            app:label="필터"
+            visible="@{! vm.isLoading()}"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="8dp"
+            app:trailingIcon="@drawable/ic_filter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_dex" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_dex"
+            app:layout_constraintTop_toBottomOf="@id/chip_poke_fiter"
             tools:listitem="@layout/item_pokemon_list_pokemon"
             tools:spanCount="3" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dex_loading"
-            visible="@{viewModel.isLoading()}"
+            visible="@{vm.isLoading()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +97,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dex_empty"
-            visible="@{viewModel.isEmpty()}"
+            visible="@{vm.isEmpty()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

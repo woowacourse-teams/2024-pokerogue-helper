@@ -1,16 +1,19 @@
 package poke.rogue.helper.presentation.type.model
 
+import android.os.Parcelable
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import kotlinx.parcelize.Parcelize
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.Type
 
+@Parcelize
 enum class TypeUiModel(
     val id: Int,
     val typeName: String,
     @ColorRes val typeColor: Int,
     @DrawableRes val typeIconResId: Int,
-) {
+): Parcelable {
     NORMAL(0, "노말", R.color.poke_normal, R.drawable.icon_type_normal),
     FIRE(1, "불꽃", R.color.poke_fire, R.drawable.icon_type_fire),
     WATER(2, "물", R.color.poke_water, R.drawable.icon_type_water),
@@ -40,3 +43,5 @@ enum class TypeUiModel(
 }
 
 fun Type.toUi(): TypeUiModel = TypeUiModel.valueOf(this.name)
+
+fun TypeUiModel.toData(): Type = Type.fromId(this.id)
