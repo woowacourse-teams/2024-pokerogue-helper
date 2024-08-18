@@ -272,8 +272,8 @@ class PokeChip
             val label: String,
             @DrawableRes val leadingIconRes: Int? = null,
             @DrawableRes val trailingIconRes: Int? = null,
-            val colors: PokeChipColors = PokeChipColors(),
-            val sizes: PokeChipSizes = PokeChipSizes(),
+            val colors: Colors = Colors(),
+            val sizes: Sizes = Sizes(),
             val padding: PaddingValues = PaddingValues(8.dp),
             @Dimension(DP) val strokeWidth: Int = 1.dp,
             @Dimension(DP) val cornerRadius: Int = 10.dp,
@@ -287,7 +287,7 @@ class PokeChip
             }
         }
 
-        data class PokeChipColors(
+        data class Colors(
             @ColorRes val labelColor: Int = R.color.poke_chip_text_default,
             @ColorRes val strokeColor: Int = R.color.poke_chip_stroke_default,
             @ColorRes val containerColor: Int = R.color.poke_chip_background_default,
@@ -296,7 +296,7 @@ class PokeChip
             @ColorRes val selectedContainerColor: Int = R.color.poke_chip_background_selected,
         )
 
-        data class PokeChipSizes(
+        data class Sizes(
             @Dimension(DP) val leadingIconSize: Int = 24.dp,
             @Dimension(DP) val leadingSpacing: Int = 8.dp,
             @Dimension(PX) val labelSize: Int = 16,

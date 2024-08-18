@@ -59,11 +59,11 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
                             "",
                             leadingIconRes = selectableType.data.typeIconResId,
                             sizes =
-                                PokeChip.PokeChipSizes(
+                                PokeChip.Sizes(
                                     leadingIconSize = 28.dp,
                                 ),
                             colors =
-                                PokeChip.PokeChipColors(
+                                PokeChip.Colors(
                                     selectedContainerColor = selectableType.data.typeColor,
                                 ),
                             isSelected = selectableType.isSelected,
