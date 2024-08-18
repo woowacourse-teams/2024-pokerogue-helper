@@ -10,7 +10,6 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.event.EventFlow
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
 import poke.rogue.helper.presentation.util.event.asEventFlow
-import timber.log.Timber
 
 class PokeFilterViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(PokeFilterUiState.DEFAULT)
@@ -45,7 +44,7 @@ class PokeFilterViewModel : ViewModel() {
     fun selectType(id: Int) {
         val selectedTypes = uiState.value.selectedTypes
         val types = uiState.value.types
-        if (selectedTypes.size < Limit_TYPE_COUNT) {
+        if (selectedTypes.size < LIMIT_TYPE_COUNT) {
             return selectTypeWithinLimit(id, types, selectedTypes)
         }
         if (selectedTypes.any { it.id == id }) {
@@ -130,6 +129,6 @@ class PokeFilterViewModel : ViewModel() {
     }
 
     companion object {
-        private const val Limit_TYPE_COUNT = 2
+        private const val LIMIT_TYPE_COUNT: Int = 2
     }
 }

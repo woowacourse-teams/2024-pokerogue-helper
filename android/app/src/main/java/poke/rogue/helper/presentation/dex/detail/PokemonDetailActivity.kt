@@ -57,7 +57,7 @@ class PokemonDetailActivity :
 
         TabLayoutMediator(
             binding.tabLayoutPokemonDetail,
-            binding.pagerPokemonDetail
+            binding.pagerPokemonDetail,
         ) { tab, position ->
             when (position) {
                 0 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_stats_title)

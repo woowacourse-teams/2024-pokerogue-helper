@@ -9,14 +9,15 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import poke.rogue.helper.R
 import poke.rogue.helper.databinding.BottomSheetPokemonFilterBinding
 import poke.rogue.helper.presentation.dex.PokemonListActivity.Companion.RESULT_KEY
 import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.ui.component.PokeChip
-import timber.log.Timber
 
 class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: BottomSheetPokemonFilterBinding? = null
@@ -72,9 +73,18 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
                 )
                 binding.chipGroupPokeFilterGeneration.submitList(
                     it.generations.map { selectableGeneration ->
+                        val generationText =
+                            if (selectableGeneration.data == PokeGenerationUiModel.ALL) {
+                                stringOf(R.string.dex_filter_all_generations)
+                            } else {
+                                stringOf(
+                                    R.string.dex_filter_generation_format,
+                                    selectableGeneration.data.number,
+                                )
+                            }
                         PokeChip.Spec(
                             selectableGeneration.id,
-                            if (selectableGeneration.data == PokeGenerationUiModel.ALL) "모든 세대" else "${selectableGeneration.data.number}세대",
+                            generationText,
                             isSelected = selectableGeneration.isSelected,
                             onSelect = viewModel::toggleGeneration,
                         )
