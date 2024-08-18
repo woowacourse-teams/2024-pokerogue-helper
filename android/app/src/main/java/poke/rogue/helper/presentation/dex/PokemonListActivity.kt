@@ -15,6 +15,7 @@ import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.filter.PokemonFilterBottomSheetFragment
 import poke.rogue.helper.presentation.util.activity.hideKeyboard
+import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
@@ -45,16 +46,7 @@ class PokemonListActivity :
         binding.lifecycleOwner = this
         initAdapter()
         initObservers()
-        binding.root.setOnClickListener {
-            hideKeyboard()
-        }
-        val fm: FragmentManager = supportFragmentManager
-        fm.setFragmentResultListener(RESULT_KEY, this) { key, bundle ->
-            val args: PokeFilterUiModel =
-                PokemonFilterBottomSheetFragment.argsFrom(bundle)
-                    ?: return@setFragmentResultListener
-            viewModel.filterPokemon(args)
-        }
+        initListeners()
     }
 
     private fun initAdapter() {
@@ -79,7 +71,7 @@ class PokemonListActivity :
                 pokemonAdapter.submitList(uiState.pokemons)
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.PokeChipSpec(
-                        label = "필터 ${if (uiState.isFiltered) uiState.filterCount else ""}",
+                        label = stringOf(R.string.dex_filter_chip,if (uiState.isFiltered) uiState.filterCount.toString() else "") ,
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
@@ -100,6 +92,19 @@ class PokemonListActivity :
                 hideKeyboard()
                 startActivity(PokemonDetailActivity.intent(this, pokemonId))
             }
+        }
+        val fm: FragmentManager = supportFragmentManager
+        fm.setFragmentResultListener(RESULT_KEY, this) { key, bundle ->
+            val args: PokeFilterUiModel =
+                PokemonFilterBottomSheetFragment.argsFrom(bundle)
+                    ?: return@setFragmentResultListener
+            viewModel.filterPokemon(args)
+        }
+    }
+
+    private fun initListeners() {
+        binding.root.setOnClickListener {
+            hideKeyboard()
         }
     }
 
