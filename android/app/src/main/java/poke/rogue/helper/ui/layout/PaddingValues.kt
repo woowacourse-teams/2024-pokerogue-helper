@@ -9,10 +9,13 @@ data class PaddingValues(
     @Dimension(DP) val start: Int = 0.dp,
     @Dimension(DP) val top: Int = 0.dp,
     @Dimension(DP) val end: Int = 0.dp,
-    @Dimension(DP) val bottom: Int = 0.dp
+    @Dimension(DP) val bottom: Int = 0.dp,
 ) {
-    constructor(horizontal: Int , vertical: Int) : this(
-        horizontal, vertical, horizontal, vertical
+    constructor(horizontal: Int, vertical: Int) : this(
+        horizontal,
+        vertical,
+        horizontal,
+        vertical,
     )
 
     constructor(all: Int) : this(all, all, all, all)

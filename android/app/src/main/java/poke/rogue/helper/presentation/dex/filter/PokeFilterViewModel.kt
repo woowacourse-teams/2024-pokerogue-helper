@@ -13,7 +13,6 @@ import poke.rogue.helper.presentation.util.event.asEventFlow
 import timber.log.Timber
 
 class PokeFilterViewModel : ViewModel() {
-
     private val _uiState = MutableStateFlow(PokeFilterUiState.DEFAULT)
     val uiState: StateFlow<PokeFilterUiState> = _uiState.asStateFlow()
 
@@ -21,23 +20,26 @@ class PokeFilterViewModel : ViewModel() {
     val uiEvent: EventFlow<PokeFilterUiEvent> = _uiEvent.asEventFlow()
 
     fun init(args: PokeFilterUiModel) {
-        _uiState.value = PokeFilterUiState(
-            types = TypeUiModel.entries.mapIndexed { index, typeUiModel ->
-                SelectableUiModel(
-                    index,
-                    args.selectedTypes.contains(typeUiModel),
-                    typeUiModel,
-                )
-            },
-            generations = PokeGenerationUiModel.entries.mapIndexed { index, pokeGenerationUiModel ->
-                SelectableUiModel(
-                    index,
-                    args.selectedGeneration == pokeGenerationUiModel,
-                    pokeGenerationUiModel,
-                )
-            },
-            selectedTypes = args.selectedTypes,
-        )
+        _uiState.value =
+            PokeFilterUiState(
+                types =
+                    TypeUiModel.entries.mapIndexed { index, typeUiModel ->
+                        SelectableUiModel(
+                            index,
+                            args.selectedTypes.contains(typeUiModel),
+                            typeUiModel,
+                        )
+                    },
+                generations =
+                    PokeGenerationUiModel.entries.mapIndexed { index, pokeGenerationUiModel ->
+                        SelectableUiModel(
+                            index,
+                            args.selectedGeneration == pokeGenerationUiModel,
+                            pokeGenerationUiModel,
+                        )
+                    },
+                selectedTypes = args.selectedTypes,
+            )
     }
 
     fun selectType(id: Int) {
@@ -56,53 +58,57 @@ class PokeFilterViewModel : ViewModel() {
     private fun selectTypeWithinLimit(
         id: Int,
         types: List<SelectableUiModel<TypeUiModel>>,
-        selectedTypes: List<TypeUiModel>
+        selectedTypes: List<TypeUiModel>,
     ) {
         var newSelectedTypes = selectedTypes
-        val newTypes = types.map { type ->
-            if (type.id == id) {
-                newSelectedTypes = if (type.isSelected) {
-                    selectedTypes - type.data
-                } else {
-                    selectedTypes + type.data
+        val newTypes =
+            types.map { type ->
+                if (type.id == id) {
+                    newSelectedTypes =
+                        if (type.isSelected) {
+                            selectedTypes - type.data
+                        } else {
+                            selectedTypes + type.data
+                        }
+                    return@map type.copy(isSelected = !type.isSelected)
                 }
-                return@map type.copy(isSelected = !type.isSelected)
+                type
             }
-            type
-        }
         _uiState.value = uiState.value.copy(types = newTypes, selectedTypes = newSelectedTypes)
     }
 
     private fun selectTypeExceedingLimit(
         id: Int,
         types: List<SelectableUiModel<TypeUiModel>>,
-        selectedTypes: List<TypeUiModel>
+        selectedTypes: List<TypeUiModel>,
     ) {
         var newSelectedTypes = selectedTypes
         val firstSelectedType = selectedTypes.first()
-        val newTypes = types.map { type ->
-            if (type.data == firstSelectedType) {
-                return@map type.copy(isSelected = false)
+        val newTypes =
+            types.map { type ->
+                if (type.data == firstSelectedType) {
+                    return@map type.copy(isSelected = false)
+                }
+                if (type.id == id) {
+                    newSelectedTypes = selectedTypes.drop(1) + type.data
+                    return@map type.copy(isSelected = !type.isSelected)
+                }
+                type
             }
-            if (type.id == id) {
-                newSelectedTypes = selectedTypes.drop(1) + type.data
-                return@map type.copy(isSelected = !type.isSelected)
-            }
-            type
-        }
         _uiState.value = uiState.value.copy(types = newTypes, selectedTypes = newSelectedTypes)
     }
 
     fun toggleGeneration(generationId: Int) {
         val generations = uiState.value.generations
         if (generations[generationId].isSelected) return
-        val newGenerations = uiState.value.generations.map { type ->
-            if (type.id == generationId) {
-                type.copy(isSelected = !type.isSelected)
-            } else {
-                type.copy(isSelected = false)
+        val newGenerations =
+            uiState.value.generations.map { type ->
+                if (type.id == generationId) {
+                    type.copy(isSelected = !type.isSelected)
+                } else {
+                    type.copy(isSelected = false)
+                }
             }
-        }
         _uiState.value = uiState.value.copy(generations = newGenerations)
     }
 
@@ -112,8 +118,8 @@ class PokeFilterViewModel : ViewModel() {
             _uiEvent.emit(
                 PokeFilterUiEvent.ApplyFiltering(
                     selectedTypes = uiState.value.selectedTypes,
-                    generation = uiState.value.selectedGeneration
-                )
+                    generation = uiState.value.selectedGeneration,
+                ),
             )
         }
     }
@@ -128,6 +134,3 @@ class PokeFilterViewModel : ViewModel() {
         private const val Limit_TYPE_COUNT = 2
     }
 }
-
-
-

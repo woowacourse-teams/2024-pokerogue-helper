@@ -39,12 +39,13 @@ class PokemonListViewModel(
     logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), PokemonListNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
-    private val pokeFilter = MutableStateFlow<PokeFilterUiModel>(
-        PokeFilterUiModel(
-            emptyList(),
-            PokeGenerationUiModel.ALL
+    private val pokeFilter =
+        MutableStateFlow<PokeFilterUiModel>(
+            PokeFilterUiModel(
+                emptyList(),
+                PokeGenerationUiModel.ALL,
+            ),
         )
-    )
 
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val uiState: StateFlow<PokemonListUiState> =
@@ -58,11 +59,12 @@ class PokemonListViewModel(
             .flatMapLatest { query ->
                 pokeFilter.map { filter ->
                     PokemonListUiState(
-                        pokemons = queriedPokemons(
-                            query,
-                            filter.selectedTypes,
-                            filter.selectedGeneration
-                        ),
+                        pokemons =
+                            queriedPokemons(
+                                query,
+                                filter.selectedTypes,
+                                filter.selectedGeneration,
+                            ),
                         filteredTypes = filter.selectedTypes,
                         filteredGeneration = filter.selectedGeneration,
                     )
@@ -98,7 +100,7 @@ class PokemonListViewModel(
                 listOfNotNull(generation.toDataOrNull()).map { PokemonFilter.ByGeneration(it) }
             pokemonListRepository.filteredPokemons(
                 query,
-                filters = filteredTypes + filteredGenerations
+                filters = filteredTypes + filteredGenerations,
             ).map(Pokemon::toUi)
         } catch (e: PokeException) {
             handlePokemonError(e)
@@ -119,6 +121,7 @@ class PokemonListViewModel(
             searchQuery.value = name
         }
     }
+
     fun filterPokemon(filter: PokeFilterUiModel) {
         viewModelScope.launch {
             pokeFilter.value = filter
@@ -141,10 +144,11 @@ data class PokemonListUiState(
     val isFiltered get() = filteredTypes.isNotEmpty() || filteredGeneration != PokeGenerationUiModel.ALL
 
     val filterCount
-        get() = run {
-            var count = 0
-            if (filteredTypes.isNotEmpty()) count++
-            if (filteredGeneration != PokeGenerationUiModel.ALL) count++
-            count
-        }
+        get() =
+            run {
+                var count = 0
+                if (filteredTypes.isNotEmpty()) count++
+                if (filteredGeneration != PokeGenerationUiModel.ALL) count++
+                count
+            }
 }

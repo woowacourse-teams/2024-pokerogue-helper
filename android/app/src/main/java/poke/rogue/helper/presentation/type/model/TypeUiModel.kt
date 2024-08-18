@@ -13,7 +13,7 @@ enum class TypeUiModel(
     val typeName: String,
     @ColorRes val typeColor: Int,
     @DrawableRes val typeIconResId: Int,
-): Parcelable {
+) : Parcelable {
     NORMAL(0, "노말", R.color.poke_normal, R.drawable.icon_type_normal),
     FIRE(1, "불꽃", R.color.poke_fire, R.drawable.icon_type_fire),
     WATER(2, "물", R.color.poke_water, R.drawable.icon_type_water),

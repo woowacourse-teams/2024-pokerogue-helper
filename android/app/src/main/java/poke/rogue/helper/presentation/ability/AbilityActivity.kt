@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.ability
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import poke.rogue.helper.R

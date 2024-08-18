@@ -15,7 +15,6 @@ import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.BattleActivity
 import poke.rogue.helper.presentation.biome.BiomeActivity
 import poke.rogue.helper.presentation.dex.PokemonListActivity
-import poke.rogue.helper.presentation.item.ItemActivity
 import poke.rogue.helper.presentation.tip.TipActivity
 import poke.rogue.helper.presentation.type.TypeActivity
 import poke.rogue.helper.presentation.util.context.startActivity

@@ -50,8 +50,9 @@ class PokemonListActivity :
         }
         val fm: FragmentManager = supportFragmentManager
         fm.setFragmentResultListener(RESULT_KEY, this) { key, bundle ->
-            val args: PokeFilterUiModel = PokemonFilterBottomSheetFragment.argsFrom(bundle)
-                ?: return@setFragmentResultListener
+            val args: PokeFilterUiModel =
+                PokemonFilterBottomSheetFragment.argsFrom(bundle)
+                    ?: return@setFragmentResultListener
             viewModel.filterPokemon(args)
         }
     }
@@ -81,15 +82,16 @@ class PokemonListActivity :
                         label = "필터 ${if (uiState.isFiltered) uiState.filterCount else ""}",
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
-                        padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp)
+                        padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
                     ) {
                         PokemonFilterBottomSheetFragment.newInstance(
-                            uiState.filteredTypes, uiState.filteredGeneration
+                            uiState.filteredTypes,
+                            uiState.filteredGeneration,
                         ).show(
                             supportFragmentManager,
-                            PokemonFilterBottomSheetFragment.TAG
+                            PokemonFilterBottomSheetFragment.TAG,
                         )
-                    }
+                    },
                 )
             }
         }

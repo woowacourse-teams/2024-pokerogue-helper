@@ -51,29 +51,35 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
     private fun observeUiState() {
         repeatOnStarted {
             viewModel.uiState.collect {
-                binding.chipGroupPokeFilterType.submitList(it.types.map { selectableType ->
-                    PokeChip.PokeChipSpec(
-                        selectableType.id,
-                        "",
-                        leadingIconRes = selectableType.data.typeIconResId,
-                        sizes = PokeChip.PokeChipSizes(
-                            leadingIconSize = 28.dp
-                        ),
-                        colors = PokeChip.PokeChipColors(
-                            selectedContainerColor = selectableType.data.typeColor,
-                        ),
-                        isSelected = selectableType.isSelected,
-                        onSelect = viewModel::selectType
-                    )
-                })
-                binding.chipGroupPokeFilterGeneration.submitList(it.generations.map { selectableGeneration ->
-                    PokeChip.PokeChipSpec(
-                        selectableGeneration.id,
-                        if (selectableGeneration.data == PokeGenerationUiModel.ALL) "모든 세대" else "${selectableGeneration.data.number}세대",
-                        isSelected = selectableGeneration.isSelected,
-                        onSelect = viewModel::toggleGeneration
-                    )
-                })
+                binding.chipGroupPokeFilterType.submitList(
+                    it.types.map { selectableType ->
+                        PokeChip.PokeChipSpec(
+                            selectableType.id,
+                            "",
+                            leadingIconRes = selectableType.data.typeIconResId,
+                            sizes =
+                                PokeChip.PokeChipSizes(
+                                    leadingIconSize = 28.dp,
+                                ),
+                            colors =
+                                PokeChip.PokeChipColors(
+                                    selectedContainerColor = selectableType.data.typeColor,
+                                ),
+                            isSelected = selectableType.isSelected,
+                            onSelect = viewModel::selectType,
+                        )
+                    },
+                )
+                binding.chipGroupPokeFilterGeneration.submitList(
+                    it.generations.map { selectableGeneration ->
+                        PokeChip.PokeChipSpec(
+                            selectableGeneration.id,
+                            if (selectableGeneration.data == PokeGenerationUiModel.ALL) "모든 세대" else "${selectableGeneration.data.number}세대",
+                            isSelected = selectableGeneration.isSelected,
+                            onSelect = viewModel::toggleGeneration,
+                        )
+                    },
+                )
             }
         }
     }
@@ -88,7 +94,7 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
                         val args = PokeFilterUiModel(event.selectedTypes, event.generation)
                         setFragmentResult(
                             RESULT_KEY,
-                            bundleOf(ARGS_KEY to args)
+                            bundleOf(ARGS_KEY to args),
                         )
                         dismiss()
                     }
