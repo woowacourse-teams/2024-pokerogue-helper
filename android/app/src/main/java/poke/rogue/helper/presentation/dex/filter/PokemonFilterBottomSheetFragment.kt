@@ -11,7 +11,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.BottomSheetPokemonFilterBinding
-import poke.rogue.helper.presentation.dex.PokemonListActivity.Companion.RESULT_KEY
+import poke.rogue.helper.presentation.dex.PokemonListActivity.Companion.FILTER_RESULT_KEY
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.parcelable
@@ -40,7 +40,7 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        if (arguments != null) {
+        if (arguments != null && savedInstanceState == null) {
             val args = requireNotNull(argsFrom(requireArguments()))
             viewModel.init(args)
         }
@@ -59,13 +59,13 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
                             "",
                             leadingIconRes = selectableType.data.typeIconResId,
                             sizes =
-                                PokeChip.Sizes(
-                                    leadingIconSize = 28.dp,
-                                ),
+                            PokeChip.Sizes(
+                                leadingIconSize = 28.dp,
+                            ),
                             colors =
-                                PokeChip.Colors(
-                                    selectedContainerColor = selectableType.data.typeColor,
-                                ),
+                            PokeChip.Colors(
+                                selectedContainerColor = selectableType.data.typeColor,
+                            ),
                             isSelected = selectableType.isSelected,
                             onSelect = viewModel::selectType,
                         )
@@ -102,7 +102,7 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
                     is PokeFilterUiEvent.ApplyFiltering -> {
                         val args = PokeFilterUiModel(event.selectedTypes, event.generation)
                         setFragmentResult(
-                            RESULT_KEY,
+                            FILTER_RESULT_KEY,
                             bundleOf(ARGS_KEY to args),
                         )
                         dismiss()
@@ -126,7 +126,7 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
-        const val TAG = "PokemonFilterBottomSheetFragment"
+        val TAG: String = PokemonFilterBottomSheetFragment::class.java.simpleName
         private const val ARGS_KEY = "PokemonFilterBottomSheetFragment_args_key"
 
         fun argsFrom(result: Bundle): PokeFilterUiModel? {

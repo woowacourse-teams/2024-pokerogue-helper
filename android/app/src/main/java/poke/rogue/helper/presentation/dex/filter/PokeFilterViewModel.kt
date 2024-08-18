@@ -22,21 +22,21 @@ class PokeFilterViewModel : ViewModel() {
         _uiState.value =
             PokeFilterUiState(
                 types =
-                    TypeUiModel.entries.mapIndexed { index, typeUiModel ->
-                        SelectableUiModel(
-                            index,
-                            args.selectedTypes.contains(typeUiModel),
-                            typeUiModel,
-                        )
-                    },
+                TypeUiModel.entries.mapIndexed { index, typeUiModel ->
+                    SelectableUiModel(
+                        index,
+                        args.selectedTypes.contains(typeUiModel),
+                        typeUiModel,
+                    )
+                },
                 generations =
-                    PokeGenerationUiModel.entries.mapIndexed { index, pokeGenerationUiModel ->
-                        SelectableUiModel(
-                            index,
-                            args.selectedGeneration == pokeGenerationUiModel,
-                            pokeGenerationUiModel,
-                        )
-                    },
+                PokeGenerationUiModel.entries.mapIndexed { index, pokeGenerationUiModel ->
+                    SelectableUiModel(
+                        index,
+                        args.selectedGeneration == pokeGenerationUiModel,
+                        pokeGenerationUiModel,
+                    )
+                },
                 selectedTypes = args.selectedTypes,
             )
     }
