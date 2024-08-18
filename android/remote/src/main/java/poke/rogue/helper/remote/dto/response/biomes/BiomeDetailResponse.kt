@@ -13,7 +13,8 @@ class BiomeDetailResponse(
     val bossPokemons: List<BossPokemonResponse>,
     @SerialName("trainerPokemons")
     val gymPokemons: List<GymPokemonResponse>,
-    val map: List<MapResponse>
+    @SerialName("map")
+    val nextBiomes: List<NextBiomesResponse>
 )
 
 @Serializable
@@ -48,7 +49,7 @@ data class GymPokemonResponse(
 )
 
 @Serializable
-data class MapResponse(
+data class NextBiomesResponse(
     val id: String,
     val name: String,
     val image: String,
