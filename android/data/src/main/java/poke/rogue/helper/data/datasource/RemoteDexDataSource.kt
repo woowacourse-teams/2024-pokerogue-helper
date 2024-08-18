@@ -4,8 +4,8 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.getOrThrow
 import poke.rogue.helper.data.exception.onFailure
-import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.remote.injector.ServiceModule
 import poke.rogue.helper.remote.service.PokeDexService

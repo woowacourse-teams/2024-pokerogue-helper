@@ -1,7 +1,7 @@
 package poke.rogue.helper.data.repository
 
-import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonDetail
 
 interface DexRepository {
     suspend fun pokemons(): List<Pokemon>

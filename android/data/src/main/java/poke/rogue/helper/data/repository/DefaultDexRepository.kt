@@ -1,8 +1,8 @@
 package poke.rogue.helper.data.repository
 
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
-import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.stringmatcher.has
 
 class DefaultDexRepository(

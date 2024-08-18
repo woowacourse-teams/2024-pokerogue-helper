@@ -24,7 +24,7 @@ class FakeDexRepository : DexRepository {
     companion object {
         private const val FORMAT_POKEMON_IMAGE_URL =
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other" +
-                    "/official-artwork/"
+                "/official-artwork/"
 
         private const val POSTFIX_PNG = ".png"
 
@@ -248,27 +248,28 @@ class FakeDexRepository : DexRepository {
             PokemonDetail(
                 pokemon = Pokemon.DUMMY,
                 abilities =
-                listOf(
-                    PokemonDetailAbility("450", "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다.", false, false),
-                    PokemonDetailAbility("419", "엽록소", description = "날씨가 맑을 때 스피드가 올라간다.", false, false),
-                ),
+                    listOf(
+                        PokemonDetailAbility("450", "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다.", false, false),
+                        PokemonDetailAbility("419", "엽록소", description = "날씨가 맑을 때 스피드가 올라간다.", false, false),
+                    ),
                 stats =
-                listOf(
-                    Stat("hp", 45),
-                    Stat("attack", 49),
-                    Stat("defense", 49),
-                    Stat("specialAttack", 65),
-                    Stat("specialDefense", 65),
-                    Stat("speed", 45),
-                    Stat("total", 318),
-                ),
+                    listOf(
+                        Stat("hp", 45),
+                        Stat("attack", 49),
+                        Stat("defense", 49),
+                        Stat("specialAttack", 65),
+                        Stat("specialDefense", 65),
+                        Stat("speed", 45),
+                        Stat("total", 318),
+                    ),
                 pokemonCategory = PokemonCategory.EMPTY,
                 evolutions = emptyList(),
-                skills = PokemonDetailSkills(
-                    selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
-                    tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
-                    eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
-                ),
+                skills =
+                    PokemonDetailSkills(
+                        selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                        tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
+                        eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
+                    ),
                 biomes = Biome.DUMMYS,
                 height = 0.7,
                 weight = 6.9,

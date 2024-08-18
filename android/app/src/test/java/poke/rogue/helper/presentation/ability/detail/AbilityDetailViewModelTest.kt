@@ -35,9 +35,10 @@ class AbilityDetailViewModelTest {
 
             // when
             viewModel.updateAbilityDetail(abilityId)
-            val abilityDetail = viewModel.abilityDetail.first{
-                it is AbilityDetailUiState.Success
-            }
+            val abilityDetail =
+                viewModel.abilityDetail.first {
+                    it is AbilityDetailUiState.Success
+                }
             val detail = (abilityDetail as AbilityDetailUiState.Success).data.toUi()
 
             // then

@@ -53,22 +53,22 @@ class PokemonDetailViewModelTest {
             // then
             val pokemonDetailUiState = viewModel.uiState
             pokemonDetailUiState.value shouldBe
-                    PokemonDetailUiState.Success(
-                        pokemon =
+                PokemonDetailUiState.Success(
+                    pokemon =
                         PokemonUiModel(
                             id = "1",
                             dexNumber = 1,
                             name = "이상해씨",
                             imageUrl =
-                            "https://raw.githubusercontent.com" +
+                                "https://raw.githubusercontent.com" +
                                     "/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
                             types =
-                            listOf(
-                                TypeUiModel.GRASS,
-                                TypeUiModel.POISON,
-                            ),
+                                listOf(
+                                    TypeUiModel.GRASS,
+                                    TypeUiModel.POISON,
+                                ),
                         ),
-                        stats =
+                    stats =
                         listOf(
                             StatUiModel("HP", 45, 255, R.color.stat_hp),
                             StatUiModel("공격", 49, 190, R.color.stat_attack),
@@ -78,18 +78,19 @@ class PokemonDetailViewModelTest {
                             StatUiModel("스피드", 45, 200, R.color.stat_speed),
                             StatUiModel("총합", 318, 800, R.color.stat_total),
                         ),
-                        abilities =
+                    abilities =
                         listOf(
                             PokemonDetailAbilityUiModel("450", "심록", false, false),
                             PokemonDetailAbilityUiModel("419", "엽록소", false, false),
                         ),
-                        skills = PokemonDetailSkills(
+                    skills =
+                        PokemonDetailSkills(
                             selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
                             eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
                             tmLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
                         ),
-                        height = 0.7f,
-                        weight = 6.9f,
-                    )
+                    height = 0.7f,
+                    weight = 6.9f,
+                )
         }
 }

@@ -9,7 +9,7 @@ data class Pokemon(
     val name: String,
     val imageUrl: String,
     val types: List<Type>,
-){
+) {
     companion object {
         private const val DUMMY_POKEMON_NAME = "이상해씨"
         private const val DUMMY_IMAGE_URL =
