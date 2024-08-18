@@ -2,13 +2,11 @@ package com.pokerogue.helper.pokemon2;
 
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class MoveRepository {
     private final Map<String, Map<String, String>> data = new TreeMap<>();
 
