@@ -38,6 +38,8 @@
     <string name="dex_filter_chip">필터 %s</string>
     <string name="dex_filter_all_generations">모든 세대</string>
     <string name="dex_filter_generation_format">%d세대</string>
+    <string name="dex_pokemon_sort_title">포켓몬 정렬</string>
+
     <!--    detail-->
     <string name="dex_detail_pokemon_stats_title">기본 스탯</string>
     <string name="pokemon_detail_pokemon_stats_title">능력치</string>

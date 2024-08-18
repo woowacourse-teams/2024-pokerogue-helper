@@ -52,11 +52,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_dex" />
 
+        <poke.rogue.helper.ui.component.PokeChip
+            android:id="@+id/chip_poke_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            app:label="정렬"
+            visible="@{! vm.isLoading()}"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="8dp"
+            app:trailingIcon="@drawable/ic_sort"
+            app:layout_constraintEnd_toStartOf="@id/chip_poke_fiter"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_dex" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_poke_fiter"
