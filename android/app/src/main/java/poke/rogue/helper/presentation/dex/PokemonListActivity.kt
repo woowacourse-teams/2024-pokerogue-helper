@@ -70,8 +70,11 @@ class PokemonListActivity :
             viewModel.uiState.collect { uiState ->
                 pokemonAdapter.submitList(uiState.pokemons)
                 binding.chipPokeFiter.bindPokeChip(
-                    PokeChip.PokeChipSpec(
-                        label = stringOf(R.string.dex_filter_chip,if (uiState.isFiltered) uiState.filterCount.toString() else "") ,
+                    PokeChip.Spec(
+                        label = stringOf(
+                            R.string.dex_filter_chip,
+                            if (uiState.isFiltered) uiState.filterCount.toString() else ""
+                        ),
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
@@ -107,6 +110,7 @@ class PokemonListActivity :
             hideKeyboard()
         }
     }
+
 
     companion object {
         val TAG: String = PokemonListActivity::class.java.simpleName

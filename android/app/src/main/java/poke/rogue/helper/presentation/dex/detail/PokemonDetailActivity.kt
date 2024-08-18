@@ -20,7 +20,8 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 
-class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
+class PokemonDetailActivity :
+    ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
@@ -54,7 +55,10 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
             adapter = pokemonDetailPagerAdapter
         }
 
-        TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
+        TabLayoutMediator(
+            binding.tabLayoutPokemonDetail,
+            binding.pagerPokemonDetail
+        ) { tab, position ->
             when (position) {
                 0 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_stats_title)
                 1 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_evolution_title)

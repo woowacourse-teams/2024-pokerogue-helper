@@ -58,7 +58,7 @@ class PokeChipGroup
         }
 
         fun submitList(
-            specs: List<PokeChip.PokeChipSpec>,
+            specs: List<PokeChip.Spec>,
             onSelect: ((chipId: Int) -> Unit)? = null,
         ) {
             if (chipViews.isEmpty()) {
@@ -69,7 +69,7 @@ class PokeChipGroup
         }
 
         private fun addChips(
-            specs: List<PokeChip.PokeChipSpec>,
+            specs: List<PokeChip.Spec>,
             onSelect: ((chipId: Int) -> Unit)?,
         ) {
             removeAllViews()
@@ -80,7 +80,7 @@ class PokeChipGroup
         }
 
         private fun addChip(
-            spec: PokeChip.PokeChipSpec,
+            spec: PokeChip.Spec,
             originalChipViews: List<PokeChip>,
             onSelect: ((chipId: Int) -> Unit)?,
         ) {
@@ -104,7 +104,7 @@ class PokeChipGroup
             chipViews.add(chip)
         }
 
-        private fun updateChips(specs: List<PokeChip.PokeChipSpec>) {
+        private fun updateChips(specs: List<PokeChip.Spec>) {
             require(chipViews.all { chip -> specs.any { it.id == chip.chipId } }) {
                 "업데이트할 chip이 존재하지 않습니다."
             }

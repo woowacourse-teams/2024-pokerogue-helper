@@ -53,7 +53,7 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
             viewModel.uiState.collect {
                 binding.chipGroupPokeFilterType.submitList(
                     it.types.map { selectableType ->
-                        PokeChip.PokeChipSpec(
+                        PokeChip.Spec(
                             selectableType.id,
                             "",
                             leadingIconRes = selectableType.data.typeIconResId,
@@ -72,7 +72,7 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
                 )
                 binding.chipGroupPokeFilterGeneration.submitList(
                     it.generations.map { selectableGeneration ->
-                        PokeChip.PokeChipSpec(
+                        PokeChip.Spec(
                             selectableGeneration.id,
                             if (selectableGeneration.data == PokeGenerationUiModel.ALL) "모든 세대" else "${selectableGeneration.data.number}세대",
                             isSelected = selectableGeneration.isSelected,

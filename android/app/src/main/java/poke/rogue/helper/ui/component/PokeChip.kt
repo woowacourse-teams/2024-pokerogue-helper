@@ -112,7 +112,7 @@ class PokeChip
             }
         }
 
-        private fun initPokeChip(chipSpec: PokeChipSpec) {
+        private fun initPokeChip(chipSpec: Spec) {
             removeAllViews()
             chipId = chipSpec.id
             isSelected = chipSpec.isSelected
@@ -264,7 +264,7 @@ class PokeChip
             label.setTextColor(textColorList)
         }
 
-        data class PokeChipSpec(
+        data class Spec(
             val id: Int = NO_ID,
             val label: String,
             @DrawableRes val leadingIconRes: Int? = null,
@@ -297,7 +297,7 @@ class PokeChip
 
             @JvmStatic
             @BindingAdapter("pokeChipSpec")
-            fun PokeChip.bindPokeChip(chipSpec: PokeChipSpec) {
+            fun PokeChip.bindPokeChip(chipSpec: Spec) {
                 initPokeChip(chipSpec)
             }
         }
