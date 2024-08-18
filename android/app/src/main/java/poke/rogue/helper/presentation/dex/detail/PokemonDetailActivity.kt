@@ -16,6 +16,7 @@ import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
@@ -55,7 +56,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
             adapter = pokemonDetailPagerAdapter
         }
 
-        val tabTitles = resources.getStringArray(R.array.pokemon_detail_tab_titles)
+        val tabTitles = stringArrayOf(R.array.pokemon_detail_tab_titles)
         TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
             tab.text = tabTitles[position]
         }.attach()

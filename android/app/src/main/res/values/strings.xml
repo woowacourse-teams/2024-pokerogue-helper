@@ -42,8 +42,8 @@
 
     <string-array name="pokemon_detail_tab_titles">
         <item>능력치</item>
-        <item>기술 정보</item>
         <item>진화 정보</item>
+        <item>기술 정보</item>
         <item>정보</item>
     </string-array>
 
