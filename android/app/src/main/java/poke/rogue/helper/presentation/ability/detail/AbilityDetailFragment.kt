@@ -34,7 +34,7 @@ class AbilityDetailFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val abilityId = arguments?.getString(ABILITY_ID).toString()
+        val abilityId = arguments?.getString(ABILITY_ID) ?: ""
         viewModel.updateAbilityDetail(abilityId)
     }
 
