@@ -25,7 +25,7 @@ class DefaultDexRepository(
         sort: PokemonSort,
         filters: List<PokemonFilter>,
     ): List<Pokemon> {
-        return if (name.isEmpty()) {
+        return if (name.isBlank()) {
             pokemons()
         } else {
             pokemons().filter { it.name.has(name) }
