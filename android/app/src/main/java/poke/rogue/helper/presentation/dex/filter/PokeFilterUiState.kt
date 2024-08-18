@@ -32,29 +32,29 @@ data class PokeFilterUiState(
         val DEFAULT =
             PokeFilterUiState(
                 types =
-                TypeUiModel.entries.mapIndexed { index, typeUiModel ->
-                    SelectableUiModel(
-                        index,
-                        false,
-                        typeUiModel,
-                    )
-                },
-                generations =
-                PokeGenerationUiModel.entries.mapIndexed { index, pokeGenerationUiModel ->
-                    if (pokeGenerationUiModel == PokeGenerationUiModel.ALL) {
-                        SelectableUiModel(
-                            index,
-                            true,
-                            pokeGenerationUiModel,
-                        )
-                    } else {
+                    TypeUiModel.entries.mapIndexed { index, typeUiModel ->
                         SelectableUiModel(
                             index,
                             false,
-                            pokeGenerationUiModel,
+                            typeUiModel,
                         )
-                    }
-                },
+                    },
+                generations =
+                    PokeGenerationUiModel.entries.mapIndexed { index, pokeGenerationUiModel ->
+                        if (pokeGenerationUiModel == PokeGenerationUiModel.ALL) {
+                            SelectableUiModel(
+                                index,
+                                true,
+                                pokeGenerationUiModel,
+                            )
+                        } else {
+                            SelectableUiModel(
+                                index,
+                                false,
+                                pokeGenerationUiModel,
+                            )
+                        }
+                    },
             )
     }
 }

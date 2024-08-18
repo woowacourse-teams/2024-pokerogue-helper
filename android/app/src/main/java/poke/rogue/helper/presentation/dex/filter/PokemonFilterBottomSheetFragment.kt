@@ -65,13 +65,13 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
                             "",
                             leadingIconRes = selectableType.data.typeIconResId,
                             sizes =
-                            PokeChip.Sizes(
-                                leadingIconSize = 28.dp,
-                            ),
+                                PokeChip.Sizes(
+                                    leadingIconSize = 28.dp,
+                                ),
                             colors =
-                            PokeChip.Colors(
-                                selectedContainerColor = selectableType.data.typeColor,
-                            ),
+                                PokeChip.Colors(
+                                    selectedContainerColor = selectableType.data.typeColor,
+                                ),
                             isSelected = selectableType.isSelected,
                             onSelect = viewModel::selectType,
                         )

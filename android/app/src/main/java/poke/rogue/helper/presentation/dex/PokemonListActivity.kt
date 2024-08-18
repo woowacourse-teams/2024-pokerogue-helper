@@ -84,10 +84,10 @@ class PokemonListActivity :
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
                         label =
-                        stringOf(
-                            R.string.dex_filter_chip,
-                            if (uiState.isFiltered) uiState.filterCount.toString() else "",
-                        ),
+                            stringOf(
+                                R.string.dex_filter_chip,
+                                if (uiState.isFiltered) uiState.filterCount.toString() else "",
+                            ),
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
@@ -146,9 +146,10 @@ class PokemonListActivity :
         }
     }
 
-    private fun String.clean() = this
-        .replace("\\s".toRegex(), "")
-        .replace("[^a-zA-Z0-9ㄱ-ㅎ가-힣]".toRegex(), "")
+    private fun String.clean() =
+        this
+            .replace("\\s".toRegex(), "")
+            .replace("[^a-zA-Z0-9ㄱ-ㅎ가-힣]".toRegex(), "")
 
     companion object {
         const val FILTER_RESULT_KEY = "FILTER_RESULT_KEY_result_key"
@@ -156,7 +157,7 @@ class PokemonListActivity :
     }
 }
 
-//TODO : Remove this class
+// TODO : Remove this class
 class FakeDexRepository : DexRepository {
     override suspend fun pokemons(): List<Pokemon> = POKEMONS
 
@@ -193,12 +194,11 @@ class FakeDexRepository : DexRepository {
     companion object {
         private const val FORMAT_POKEMON_IMAGE_URL =
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other" +
-                    "/official-artwork/"
+                "/official-artwork/"
 
         private const val POSTFIX_PNG = ".png"
 
-        private fun pokemonImageUrl(pokemonId: Long) =
-            FORMAT_POKEMON_IMAGE_URL + pokemonId + POSTFIX_PNG
+        private fun pokemonImageUrl(pokemonId: Long) = FORMAT_POKEMON_IMAGE_URL + pokemonId + POSTFIX_PNG
 
         val POKEMONS: List<Pokemon> =
             listOf(
@@ -358,20 +358,20 @@ class FakeDexRepository : DexRepository {
             PokemonDetail(
                 pokemon = Pokemon.DUMMY,
                 stats =
-                listOf(
-                    Stat("hp", 45),
-                    Stat("attack", 49),
-                    Stat("defense", 49),
-                    Stat("specialAttack", 65),
-                    Stat("specialDefense", 65),
-                    Stat("speed", 45),
-                    Stat("total", 318),
-                ),
+                    listOf(
+                        Stat("hp", 45),
+                        Stat("attack", 49),
+                        Stat("defense", 49),
+                        Stat("specialAttack", 65),
+                        Stat("specialDefense", 65),
+                        Stat("speed", 45),
+                        Stat("total", 318),
+                    ),
                 abilities =
-                listOf(
-                    Ability(450, "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다."),
-                    Ability(419, "엽록소", description = "날씨가 맑을 때 스피드가 올라간다."),
-                ),
+                    listOf(
+                        Ability(450, "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다."),
+                        Ability(419, "엽록소", description = "날씨가 맑을 때 스피드가 올라간다."),
+                    ),
                 skills = PokemonSkill.FAKE_SKILLS,
                 height = 0.7f,
                 weight = 6.9f,

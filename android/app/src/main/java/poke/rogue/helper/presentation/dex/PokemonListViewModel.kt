@@ -63,12 +63,13 @@ class PokemonListViewModel(
             .flatMapLatest { query ->
                 combine(pokeSort, pokeFilter) { sort, filter ->
                     PokemonListUiState(
-                        pokemons = queriedPokemons(
-                            query = query,
-                            types = filter.selectedTypes,
-                            generation = filter.selectedGeneration,
-                            sort = sort,
-                        ),
+                        pokemons =
+                            queriedPokemons(
+                                query = query,
+                                types = filter.selectedTypes,
+                                generation = filter.selectedGeneration,
+                                sort = sort,
+                            ),
                         sort = sort,
                         filteredTypes = filter.selectedTypes,
                         filteredGeneration = filter.selectedGeneration,
@@ -98,7 +99,7 @@ class PokemonListViewModel(
         query: String,
         types: List<TypeUiModel>,
         generation: PokeGenerationUiModel,
-        sort: PokemonSortUiModel
+        sort: PokemonSortUiModel,
     ): List<PokemonUiModel> {
         return try {
             val filteredTypes = types.map { PokemonFilter.ByType(it.toData()) }

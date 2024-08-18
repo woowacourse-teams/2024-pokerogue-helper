@@ -11,25 +11,29 @@ import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 class PokeSortAdapter(
     private val onToggleSort: PokemonSortHandler,
 ) : ListAdapter<SelectableUiModel<PokemonSortUiModel>, PokeSortAdapter.PokeSortViewHolder>(
-    sortComparator
-) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokeSortViewHolder {
+        sortComparator,
+    ) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): PokeSortViewHolder {
         val binding =
             ItemPokemonSortBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PokeSortViewHolder(binding, onToggleSort)
     }
 
-    override fun onBindViewHolder(holder: PokeSortViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PokeSortViewHolder,
+        position: Int,
+    ) {
         holder.bind(getItem(position))
     }
 
     class PokeSortViewHolder(
         private val binding: ItemPokemonSortBinding,
-        private val onToggleSort: PokemonSortHandler
+        private val onToggleSort: PokemonSortHandler,
     ) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(selectableSort: SelectableUiModel<PokemonSortUiModel>) {
             binding.sort = selectableSort
             binding.handler = onToggleSort
@@ -37,9 +41,10 @@ class PokeSortAdapter(
     }
 
     companion object {
-        private val sortComparator = ItemDiffCallback<SelectableUiModel<PokemonSortUiModel>>(
-            onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
-            onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
-        )
+        private val sortComparator =
+            ItemDiffCallback<SelectableUiModel<PokemonSortUiModel>>(
+                onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
+                onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
+            )
     }
 }

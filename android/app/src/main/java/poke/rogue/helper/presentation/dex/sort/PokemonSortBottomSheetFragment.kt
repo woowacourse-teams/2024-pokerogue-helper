@@ -12,7 +12,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.databinding.BottomSheetPokemonSortBinding
 import poke.rogue.helper.presentation.dex.PokemonListActivity.Companion.SORT_RESULT_KEY
-import poke.rogue.helper.presentation.dex.filter.PokemonFilterBottomSheetFragment
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
@@ -101,9 +100,7 @@ class PokemonSortBottomSheetFragment : BottomSheetDialogFragment() {
             return result.parcelable<PokemonSortUiModel>(ARGS_KEY)
         }
 
-        fun newInstance(
-            sort: PokemonSortUiModel,
-        ): PokemonSortBottomSheetFragment {
+        fun newInstance(sort: PokemonSortUiModel): PokemonSortBottomSheetFragment {
             return PokemonSortBottomSheetFragment().apply {
                 arguments =
                     bundleOf(ARGS_KEY to sort)

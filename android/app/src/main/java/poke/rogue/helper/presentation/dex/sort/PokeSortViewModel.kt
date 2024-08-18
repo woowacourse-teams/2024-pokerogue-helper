@@ -15,11 +15,11 @@ import poke.rogue.helper.presentation.util.event.asEventFlow
 class PokeSortViewModel(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel(), PokemonSortHandler {
-
-    val uiState: StateFlow<PokeSortUiState> = savedStateHandle.getStateFlow(
-        key = UI_STATE_KEY,
-        initialValue = PokeSortUiState.Default,
-    )
+    val uiState: StateFlow<PokeSortUiState> =
+        savedStateHandle.getStateFlow(
+            key = UI_STATE_KEY,
+            initialValue = PokeSortUiState.Default,
+        )
 
     private val _uiEvent = MutableEventFlow<PokeSortUiEvent>()
     val uiEvent: EventFlow<PokeSortUiEvent> = _uiEvent.asEventFlow()
@@ -50,7 +50,7 @@ class PokeSortViewModel(
             _uiEvent.emit(
                 PokeSortUiEvent.ApplySorting(
                     uiState.value.selectedSort,
-                )
+                ),
             )
         }
     }
@@ -68,24 +68,26 @@ class PokeSortViewModel(
 
 sealed interface PokeSortUiEvent {
     data object CloseSort : PokeSortUiEvent
+
     data class ApplySorting(val sort: PokemonSortUiModel) : PokeSortUiEvent
 }
 
 @Parcelize
 data class PokeSortUiState(
-    val pokemonSorts: List<SelectableUiModel<PokemonSortUiModel>>
+    val pokemonSorts: List<SelectableUiModel<PokemonSortUiModel>>,
 ) : Parcelable {
     constructor(pokemonSort: PokemonSortUiModel) : this(
-        pokemonSorts = pokemonSortsFrom(pokemonSort)
+        pokemonSorts = pokemonSortsFrom(pokemonSort),
     )
 
     val selectedSort: PokemonSortUiModel
         get() = pokemonSorts.first { it.isSelected }.data
 
     companion object {
-        val Default = PokeSortUiState(
-            pokemonSorts = pokemonSortsFrom(PokemonSortUiModel.ByDexNumber),
-        )
+        val Default =
+            PokeSortUiState(
+                pokemonSorts = pokemonSortsFrom(PokemonSortUiModel.ByDexNumber),
+            )
 
         private fun pokemonSortsFrom(sort: PokemonSortUiModel) =
             PokemonSortUiModel.entries.map { type ->

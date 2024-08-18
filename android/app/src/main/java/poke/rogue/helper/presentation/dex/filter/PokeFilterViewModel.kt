@@ -11,35 +11,38 @@ import poke.rogue.helper.presentation.util.event.MutableEventFlow
 import poke.rogue.helper.presentation.util.event.asEventFlow
 
 class PokeFilterViewModel(
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-
-    val uiState: StateFlow<PokeFilterUiState> = savedStateHandle.getStateFlow(
-        UI_STATE_KEY,
-        PokeFilterUiState.DEFAULT
-    )
+    val uiState: StateFlow<PokeFilterUiState> =
+        savedStateHandle.getStateFlow(
+            UI_STATE_KEY,
+            PokeFilterUiState.DEFAULT,
+        )
 
     private val _uiEvent = MutableEventFlow<PokeFilterUiEvent>()
     val uiEvent: EventFlow<PokeFilterUiEvent> = _uiEvent.asEventFlow()
 
     fun init(args: PokeFilterUiModel) {
-        savedStateHandle[UI_STATE_KEY] = PokeFilterUiState(
-            types = TypeUiModel.entries.mapIndexed { index, typeUiModel ->
-                SelectableUiModel(
-                    index,
-                    args.selectedTypes.contains(typeUiModel),
-                    typeUiModel,
-                )
-            },
-            generations = PokeGenerationUiModel.entries.mapIndexed { index, pokeGenerationUiModel ->
-                SelectableUiModel(
-                    index,
-                    args.selectedGeneration == pokeGenerationUiModel,
-                    pokeGenerationUiModel,
-                )
-            },
-            selectedTypes = args.selectedTypes,
-        )
+        savedStateHandle[UI_STATE_KEY] =
+            PokeFilterUiState(
+                types =
+                    TypeUiModel.entries.mapIndexed { index, typeUiModel ->
+                        SelectableUiModel(
+                            index,
+                            args.selectedTypes.contains(typeUiModel),
+                            typeUiModel,
+                        )
+                    },
+                generations =
+                    PokeGenerationUiModel.entries.mapIndexed { index, pokeGenerationUiModel ->
+                        SelectableUiModel(
+                            index,
+                            args.selectedGeneration == pokeGenerationUiModel,
+                            pokeGenerationUiModel,
+                        )
+                    },
+                selectedTypes = args.selectedTypes,
+            )
     }
 
     fun selectType(id: Int) {
