@@ -21,9 +21,6 @@
             android:name=".presentation.battle.BattleActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.component.MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".presentation.tip.TipActivity"
             android:exported="false" />
         <activity
