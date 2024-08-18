@@ -32,8 +32,8 @@ class BiomePokemonViewHolder(
         private val typesUiConfig =
             TypeChip.PokemonTypeViewConfiguration(
                 hasBackGround = true,
-                nameSize = 8.dp,
-                iconSize = 18.dp,
+                nameSize = 7.dp,
+                iconSize = 14.dp,
                 spacing = 0.dp,
             )
     }

@@ -57,7 +57,7 @@
             android:id="@+id/rv_biome_gym_pokemon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="5dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/vw_divider"
             app:spanCount="3"
