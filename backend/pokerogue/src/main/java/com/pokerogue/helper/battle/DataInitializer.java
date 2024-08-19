@@ -1,10 +1,13 @@
 package com.pokerogue.helper.battle;
 
 import com.pokerogue.external.s3.service.S3Service;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -29,6 +32,8 @@ public class DataInitializer implements ApplicationRunner {
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
     private final BattlePokemonTypeRepository battlePokemonTypeRepository;
+    private final BattlePokemonRepository battlePokemonRepository;
+    private final TypeMatchingRepository typeMatchingRepository;
     private final S3Service s3Service;
 
     @Override
@@ -45,15 +50,21 @@ public class DataInitializer implements ApplicationRunner {
             PokemonMovesByMachine pokemonMovesByMachine = createPokemonMovesByMachine(fields);
             pokemonMovesByMachineRepository.save(pokemonMovesByMachine);
         });
+        saveData("type.txt", fields -> {
+            PokemonType pokemonType = createPokemonType(fields);
+            battlePokemonTypeRepository.save(pokemonType);
+        });
         saveData("battle-pokemon.txt", fields -> {
             PokemonMovesBySelf pokemonMovesBySelf = createPokemonMovesBySelf(fields);
             pokemonMovesBySelfRepository.save(pokemonMovesBySelf);
             PokemonMovesByEgg pokemonMovesByEgg = createPokemonMovesByEgg(fields);
             pokemonMovesByEggRepository.save(pokemonMovesByEgg);
+            BattlePokemon battlePokemon = createBattlePokemon(fields);
+            battlePokemonRepository.save(battlePokemon);
         });
-        saveData("type.txt", fields -> {
-            PokemonType pokemonType = createPokemonType(fields);
-            battlePokemonTypeRepository.save(pokemonType);
+        saveData("type-matching.txt", fields -> {
+            TypeMatching typeMatching = createTypeMatching(fields);
+            typeMatchingRepository.save(typeMatching);
         });
     }
 
@@ -112,6 +123,14 @@ public class DataInitializer implements ApplicationRunner {
         );
     }
 
+    private PokemonType createPokemonType(List<String> fields) {
+        String name = fields.get(0);
+        String engName = fields.get(1);
+        String image = s3Service.getPokerogueTypeImageFromS3(engName);
+
+        return new PokemonType(name, engName, image);
+    }
+
     private PokemonMovesByMachine createPokemonMovesByMachine(List<String> fields) {
         Integer pokedexNumber = convertToInteger(fields.get(0));
         List<String> moveIds = Arrays.stream(fields.get(2).split(LIST_DELIMITER))
@@ -142,14 +161,31 @@ public class DataInitializer implements ApplicationRunner {
         return new PokemonMovesByEgg(pokedexNumber, moveIds);
     }
 
-    private PokemonType createPokemonType(List<String> fields) {
-        String name = fields.get(0);
-        String engName = fields.get(1);
-        String image = s3Service.getPokerogueTypeImageFromS3(engName);
+    private BattlePokemon createBattlePokemon(List<String> fields) {
+        String name = fields.get(1);
+        List<PokemonType> types = new ArrayList<>();
+        String type1 = fields.get(2);
+        String type2 = fields.get(3);
+        battlePokemonTypeRepository.findByName(type1).ifPresent(types::add);
+        battlePokemonTypeRepository.findByName(type2).ifPresent(types::add);
 
-        return new PokemonType(name, engName, image);
+        return new BattlePokemon(name, types, name);
     }
 
+    private TypeMatching createTypeMatching(List<String> fields) {
+        String fromType = fields.get(0);
+        String toType = fields.get(1);
+        double result = convertToDouble(fields.get(2));
+        return new TypeMatching(fromType, toType, result);
+    }
+
+    private double convertToDouble(String data) {
+        try {
+            return Double.parseDouble(data);
+        } catch (NumberFormatException e) {
+            throw new GlobalCustomException(ErrorMessage.PARSE_ERROR);
+        }
+    }
 
     private Integer convertToInteger(String data) {
         try {

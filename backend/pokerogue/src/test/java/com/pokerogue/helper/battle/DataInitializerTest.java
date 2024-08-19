@@ -20,6 +20,8 @@ class DataInitializerTest {
         PokemonMovesBySelfRepository pokemonMovesBySelfRepository = new PokemonMovesBySelfRepository();
         PokemonMovesByEggRepository pokemonMovesByEggRepository = new PokemonMovesByEggRepository();
         BattlePokemonTypeRepository battlePokemonTypeRepository = new BattlePokemonTypeRepository();
+        BattlePokemonRepository battlePokemonRepository = new BattlePokemonRepository();
+        TypeMatchingRepository typeMatchingRepository = new TypeMatchingRepository();
         S3Service s3Service = new S3Service(new FakeS3ImageClient());
         DataInitializer dataInitializer = new DataInitializer(
                 weatherRepository,
@@ -28,6 +30,8 @@ class DataInitializerTest {
                 pokemonMovesBySelfRepository,
                 pokemonMovesByEggRepository,
                 battlePokemonTypeRepository,
+                battlePokemonRepository,
+                typeMatchingRepository,
                 s3Service
         );
         dataInitializer.run(new DefaultApplicationArguments());
@@ -39,6 +43,8 @@ class DataInitializerTest {
             assertThat(pokemonMovesBySelfRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesByEggRepository.findAll()).hasSize(1082);
             assertThat(battlePokemonTypeRepository.findAll()).hasSize(20);
+            assertThat(battlePokemonRepository.findAll()).isNotEmpty();
+            assertThat(typeMatchingRepository.findAll()).hasSize(361);
         });
     }
 }
