@@ -60,7 +60,7 @@ class FakeBiomeRepository : BiomeRepository {
                             "레어", listOf(
                                 BiomePokemon(
                                     name = "이상해씨",
-                                    image = "https://wiki.pokerogue.net/_media/ko:pokemon:bulbasaur.png?w=100&tok=3b3b7b",
+                                    image = "",
                                     types = listOf(Type.BUG, Type.GRASS)
                                 )
                             )
@@ -71,7 +71,7 @@ class FakeBiomeRepository : BiomeRepository {
                             "레어", listOf(
                                 BiomePokemon(
                                     name = "이상해풀",
-                                    image = "https://wiki.pokerogue.net/_media/ko:pokemon:bulbasaur.png?w=100&tok=3b3b7b",
+                                    image = "",
                                     types = listOf(Type.GRASS, Type.POISON)
                                 )
                             )
@@ -85,7 +85,7 @@ class FakeBiomeRepository : BiomeRepository {
                             pokemons = listOf(
                                 BiomePokemon(
                                     name = "이상해꽃",
-                                    image = "https://wiki.pokerogue.net/_media/ko:pokemon:venusaur.png?w=100&tok=3b3b7b",
+                                    image = "",
                                     types = listOf(Type.GRASS, Type.POISON)
                                 )
                             )
