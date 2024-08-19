@@ -1,9 +1,12 @@
 package poke.rogue.helper.presentation.battle
 
 import WeatherSpinnerAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
@@ -11,7 +14,6 @@ import poke.rogue.helper.databinding.ActivityBattleBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
-import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
 
@@ -20,12 +22,15 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)
     }
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
     override val toolbar: Toolbar
         get() = binding.toolbarBattle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
+        initResultLauncher()
         initSpinner()
         initObserver()
     }
@@ -33,10 +38,14 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     private fun initView() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
+    }
 
-        binding.ivMinePokemon.setOnClickListener {
-            startActivity<BattleSelectionActivity> { }
-        }
+    private fun initResultLauncher() {
+        resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                }
+            }
     }
 
     private fun initSpinner() {
@@ -87,7 +96,12 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
         repeatOnStarted {
             viewModel.navigateToSelection.collect { hasSkillSelection ->
-                startActivity(BattleSelectionActivity.intent(this@BattleActivity, hasSkillSelection))
+                val intent =
+                    BattleSelectionActivity.intent(
+                        this@BattleActivity,
+                        hasSkillSelection,
+                    )
+                resultLauncher.launch(intent)
             }
         }
     }

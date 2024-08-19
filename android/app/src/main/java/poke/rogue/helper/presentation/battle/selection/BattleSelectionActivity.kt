@@ -10,6 +10,7 @@ import poke.rogue.helper.databinding.ActivityBattleSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.BattleSelectionUiState
+import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
 
@@ -18,7 +19,12 @@ class BattleSelectionActivity :
     private val viewModel by viewModels<BattleSelectionViewModel> {
         BattleSelectionViewModel.factory(isSkillSelectionRequired)
     }
-    private val isSkillSelectionRequired by lazy { intent.getBooleanExtra(KEY_HAS_SKILL_SELECTION, false) }
+    private val isSkillSelectionRequired by lazy {
+        intent.getBooleanExtra(
+            KEY_HAS_SKILL_SELECTION,
+            false,
+        )
+    }
     private val selectionPagerAdapter: BattleSelectionPagerAdapter by lazy {
         BattleSelectionPagerAdapter(this)
     }
@@ -58,10 +64,25 @@ class BattleSelectionActivity :
                 binding.pagerBattleSelection.currentItem = it.ordinal
             }
         }
+
+        repeatOnStarted {
+            viewModel.completeSelection.collect {
+                handleSelectionResult(it)
+            }
+        }
+    }
+
+    private fun handleSelectionResult(result: SelectionData) {
+        val intent = Intent().apply { putExtra(KEY_SELECTION_RESULT, result) }
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
     companion object {
         private const val KEY_HAS_SKILL_SELECTION = "hasSkillSelection"
+        const val KEY_SELECTED_POKEMON = "selectedPokemon"
+        const val KEY_SELECTED_SKILL = "selectedSkill"
+        const val KEY_SELECTION_RESULT = "selectionResult"
 
         fun intent(
             context: Context,

@@ -2,13 +2,16 @@ package poke.rogue.helper.presentation.battle.selection
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
@@ -16,6 +19,7 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.isSelected
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
+import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 
 class BattleSelectionViewModel(
@@ -56,6 +60,9 @@ class BattleSelectionViewModel(
             }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
+    private val _completeSelection = MutableSharedFlow<SelectionData>()
+    val completeSelection = _completeSelection.asSharedFlow()
+
     override fun selectPokemon(pokemon: PokemonSelectionUiModel) {
         _selectedPokemon.value = BattleSelectionUiState.Selected(pokemon)
     }
@@ -66,13 +73,30 @@ class BattleSelectionViewModel(
 
     override fun navigateToNextPage() {
         if (isLastStep.value) {
-            // TODO : Complete Selection
+            handleSelectionResult()
             return
         }
         val nextIndex = currentStep.value.ordinal + 1
         val nextPage = SelectionStep.entries.getOrNull(nextIndex)
         if (nextPage != null) {
             _currentStep.value = nextPage
+        }
+    }
+
+    private fun handleSelectionResult() {
+        val pokemon =
+            selectedPokemon.value.selectedData() ?: throw IllegalStateException("포켓몬을 선택하세요")
+        val result =
+            if (isSkillSelectionRequired) {
+                val skill =
+                    selectedSkill.value.selectedData() ?: throw IllegalStateException("스킬을 선택하세요")
+                SelectionData.WithSkill(pokemon, skill)
+            } else {
+                SelectionData.WithoutSkill(pokemon)
+            }
+
+        viewModelScope.launch {
+            _completeSelection.emit(result)
         }
     }
 
