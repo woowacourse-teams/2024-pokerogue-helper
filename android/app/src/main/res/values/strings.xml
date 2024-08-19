@@ -89,6 +89,8 @@
     <string name="battle_selection_search_skill_hint">기술을 검색하세요</string>
     <string name="battle_selection_pokemon_hint">포켓몬을 검색하세요</string>
     <string name="battle_selection_title">포켓몬을 선택하세요</string>
+    <string name="battle_selection_next_btn">다음</string>
+    <string name="battle_selection_previous_btn">이전</string>
 
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>

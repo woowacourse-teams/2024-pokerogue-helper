@@ -1,16 +1,23 @@
 package poke.rogue.helper.presentation.battle.selection
 
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 
 class BattleSelectionViewModel(
+    private val isSkillSelectionRequired: Boolean,
     logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), BattleSelectionHandler, NavigationHandler {
     private val _pokemons = MutableStateFlow(PokemonSelectionUiModel.DUMMY)
@@ -30,6 +37,11 @@ class BattleSelectionViewModel(
     private val _currentStep = MutableStateFlow(SelectionStep.POKEMON_SELECTION)
     val currentStep: StateFlow<SelectionStep> = _currentStep.asStateFlow()
 
+    val isLastStep: StateFlow<Boolean> =
+        currentStep.map {
+            it.isLastStep(isSkillSelectionRequired)
+        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
     override fun selectPokemon(pokemon: PokemonSelectionUiModel) {
         _selectedPokemon.value = BattleSelectionUiState.Selected(pokemon)
     }
@@ -39,20 +51,28 @@ class BattleSelectionViewModel(
     }
 
     override fun navigateToNextPage() {
-        val nextPage =
-            when (currentStep.value) {
-                SelectionStep.POKEMON_SELECTION -> SelectionStep.SKILL_SELECTION
-                SelectionStep.SKILL_SELECTION -> return // TODO : Complete Selection
-            }
-        _currentStep.value = nextPage
+        if (isLastStep.value) {
+            // TODO : Complete Selection
+            return
+        }
+        val nextIndex = currentStep.value.ordinal + 1
+        val nextPage = SelectionStep.entries.getOrNull(nextIndex)
+        if (nextPage != null) {
+            _currentStep.value = nextPage
+        }
     }
 
     override fun navigateToPrevPage() {
-        val prevPage =
-            when (currentStep.value) {
-                SelectionStep.POKEMON_SELECTION -> return
-                SelectionStep.SKILL_SELECTION -> SelectionStep.POKEMON_SELECTION
-            }
-        _currentStep.value = prevPage
+        val pageIndex = currentStep.value.ordinal
+        if (pageIndex == 0) return
+        val prevPage = SelectionStep.entries.getOrNull(pageIndex - 1)
+        if (prevPage != null) {
+            _currentStep.value = prevPage
+        }
+    }
+
+    companion object {
+        fun factory(hasSkillSelection: Boolean): ViewModelProvider.Factory =
+            BaseViewModelFactory { BattleSelectionViewModel(hasSkillSelection) }
     }
 }

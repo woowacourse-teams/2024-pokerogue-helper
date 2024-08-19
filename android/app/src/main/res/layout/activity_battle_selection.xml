@@ -88,13 +88,14 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_prev"
             style="@style/TextAppearance.Poke.TitleBold"
+            onSingleClick="@{() -> vm.navigateToPrevPage()}"
+            visible="@{vm.currentStep.hasPreviousStep()}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@drawable/bg_before_button"
-            android:text="이전"
+            android:text="@string/battle_selection_previous_btn"
             android:textColor="@color/poke_black"
-            onSingleClick="@{() -> vm.navigateToPrevPage()}"
             app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
             app:layout_constraintEnd_toStartOf="@id/btn_next"
             app:layout_constraintStart_toStartOf="@id/gl_start" />
@@ -102,12 +103,13 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             style="@style/TextAppearance.Poke.TitleBold"
+            onSingleClick="@{() -> vm.navigateToNextPage()}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_button_enabled_selector"
-            android:text="@{vm.currentStep.buttonText}"
+            android:enabled="@{vm.canGoNextStep}"
+            android:text="@{vm.isLastStep ? @string/battle_selection_complete_btn : @string/battle_selection_next_btn}"
             android:textColor="@color/poke_black"
-            onSingleClick="@{() -> vm.navigateToNextPage()}"
             app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toEndOf="@id/btn_prev" />

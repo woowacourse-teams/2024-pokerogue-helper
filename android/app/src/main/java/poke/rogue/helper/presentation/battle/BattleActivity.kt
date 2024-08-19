@@ -87,9 +87,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
         repeatOnStarted {
             viewModel.navigateToSelection.collect { hasSkillSelection ->
-                startActivity<BattleSelectionActivity> {
-                    BattleSelectionActivity.intent(this@BattleActivity, hasSkillSelection)
-                }
+                startActivity(BattleSelectionActivity.intent(this@BattleActivity, hasSkillSelection))
             }
         }
     }

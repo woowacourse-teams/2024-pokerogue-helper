@@ -15,7 +15,10 @@ import poke.rogue.helper.presentation.util.view.setImage
 
 class BattleSelectionActivity :
     ErrorHandleActivity<ActivityBattleSelectionBinding>(R.layout.activity_battle_selection) {
-    private val viewModel by viewModels<BattleSelectionViewModel>()
+    private val viewModel by viewModels<BattleSelectionViewModel> {
+        BattleSelectionViewModel.factory(isSkillSelectionRequired)
+    }
+    private val isSkillSelectionRequired by lazy { intent.getBooleanExtra(KEY_HAS_SKILL_SELECTION, false) }
     private val selectionPagerAdapter: BattleSelectionPagerAdapter by lazy {
         BattleSelectionPagerAdapter(this)
     }
