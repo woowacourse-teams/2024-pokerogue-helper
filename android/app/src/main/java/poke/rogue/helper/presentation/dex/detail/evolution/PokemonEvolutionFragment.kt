@@ -5,7 +5,7 @@ import android.view.View
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonEvolutionBinding
 import poke.rogue.helper.presentation.base.BindingFragment
-import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
+import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel.Companion.DUMMY_EVE_EVOLUTION
 
 class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding>(R.layout.fragment_pokemon_evolution) {
     private val evolutionDepth0Adapter by lazy { EvolutionAdapter() }
@@ -21,7 +21,11 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
         initAdapter()
 
-        val evolutionsUiModel = EvolutionsUiModel.DUMMY_PICAKCHU_EVOLUTION
+        val evolutionsUiModel = DUMMY_EVE_EVOLUTION
+        // 테스트 하고 싶으시면 아래 더미 데이터 중 하나를 선택해서 넣어보세요.
+        // DUMMY_PICAKCHU_EVOLUTION
+        // DUMMY_PSYDUCK_EVOLUTION
+        // DUMMY_EVE_EVOLUTION
 
         binding.evolutions = evolutionsUiModel
         evolutionsUiModel.apply {
