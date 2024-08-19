@@ -11,13 +11,13 @@ public record BiomeResponse(
         List<String> trainerTypeLogos
 ) {
 
-    public static BiomeResponse from(Biome biome) {
+    public static BiomeResponse from(Biome biome, List<String> pokemonTypeLogos, List<String> trainerTypeLogos) {
         return new BiomeResponse(
                 biome.getId(),
                 biome.getName(),
                 biome.getImage(),
-                biome.getMainTypes(),
-                biome.getTrainerTypes()
+                pokemonTypeLogos,
+                trainerTypeLogos
         );
     }
 }

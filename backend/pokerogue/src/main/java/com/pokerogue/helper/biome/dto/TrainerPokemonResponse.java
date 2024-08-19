@@ -7,15 +7,18 @@ public record TrainerPokemonResponse(
         String trainerName,
         String trainerImage,
         List<String> trainerTypeLogos,
-        List<String> pokemons
+        List<BiomePokemonResponse> pokemons
 ) {
 
-    public static TrainerPokemonResponse from(Trainer trainer) {
+    public static TrainerPokemonResponse from(
+            Trainer trainer,
+            List<String> trainerTypes,
+            List<BiomePokemonResponse> trainerPokemons) {
         return new TrainerPokemonResponse(
                 trainer.getName(),
                 trainer.getImage(),
-                trainer.getTrainerTypes(),
-                trainer.getPokemons()
+                trainerTypes,
+                trainerPokemons
         );
     }
 }

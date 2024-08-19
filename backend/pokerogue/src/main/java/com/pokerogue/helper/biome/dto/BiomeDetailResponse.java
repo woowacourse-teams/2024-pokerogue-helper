@@ -3,23 +3,23 @@ package com.pokerogue.helper.biome.dto;
 import com.pokerogue.helper.biome.data.Biome;
 import java.util.List;
 
-public record BiomeResponse2(
+public record BiomeDetailResponse(
         String id,
         String name,
         String image,
-        List<BiomePokemonResponse> wildPokemons,
-        List<BiomePokemonResponse> bossPokemons,
+        List<BiomeAllPokemonResponse> wildPokemons,
+        List<BiomeAllPokemonResponse> bossPokemons,
         List<TrainerPokemonResponse> trainerPokemons,
         List<NextBiomeResponse> map
 ) {
-    public static BiomeResponse2 of(
+    public static BiomeDetailResponse of(
             Biome biome,
-            List<BiomePokemonResponse> wildPokemons,
-            List<BiomePokemonResponse> bossPokemons,
+            List<BiomeAllPokemonResponse> wildPokemons,
+            List<BiomeAllPokemonResponse> bossPokemons,
             List<TrainerPokemonResponse> trainerPokemons,
             List<NextBiomeResponse> map
     ) {
-        return new BiomeResponse2(
+        return new BiomeDetailResponse(
                 biome.getId(),
                 biome.getName(),
                 biome.getImage(),

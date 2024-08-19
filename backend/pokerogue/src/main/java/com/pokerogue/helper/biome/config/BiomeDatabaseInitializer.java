@@ -4,11 +4,15 @@ import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.BiomeLink;
 import com.pokerogue.helper.biome.data.BiomePokemon;
+import com.pokerogue.helper.biome.data.BiomePokemonInfo;
+import com.pokerogue.helper.biome.data.BiomePokemonType;
 import com.pokerogue.helper.biome.data.BiomeTypeAndTrainer;
+import com.pokerogue.helper.biome.data.PokemonByBiome;
 import com.pokerogue.helper.biome.data.Tier;
 import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.data.TrainerPokemon;
 import com.pokerogue.helper.biome.data.TrainerType;
+import com.pokerogue.helper.biome.repository.BiomePokemonInfoRepository;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
@@ -32,6 +36,7 @@ import org.springframework.stereotype.Component;
 public class BiomeDatabaseInitializer implements ApplicationRunner {
 
     private final BiomeRepository biomeRepository;
+    private final BiomePokemonInfoRepository biomePokemonInfoRepository;
     private final S3Service s3Service;
 
     @Override
@@ -41,6 +46,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         List<BiomeTypeAndTrainer> biomeTypesAndTrainers = new ArrayList<>();
         List<TrainerType> trainerTypes = new ArrayList<>();
         List<TrainerPokemon> trainerPokemons = new ArrayList<>();
+        List<PokemonByBiome> pokemonByBiomes = new ArrayList<>();
 
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-pokemons.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -107,6 +113,19 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("pokemon-by-biome.txt");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+            while (true) {
+                String pokemonByBiome = bufferedReader.readLine();
+                if (pokemonByBiome == null) {
+                    break;
+                }
+                pokemonByBiomes.add(new PokemonByBiome(pokemonByBiome));
+            }
+        } catch (IOException e) {
+            log.error("error message : {}", e.getStackTrace()[0]);
+        }
+
         List<Trainer> trainers = trainerTypes.stream()
                 .map(trainerType -> new Trainer(
                         trainerType.getId(),
@@ -128,6 +147,15 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                         getNextBiomes(biomeLinks, biomeTypeAndTrainer.getId()))
                 )
                 .forEach(biomeRepository::save);
+
+        pokemonByBiomes.stream()
+                .map(pokemonByBiome -> new BiomePokemonInfo(
+                        pokemonByBiome.getId(),
+                        pokemonByBiome.getName(),
+                        BiomePokemonType.getBiomePokemonTypeByName(pokemonByBiome.getType1()),
+                        BiomePokemonType.getBiomePokemonTypeByName(pokemonByBiome.getType2())
+                ))
+                .forEach(biomePokemonInfoRepository::save);
     }
 
     private List<String> getTrainerPokemons(List<TrainerPokemon> trainerPokemons, String trainerName) {

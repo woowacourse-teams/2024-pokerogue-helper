@@ -1,7 +1,7 @@
 package com.pokerogue.helper.biome.controller;
 
 import com.pokerogue.helper.biome.dto.BiomeResponse;
-import com.pokerogue.helper.biome.dto.BiomeResponse2;
+import com.pokerogue.helper.biome.dto.BiomeDetailResponse;
 import com.pokerogue.helper.biome.service.BiomeService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
@@ -24,7 +24,7 @@ public class BiomeController {
     }
 
     @GetMapping("/api/v1/biome/{id}")
-    public ApiResponse<BiomeResponse2> biomeDetails(@PathVariable("id") String id) {
+    public ApiResponse<BiomeDetailResponse> biomeDetails(@PathVariable("id") String id) {
         log.info("---- URI : {}, Param : {}", "/api/v1/biome/{id}", id);
 
         return new ApiResponse<>("바이옴 정보 불러오기에 성공했습니다.", biomeService.findBiome(id));
