@@ -43,6 +43,7 @@ public class BiomeService {
     public BiomeDetailResponse findBiome(String id) {
         Biome biome = biomeRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
+
         return BiomeDetailResponse.of(
                 biome,
                 s3Service.getBiomeImageFromS3(biome.getId()),
@@ -55,6 +56,7 @@ public class BiomeService {
 
     private List<BiomeAllPokemonResponse> getWildPokemons(Biome biome) {
         Map<Tier, List<String>> biomePokemons = biome.getPokemons();
+
         return biomePokemons.keySet().stream()
                 .filter(Tier::isWildPokemon)
                 .map(tier -> BiomeAllPokemonResponse.of(tier, getBiomePokemons(biomePokemons.get(tier))))
@@ -64,6 +66,7 @@ public class BiomeService {
 
     private List<BiomeAllPokemonResponse> getBossPokemons(Biome biome) {
         Map<Tier, List<String>> biomePokemons = biome.getPokemons();
+
         return biomePokemons.keySet().stream()
                 .filter(Tier::isBossPokemon)
                 .map(tier -> BiomeAllPokemonResponse.of(tier, getBiomePokemons(biomePokemons.get(tier))))
@@ -103,6 +106,7 @@ public class BiomeService {
                     type2.getName())
             );
         }
+
         return biomePokemonTypeResponses;
     }
 
