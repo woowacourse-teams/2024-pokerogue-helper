@@ -103,7 +103,7 @@ class PokemonDetailActivity :
 
     private fun observeNavigateToBiomeDetailEvent() {
         repeatOnStarted {
-            viewModel.navigationToDetailEvent.collect { biomeId ->
+            viewModel.navigationToBiomeDetailEvent.collect { biomeId ->
                 startActivity(BiomeDetailActivity.intent(this, biomeId))
             }
         }

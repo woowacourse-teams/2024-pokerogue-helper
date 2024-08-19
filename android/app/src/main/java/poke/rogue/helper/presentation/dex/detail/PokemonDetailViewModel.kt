@@ -36,7 +36,7 @@ class PokemonDetailViewModel(
     val navigationToAbilityDetailEvent: SharedFlow<String> = _navigationToAbilityDetailEvent.asSharedFlow()
 
     private val _navigationToBiomeDetailEvent = MutableSharedFlow<String>()
-    val navigationToDetailEvent: SharedFlow<String> = _navigationToBiomeDetailEvent.asSharedFlow()
+    val navigationToBiomeDetailEvent: SharedFlow<String> = _navigationToBiomeDetailEvent.asSharedFlow()
 
     private val _navigateToHomeEvent = MutableSharedFlow<Boolean>()
     val navigateToHomeEvent = _navigateToHomeEvent.asSharedFlow()

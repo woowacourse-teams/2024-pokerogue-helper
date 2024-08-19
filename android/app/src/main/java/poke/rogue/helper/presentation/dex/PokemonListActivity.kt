@@ -74,10 +74,10 @@ class PokemonListActivity :
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
                         label =
-                        stringOf(
-                            R.string.dex_filter_chip,
-                            if (uiState.isFiltered) uiState.filterCount.toString() else "",
-                        ),
+                            stringOf(
+                                R.string.dex_filter_chip,
+                                if (uiState.isFiltered) uiState.filterCount.toString() else "",
+                            ),
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
