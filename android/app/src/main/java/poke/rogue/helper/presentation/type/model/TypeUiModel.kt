@@ -45,3 +45,5 @@ enum class TypeUiModel(
 fun Type.toUi(): TypeUiModel = TypeUiModel.valueOf(this.name)
 
 fun TypeUiModel.toData(): Type = Type.fromId(this.id)
+
+fun List<Type>.toUi(): List<TypeUiModel> = map(Type::toUi)

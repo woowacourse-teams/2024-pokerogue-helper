@@ -31,7 +31,7 @@ class AbilityFragment : ErrorHandleFragment<FragmentAbilityBinding>(R.layout.fra
 
     private val adapter: AbilityAdapter by lazy { AbilityAdapter(viewModel) }
 
-    override val toolbar: Toolbar?
+    override val toolbar: Toolbar
         get() = binding.toolbarAbility
 
     override fun onViewCreated(

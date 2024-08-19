@@ -14,8 +14,8 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            val abilityId = intent.getLongExtra(ABILITY_ID, INVALID_ABILITY)
-            if (abilityId == INVALID_ABILITY) {
+            val abilityId = intent.getStringExtra(ABILITY_ID) ?: ""
+            if (abilityId.isBlank()) {
                 navigateToAbilityList()
                 return
             }
@@ -30,7 +30,7 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
         }
     }
 
-    private fun navigateToAbilityDetail(abilityId: Long) {
+    private fun navigateToAbilityDetail(abilityId: String) {
         supportFragmentManager.commit {
             replace<AbilityDetailFragment>(
                 containerViewId = R.id.fragment_container_ability,
@@ -41,11 +41,10 @@ class AbilityActivity : BindingActivity<ActivityAbilityBinding>(R.layout.activit
 
     companion object {
         private const val ABILITY_ID = "abilityId"
-        private const val INVALID_ABILITY = -1L
 
         fun intent(
             context: Context,
-            abilityId: Long = INVALID_ABILITY,
+            abilityId: String,
         ): Intent =
             Intent(context, AbilityActivity::class.java).apply {
                 putExtra(ABILITY_ID, abilityId)

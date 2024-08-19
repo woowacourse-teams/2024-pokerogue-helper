@@ -26,5 +26,5 @@ fun AbilityDetail.toUi(): AbilityDetailUiModel =
     AbilityDetailUiModel(
         title = this.title,
         description = this.description,
-        pokemons = this.pokemons.map { it.toUi() },
+        pokemons = pokemons.toUi(),
     )

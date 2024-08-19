@@ -27,7 +27,7 @@ class RemoteDexDataSourceTest {
             val actualPokemonDatas = dataSource.pokemons()
 
             // then
-            val expectedPokemonDatas = pokemons(1, 2, 3, 4, 5)
+            val expectedPokemonDatas = pokemons("1", "2", "3", "4", "5")
             actualPokemonDatas shouldBe expectedPokemonDatas
         }
 }

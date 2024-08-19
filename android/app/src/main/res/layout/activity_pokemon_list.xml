@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/dex_title_name">
+            app:title="@string/pokemon_list_title_name">
 
             <androidx.appcompat.widget.SearchView
                 style="@style/CustomSearchViewStyle"
@@ -56,7 +56,7 @@
             android:id="@+id/rv_pokemon_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_poke_fiter"
@@ -88,7 +88,7 @@
                 style="@style/TextAppearance.Poke.TitleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dex_list_loading_guide"
+                android:text="@string/pokemon_list_loading_guide"
                 android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +120,7 @@
                 style="@style/TextAppearance.Poke.TitleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dex_list_empty_guide"
+                android:text="@string/pokemon_list_empty_guide"
                 android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

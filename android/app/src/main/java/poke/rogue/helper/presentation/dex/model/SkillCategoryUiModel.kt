@@ -5,7 +5,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.data.model.SkillCategory
 
 data class SkillCategoryUiModel(
-    val id: Long,
+    val id: String,
     val name: String,
     @DrawableRes val iconResId: Int,
 )

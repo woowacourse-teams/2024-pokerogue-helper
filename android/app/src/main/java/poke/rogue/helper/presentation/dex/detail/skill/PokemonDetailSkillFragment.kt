@@ -6,10 +6,14 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.android.material.divider.MaterialDividerItemDecoration.VERTICAL
 import poke.rogue.helper.R
+import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.databinding.FragmentPokemonSkillsBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
+import poke.rogue.helper.presentation.dex.model.PokemonSkillUiModel
+import poke.rogue.helper.presentation.dex.model.toUi
+import poke.rogue.helper.presentation.type.model.toUi
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
@@ -57,9 +61,24 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
             activityViewModel.uiState.collect { state ->
                 when (state) {
                     is PokemonDetailUiState.IsLoading -> {}
-                    is PokemonDetailUiState.Success -> skillsAdapter.submitList(state.skills)
+                    // TODO: skill 을 현재는 한 종류의 스킬 목록만 사용하고 있음..... 이후에는 여러개의 스킬을 받아야함
+                    is PokemonDetailUiState.Success -> skillsAdapter.submitList(state.skills.selfLearn.toUi())
                 }
             }
         }
     }
 }
+
+// TODO: skill 을 현재는 한 종류의 스킬 목록만 사용하고 있음..... 이후에는 여러개의 스킬을 받아야함
+fun PokemonSkill.toUi(): PokemonSkillUiModel =
+    PokemonSkillUiModel(
+        id = id,
+        name = name,
+        level = level,
+        power = if (power == PokemonSkill.NO_POWER_VALUE) PokemonSkillUiModel.NO_POWER else power.toString(),
+        type = type.toUi(),
+        accuracy = accuracy,
+        category = category.toUi(),
+    )
+
+fun List<PokemonSkill>.toUi(): List<PokemonSkillUiModel> = map(PokemonSkill::toUi)

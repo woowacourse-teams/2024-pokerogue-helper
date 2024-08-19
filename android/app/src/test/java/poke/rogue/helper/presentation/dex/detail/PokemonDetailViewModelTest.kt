@@ -7,11 +7,11 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.R
+import poke.rogue.helper.data.model.PokemonDetailSkills
+import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.data.repository.DexRepository
-import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
-import poke.rogue.helper.presentation.dex.model.PokemonSkillUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
-import poke.rogue.helper.presentation.dex.model.SkillCategoryUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
@@ -48,7 +48,7 @@ class PokemonDetailViewModelTest {
             viewModel = PokemonDetailViewModel(repository)
 
             // when
-            viewModel.updatePokemonDetail(pokemonId = 1)
+            viewModel.updatePokemonDetail(pokemonId = "1")
 
             // then
             val pokemonDetailUiState = viewModel.uiState
@@ -56,7 +56,7 @@ class PokemonDetailViewModelTest {
                 PokemonDetailUiState.Success(
                     pokemon =
                         PokemonUiModel(
-                            id = 1,
+                            id = "1",
                             dexNumber = 1,
                             name = "이상해씨",
                             imageUrl =
@@ -80,146 +80,14 @@ class PokemonDetailViewModelTest {
                         ),
                     abilities =
                         listOf(
-                            AbilityTitleUiModel(450, "심록"),
-                            AbilityTitleUiModel(419, "엽록소"),
+                            PokemonDetailAbilityUiModel("450", "심록", false, false),
+                            PokemonDetailAbilityUiModel("419", "엽록소", false, false),
                         ),
                     skills =
-                        listOf(
-                            PokemonSkillUiModel(
-                                id = 1,
-                                name = "몸통박치기",
-                                level = 1,
-                                power = "40",
-                                type = TypeUiModel.NORMAL,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(1, "물리", R.drawable.ic_physical_attack_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 2,
-                                name = "울음소리",
-                                level = 1,
-                                power = PokemonSkillUiModel.NO_POWER,
-                                type = TypeUiModel.NORMAL,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(3, "변화", R.drawable.ic_change_status_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 3,
-                                name = "덩굴채찍",
-                                level = 1,
-                                power = "45",
-                                type = TypeUiModel.GRASS,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(1, "물리", R.drawable.ic_physical_attack_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 4,
-                                name = "성장",
-                                level = 6,
-                                power = PokemonSkillUiModel.NO_POWER,
-                                type = TypeUiModel.NORMAL,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(3, "변화", R.drawable.ic_change_status_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 5,
-                                name = "씨뿌리기",
-                                level = 9,
-                                power = PokemonSkillUiModel.NO_POWER,
-                                type = TypeUiModel.GRASS,
-                                accuracy = 90,
-                                category = SkillCategoryUiModel(3, "변화", R.drawable.ic_change_status_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 6,
-                                name = "앞날가르기",
-                                level = 12,
-                                power = "55",
-                                type = TypeUiModel.GRASS,
-                                accuracy = 95,
-                                SkillCategoryUiModel(1, "물리", R.drawable.ic_physical_attack_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 7,
-                                name = "독가루",
-                                level = 15,
-                                power = PokemonSkillUiModel.NO_POWER,
-                                type = TypeUiModel.POISON,
-                                accuracy = 75,
-                                category = SkillCategoryUiModel(3, "변화", R.drawable.ic_change_status_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 8,
-                                name = "수면가루",
-                                level = 15,
-                                power = PokemonSkillUiModel.NO_POWER,
-                                type = TypeUiModel.GRASS,
-                                accuracy = 75,
-                                category = SkillCategoryUiModel(3, "변화", R.drawable.ic_change_status_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 9,
-                                name = "씨폭탄",
-                                level = 18,
-                                power = "80",
-                                type = TypeUiModel.GRASS,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(1, "물리", R.drawable.ic_physical_attack_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 10,
-                                name = "돌진",
-                                level = 21,
-                                power = "90",
-                                type = TypeUiModel.NORMAL,
-                                accuracy = 85,
-                                category = SkillCategoryUiModel(1, "물리", R.drawable.ic_physical_attack_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 11,
-                                name = "달콤한향기",
-                                level = 24,
-                                power = PokemonSkillUiModel.NO_POWER,
-                                type = TypeUiModel.NORMAL,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(3, "변화", R.drawable.ic_change_status_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 12,
-                                name = "광합성",
-                                level = 27,
-                                power = PokemonSkillUiModel.NO_POWER,
-                                type = TypeUiModel.GRASS,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(3, "변화", R.drawable.ic_change_status_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 13,
-                                name = "고민씨",
-                                level = 30,
-                                power = PokemonSkillUiModel.NO_POWER,
-                                type = TypeUiModel.GRASS,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(3, "변화", R.drawable.ic_change_status_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 14,
-                                name = "파워휩",
-                                level = 33,
-                                power = "120",
-                                type = TypeUiModel.GRASS,
-                                accuracy = 85,
-                                category = SkillCategoryUiModel(1, "물리", R.drawable.ic_physical_attack_skill),
-                            ),
-                            PokemonSkillUiModel(
-                                id = 15,
-                                name = "솔라빔",
-                                level = 36,
-                                power = "120",
-                                type = TypeUiModel.GRASS,
-                                accuracy = 100,
-                                category = SkillCategoryUiModel(2, "특수", R.drawable.ic_special_attack_skill),
-                            ),
+                        PokemonDetailSkills(
+                            selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                            eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
+                            tmLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
                         ),
                     height = 0.7f,
                     weight = 6.9f,

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="biome"
+            type="poke.rogue.helper.data.model.Biome" />
+
+        <variable
+            name="uiEventHandler"
+            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        onSingleClick="@{()->uiEventHandler.navigateToBiomeDetail(String.valueOf(biome.id))}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_pokemon_corner_radius">
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_information_biome_name"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:text="@{biome.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="화산" />
+
+        <ImageView
+            android:id="@+id/iv_pokemon_detail_information_biome"
+            imageUrl="@{biome.imageUrl}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:importantForAccessibility="no"
+            android:padding="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_information_biome_name"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

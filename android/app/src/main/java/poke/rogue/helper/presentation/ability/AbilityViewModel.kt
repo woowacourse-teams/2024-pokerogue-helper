@@ -32,8 +32,8 @@ class AbilityViewModel(
 ) : ErrorHandleViewModel(logger),
     AbilityQueryHandler,
     AbilityUiEventHandler {
-    private val _navigationToDetailEvent = MutableSharedFlow<Long>()
-    val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
+    private val _navigationToDetailEvent = MutableSharedFlow<String>()
+    val navigationToDetailEvent: SharedFlow<String> = _navigationToDetailEvent.asSharedFlow()
 
     private val searchQuery = MutableStateFlow("")
 
@@ -64,7 +64,7 @@ class AbilityViewModel(
 
     private suspend fun queriedAbilities(query: String): List<AbilityUiModel> = abilityRepository.abilities(query).map { it.toUi() }
 
-    override fun navigateToDetail(abilityId: Long) {
+    override fun navigateToDetail(abilityId: String) {
         viewModelScope.launch {
             _navigationToDetailEvent.emit(abilityId)
         }

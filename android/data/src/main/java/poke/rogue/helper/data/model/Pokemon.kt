@@ -4,7 +4,7 @@ import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 data class Pokemon(
-    val id: Long,
+    val id: String,
     val dexNumber: Long,
     val name: String,
     val imageUrl: String,
@@ -26,7 +26,7 @@ data class Pokemon(
 
         val DUMMY =
             Pokemon(
-                id = 1,
+                id = "1",
                 dexNumber = 1,
                 name = DUMMY_POKEMON_NAME,
                 imageUrl = DUMMY_IMAGE_URL,
@@ -37,7 +37,7 @@ data class Pokemon(
 
 fun PokemonResponse.toData(): Pokemon =
     Pokemon(
-        id = id,
+        id = id.toString(),
         dexNumber = pokedexNumber,
         name = name,
         imageUrl = image,
