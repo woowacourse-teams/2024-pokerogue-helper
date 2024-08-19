@@ -68,7 +68,7 @@ class FakeAbilityRepositoryTest {
         runTest {
             // when, then
             assertThrows<IllegalArgumentException> {
-                repository.abilityDetail(-1)
+                repository.abilityDetail("-1")
             }
         }
 }

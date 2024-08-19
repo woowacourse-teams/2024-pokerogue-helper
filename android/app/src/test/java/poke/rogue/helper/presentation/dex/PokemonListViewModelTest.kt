@@ -34,9 +34,9 @@ class PokemonListViewModelTest {
 
             // when
             val pokemons =
-                viewModel.uiState.first { pokemons ->
-                    pokemons.isNotEmpty()
-                }
+                viewModel.uiState.first { uiState ->
+                    uiState.pokemons.isNotEmpty()
+                }.pokemons
 
             // then
             pokemons shouldBe FakeDexRepository.POKEMONS.map(Pokemon::toUi)
@@ -51,9 +51,9 @@ class PokemonListViewModelTest {
             // when
             viewModel.queryName("리자")
             val queriedPokemons =
-                viewModel.uiState.first { pokemons ->
-                    pokemons.isNotEmpty()
-                }
+                viewModel.uiState.first { uiState ->
+                    uiState.pokemons.isNotEmpty()
+                }.pokemons
 
             // then
             queriedPokemons shouldBe

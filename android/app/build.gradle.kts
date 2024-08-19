@@ -183,7 +183,6 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":local"))
     implementation(project(":analytics"))
-    implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(project(":testing"))
     androidTestImplementation(project(":testing"))
     // androidx
@@ -206,6 +205,7 @@ dependencies {
     implementation(libs.splash.screen)
     // google & firebase
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.bundles.firebase)
     // android test
     androidTestImplementation(libs.bundles.android.test)
