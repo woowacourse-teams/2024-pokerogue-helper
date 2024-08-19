@@ -75,5 +75,90 @@ data class SingleEvolutionUiModel(
                 level = 33,
                 depth = 1,
             )
+
+        val DUMMY_EEVEE =
+            SingleEvolutionUiModel(
+                pokemonId = "eevee{Normal}",
+                pokemonName = "이브이",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+                depth = 0,
+            )
+
+        val DUMMY_SYLYEON =
+            SingleEvolutionUiModel(
+                pokemonId = "sylveon",
+                pokemonName = "님피아",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png",
+                condition = "친밀도 70 \n+ 페어리 타입 기술 습득",
+                depth = 1,
+            )
+
+        val DUMMY_ESPEON =
+            SingleEvolutionUiModel(
+                pokemonId = "espeon",
+                pokemonName = "에브이",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png",
+                condition = "친밀도 70 \n+ 낮에 레벨업",
+                depth = 1,
+            )
+
+        val DUMMY_UMBREON =
+            SingleEvolutionUiModel(
+                pokemonId = "umbreon",
+                pokemonName = "블래키",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/197.png",
+                condition = "친밀도 70 \n+ 밤에 레벨업",
+                depth = 1,
+            )
+
+        val DUMMY_VAPOREON =
+            SingleEvolutionUiModel(
+                pokemonId = "vaporeon",
+                pokemonName = "샤미드",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png",
+                item = "물의 돌",
+                condition = "아이템 사용",
+                depth = 1,
+            )
+
+        val DUMMY_JOLTEON =
+            SingleEvolutionUiModel(
+                pokemonId = "jolteon",
+                pokemonName = "쥬피썬더",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png",
+                item = "천둥의 돌",
+                condition = "아이템 사용",
+                depth = 1,
+            )
+
+        val DUMMY_FLAREON =
+            SingleEvolutionUiModel(
+                pokemonId = "flareon",
+                pokemonName = "부스터",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png",
+                item = "화염의 돌",
+                condition = "아이템 사용",
+                depth = 1,
+            )
+
+        val DUMMY_LEAFEON =
+            SingleEvolutionUiModel(
+                pokemonId = "leafeon",
+                pokemonName = "리피아",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/470.png",
+                item = "리프의 돌",
+                condition = "아이템 사용",
+                depth = 1,
+            )
+
+        val DUMMY_GLACEON =
+            SingleEvolutionUiModel(
+                pokemonId = "glaceon",
+                pokemonName = "글레이시아",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/471.png",
+                item = "눈의 돌",
+                condition = "아이템 사용",
+                depth = 1,
+            )
     }
 }

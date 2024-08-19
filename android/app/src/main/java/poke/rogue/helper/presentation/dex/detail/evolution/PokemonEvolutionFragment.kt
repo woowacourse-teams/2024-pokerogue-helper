@@ -21,7 +21,7 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
         initAdapter()
 
-        val evolutions = EvolutionsUiModel.DUMMY_PICAKCHU_EVOLUTION
+        val evolutions = EvolutionsUiModel.DUMMY_EVE_EVOLUTION
 
         binding.evolutions = evolutions
         evolutions.apply {
