@@ -14,7 +14,7 @@ class BiomeGymViewHolder(private val binding: ItemBiomeGymBinding) :
     fun bind(gymPokemon: BiomePokemonUiModel) {
         binding.gymLeader = gymPokemon
 
-        val decoration = GridSpacingItemDecoration(3, 18.dp, false)
+        val decoration = GridSpacingItemDecoration(3, 9.dp, false)
         binding.rvBiomeGymPokemon.addItemDecoration(decoration)
         gymPokemon.pokemons.let(pokemonAdapter::submitList)
         binding.rvBiomeGymPokemon.adapter = pokemonAdapter

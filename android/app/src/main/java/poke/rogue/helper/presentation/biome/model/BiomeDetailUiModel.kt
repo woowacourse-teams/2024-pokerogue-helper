@@ -9,7 +9,7 @@ class BiomeDetailUiModel(
     val wildPokemons: List<BiomePokemonUiModel>,
     val bossPokemons: List<BiomePokemonUiModel>,
     val gymPokemons: List<BiomePokemonUiModel>,
-    val map: List<NextBiomeUiModel>,
+    val nextBiomes: List<NextBiomeUiModel>,
 ) {
     companion object {
         private const val DUMMY_IMAGE_URL =
@@ -30,7 +30,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (1..9).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "일반 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -45,7 +44,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (10..21).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "희귀 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -60,7 +58,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (22..24).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "전설 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -78,7 +75,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (990..1005).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "일반 보스 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -93,7 +89,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (1006..1011).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "희귀 보스 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -108,7 +103,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (1012..1015).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "전설 보스 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -126,7 +120,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (871..874).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "심지몬 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -141,7 +134,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (901..905).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "꼬상몬 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -156,7 +148,6 @@ class BiomeDetailUiModel(
                             pokemons =
                                 (100..105).map {
                                     PokemonUiModel(
-                                        id = it.toLong(),
                                         dexNumber = it.toLong(),
                                         name = "비토몬 $it",
                                         imageUrl = dummyUrl(it.toLong()),
@@ -165,7 +156,7 @@ class BiomeDetailUiModel(
                                 },
                         ),
                     ),
-                map =
+                nextBiomes =
                     listOf(
                         NextBiomeUiModel(
                             biome = BiomeUiModel.DUMMYS[1],

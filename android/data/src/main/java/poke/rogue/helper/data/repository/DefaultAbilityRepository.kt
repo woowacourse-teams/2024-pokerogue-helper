@@ -23,7 +23,7 @@ class DefaultAbilityRepository(private val remoteAbilityDataSource: RemoteAbilit
         return abilities().filter { it.title.has(query) }
     }
 
-    override suspend fun abilityDetail(id: Long): AbilityDetail = remoteAbilityDataSource.abilityDetail(id)
+    override suspend fun abilityDetail(id: String): AbilityDetail = remoteAbilityDataSource.abilityDetail(id)
 
     companion object {
         private var instance: AbilityRepository? = null

@@ -28,8 +28,8 @@ class AbilityDetailViewModel(
         MutableStateFlow<AbilityDetailUiState<AbilityDetailUiModel>>(AbilityDetailUiState.Loading)
     val abilityDetail = _abilityDetail.asStateFlow()
 
-    private val _navigationToPokemonDetailEvent = MutableSharedFlow<Long>()
-    val navigationToPokemonDetailEvent: SharedFlow<Long> =
+    private val _navigationToPokemonDetailEvent = MutableSharedFlow<String>()
+    val navigationToPokemonDetailEvent: SharedFlow<String> =
         _navigationToPokemonDetailEvent.asSharedFlow()
 
     private val _navigateToHomeEvent = MutableSharedFlow<Boolean>()
@@ -42,7 +42,7 @@ class AbilityDetailViewModel(
         abilityDetail.map { it is AbilityDetailUiState.Success && it.data.pokemons.isEmpty() }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), false)
 
-    override fun navigateToPokemonDetail(pokemonId: Long) {
+    override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
             _navigationToPokemonDetailEvent.emit(pokemonId)
         }
@@ -54,8 +54,8 @@ class AbilityDetailViewModel(
         }
     }
 
-    fun updateAbilityDetail(abilityId: Long) {
-        if (abilityId == -1L) {
+    fun updateAbilityDetail(abilityId: String) {
+        if (abilityId.isBlank()) {
             _errorEvent.tryEmit(Unit)
             return
         }

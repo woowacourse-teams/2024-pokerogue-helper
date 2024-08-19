@@ -10,6 +10,8 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBattleBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
+import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
+import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
@@ -30,6 +32,10 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     private fun initView() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
+
+        binding.ivMinePokemon.setOnClickListener {
+            startActivity<BattleSelectionActivity> { }
+        }
     }
 
     private fun initSpinner() {

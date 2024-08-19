@@ -34,9 +34,9 @@ class PokemonListViewModelTest {
 
             // when
             val pokemons =
-                viewModel.uiState.first { pokemons ->
-                    pokemons.isNotEmpty()
-                }
+                viewModel.uiState.first { uiState ->
+                    uiState.pokemons.isNotEmpty()
+                }.pokemons
 
             // then
             pokemons shouldBe FakeDexRepository.POKEMONS.map(Pokemon::toUi)
@@ -51,22 +51,22 @@ class PokemonListViewModelTest {
             // when
             viewModel.queryName("리자")
             val queriedPokemons =
-                viewModel.uiState.first { pokemons ->
-                    pokemons.isNotEmpty()
-                }
+                viewModel.uiState.first { uiState ->
+                    uiState.pokemons.isNotEmpty()
+                }.pokemons
 
             // then
             queriedPokemons shouldBe
                 listOf(
                     PokemonUiModel(
-                        id = 5,
+                        id = "5",
                         dexNumber = 5,
                         name = "리자드",
                         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
                         types = listOf(TypeUiModel.FIRE),
                     ),
                     PokemonUiModel(
-                        id = 6,
+                        id = "6",
                         dexNumber = 6,
                         name = "리자몽",
                         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",

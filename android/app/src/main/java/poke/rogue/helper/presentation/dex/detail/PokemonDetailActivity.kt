@@ -12,15 +12,18 @@ import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 
-class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
+class PokemonDetailActivity :
+    ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
@@ -33,7 +36,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.updatePokemonDetail(intent.getLongExtra(POKEMON_ID, 2606))
+        viewModel.updatePokemonDetail(intent.getStringExtra(POKEMON_ID).toString())
 
         binding.eventHandler = viewModel
         binding.lifecycleOwner = this
@@ -54,13 +57,9 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
             adapter = pokemonDetailPagerAdapter
         }
 
+        val tabTitles = stringArrayOf(R.array.pokemon_detail_tab_titles)
         TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
-            when (position) {
-                0 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_stats_title)
-                1 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_evolution_title)
-                2 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_skills_title)
-                3 -> tab.text = stringOf(R.string.pokemon_detail_pokemon_information_title)
-            }
+            tab.text = tabTitles[position]
         }.attach()
     }
 
@@ -68,6 +67,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
         observePokemonDetailUi()
         observeNavigateToHomeEvent()
         observeNavigateToAbilityDetailEvent()
+        observeNavigateToBiomeDetailEvent()
     }
 
     private fun observePokemonDetailUi() {
@@ -95,8 +95,16 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
     private fun observeNavigateToAbilityDetailEvent() {
         repeatOnStarted {
-            viewModel.navigationToDetailEvent.collect { abilityId ->
+            viewModel.navigationToAbilityDetailEvent.collect { abilityId ->
                 startActivity(AbilityActivity.intent(this, abilityId))
+            }
+        }
+    }
+
+    private fun observeNavigateToBiomeDetailEvent() {
+        repeatOnStarted {
+            viewModel.navigationToBiomeDetailEvent.collect { biomeId ->
+                startActivity(BiomeDetailActivity.intent(this, biomeId))
             }
         }
     }
@@ -110,7 +118,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
             tvPokemonDetailPokemonName.text =
                 stringOf(
-                    R.string.dex_poke_name_format,
+                    R.string.pokemon_list_poke_name_format,
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
@@ -137,7 +145,7 @@ class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.la
 
         fun intent(
             context: Context,
-            pokemonId: Long,
+            pokemonId: String,
         ): Intent =
             Intent(context, PokemonDetailActivity::class.java).apply {
                 putExtra(POKEMON_ID, pokemonId)

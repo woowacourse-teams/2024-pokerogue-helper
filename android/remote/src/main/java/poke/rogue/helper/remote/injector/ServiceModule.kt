@@ -10,7 +10,7 @@ object ServiceModule {
 
     fun abilityService(): AbilityService = ServicePool.abilityService
 
-    fun biomesService(): BiomeService = ServicePool.biomesService
+    fun biomeService(): BiomeService = ServicePool.biomeService
 
     private object ServicePool {
         val pokeDexService: PokeDexService by lazy {
@@ -19,7 +19,7 @@ object ServiceModule {
         val abilityService: AbilityService by lazy {
             RetrofitModule.retrofit().create()
         }
-        val biomesService: BiomeService by lazy {
+        val biomeService: BiomeService by lazy {
             RetrofitModule.retrofit().create()
         }
     }
