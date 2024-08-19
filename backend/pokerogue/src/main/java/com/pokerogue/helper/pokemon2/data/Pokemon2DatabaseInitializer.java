@@ -22,8 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Component
-@Transactional
-@Profile("local-mysql")
 @RequiredArgsConstructor
 public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
@@ -68,7 +66,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
 
                 while (stringTokenizer.hasMoreTokens()) {
-                    values.add(stringTokenizer.nextToken().strip());
+                    values.add(stringTokenizer.nextToken().strip().toLowerCase());
                 }
 
                 if (pokemonKeys.size() != values.size()) {

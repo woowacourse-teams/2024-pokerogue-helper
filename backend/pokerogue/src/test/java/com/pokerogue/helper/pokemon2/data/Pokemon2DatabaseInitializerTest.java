@@ -7,9 +7,13 @@ import com.pokerogue.helper.global.config.DatabaseInitializer;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import org.assertj.core.api.Assertions;
+import org.hibernate.annotations.Source;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.DefaultApplicationArguments;
 import org.springframework.boot.SpringApplication;
 
@@ -18,7 +22,7 @@ class Pokemon2DatabaseInitializerTest {
 
     @Test
     @DisplayName("포켓몬 정보가 지정된 개수만큼 저장된다")
-    void run() {
+    void savePokemons() {
         Pokemon2Repository pokemon2Repository = new Pokemon2Repository();
         Pokemon2DatabaseInitializer pokemon2DatabaseInitializer = new Pokemon2DatabaseInitializer(
                 pokemon2Repository,
@@ -28,5 +32,21 @@ class Pokemon2DatabaseInitializerTest {
         pokemon2DatabaseInitializer.run(new DefaultApplicationArguments());
 
         Assertions.assertThat(pokemon2Repository.findAll()).hasSize(1350);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"bulbasaur", "chikorita", "wailmer", "virizion", "golisopod", "melmetal", "spidops",
+            "hydrapple", "alola_exeggutor"})
+    @DisplayName("포켓몬의 저장된 이름을 확인한다")
+    void savePokemons2(String name) {
+        Pokemon2Repository pokemon2Repository = new Pokemon2Repository();
+        Pokemon2DatabaseInitializer pokemon2DatabaseInitializer = new Pokemon2DatabaseInitializer(
+                pokemon2Repository,
+                new MoveRepository()
+        );
+
+        pokemon2DatabaseInitializer.run(new DefaultApplicationArguments());
+
+        Assertions.assertThat(pokemon2Repository.findById(name)).isNotNull();
     }
 }
