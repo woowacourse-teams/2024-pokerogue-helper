@@ -73,11 +73,9 @@ public class BiomeService {
 
     private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
         return biomePokemons.stream()
-                .map(biomePokemon -> {
-                    System.out.println(biomePokemon);
-                    return biomePokemonInfoRepository.findById(biomePokemon)
-                            .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-                })
+                .map(biomePokemon -> biomePokemonInfoRepository.findById(biomePokemon)
+                            .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
+                )
                 .map(biomePokemonInfo -> new BiomePokemonResponse(
                         biomePokemonInfo.getId(),
                         biomePokemonInfo.getName(),
