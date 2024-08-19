@@ -11,7 +11,7 @@ data class PokemonDetail(
     val pokemonCategory: PokemonCategory,
     val evolutions: List<Evolution>,
     val skills: PokemonDetailSkills,
-    val biomes: List<Biome>,
+    val biomes: List<PokemonBiome>,
     val height: Double,
     val weight: Double,
 )
@@ -46,7 +46,7 @@ fun PokemonDetailResponse.toData(id: Long): PokemonDetail =
                 tmLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
                 eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
             ),
-        biomes = Biome.DUMMYS,
+        biomes = PokemonBiome.DUMMYS,
         height = height.toDouble(),
         weight = weight.toDouble(),
     )

@@ -1,6 +1,6 @@
 package poke.rogue.helper.testing.data.repository
 
-import poke.rogue.helper.data.model.Biome
+import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonCategory
 import poke.rogue.helper.data.model.PokemonDetail
@@ -237,7 +237,7 @@ class FakeDexRepository : DexRepository {
                         tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
                         eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
                     ),
-                biomes = Biome.DUMMYS,
+                biomes = PokemonBiome.DUMMYS,
                 height = 0.7,
                 weight = 6.9,
             )

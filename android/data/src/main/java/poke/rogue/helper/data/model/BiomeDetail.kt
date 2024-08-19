@@ -1,5 +1,9 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.data.model.biome.BossPokemon
+import poke.rogue.helper.data.model.biome.GymPokemon
+import poke.rogue.helper.data.model.biome.WildPokemon
+import poke.rogue.helper.data.model.biome.toData
 import poke.rogue.helper.remote.dto.response.biomes.BiomeDetailResponse
 
 data class BiomeDetail(
