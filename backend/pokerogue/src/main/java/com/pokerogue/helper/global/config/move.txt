@@ -1,0 +1,920 @@
+EMPTY / EMPTY / EMPTY / EMPTY / 노말 / 노말 / STATUS / USER / -1 / 2 / -1 / -1 / EMPTY / 1 / IGNORE_PROTECT
+1 / 막치기 / EMPTY / 긴 꼬리나 손 등을 사용하여 상대를 때려서 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 40 / 100 / 35 / -1 / EMPTY / 1 / MAKES_CONTACT
+2 / 태권당수 / EMPTY / 날카로운 당수로 상대를 때려서 공격한다. 급소에 맞기 쉽다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 50 / 100 / 25 / -1 / EMPTY / 1 / MAKES_CONTACT
+3 / 연속뺨치기 / EMPTY / 연속 뺨치기로 상대를 때려서 공격한다. 2-5회 동안 연속으로 쓴다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 15 / 85 / 10 / -1 / EMPTY / 1 / MAKES_CONTACT
+4 / 연속펀치 / EMPTY / 노도 같은 펀치로 상대를 세게 때려서 공격한다. 2-5회 동안 연속으로 쓴다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 18 / 85 / 15 / -1 / EMPTY / 1 / EMPTY
+5 / 메가톤펀치 / EMPTY / 힘을 담은 펀치로 상대를 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 80 / 85 / 20 / -1 / EMPTY / 1 / EMPTY
+6 / 고양이돈받기 / EMPTY / 상대의 몸에 돈을 세게 던져서 공격한다. 배틀 후에 돈을 받을 수 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 40 / 100 / 20 / -1 / EMPTY / 1 / NONE
+7 / 불꽃펀치 / EMPTY / 불꽃을 담은 펀치로 상대를 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 75 / 100 / 15 / 10 / EMPTY / 1 / EMPTY
+8 / 냉동펀치 / EMPTY / 냉기를 담은 펀치로 상대를 공격한다. 얼음 상태로 만들 때가 있다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 75 / 100 / 15 / 10 / EMPTY / 1 / EMPTY
+9 / 번개펀치 / EMPTY / 전격을 담은 펀치로 상대를 공격한다. 마비 상태로 만들 때가 있다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 75 / 100 / 15 / 10 / EMPTY / 1 / EMPTY
+10 / 할퀴기 / EMPTY / 단단하고 뾰족한 날카로운 손톱으로 상대를 할퀴어서 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 40 / 100 / 35 / -1 / EMPTY / 1 / MAKES_CONTACT
+11 / 찝기 / EMPTY / 상대를 양쪽에서 집어서 데미지를 준다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 55 / 100 / 30 / -1 / EMPTY / 1 / MAKES_CONTACT
+12 / 가위자르기 / EMPTY / 큰 집게로 상대를 베어 갈라 공격한다. 맞으면 일격에 기절한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 200 / 30 / 5 / -1 / EMPTY / 1 / MAKES_CONTACT
+13 / 칼바람 / EMPTY / 바람의 칼날을 만들어 2턴째에 상대를 공격한다. 급소에 맞기 쉽다. / 노말 / 노말 / SPECIAL / ALL_NEAR_ENEMIES / 80 / 100 / 10 / -1 / EMPTY / 1 / EMPTY
+14 / 칼춤 / EMPTY / 싸움의 춤을 격렬하게 춰서 기세를 높인다. 자신의 공격을 크게 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 1 / EMPTY
+15 / 풀베기 / EMPTY / 낫이나 발톱 등으로 상대를 베어 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 50 / 95 / 30 / -1 / EMPTY / 1 / EMPTY
+16 / 바람일으키기 / EMPTY / 날개로 일으킨 격한 바람을 상대에게 부딪쳐서 공격한다. / 비행 / 비행 / SPECIAL / NEAR_OTHER / 40 / 100 / 35 / -1 / EMPTY / 1 / WIND_MOVE
+17 / 날개치기 / EMPTY / 크게 펼친 훌륭한 날개를 상대에게 부딪쳐서 공격한다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 60 / 100 / 35 / -1 / EMPTY / 1 / MAKES_CONTACT
+18 / 날려버리기 / EMPTY / 상대를 날려버려서 교대할 포켓몬을 끌어낸다. 야생의 경우에는 배틀이 끝난다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / -6 / 1 / EMPTY
+19 / 공중날기 / EMPTY / 1턴째에 하늘을 날아 2턴째에 상대를 공격한다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 90 / 95 / 15 / -1 / EMPTY / 1 / EMPTY
+20 / 조이기 / EMPTY / 긴 몸이나 덩굴 등을 써서 4-5턴 동안 상대를 조여 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 15 / 85 / 20 / -1 / EMPTY / 1 / MAKES_CONTACT
+21 / 힘껏치기 / EMPTY / 긴 꼬리나 덩굴 등을 사용해 상대를 힘껏 쳐서 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 80 / 75 / 20 / -1 / EMPTY / 1 / MAKES_CONTACT
+22 / 덩굴채찍 / EMPTY / 채찍처럼 휘어지는 가늘고 긴 덩굴로 상대를 힘껏 쳐서 공격한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 45 / 100 / 25 / -1 / EMPTY / 1 / MAKES_CONTACT
+23 / 짓밟기 / EMPTY / 큰 발로 상대를 짓밟아서 공격한다. 상대를 풀죽게 만들 때가 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 65 / 100 / 20 / 30 / EMPTY / 1 / MAKES_CONTACT
+24 / 두번차기 / EMPTY / 2개의 다리로 상대를 걷어차서 공격한다. 2회 연속으로 데미지를 준다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 30 / 100 / 30 / -1 / EMPTY / 1 / MAKES_CONTACT
+25 / 메가톤킥 / EMPTY / 굉장한 힘을 담은 킥으로 상대를 걷어차서 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 120 / 75 / 5 / -1 / EMPTY / 1 / MAKES_CONTACT
+26 / 점프킥 / EMPTY / 높이 점프해서 킥으로 상대를 공격한다. 빗나가면 자신이 데미지를 입는다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 100 / 95 / 10 / -1 / EMPTY / 1 / EMPTY
+27 / 돌려차기 / EMPTY / 몸을 재빨리 회전시키며 걷어차서 공격한다. 상대를 풀죽게 만들 때가 있다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 60 / 85 / 15 / 30 / EMPTY / 1 / MAKES_CONTACT
+28 / 모래뿌리기 / EMPTY / 상대의 얼굴에 모래를 뿌려서 명중률을 떨어뜨린다. / 땅 / 땅 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 1 / NONE
+29 / 박치기 / EMPTY / 머리를 내밀어 곧장 돌진하여 공격한다. 상대를 풀죽게 만들 때가 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 70 / 100 / 15 / 30 / EMPTY / 1 / MAKES_CONTACT
+30 / 뿔찌르기 / EMPTY / 날카롭고 뾰족한 뿔로 상대를 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 65 / 100 / 25 / -1 / EMPTY / 1 / MAKES_CONTACT
+31 / 마구찌르기 / EMPTY / 뿔이나 부리로 상대를 찔러서 공격한다. 2-5회 동안 연속으로 쓴다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 15 / 85 / 20 / -1 / EMPTY / 1 / MAKES_CONTACT
+32 / 뿔드릴 / EMPTY / 회전하는 뿔을 상대에게 꿰찔러서 공격한다. 맞으면 일격에 기절한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 200 / 30 / 5 / -1 / EMPTY / 1 / MAKES_CONTACT
+33 / 몸통박치기 / EMPTY / 상대를 향해서 몸 전체를 부딪쳐가며 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 40 / 100 / 35 / -1 / EMPTY / 1 / MAKES_CONTACT
+34 / 누르기 / EMPTY / 몸 전체로 상대를 덮쳐눌러 공격한다. 마비 상태로 만들 때가 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 85 / 100 / 15 / 30 / EMPTY / 1 / MAKES_CONTACT
+35 / 김밥말이 / EMPTY / 긴 몸이나 덩굴 등을 사용해 4-5턴 동안 상대를 휘감아 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 15 / 90 / 20 / -1 / EMPTY / 1 / MAKES_CONTACT
+36 / 돌진 / EMPTY / 굉장한 기세로 상대에게 부딪쳐 공격한다. 자신도 조금 데미지를 입는다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 90 / 85 / 20 / -1 / EMPTY / 1 / EMPTY
+37 / 난동부리기 / EMPTY / 2-3턴 동안 마구 난동 부려서 공격한다. 난동 부린 뒤에는 혼란에 빠진다. / 노말 / 노말 / PHYSICAL / RANDOM_NEAR_ENEMY / 120 / 100 / 10 / -1 / EMPTY / 1 / MAKES_CONTACT
+38 / 이판사판태클 / EMPTY / 목숨을 걸고 상대에게 돌진하여 공격을 한다. 자신도 상당한 데미지를 입는다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 120 / 100 / 15 / -1 / EMPTY / 1 / EMPTY
+39 / 꼬리흔들기 / EMPTY / 꼬리를 좌우로 귀엽게 흔들어 방심을 유도한다. 상대의 방어를 떨어뜨린다. / 노말 / 노말 / STATUS / ALL_NEAR_ENEMIES / -1 / 100 / 30 / -1 / EMPTY / 1 / NONE
+40 / 독침 / EMPTY / 독이 있는 침을 상대에게 꿰찔러서 공격한다. 독 상태로 만들 때가 있다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 15 / 100 / 35 / 30 / EMPTY / 1 / NONE
+41 / 더블니들 / EMPTY / 2개의 침을 상대에게 꿰찔러 2회 연속으로 데미지를 준다. 독 상태로 만들 때가 있다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 25 / 100 / 20 / 20 / EMPTY / 1 / NONE
+42 / 바늘미사일 / EMPTY / 날카로운 침을 상대에게 발사해서 공격한다. 2-5회 동안 연속으로 쓴다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 25 / 95 / 20 / -1 / EMPTY / 1 / NONE
+43 / 째려보기 / EMPTY / 날카로운 눈초리로 겁을 주어 상대의 방어를 떨어뜨린다. / 노말 / 노말 / STATUS / ALL_NEAR_ENEMIES / -1 / 100 / 30 / -1 / EMPTY / 1 / NONE
+44 / 물기 / EMPTY / 날카롭고 뾰족한 이빨로 물어서 공격한다. 상대를 풀죽게 만들 때가 있다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 60 / 100 / 25 / 30 / EMPTY / 1 / EMPTY
+45 / 울음소리 / EMPTY / 귀여운 울음소리를 들려주고 관심을 끌어 방심한 사이에 상대의 공격을 떨어뜨린다. / 노말 / 노말 / STATUS / ALL_NEAR_ENEMIES / -1 / 100 / 40 / -1 / EMPTY / 1 / SOUND_BASED
+46 / 울부짖기 / EMPTY / 상대를 도망가게 해서 교대할 포켓몬을 끌어낸다. 야생의 경우에는 배틀이 끝난다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / -6 / 1 / EMPTY
+47 / 노래하기 / EMPTY / 기분 좋은 예쁜 노랫소리를 들려주고 상대를 잠듦 상태로 만든다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 55 / 15 / -1 / EMPTY / 1 / SOUND_BASED
+48 / 초음파 / EMPTY / 특수한 음파를 몸에서 발산하여 상대를 혼란시킨다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 55 / 20 / -1 / EMPTY / 1 / SOUND_BASED
+49 / 소닉붐 / EMPTY / 충격파를 상대에 부딪쳐서 공격한다. 언제나 20의 데미지를 준다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / -1 / 90 / 20 / -1 / EMPTY / 1 / NONE
+50 / 사슬묶기 / EMPTY / 상대의 움직임을 막아 바로 전에 쓴 기술을 4턴 동안 사용할 수 없게 만든다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 1 / NONE
+51 / 용해액 / EMPTY / 강한 산을 상대에게 끼얹어 공격한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 독 / 독 / SPECIAL / ALL_NEAR_ENEMIES / 40 / 100 / 30 / 10 / EMPTY / 1 / NONE
+52 / 불꽃세례 / EMPTY / 작은 불꽃을 상대에게 발사하여 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 40 / 100 / 25 / 10 / EMPTY / 1 / NONE
+53 / 화염방사 / EMPTY / 세찬 불꽃을 상대에게 발사하여 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 90 / 100 / 15 / 10 / EMPTY / 1 / NONE
+54 / 흰안개 / EMPTY / 하얀 안개로 몸을 덮는다. 5턴 동안 상대에 의해 능력이 떨어지지 않게 된다. / 얼음 / 얼음 / STATUS / USER_SIDE / -1 / -1 / 30 / -1 / EMPTY / 1 / NONE
+55 / 물대포 / EMPTY / 물을 기세 좋게 상대에게 발사하여 공격한다. / 물 / 물 / SPECIAL / NEAR_OTHER / 40 / 100 / 25 / -1 / EMPTY / 1 / NONE
+56 / 하이드로펌프 / EMPTY / 대량의 물을 세찬 기세로 상대에게 발사하여 공격한다. / 물 / 물 / SPECIAL / NEAR_OTHER / 110 / 80 / 5 / -1 / EMPTY / 1 / NONE
+57 / 파도타기 / EMPTY / 큰 파도로 자신의 주위에 있는 포켓몬을 공격한다. / 물 / 물 / SPECIAL / ALL_NEAR_OTHERS / 90 / 100 / 15 / -1 / EMPTY / 1 / NONE
+58 / 냉동빔 / EMPTY / 냉동빔을 상대에게 발사하여 공격한다. 얼음 상태로 만들 때가 있다. / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / 90 / 100 / 10 / 10 / EMPTY / 1 / NONE
+59 / 눈보라 / EMPTY / 세찬 눈보라를 상대에게 내뿜어 공격한다. 얼음 상태로 만들 때가 있다. / 얼음 / 얼음 / SPECIAL / ALL_NEAR_ENEMIES / 110 / 70 / 5 / 10 / EMPTY / 1 / WIND_MOVE
+60 / 환상빔 / EMPTY / 이상한 광선을 상대에게 발사하여 공격한다. 혼란시킬 때가 있다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 65 / 100 / 20 / 10 / EMPTY / 1 / NONE
+61 / 거품광선 / EMPTY / 거품을 기세 좋게 상대에게 발사하여 공격한다. 스피드를 떨어뜨릴 때가 있다. / 물 / 물 / SPECIAL / NEAR_OTHER / 65 / 100 / 20 / 10 / EMPTY / 1 / NONE
+62 / 오로라빔 / EMPTY / 무지개색의 빔을 상대에게 발사하여 공격한다. 공격을 떨어뜨릴 때가 있다. / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / 65 / 100 / 20 / 10 / EMPTY / 1 / NONE
+63 / 파괴광선 / EMPTY / 강한 광선을 상대에게 발사하여 공격한다. 다음 턴은 움직일 수 없다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 150 / 90 / 5 / -1 / EMPTY / 1 / NONE
+64 / 쪼기 / EMPTY / 날카롭고 뾰족한 부리나 뿔로 상대를 쪼아서 공격한다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 35 / 100 / 35 / -1 / EMPTY / 1 / MAKES_CONTACT
+65 / 회전부리 / EMPTY / 회전하면서 뾰족한 부리를 상대에게 꿰찔러 공격한다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 80 / 100 / 20 / -1 / EMPTY / 1 / MAKES_CONTACT
+66 / 지옥의바퀴 / EMPTY / 땅에 자신과 함께 상대를 내던져 공격한다. 자신도 조금 데미지를 입는다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 80 / 80 / 20 / -1 / EMPTY / 1 / EMPTY
+67 / 안다리걸기 / EMPTY / 발을 강하게 걸고 상대를 넘어뜨려 공격한다. 상대가 무거울수록 위력이 올라간다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 1 / MAKES_CONTACT
+68 / 카운터 / EMPTY / 상대로부터 받은 물리공격의 데미지를 2배로 만들어 같은 상대에게 돌려준다. / 격투 / 격투 / PHYSICAL / ATTACKER / -1 / 100 / 20 / -1 / -5 / 1 / MAKES_CONTACT
+69 / 지구던지기 / EMPTY / 인력을 사용해 내던진다. 자신의 레벨과 똑같은 데미지를 상대에게 준다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 1 / MAKES_CONTACT
+70 / 괴력 / EMPTY / 혼신의 힘으로 상대를 세게 때려서 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / -1 / EMPTY / 1 / MAKES_CONTACT
+71 / 흡수 / EMPTY / 양분을 흡수하여 공격한다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 20 / 100 / 25 / -1 / EMPTY / 1 / TRIAGE_MOVE
+72 / 메가드레인 / EMPTY / 양분을 흡수하여 공격한다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 40 / 100 / 15 / -1 / EMPTY / 1 / TRIAGE_MOVE
+73 / 씨뿌리기 / EMPTY / 씨가 뿌려진 상대의 HP를 매 턴 조금씩 흡수하여 자신의 HP를 회복한다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / 90 / 10 / -1 / EMPTY / 1 / NONE
+74 / 성장 / EMPTY / 몸을 일시에 크게 성장시켜 공격과 특수공격을 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 1 / IGNORE_PROTECT
+75 / 잎날가르기 / EMPTY / 잎사귀를 날려 상대를 베어 공격한다. 급소에 맞기 쉽다. / 풀 / 풀 / PHYSICAL / ALL_NEAR_ENEMIES / 55 / 95 / 25 / -1 / EMPTY / 1 / SLICING_MOVE
+76 / 솔라빔 / EMPTY / 1턴째에 빛을 가득 모아 2턴째에 빛의 다발을 발사하여 공격한다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 120 / 100 / 10 / -1 / EMPTY / 1 / IGNORE_VIRTUAL
+77 / 독가루 / EMPTY / 독이 있는 가루를 많이 흩뿌려서 상대를 독 상태로 만든다. / 독 / 독 / STATUS / NEAR_OTHER / -1 / 75 / 35 / -1 / EMPTY / 1 / POWDER_MOVE
+78 / 저리가루 / EMPTY / 저리가루를 많이 흩뿌려서 상대를 마비 상태로 만든다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / 75 / 30 / -1 / EMPTY / 1 / POWDER_MOVE
+79 / 수면가루 / EMPTY / 잠이 오는 가루를 많이 흩뿌려서 상대를 잠듦 상태로 만든다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / 75 / 15 / -1 / EMPTY / 1 / POWDER_MOVE
+80 / 꽃잎댄스 / EMPTY / 2-3턴 동안 꽃을 흩뿌려서 상대를 공격한다. 흩뿌린 뒤에는 혼란에 빠진다. / 풀 / 풀 / SPECIAL / RANDOM_NEAR_ENEMY / 120 / 100 / 10 / -1 / EMPTY / 1 / EMPTY
+81 / 실뿜기 / EMPTY / 입에서 뿜어낸 실을 휘감아서 상대의 스피드를 크게 떨어뜨린다. / 벌레 / 벌레 / STATUS / ALL_NEAR_ENEMIES / -1 / 95 / 40 / -1 / EMPTY / 1 / NONE
+82 / 용의분노 / EMPTY / 분노의 충격파를 상대에게 부딪쳐서 공격한다. 언제나 40의 데미지를 준다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 1 / NONE
+83 / 회오리불꽃 / EMPTY / 세차게 소용돌이치는 불꽃 속에 4-5턴 동안 상대를 가두어 공격한다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 35 / 85 / 15 / -1 / EMPTY / 1 / NONE
+84 / 전기쇼크 / EMPTY / 전기 자극을 상대에게 날려서 공격한다. 마비 상태로 만들 때가 있다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 40 / 100 / 30 / 10 / EMPTY / 1 / NONE
+85 / 10만볼트 / EMPTY / 강한 전격을 상대에게 날려서 공격한다. 마비 상태로 만들 때가 있다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 90 / 100 / 15 / 10 / EMPTY / 1 / NONE
+86 / 전기자석파 / EMPTY / 약한 전격을 날려서 상대를 마비 상태로 만든다. / 전기 / 전기 / STATUS / NEAR_OTHER / -1 / 90 / 20 / -1 / EMPTY / 1 / NONE
+87 / 번개 / EMPTY / 강한 번개를 상대에게 떨어뜨려 공격한다. 마비 상태로 만들 때가 있다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 110 / 70 / 10 / 30 / EMPTY / 1 / NONE
+88 / 돌떨구기 / EMPTY / 작은 바위를 들어올려 상대에게 내던져서 공격한다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 50 / 90 / 15 / -1 / EMPTY / 1 / NONE
+89 / 지진 / EMPTY / 지진의 충격으로 자신의 주위에 있는 포켓몬을 공격한다. / 땅 / 땅 / PHYSICAL / ALL_NEAR_OTHERS / 100 / 100 / 10 / -1 / EMPTY / 1 / NONE
+90 / 땅가르기 / EMPTY / 땅이 갈라진 곳에 상대를 떨어뜨려 공격한다. 맞으면 일격에 기절한다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 200 / 30 / 5 / -1 / EMPTY / 1 / NONE
+91 / 구멍파기 / EMPTY / 1턴째에 파고들어 2턴째에 상대를 공격한다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 1 / EMPTY
+92 / 맹독 / EMPTY / 상대를 맹독의 상태로 만든다. 턴이 진행될수록 독의 데미지가 증가한다. / 독 / 독 / STATUS / NEAR_OTHER / -1 / 90 / 10 / -1 / EMPTY / 1 / NONE
+93 / 염동력 / EMPTY / 약한 염동력을 상대에게 보내어 공격한다. 상대를 혼란시킬 때가 있다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 50 / 100 / 25 / 10 / EMPTY / 1 / NONE
+94 / 사이코키네시스 / EMPTY / 강한 염동력을 상대에게 보내어 공격한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 90 / 100 / 10 / 10 / EMPTY / 1 / NONE
+95 / 최면술 / EMPTY / 졸음을 유도하는 암시를 걸어서 상대를 잠듦 상태로 만든다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / 60 / 20 / -1 / EMPTY / 1 / NONE
+96 / 요가포즈 / EMPTY / 잠들어 있는 힘을 몸속에서 끌어내어 자신의 공격을 올린다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 40 / -1 / EMPTY / 1 / IGNORE_PROTECT
+97 / 고속이동 / EMPTY / 힘을 빼고 몸을 가볍게 해서 고속으로 움직인다. 자신의 스피드를 크게 올린다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 30 / -1 / EMPTY / 1 / IGNORE_PROTECT
+98 / 전광석화 / EMPTY / 눈에 보이지 않는 굉장한 속도로 상대에게 돌진한다. 반드시 선제공격할 수 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 40 / 100 / 30 / -1 / 1 / 1 / MAKES_CONTACT
+99 / 분노 /  (P) / 기술을 썼을 때 공격을 받으면 분노의 힘으로 공격이 올라간다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 20 / 100 / 20 / -1 / EMPTY / 1 / MAKES_CONTACT
+100 / 순간이동 / EMPTY / 교대할 포켓몬이 있을 때 사용하면 교체한다. 야생 포켓몬은 도망가 버린다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 20 / -1 / -6 / 1 / EMPTY
+101 / 나이트헤드 / EMPTY / 무시무시한 환상을 보게 해서 자신의 레벨과 똑같은 만큼의 데미지를 상대에게 준다. / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 1 / NONE
+102 / 흉내내기 / EMPTY / 상대가 마지막에 사용한 기술을 배틀을 하는 동안 자신의 기술로 만들 수 있다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 1 / IGNORE_VIRTUAL
+103 / 싫은소리 / EMPTY / 그만 귀를 막아버리고 싶은 싫은 소리를 내어 상대의 방어를 크게 떨어뜨린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 85 / 40 / -1 / EMPTY / 1 / SOUND_BASED
+104 / 그림자분신 / EMPTY / 재빠른 움직임으로 분신을 만들어 상대를 혼란시켜 회피율을 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 15 / -1 / EMPTY / 1 / IGNORE_PROTECT
+105 / HP회복 / EMPTY / 세포를 재생시켜 자신의 최대 HP의 절반만큼 HP를 회복한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 1 / EMPTY
+106 / 단단해지기 / EMPTY / 전신에 힘을 담아 몸을 단단하게 해서 자신의 방어를 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 30 / -1 / EMPTY / 1 / IGNORE_PROTECT
+107 / 작아지기 / EMPTY / 몸을 축소하여 작게 보임으로써 자신의 회피율을 크게 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 1 / IGNORE_PROTECT
+108 / 연막 / EMPTY / 연기나 먹물을 내뿜어 상대의 명중률을 떨어뜨린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 1 / NONE
+109 / 이상한빛 / EMPTY / 이상한 빛을 상대에게 비춰 당황하게 한다. 상대를 혼란시킨다. / 고스트 / 고스트 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 1 / NONE
+110 / 껍질에숨기 / EMPTY / 껍질에 숨어 몸을 보호하여 자신의 방어를 올린다. / 물 / 물 / STATUS / USER / -1 / -1 / 40 / -1 / EMPTY / 1 / IGNORE_PROTECT
+111 / 웅크리기 / EMPTY / 몸을 둥글게 웅크려서 자신의 방어를 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 40 / -1 / EMPTY / 1 / IGNORE_PROTECT
+112 / 배리어 / EMPTY / 튼튼한 장막을 만들어 자신의 방어를 크게 올린다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 1 / IGNORE_PROTECT
+113 / 빛의장막 / EMPTY / 5턴 동안 이상한 장막을 쳐서 상대로부터 받는 특수공격의 데미지를 약하게 한다. / 에스퍼 / 에스퍼 / STATUS / USER_SIDE / -1 / -1 / 30 / -1 / EMPTY / 1 / NONE
+114 / 흑안개 / EMPTY / 흑안개를 뿜어 배틀에 참가 중인 포켓몬 전원의 능력 변화를 원래대로 돌린다. / 얼음 / 얼음 / STATUS / BOTH_SIDES / -1 / -1 / 30 / -1 / EMPTY / 1 / NONE
+115 / 리플렉터 / EMPTY / 5턴 동안 이상한 장막을 쳐서 상대로부터 받는 물리공격의 데미지를 약하게 한다. / 에스퍼 / 에스퍼 / STATUS / USER_SIDE / -1 / -1 / 20 / -1 / EMPTY / 1 / NONE
+116 / 기충전 / EMPTY / 깊게 숨을 들이마셔 기합을 넣는다. 자신의 공격이 급소에 맞기 쉬워진다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 30 / -1 / EMPTY / 1 / IGNORE_PROTECT
+117 / 참기 /  (N) / 2턴 동안 공격을 견뎌 입은 데미지를 2배로 만들어 상대에게 돌려준다. / 노말 / 노말 / PHYSICAL / USER / -1 / -1 / 10 / -1 / 1 / 1 / EMPTY
+118 / 손가락흔들기 / EMPTY / 손가락을 흔들어 자신의 뇌를 자극해서 모든 기술 중 어느 하나를 날린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 1 / EMPTY
+119 / 따라하기 / EMPTY / 상대가 사용한 기술을 흉내 내어 자신도 똑같은 기술을 쓴다. / 비행 / 비행 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 1 / IGNORE_VIRTUAL
+120 / 자폭 / EMPTY / 폭발을 일으켜서 자신의 주위에 있는 포켓몬을 공격한다. 쓰고 나서 기절하게 된다. / 노말 / 노말 / PHYSICAL / ALL_NEAR_OTHERS / 200 / 100 / 5 / -1 / EMPTY / 1 / NONE
+121 / 알폭탄 / EMPTY / 큰 알을 온 힘을 다해 상대에게 내던져서 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 100 / 75 / 10 / -1 / EMPTY / 1 / BALLBOMB_MOVE
+122 / 핥기 / EMPTY / 긴 혀로 상대를 핥아서 공격한다. 마비 상태로 만들 때가 있다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 30 / 100 / 30 / 30 / EMPTY / 1 / MAKES_CONTACT
+123 / 스모그 / EMPTY / 더러운 가스를 상대에게 내뿜어 공격한다. 독 상태로 만들 때가 있다. / 독 / 독 / SPECIAL / NEAR_OTHER / 30 / 70 / 20 / 40 / EMPTY / 1 / NONE
+124 / 오물공격 / EMPTY / 더러운 오물을 상대에게 내던져서 공격한다. 독 상태로 만들 때가 있다. / 독 / 독 / SPECIAL / NEAR_OTHER / 65 / 100 / 20 / 30 / EMPTY / 1 / NONE
+125 / 뼈다귀치기 / EMPTY / 손에 들고 있는 뼈로 상대를 세게 때려서 공격한다. 상대를 풀죽게 만들 때가 있다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 65 / 85 / 20 / 10 / EMPTY / 1 / NONE
+126 / 불대문자 / EMPTY / 큰 대자의 불꽃으로 상대를 불태운다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 110 / 85 / 5 / 10 / EMPTY / 1 / NONE
+127 / 폭포오르기 / EMPTY / 굉장한 기세로 상대에게 돌진한다. 상대를 풀죽게 만들 때가 있다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / 20 / EMPTY / 1 / MAKES_CONTACT
+128 / 껍질끼우기 / EMPTY / 매우 튼튼하고 두꺼운 껍질에 4-5턴 동안 상대를 끼워서 공격한다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 35 / 85 / 15 / -1 / EMPTY / 1 / MAKES_CONTACT
+129 / 스피드스타 / EMPTY / 별 모양의 빛을 발사해서 상대를 공격한다. 공격은 반드시 명중한다. / 노말 / 노말 / SPECIAL / ALL_NEAR_ENEMIES / 60 / -1 / 20 / -1 / EMPTY / 1 / NONE
+130 / 로켓박치기 / EMPTY / 1턴째에 머리를 움츠려 방어를 올린다. 2턴째에 상대를 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 130 / 100 / 10 / -1 / EMPTY / 1 / EMPTY
+131 / 가시대포 / EMPTY / 날카로운 침을 상대에게 발사해서 공격한다. 2-5회 동안 연속으로 쓴다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 20 / 100 / 15 / -1 / EMPTY / 1 / NONE
+132 / 휘감기 / EMPTY / 촉수나 덩굴 등을 휘감아서 공격한다. 상대의 스피드를 떨어뜨릴 때가 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 10 / 100 / 35 / 10 / EMPTY / 1 / MAKES_CONTACT
+133 / 망각술 / EMPTY / 머리를 비워서 순간적으로 무언가를 잊어버림으로써 자신의 특수방어를 크게 올린다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 1 / IGNORE_PROTECT
+134 / 숟가락휘기 / EMPTY / 숟가락을 휘어서 주의를 끌어 상대의 명중률을 낮춘다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / 80 / 15 / -1 / EMPTY / 1 / NONE
+135 / 알낳기 / EMPTY / 자신의 최대 HP 절반을 회복한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 1 / EMPTY
+136 / 무릎차기 / EMPTY / 점프해서 무릎차기로 상대를 공격한다. 빗나가면 자신이 데미지를 입는다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 130 / 90 / 10 / -1 / EMPTY / 1 / EMPTY
+137 / 뱀눈초리 / EMPTY / 배의 무늬로 겁을 주어 상대를 마비 상태로 만든다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 30 / -1 / EMPTY / 1 / NONE
+138 / 꿈먹기 / EMPTY / 잠자고 있는 상대의 꿈을 먹어 공격한다. 데미지의 절반을 HP로 회복한다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 100 / 100 / 15 / -1 / EMPTY / 1 / TRIAGE_MOVE
+139 / 독가스 / EMPTY / 독가스를 상대의 얼굴에 내뿜어 독 상태로 만든다. / 독 / 독 / STATUS / ALL_NEAR_ENEMIES / -1 / 90 / 40 / -1 / EMPTY / 1 / NONE
+140 / 구슬던지기 / EMPTY / 둥근 것을 상대에게 내던져서 공격한다. 2-5회 동안 연속으로 쓴다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 15 / 85 / 20 / -1 / EMPTY / 1 / BALLBOMB_MOVE
+141 / 흡혈 / EMPTY / 피를 빨아서 상대를 공격한다. 준 데미지의 절반을 HP로 회복한다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 1 / EMPTY
+142 / 악마의키스 / EMPTY / 무서운 얼굴로 키스한다. 상대를 잠듦 상태로 만든다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 75 / 10 / -1 / EMPTY / 1 / NONE
+143 / 불새 / EMPTY / 2턴째에 상대를 공격한다. 가끔 풀죽게 만든다. 급소에도 맞기 쉽다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 140 / 90 / 5 / 30 / EMPTY / 1 / IGNORE_VIRTUAL
+144 / 변신 / EMPTY / 상대 포켓몬으로 변신하여 상대와 완전히 똑같은 기술을 사용할 수 있다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 1 / IGNORE_PROTECT
+145 / 거품 / EMPTY / 매우 많은 거품을 상대에게 내뿜어 공격한다. 상대의 스피드를 떨어뜨릴 때가 있다. / 물 / 물 / SPECIAL / ALL_NEAR_ENEMIES / 40 / 100 / 30 / 10 / EMPTY / 1 / NONE
+146 / 잼잼펀치 / EMPTY / 리드미컬한 펀치를 날려 상대를 공격한다. 혼란시킬 때가 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 70 / 100 / 10 / 20 / EMPTY / 1 / EMPTY
+147 / 버섯포자 / EMPTY / 최면 효과가 있는 포자를 훌훌 흩뿌려서 상대를 잠듦 상태로 만든다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 1 / POWDER_MOVE
+148 / 플래시 / EMPTY / 눈이 부신 빛으로 상대의 명중률을 떨어뜨린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 1 / NONE
+149 / 사이코웨이브 / EMPTY / 이상한 염력파를 상대에게 발사하여 공격한다. 사용할 때마다 데미지가 바뀐다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 1 / NONE
+150 / 튀어오르기 / EMPTY / 공격도 하지 않고 팔딱팔딱 튈 뿐 아무 일도 일어나지 않는다... / 노말 / 노말 / STATUS / USER / -1 / -1 / 40 / -1 / EMPTY / 1 / IGNORE_PROTECT
+151 / 녹기 / EMPTY / 세포의 변화로 액체가 되어 자신의 방어를 크게 올린다. / 독 / 독 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 1 / IGNORE_PROTECT
+152 / 집게해머 / EMPTY / 큰 집게를 상대에게 내리쳐서 공격한다. 급소에 맞기 쉽다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 100 / 90 / 10 / -1 / EMPTY / 1 / MAKES_CONTACT
+153 / 대폭발 / EMPTY / 큰 폭발로 자신의 주위에 있는 포켓몬을 공격한다. 쓰고 나서는 기절한다. / 노말 / 노말 / PHYSICAL / ALL_NEAR_OTHERS / 250 / 100 / 5 / -1 / EMPTY / 1 / NONE
+154 / 마구할퀴기 / EMPTY / 손톱이나 낫 등으로 상대를 할퀴어서 공격한다. 2-5회 동안 연속으로 쓴다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 18 / 80 / 15 / -1 / EMPTY / 1 / MAKES_CONTACT
+155 / 뼈다귀부메랑 / EMPTY / 손에 들고 있는 뼈를 상대에게 날려서 날아갈 때와 돌아올 때 2회 연속 데미지를 준다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 50 / 90 / 10 / -1 / EMPTY / 1 / NONE
+156 / 잠자기 / EMPTY / 2턴 동안 계속 잠잔다. 자신의 HP와 상태 이상을 모두 회복한다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 1 / EMPTY
+157 / 스톤샤워 / EMPTY / 큰 바위를 세차게 부딪쳐서 공격한다. 상대를 풀죽게 만들 때가 있다. / 바위 / 바위 / PHYSICAL / ALL_NEAR_ENEMIES / 75 / 90 / 10 / 30 / EMPTY / 1 / NONE
+158 / 필살앞니 / EMPTY / 날카로운 앞니로 강하게 물어서 공격한다. 상대를 풀죽게 만들 때가 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 80 / 90 / 15 / 10 / EMPTY / 1 / EMPTY
+159 / 각지기 / EMPTY / 몸의 각을 늘려서 더욱 각지게 하여 자신의 공격을 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 30 / -1 / EMPTY / 1 / IGNORE_PROTECT
+160 / 텍스처 / EMPTY / 자신의 타입을 배운 기술 중 가장 위에 있는 기술과 같은 타입으로 바꾼다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 30 / -1 / EMPTY / 1 / IGNORE_PROTECT
+161 / 트라이어택 / EMPTY / 3개의 광선으로 공격한다. 마비, 화상 또는 얼음 상태 중 어느 하나로 만들 때가 있다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / 20 / EMPTY / 1 / NONE
+162 / 분노의앞니 / EMPTY / 날카로운 앞니로 강하게 물어서 공격한다. 상대의 HP는 절반이 된다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / 90 / 10 / -1 / EMPTY / 1 / MAKES_CONTACT
+163 / 베어가르기 / EMPTY / 발톱이나 낫 등으로 상대를 베어 갈라서 공격한다. 급소에 맞기 쉽다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 70 / 100 / 20 / -1 / EMPTY / 1 / EMPTY
+164 / 대타출동 /  (N) / 자신의 HP를 조금 깎아서 분신을 만든다. 분신은 자신의 대타가 된다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 1 / IGNORE_PROTECT
+165 / 발버둥 / EMPTY / 자신의 PP가 떨어지면 발버둥 쳐 상대를 공격한다. 자신도 조금 데미지를 입는다. / 노말 / 노말 / PHYSICAL / RANDOM_NEAR_ENEMY / 50 / -1 / 1 / -1 / EMPTY / 1 / EMPTY
+166 / 스케치 / EMPTY / 상대가 쓴 기술을 자신의 것으로 만든다. 한 번 사용하면 스케치는 사라진다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 2 / IGNORE_VIRTUAL
+167 / 트리플킥 / EMPTY / 3회 연속으로 킥을 날려 공격한다. 기술이 맞을 때마다 위력이 올라간다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 10 / 90 / 10 / -1 / EMPTY / 2 / EMPTY
+168 / 도둑질 / EMPTY / 공격과 동시에 30%의 확률로 도구를 훔친다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 60 / 100 / 25 / -1 / EMPTY / 2 / MAKES_CONTACT
+169 / 거미집 / EMPTY / 끈적끈적하고 가는 실을 칭칭 휘감아 상대를 배틀에서 도망칠 수 없게 한다. / 벌레 / 벌레 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 2 / NONE
+170 / 마음의눈 / EMPTY / 상대의 움직임을 마음으로 읽고 다음 공격이 반드시 상대에게 명중되게 한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 5 / -1 / EMPTY / 2 / NONE
+171 / 악몽 / EMPTY / 잠듦 상태의 상대에게 악몽을 꾸게 하여 매 턴 조금씩 HP를 떨어뜨려 간다. / 고스트 / 고스트 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 2 / NONE
+172 / 화염바퀴 / EMPTY / 불꽃을 둘러 상대에게 돌진하여 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 60 / 100 / 25 / 10 / EMPTY / 2 / MAKES_CONTACT
+173 / 코골기 / EMPTY / 자신이 잠들어 있을 때 소음을 내어 공격한다. 상대를 풀죽게 만들 때가 있다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 50 / 100 / 15 / 30 / EMPTY / 2 / SOUND_BASED
+174 / 저주 / EMPTY / 기술을 쓰는 포켓몬이 고스트타입일 때와 그 이외의 타입일 때는 효과가 다르다. / 고스트 / 고스트 / STATUS / CURSE / -1 / -1 / 10 / -1 / EMPTY / 2 / IGNORE_PROTECT
+175 / 바둥바둥 / EMPTY / 바둥바둥 난동 부려서 공격한다. 자신의 HP가 적을수록 기술의 위력이 올라간다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 2 / MAKES_CONTACT
+176 / 텍스처2 /  (P) / 상대가 마지막으로 쓴 기술에 저항할 수 있도록 자신의 타입을 변화시킨다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 30 / -1 / EMPTY / 2 / NONE
+177 / 에어로블라스트 / EMPTY / 공기의 소용돌이를 발사하여 공격한다. 급소에 맞기 쉽다. / 비행 / 비행 / SPECIAL / NEAR_OTHER / 100 / 95 / 5 / -1 / EMPTY / 2 / WIND_MOVE
+178 / 목화포자 / EMPTY / 솜처럼 폭신폭신한 포자를 착 달라붙게 해서 상대의 스피드를 크게 떨어뜨린다. / 풀 / 풀 / STATUS / ALL_NEAR_ENEMIES / -1 / 100 / 40 / -1 / EMPTY / 2 / POWDER_MOVE
+179 / 기사회생 / EMPTY / 힘을 쥐어짜서 공격한다. 자신의 HP가 적을수록 기술의 위력이 올라간다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 2 / MAKES_CONTACT
+180 / 원한 / EMPTY / 상대가 마지막으로 사용한 기술에 원한을 품어 그 기술의 PP를 4만큼 줄인다. / 고스트 / 고스트 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 2 / NONE
+181 / 눈싸라기 / EMPTY / 차가운 가랑눈을 상대에게 내뿜어 공격한다. 얼음 상태로 만들 때가 있다. / 얼음 / 얼음 / SPECIAL / ALL_NEAR_ENEMIES / 40 / 100 / 25 / 10 / EMPTY / 2 / NONE
+182 / 방어 / EMPTY / 상대의 공격을 전혀 받지 않는다. 연속으로 쓰면 실패하기 쉽다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 2 / IGNORE_PROTECT
+183 / 마하펀치 / EMPTY / 눈에 보이지 않는 굉장한 속도로 펀치를 날린다. 반드시 선제공격을 할 수 있다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 40 / 100 / 30 / -1 / 1 / 2 / EMPTY
+184 / 겁나는얼굴 / EMPTY / 무서운 얼굴로 노려보고 겁주어 상대의 스피드를 크게 떨어뜨린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 2 / NONE
+185 / 속여때리기 / EMPTY / 슬금슬금 상대에게 다가가 방심한 틈을 타서 세게 때린다. 공격은 반드시 명중한다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 60 / -1 / 20 / -1 / EMPTY / 2 / MAKES_CONTACT
+186 / 천사의키스 / EMPTY / 천사처럼 귀엽게 키스하여 상대를 혼란시킨다. / 페어리 / 페어리 / STATUS / NEAR_OTHER / -1 / 75 / 10 / -1 / EMPTY / 2 / NONE
+187 / 배북 / EMPTY / 자신의 HP를 최대 HP의 절반만큼 감소시켜 자신의 공격을 최대로 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 2 / IGNORE_PROTECT
+188 / 오물폭탄 / EMPTY / 더러운 오물을 상대에게 내던져서 공격한다. 독 상태로 만들 때가 있다. / 독 / 독 / SPECIAL / NEAR_OTHER / 90 / 100 / 10 / 30 / EMPTY / 2 / BALLBOMB_MOVE
+189 / 진흙뿌리기 / EMPTY / 상대의 얼굴 등에 진흙을 내던져서 공격한다. 명중률을 떨어뜨린다. / 땅 / 땅 / SPECIAL / NEAR_OTHER / 20 / 100 / 10 / 100 / EMPTY / 2 / NONE
+190 / 대포무노포 / EMPTY / 상대의 얼굴 등에 먹물을 내뿜어 공격한다. 명중률을 떨어뜨릴 때가 있다. / 물 / 물 / SPECIAL / NEAR_OTHER / 65 / 85 / 10 / 50 / EMPTY / 2 / BALLBOMB_MOVE
+191 / 압정뿌리기 / EMPTY / 상대의 발밑에 압정을 뿌린다. 교체된 상대 포켓몬에게 데미지를 준다. / 땅 / 땅 / STATUS / ENEMY_SIDE / -1 / -1 / 20 / -1 / EMPTY / 2 / NONE
+192 / 전자포 / EMPTY / 대포처럼 전기를 발사해서 공격한다. 상대를 마비 상태로 만든다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 120 / 50 / 5 / 100 / EMPTY / 2 / BALLBOMB_MOVE
+193 / 꿰뚫어보기 /  (N) / 고스트타입에 효과가 없는 기술이나 회피율이 높은 상대라 할지라도 공격이 맞게 된다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 40 / -1 / EMPTY / 2 / NONE
+194 / 길동무 / EMPTY / 기술을 쓴 뒤 상대의 공격으로 기절했을 때 공격 상대도 기절하게 한다. 연속으로 쓰면 실패한다. / 고스트 / 고스트 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 2 / NONE
+195 / 멸망의노래 / EMPTY / 노래를 들은 포켓몬은 3턴이 지나면 기절한다. 교체되면 효과가 없어진다. / 노말 / 노말 / STATUS / ALL / -1 / -1 / 5 / -1 / EMPTY / 2 / EMPTY
+196 / 얼어붙은바람 / EMPTY / 차가운 냉기를 상대에게 내뿜어 공격한다. 상대의 스피드를 떨어뜨린다. / 얼음 / 얼음 / SPECIAL / ALL_NEAR_ENEMIES / 55 / 95 / 15 / 100 / EMPTY / 2 / WIND_MOVE
+197 / 판별 / EMPTY / 상대의 공격을 전혀 받지 않는다. 연속으로 쓰면 실패하기 쉽다. / 격투 / 격투 / STATUS / USER / -1 / -1 / 5 / -1 / 4 / 2 / IGNORE_PROTECT
+198 / 본러시 / EMPTY / 단단한 뼈로 상대를 세게 때려서 공격한다. 2-5회 동안 연속으로 쓴다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 25 / 90 / 10 / -1 / EMPTY / 2 / NONE
+199 / 록온 / EMPTY / 조준을 잘 맞춰 다음 공격이 반드시 상대에게 명중하도록 한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 5 / -1 / EMPTY / 2 / NONE
+200 / 역린 / EMPTY / 2-3턴 동안 마구 난동 부려서 공격한다. 난동 부린 뒤에는 혼란에 빠진다. / 드래곤 / 드래곤 / PHYSICAL / RANDOM_NEAR_ENEMY / 120 / 100 / 10 / -1 / EMPTY / 2 / MAKES_CONTACT
+201 / 모래바람 / EMPTY / 5턴 동안 모래바람을 일으켜 바위 땅, 강철타입 이외의 상대에게 데미지를 준다. 바위타입의 특수방어가 올라간다. / 바위 / 바위 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 2 / NONE
+202 / 기가드레인 / EMPTY / 양분을 흡수하여 공격한다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 75 / 100 / 10 / -1 / EMPTY / 2 / TRIAGE_MOVE
+203 / 버티기 / EMPTY / 공격을 받아도 HP를 반드시 1만큼은 남긴다. 연속으로 쓰면 실패하기 쉽다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 2 / IGNORE_PROTECT
+204 / 애교부리기 / EMPTY / 귀엽게 바라보고 방심을 유도하여 상대의 공격을 크게 떨어뜨린다. / 페어리 / 페어리 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 2 / NONE
+205 / 구르기 / EMPTY / 5턴 동안 구르기를 반복하여 공격한다. 기술이 맞을 때마다 위력이 올라간다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 30 / 90 / 20 / -1 / EMPTY / 2 / MAKES_CONTACT
+206 / 칼등치기 / EMPTY / 상대의 HP가 반드시 1만 남도록 조절하여 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 40 / 100 / 40 / -1 / EMPTY / 2 / MAKES_CONTACT
+207 / 뽐내기 / EMPTY / 상대를 화내게 해서 혼란시킨다. 분노로 상대의 공격은 크게 올라가 버린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 85 / 15 / -1 / EMPTY / 2 / NONE
+208 / 우유마시기 / EMPTY / 자신의 최대 HP 절반을 회복한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 2 / EMPTY
+209 / 스파크 / EMPTY / 전기를 둘러 상대에게 돌진하여 공격한다. 마비 상태로 만들 때가 있다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 65 / 100 / 20 / 30 / EMPTY / 2 / MAKES_CONTACT
+210 / 연속자르기 / EMPTY / 낫이나 발톱 등으로 상대를 베어 공격한다. 연속으로 맞히면 위력이 올라간다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 40 / 95 / 20 / -1 / EMPTY / 2 / EMPTY
+211 / 강철날개 / EMPTY / 단단한 날개를 상대에게 부딪쳐서 공격한다. 자신의 방어가 올라갈 때가 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 70 / 90 / 25 / 10 / EMPTY / 2 / MAKES_CONTACT
+212 / 검은눈빛 / EMPTY / 빨려 들어갈 것 같은 까만 눈빛으로 가만히 응시하여 상대를 배틀에서 도망갈 수 없게 한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 5 / -1 / EMPTY / 2 / NONE
+213 / 헤롱헤롱 / EMPTY / 수컷은 암컷을 암컷은 수컷을 유혹하여 헤롱헤롱하게 만든다. 상대가 기술을 쓰기 어려워진다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 2 / NONE
+214 / 잠꼬대 / EMPTY / 자신이 배운 기술 중 하나를 무작위로 날린다. 자신이 잠들어 있을 때만 쓸 수 있다. / 노말 / 노말 / STATUS / ALL_ENEMIES / -1 / -1 / 10 / -1 / EMPTY / 2 / EMPTY
+215 / 치료방울 / EMPTY / 기분 좋은 방울소리를 들려주어 같은 편 전원의 상태 이상을 회복한다. / 노말 / 노말 / STATUS / PARTY / -1 / -1 / 5 / -1 / EMPTY / 2 / SOUND_BASED
+216 / 은혜갚기 / EMPTY / 트레이너를 위해 전력으로 상대를 공격한다. 친밀할수록 위력이 올라간다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 2 / MAKES_CONTACT
+217 / 프레젠트 / EMPTY / 덫을 설치한 상자를 상대에게 건네어 공격한다. HP가 회복돼버릴 때도 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / 90 / 15 / -1 / EMPTY / 2 / NONE
+218 / 화풀이 / EMPTY / 불만을 풀기 위해 전력으로 상대를 공격한다. 친밀하지 않을수록 위력이 올라간다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 2 / MAKES_CONTACT
+219 / 신비의부적 /  (N) / 5턴 동안 이상한 힘의 보호를 받아 상태 이상이 되지 않는다. / 노말 / 노말 / STATUS / USER_SIDE / -1 / -1 / 25 / -1 / EMPTY / 2 / NONE
+220 / 아픔나누기 / EMPTY / 자신의 HP와 상대의 HP를 합친 것을 자신과 상대가 사이좋게 나눈다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 2 / NONE
+221 / 성스러운불꽃 / EMPTY / 신비한 불꽃으로 상대를 태워서 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 100 / 95 / 5 / 50 / EMPTY / 2 / NONE
+222 / 매그니튜드 / EMPTY / 땅을 흔들어서 자신의 주위에 있는 포켓몬을 공격한다. 기술의 위력이 여러모로 바뀐다. / 땅 / 땅 / PHYSICAL / ALL_NEAR_OTHERS / -1 / 100 / 30 / -1 / EMPTY / 2 / NONE
+223 / 폭발펀치 / EMPTY / 혼신의 힘으로 펀치를 날려서 공격한다. 상대를 반드시 혼란시킨다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 100 / 50 / 5 / 100 / EMPTY / 2 / EMPTY
+224 / 메가혼 / EMPTY / 단단하고 훌륭한 뿔로 마음껏 상대를 꿰찔러서 공격한다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 120 / 85 / 10 / -1 / EMPTY / 2 / MAKES_CONTACT
+225 / 용의숨결 / EMPTY / 굉장한 숨결을 상대에게 내뿜어 공격한다. 마비 상태로 만들 때가 있다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / 60 / 100 / 20 / 30 / EMPTY / 2 / NONE
+226 / 배턴터치 / EMPTY / 교대 포켓몬과 바뀐다. 능력 변화는 바뀐 포켓몬이 그대로 이어받는다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 40 / -1 / EMPTY / 2 / EMPTY
+227 / 앙코르 / EMPTY / 상대에게 앙코르를 외쳐서 기술을 3번 연속으로 쓰게 한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 5 / -1 / EMPTY / 2 / NONE
+228 / 따라가때리기 /  (P) / 상대 포켓몬이 교체될 때 기술을 쓰면 2배의 위력으로 공격할 수 있다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 40 / 100 / 20 / -1 / EMPTY / 2 / MAKES_CONTACT
+229 / 고속스핀 / EMPTY / 회전해서 상대를 공격한다. 조이기, 김밥말이, 씨뿌리기 등을 날려버린다. 자신의 스피드도 오른다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 50 / 100 / 40 / 100 / EMPTY / 2 / MAKES_CONTACT
+230 / 달콤한향기 / EMPTY / 향기로 상대의 회피율을 크게 떨어뜨린다. / 노말 / 노말 / STATUS / ALL_NEAR_ENEMIES / -1 / 100 / 20 / -1 / EMPTY / 2 / NONE
+231 / 아이언테일 / EMPTY / 단단한 꼬리로 상대를 힘껏 쳐서 공격한다. 상대의 방어를 떨어뜨릴 때가 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 100 / 75 / 15 / 30 / EMPTY / 2 / MAKES_CONTACT
+232 / 메탈클로 / EMPTY / 강철의 발톱으로 상대를 베어 갈라 공격한다. 자신의 공격이 올라갈 때도 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 50 / 95 / 35 / 10 / EMPTY / 2 / MAKES_CONTACT
+233 / 받아던지기 / EMPTY / 상대보다 나중에 공격한다. 그 대신 자신의 공격은 반드시 명중한다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 70 / -1 / 10 / -1 / -1 / 2 / MAKES_CONTACT
+234 / 아침햇살 / EMPTY / 자신의 HP를 회복한다. 날씨에 따라 회복량이 변한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 2 / EMPTY
+235 / 광합성 / EMPTY / 자신의 HP를 회복한다. 날씨에 따라 회복량이 변한다. / 풀 / 풀 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 2 / EMPTY
+236 / 달빛 / EMPTY / 자신의 HP를 회복한다. 날씨에 따라 회복량이 변한다. / 페어리 / 페어리 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 2 / EMPTY
+237 / 잠재파워 / EMPTY / 기술을 쓴 포켓몬에 따라 기술의 타입이 바뀐다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 60 / 100 / 15 / -1 / EMPTY / 2 / NONE
+238 / 크로스촙 / EMPTY / 양손으로 당수를 상대에게 힘껏 쳐서 공격한다. 급소에 맞기 쉽다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 100 / 80 / 5 / -1 / EMPTY / 2 / MAKES_CONTACT
+239 / 회오리 / EMPTY / 회오리를 일으켜 상대를 끌어들여 공격한다. 상대를 풀죽게 만들 때가 있다. / 드래곤 / 드래곤 / SPECIAL / ALL_NEAR_ENEMIES / 40 / 100 / 20 / 20 / EMPTY / 2 / WIND_MOVE
+240 / 비바라기 / EMPTY / 5턴 동안 비를 내리게 해서 물타입 기술의 위력을 올린다. 불꽃타입의 위력은 떨어진다. / 물 / 물 / STATUS / BOTH_SIDES / -1 / -1 / 5 / -1 / EMPTY / 2 / NONE
+241 / 쾌청 / EMPTY / 5턴 동안 햇살을 강하게 해서 불꽃타입 기술의 위력을 올린다. 물타입의 위력은 떨어진다. / 불꽃 / 불꽃 / STATUS / BOTH_SIDES / -1 / -1 / 5 / -1 / EMPTY / 2 / NONE
+242 / 깨물어부수기 / EMPTY / 날카로운 이빨로 상대를 깨물어 부숴서 공격한다. 상대의 방어를 떨어뜨릴 때가 있다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / 20 / EMPTY / 2 / EMPTY
+243 / 미러코트 / EMPTY / 상대에게 받은 특수공격의 데미지를 2배로 만들어 그 상대에게 돌려준다. / 에스퍼 / 에스퍼 / SPECIAL / ATTACKER / -1 / 100 / 20 / -1 / -5 / 2 / NONE
+244 / 자기암시 / EMPTY / 자신에게 암시를 걸어서 능력 변화 상태를 상대와 똑같은 상태로 만든다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 2 / NONE
+245 / 신속 / EMPTY / 눈에 보이지 않는 굉장한 속도로 상대에게 돌진하여 공격한다. 반드시 선제공격을 할 수 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 80 / 100 / 5 / -1 / 2 / 2 / MAKES_CONTACT
+246 / 원시의힘 / EMPTY / 원시의 힘으로 공격한다. 자신의 모든 능력이 오를 때가 있다. / 바위 / 바위 / SPECIAL / NEAR_OTHER / 60 / 100 / 5 / 10 / EMPTY / 2 / NONE
+247 / 섀도볼 / EMPTY / 까만 그림자의 덩어리를 내던져서 공격한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / 80 / 100 / 15 / 20 / EMPTY / 2 / BALLBOMB_MOVE
+248 / 미래예지 / EMPTY / 기술을 사용한 2턴 뒤에 상대에게 염동력의 덩어리를 보내어 공격한다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 120 / 100 / 10 / -1 / EMPTY / 2 / NONE
+249 / 바위깨기 / EMPTY / 펀치로 공격한다. 상대의 방어를 떨어뜨릴 때가 있다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 40 / 100 / 15 / 50 / EMPTY / 2 / MAKES_CONTACT
+250 / 바다회오리 / EMPTY / 세차게 소용돌이치는 물속에 4-5턴 동안 상대를 가두어 공격한다. / 물 / 물 / SPECIAL / NEAR_OTHER / 35 / 85 / 15 / -1 / EMPTY / 2 / NONE
+251 / 집단구타 / EMPTY / 같은 편 전원이 공격한다. 동료 포켓몬이 많을수록 기술의 공격 횟수가 증가한다. / 악 / 악 / PHYSICAL / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 2 / NONE
+252 / 속이기 / EMPTY / 선제공격으로 상대를 풀죽게 한다. 배틀에 나가서 바로 쓰지 않으면 성공할 수 없다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 40 / 100 / 10 / 100 / 3 / 3 / MAKES_CONTACT
+253 / 소란피기 /  (P) / 3턴 동안 소란 피워 공격한다. 그동안은 아무도 잠들지 않게 된다. / 노말 / 노말 / SPECIAL / RANDOM_NEAR_ENEMY / 90 / 100 / 10 / -1 / EMPTY / 3 / EMPTY
+254 / 비축하기 / EMPTY / 힘을 비축해서 자신의 방어와 특수방어를 올린다. 최대 3회까지 비축할 수 있다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+255 / 토해내기 / EMPTY / 비축된 힘을 상대에게 부딪쳐서 공격한다. 비축된 만큼 위력이 올라간다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 3 / NONE
+256 / 꿀꺽 / EMPTY / 비축된 힘을 꿀꺽해서 자신의 HP를 회복한다. 비축된 만큼 회복한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 3 / EMPTY
+257 / 열풍 / EMPTY / 뜨거운 숨결을 상대에게 내뿜어 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / SPECIAL / ALL_NEAR_ENEMIES / 95 / 90 / 10 / 10 / EMPTY / 3 / WIND_MOVE
+258 / 싸라기눈 / EMPTY / 5턴 동안 싸라기눈을 내리게 해서 얼음타입이 아닌 포켓몬 모두에게 데미지를 준다. / 얼음 / 얼음 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 3 / NONE
+259 / 트집 /  (N) / 상대에게 트집을 잡아서 똑같은 기술을 2회 연속으로 쓸 수 없게 한다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 3 / NONE
+260 / 부추기기 / EMPTY / 상대를 부추겨서 혼란시킨다. 동시에 상대의 특수공격도 올라가 버린다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 3 / NONE
+261 / 도깨비불 / EMPTY / 으스스하고 괴상한 불꽃을 쏘아 상대를 화상 상태로 만든다. / 불꽃 / 불꽃 / STATUS / NEAR_OTHER / -1 / 85 / 15 / -1 / EMPTY / 3 / NONE
+262 / 추억의선물 / EMPTY / 자신은 기절하게 되지만 그 대신 상대의 공격과 특수공격을 크게 떨어뜨린다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 3 / NONE
+263 / 객기 / EMPTY / 자신이 독, 마비, 화상 상태일 때 날리면 기술의 위력이 2배가 된다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 70 / 100 / 20 / -1 / EMPTY / 3 / MAKES_CONTACT
+264 / 힘껏펀치 / EMPTY / 정신력을 높여 펀치를 날린다. 기술을 쓰기 전에 공격을 받으면 실패한다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 150 / 100 / 20 / -1 / -3 / 3 / EMPTY
+265 / 정신차리기 / EMPTY / 마비 상태의 상대에게는 위력이 2배가 되지만 대신 상대의 마비가 풀린다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 70 / 100 / 10 / -1 / EMPTY / 3 / MAKES_CONTACT
+266 / 날따름 / EMPTY / 자신에게 주목시켜 상대로부터의 공격을 모두 자신에게 향하게 한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 20 / -1 / 2 / 3 / IGNORE_PROTECT
+267 / 자연의힘 / EMPTY / 자연의 힘으로 공격한다. 사용하는 장소에 따라 나오는 기술이 변화한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_VIRTUAL
+268 / 충전 / EMPTY / 다음 턴에 쓸 전기타입 기술의 위력을 올린다. 자신의 특수방어도 올라간다. / 전기 / 전기 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+269 / 도발 /  (N) / 상대를 화나게 한다. 3턴 동안 상대는 데미지를 주는 기술밖에 쓸 수 없게 된다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 3 / NONE
+270 / 도우미 / EMPTY / 동료를 돕는다. 도움받은 포켓몬이 쓰는 기술의 위력은 여느 때보다 커진다. / 노말 / 노말 / STATUS / NEAR_ALLY / -1 / -1 / 20 / -1 / 5 / 3 / NONE
+271 / 트릭 /  (N) / 상대의 빈틈을 노려 자신과 상대가 지닌 물건을 바꿔치기한다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 3 / NONE
+272 / 역할 / EMPTY / 상대의 역할을 하여 자신도 상대와 같은 특성으로 변화한다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 3 / NONE
+273 / 희망사항 / EMPTY / 다음 턴에 자신 또는 교체한 포켓몬의 HP를 최대 HP의 절반만큼 회복한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 3 / EMPTY
+274 / 조수 / EMPTY / 서둘러서 같은 편의 도움을 받아 같은 편 포켓몬이 기억하고 있는 기술 중 하나를 쓴다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / EMPTY
+275 / 뿌리박기 / EMPTY / 대지에 뿌리를 박아 매 턴마다 자신의 HP를 회복한다. 뿌리 박고 있으므로 교체할 수 없다. / 풀 / 풀 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+276 / 엄청난힘 / EMPTY / 엄청난 힘을 발휘하여 상대를 공격한다. 자신의 공격과 방어가 떨어진다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 3 / MAKES_CONTACT
+277 / 매직코트 /  (N) / 상대가 상태 이상이 되는 기술이나 씨뿌리기 등을 썼을 때 되받아친다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 15 / -1 / 4 / 3 / IGNORE_PROTECT
+278 / 리사이클 /  (N) / 배틀 중에 사용하여 없어진 자신의 지닌 물건을 재생시켜 사용할 수 있게 한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 3 / IGNORE_PROTECT
+279 / 리벤지 / EMPTY / 상대에게 기술을 받으면 그 상대에게 주는 데미지가 2배가 된다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 60 / 100 / 10 / -1 / -4 / 3 / MAKES_CONTACT
+280 / 깨트리기 / EMPTY / 수도로 기세 좋게 내려쳐서 상대를 공격한다. 빛의장막이나 리플렉터 등도 파괴할 수 있다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 75 / 100 / 15 / -1 / EMPTY / 3 / MAKES_CONTACT
+281 / 하품 / EMPTY / 큰 하품으로 졸음을 유도한다. 다음 턴에 상대를 잠듦 상태로 만든다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 3 / NONE
+282 / 탁쳐서떨구기 / EMPTY / 상대의 지닌 물건을 탁 쳐서 떨어뜨려 배틀이 끝날 때까지 사용할 수 없게 한다. 물건을 가진 상대에게는 데미지를 더 준다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 65 / 100 / 20 / -1 / EMPTY / 3 / MAKES_CONTACT
+283 / 죽기살기 / EMPTY / 상대의 HP가 자신의 HP와 같아지도록 데미지를 준다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / 100 / 5 / -1 / EMPTY / 3 / MAKES_CONTACT
+284 / 분화 / EMPTY / 분노를 폭발시켜 상대를 공격한다. 자신의 HP가 적을수록 기술의 위력이 떨어진다. / 불꽃 / 불꽃 / SPECIAL / ALL_NEAR_ENEMIES / 150 / 100 / 5 / -1 / EMPTY / 3 / NONE
+285 / 스킬스왑 / EMPTY / 초능력으로 자신의 특성과 상대의 특성을 바꾼다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 3 / NONE
+286 / 봉인 /  (N) / 상대가 자신과 같은 기술을 배웠다면 상대만 그 기술을 사용할 수 없게 한다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 3 / IGNORE_PROTECT
+287 / 리프레시 / EMPTY / 몸을 쉬게 하여 자신이 입은 독, 마비, 화상의 상태 이상을 치료한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+288 / 원념 /  (N) / 상대의 기술로 기절하면 원념을 담아 그 기술의 PP를 0으로 만든다. / 고스트 / 고스트 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 3 / IGNORE_PROTECT
+289 / 가로채기 /  (N) / 상대가 사용하려고 한 회복 기술이나 능력 변화의 기술을 빼앗아 자신에게 쓴다. / 악 / 악 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 3 / IGNORE_PROTECT
+290 / 비밀의힘 /  (P) / 사용하는 장소에 따라 추가 효과가 변화하는 공격이다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 70 / 100 / 20 / 30 / EMPTY / 3 / NONE
+291 / 다이빙 / EMPTY / 1턴째에 잠수했다가 2턴째에 떠올라 공격한다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 3 / EMPTY
+292 / 손바닥치기 / EMPTY / 펼친 양손으로 상대를 번갈아 쳐서 공격한다. 2-5회 동안 연속으로 쓴다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 15 / 100 / 20 / -1 / EMPTY / 3 / MAKES_CONTACT
+293 / 보호색 / EMPTY / 물가나 풀밭, 동굴 등 있는 장소에 맞춰서 자신의 타입을 바꾼다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+294 / 반딧불 / EMPTY / 깜빡거리는 빛을 바라보고 자신의 정신을 통일하여 특수공격을 매우 크게 올린다. / 벌레 / 벌레 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+295 / 러스터퍼지 / EMPTY / 눈부신 빛을 발산하여 공격한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 95 / 100 / 5 / 50 / EMPTY / 3 / NONE
+296 / 미스트볼 / EMPTY / 안개의 깃털로 둘러싸 공격한다. 상대의 특수공격을 떨어뜨릴 때가 있다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 95 / 100 / 5 / 50 / EMPTY / 3 / BALLBOMB_MOVE
+297 / 깃털댄스 / EMPTY / 깃털을 흩뿌려 상대의 몸에 휘감는다. 상대의 공격을 크게 떨어뜨린다. / 비행 / 비행 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 3 / DANCE_MOVE
+298 / 흔들흔들댄스 / EMPTY / 흔들흔들 댄스를 춰서 주위에 있는 포켓몬을 혼란 상태로 만든다. / 노말 / 노말 / STATUS / ALL_NEAR_OTHERS / -1 / 100 / 20 / -1 / EMPTY / 3 / DANCE_MOVE
+299 / 블레이즈킥 / EMPTY / 공격한 상대를 화상 상태로 만들 때가 있다. 급소에도 맞기 쉽다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 85 / 90 / 10 / 10 / EMPTY / 3 / MAKES_CONTACT
+300 / 흙놀이 / EMPTY / 주위를 진흙투성이로 만든다. 5턴 동안 전기타입의 기술을 약하게 한다. / 땅 / 땅 / STATUS / BOTH_SIDES / -1 / -1 / 15 / -1 / EMPTY / 3 / NONE
+301 / 아이스볼 / EMPTY / 5턴 동안 상대를 공격한다. 기술이 맞을 때마다 위력이 올라간다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 30 / 90 / 20 / -1 / EMPTY / 3 / EMPTY
+302 / 바늘팔 / EMPTY / 바늘팔을 세차게 흔들어 공격한다. 상대를 풀죽게 만들 때가 있다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 60 / 100 / 15 / 30 / EMPTY / 3 / MAKES_CONTACT
+303 / 게으름피우기 / EMPTY / 게으름 피우며 쉰다. 자신의 HP를 최대 HP의 절반만큼 회복한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 3 / EMPTY
+304 / 하이퍼보이스 / EMPTY / 시끄럽게 울리는 큰 진동을 상대에게 전달하여 공격한다. / 노말 / 노말 / SPECIAL / ALL_NEAR_ENEMIES / 90 / 100 / 10 / -1 / EMPTY / 3 / SOUND_BASED
+305 / 맹독엄니 / EMPTY / 독이 있는 이빨로 상대를 물어서 공격한다. 맹독을 주입할 때가 있다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 50 / 100 / 15 / 50 / EMPTY / 3 / EMPTY
+306 / 브레이크클로 / EMPTY / 단단하고 날카로운 손톱으로 베어 갈라서 공격한다. 상대의 방어를 떨어뜨릴 때가 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 75 / 95 / 10 / 50 / EMPTY / 3 / MAKES_CONTACT
+307 / 블라스트번 / EMPTY / 폭발하는 불꽃으로 상대를 태워서 공격한다. 다음 턴은 움직일 수 없다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 150 / 90 / 5 / -1 / EMPTY / 3 / NONE
+308 / 하이드로캐논 / EMPTY / 물의 대포를 상대에게 발사해서 공격한다. 다음 턴은 움직일 수 없다. / 물 / 물 / SPECIAL / NEAR_OTHER / 150 / 90 / 5 / -1 / EMPTY / 3 / NONE
+309 / 코멧펀치 / EMPTY / 혜성과 같은 펀치를 날려서 상대를 공격한다. 자신의 공격이 올라갈 때가 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 90 / 90 / 10 / 20 / EMPTY / 3 / EMPTY
+310 / 놀래키기 / EMPTY / 큰 소리 등으로 불시에 놀래켜서 공격한다. 상대를 풀죽게 만들 때가 있다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 30 / 100 / 15 / 30 / EMPTY / 3 / MAKES_CONTACT
+311 / 웨더볼 / EMPTY / 사용했을 때의 날씨에 따라서 기술 타입과 위력이 바뀐다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 50 / 100 / 10 / -1 / EMPTY / 3 / BALLBOMB_MOVE
+312 / 아로마테라피 / EMPTY / 기분 좋은 평온한 향기를 맡게 하여 같은 편 모두의 상태 이상을 회복한다. / 풀 / 풀 / STATUS / PARTY / -1 / -1 / 5 / -1 / EMPTY / 3 / NONE
+313 / 거짓울음 / EMPTY / 우는 척을 하며 눈물을 흘린다. 난처하게 만들어 상대의 특수방어를 크게 떨어뜨린다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 3 / NONE
+314 / 에어커터 / EMPTY / 날카로운 바람으로 상대를 베어 공격한다. 급소에 맞기 쉽다. / 비행 / 비행 / SPECIAL / ALL_NEAR_ENEMIES / 60 / 95 / 25 / -1 / EMPTY / 3 / EMPTY
+315 / 오버히트 / EMPTY / 풀 파워로 상대를 공격한다. 쓰면 반동으로 자신의 특수공격이 크게 떨어진다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 130 / 90 / 5 / -1 / EMPTY / 3 / NONE
+316 / 냄새구별 /  (N) / 고스트타입에 효과가 없는 기술이나 회피율이 높은 상대라 할지라도 공격이 맞게 된다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 40 / -1 / EMPTY / 3 / NONE
+317 / 암석봉인 / EMPTY / 암석을 내던져서 공격한다. 상대의 움직임을 봉인함으로써 스피드를 떨어뜨린다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 60 / 95 / 15 / 100 / EMPTY / 3 / NONE
+318 / 은빛바람 / EMPTY / 바람에 날개 가루를 날려서 상대를 공격한다. 자신의 모든 능력이 올라갈 때가 있다. / 벌레 / 벌레 / SPECIAL / NEAR_OTHER / 60 / 100 / 5 / 10 / EMPTY / 3 / WIND_MOVE
+319 / 금속음 / EMPTY / 금속을 긁을 때 나는 듯한 싫은 소리를 들려준다. 상대의 특수방어를 크게 떨어뜨린다. / 강철 / 강철 / STATUS / NEAR_OTHER / -1 / 85 / 40 / -1 / EMPTY / 3 / SOUND_BASED
+320 / 풀피리 / EMPTY / 기분 좋은 피리 소리를 들려주어 상대를 잠듦 상태로 만든다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / 55 / 15 / -1 / EMPTY / 3 / SOUND_BASED
+321 / 간지르기 / EMPTY / 몸을 간질여 웃게 만들어서 상대의 공격과 방어를 떨어뜨린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 3 / NONE
+322 / 코스믹파워 / EMPTY / 우주로부터 신비한 힘을 손에 넣음으로써 자신의 방어와 특수방어를 올린다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+323 / 해수스파우팅 / EMPTY / 바닷물을 내뿜어 공격한다. 자신의 HP가 적을수록 기술의 위력이 떨어진다. / 물 / 물 / SPECIAL / ALL_NEAR_ENEMIES / 150 / 100 / 5 / -1 / EMPTY / 3 / NONE
+324 / 시그널빔 / EMPTY / 이상한 빛을 발사해서 공격한다. 상대를 혼란시킬 때가 있다. / 벌레 / 벌레 / SPECIAL / NEAR_OTHER / 75 / 100 / 15 / 10 / EMPTY / 3 / NONE
+325 / 섀도펀치 / EMPTY / 그림자에 섞여 펀치를 날린다. 공격은 반드시 명중한다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 60 / -1 / 20 / -1 / EMPTY / 3 / EMPTY
+326 / 신통력 / EMPTY / 보이지 않는 이상한 힘을 보내어 공격한다. 상대를 풀죽게 만들 때가 있다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 80 / 100 / 20 / 10 / EMPTY / 3 / NONE
+327 / 스카이어퍼 / EMPTY / 하늘을 향하는 듯한 높은 업퍼로 상대를 밀어올려 공격한다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 85 / 90 / 15 / -1 / EMPTY / 3 / EMPTY
+328 / 모래지옥 / EMPTY / 세차게 불어대는 모래바람 속에 4-5턴 동안 상대를 가두어 공격한다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 35 / 85 / 15 / -1 / EMPTY / 3 / NONE
+329 / 절대영도 / EMPTY / 상대를 일격에 기절시킨다. 얼음타입 이외의 포켓몬이 사용하면 잘 맞지 않는다. / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / 200 / 20 / 5 / -1 / EMPTY / 3 / NONE
+330 / 탁류 / EMPTY / 탁해진 물을 상대에게 발사하여 공격한다. 명중률을 떨어뜨릴 때가 있다. / 물 / 물 / SPECIAL / ALL_NEAR_ENEMIES / 90 / 85 / 10 / 30 / EMPTY / 3 / NONE
+331 / 씨기관총 / EMPTY / 씨앗을 기세 좋게 상대에게 발사하여 공격한다. 2-5회 동안 연속으로 쓴다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 25 / 100 / 30 / -1 / EMPTY / 3 / BALLBOMB_MOVE
+332 / 제비반환 / EMPTY / 재빠른 움직임으로 상대를 농락해 벤다. 공격은 반드시 명중한다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 60 / -1 / 20 / -1 / EMPTY / 3 / EMPTY
+333 / 고드름침 / EMPTY / 날카로운 고드름을 상대에게 발사하여 공격한다. 2-5회 동안 연속으로 쓴다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 25 / 100 / 30 / -1 / EMPTY / 3 / NONE
+334 / 철벽 / EMPTY / 피부를 쇠처럼 단단하게 만듦으로써 자신의 방어를 크게 올린다. / 강철 / 강철 / STATUS / USER / -1 / -1 / 15 / -1 / EMPTY / 3 / IGNORE_PROTECT
+335 / 블록 / EMPTY / 양팔을 벌려 막아서서 상대의 도주로를 가로막아 도망칠 수 없게 한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 5 / -1 / EMPTY / 3 / NONE
+336 / 멀리짖기 / EMPTY / 큰 소리로 짖고 기합을 높여 자신과 같은 편의 공격을 올린다. / 노말 / 노말 / STATUS / USER_AND_ALLIES / -1 / -1 / 40 / -1 / EMPTY / 3 / SOUND_BASED
+337 / 드래곤클로 / EMPTY / 날카롭고 뾰족한 거대한 발톱으로 상대를 베어 갈라서 공격한다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / -1 / EMPTY / 3 / MAKES_CONTACT
+338 / 하드플랜트 / EMPTY / 큰 나무로 상대를 힘껏 쳐서 공격한다. 다음 턴은 움직일 수 없게 된다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 150 / 90 / 5 / -1 / EMPTY / 3 / NONE
+339 / 벌크업 / EMPTY / 몸에 힘을 담아 근육을 두껍게 해서 자신의 공격과 방어를 올린다. / 격투 / 격투 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+340 / 뛰어오르기 / EMPTY / 하늘 높이 뛰어올라 2턴째에 상대를 공격한다. 마비 상태로 만들 때가 있다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 85 / 85 / 5 / 30 / EMPTY / 3 / EMPTY
+341 / 머드샷 / EMPTY / 진흙 덩어리를 상대에게 내던져서 공격한다. 동시에 상대의 스피드를 떨어뜨린다. / 땅 / 땅 / SPECIAL / NEAR_OTHER / 55 / 95 / 15 / 100 / EMPTY / 3 / NONE
+342 / 포이즌테일 / EMPTY / 꼬리로 때린다. 독 상태로 만들 때가 있고 급소에도 맞기 쉽다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 50 / 100 / 25 / 10 / EMPTY / 3 / MAKES_CONTACT
+343 / 탐내기 / EMPTY / 귀엽게 애교부리며 상대에게 다가가 30%의 확률로 지니고 있는 도구를 뺏는다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 60 / 100 / 25 / -1 / EMPTY / 3 / MAKES_CONTACT
+344 / 볼트태클 / EMPTY / 전기를 한데 모아 돌진한다. 자신도 상당한 데미지를 입는다. 마비 상태로 만들 때가 있다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 120 / 100 / 15 / 10 / EMPTY / 3 / EMPTY
+345 / 매지컬리프 / EMPTY / 상대를 추적하는 이상한 잎사귀를 흩뿌린다. 공격은 반드시 명중한다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 60 / -1 / 20 / -1 / EMPTY / 3 / NONE
+346 / 물놀이 / EMPTY / 주위를 물로 흠뻑 젖게 만든다. 5턴 동안 불꽃타입의 기술을 약하게 한다. / 물 / 물 / STATUS / BOTH_SIDES / -1 / -1 / 15 / -1 / EMPTY / 3 / NONE
+347 / 명상 / EMPTY / 조용히 정신을 통일하고 마음을 가라앉혀서 자신의 특수공격과 특수방어를 올린다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / IGNORE_PROTECT
+348 / 리프블레이드 / EMPTY / 잎사귀를 칼처럼 이용해 상대를 베어 공격한다. 급소에 맞기 쉽다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 90 / 100 / 15 / -1 / EMPTY / 3 / EMPTY
+349 / 용의춤 / EMPTY / 신비롭고 힘센 춤을 격렬하게 춘다. 자신의 공격과 스피드를 올린다. / 드래곤 / 드래곤 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 3 / EMPTY
+350 / 록블라스트 / EMPTY / 단단한 암석을 상대에게 발사하여 공격한다. 2-5회 동안 연속으로 쓴다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 25 / 90 / 10 / -1 / EMPTY / 3 / BALLBOMB_MOVE
+351 / 전격파 / EMPTY / 전격을 재빠르게 상대에게 날린다. 공격은 반드시 명중한다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 60 / -1 / 20 / -1 / EMPTY / 3 / NONE
+352 / 물의파동 / EMPTY / 물의 진동을 상대에게 가하여 공격한다. 상대를 혼란시킬 때가 있다. / 물 / 물 / SPECIAL / NEAR_OTHER / 60 / 100 / 20 / 20 / EMPTY / 3 / PULSE_MOVE
+353 / 파멸의소원 / EMPTY / 기술을 사용한 2턴 뒤에 무수한 빛의 다발이 상대를 공격한다. / 강철 / 강철 / SPECIAL / NEAR_OTHER / 140 / 100 / 5 / -1 / EMPTY / 3 / NONE
+354 / 사이코부스트 / EMPTY / 풀 파워로 상대를 공격한다. 쓰면 반동으로 자신의 특수공격이 크게 떨어진다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 140 / 90 / 5 / -1 / EMPTY / 3 / NONE
+355 / 날개쉬기 / EMPTY / 땅에 내려와 몸을 쉬게 한다. 최대 HP의 절반만큼 HP를 회복한다. / 비행 / 비행 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 4 / EMPTY
+356 / 중력 / EMPTY / 5턴 동안 부유나 비행타입에 땅타입의 기술이 맞게 된다. 공중으로 나는 기술도 사용할 수 없다. / 에스퍼 / 에스퍼 / STATUS / BOTH_SIDES / -1 / -1 / 5 / -1 / EMPTY / 4 / NONE
+357 / 미라클아이 /  (N) / 악타입에 효과가 없는 기술이나 회피율이 높은 상대라 할지라도 공격이 맞게 된다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 40 / -1 / EMPTY / 4 / NONE
+358 / 잠깨움뺨치기 / EMPTY / 잠듦 상태의 상대에게 큰 데미지를 준다. 대신 상대는 잠에서 깬다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 70 / 100 / 10 / -1 / EMPTY / 4 / MAKES_CONTACT
+359 / 암해머 / EMPTY / 강하고 무거운 주먹을 휘둘러 데미지를 준다. 자신의 스피드가 떨어진다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 100 / 90 / 10 / -1 / EMPTY / 4 / EMPTY
+360 / 자이로볼 / EMPTY / 몸을 고속으로 회전시켜 몸통박치기한다. 상대보다 스피드가 낮을수록 위력은 올라간다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / -1 / 100 / 5 / -1 / EMPTY / 4 / EMPTY
+361 / 치유소원 / EMPTY / 자신은 기절하지만 교대하여 나오는 포켓몬의 상태 이상과 HP를 회복한다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 4 / EMPTY
+362 / 소금물 / EMPTY / 상대가 HP의 절반 정도 상처를 입고 있으면 기술의 위력이 2배가 된다. / 물 / 물 / SPECIAL / NEAR_OTHER / 65 / 100 / 10 / -1 / EMPTY / 4 / NONE
+363 / 자연의은혜 /  (N) / 나무열매에서 힘을 얻어 공격한다. 지니게 한 나무열매에 따라 기술의 타입과 위력이 바뀐다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 4 / NONE
+364 / 페인트 / EMPTY / 방어나 판별 등을 하고 있는 상대에게 공격할 수 있다. 방어 효과를 해제시킨다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 30 / 100 / 10 / -1 / 2 / 4 / IGNORE_PROTECT
+365 / 쪼아대기 / EMPTY / 부리로 공격한다. 상대가 나무열매를 지니고 있을 때 먹어서 나무열매의 효과를 받을 수 있다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 60 / 100 / 20 / -1 / EMPTY / 4 / MAKES_CONTACT
+366 / 순풍 / EMPTY / 세차게 불어대는 바람의 소용돌이를 만들어 4턴 동안 같은 편 모두의 스피드를 올린다. / 비행 / 비행 / STATUS / USER_SIDE / -1 / -1 / 15 / -1 / EMPTY / 4 / WIND_MOVE
+367 / 경혈찌르기 / EMPTY / 경혈을 눌러 몸을 활성화시킨다. 능력 중 하나를 크게 올린다. / 노말 / 노말 / STATUS / USER_OR_NEAR_ALLY / -1 / -1 / 30 / -1 / EMPTY / 4 / NONE
+368 / 메탈버스트 / EMPTY / 기술을 쓰기 전에 마지막으로 받은 기술의 데미지를 늘려서 기술을 쓴 상대에게 돌려준다. / 강철 / 강철 / PHYSICAL / ATTACKER / -1 / 100 / 10 / -1 / EMPTY / 4 / REDIRECT_COUNTER
+369 / 유턴 / EMPTY / 공격한 뒤 굉장한 스피드로 돌아와서 교대 포켓몬과 교체한다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 70 / 100 / 20 / -1 / EMPTY / 4 / MAKES_CONTACT
+370 / 인파이트 / EMPTY / 방어를 포기하고 상대 쪽으로 깊숙이 돌격한다. 자신의 방어와 특수방어가 떨어진다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 4 / MAKES_CONTACT
+371 / 보복 / EMPTY / 모아서 공격한다. 상대보다 나중에 공격할 수 있으면 기술의 위력은 2배가 된다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 50 / 100 / 10 / -1 / EMPTY / 4 / MAKES_CONTACT
+372 / 승부굳히기 / EMPTY / 그 턴에 상대가 이미 데미지를 입었다면 기술의 위력은 2배가 된다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 60 / 100 / 10 / -1 / EMPTY / 4 / MAKES_CONTACT
+373 / 금제 /  (N) / 지니게 한 도구를 5턴 동안 쓸 수 없게 한다. 트레이너도 그 포켓몬에게는 도구를 쓸 수 없다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 4 / NONE
+374 / 내던지기 /  (N) / 지니게 한 도구를 재빠르게 내던져서 공격한다. 도구에 따라 위력과 효과가 바뀐다. / 악 / 악 / PHYSICAL / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 4 / NONE
+375 / 사이코시프트 / EMPTY / 초능력으로 암시를 걸어서 자신에게 걸려 있는 상태 이상을 상대에게 옮긴다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 4 / NONE
+376 / 마지막수단 / EMPTY / 마지막수단의 남은 PP가 적으면 적을수록 기술의 위력이 올라간다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / -1 / -1 / 5 / -1 / EMPTY / 4 / MAKES_CONTACT
+377 / 회복봉인 /  (N) / 5턴 동안 기술이나 특성, 지니고 있는 도구에 의한 HP 회복을 할 수 없게 한다. / 에스퍼 / 에스퍼 / STATUS / ALL_NEAR_ENEMIES / -1 / 100 / 15 / -1 / EMPTY / 4 / NONE
+378 / 쥐어짜기 / EMPTY / 강하게 조여 공격을 한다. 상대의 HP가 많이 남아 있을수록 위력이 올라간다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / -1 / 100 / 5 / -1 / EMPTY / 4 / MAKES_CONTACT
+379 / 파워트릭 /  (N) / 초능력으로 자신의 공격과 방어의 힘을 교환한다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 4 / IGNORE_PROTECT
+380 / 위액 / EMPTY / 상대의 몸에 위액을 내뱉는다. 달라붙은 위액은 상대의 특성 효과를 지운다. / 독 / 독 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 4 / NONE
+381 / 주술 /  (N) / 하늘을 향해 기도를 올려 5턴 동안 상대의 공격을 급소에 맞지 않게 한다. / 노말 / 노말 / STATUS / USER_SIDE / -1 / -1 / 30 / -1 / EMPTY / 4 / NONE
+382 / 선취 /  (N) / 위력을 올려 상대가 쓰려고 하는 기술을 먼저 쓴다. 먼저 쓰지 않으면 실패한다. / 노말 / 노말 / STATUS / NEAR_ENEMY / -1 / -1 / 20 / -1 / EMPTY / 4 / IGNORE_VIRTUAL
+383 / 흉내쟁이 / EMPTY / 직전에 나온 기술을 흉내 내어 같은 기술을 쓴다. 기술이 나오지 않았으면 실패한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 4 / EMPTY
+384 / 파워스왑 /  (N) / 초능력으로 자신과 상대의 공격과 특수공격의 능력 변화를 교체한다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / 100 / EMPTY / 4 / NONE
+385 / 가드스왑 /  (N) / 초능력으로 자신과 상대의 방어와 특수방어의 능력 변화를 교체한다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / 100 / EMPTY / 4 / NONE
+386 / 혼내기 / EMPTY / 능력 변화로 상대가 파워업한 만큼 기술의 위력이 올라간다. / 악 / 악 / PHYSICAL / NEAR_OTHER / -1 / 100 / 5 / -1 / EMPTY / 4 / MAKES_CONTACT
+387 / 비장의무기 / EMPTY / 배틀 중에 기억하고 있는 기술을 모두 사용하면 그때부터 쓸 수 있는 필살기이다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 140 / 100 / 5 / -1 / EMPTY / 4 / MAKES_CONTACT
+388 / 고민씨 / EMPTY / 마음을 괴롭히는 씨앗을 심는다. 상대를 잠잘 수 없게 해서 특성을 불면으로 만든다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 4 / NONE
+389 / 기습 / EMPTY / 상대보다 먼저 공격할 수 있다. 상대가 쓴 기술이 공격기술이 아니면 실패한다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 70 / 100 / 5 / -1 / 1 / 4 / MAKES_CONTACT
+390 / 독압정 / EMPTY / 상대의 발밑에 독 압정을 뿌린다. 교체로 나온 상대 포켓몬에게 독을 퍼지게 한다. / 독 / 독 / STATUS / ENEMY_SIDE / -1 / -1 / 20 / -1 / EMPTY / 4 / NONE
+391 / 하트스왑 / EMPTY / 초능력으로 자신과 상대에 걸려 있는 능력 변화를 교체한다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 4 / NONE
+392 / 아쿠아링 / EMPTY / 자신의 몸 주변을 물로 만든 베일로 덮는다. 매 턴 HP를 회복한다. / 물 / 물 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 4 / IGNORE_PROTECT
+393 / 전자부유 / EMPTY / 전기로 만든 자력의 힘으로 허공에 뜬다. 5턴 동안 부유할 수 있다. / 전기 / 전기 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 4 / IGNORE_PROTECT
+394 / 플레어드라이브 / EMPTY / 불꽃을 두르고 돌진한다. 자신도 상당한 데미지를 입는다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 120 / 100 / 15 / 10 / EMPTY / 4 / EMPTY
+395 / 발경 / EMPTY / 상대의 몸에 충격파를 부딪쳐 공격한다. 마비 상태로 만들 때가 있다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 60 / 100 / 10 / 30 / EMPTY / 4 / MAKES_CONTACT
+396 / 파동탄 / EMPTY / 몸속에서 파동의 힘을 끌어내 상대에게 쏜다. 공격은 반드시 명중한다. / 격투 / 격투 / SPECIAL / NEAR_OTHER / 80 / -1 / 20 / -1 / EMPTY / 4 / EMPTY
+397 / 록커트 / EMPTY / 자신의 몸을 갈아 공기의 저항을 적게 한다. 스피드를 크게 올릴 수 있다. / 바위 / 바위 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 4 / IGNORE_PROTECT
+398 / 독찌르기 / EMPTY / 독에 물든 촉수나 팔로 상대를 꿰찌른다. 독 상태로 만들 때가 있다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 80 / 100 / 20 / 30 / EMPTY / 4 / MAKES_CONTACT
+399 / 악의파동 / EMPTY / 몸에서 악의로 가득한 무서운 오라를 발한다. 상대를 풀죽게 만들 때가 있다. / 악 / 악 / SPECIAL / NEAR_OTHER / 80 / 100 / 15 / 20 / EMPTY / 4 / PULSE_MOVE
+400 / 깜짝베기 / EMPTY / 순간적으로 틈을 노려 상대를 베어 버린다. 급소에 맞기 쉽다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 70 / 100 / 15 / -1 / EMPTY / 4 / EMPTY
+401 / 아쿠아테일 / EMPTY / 세차게 날뛰는 거친 파도와 같이 큰 꼬리를 흔들어서 상대를 공격한다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 90 / 90 / 10 / -1 / EMPTY / 4 / MAKES_CONTACT
+402 / 씨폭탄 / EMPTY / 단단한 껍질을 가지고 있는 큰 씨앗을 위에서 힘껏 내던져 상대를 공격한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / -1 / EMPTY / 4 / BALLBOMB_MOVE
+403 / 에어슬래시 / EMPTY / 하늘까지 베어 가르는 공기의 칼날로 공격한다. 상대를 풀죽게 만들 때가 있다. / 비행 / 비행 / SPECIAL / NEAR_OTHER / 75 / 95 / 15 / 30 / EMPTY / 4 / SLICING_MOVE
+404 / 시저크로스 / EMPTY / 낫이나 발톱을 가위처럼 교차시키면서 상대를 베어 가른다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / -1 / EMPTY / 4 / EMPTY
+405 / 벌레의야단법석 / EMPTY / 진동으로 음파를 일으켜서 공격한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 벌레 / 벌레 / SPECIAL / NEAR_OTHER / 90 / 100 / 10 / 10 / EMPTY / 4 / SOUND_BASED
+406 / 용의파동 / EMPTY / 큰 입으로 충격파를 일으켜서 상대를 공격한다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / 85 / 100 / 10 / -1 / EMPTY / 4 / PULSE_MOVE
+407 / 드래곤다이브 / EMPTY / 굉장한 살기로 위압하면서 몸통박치기한다. 상대를 풀죽게 만들 때가 있다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 100 / 75 / 10 / 20 / EMPTY / 4 / MAKES_CONTACT
+408 / 파워젬 / EMPTY / 보석처럼 반짝이는 빛을 발사하여 상대를 공격한다. / 바위 / 바위 / SPECIAL / NEAR_OTHER / 80 / 100 / 20 / -1 / EMPTY / 4 / NONE
+409 / 드레인펀치 / EMPTY / 주먹으로 상대의 힘을 흡수한다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 75 / 100 / 10 / -1 / EMPTY / 4 / EMPTY
+410 / 진공파 / EMPTY / 주먹을 흔들어 진공의 파도를 일으킨다. 반드시 선제공격을 할 수 있다. / 격투 / 격투 / SPECIAL / NEAR_OTHER / 40 / 100 / 30 / -1 / 1 / 4 / NONE
+411 / 기합구슬 / EMPTY / 기합을 높여서 혼신의 힘을 방출한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 격투 / 격투 / SPECIAL / NEAR_OTHER / 120 / 70 / 5 / 10 / EMPTY / 4 / BALLBOMB_MOVE
+412 / 에너지볼 / EMPTY / 자연으로부터 모은 생명의 힘을 발사한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 90 / 100 / 10 / 10 / EMPTY / 4 / BALLBOMB_MOVE
+413 / 브레이브버드 / EMPTY / 날개를 접어 저공비행으로 돌격한다. 자신도 상당한 데미지를 입는다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 120 / 100 / 15 / -1 / EMPTY / 4 / EMPTY
+414 / 대지의힘 / EMPTY / 상대의 발밑에 대지의 힘을 방출한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 땅 / 땅 / SPECIAL / NEAR_OTHER / 90 / 100 / 10 / 10 / EMPTY / 4 / NONE
+415 / 바꿔치기 /  (N) / 눈에 보이지 않는 속도로 자신과 상대가 지닌 물건을 교환한다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 4 / NONE
+416 / 기가임팩트 / EMPTY / 가진 힘을 모두 사용해서 상대에게 돌격한다. 다음 턴은 움직일 수 없다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 150 / 90 / 5 / -1 / EMPTY / 4 / MAKES_CONTACT
+417 / 나쁜음모 / EMPTY / 나쁜 일을 생각해서 머리를 활성화시킨다. 자신의 특수공격을 크게 올린다. / 악 / 악 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 4 / IGNORE_PROTECT
+418 / 불릿펀치 / EMPTY / 탄환처럼 빠르고 단단한 펀치를 상대에게 날린다. 반드시 선제공격을 할 수 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 40 / 100 / 30 / -1 / 1 / 4 / EMPTY
+419 / 눈사태 / EMPTY / 상대로부터 기술을 받으면 그 상대에 대해서 기술의 위력이 2배가 된다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 60 / 100 / 10 / -1 / -4 / 4 / MAKES_CONTACT
+420 / 얼음뭉치 / EMPTY / 얼음덩어리를 순식간에 만들어 상대에게 빠르게 쏜다. 반드시 선제공격을 할 수 있다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 40 / 100 / 30 / -1 / 1 / 4 / NONE
+421 / 섀도클로 / EMPTY / 그림자로 만든 날카로운 발톱으로 상대를 베어 가른다. 급소에 맞기 쉽다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 70 / 100 / 15 / -1 / EMPTY / 4 / MAKES_CONTACT
+422 / 번개엄니 / EMPTY / 전기를 모은 이빨로 문다. 상대를 풀죽게 하거나 마비 상태로 만들 때가 있다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 65 / 95 / 15 / 10 / EMPTY / 4 / EMPTY
+423 / 얼음엄니 / EMPTY / 냉기를 품은 이빨로 문다. 상대를 풀죽게 하거나 얼음 상태로 만들 때가 있다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 65 / 95 / 15 / 10 / EMPTY / 4 / EMPTY
+424 / 불꽃엄니 / EMPTY / 불꽃을 두른 이빨로 문다. 상대를 풀죽게 하거나 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 65 / 95 / 15 / 10 / EMPTY / 4 / EMPTY
+425 / 야습 / EMPTY / 그림자를 늘려 상대의 배후에서 공격한다. 반드시 선제공격할 수 있다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 40 / 100 / 30 / -1 / 1 / 4 / MAKES_CONTACT
+426 / 진흙폭탄 / EMPTY / 단단한 진흙구슬을 상대에게 발사하여 공격한다. 명중률을 떨어뜨릴 때가 있다. / 땅 / 땅 / SPECIAL / NEAR_OTHER / 65 / 85 / 10 / 30 / EMPTY / 4 / BALLBOMB_MOVE
+427 / 사이코커터 / EMPTY / 실체화시킨 마음의 칼날로 상대를 베어 가른다. 급소에 맞기 쉽다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_OTHER / 70 / 100 / 20 / -1 / EMPTY / 4 / SLICING_MOVE
+428 / 사념의박치기 / EMPTY / 사념의 힘을 이마에 모아서 공격한다. 상대를 풀죽게 만들 때가 있다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_OTHER / 80 / 90 / 15 / 20 / EMPTY / 4 / MAKES_CONTACT
+429 / 미러샷 / EMPTY / 갈고닦은 몸에서 섬광의 힘을 상대에게 쏜다. 명중률을 떨어뜨릴 때가 있다. / 강철 / 강철 / SPECIAL / NEAR_OTHER / 65 / 85 / 10 / 30 / EMPTY / 4 / NONE
+430 / 러스터캐논 / EMPTY / 몸의 빛을 한곳에 모아서 힘을 방출한다. 상대의 특수방어를 떨어뜨릴 때가 있다. / 강철 / 강철 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / 10 / EMPTY / 4 / NONE
+431 / 록클라임 / EMPTY / 굉장한 기세로 상대에게 돌진하여 공격한다. 상대를 혼란시킬 때가 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 90 / 85 / 20 / 20 / EMPTY / 4 / MAKES_CONTACT
+432 / 안개제거 / EMPTY / 강한 바람으로 상대의 리플렉터나 빛의장막 등을 제거한다. 회피율도 떨어뜨린다. / 비행 / 비행 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / EMPTY / 4 / NONE
+433 / 트릭룸 / EMPTY / 이상한 공간을 만든다. 5턴 동안 느린 포켓몬부터 행동할 수 있다. / 에스퍼 / 에스퍼 / STATUS / BOTH_SIDES / -1 / -1 / 5 / -1 / -7 / 4 / IGNORE_PROTECT
+434 / 용성군 / EMPTY / 천공에서 운석을 상대에게 떨어뜨린다. 사용하면 반동으로 자신의 특수공격이 크게 떨어진다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / 130 / 90 / 5 / -1 / EMPTY / 4 / NONE
+435 / 방전 / EMPTY / 눈부신 전격으로 자신의 주위에 있는 포켓몬을 공격한다. 마비 상태로 만들 때가 있다. / 전기 / 전기 / SPECIAL / ALL_NEAR_OTHERS / 80 / 100 / 15 / 30 / EMPTY / 4 / NONE
+436 / 분연 / EMPTY / 새빨간 불꽃으로 자신의 주위에 있는 포켓몬을 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / SPECIAL / ALL_NEAR_OTHERS / 80 / 100 / 15 / 30 / EMPTY / 4 / NONE
+437 / 리프스톰 / EMPTY / 뾰족한 잎사귀로 상대에게 돌풍을 일으킨다. 사용하면 반동으로 자신의 특수공격이 크게 떨어진다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 130 / 90 / 5 / -1 / EMPTY / 4 / NONE
+438 / 파워휩 / EMPTY / 덩굴이나 촉수를 세차게 흔들어 상대를 힘껏 쳐서 공격한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 120 / 85 / 10 / -1 / EMPTY / 4 / MAKES_CONTACT
+439 / 암석포 / EMPTY / 거대한 바위를 상대에게 발사하여 공격한다. 다음 턴은 움직일 수 없게 된다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 150 / 90 / 5 / -1 / EMPTY / 4 / BALLBOMB_MOVE
+440 / 크로스포이즌 / EMPTY / 독 칼날로 상대를 베어 가른다. 독 상태로 만들 때가 있고 급소에도 맞기 쉽다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 70 / 100 / 20 / 10 / EMPTY / 4 / EMPTY
+441 / 더스트슈트 / EMPTY / 더러운 쓰레기를 상대에게 부딪쳐서 공격한다. 독 상태로 만들 때가 있다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 120 / 80 / 5 / 30 / EMPTY / 4 / NONE
+442 / 아이언헤드 / EMPTY / 강철과 같은 단단한 머리로 공격한다. 상대를 풀죽게 만들 때가 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / 30 / EMPTY / 4 / MAKES_CONTACT
+443 / 마그넷봄 / EMPTY / 상대에게 달라붙는 강철의 폭탄을 발사한다. 공격은 반드시 명중한다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 60 / -1 / 20 / -1 / EMPTY / 4 / BALLBOMB_MOVE
+444 / 스톤에지 / EMPTY / 뾰족한 바위를 상대에게 꿰찔러서 공격한다. 급소에 맞기 쉽다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 100 / 80 / 5 / -1 / EMPTY / 4 / NONE
+445 / 유혹 / EMPTY / 수컷은 암컷을 암컷은 수컷을 유혹하여 상대의 특수공격을 크게 떨어뜨린다. / 노말 / 노말 / STATUS / ALL_NEAR_ENEMIES / -1 / 100 / 20 / -1 / EMPTY / 4 / NONE
+446 / 스텔스록 / EMPTY / 상대의 주위에 무수한 바위를 띄워 교체해서 나온 상대 포켓몬에게 데미지를 준다. / 바위 / 바위 / STATUS / ENEMY_SIDE / -1 / -1 / 20 / -1 / EMPTY / 4 / NONE
+447 / 풀묶기 / EMPTY / 풀을 휘감아서 상대를 쓰러뜨린다. 상대가 무거울수록 위력이 올라간다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 4 / MAKES_CONTACT
+448 / 수다 / EMPTY / 매우 시끄럽고 수다스러운 음파로 상대를 공격한다. 상대를 혼란시킨다. / 비행 / 비행 / SPECIAL / NEAR_OTHER / 65 / 100 / 20 / 100 / EMPTY / 4 / SOUND_BASED
+449 / 심판의뭉치 / EMPTY / 무수한 광탄을 상대에게 방출한다. 자신이 가지고 있는 플레이트에 따라 타입이 바뀐다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 100 / 100 / 10 / -1 / EMPTY / 4 / NONE
+450 / 벌레먹기 / EMPTY / 물어서 공격한다. 상대가 나무열매를 지니고 있을 때 먹어서 나무열매의 효과를 받을 수 있다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 60 / 100 / 20 / -1 / EMPTY / 4 / MAKES_CONTACT
+451 / 차지빔 / EMPTY / 전격의 다발을 상대에게 발사한다. 전기를 모아서 자신의 특수공격을 올릴 때가 있다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 50 / 90 / 10 / 70 / EMPTY / 4 / NONE
+452 / 우드해머 / EMPTY / 단단한 몸통을 상대에게 부딪쳐서 공격한다. 자신도 상당한 데미지를 입는다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 120 / 100 / 15 / -1 / EMPTY / 4 / EMPTY
+453 / 아쿠아제트 / EMPTY / 눈에 보이지 않는 굉장한 속도로 상대에게 돌진한다. 반드시 선제공격할 수 있다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 40 / 100 / 20 / -1 / 1 / 4 / MAKES_CONTACT
+454 / 공격지령 / EMPTY / 부하를 불러내어 상대를 향해서 공격시킨다. 급소에 맞기 쉽다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 90 / 100 / 15 / -1 / EMPTY / 4 / NONE
+455 / 방어지령 / EMPTY / 부하를 불러내어 자신의 몸을 뒤덮게 한다. 방어와 특수방어를 올릴 수 있다. / 벌레 / 벌레 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 4 / IGNORE_PROTECT
+456 / 회복지령 / EMPTY / 부하를 불러내어 상처를 회복한다. 최대 HP의 절반만큼 자신의 HP를 회복한다. / 벌레 / 벌레 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 4 / EMPTY
+457 / 양날박치기 / EMPTY / 목숨을 걸고 혼신의 힘으로 상대에게 박치기를 한다. 자신도 굉장한 데미지를 입는다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 150 / 80 / 5 / -1 / EMPTY / 4 / EMPTY
+458 / 더블어택 / EMPTY / 꼬리 등을 써서 상대를 때려 공격한다. 2회 연속으로 데미지를 준다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 35 / 90 / 10 / -1 / EMPTY / 4 / MAKES_CONTACT
+459 / 시간의포효 / EMPTY / 시간이 뒤틀릴 정도의 힘을 사용해서 상대를 공격한다. 다음 턴은 움직일 수 없다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / 150 / 90 / 5 / -1 / EMPTY / 4 / NONE
+460 / 공간절단 / EMPTY / 주위의 공간과 더불어 상대를 찢어서 데미지를 준다. 급소에 맞기 쉽다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / 100 / 95 / 5 / -1 / EMPTY / 4 / NONE
+461 / 초승달춤 /  (N) / 자신은 기절하지만 교대하여 나오는 포켓몬의 모든 상태를 회복한다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 4 / EMPTY
+462 / 묵사발 / EMPTY / 굉장한 힘으로 상대를 묵사발로 만든다. 상대의 HP가 남아 있을수록 위력이 올라간다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / 100 / 5 / -1 / EMPTY / 4 / MAKES_CONTACT
+463 / 마그마스톰 / EMPTY / 세차게 타오르는 불꽃 속에 4-5턴 동안 상대를 가두어 공격한다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 100 / 75 / 5 / -1 / EMPTY / 4 / NONE
+464 / 다크홀 / EMPTY / 암흑의 세계로 끌고 가서 떨어뜨려 상대를 잠듦 상태로 만든다. / 악 / 악 / STATUS / ALL_NEAR_ENEMIES / -1 / 50 / 10 / -1 / EMPTY / 4 / NONE
+465 / 시드플레어 / EMPTY / 몸속에서 충격파를 발생시킨다. 상대의 특수방어를 크게 떨어뜨릴 때가 있다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 120 / 85 / 5 / 40 / EMPTY / 4 / NONE
+466 / 괴상한바람 / EMPTY / 소름이 끼칠 만한 돌풍으로 상대를 공격한다. 자신의 모든 능력이 올라갈 때가 있다. / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / 60 / 100 / 5 / 10 / EMPTY / 4 / WIND_MOVE
+467 / 섀도다이브 / EMPTY / 1턴째에 모습을 감춰 2턴째에 상대를 공격한다. 방어하고 있어도 공격은 맞는다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 4 / EMPTY
+468 / 손톱갈기 / EMPTY / 손톱을 갈아 날카롭게 한다. 자신의 공격과 명중률을 올린다. / 악 / 악 / STATUS / USER / -1 / -1 / 15 / -1 / EMPTY / 5 / IGNORE_PROTECT
+469 / 와이드가드 / EMPTY / 같은 편 전원에게 향하는 공격을 1턴 동안 막는다. / 바위 / 바위 / STATUS / USER_SIDE / -1 / -1 / 10 / -1 / 3 / 5 / NONE
+470 / 가드셰어 /  (N) / 초능력으로 자신과 상대의 방어와 특수방어를 더해서 반으로 나눈다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 5 / NONE
+471 / 파워셰어 /  (N) / 초능력으로 자신과 상대의 공격과 특수공격을 더해서 반으로 나눈다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 5 / NONE
+472 / 원더룸 /  (N) / 이상한 공간을 만든다. 5턴 동안 모든 포켓몬의 방어와 특수방어가 바뀐다. / 에스퍼 / 에스퍼 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 5 / IGNORE_PROTECT
+473 / 사이코쇼크 / EMPTY / 이상한 염력파를 실체화하여 상대를 공격한다. 물리적인 데미지를 준다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 5 / NONE
+474 / 베놈쇼크 / EMPTY / 특수한 독액을 끼얹는다. 독 상태의 상대에게는 위력이 2배가 된다. / 독 / 독 / SPECIAL / NEAR_OTHER / 65 / 100 / 10 / -1 / EMPTY / 5 / NONE
+475 / 바디퍼지 /  (P) / 몸의 쓸모없는 부분을 깎는다. 자신의 스피드를 크게 올리고 체중도 가벼워진다. / 강철 / 강철 / STATUS / USER / -1 / -1 / 15 / -1 / EMPTY / 5 / IGNORE_PROTECT
+476 / 분노가루 / EMPTY / 안절부절못하게 하는 가루를 자신에게 뿌려서 주의를 끈다. 상대의 공격은 모두 자신에게 향한다. / 벌레 / 벌레 / STATUS / USER / -1 / -1 / 20 / -1 / 2 / 5 / EMPTY
+477 / 텔레키네시스 /  (N) / 초능력으로 상대를 띄운다. 3턴 동안 공격이 상대에게 맞기 쉬워진다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / EMPTY / 5 / NONE
+478 / 매직룸 /  (N) / 이상한 공간을 만든다. 5턴 동안 모든 포켓몬의 도구의 효과가 사라진다. / 에스퍼 / 에스퍼 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 5 / IGNORE_PROTECT
+479 / 떨어뜨리기 / EMPTY / 돌이나 구슬을 던져서 날고 있는 상대를 공격한다. 맞은 상대는 땅에 떨어진다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 50 / 100 / 15 / 100 / EMPTY / 5 / NONE
+480 / 업어후리기 / EMPTY / 강렬한 일격을 상대에게 날린다. 공격은 반드시 급소에 맞는다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 60 / 100 / 10 / -1 / EMPTY / 5 / MAKES_CONTACT
+481 / 불꽃튀기기 /  (P) / 맞으면 튀는 불꽃으로 상대를 공격한다. 튕긴 불꽃은 옆의 상대에게도 쏟아진다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 70 / 100 / 15 / -1 / EMPTY / 5 / NONE
+482 / 오물웨이브 / EMPTY / 오물 파도로 자신의 주위에 있는 포켓몬을 공격한다. 독 상태로 만들 때가 있다. / 독 / 독 / SPECIAL / ALL_NEAR_OTHERS / 95 / 100 / 10 / 10 / EMPTY / 5 / NONE
+483 / 나비춤 / EMPTY / 신비롭고 아름다운 춤을 경쾌하게 춘다. 자신의 특수공격과 특수방어와 스피드를 올린다. / 벌레 / 벌레 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 5 / EMPTY
+484 / 헤비봄버 / EMPTY / 무거운 몸으로 상대에게 부딪쳐 공격한다. 자신이 상대보다 무거울수록 위력이 올라간다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 5 / MAKES_CONTACT
+485 / 싱크로노이즈 / EMPTY / 이상한 전파로 주위에 있는 자신과 같은 타입의 포켓몬에게 데미지를 준다. / 에스퍼 / 에스퍼 / SPECIAL / ALL_NEAR_OTHERS / 120 / 100 / 10 / -1 / EMPTY / 5 / NONE
+486 / 일렉트릭볼 / EMPTY / 전기 덩어리를 상대에게 부딪쳐서 공격한다. 상대보다 스피드가 빠를수록 위력이 올라간다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 5 / BALLBOMB_MOVE
+487 / 물붓기 / EMPTY / 많은 물을 끼얹어서 상대를 물타입으로 바꾼다. / 물 / 물 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 5 / NONE
+488 / 니트로차지 / EMPTY / 불꽃을 둘러 상대를 공격한다. 힘을 모아서 자신의 스피드를 올린다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 50 / 100 / 20 / 100 / EMPTY / 5 / MAKES_CONTACT
+489 / 똬리틀기 / EMPTY / 똬리를 틀어서 집중한다. 자신의 공격과 방어와 명중률을 올린다. / 독 / 독 / STATUS / USER / -1 / -1 / 20 / -1 / EMPTY / 5 / IGNORE_PROTECT
+490 / 로킥 / EMPTY / 재빠른 움직임으로 상대의 다리를 노려 공격한다. 상대의 스피드를 떨어뜨린다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 65 / 100 / 20 / 100 / EMPTY / 5 / MAKES_CONTACT
+491 / 애시드봄 / EMPTY / 상대를 녹이는 액체를 토해내서 공격한다. 상대의 특수방어를 크게 떨어뜨린다. / 독 / 독 / SPECIAL / NEAR_OTHER / 40 / 100 / 20 / 100 / EMPTY / 5 / BALLBOMB_MOVE
+492 / 속임수 / EMPTY / 상대의 힘을 이용한다. 싸우고 있는 상대의 공격이 높을수록 데미지가 올라간다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 95 / 100 / 15 / -1 / EMPTY / 5 / MAKES_CONTACT
+493 / 심플빔 / EMPTY / 수수께끼의 염력파를 상대에게 보낸다. 염력파를 받은 상대는 특성이 단순으로 바뀐다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 5 / NONE
+494 / 동료만들기 / EMPTY / 이상한 리듬으로 춤춘다. 움직임을 흉내 내게 해서 자신과 상대의 특성을 똑같게 만든다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 5 / NONE
+495 / 당신먼저 /  (N) / 상대의 행동을 도와서 자신이 행동한 뒤에 바로 움직일 수 있도록 한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / EMPTY / 5 / IGNORE_PROTECT
+496 / 돌림노래 /  (P) / 노래로 상대를 공격한다. 함께 돌림노래를 하면 계속해서 쓸 수 있고 위력도 올라간다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 60 / 100 / 15 / -1 / EMPTY / 5 / SOUND_BASED
+497 / 에코보이스 / EMPTY / 울리는 목소리로 상대를 공격한다. 매 턴 누군가 이 기술을 계속해서 쓰면 위력이 올라간다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 40 / 100 / 15 / -1 / EMPTY / 5 / SOUND_BASED
+498 / 야금야금 / EMPTY / 틈을 보며 착실하게 공격한다. 상대의 능력 변화에 관계없이 데미지를 준다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 70 / 100 / 20 / -1 / EMPTY / 5 / MAKES_CONTACT
+499 / 클리어스모그 / EMPTY / 특수한 진흙 덩어리를 상대에게 내던져서 공격한다. 능력 변화를 원래대로 돌린다. / 독 / 독 / SPECIAL / NEAR_OTHER / 50 / -1 / 15 / -1 / EMPTY / 5 / NONE
+500 / 어시스트파워 / EMPTY / 축적된 파워로 상대를 공격한다. 자신의 능력이 올라가 있는 만큼 위력이 오른다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 20 / 100 / 10 / -1 / EMPTY / 5 / NONE
+501 / 패스트가드 / EMPTY / 자신과 같은 편을 상대의 선제공격으로부터 지킨다. / 격투 / 격투 / STATUS / USER_SIDE / -1 / -1 / 15 / -1 / 3 / 5 / NONE
+502 / 사이드체인지 /  (N) / 이상한 힘으로 순간이동하여 자신과 같은 편의 위치를 바꾼다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 15 / -1 / 2 / 5 / NONE
+503 / 열탕 / EMPTY / 뜨겁게 끓어오르는 물을 상대에게 발사해서 공격한다. 화상 상태로 만들 때가 있다. / 물 / 물 / SPECIAL / NEAR_OTHER / 80 / 100 / 15 / 30 / EMPTY / 5 / NONE
+504 / 껍질깨기 / EMPTY / 껍질을 깨서 자신의 방어와 특수방어를 떨어뜨리지만 공격과 특수공격, 스피드를 크게 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 15 / -1 / EMPTY / 5 / IGNORE_PROTECT
+505 / 치유파동 / EMPTY / 치유파동을 날려서 최대 HP의 절반만큼 상대의 HP를 회복한다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 5 / EMPTY
+506 / 병상첨병 / EMPTY / 엎친 데 덮친 격으로 공격한다. 상태 이상인 상대에게 큰 데미지를 준다. / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / 65 / 100 / 10 / -1 / EMPTY / 5 / NONE
+507 / 프리폴 / EMPTY / 1턴째에 상대를 하늘로 끌고 가서 2턴째에 떨어뜨려 공격한다. 끌려간 상대는 움직일 수 없다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 60 / 100 / 10 / -1 / EMPTY / 5 / EMPTY
+508 / 기어체인지 / EMPTY / 톱니바퀴를 돌려서 자신의 공격을 올리는 것뿐만 아니라 스피드도 크게 올린다. / 강철 / 강철 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 5 / IGNORE_PROTECT
+509 / 배대뒤치기 / EMPTY / 상대를 내던져서 교대할 포켓몬을 끌어낸다. 야생의 경우에는 배틀이 끝난다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 60 / 90 / 10 / -1 / -6 / 5 / MAKES_CONTACT
+510 / 불태우기 / EMPTY / 불꽃으로 상대를 공격한다. 상대가 나무열매 등을 지니고 있을 때 불태워서 쓸 수 없게 만든다. / 불꽃 / 불꽃 / SPECIAL / ALL_NEAR_ENEMIES / 60 / 100 / 15 / -1 / EMPTY / 5 / NONE
+511 / 순서미루기 /  (N) / 상대를 억눌러서 행동의 순서를 마지막으로 만든다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 5 / NONE
+512 / 애크러뱃 / EMPTY / 경쾌하게 상대를 공격한다. 도구를 적게 지니고 있을수록 더 큰 데미지를 준다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 55 / 100 / 15 / -1 / EMPTY / 5 / MAKES_CONTACT
+513 / 미러타입 / EMPTY / 상대의 타입을 반사해서 자신도 똑같은 타입이 된다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / EMPTY / 5 / NONE
+514 / 원수갚기 /  (P) / 쓰러진 같은 편의 원수를 갚는다. 앞 턴에서 같은 편이 쓰러지면 위력이 올라간다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 70 / 100 / 5 / -1 / EMPTY / 5 / MAKES_CONTACT
+515 / 목숨걸기 / EMPTY / 목숨을 걸고 상대를 공격한다. 자신은 기절하게 되지만 상대에게 HP만큼의 데미지를 준다. / 격투 / 격투 / SPECIAL / NEAR_OTHER / -1 / 100 / 5 / -1 / EMPTY / 5 / NONE
+516 / 기프트패스 /  (N) / 상대가 도구를 지니고 있지 않을 때 자신이 지니고 있는 도구를 상대에게 건넨다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / EMPTY / 5 / IGNORE_PROTECT
+517 / 연옥 / EMPTY / 격렬한 불꽃으로 상대를 둘러싸 공격한다. 화상 상태로 만든다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 100 / 50 / 5 / 100 / EMPTY / 5 / NONE
+518 / 물의맹세 /  (P) / 물기둥으로 공격한다. 불꽃과 조합하면 위력이 올라가고 하늘에 무지개가 걸린다. / 물 / 물 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 5 / NONE
+519 / 불꽃의맹세 /  (P) / 불꽃기둥으로 공격한다. 풀과 조합하면 위력이 올라가고 주위가 불바다가 된다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 5 / NONE
+520 / 풀의맹세 /  (P) / 풀기둥으로 공격한다. 물과 조합하면 위력이 올라가고 주변이 습지초원이 된다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 5 / NONE
+521 / 볼트체인지 / EMPTY / 공격한 뒤 굉장한 스피드로 돌아와서 교대 포켓몬과 교체한다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 70 / 100 / 20 / -1 / EMPTY / 5 / NONE
+522 / 벌레의저항 / EMPTY / 저항해서 상대를 공격한다. 상대의 특수공격을 떨어뜨린다. / 벌레 / 벌레 / SPECIAL / ALL_NEAR_ENEMIES / 50 / 100 / 20 / 100 / EMPTY / 5 / NONE
+523 / 땅고르기 / EMPTY / 땅을 힘껏 밟아 자신의 주위에 있는 포켓몬을 공격한다. 상대의 스피드를 떨어뜨린다. / 땅 / 땅 / PHYSICAL / ALL_NEAR_OTHERS / 60 / 100 / 20 / 100 / EMPTY / 5 / NONE
+524 / 얼음숨결 / EMPTY / 차가운 숨결을 상대에게 내뿜어 공격한다. 반드시 급소에 맞는다. / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / 60 / 90 / 10 / 100 / EMPTY / 5 / NONE
+525 / 드래곤테일 / EMPTY / 상대를 튕겨내서 교대할 포켓몬을 끌어낸다. 야생의 경우에는 배틀이 끝난다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 60 / 90 / 10 / -1 / -6 / 5 / MAKES_CONTACT
+526 / 분발 / EMPTY / 스스로 분발해서 공격과 특수공격을 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 30 / -1 / EMPTY / 5 / IGNORE_PROTECT
+527 / 일렉트릭네트 / EMPTY / 전기 네트로 상대를 붙잡아서 공격한다. 상대의 스피드를 떨어뜨린다. / 전기 / 전기 / SPECIAL / ALL_NEAR_ENEMIES / 55 / 95 / 15 / 100 / EMPTY / 5 / NONE
+528 / 와일드볼트 / EMPTY / 전기를 두르고 상대에게 부딪쳐 공격한다. 자신도 조금 데미지를 입는다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 90 / 100 / 15 / -1 / EMPTY / 5 / EMPTY
+529 / 드릴라이너 / EMPTY / 드릴처럼 몸을 회전시켜서 상대에게 몸통박치기한다. 급소에 맞기 쉽다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 80 / 95 / 10 / -1 / EMPTY / 5 / MAKES_CONTACT
+530 / 더블촙 / EMPTY / 몸의 단단한 부분으로 상대를 때려 공격한다. 2회 연속으로 데미지를 준다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 40 / 90 / 15 / -1 / EMPTY / 5 / MAKES_CONTACT
+531 / 하트스탬프 / EMPTY / 귀여운 모습으로 방심시켜서 강렬한 일격을 날린다. 상대를 풀죽게 만들 때가 있다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_OTHER / 60 / 100 / 25 / 30 / EMPTY / 5 / MAKES_CONTACT
+532 / 우드혼 / EMPTY / 뿔을 꿰찔러서 상대의 양분을 흡수한다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 75 / 100 / 10 / -1 / EMPTY / 5 / EMPTY
+533 / 성스러운칼 / EMPTY / 긴 뿔로 베어 공격한다. 상대의 능력 변화에 관계없이 데미지를 준다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 90 / 100 / 15 / -1 / EMPTY / 5 / EMPTY
+534 / 셸블레이드 / EMPTY / 날카로운 조개껍질로 베어 공격한다. 상대의 방어를 떨어뜨릴 때가 있다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 75 / 95 / 10 / 50 / EMPTY / 5 / EMPTY
+535 / 히트스탬프 / EMPTY / 불타는 몸으로 상대에게 부딪쳐서 공격한다. 자신이 상대보다 무거울수록 위력이 올라간다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 5 / MAKES_CONTACT
+536 / 그래스믹서 / EMPTY / 날카로운 잎사귀로 상대를 둘러싸서 공격한다. 명중률을 떨어뜨릴 때가 있다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 65 / 90 / 10 / 50 / EMPTY / 5 / NONE
+537 / 하드롤러 / EMPTY / 둥글게 뭉친 몸을 회전하여 상대를 뭉개 버린다. 상대를 풀죽게 만들 때가 있다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 65 / 100 / 20 / 30 / EMPTY / 5 / MAKES_CONTACT
+538 / 코튼가드 / EMPTY / 푹신푹신한 솜털로 자신의 몸을 둘러싸서 지킨다. 방어를 매우 크게 올린다. / 풀 / 풀 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 5 / IGNORE_PROTECT
+539 / 나이트버스트 / EMPTY / 암흑의 충격파를 날려서 상대를 공격한다. 명중률을 떨어뜨릴 때가 있다. / 악 / 악 / SPECIAL / NEAR_OTHER / 85 / 95 / 10 / 40 / EMPTY / 5 / NONE
+540 / 사이코브레이크 / EMPTY / 이상한 염력파를 실체화하여 상대를 공격한다. 물리적인 데미지를 준다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 100 / 100 / 10 / -1 / EMPTY / 5 / NONE
+541 / 스위프뺨치기 / EMPTY / 단단한 꼬리로 상대를 때려서 공격한다. 2-5회 동안 연속으로 쓴다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 25 / 85 / 10 / -1 / EMPTY / 5 / MAKES_CONTACT
+542 / 폭풍 / EMPTY / 강렬한 바람으로 상대를 둘러싸서 공격한다. 상대를 혼란시킬 때가 있다. / 비행 / 비행 / SPECIAL / NEAR_OTHER / 110 / 70 / 10 / 30 / EMPTY / 5 / WIND_MOVE
+543 / 아프로브레이크 / EMPTY / 굉장한 아프로 머리로 상대에게 돌진하여 공격한다. 자신도 조금 데미지를 입는다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 120 / 100 / 15 / -1 / EMPTY / 5 / EMPTY
+544 / 기어소서 / EMPTY / 강철의 기어를 상대에게 던져서 공격한다. 2회 연속으로 데미지를 준다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 50 / 85 / 15 / -1 / EMPTY / 5 / MAKES_CONTACT
+545 / 화염탄 / EMPTY / 새빨간 불꽃으로 자신의 주위에 있는 포켓몬을 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / SPECIAL / ALL_NEAR_OTHERS / 100 / 100 / 5 / 30 / EMPTY / 5 / BALLBOMB_MOVE
+546 / 테크노버스터 / EMPTY / 광탄을 상대에게 방출한다. 자신이 지니고 있는 카세트에 의해 타입이 바뀐다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 5 / NONE
+547 / 옛노래 / EMPTY / 옛 노래를 상대에게 들려주고 마음에 호소하여 공격한다. 잠듦 상태로 만들 때가 있다. / 노말 / 노말 / SPECIAL / ALL_NEAR_ENEMIES / 75 / 100 / 10 / 10 / EMPTY / 5 / SOUND_BASED
+548 / 신비의칼 / EMPTY / 긴 뿔로 베어 공격한다. 뿔이 머금은 이상한 힘은 물리적인 데미지를 준다. / 격투 / 격투 / SPECIAL / NEAR_OTHER / 85 / 100 / 10 / -1 / EMPTY / 5 / SLICING_MOVE
+549 / 얼어붙은세계 / EMPTY / 차가운 냉기를 상대에게 내뿜어 공격한다. 상대의 스피드를 떨어뜨린다. / 얼음 / 얼음 / SPECIAL / ALL_NEAR_ENEMIES / 65 / 95 / 10 / 100 / EMPTY / 5 / NONE
+550 / 뇌격 / EMPTY / 방대한 전기를 몸에 둘러 상대에게 돌진해서 공격한다. 마비 상태로 만들 때가 있다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 130 / 85 / 5 / 20 / EMPTY / 5 / MAKES_CONTACT
+551 / 푸른불꽃 / EMPTY / 아름다우면서도 격렬한 푸른불꽃으로 상대를 둘러싸서 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 130 / 85 / 5 / 20 / EMPTY / 5 / NONE
+552 / 불꽃춤 / EMPTY / 불꽃을 두른 날개를 쳐서 공격한다. 자신의 특수공격이 오를 때가 있다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / 50 / EMPTY / 5 / DANCE_MOVE
+553 / 프리즈볼트 / EMPTY / 전기를 두른 얼음덩어리로 2턴째에 상대를 내리친다. 마비 상태로 만들 때가 있다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 140 / 90 / 5 / 30 / EMPTY / 5 / NONE
+554 / 콜드플레어 / EMPTY / 모든 것을 얼려버리는 격렬한 냉기로 2턴째에 상대를 둘러싼다. 화상 상태로 만들 때가 있다. / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / 140 / 90 / 5 / 30 / EMPTY / 5 / IGNORE_VIRTUAL
+555 / 바크아웃 / EMPTY / 호되게 호통을 쳐서 상대의 특수공격을 떨어뜨린다. / 악 / 악 / SPECIAL / ALL_NEAR_ENEMIES / 55 / 95 / 15 / 100 / EMPTY / 5 / SOUND_BASED
+556 / 고드름떨구기 / EMPTY / 큰 고드름을 격렬하게 부딪쳐서 공격한다. 상대를 풀죽게 만들 때가 있다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 85 / 90 / 10 / 30 / EMPTY / 5 / NONE
+557 / V제너레이트 / EMPTY / 작열하는 불꽃을 이마에서 발생시켜 이판사판으로 몸통박치기한다. 방어, 특수방어, 스피드가 떨어진다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 180 / 95 / 5 / -1 / EMPTY / 5 / MAKES_CONTACT
+558 / 크로스플레임 /  (P) / 거대한 불꽃을 내리친다. 거대한 천둥의 영향을 받아 기술의 위력이 올라간다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 5 / NONE
+559 / 크로스썬더 /  (P) / 거대한 천둥을 내리친다. 거대한 불꽃의 영향을 받아 기술의 위력이 올라간다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 5 / NONE
+560 / 플라잉프레스 / EMPTY / 공중에서 상대에게 다이브한다. 이 기술은 격투타입임과 동시에 비행타입이기도 하다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 100 / 95 / 10 / -1 / EMPTY / 6 / MAKES_CONTACT
+561 / 마룻바닥세워막기 / EMPTY / 뒤집어 세운 마룻바닥을 방패로 하여 자신과 같은 편으로 향하는 기술 데미지를 막는다. 변화 기술은 막을 수 없다. / 격투 / 격투 / STATUS / USER_SIDE / -1 / -1 / 10 / -1 / EMPTY / 6 / NONE
+562 / 트림 / EMPTY / 상대를 향해 트림을 하여 데미지를 준다. 나무열매를 먹지 않으면 쓸 수 없다. / 독 / 독 / SPECIAL / NEAR_OTHER / 120 / 90 / 10 / -1 / EMPTY / 6 / NONE
+563 / 일구기 / EMPTY / 땅을 일구어 초목이 자라기 쉽게 한다. 풀타입의 공격과 특수공격이 오른다. / 땅 / 땅 / STATUS / ALL / -1 / -1 / 10 / -1 / EMPTY / 6 / NONE
+564 / 끈적끈적네트 / EMPTY / 상대의 주위에 끈적끈적한 네트를 둘러 펼쳐 교체되어 나온 상대의 스피드를 떨어뜨린다. / 벌레 / 벌레 / STATUS / ENEMY_SIDE / -1 / -1 / 20 / -1 / EMPTY / 6 / NONE
+565 / 마지막일침 / EMPTY / 이 기술을 사용하여 상대를 쓰러뜨리면 공격이 매우 크게 오른다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 50 / 100 / 25 / -1 / EMPTY / 6 / MAKES_CONTACT
+566 / 고스트다이브 / EMPTY / 1턴째에 어디론가 사라져서 2턴째에 상대를 공격한다. 기술 방어를 무시하고 공격할 수 있다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 90 / 100 / 10 / -1 / EMPTY / 6 / EMPTY
+567 / 핼러윈 /  (P) / 상대를 핼러윈으로 초대한다. 상대 타입에 고스트타입이 추가된다. / 고스트 / 고스트 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 6 / NONE
+568 / 부르짖기 / EMPTY / 우렁차게 부르짖어서 상대를 위협하여 상대의 공격과 특수공격을 떨어뜨린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 30 / -1 / EMPTY / 6 / SOUND_BASED
+569 / 플라스마샤워 /  (N) / 전기를 띤 입자를 확산시켜 노말타입 기술을 전기타입으로 바꿔버린다. / 전기 / 전기 / STATUS / BOTH_SIDES / -1 / -1 / 25 / -1 / 1 / 6 / NONE
+570 / 파라볼라차지 / EMPTY / 주위에 있는 모든 포켓몬에게 데미지를 준다. 준 데미지의 절반을 자신이 회복한다. / 전기 / 전기 / SPECIAL / ALL_NEAR_OTHERS / 65 / 100 / 20 / -1 / EMPTY / 6 / TRIAGE_MOVE
+571 / 숲의저주 /  (P) / 상대에게 숲의 저주를 건다. 저주에 걸린 상대는 타입에 풀타입이 추가된다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 6 / NONE
+572 / 꽃보라 / EMPTY / 세찬 꽃보라를 일으켜서 주위에 있는 포켓몬을 공격하여 데미지를 준다. / 풀 / 풀 / PHYSICAL / ALL_NEAR_OTHERS / 90 / 100 / 15 / -1 / EMPTY / 6 / WIND_MOVE
+573 / 프리즈드라이 / EMPTY / 상대를 급격히 차갑게 하여 얼음 상태로 만들 때가 있다. 물타입 포켓몬에게도 효과가 굉장해진다. / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / 70 / 100 / 20 / 10 / EMPTY / 6 / NONE
+574 / 차밍보이스 / EMPTY / 매혹적인 울음소리를 내어 상대에게 정신적 데미지를 준다. 공격은 반드시 명중한다. / 페어리 / 페어리 / SPECIAL / ALL_NEAR_ENEMIES / 40 / -1 / 15 / -1 / EMPTY / 6 / SOUND_BASED
+575 / 막말내뱉기 / EMPTY / 막말을 내뱉어 상대를 위협하여 공격과 특수공격을 떨어뜨린 후 교대 포켓몬과 교체한다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 6 / SOUND_BASED
+576 / 뒤집어엎기 / EMPTY / 상대에게 걸려 있는 모든 능력 변화를 뒤집어서 반대로 만든다. / 악 / 악 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 6 / NONE
+577 / 드레인키스 / EMPTY / 키스로 상대의 HP를 흡수한다. 준 데미지의 반 이상 HP를 회복한다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / 50 / 100 / 10 / -1 / EMPTY / 6 / EMPTY
+578 / 트릭가드 / EMPTY / 이상한 힘을 사용하여 같은 편을 공격하는 변화 기술을 막는다. 데미지 기술은 받는다. / 페어리 / 페어리 / STATUS / USER_SIDE / -1 / -1 / 10 / -1 / 3 / 6 / NONE
+579 / 플라워가드 / EMPTY / 이상한 힘을 사용하여 배틀에 나와 있는 모든 풀타입 포켓몬의 방어를 올린다. / 페어리 / 페어리 / STATUS / ALL / -1 / -1 / 10 / -1 / EMPTY / 6 / NONE
+580 / 그래스필드 / EMPTY / 5턴 동안 그래스필드로 만든다. 땅에 있으면 매 턴 회복한다. 풀타입의 위력이 올라간다. / 풀 / 풀 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 6 / NONE
+581 / 미스트필드 / EMPTY / 5턴 동안 땅에 있으면 상태 이상이 되지 않고 드래곤타입 기술의 데미지도 절반이 된다. / 페어리 / 페어리 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 6 / NONE
+582 / 송전 /  (N) / 상대가 기술을 쓰기 전에 송전하면 그 턴에 상대가 사용하는 기술은 전기타입이 된다. / 전기 / 전기 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 6 / NONE
+583 / 치근거리기 / EMPTY / 상대에게 치근거리며 공격한다. 상대의 공격을 떨어뜨릴 때가 있다. / 페어리 / 페어리 / PHYSICAL / NEAR_OTHER / 90 / 90 / 10 / 10 / EMPTY / 6 / MAKES_CONTACT
+584 / 요정의바람 / EMPTY / 요정의 바람을 일으켜 상대에게 몰아쳐서 공격한다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / 40 / 100 / 30 / -1 / EMPTY / 6 / WIND_MOVE
+585 / 문포스 / EMPTY / 달의 파워를 빌려서 상대를 공격한다. 상대의 특수공격을 떨어뜨릴 때가 있다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / 95 / 100 / 15 / 30 / EMPTY / 6 / NONE
+586 / 폭음파 / EMPTY / 무시무시한 폭음의 파괴력으로 주위에 있는 포켓몬을 공격한다. / 노말 / 노말 / SPECIAL / ALL_NEAR_OTHERS / 140 / 100 / 10 / -1 / EMPTY / 6 / SOUND_BASED
+587 / 페어리록 /  (N) / 록을 걸어 다음 턴의 모든 포켓몬을 도망가지 못하게 한다. / 페어리 / 페어리 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 6 / NONE
+588 / 킹실드 / EMPTY / 상대의 공격을 막음과 동시에 방어 태세를 갖춘다. 접촉한 상대의 공격을 떨어뜨린다. / 강철 / 강철 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 6 / IGNORE_PROTECT
+589 / 친해지기 / EMPTY / 상대와 친해져서 싸울 마음을 잃게 하여 상대의 공격을 떨어뜨린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 6 / NONE
+590 / 비밀이야기 / EMPTY / 비밀 이야기를 해서 상대의 집중력을 잃게 하여 특수공격을 떨어뜨린다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 6 / SOUND_BASED
+591 / 다이아스톰 / EMPTY / 다이아 폭풍을 일으켜 데미지를 준다. 자신의 방어를 크게 올릴 때가 있다. / 바위 / 바위 / PHYSICAL / ALL_NEAR_ENEMIES / 100 / 95 / 5 / 50 / EMPTY / 6 / NONE
+592 / 스팀버스트 / EMPTY / 상대에게 굉장히 뜨거운 증기를 뿜는다. 상대는 화상을 입기도 한다. / 물 / 물 / SPECIAL / NEAR_OTHER / 110 / 95 / 5 / 30 / EMPTY / 6 / NONE
+593 / 이차원홀 / EMPTY / 이차원홀로 갑자기 상대 바로 옆에 나타나 공격한다. 방어나 판별 등도 무시할 수 있다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 80 / -1 / 5 / -1 / EMPTY / 6 / IGNORE_PROTECT
+594 / 물수리검 / EMPTY / 점액으로 만든 수리검을 2-5회 동안 연속으로 던진다. 반드시 선제공격할 수 있다. / 물 / 물 / SPECIAL / NEAR_OTHER / 15 / 100 / 20 / -1 / 1 / 6 / NONE
+595 / 매지컬플레임 / EMPTY / 입에서 내뱉는 아주 뜨거운 불꽃으로 공격한다. 상대의 특수공격을 떨어뜨린다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 75 / 100 / 10 / 100 / EMPTY / 6 / NONE
+596 / 니들가드 / EMPTY / 상대의 공격을 막음과 동시에 접촉한 상대의 체력을 떨어뜨린다. / 풀 / 풀 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 6 / IGNORE_PROTECT
+597 / 아로마미스트 / EMPTY / 신비한 아로마 향으로 같은 편의 특수방어를 올린다. / 페어리 / 페어리 / STATUS / NEAR_ALLY / -1 / -1 / 20 / -1 / EMPTY / 6 / NONE
+598 / 괴전파 / EMPTY / 몸에서 발생시킨 괴전파를 상대에게 쏘아 특수공격을 크게 떨어뜨린다. / 전기 / 전기 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 6 / NONE
+599 / 베놈트랩 / EMPTY / 특수한 독액을 끼얹는다. 독 상태인 상대는 공격, 특수공격, 스피드가 떨어진다. / 독 / 독 / STATUS / ALL_NEAR_ENEMIES / -1 / 100 / 20 / -1 / EMPTY / 6 / NONE
+600 / 분진 /  (N) / 분진을 뒤집어쓴 상대가 불꽃 기술을 쓰면 폭발하여 데미지를 준다. / 벌레 / 벌레 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / 1 / 6 / POWDER_MOVE
+601 / 지오컨트롤 / EMPTY / 1턴째에 에너지를 흡수하여 2턴째에 특수공격, 특수방어, 스피드를 크게 올린다. / 페어리 / 페어리 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 6 / EMPTY
+602 / 자기장조작 / EMPTY / 자기장 조작으로 인해 특성 플러스와 마이너스의 방어, 특수방어가 오른다. / 전기 / 전기 / STATUS / USER_AND_ALLIES / -1 / -1 / 20 / -1 / EMPTY / 6 / NONE
+603 / 해피타임 / EMPTY / 해피타임 기술을 쓰면 배틀 후에 받을 수 있는 돈이 배가 된다. / 노말 / 노말 / STATUS / USER_SIDE / -1 / -1 / 30 / -1 / EMPTY / 6 / NONE
+604 / 일렉트릭필드 / EMPTY / 5턴 동안 일렉트릭필드로 만든다. 땅에 있는 포켓몬은 잠들지 않는다. 전기타입의 위력이 올라간다. / 전기 / 전기 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 6 / NONE
+605 / 매지컬샤인 / EMPTY / 강력한 빛을 내어 상대에게 데미지를 준다. / 페어리 / 페어리 / SPECIAL / ALL_NEAR_ENEMIES / 80 / 100 / 10 / -1 / EMPTY / 6 / NONE
+606 / 축하 / EMPTY / 포켓몬이 매우 행복한 당신을 축하해 준다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 40 / -1 / EMPTY / 6 / IGNORE_PROTECT
+607 / 손에손잡기 / EMPTY / 같은 편 포켓몬끼리 손에 손을 잡는다. 굉장히 행복한 기분이 들게 된다. / 노말 / 노말 / STATUS / NEAR_ALLY / -1 / -1 / 40 / -1 / EMPTY / 6 / NONE
+608 / 초롱초롱눈동자 / EMPTY / 초롱초롱한 눈동자로 상대를 바라보며 공격을 떨어뜨린다. 반드시 선제공격할 수 있다. / 페어리 / 페어리 / STATUS / NEAR_OTHER / -1 / 100 / 30 / -1 / 1 / 6 / NONE
+609 / 볼부비부비 / EMPTY / 전기가 흐르는 볼을 비벼서 공격한다. 상대를 마비 상태로 만든다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 20 / 100 / 20 / 100 / EMPTY / 6 / MAKES_CONTACT
+610 / 적당히손봐주기 / EMPTY / 적당히 공격하여 상대의 HP를 반드시 1은 남긴다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 40 / 100 / 40 / -1 / EMPTY / 6 / MAKES_CONTACT
+611 / 엉겨붙기 / EMPTY / 4-5턴 동안 상대에게 엉겨 붙어서 공격한다. 그동안 상대는 도망갈 수 없다. / 벌레 / 벌레 / SPECIAL / NEAR_OTHER / 20 / 100 / 20 / -1 / EMPTY / 6 / MAKES_CONTACT
+612 / 그로우펀치 / EMPTY / 반복하여 때리면 점점 주먹이 단단해진다. 상대를 때리면 공격이 오른다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 40 / 100 / 20 / 100 / EMPTY / 6 / EMPTY
+613 / 데스윙 / EMPTY / 조준한 상대로부터 HP를 흡수한다. 준 데미지의 반 이상 HP를 회복한다. / 비행 / 비행 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 6 / TRIAGE_MOVE
+614 / 사우전드애로 / EMPTY / 떠 있는 포켓몬도 맞힐 수 있다. 떠 있던 상대는 맞아서 땅에 떨어진다. / 땅 / 땅 / PHYSICAL / ALL_NEAR_ENEMIES / 90 / 100 / 10 / -1 / EMPTY / 6 / NONE
+615 / 사우전드웨이브 / EMPTY / 땅 위를 뻗어 나가는 파도로 공격한다. 파도에 휩쓸린 상대는 전투에서 도망칠 수 없게 된다. / 땅 / 땅 / PHYSICAL / ALL_NEAR_ENEMIES / 90 / 100 / 10 / -1 / EMPTY / 6 / NONE
+616 / 그라운드포스 / EMPTY / 대지의 힘을 모으고 그 힘을 상대에게 집중시켜서 데미지를 준다. / 땅 / 땅 / PHYSICAL / ALL_NEAR_ENEMIES / 90 / 100 / 10 / -1 / EMPTY / 6 / NONE
+617 / 파멸의빛 / EMPTY / 영원의 꽃의 파워를 빌려서 강력한 광선을 쏜다. 자신도 상당한 데미지를 입는다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / 140 / 90 / 5 / -1 / EMPTY / 6 / RECKLESS_MOVE
+618 / 근원의파동 / EMPTY / 파랗게 빛나는 무수한 광선으로 상대를 공격한다. / 물 / 물 / SPECIAL / ALL_NEAR_ENEMIES / 110 / 85 / 10 / -1 / EMPTY / 6 / PULSE_MOVE
+619 / 단애의칼 / EMPTY / 대지의 힘을 칼날로 바꿔 상대를 공격한다. / 땅 / 땅 / PHYSICAL / ALL_NEAR_ENEMIES / 120 / 85 / 10 / -1 / EMPTY / 6 / NONE
+620 / 화룡점정 / EMPTY / 넓은 하늘에서 급속으로 강하하여 상대를 공격한다. 자신의 방어와 특수방어가 떨어진다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 6 / MAKES_CONTACT
+621 / 이차원러시 / EMPTY / 많은 팔로 방어와 판별 등을 무시하는 연속 공격이다. 자신의 방어가 떨어진다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 100 / -1 / 5 / -1 / EMPTY / 6 / IGNORE_PROTECT
+622 / 울트라대시어택 /  (N) / Z파워로 기세를 몰아 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+623 / 울트라대시어택 /  (N) / Dummy Data / 노말 / 노말 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+624 / 전력무쌍격렬권 /  (N) / Z파워로 만든 에너지 구슬을 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+625 / 전력무쌍격렬권 /  (N) / Dummy Data / 격투 / 격투 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+626 / 파이널다이브클래시 /  (N) / Z파워로 기세 좋게 날아올라 상대를 향해 전력으로 낙하한다. 원래 기술에 따라 위력이 변한다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+627 / 파이널다이브클래시 /  (N) / Dummy Data / 비행 / 비행 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+628 / 애시드포이즌딜리트 /  (N) / Z파워로 독의 늪을 만들어 전력으로 상대를 가라앉힌다. 원래 기술에 따라 위력이 변한다. / 독 / 독 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+629 / 애시드포이즌딜리트 /  (N) / Dummy Data / 독 / 독 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+630 / 라이징랜드오버 /  (N) / Z파워로 땅 깊숙이 파고들어 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+631 / 라이징랜드오버 /  (N) / Dummy Data / 땅 / 땅 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+632 / 월즈엔드폴 /  (N) / Z파워로 큰 바위산을 불러내 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+633 / 월즈엔드폴 /  (N) / Dummy Data / 바위 / 바위 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+634 / 절대포식회전참 /  (N) / Z파워로 뱉어낸 실이 전력으로 상대를 붙들어 맨다. 원래 기술에 따라 위력이 변한다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+635 / 절대포식회전참 /  (N) / Dummy Data / 벌레 / 벌레 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+636 / 무한암야로의유인 /  (N) / Z파워로 불러낸 강한 원념이 전력으로 상대에게 쏟아진다. 원래 기술에 따라 위력이 변한다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+637 / 무한암야로의유인 /  (N) / Dummy Data / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+638 / 초월나선연격 /  (N) / Z파워로 고속 회전을 하여 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+639 / 초월나선연격 /  (N) / Dummy Data / 강철 / 강철 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+640 / 다이내믹풀플레임 /  (N) / Z파워로 활활 타는 불꽃을 뱉어내 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+641 / 다이내믹풀플레임 /  (N) / Dummy Data / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+642 / 슈퍼아쿠아토네이도 /  (N) / Z파워로 큰 바다회오리를 만들어 전력으로 상대를 집어삼킨다. 원래 기술에 따라 위력이 변한다. / 물 / 물 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+643 / 슈퍼아쿠아토네이도 /  (N) / Dummy Data / 물 / 물 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+644 / 블룸샤인엑스트라 /  (N) / Z파워로 화초들의 에너지를 빌려 전력으로 상대를 공격한다. 원래 기술에 따라 위력이 변한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+645 / 블룸샤인엑스트라 /  (N) / Dummy Data / 풀 / 풀 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+646 / 스파킹기가볼트 /  (N) / Z파워로 비축한 강한 전기를 전력으로 상대에게 부딪친다. 원래 기술에 따라 위력이 변한다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+647 / 스파킹기가볼트 /  (N) / Dummy Data / 전기 / 전기 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+648 / 맥시멈사이브레이커 /  (N) / Z파워로 상대를 조종해 전력으로 매서운 맛을 보여준다. 원래 기술에 따라 위력이 변한다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+649 / 맥시멈사이브레이커 /  (N) / Dummy Data / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+650 / 레이징지오프리즈 /  (N) / Z파워로 기온을 급격하게 떨어뜨려 전력으로 상대를 얼린다. 원래 기술에 따라 위력이 변한다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+651 / 레이징지오프리즈 /  (N) / Dummy Data / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+652 / 얼티메이트드래곤번 /  (N) / Z파워로 오라를 실체화시켜 전력으로 상대를 공격한다. 원래 기술에 따라 위력이 변한다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+653 / 얼티메이트드래곤번 /  (N) / Dummy Data / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+654 / 블랙홀이클립스 /  (N) / Z파워로 어둠의 에너지를 모아 전력으로 상대를 끌어당긴다. 원래 기술에 따라 위력이 변한다. / 악 / 악 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+655 / 블랙홀이클립스 /  (N) / Dummy Data / 악 / 악 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+656 / 러블리스타임팩트 /  (N) / Z파워로 매혹의 공간을 만들어 전력으로 상대를 가지고 논다. 원래 기술에 따라 위력이 변한다. / 페어리 / 페어리 / PHYSICAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+657 / 러블리스타임팩트 /  (N) / Dummy Data / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+658 / 필살피카슛 /  (N) / Z파워로 최대 전력을 몸에 두른 피카츄가 전력으로 상대에게 덤벼든다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 210 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+659 / 모래모으기 / EMPTY / 자신의 최대 HP 절반을 회복한다. 모래바람일 때는 많이 회복한다. / 땅 / 땅 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 7 / EMPTY
+660 / 만나자마자 / EMPTY / 위력이 높은 기술이지만 배틀에 나가서 바로 쓰지 않으면 성공할 수 없다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 90 / 100 / 10 / -1 / 2 / 7 / MAKES_CONTACT
+661 / 토치카 / EMPTY / 상대의 공격을 막음과 동시에 접촉한 상대에게 독을 퍼뜨린다. / 독 / 독 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 7 / IGNORE_PROTECT
+662 / 그림자꿰매기 / EMPTY / 공격과 동시에 상대의 그림자를 꿰매 도망칠 수 없게 한다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 7 / NONE
+663 / DD래리어트 / EMPTY / 양팔을 돌려 상대에게 부딪친다. 상대의 능력 변화에 상관없이 데미지를 준다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 85 / 100 / 10 / -1 / EMPTY / 7 / MAKES_CONTACT
+664 / 물거품아리아 / EMPTY / 노래 부르는 것으로 많은 벌룬을 방출한다. 기술에 맞으면 화상이 낫는다. / 물 / 물 / SPECIAL / ALL_NEAR_OTHERS / 90 / 100 / 10 / 100 / EMPTY / 7 / SOUND_BASED
+665 / 아이스해머 / EMPTY / 강하고 무거운 주먹을 휘둘러 데미지를 준다. 자신의 스피드가 떨어진다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 100 / 90 / 10 / -1 / EMPTY / 7 / EMPTY
+666 / 플라워힐 / EMPTY / 최대 HP의 절반만큼 상대의 HP를 회복한다. 그래스필드일 때 효과가 올라간다. / 페어리 / 페어리 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 7 / TRIAGE_MOVE
+667 / 10만마력 / EMPTY / 온몸을 써서 상대에게 맹렬히 어택한다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 95 / 95 / 10 / -1 / EMPTY / 7 / MAKES_CONTACT
+668 / 힘흡수 / EMPTY / 상대 공격력과 동일하게 자신의 HP를 회복한다. 그리고 상대의 공격을 떨어뜨린다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 7 / TRIAGE_MOVE
+669 / 솔라블레이드 / EMPTY / 1턴째에 빛을 가득 모아 2턴째에 그 힘을 검에 담아 공격한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 125 / 100 / 10 / -1 / EMPTY / 7 / EMPTY
+670 / 나뭇잎 / EMPTY / 잎을 상대에 맞춰 공격한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 40 / 100 / 40 / -1 / EMPTY / 7 / NONE
+671 / 스포트라이트 / EMPTY / 포켓몬에게 스포트라이트를 비춰 그 턴에서 그 포켓몬만 공격할 수 있게 한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / 3 / 7 / NONE
+672 / 독실 / EMPTY / 독이 섞인 실을 뿜어낸다. 상대를 독 상태로 만들고 스피드를 떨어뜨린다. / 독 / 독 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 7 / NONE
+673 / 예민해지기 / EMPTY / 정신을 집중해서 다음 공격을 반드시 급소에 맞춘다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 30 / -1 / EMPTY / 7 / IGNORE_PROTECT
+674 / 어시스트기어 / EMPTY / 기어를 넣는 것으로 특성 플러스와 마이너스의 공격과 특수공격이 올라간다. / 강철 / 강철 / STATUS / USER_AND_ALLIES / -1 / -1 / 20 / -1 / EMPTY / 7 / NONE
+675 / 지옥찌르기 /  (P) / 이 기술에 맞은 상대는 지옥의 고통 때문에 2턴 동안 소리 기술을 낼 수 없다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / 100 / EMPTY / 7 / MAKES_CONTACT
+676 / 꽃가루경단 / EMPTY / 상대에게는 폭발하는 경단을 사용하여 공격한다. 같은 편에게는 회복하는 경단을 준다. / 벌레 / 벌레 / SPECIAL / NEAR_OTHER / 90 / 100 / 15 / -1 / EMPTY / 7 / BALLBOMB_MOVE
+677 / 앵커샷 / EMPTY / 앵커를 상대에게 휘감아서 공격한다. 상대는 도망칠 수 없게 된다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 80 / 100 / 20 / 100 / EMPTY / 7 / MAKES_CONTACT
+678 / 사이코필드 / EMPTY / 5턴 동안 땅에 있으면 선제공격을 받지 않는다. 에스퍼타입의 위력이 올라간다. / 에스퍼 / 에스퍼 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 7 / NONE
+679 / 덤벼들기 / EMPTY / 전력으로 상대에게 덤벼들며 공격한다. 상대의 공격을 떨어뜨린다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / 100 / EMPTY / 7 / MAKES_CONTACT
+680 / 불꽃채찍 / EMPTY / 불타는 채찍으로 상대를 친다. 공격을 받은 상대는 방어가 떨어진다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / 100 / EMPTY / 7 / MAKES_CONTACT
+681 / 기어오르기 / EMPTY / 자신의 강함을 뻐기고 공격한다. 자신의 능력이 올라가 있는 만큼 위력이 오른다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 20 / 100 / 10 / -1 / EMPTY / 7 / MAKES_CONTACT
+682 / 불사르기 / EMPTY / 전신의 불꽃을 모두 태워서 큰 데미지를 준다. 자신의 불꽃타입이 없어진다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 130 / 100 / 5 / -1 / EMPTY / 7 / NONE
+683 / 스피드스왑 /  (N) / 상대의 스피드와 자신의 스피드를 교체한다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 10 / -1 / EMPTY / 7 / NONE
+684 / 스마트혼 / EMPTY / 뾰족한 뿔로 상대를 꿰찔러서 공격한다. 공격은 반드시 명중한다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 70 / -1 / 10 / -1 / EMPTY / 7 / MAKES_CONTACT
+685 / 정화 / EMPTY / 상대의 상태 이상을 회복한다. 회복하면 자신은 HP를 회복할 수 있다. / 독 / 독 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 7 / TRIAGE_MOVE
+686 / 잠재댄스 / EMPTY / 전력으로 춤추며 공격한다. 이 기술의 타입은 자신의 타입과 같아진다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 90 / 100 / 15 / -1 / EMPTY / 7 / DANCE_MOVE
+687 / 코어퍼니셔 / EMPTY / 데미지를 준 상대가 이미 행동을 끝냈다면 상대의 특성을 없애버린다. / 드래곤 / 드래곤 / SPECIAL / ALL_NEAR_ENEMIES / 100 / 100 / 10 / -1 / EMPTY / 7 / NONE
+688 / 트로피컬킥 / EMPTY / 남쪽 나라에서 유래된 뜨거운 킥을 상대에게 날린다. 상대의 공격을 떨어뜨린다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 70 / 100 / 15 / 100 / EMPTY / 7 / MAKES_CONTACT
+689 / 지휘 /  (N) / 상대에게 지시하여 상대가 쓴 기술을 다시 한번 쓰게 할 수 있다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / EMPTY / 7 / NONE
+690 / 부리캐논 /  (P) / 먼저 부리를 가열시킨 다음 공격을 날린다. 가열 중에 만지면 화상을 입는다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 100 / 100 / 15 / -1 / 5 / 7 / BALLBOMB_MOVE
+691 / 스케일노이즈 / EMPTY / 전신의 비늘을 비벼서 큰 소리를 내 공격한다. 공격 후 자신의 방어가 떨어진다. / 드래곤 / 드래곤 / SPECIAL / ALL_NEAR_ENEMIES / 110 / 100 / 5 / -1 / EMPTY / 7 / SOUND_BASED
+692 / 드래곤해머 / EMPTY / 몸을 해머처럼 써서 상대를 덮쳐 데미지를 준다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 90 / 100 / 15 / -1 / EMPTY / 7 / MAKES_CONTACT
+693 / 세차게휘두르기 / EMPTY / 자신의 몸을 세차게 휘둘러서 상대에게 데미지를 준다. / 악 / 악 / PHYSICAL / ALL_NEAR_OTHERS / 60 / 100 / 20 / -1 / EMPTY / 7 / MAKES_CONTACT
+694 / 오로라베일 / EMPTY / 5턴 동안 물리와 특수 기술의 데미지를 약하게 한다. 설경일 때만 쓸 수 있다. / 얼음 / 얼음 / STATUS / USER_SIDE / -1 / -1 / 20 / -1 / EMPTY / 7 / NONE
+695 / 섀도애로우즈스트라이크 /  (P) / Z파워로 무수한 화살을 만들어낸 모크나이퍼가 전력으로 상대를 꿰뚫는 공격이다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 180 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+696 / 하이퍼다크크러셔 /  (P) / Z파워로 강한 육체를 얻은 어흥염이 전력으로 상대에게 부딪쳐 공격한다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 180 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+697 / 바다의심포니 /  (P) / Z파워로 대량의 물을 부른 누리레느가 전력으로 상대를 공격한다. / 물 / 물 / SPECIAL / NEAR_OTHER / 195 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+698 / 알로라의수호자 /  (N) / Z파워로 알로라의 힘을 얻은 토속신포켓몬 전력의 공격. 상대의 남은 HP를 많이 줄인다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / -1 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+699 / 칠성탈혼퇴 /  (N) / Z파워를 얻은 마샤도가 펀치와 킥의 연속기술을 전력으로 상대에게 퍼붓는다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 195 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+700 / 라이트닝서프라이드 /  (P) / Z파워를 얻은 알로라지방의 라이츄가 전력으로 공격한다. 상대를 마비 상태로 만든다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 175 / -1 / 1 / 100 / EMPTY / 7 / IGNORE_VIRTUAL
+701 / 진심의공격 /  (P) / Z파워로 진심을 낸 잠만보가 거대한 몸을 움직여서 전력으로 상대를 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 210 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+702 / 나인이볼부스트 / EMPTY / Z파워를 얻은 이브이가 진화한 동료들의 힘을 빌려 능력을 크게 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+703 / 오리진즈슈퍼노바 / EMPTY / Z파워를 얻은 뮤가 전력으로 상대를 공격한다. 발밑이 사이코필드가 된다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 185 / -1 / 1 / 100 / EMPTY / 7 / IGNORE_VIRTUAL
+704 / 트랩셸 /  (P) / 껍질의 트랩을 설치한다. 상대가 물리 기술을 쓰면 폭발해서 데미지를 준다. / 불꽃 / 불꽃 / SPECIAL / ALL_NEAR_ENEMIES / 150 / 100 / 5 / -1 / -3 / 7 / NONE
+705 / 플뢰르캐논 / EMPTY / 강력한 빔을 발산한 후 자신의 특수공격이 크게 떨어진다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / 130 / 90 / 5 / -1 / EMPTY / 7 / NONE
+706 / 사이코팽 / EMPTY / 사이코 파워로 물어서 상대를 공격한다. 빛의장막이나 리플렉터도 파괴할 수 있다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_OTHER / 85 / 100 / 10 / -1 / EMPTY / 7 / EMPTY
+707 / 분함의발구르기 / EMPTY / 분함을 발판 삼아 공격한다. 앞 턴에서 기술이 빗나갔다면 위력이 배가 된다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 75 / 100 / 10 / -1 / EMPTY / 7 / MAKES_CONTACT
+708 / 섀도본 / EMPTY / 영혼이 머물고 있는 뼈로 상대를 세게 때려서 공격한다. 상대의 방어를 떨어뜨릴 때가 있다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 85 / 100 / 10 / 20 / EMPTY / 7 / NONE
+709 / 액셀록 / EMPTY / 재빠른 스피드로 상대에게 부딪쳐서 공격한다. 반드시 선제공격할 수 있다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 40 / 100 / 20 / -1 / 1 / 7 / MAKES_CONTACT
+710 / 아쿠아브레이크 / EMPTY / 물의 힘으로 상대에게 부딪쳐서 공격한다. 상대의 방어를 떨어뜨릴 때가 있다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 85 / 100 / 10 / 20 / EMPTY / 7 / MAKES_CONTACT
+711 / 프리즘레이저 / EMPTY / 프리즘의 힘으로 강력한 광선을 발사한다. 다음 턴은 움직일 수 없다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 160 / 100 / 10 / -1 / EMPTY / 7 / NONE
+712 / 섀도스틸 /  (P) / 상대의 그림자에 숨어들어 상대의 능력이 올라가는 것을 뺏어 공격한다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 90 / 100 / 10 / -1 / EMPTY / 7 / MAKES_CONTACT
+713 / 메테오드라이브 /  (P) / 유성 같은 기세로 돌진한다. 상대의 특성을 무시하고 공격할 수 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 7 / EMPTY
+714 / 섀도레이 /  (P) / 괴상한 광선을 쏘아 공격한다. 상대의 특성을 무시하고 공격할 수 있다. / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 7 / IGNORE_ABILITIES
+715 / 눈물그렁그렁 / EMPTY / 눈물을 그렁그렁거려 상대의 전의를 상실하게 한다. 상대의 공격과 특수공격이 떨어진다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 7 / NONE
+716 / 찌리리따끔따끔 / EMPTY / 상대에게 부딪쳐 강력한 전기를 날려서 찌리리따끔따끔하게 만든다. 상대를 풀죽게 만들 때가 있다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 30 / EMPTY / 7 / MAKES_CONTACT
+717 / 자연의분노 / EMPTY / 자연의 분노를 상대에게 부딪친다. 상대의 HP는 절반이 된다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / -1 / 90 / 10 / -1 / EMPTY / 7 / NONE
+718 / 멀티어택 / EMPTY / 높은 에너지를 둘러싸 상대에게 부딪쳐 공격한다. 메모리에 따라 타입이 바뀐다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 120 / 100 / 10 / -1 / EMPTY / 7 / MAKES_CONTACT
+719 / 1000만볼트 /  (P) / 모자를 쓴 피카츄가 Z파워로 파워업한 전격을 쏜다. 급소에 맞기 쉽다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 195 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+720 / 깜짝헤드 / EMPTY / 자신의 머리를 폭발시켜 주위의 모든 것을 공격한다. 자신도 데미지를 받는다. / 불꽃 / 불꽃 / SPECIAL / ALL_NEAR_OTHERS / 150 / 100 / 5 / -1 / EMPTY / 7 / NONE
+721 / 플라스마피스트 /  (P) / 전기를 두른 주먹으로 공격한다. 노말타입 기술을 전기타입으로 바꿔버린다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 100 / 100 / 15 / -1 / EMPTY / 7 / EMPTY
+722 / 포톤가이저 /  (P) / 빛의 기둥으로 공격한다. 공격과 특수공격을 비교해서 높은 쪽으로 데미지를 준다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 7 / IGNORE_ABILITIES
+723 / 하늘을태우는멸망의빛 / EMPTY / 네크로즈마가 상대의 특성 효과를 무시하고 공격과 특수공격 중 높은 쪽으로 데미지를 준다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 200 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+724 / 선샤인스매셔 / EMPTY / Z파워를 얻은 솔가레오가 전력으로 공격한다. 상대의 특성 효과를 무시할 수 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 200 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+725 / 문라이트블래스터 / EMPTY / Z파워를 얻은 루나아라가 전력으로 공격한다. 상대의 특성 효과를 무시할 수 있다. / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / 200 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+726 / 투닥투닥프렌드타임 /  (P) / Z파워를 얻은 따라큐가 전력으로 투닥투닥 공격한다. / 페어리 / 페어리 / PHYSICAL / NEAR_OTHER / 190 / -1 / 1 / -1 / EMPTY / 7 / EMPTY
+727 / 레이디얼에지스톰 / EMPTY / Z파워를 얻은 루가루암이 전력으로 공격한다. 추가로 필드 상태를 없앤다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 190 / -1 / 1 / -1 / EMPTY / 7 / IGNORE_VIRTUAL
+728 / 브레이징소울비트 /  (P) / Z파워를 얻은 짜랑고우거가 전력으로 상대를 공격한다. 추가로 자신의 능력이 올라간다. / 드래곤 / 드래곤 / SPECIAL / ALL_NEAR_ENEMIES / 185 / -1 / 1 / 100 / EMPTY / 7 / EMPTY
+729 / 파찌파찌액셀 / EMPTY / 맹렬한 속도의 전격 공격. 반드시 선제공격할 수 있고 자신의 회피율을 높인다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 100 / 2 / 7 / MAKES_CONTACT
+730 / 참방참방서핑 / EMPTY / 커다란 파도에 전기를 날리고 상대에게 부딪쳐서 공격한다. 마비 상태로 만들 때가 있다. / 물 / 물 / SPECIAL / ALL_NEAR_ENEMIES / 90 / 100 / 15 / 30 / EMPTY / 7 / NONE
+731 / 둥실둥실폴 / EMPTY / 두둥실 떠오른 다음 단숨에 급강하해서 공격한다. 상대를 풀죽게 만들 때가 있다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 90 / 95 / 15 / 30 / EMPTY / 7 / MAKES_CONTACT
+732 / 피카피카썬더 / EMPTY / 트레이너를 좋아하는 피카츄의 마음이 강할수록 위력이 올라가는 전격. 반드시 명중한다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 7 / NONE
+733 / 생생버블 / EMPTY / 물덩어리를 부딪쳐서 공격한다. 물을 흡수하여 준 데미지만큼 HP를 회복한다. / 물 / 물 / SPECIAL / ALL_NEAR_ENEMIES / 60 / 100 / 20 / -1 / EMPTY / 7 / TRIAGE_MOVE
+734 / 찌릿찌릿일렉 / EMPTY / 전기를 상대에게 날려서 공격한다. 상대를 마비 상태로 만든다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 60 / 100 / 20 / 100 / EMPTY / 7 / NONE
+735 / 이글이글번 / EMPTY / 불꽃을 두른 몸으로 기세 좋게 상대에게 부딪친다. 상대를 화상 상태로 만든다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 60 / 100 / 20 / 100 / EMPTY / 7 / MAKES_CONTACT
+736 / 콸콸오라 / EMPTY / 염동력을 한가득 날린다. 상대의 특수공격을 약하게 만드는 이상한 장막을 만든다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 80 / 95 / 15 / -1 / EMPTY / 7 / NONE
+737 / 아그아그존 / EMPTY / 악함을 어필해서 공격한다. 상대의 물리공격을 약하게 만드는 이상한 장막을 만든다. / 악 / 악 / SPECIAL / NEAR_OTHER / 80 / 95 / 15 / -1 / EMPTY / 7 / NONE
+738 / 쑥쑥봄버 / EMPTY / 거대한 덩굴을 자라게 하고 씨를 흩뿌려서 공격한다. 씨는 매 턴 상대의 HP를 흡수한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 100 / 90 / 10 / 100 / EMPTY / 7 / NONE
+739 / 꽁꽁프로스트 / EMPTY / 차갑게 얼어붙은 흑안개의 결정으로 공격한다. 전원의 능력 변화를 원래대로 돌린다. / 얼음 / 얼음 / SPECIAL / NEAR_OTHER / 100 / 90 / 10 / -1 / EMPTY / 7 / NONE
+740 / 반짝반짝스톰 / EMPTY / 숨 막힐 듯 진한 향기의 회오리로 상대를 휘감아 공격한다. 같은 편의 상태 이상을 회복한다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / 120 / 85 / 5 / -1 / EMPTY / 7 / NONE
+741 / 브이브이브레이크 / EMPTY / 트레이너를 좋아하는 이브이의 마음이 강할수록 위력이 올라가는 몸통박치기. 반드시 명중한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / -1 / -1 / 20 / -1 / EMPTY / 7 / MAKES_CONTACT
+742 / 더블펀처 / EMPTY / 가슴의 너트를 축으로 회전시켜 2번 연속 팔로 힘껏 친다. 상대를 풀죽게 만들 때가 있다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 60 / 100 / 5 / 30 / EMPTY / 7 / EMPTY
+743 / 다이월 / EMPTY / 상대의 공격을 전혀 받지 않는다. 연속으로 쓰면 실패하기 쉽다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 8 / EMPTY
+744 / 다이맥스포 / EMPTY / 코어에서 빔을 발사해서 공격한다. 상대가 웨이브 레벨 최대치를 초과했다면, 초과한 정도에 비례하여 데미지가 최대 2배가 된다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 8 / IGNORE_VIRTUAL
+745 / 노려맞히기 / EMPTY / 상대의 기술을 끌어모으는 특성이나 기술의 영향을 무시하고 선택한 상대를 공격할 수 있다. / 물 / 물 / SPECIAL / NEAR_OTHER / 80 / 100 / 15 / -1 / EMPTY / 8 / NONE
+746 / 물고버티기 / EMPTY / 어느 한쪽이 기절할 때까지 교체할 수 없게 된다. 한쪽의 포켓몬이 없어지면 효과가 사라진다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 8 / EMPTY
+747 / 볼가득넣기 /  (P) / 지니고 있는 나무열매를 먹고 방어를 크게 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 8 / IGNORE_PROTECT
+748 / 배수의진 / EMPTY / 자신의 모든 능력이 올라가지만 교체하거나 도망칠 수 없게 된다. / 격투 / 격투 / STATUS / USER / -1 / -1 / 5 / -1 / EMPTY / 8 / IGNORE_PROTECT
+749 / 타르샷 /  (P) / 끈적끈적한 타르를 날려서 상대의 스피드를 떨어뜨린다. 상대는 불꽃이 약점이 된다. / 바위 / 바위 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 8 / NONE
+750 / 마법가루 / EMPTY / 마법가루를 날려서 상대를 에스퍼타입으로 바꾼다. / 에스퍼 / 에스퍼 / STATUS / NEAR_OTHER / -1 / 100 / 20 / -1 / EMPTY / 8 / POWDER_MOVE
+751 / 드래곤애로 /  (P) / 드라꼰으로 2번 공격한다. 상대가 2마리일 때는 각각 1번씩 공격한다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 50 / 100 / 10 / -1 / EMPTY / 8 / NONE
+752 / 다과회 / EMPTY / 다과회를 열어서 배틀에 나와 있는 포켓몬이 각각 지니고 있는 나무열매를 먹는다. / 노말 / 노말 / STATUS / ALL / -1 / -1 / 10 / -1 / EMPTY / 8 / NONE
+753 / 문어굳히기 / EMPTY / 상대를 도망칠 수 없게 한다. 굳히기에 당한 상대는 매 턴 방어와 특수방어가 떨어진다. / 격투 / 격투 / STATUS / NEAR_OTHER / -1 / 100 / 15 / -1 / EMPTY / 8 / NONE
+754 / 전격부리 / EMPTY / 전기를 두른 부리로 찌른다. 상대보다 먼저 공격하면 기술의 위력은 2배가 된다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 85 / 100 / 10 / -1 / EMPTY / 8 / MAKES_CONTACT
+755 / 아가미물기 / EMPTY / 단단한 아가미로 문다. 상대보다 먼저 공격하면 기술의 위력은 2배가 된다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 85 / 100 / 10 / -1 / EMPTY / 8 / EMPTY
+756 / 코트체인지 / EMPTY / 이상한 힘으로 서로의 필드 효과를 교체한다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 8 / NONE
+757 / 다이번 /  (N) / 다이맥스한 포켓몬이 날리는 불꽃타입의 공격. 5턴 동안 햇살을 강하게 만든다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+758 / 다이웜 /  (N) / 다이맥스한 포켓몬이 날리는 벌레타입의 공격. 상대의 특수공격을 떨어뜨린다. / 벌레 / 벌레 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+759 / 다이썬더 /  (N) / 다이맥스한 포켓몬이 날리는 전기타입의 공격. 5턴 동안 일렉트릭필드로 만든다. / 전기 / 전기 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+760 / 다이어택 /  (N) / 다이맥스한 포켓몬이 날리는 노말타입의 공격. 상대의 스피드를 떨어뜨린다. / 노말 / 노말 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+761 / 다이너클 /  (N) / 다이맥스한 포켓몬이 날리는 격투타입의 공격. 같은 편의 공격을 올린다. / 격투 / 격투 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+762 / 다이할로우 /  (N) / 다이맥스한 포켓몬이 날리는 고스트타입의 공격. 상대의 방어를 떨어뜨린다. / 고스트 / 고스트 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+763 / 다이아이스 /  (N) / 다이맥스한 포켓몬이 날리는 얼음타입의 공격. 5턴 동안 싸라기눈을 내리게 한다. / 얼음 / 얼음 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+764 / 다이애시드 /  (N) / 다이맥스한 포켓몬이 날리는 독타입의 공격. 같은 편의 특수공격을 올린다. / 독 / 독 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+765 / 다이스트림 /  (N) / 다이맥스한 포켓몬이 날리는 물타입의 공격. 5턴 동안 비를 내리게 한다. / 물 / 물 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+766 / 다이제트 /  (N) / 다이맥스한 포켓몬이 날리는 비행타입의 공격. 같은 편의 스피드를 올린다. / 비행 / 비행 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+767 / 다이페어리 /  (N) / 다이맥스한 포켓몬이 날리는 페어리타입의 공격. 5턴 동안 미스트필드로 만든다. / 페어리 / 페어리 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+768 / 다이드라군 /  (N) / 다이맥스한 포켓몬이 날리는 드래곤타입의 공격. 상대의 공격을 떨어뜨린다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+769 / 다이사이코 /  (N) / 다이맥스한 포켓몬이 날리는 에스퍼타입의 공격. 5턴 동안 사이코필드로 만든다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+770 / 다이록 /  (N) / 다이맥스한 포켓몬이 날리는 바위타입의 공격. 5턴 동안 날씨를 모래바람으로 만든다. / 바위 / 바위 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+771 / 다이어스 /  (N) / 다이맥스한 포켓몬이 날리는 땅타입의 공격. 같은 편의 특수방어를 올린다. / 땅 / 땅 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+772 / 다이아크 /  (N) / 다이맥스한 포켓몬이 날리는 악타입의 공격. 상대의 특수방어를 떨어뜨린다. / 악 / 악 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+773 / 다이그래스 /  (N) / 다이맥스한 포켓몬이 날리는 풀타입의 공격. 5턴 동안 그래스필드로 만든다. / 풀 / 풀 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+774 / 다이스틸 /  (N) / 다이맥스한 포켓몬이 날리는 강철타입의 공격. 같은 편의 방어를 올린다. / 강철 / 강철 / PHYSICAL / NEAR_ENEMY / 10 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+775 / 소울비트 / EMPTY / 자신의 HP를 조금 깎아서 모든 능력을 올린다. / 드래곤 / 드래곤 / STATUS / USER / -1 / 100 / 5 / -1 / EMPTY / 8 / EMPTY
+776 / 바디프레스 / EMPTY / 몸을 부딪쳐서 공격한다. 방어가 높을수록 주는 데미지가 올라간다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 8 / MAKES_CONTACT
+777 / 데코레이션 / EMPTY / 데코레이션을 해서 상대의 공격과 특수공격을 크게 올린다. / 페어리 / 페어리 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / EMPTY / 8 / NONE
+778 / 드럼어택 / EMPTY / 드럼의 뿌리를 연주로 조종해서 공격하는 것으로 상대의 스피드를 떨어뜨린다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 8 / NONE
+779 / 집게덫 / EMPTY / 집게덫으로 붙잡은 뒤 4-5턴 동안 상대를 끼워서 공격한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 35 / 100 / 15 / -1 / EMPTY / 8 / MAKES_CONTACT
+780 / 화염볼 / EMPTY / 작은 돌을 태운 불꽃의 공으로 상대를 공격한다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 120 / 90 / 5 / 10 / EMPTY / 8 / BALLBOMB_MOVE
+781 / 거수참 / EMPTY / 크고 강한 검을 온몸으로 치켜든 다음 기세 좋게 베어서 공격한다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 8 / EMPTY
+782 / 거수탄 / EMPTY / 온몸을 강하고 튼튼한 방패로 바꾼 다음 기세 좋게 부딪혀서 공격한다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 8 / MAKES_CONTACT
+783 / 오라휠 / EMPTY / 볼주머니에 저장해둔 에너지로 공격하고 자신의 스피드를 올린다. 모르페코의 모습에 따라 타입이 바뀐다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 110 / 100 / 10 / 100 / EMPTY / 8 / NONE
+784 / 와이드브레이커 / EMPTY / 강인한 꼬리를 세차게 휘둘러서 상대를 공격한다. 상대의 공격을 떨어뜨린다. / 드래곤 / 드래곤 / PHYSICAL / ALL_NEAR_ENEMIES / 60 / 100 / 15 / 100 / EMPTY / 8 / MAKES_CONTACT
+785 / 가지찌르기 / EMPTY / 날카롭고 뾰족한 가지로 상대를 찔러서 공격한다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 40 / 100 / 40 / -1 / EMPTY / 8 / MAKES_CONTACT
+786 / 오버드라이브 / EMPTY / 기타나 베이스를 쳐서 큰 울림과 강한 진동을 상대에게 전달하여 공격한다. / 전기 / 전기 / SPECIAL / ALL_NEAR_ENEMIES / 80 / 100 / 10 / -1 / EMPTY / 8 / SOUND_BASED
+787 / 사과산 / EMPTY / 새콤한 사과에서 만들어 낸 산성 액체로 공격한다. 상대의 특수방어를 떨어뜨린다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 8 / NONE
+788 / G의힘 / EMPTY / 높은 곳에서 사과를 떨어뜨려서 데미지를 준다. 상대의 방어를 떨어뜨린다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 8 / NONE
+789 / 소울크래시 / EMPTY / 맞으면 기가 꺾여버릴 것 같은 기세로 공격한다. 상대의 특수공격을 떨어뜨린다. / 페어리 / 페어리 / PHYSICAL / NEAR_OTHER / 75 / 100 / 15 / 100 / EMPTY / 8 / MAKES_CONTACT
+790 / 원더스팀 / EMPTY / 연기를 분출해서 상대를 공격한다. 혼란시킬 때가 있다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / 90 / 95 / 10 / 20 / EMPTY / 8 / NONE
+791 / 생명의물방울 / EMPTY / 신비한 물을 흩뿌려서 자신과 배틀에 나와 있는 같은 편의 HP를 회복한다. / 물 / 물 / STATUS / USER_AND_ALLIES / -1 / -1 / 10 / -1 / EMPTY / 8 / IGNORE_PROTECT
+792 / 블로킹 / EMPTY / 상대의 공격을 전혀 받지 않는다. 연속으로 쓰면 실패하기 쉽다. 접촉한 상대의 방어를 크게 떨어뜨린다. / 악 / 악 / STATUS / USER / -1 / 100 / 10 / -1 / 4 / 8 / IGNORE_PROTECT
+793 / 사죄의찌르기 / EMPTY / 고개를 숙이는 척하면서 흐트러진 머리카락으로 찌른다. 공격은 반드시 명중한다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 80 / -1 / 10 / -1 / EMPTY / 8 / MAKES_CONTACT
+794 / 스타어설트 / EMPTY / 굵은 줄기를 휘둘러서 공격한다. 단 자신도 비틀거리기 때문에 다음 턴은 움직일 수 없다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 150 / 100 / 5 / -1 / EMPTY / 8 / NONE
+795 / 무한다이빔 / EMPTY / 본래의 모습이 된 무한다이노 최대의 공격. 다음 턴은 움직일 수 없다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / 160 / 90 / 5 / -1 / EMPTY / 8 / NONE
+796 / 철제광선 / EMPTY / 전신에서 끌어모은 강철을 빔으로 바꿔 세차게 발사한다. 자신도 데미지를 받는다. / 강철 / 강철 / SPECIAL / NEAR_OTHER / 140 / 95 / 5 / -1 / EMPTY / 8 / NONE
+797 / 와이드포스 / EMPTY / 사이코 파워로 상대를 공격한다. 사이코필드일 때는 위력이 오르며 모든 상대에게 데미지를 준다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 8 / NONE
+798 / 아이언롤러 / EMPTY / 필드를 파괴하면서 공격한다. 필드가 어떤 상태로든 변해 있지 않은 경우 기술은 실패한다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 130 / 100 / 5 / -1 / EMPTY / 8 / MAKES_CONTACT
+799 / 스케일샷 /  (P) / 비늘을 쏘아서 공격한다. 2-5회 동안 연속으로 쓴다. 스피드가 올라가지만 방어가 떨어진다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 25 / 90 / 20 / -1 / EMPTY / 8 / NONE
+800 / 메테오빔 / EMPTY / 1턴째에 우주의 힘을 모아서 특수공격을 올리고 2턴째에 상대를 공격한다. / 바위 / 바위 / SPECIAL / NEAR_OTHER / 120 / 90 / 10 / 100 / EMPTY / 8 / IGNORE_VIRTUAL
+801 / 셸암즈 /  (P) / 물리와 특수 중 더 많은 데미지를 줄 수 있는 능력으로 공격한다. 독 상태로 만들 때가 있다. / 독 / 독 / SPECIAL / NEAR_OTHER / 90 / 100 / 10 / 20 / EMPTY / 8 / NONE
+802 / 미스트버스트 / EMPTY / 자신의 주위에 있는 모두를 공격하지만 사용하면 기절한다. 미스트필드일 때 위력이 올라간다. / 페어리 / 페어리 / SPECIAL / ALL_NEAR_OTHERS / 100 / 100 / 5 / -1 / EMPTY / 8 / MAKES_CONTACT
+803 / 그래스슬라이더 / EMPTY / 지면에 미끄러지듯 상대를 공격한다. 그래스필드일 때 반드시 선제공격할 수 있다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 55 / 100 / 20 / -1 / EMPTY / 8 / MAKES_CONTACT
+804 / 라이징볼트 / EMPTY / 지면에서 올라오는 전격으로 공격한다. 상대가 일렉트릭필드 위에 있을 때 기술의 위력이 2배가 된다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 70 / 100 / 20 / -1 / EMPTY / 8 / NONE
+805 / 대지의파동 / EMPTY / 필드의 힘을 빌려서 공격한다. 사용했을 때의 필드 상태에 따라서 기술 타입과 위력이 바뀐다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 50 / 100 / 10 / -1 / EMPTY / 8 / PULSE_MOVE
+806 / 엄습하는일격 / EMPTY / 배후에서 엄습해서 공격한다. 상대의 특수공격을 떨어뜨린다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 70 / 90 / 10 / 100 / EMPTY / 8 / MAKES_CONTACT
+807 / 질투의불꽃 /  (P) / 질투의 에너지로 상대를 공격한다. 그 턴에 능력이 올라간 포켓몬을 화상 상태로 만든다. / 불꽃 / 불꽃 / SPECIAL / ALL_NEAR_ENEMIES / 70 / 100 / 5 / 100 / EMPTY / 8 / NONE
+808 / 분풀이 /  (P) / 상대에 대한 울분이 담긴 공격을 한다. 그 턴에 능력이 떨어져 있으면 기술의 위력이 2배가 된다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 75 / 100 / 5 / -1 / EMPTY / 8 / MAKES_CONTACT
+809 / 폴터가이스트 / EMPTY / 상대의 지닌 물건을 조종해서 공격한다. 상대가 도구를 지니고 있지 않으면 실패한다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 110 / 90 / 5 / -1 / EMPTY / 8 / NONE
+810 / 부식가스 /  (N) / 주위에 있는 모든 것을 강력한 산성 가스로 뒤덮어서 지니고 있는 도구를 녹여버린다. / 독 / 독 / STATUS / ALL_NEAR_OTHERS / -1 / 100 / 40 / -1 / EMPTY / 8 / NONE
+811 / 코칭 / EMPTY / 적절한 지도를 통해서 같은 편 전원의 공격과 방어를 올린다. / 격투 / 격투 / STATUS / NEAR_ALLY / -1 / -1 / 10 / -1 / EMPTY / 8 / NONE
+812 / 퀵턴 / EMPTY / 공격한 뒤 굉장한 스피드로 돌아와서 교대 포켓몬과 교체한다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 60 / 100 / 20 / -1 / EMPTY / 8 / MAKES_CONTACT
+813 / 트리플악셀 / EMPTY / 3회 연속으로 킥을 날려 공격한다. 기술이 맞을 때마다 위력이 올라간다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 20 / 90 / 10 / -1 / EMPTY / 8 / EMPTY
+814 / 더블윙 / EMPTY / 날개를 상대에게 부딪쳐서 공격한다. 2회 연속으로 데미지를 준다. / 비행 / 비행 / PHYSICAL / NEAR_OTHER / 40 / 90 / 10 / -1 / EMPTY / 8 / MAKES_CONTACT
+815 / 열사의대지 / EMPTY / 뜨겁게 달궈진 모래를 상대에게 부딪쳐서 공격한다. 화상 상태로 만들 때가 있다. / 땅 / 땅 / SPECIAL / NEAR_OTHER / 70 / 100 / 10 / 30 / EMPTY / 8 / NONE
+816 / 정글힐 / EMPTY / 정글과 하나가 되어 자신과 배틀에 나와 있는 같은 편의 HP와 모든 상태를 회복한다. / 풀 / 풀 / STATUS / USER_AND_ALLIES / -1 / -1 / 10 / -1 / EMPTY / 8 / NONE
+817 / 암흑강타 / EMPTY / 악의 태세가 극에 달하여 강렬한 일격을 날린다. 반드시 급소에 맞는다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 75 / 100 / 5 / -1 / EMPTY / 8 / EMPTY
+818 / 수류연타 / EMPTY / 물의 태세가 극에 달하여 물 흐르듯 3회의 연격을 날린다. 반드시 급소에 맞는다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 25 / 100 / 5 / -1 / EMPTY / 8 / EMPTY
+819 / 썬더프리즌 / EMPTY / 전기가 흐르는 우리 안에 4-5턴 동안 상대를 가두어 공격한다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 80 / 90 / 15 / -1 / EMPTY / 8 / NONE
+820 / 드래곤에너지 / EMPTY / 생명력을 파워로 바꿔서 상대를 공격한다. 자신의 HP가 적을수록 기술의 위력이 떨어진다. / 드래곤 / 드래곤 / SPECIAL / ALL_NEAR_ENEMIES / 150 / 100 / 5 / -1 / EMPTY / 8 / NONE
+821 / 얼어붙는시선 / EMPTY / 두 눈에서 사이코 파워를 발사해서 공격한다. 얼음 상태로 만들 때가 있다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 90 / 100 / 10 / 10 / EMPTY / 8 / NONE
+822 / 타오르는분노 / EMPTY / 분노를 불꽃 같은 오라로 바꿔서 공격한다. 상대를 풀죽게 만들 때가 있다. / 악 / 악 / SPECIAL / ALL_NEAR_ENEMIES / 90 / 100 / 10 / 20 / EMPTY / 8 / NONE
+823 / 천둥차기 / EMPTY / 번개 같은 움직임으로 상대를 농락하며 킥을 날린다. 상대의 방어를 떨어뜨린다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 90 / 100 / 10 / 100 / EMPTY / 8 / MAKES_CONTACT
+824 / 블리자드랜스 / EMPTY / 눈보라를 두른 얼음의 창을 상대에게 던져서 공격한다. / 얼음 / 얼음 / PHYSICAL / ALL_NEAR_ENEMIES / 120 / 100 / 5 / -1 / EMPTY / 8 / NONE
+825 / 아스트랄비트 / EMPTY / 수많은 작은 영체를 상대에게 부딪쳐서 공격한다. / 고스트 / 고스트 / SPECIAL / ALL_NEAR_ENEMIES / 120 / 100 / 5 / -1 / EMPTY / 8 / NONE
+826 / 섬뜩한주문 / EMPTY / 강력한 사이코 파워로 공격한다. 상대가 마지막으로 사용한 기술의 PP를 3만큼 줄인다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 80 / 100 / 5 / 100 / EMPTY / 8 / SOUND_BASED
+827 / 페이탈클로 / EMPTY / 치명적인 손톱으로 공격한다. 상대를 독, 마비, 잠듦 중 하나의 상태로 만들 때가 있다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / 50 / EMPTY / 8 / MAKES_CONTACT
+828 / 배리어러시 / EMPTY / 사념의 에너지를 두른 채로 상대에게 부딪친다. 자신의 방어를 올린다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_OTHER / 70 / 90 / 10 / 100 / EMPTY / 8 / MAKES_CONTACT
+829 / 파워시프트 /  (N) / 자신의 공격력과 방어력을 바꾼다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 8 / IGNORE_PROTECT
+830 / 암석액스 / EMPTY / 암석 도끼로 공격한다. 흩어진 암석 파편은 상대의 주위에 떠다니게 된다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 65 / 90 / 15 / 100 / EMPTY / 8 / EMPTY
+831 / 봄의폭풍 / EMPTY / 애증 섞인 강렬한 바람으로 상대를 둘러싸서 공격한다. 상대의 공격을 떨어뜨릴 때가 있다. / 페어리 / 페어리 / SPECIAL / ALL_NEAR_ENEMIES / 100 / 80 / 5 / 30 / EMPTY / 8 / WIND_MOVE
+832 / 신비의힘 / EMPTY / 신비한 힘으로 자신을 강화한다. 자신의 특수공격이 올라간다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 70 / 90 / 10 / 100 / EMPTY / 8 / NONE
+833 / 대격분 / EMPTY / 2~3턴 동안 불꽃을 마구 뿜어 대며 난동을 부린다. 난동 부린 뒤에는 혼란에 빠진다. / 불꽃 / 불꽃 / PHYSICAL / RANDOM_NEAR_ENEMY / 120 / 100 / 10 / -1 / EMPTY / 8 / NONE
+834 / 웨이브태클 / EMPTY / 물을 두르고 온몸으로 상대에게 부딪친다. 자신도 상당한 데미지를 입는다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 120 / 100 / 10 / -1 / EMPTY / 8 / EMPTY
+835 / 클로로블라스트 / EMPTY / 엽록소를 모은 뒤 발사하여 공격한다. 자신도 데미지를 입는다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 150 / 95 / 5 / -1 / EMPTY / 8 / NONE
+836 / 빙산바람 / EMPTY / 빙산처럼 커다란 얼음덩어리를 부딪쳐서 공격한다. 상대를 풀죽게 만들 때가 있다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 100 / 85 / 10 / 30 / EMPTY / 8 / NONE
+837 / 승리의춤 / EMPTY / 승리를 부르는 춤을 격렬하게 춘다. 자신의 공격과 방어와 스피드를 올린다. / 격투 / 격투 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 8 / EMPTY
+838 / 들이받기 / EMPTY / 온 힘을 다한 몸통박치기를 날린다. 자신의 방어와 특수방어가 떨어진다. / 땅 / 땅 / PHYSICAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 8 / EMPTY
+839 / 독침천밭 / EMPTY / 무수히 많은 독침으로 공격한다. 상대를 독 상태로 만들 때가 있다. 상대가 독 상태인 경우 위력이 2배가 된다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 60 / 100 / 10 / 50 / EMPTY / 8 / NONE
+840 / 오라윙 / EMPTY / 오라로 강화한 날개로 베어 가른다. 급소에 맞기 쉽다. 자신의 스피드를 올린다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 8 / NONE
+841 / 천추지한 / EMPTY / 등골이 서늘해지는 원념으로 공격해서 상대의 공격을 떨어뜨린다. / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / 75 / 100 / 10 / 100 / EMPTY / 8 / NONE
+842 / 농성 / EMPTY / 피부를 강철 방패처럼 단단하게 만들어서 자신의 방어를 크게 올린다. / 강철 / 강철 / STATUS / USER / -1 / -1 / 10 / 100 / EMPTY / 8 / IGNORE_PROTECT
+843 / 3연화살 /  (P) / 발 기술을 사용하고 3개의 화살을 동시에 발사한다. 상대의 방어를 떨어뜨리거나 풀죽게 만들 때가 있다. 급소에 맞기 쉽다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 90 / 100 / 10 / 30 / EMPTY / 8 / NONE
+844 / 백귀야행 / EMPTY / 무수히 많은 불덩이로 공격한다. 화상 상태로 만들 때가 있다. 상대가 상태 이상인 경우 위력이 2배가 된다. / 고스트 / 고스트 / SPECIAL / NEAR_OTHER / 60 / 100 / 15 / 30 / EMPTY / 8 / NONE
+845 / 비검천중파 / EMPTY / 조개껍질 검으로 공격한다. 조개껍질 파편은 압정이 되어 상대의 발밑에 흩어진다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 65 / 90 / 15 / 100 / EMPTY / 8 / EMPTY
+846 / 찬바람폭풍 / EMPTY / 심신을 모두 떨게 만드는 차갑고도 거친 바람으로 공격한다. 상대의 스피드를 떨어뜨릴 때가 있다. / 비행 / 비행 / SPECIAL / ALL_NEAR_ENEMIES / 100 / 80 / 10 / 30 / EMPTY / 8 / WIND_MOVE
+847 / 번개폭풍 / EMPTY / 폭풍을 일으키고 뇌운을 불러서 번개와 바람으로 매섭게 공격한다. 상대를 마비 상태로 만들 때가 있다. / 전기 / 전기 / SPECIAL / ALL_NEAR_ENEMIES / 100 / 80 / 10 / 20 / EMPTY / 8 / WIND_MOVE
+848 / 열사의폭풍 / EMPTY / 뜨겁게 달궈진 모래와 강렬한 바람으로 상대를 둘러싸서 공격한다. 상대를 화상 상태로 만들 때가 있다. / 땅 / 땅 / SPECIAL / ALL_NEAR_ENEMIES / 100 / 80 / 10 / 20 / EMPTY / 8 / WIND_MOVE
+849 / 초승달의기도 / EMPTY / 초승달에 기도를 하여 자신과 같은 편의 HP와 상태 이상을 모두 회복한다. / 에스퍼 / 에스퍼 / STATUS / USER_AND_ALLIES / -1 / -1 / 5 / -1 / EMPTY / 8 / TRIAGE_MOVE
+850 / 브레이브차지 / EMPTY / 기운을 고조시켜서 자신의 상태 이상을 회복하고 특수공격과 특수방어를 올린다. / 에스퍼 / 에스퍼 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 8 / IGNORE_PROTECT
+851 / 테라버스트 /  (N) / 테라스탈 중이면, 테라스탈타입의 에너지를 방출해서 공격한다. 공격과 특수공격을 비교해서 높은 쪽으로 데미지를 준다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 9 / NONE
+852 / 스레드트랩 / EMPTY / 실로 함정을 만들어 둘러친다. 상대의 공격을 막음과 동시에 접촉한 상대의 스피드를 떨어뜨린다. / 벌레 / 벌레 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 9 / IGNORE_PROTECT
+853 / 발꿈치찍기 / EMPTY / 발꿈치를 들어 올린 뒤 내리찍어 공격한다. 상대를 혼란시킬 때가 있다. 빗나가면 자신이 데미지를 입는다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 120 / 90 / 10 / 30 / EMPTY / 9 / EMPTY
+854 / 성묘 / EMPTY / 동료의 한을 풀어 주기 위해 공격한다. 쓰러진 같은 편 포켓몬이 많을수록 기술의 위력이 올라간다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 50 / 100 / 10 / -1 / EMPTY / 9 / NONE
+855 / 루미나콜리전 / EMPTY / 정신에도 작용하는 기묘한 빛을 발산해서 공격한다. 상대의 특수방어를 크게 떨어뜨린다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 9 / NONE
+856 / 한판내기 /  (P) / 멋들어진 몸놀림으로 공격한다. 입속에 싸리용이 있으면 싸리용의 모습에 따라 능력이 올라간다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 9 / NONE
+857 / 제트펀치 / EMPTY / 거센 물살을 주먹에 둘러 눈에 보이지 않는 속도로 펀치를 날린다. 반드시 선제공격할 수 있다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 60 / 100 / 15 / -1 / 1 / 9 / EMPTY
+858 / 하바네로엑기스 / EMPTY / 어마어마하게 매운 엑기스를 발사한다. 상대의 공격이 크게 오르고 방어는 크게 떨어진다. / 풀 / 풀 / STATUS / NEAR_OTHER / -1 / -1 / 15 / -1 / EMPTY / 9 / NONE
+859 / 휠스핀 / EMPTY / 발에 부하를 걸어 격렬하게 회전하며 데미지를 준다. 자신의 스피드가 크게 떨어진다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 9 / MAKES_CONTACT
+860 / 찍찍베기 / EMPTY / 여기저기서 동료들을 모아서 화려한 콤비네이션으로 공격한다. 1~10회 연속으로 공격한다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 20 / 90 / 10 / -1 / EMPTY / 9 / EMPTY
+861 / 아이스스피너 / EMPTY / 발에 얇은 얼음을 두르고 빙글빙글 회전하며 부딪친다. 회전 운동에 의해 필드가 파괴된다. / 얼음 / 얼음 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / -1 / EMPTY / 9 / MAKES_CONTACT
+862 / 대검돌격 / EMPTY / 몸을 내던지는 무모한 돌격. 기술을 사용한 다음, 상대의 공격이 반드시 명중하고 데미지를 2배로 입게 된다. / 드래곤 / 드래곤 / PHYSICAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 9 / MAKES_CONTACT
+863 / 회생의기도 / EMPTY / 자애로운 마음으로 기도를 하여 기절한 교대 포켓몬을 HP가 절반인 상태로 부활시킨다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 1 / -1 / EMPTY / 9 / TRIAGE_MOVE
+864 / 소금절이 / EMPTY / 상대를 소금절이 상태로 만들어 매 턴 데미지를 준다. 강철타입이나 물타입에게 더 고통스럽다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 40 / 100 / 15 / 100 / EMPTY / 9 / NONE
+865 / 트리플다이브 / EMPTY / 호흡이 척척 맞게 다이빙해서 상대에게 물보라를 끼얹는다. 3회 연속으로 데미지를 준다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 30 / 95 / 10 / -1 / EMPTY / 9 / MAKES_CONTACT
+866 / 킬러스핀 / EMPTY / 회전해서 상대를 공격한다. 조이기, 김밥말이, 씨뿌리기 등의 효과를 날려버린다. 상대를 독 상태로 만든다. / 독 / 독 / PHYSICAL / ALL_NEAR_ENEMIES / 30 / 100 / 15 / 100 / EMPTY / 9 / MAKES_CONTACT
+867 / 베껴그리기 / EMPTY / 상대의 본질을 꿰뚫어 보고 베껴서 자신과 같은 편을 상대와 같은 특성으로 바꾼다. / 노말 / 노말 / STATUS / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 9 / NONE
+868 / 제살깎기 / EMPTY / 자신의 HP를 깎아서 자신의 공격, 특수공격, 스피드를 크게 올린다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 9 / IGNORE_PROTECT
+869 / 도각참 / EMPTY / 머리를 조아려 상대를 방심하게 만든 뒤에 베어 버린다. 공격은 반드시 명중한다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 85 / -1 / 10 / -1 / EMPTY / 9 / EMPTY
+870 / 트릭플라워 / EMPTY / 숨겨진 장치가 있는 꽃다발을 상대에게 던져서 공격한다. 반드시 명중하며 급소에 맞는다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 70 / -1 / 10 / 100 / EMPTY / 9 / NONE
+871 / 플레어송 / EMPTY / 활활 타오르는 불꽃을 노래하듯 뿜어서 상대를 태워 버린다. 자신의 특수공격을 올린다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 9 / SOUND_BASED
+872 / 아쿠아스텝 / EMPTY / 물 흐르듯 민첩하고 경쾌한 발재간으로 상대를 농락하며 데미지를 준다. 자신의 스피드를 올린다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 100 / EMPTY / 9 / EMPTY
+873 / 레이징불 / EMPTY / 분노해 날뛰는 성난소의 맹렬한 태클. 폼에 따라 기술의 타입이 달라지고 빛의장막이나 리플렉터 등도 파괴할 수 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 90 / 100 / 10 / -1 / EMPTY / 9 / MAKES_CONTACT
+874 / 골드러시 / EMPTY / 대량의 코인을 날려서 공격한다. 자신의 특수공격이 떨어진다. 배틀 후에 돈을 받을 수 있다. / 강철 / 강철 / SPECIAL / ALL_NEAR_ENEMIES / 120 / 100 / 5 / -1 / EMPTY / 9 / NONE
+875 / 사이코블레이드 / EMPTY / 실체가 없는 칼날로 상대를 베어 가른다. 일렉트릭필드 위에 있을 때 기술의 위력이 1.5배가 된다. / 에스퍼 / 에스퍼 / PHYSICAL / NEAR_OTHER / 80 / 100 / 15 / -1 / EMPTY / 9 / EMPTY
+876 / 하이드로스팀 / EMPTY / 펄펄 끓는 물을 기세 좋게 뿜어낸다. 햇살이 강할 때 기술의 위력이 떨어지기는커녕 1.5배가 된다. / 물 / 물 / SPECIAL / NEAR_OTHER / 80 / 100 / 15 / -1 / EMPTY / 9 / NONE
+877 / 카타스트로피 / EMPTY / 파멸적인 재앙에 휩쓸리게 하여 상대의 HP를 절반으로 만든다. / 악 / 악 / SPECIAL / NEAR_OTHER / -1 / 90 / 10 / -1 / EMPTY / 9 / NONE
+878 / 액셀브레이크 / EMPTY / 변형하며 거칠게 낙하한 다음 고대의 대폭발을 일으킨다. 약점인 상대에게는 위력이 더욱 올라간다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 9 / MAKES_CONTACT
+879 / 라이트닝드라이브 / EMPTY / 변형하며 초고속으로 달려서 미지의 전격으로 상대를 관통한다. 약점인 상대에게는 위력이 더욱 올라간다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 9 / MAKES_CONTACT
+880 / 꼬리자르기 /  (N) / 자신의 HP를 깎아서 분신을 만든 뒤, 돌아와서 교대 포켓몬과 교체한다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 9 / IGNORE_PROTECT
+881 / 썰렁개그 / EMPTY / 자리를 얼어붙게 만드는 개그를 하고 교대 포켓몬과 교체한다. 5턴 동안 눈을 내리게 한다. / 얼음 / 얼음 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 9 / NONE
+882 / 정리정돈 / EMPTY / 압정뿌리기, 스텔스록, 끈적끈적네트, 독압정, 대타출동을 모두 정리한다. 자신의 공격력과 스피드가 올라간다. / 노말 / 노말 / STATUS / USER / -1 / -1 / 10 / -1 / EMPTY / 9 / IGNORE_PROTECT
+883 / 설경 / EMPTY / 5턴 동안 눈을 내리게 한다. 얼음타입의 방어가 올라간다. / 얼음 / 얼음 / STATUS / BOTH_SIDES / -1 / -1 / 10 / -1 / EMPTY / 9 / NONE
+884 / 달려들기 / EMPTY / 상대에게 달려들어 공격한다. 상대의 스피드를 떨어뜨린다. / 벌레 / 벌레 / PHYSICAL / NEAR_OTHER / 50 / 100 / 20 / 100 / EMPTY / 9 / MAKES_CONTACT
+885 / 개척하기 / EMPTY / 풀숲에서 튀어나오듯이 공격한다. 경쾌한 발재간으로 자신의 스피드를 올린다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 50 / 100 / 20 / 100 / EMPTY / 9 / MAKES_CONTACT
+886 / 찬물끼얹기 / EMPTY / 상대의 기운이 빠질 정도로 차가운 물을 끼얹어서 공격한다. 상대의 공격을 떨어뜨린다. / 물 / 물 / SPECIAL / NEAR_OTHER / 50 / 100 / 20 / 100 / EMPTY / 9 / NONE
+887 / 하이퍼드릴 / EMPTY / 뾰족한 신체 부위를 급속도로 회전시켜 관통한다. 방어나 판별 등도 무시할 수 있다. / 노말 / 노말 / PHYSICAL / NEAR_OTHER / 100 / 100 / 5 / -1 / EMPTY / 9 / EMPTY
+888 / 트윈빔 / EMPTY / 두 눈에서 불가사의한 광선을 발사해서 공격한다. 2회 연속으로 데미지를 준다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 40 / 100 / 10 / -1 / EMPTY / 9 / NONE
+889 / 분노의주먹 / EMPTY / 분노를 에너지로 바꿔서 공격한다. 받은 공격의 횟수가 많을수록 기술의 위력이 올라간다. / 고스트 / 고스트 / PHYSICAL / NEAR_OTHER / 50 / 100 / 10 / -1 / EMPTY / 9 / EMPTY
+890 / 아머캐논 / EMPTY / 자신의 갑옷을 활활 타오르는 탄환으로 발사해서 공격한다. 자신의 방어와 특수방어가 떨어진다. / 불꽃 / 불꽃 / SPECIAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 9 / NONE
+891 / 원념의칼 / EMPTY / 현세의 미련을 칼끝에 담아 베어 버린다. 입힌 데미지의 절반에 해당하는 HP를 회복할 수 있다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 90 / 100 / 10 / -1 / EMPTY / 9 / EMPTY
+892 / 전광쌍격 / EMPTY / 전신의 전기를 모두 방출해서 큰 데미지를 준다. 자신의 전기타입이 없어진다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 9 / MAKES_CONTACT
+893 / 거대해머 / EMPTY / 거대한 해머를 온몸으로 휘둘러서 공격한다. 이 기술은 2회 연속으로 쓸 수 없다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / 160 / 100 / 5 / -1 / EMPTY / 9 / NONE
+894 / 앙갚음 / EMPTY / 기술을 쓰기 전에 마지막으로 받은 기술의 데미지를 늘려서 기술을 쓴 상대에게 돌려준다. / 악 / 악 / PHYSICAL / ATTACKER / -1 / 100 / 10 / -1 / EMPTY / 9 / EMPTY
+895 / 아쿠아커터 / EMPTY / 압력을 가한 물을 칼날처럼 분사해서 상대를 베어 가른다. 급소에 맞기 쉽다. / 물 / 물 / PHYSICAL / NEAR_OTHER / 70 / 100 / 20 / -1 / EMPTY / 9 / SLICING_MOVE
+896 / 번액셀 / EMPTY / 타오르는 엔진으로 상대에게 부릉거린다. 화상 상태로 만들 때가 있다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 30 / EMPTY / 9 / NONE
+897 / 다크액셀 / EMPTY / 악의적으로 상대를 향해 부릉거린다. 잠듦 상태로 만들 때가 있다. / 악 / 악 / PHYSICAL / NEAR_OTHER / 80 / 100 / 10 / 10 / EMPTY / 9 / NONE
+898 / 포이즌액셀 / EMPTY / 독성 엔진으로 상대에게 부릉거린다. 독 상태로 만들 때가 있다. / 독 / 독 / PHYSICAL / NEAR_OTHER / 100 / 100 / 10 / 30 / EMPTY / 9 / NONE
+899 / 파이트액셀 / EMPTY / 상대를 향해 기세 좋게 부릉거린다. 마비 상태로 만들 때가 있다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 100 / 100 / 10 / 30 / EMPTY / 9 / NONE
+900 / 매지컬액셀 / EMPTY / 메르헨틱한 엔진으로 상대에게 부릉거린다. 상대를 혼란시킬 때가 있다. / 페어리 / 페어리 / PHYSICAL / NEAR_OTHER / 100 / 100 / 10 / 30 / EMPTY / 9 / NONE
+901 / 블러드문 / EMPTY / 피와 같이 붉은 보름달에서 혼신의 기백을 발사한다. 이 기술은 2회 연속으로 쓸 수 없다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 140 / 100 / 5 / -1 / EMPTY / 9 / NONE
+902 / 휘적휘적포 / EMPTY / 휘저은 차를 대포처럼 발사해 준 데미지의 절반을 HP로 회복한다. 화상 상태로 만들 때도 있다. / 풀 / 풀 / SPECIAL / ALL_NEAR_ENEMIES / 80 / 90 / 15 / 20 / EMPTY / 9 / TRIAGE_MOVE
+903 / 시럽봄 /  (P) / 끈적끈적한 물엿을 폭발시킨다. 상대를 물엿범벅 상태로 만들어서 3턴 동안 계속 스피드를 떨어뜨린다. / 풀 / 풀 / SPECIAL / NEAR_OTHER / 60 / 85 / 10 / -1 / EMPTY / 9 / BALLBOMB_MOVE
+904 / 덩굴방망이 / EMPTY / 덩굴을 휘감은 방망이로 때린다. 쓰고 있는 가면에 따라 타입이 바뀐다. 급소에 맞기 쉽다. / 풀 / 풀 / PHYSICAL / NEAR_OTHER / 100 / 100 / 10 / -1 / EMPTY / 9 / NONE
+905 / 일렉트로빔 / EMPTY / 1턴째에 전기를 모아서 특수공격을 올리고 2턴째에 고압의 전기를 발사한다. 비가 오는 날씨일 때는 바로 발사할 수 있다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 130 / 100 / 10 / 100 / EMPTY / 9 / IGNORE_VIRTUAL
+906 / 테라클러스터 /  (P) / 결정의 힘을 내리쬐어 적을 없애 버린다. 테라파고스가 스텔라폼일 때 사용하면 모든 상대에게 데미지를 준다. / 노말 / 노말 / SPECIAL / NEAR_OTHER / 120 / 100 / 5 / -1 / EMPTY / 9 / NONE
+907 / 변덕레이저 / EMPTY / 광선을 발사해서 공격한다. 가끔 다른 머리도 협력해서 레이저를 발사하여 위력이 2배가 된다. / 드래곤 / 드래곤 / SPECIAL / NEAR_OTHER / 80 / 100 / 5 / 30 / EMPTY / 9 / NONE
+908 / 화염의수호 / EMPTY / 상대의 공격을 초고열의 털로 방어하는 동시에 접촉한 상대를 화상 상태로 만든다. / 불꽃 / 불꽃 / STATUS / USER / -1 / -1 / 10 / -1 / 4 / 9 / IGNORE_PROTECT
+909 / 질풍신뢰 / EMPTY / 상대보다 먼저 전격을 퍼붓는다. 상대가 쓴 기술이 공격 기술이 아니면 실패한다. / 전기 / 전기 / SPECIAL / NEAR_OTHER / 70 / 100 / 5 / -1 / 1 / 9 / NONE
+910 / 파워풀에지 / EMPTY / 머리에 축적된 빛으로 절단한다. 기술 방어를 무시하고 공격할 수 있다. / 바위 / 바위 / PHYSICAL / NEAR_OTHER / 95 / 100 / 5 / -1 / EMPTY / 9 / EMPTY
+911 / 타키온커터 / EMPTY / 입자로 된 칼날을 연이어 발사해서 2회 연속으로 데미지를 준다. 공격은 반드시 명중한다. / 강철 / 강철 / SPECIAL / NEAR_OTHER / 50 / -1 / 10 / -1 / EMPTY / 9 / SLICING_MOVE
+912 / 하드프레스 / EMPTY / 팔이나 집게로 상대를 압박한다. 상대의 HP가 남아 있을수록 위력이 올라간다. / 강철 / 강철 / PHYSICAL / NEAR_OTHER / -1 / 100 / 10 / -1 / EMPTY / 9 / MAKES_CONTACT
+913 / 드래곤옐 /  (P) / 용의 북돋움으로 사기를 높여서 같은 편의 기술이 급소에 맞기 쉬워진다. 드래곤타입이면 더욱더 사기가 북돋는다. / 드래곤 / 드래곤 / STATUS / NEAR_ALLY / -1 / -1 / 15 / -1 / EMPTY / 9 / NONE
+914 / 매혹의보이스 /  (P) / 천사와도 같은 노랫소리로 상대를 공격한다. 그 턴에 능력이 올라간 포켓몬을 혼란 상태로 만든다. / 페어리 / 페어리 / SPECIAL / NEAR_OTHER / 80 / 100 / 10 / -1 / EMPTY / 9 / SOUND_BASED
+915 / 열불내기 / EMPTY / 자포자기하는 기세로 공격한다. 앞 턴에서 기술이 빗나갔다면 위력이 배가 된다. / 불꽃 / 불꽃 / PHYSICAL / NEAR_OTHER / 75 / 100 / 10 / -1 / EMPTY / 9 / MAKES_CONTACT
+916 / 썬더다이브 / EMPTY / 몸에 전기를 두르고 상대를 덮친다. 빗나가면 자신이 데미지를 입는다. / 전기 / 전기 / PHYSICAL / NEAR_OTHER / 100 / 95 / 15 / -1 / EMPTY / 9 / EMPTY
+917 / 사이코노이즈 /  (P) / 불쾌한 음파를 상대에게 날려서 공격한다. 2턴 동안 상대는 기술이나 특성 또는 지니고 있는 도구로 HP를 회복할 수 없게 된다. / 에스퍼 / 에스퍼 / SPECIAL / NEAR_OTHER / 75 / 100 / 10 / -1 / EMPTY / 9 / SOUND_BASED
+918 / 기선제압 /  (P) / 움직임에 반응하여 손바닥으로 밀쳐서 상대를 풀죽게 한다. 상대가 쓴 기술이 선제공격 기술이 아니면 실패한다. / 격투 / 격투 / PHYSICAL / NEAR_OTHER / 65 / 100 / 15 / 100 / 3 / 9 / MAKES_CONTACT
+919 / 악독사슬 / EMPTY / 독으로 된 사슬로 상대를 휘감은 뒤 독소를 흘려보내어 해치운다. 맹독 상태로 만들 때가 있다. / 독 / 독 / SPECIAL / NEAR_OTHER / 100 / 100 / 5 / 50 / EMPTY / 9 / NONE
