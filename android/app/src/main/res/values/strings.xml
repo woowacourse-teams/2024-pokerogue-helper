@@ -59,6 +59,10 @@
     <string name="pokemon_detail_information_weight">체중</string>
     <string name="pokemon_detail_information_height">키</string>
 
+    <!--    pokemon detail evolution-->
+    <string name="pokemon_detail_evolution_no_evolution_chain">진화 체인이 없는 포켓몬입니다.</string>
+    <string name="pokemon_detail_evolution_level">레벨 %d</string>
+
     <!-- ability -->
     <string name="ability_title_name">특성 도감</string>
     <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
