@@ -3,20 +3,47 @@ package poke.rogue.helper.testing.data.repository
 import poke.rogue.helper.data.model.Ability
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonDetail
+import poke.rogue.helper.data.model.PokemonFilter
+import poke.rogue.helper.data.model.PokemonGeneration
 import poke.rogue.helper.data.model.PokemonSkill
+import poke.rogue.helper.data.model.PokemonSort
 import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.repository.DexRepository
+import poke.rogue.helper.stringmatcher.has
 
 class FakeDexRepository : DexRepository {
     override suspend fun pokemons(): List<Pokemon> = POKEMONS
 
-    override suspend fun pokemons(query: String): List<Pokemon> =
-        POKEMONS.filter { pokemon ->
-            pokemon.name.contains(query, ignoreCase = true)
-        }
+    override suspend fun filteredPokemons(
+        name: String,
+        sort: PokemonSort,
+        filters: List<PokemonFilter>,
+    ): List<Pokemon> {
+        return if (name.isEmpty()) {
+            pokemons()
+        } else {
+            pokemons().filter { it.name.has(name) }
+        }.toFilteredPokemons(sort, filters)
+    }
 
     override suspend fun pokemonDetail(id: Long): PokemonDetail = DUMMY_POKEMON_DETAIL
+
+    private fun List<Pokemon>.toFilteredPokemons(
+        sort: PokemonSort,
+        filters: List<PokemonFilter>,
+    ): List<Pokemon> {
+        return this
+            .filter { pokemon ->
+                filters.all { filter ->
+                    when (filter) {
+                        is PokemonFilter.ByType -> pokemon.types.contains(filter.type)
+                        is PokemonFilter.ByGeneration -> pokemon.generation == filter.generation
+                    }
+                }
+            }
+            .sortedWith(sort)
+    }
 
     companion object {
         private const val FORMAT_POKEMON_IMAGE_URL =
@@ -35,6 +62,14 @@ class FakeDexRepository : DexRepository {
                     name = "이상해씨",
                     imageUrl = pokemonImageUrl(pokemonId = 1),
                     types = listOf(Type.GRASS, Type.POISON),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 318,
+                    hp = 45,
+                    attack = 49,
+                    defense = 49,
+                    specialAttack = 65,
+                    specialDefense = 65,
+                    speed = 45,
                 ),
                 Pokemon(
                     id = 2,
@@ -42,6 +77,14 @@ class FakeDexRepository : DexRepository {
                     name = "이상해풀",
                     imageUrl = pokemonImageUrl(pokemonId = 2),
                     types = listOf(Type.GRASS, Type.POISON),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 405,
+                    hp = 60,
+                    attack = 62,
+                    defense = 63,
+                    specialAttack = 80,
+                    specialDefense = 80,
+                    speed = 60,
                 ),
                 Pokemon(
                     id = 3,
@@ -49,6 +92,14 @@ class FakeDexRepository : DexRepository {
                     name = "이상해꽃",
                     imageUrl = pokemonImageUrl(pokemonId = 3),
                     types = listOf(Type.GRASS, Type.POISON),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 195,
+                    hp = 80,
+                    attack = 82,
+                    defense = 83,
+                    specialAttack = 100,
+                    specialDefense = 100,
+                    speed = 525,
                 ),
                 Pokemon(
                     id = 4,
@@ -56,6 +107,14 @@ class FakeDexRepository : DexRepository {
                     name = "파이리",
                     imageUrl = pokemonImageUrl(pokemonId = 4),
                     types = listOf(Type.FIRE),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 309,
+                    hp = 39,
+                    attack = 52,
+                    defense = 43,
+                    specialAttack = 60,
+                    specialDefense = 50,
+                    speed = 65,
                 ),
                 Pokemon(
                     id = 5,
@@ -63,6 +122,14 @@ class FakeDexRepository : DexRepository {
                     name = "리자드",
                     imageUrl = pokemonImageUrl(pokemonId = 5),
                     types = listOf(Type.FIRE),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 405,
+                    hp = 58,
+                    attack = 64,
+                    defense = 58,
+                    specialAttack = 80,
+                    specialDefense = 65,
+                    speed = 80,
                 ),
                 Pokemon(
                     id = 6,
@@ -70,6 +137,14 @@ class FakeDexRepository : DexRepository {
                     name = "리자몽",
                     imageUrl = pokemonImageUrl(pokemonId = 6),
                     types = listOf(Type.FIRE, Type.FLYING),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 534,
+                    hp = 78,
+                    attack = 84,
+                    defense = 78,
+                    specialAttack = 109,
+                    specialDefense = 85,
+                    speed = 100,
                 ),
                 Pokemon(
                     id = 7,
@@ -77,6 +152,14 @@ class FakeDexRepository : DexRepository {
                     name = "꼬부기",
                     imageUrl = pokemonImageUrl(pokemonId = 7),
                     types = listOf(Type.WATER),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 314,
+                    hp = 44,
+                    attack = 48,
+                    defense = 65,
+                    specialAttack = 50,
+                    specialDefense = 64,
+                    speed = 43,
                 ),
                 Pokemon(
                     id = 8,
@@ -84,6 +167,14 @@ class FakeDexRepository : DexRepository {
                     name = "어니부기",
                     imageUrl = pokemonImageUrl(pokemonId = 8),
                     types = listOf(Type.WATER),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 405,
+                    hp = 59,
+                    attack = 63,
+                    defense = 80,
+                    specialAttack = 65,
+                    specialDefense = 80,
+                    speed = 58,
                 ),
                 Pokemon(
                     id = 9,
@@ -91,153 +182,29 @@ class FakeDexRepository : DexRepository {
                     name = "거북왕",
                     imageUrl = pokemonImageUrl(pokemonId = 9),
                     types = listOf(Type.WATER),
+                    generation = PokemonGeneration.ONE,
+                    baseStat = 530,
+                    hp = 79,
+                    attack = 83,
+                    defense = 100,
+                    specialAttack = 85,
+                    specialDefense = 105,
+                    speed = 78,
                 ),
                 Pokemon(
-                    id = 10,
-                    dexNumber = 10,
-                    name = "캐터피",
-                    imageUrl = pokemonImageUrl(pokemonId = 10),
-                    types = listOf(Type.BUG),
-                ),
-                Pokemon(
-                    id = 11,
-                    dexNumber = 11,
-                    name = "단데기",
-                    imageUrl = pokemonImageUrl(pokemonId = 11),
-                    types = listOf(Type.BUG),
-                ),
-                Pokemon(
-                    id = 12,
-                    dexNumber = 12,
-                    name = "버터플",
-                    imageUrl = pokemonImageUrl(pokemonId = 12),
-                    types = listOf(Type.BUG, Type.FLYING),
-                ),
-                Pokemon(
-                    id = 13,
-                    dexNumber = 13,
-                    name = "뿔충이",
-                    imageUrl = pokemonImageUrl(pokemonId = 13),
-                    types = listOf(Type.BUG, Type.POISON),
-                ),
-                Pokemon(
-                    id = 14,
-                    dexNumber = 14,
-                    name = "딱충이",
-                    imageUrl = pokemonImageUrl(pokemonId = 14),
-                    types = listOf(Type.BUG, Type.POISON),
-                ),
-                Pokemon(
-                    id = 15,
-                    dexNumber = 15,
-                    name = "독침붕",
-                    imageUrl = pokemonImageUrl(pokemonId = 15),
-                    types = listOf(Type.BUG, Type.POISON),
-                ),
-                Pokemon(
-                    id = 16,
-                    dexNumber = 16,
-                    name = "구구",
-                    imageUrl = pokemonImageUrl(pokemonId = 16),
-                    types = listOf(Type.NORMAL, Type.FLYING),
-                ),
-                Pokemon(
-                    id = 17,
-                    dexNumber = 17,
-                    name = "피죤",
-                    imageUrl = pokemonImageUrl(pokemonId = 17),
-                    types = listOf(Type.NORMAL, Type.FLYING),
-                ),
-                Pokemon(
-                    id = 18,
-                    dexNumber = 18,
-                    name = "피죤투",
-                    imageUrl = pokemonImageUrl(pokemonId = 18),
-                    types = listOf(Type.NORMAL, Type.FLYING),
-                ),
-                Pokemon(
-                    id = 19,
-                    dexNumber = 19,
-                    name = "꼬렛",
-                    imageUrl = pokemonImageUrl(pokemonId = 19),
-                    types = listOf(Type.NORMAL),
-                ),
-                Pokemon(
-                    id = 20,
-                    dexNumber = 20,
-                    name = "레트라",
-                    imageUrl = pokemonImageUrl(pokemonId = 20),
-                    types = listOf(Type.NORMAL),
-                ),
-                Pokemon(
-                    id = 21,
-                    dexNumber = 21,
-                    name = "깨비참",
-                    imageUrl = pokemonImageUrl(pokemonId = 21),
-                    types = listOf(Type.NORMAL, Type.FLYING),
-                ),
-                Pokemon(
-                    id = 22,
-                    dexNumber = 22,
-                    name = "깨비드릴조",
-                    imageUrl = pokemonImageUrl(pokemonId = 22),
-                    types = listOf(Type.NORMAL, Type.FLYING),
-                ),
-                Pokemon(
-                    id = 23,
-                    dexNumber = 23,
-                    name = "아보",
-                    imageUrl = pokemonImageUrl(pokemonId = 23),
-                    types = listOf(Type.POISON),
-                ),
-                Pokemon(
-                    id = 24,
-                    dexNumber = 24,
-                    name = "아보크",
-                    imageUrl = pokemonImageUrl(pokemonId = 24),
-                    types = listOf(Type.POISON),
-                ),
-                Pokemon(
-                    id = 25,
-                    dexNumber = 25,
-                    name = "피카츄",
-                    imageUrl = pokemonImageUrl(pokemonId = 25),
-                    types = listOf(Type.ELECTRIC),
-                ),
-                Pokemon(
-                    id = 26,
-                    dexNumber = 26,
-                    name = "라이츄",
-                    imageUrl = pokemonImageUrl(pokemonId = 26),
-                    types = listOf(Type.ELECTRIC),
-                ),
-                Pokemon(
-                    id = 27,
-                    dexNumber = 27,
-                    name = "모래두지",
-                    imageUrl = pokemonImageUrl(pokemonId = 27),
-                    types = listOf(Type.GROUND),
-                ),
-                Pokemon(
-                    id = 28,
-                    dexNumber = 28,
-                    name = "고지",
-                    imageUrl = pokemonImageUrl(pokemonId = 28),
-                    types = listOf(Type.GROUND),
-                ),
-                Pokemon(
-                    id = 29,
-                    dexNumber = 29,
-                    name = "니드런",
-                    imageUrl = pokemonImageUrl(pokemonId = 29),
-                    types = listOf(Type.POISON),
-                ),
-                Pokemon(
-                    id = 30,
-                    dexNumber = 30,
-                    name = "니드리나",
-                    imageUrl = pokemonImageUrl(pokemonId = 30),
-                    types = listOf(Type.POISON),
+                    id = 373,
+                    dexNumber = 373,
+                    name = "보만다",
+                    imageUrl = pokemonImageUrl(pokemonId = 373),
+                    types = listOf(Type.FLYING, Type.DRAGON),
+                    generation = PokemonGeneration.THREE,
+                    baseStat = 600,
+                    hp = 95,
+                    attack = 135,
+                    defense = 80,
+                    specialAttack = 110,
+                    specialDefense = 80,
+                    speed = 100,
                 ),
             )
 
