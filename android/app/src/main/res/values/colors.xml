@@ -43,5 +43,7 @@
     <color name="stat_speed">#5FC253</color>
     <color name="stat_total">#964DF0</color>
 
+    <!-- tablayout -->
+    <color name="tablayout_background">#00000000</color>
 
 </resources>
