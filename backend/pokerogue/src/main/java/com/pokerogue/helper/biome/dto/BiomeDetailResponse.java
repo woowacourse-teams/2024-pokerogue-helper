@@ -14,7 +14,6 @@ public record BiomeDetailResponse(
 ) {
     public static BiomeDetailResponse of(
             Biome biome,
-            String biomeImage,
             List<BiomeAllPokemonResponse> wildPokemons,
             List<BiomeAllPokemonResponse> bossPokemons,
             List<TrainerPokemonResponse> trainerPokemons,
@@ -23,7 +22,7 @@ public record BiomeDetailResponse(
         return new BiomeDetailResponse(
                 biome.getId(),
                 biome.getName(),
-                biomeImage,
+                biome.getImage(),
                 wildPokemons,
                 bossPokemons,
                 trainerPokemons,

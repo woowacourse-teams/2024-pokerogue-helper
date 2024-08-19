@@ -1,5 +1,6 @@
 package com.pokerogue.helper.biome.config;
 
+import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.BiomeLink;
 import com.pokerogue.helper.biome.data.BiomePokemon;
@@ -12,6 +13,7 @@ import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.data.TrainerPokemon;
 import com.pokerogue.helper.biome.data.TrainerType;
 import com.pokerogue.helper.biome.repository.BiomePokemonInfoRepository;
+import com.pokerogue.helper.biome.repository.BiomePokemonTypeImageRepository;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
@@ -20,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +37,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BiomeDatabaseInitializer implements ApplicationRunner {
 
+    private final S3Service s3Service;
+    private final BiomePokemonTypeImageRepository biomePokemonTypeImageRepository;
     private final BiomeRepository biomeRepository;
     private final BiomePokemonInfoRepository biomePokemonInfoRepository;
 
@@ -129,6 +134,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .map(trainerPokemon -> new Trainer(
                         trainerPokemon.getId(),
                         trainerPokemon.getTrainerName(),
+                        s3Service.getTrainerImageFromS3(trainerPokemon.getId()),
                         getTrainerTypes(trainerTypes, trainerPokemon.getTrainerName()),
                         trainerPokemon.getTrainerPokemons())
                 ).toList();
@@ -137,6 +143,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .map(biomeTypeAndTrainer -> new Biome(
                         biomeTypeAndTrainer.getId(),
                         biomeTypeAndTrainer.getBiomeName(),
+                        s3Service.getBiomeImageFromS3(biomeTypeAndTrainer.getId()),
                         getBiomePokemons(biomePokemons, biomeTypeAndTrainer.getBiomeName()),
                         biomeTypeAndTrainer.getBiomeTypes(),
                         getBiomeTrainers(trainers, biomeTypeAndTrainer.getTrainerNames()),
@@ -148,10 +155,17 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .map(pokemonByBiome -> new BiomePokemonInfo(
                         pokemonByBiome.getId(),
                         pokemonByBiome.getName(),
+                        s3Service.getPokemonImageFromS3(pokemonByBiome.getId()),
                         BiomePokemonType.getBiomePokemonTypeByName(pokemonByBiome.getType1()),
                         BiomePokemonType.getBiomePokemonTypeByName(pokemonByBiome.getType2())
                 ))
                 .forEach(biomePokemonInfoRepository::save);
+
+        Arrays.stream(BiomePokemonType.values())
+                .forEach(biomePokemonType -> biomePokemonTypeImageRepository.save(
+                        biomePokemonType.name(),
+                        s3Service.getPokerogueTypeImageFromS3(biomePokemonType.name().toLowerCase()))
+                );
     }
 
     private boolean isExistTrainer(List<TrainerType> trainerTypes, String trainerName) {
