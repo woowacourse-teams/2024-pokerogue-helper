@@ -21,10 +21,10 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
         initAdapter()
 
-        val evolutions = EvolutionsUiModel.DUMMY_PICAKCHU_EVOLUTION
+        val evolutionsUiModel = EvolutionsUiModel.DUMMY_PICAKCHU_EVOLUTION
 
-        binding.evolutions = evolutions
-        evolutions.apply {
+        binding.evolutions = evolutionsUiModel
+        evolutionsUiModel.apply {
             evolutions(depth = 0).let(evolutionDepth0Adapter::submitList)
             evolutions(depth = 1).let(evolutionDepth1Adapter::submitList)
             evolutions(depth = 2).let(evolutionDepth2Adapter::submitList)

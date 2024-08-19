@@ -94,8 +94,10 @@
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout_pokemon_detail"
+                    style="@style/TabLayoutStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/tab_border_background"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
