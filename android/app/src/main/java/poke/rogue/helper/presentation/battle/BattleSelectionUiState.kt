@@ -5,3 +5,5 @@ sealed interface BattleSelectionUiState<out T : Any> {
 
     data object Empty : BattleSelectionUiState<Nothing>
 }
+
+fun <T : Any> BattleSelectionUiState<T>.isSelected(): Boolean = this is BattleSelectionUiState.Selected

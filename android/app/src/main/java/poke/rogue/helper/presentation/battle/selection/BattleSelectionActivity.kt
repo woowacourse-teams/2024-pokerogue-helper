@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.battle.selection
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
@@ -53,5 +55,17 @@ class BattleSelectionActivity :
                 binding.pagerBattleSelection.currentItem = it.ordinal
             }
         }
+    }
+
+    companion object {
+        private const val KEY_HAS_SKILL_SELECTION = "hasSkillSelection"
+
+        fun intent(
+            context: Context,
+            hasSkillSelection: Boolean,
+        ): Intent =
+            Intent(context, BattleSelectionActivity::class.java).apply {
+                putExtra(KEY_HAS_SKILL_SELECTION, hasSkillSelection)
+            }
     }
 }

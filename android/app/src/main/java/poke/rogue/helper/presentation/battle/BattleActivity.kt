@@ -13,6 +13,7 @@ import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.setImage
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModels<BattleViewModel>()
@@ -61,6 +62,34 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         repeatOnStarted {
             viewModel.weathers.collect {
                 weatherAdapter.updateWeathers(it)
+            }
+        }
+
+        repeatOnStarted {
+            viewModel.selectedState.collect {
+                if (it.minePokemon is BattleSelectionUiState.Selected) {
+                    val selected = it.minePokemon.selected
+                    binding.ivMinePokemon.setImage(selected.backImageUrl)
+                    binding.tvMinePokemon.text = selected.name
+                }
+
+                if (it.skill is BattleSelectionUiState.Selected) {
+                    binding.tvSkillTitle.text = it.skill.selected.name
+                }
+
+                if (it.opponentPokemon is BattleSelectionUiState.Selected) {
+                    val selected = it.opponentPokemon.selected
+                    binding.ivOpponentPokemon.setImage(selected.backImageUrl)
+                    binding.tvOpponentPokemon.text = selected.name
+                }
+            }
+        }
+
+        repeatOnStarted {
+            viewModel.navigateToSelection.collect { hasSkillSelection ->
+                startActivity<BattleSelectionActivity> {
+                    BattleSelectionActivity.intent(this@BattleActivity, hasSkillSelection)
+                }
             }
         }
     }
