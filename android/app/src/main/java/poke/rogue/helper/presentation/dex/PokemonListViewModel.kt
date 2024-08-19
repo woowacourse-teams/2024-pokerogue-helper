@@ -164,7 +164,7 @@ data class PokemonListUiState(
         get() =
             run {
                 var count = 0
-                if (filteredTypes.isNotEmpty()) count++
+                if (filteredTypes.isNotEmpty()) count += filteredTypes.size
                 if (filteredGeneration != PokeGenerationUiModel.ALL) count++
                 count
             }
