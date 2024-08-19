@@ -1,6 +1,5 @@
 package com.pokerogue.helper.biome.config;
 
-import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.BiomeLink;
 import com.pokerogue.helper.biome.data.BiomePokemon;
@@ -125,14 +124,14 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        List<Trainer> trainers = trainerTypes.stream()
-                .map(trainerType -> new Trainer(
-                        trainerType.getId(),
-                        trainerType.getTrainerName(),
-                        trainerType.getTrainerTypes(),
-                        getTrainerPokemons(trainerPokemons, trainerType.getTrainerName()))
-                )
-                .toList();
+        List<Trainer> trainers = trainerPokemons.stream()
+                .filter(trainerPokemon -> isExistTrainer(trainerTypes, trainerPokemon.getTrainerName()))
+                .map(trainerPokemon -> new Trainer(
+                        trainerPokemon.getId(),
+                        trainerPokemon.getTrainerName(),
+                        getTrainerTypes(trainerTypes, trainerPokemon.getTrainerName()),
+                        trainerPokemon.getTrainerPokemons())
+                ).toList();
 
         biomeTypesAndTrainers.stream()
                 .map(biomeTypeAndTrainer -> new Biome(
@@ -155,10 +154,15 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .forEach(biomePokemonInfoRepository::save);
     }
 
-    private List<String> getTrainerPokemons(List<TrainerPokemon> trainerPokemons, String trainerName) {
-        return trainerPokemons.stream()
-                .filter(trainerPokemon -> trainerPokemon.getTrainerName().equals(trainerName))
-                .map(TrainerPokemon::getTrainerPokemons)
+    private boolean isExistTrainer(List<TrainerType> trainerTypes, String trainerName) {
+        return trainerTypes.stream()
+                .anyMatch(trainerType -> trainerType.getTrainerName().equals(trainerName));
+    }
+
+    private List<String> getTrainerTypes(List<TrainerType> trainerTypes, String trainerName) {
+        return trainerTypes.stream()
+                .filter(trainerType -> trainerType.getTrainerName().equals(trainerName))
+                .map(TrainerType::getTrainerTypes)
                 .findFirst()
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TRAINER_NOT_FOUND));
     }
@@ -166,6 +170,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
     private Map<Tier, List<String>> getBiomePokemons(List<BiomePokemon> biomePokemons, String biomeName) {
         List<BiomePokemon> allBiomePokemons = biomePokemons.stream()
                 .filter(biomePokemon -> biomePokemon.getBiomeName().equals(biomeName))
+                .filter(biomePokemon -> !biomePokemon.getPokemons().contains("없음"))
                 .toList();
 
         Map<Tier, List<String>> ret = new HashMap<>();

@@ -58,6 +58,7 @@ public class BiomeService {
         return biomePokemons.keySet().stream()
                 .filter(Tier::isWildPokemon)
                 .map(tier -> BiomeAllPokemonResponse.of(tier, getBiomePokemons(biomePokemons.get(tier))))
+                .distinct()
                 .toList();
     }
 
@@ -66,19 +67,24 @@ public class BiomeService {
         return biomePokemons.keySet().stream()
                 .filter(Tier::isBossPokemon)
                 .map(tier -> BiomeAllPokemonResponse.of(tier, getBiomePokemons(biomePokemons.get(tier))))
+                .distinct()
                 .toList();
     }
 
     private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
         return biomePokemons.stream()
-                .map(biomePokemon -> biomePokemonInfoRepository.findById(biomePokemon)
-                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND)))
+                .map(biomePokemon -> {
+                    System.out.println(biomePokemon);
+                    return biomePokemonInfoRepository.findById(biomePokemon)
+                            .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
+                })
                 .map(biomePokemonInfo -> new BiomePokemonResponse(
                         biomePokemonInfo.getId(),
                         biomePokemonInfo.getName(),
                         "포켓몬 이미지",
                         getBiomePokemonTypeResponses(biomePokemonInfo.getType1(), biomePokemonInfo.getType2())
                 ))
+                .distinct()
                 .toList();
     }
 
