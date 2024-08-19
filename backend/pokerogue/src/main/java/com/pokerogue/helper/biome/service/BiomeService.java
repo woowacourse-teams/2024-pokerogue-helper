@@ -82,7 +82,7 @@ public class BiomeService {
                 .map(biomePokemonInfo -> new BiomePokemonResponse(
                         biomePokemonInfo.getId(),
                         biomePokemonInfo.getName(),
-                        "포켓몬 이미지",
+                        s3Service.getPokemonImageFromS3(biomePokemonInfo.getId()),
                         getBiomePokemonTypeResponses(biomePokemonInfo.getType1(), biomePokemonInfo.getType2())
                 ))
                 .distinct()
