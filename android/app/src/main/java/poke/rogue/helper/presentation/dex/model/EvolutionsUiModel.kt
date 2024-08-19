@@ -21,20 +21,22 @@ data class EvolutionsUiModel(
         val DUMMY_PICAKCHU_EVOLUTION =
             EvolutionsUiModel(
                 evolutions =
-                listOf(
-                    DUMMY_PICHU,
-                    DUMMY_PIKACHU,
-                    DUMMY_RAICHU,
-                    DUMMY_ALOLA_RAICHU,
-                    DUMMY_GIGA_PIKACHU,
-                ),
+                    listOf(
+                        DUMMY_PICHU,
+                        DUMMY_PIKACHU,
+                        DUMMY_RAICHU,
+                        DUMMY_ALOLA_RAICHU,
+                        DUMMY_GIGA_PIKACHU,
+                    ),
             )
 
-        val DUMMY_PSYDUCK_EVOLUTION = EvolutionsUiModel(
-            evolutions = listOf(
-                DUMMY_PSYDUCK,
-                DUMMY_GOLDUCK,
+        val DUMMY_PSYDUCK_EVOLUTION =
+            EvolutionsUiModel(
+                evolutions =
+                    listOf(
+                        DUMMY_PSYDUCK,
+                        DUMMY_GOLDUCK,
+                    ),
             )
-        )
     }
 }
