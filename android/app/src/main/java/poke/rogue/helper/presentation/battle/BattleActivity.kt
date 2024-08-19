@@ -5,32 +5,29 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBattleBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
+import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
-import poke.rogue.helper.presentation.util.view.setImage
+import poke.rogue.helper.presentation.util.view.setCroppedImage
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModels<BattleViewModel>()
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)
     }
-    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-
     override val toolbar: Toolbar
         get() = binding.toolbarBattle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        initResultLauncher()
         initSpinner()
         initObserver()
     }
@@ -38,14 +35,6 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     private fun initView() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
-    }
-
-    private fun initResultLauncher() {
-        resultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == RESULT_OK) {
-                }
-            }
     }
 
     private fun initSpinner() {
@@ -78,7 +67,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
             viewModel.selectedState.collect {
                 if (it.minePokemon is BattleSelectionUiState.Selected) {
                     val selected = it.minePokemon.selected
-                    binding.ivMinePokemon.setImage(selected.backImageUrl)
+                    binding.ivMinePokemon.setCroppedImage(selected.backImageUrl)
                     binding.tvMinePokemon.text = selected.name
                 }
 
@@ -88,7 +77,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
                 if (it.opponentPokemon is BattleSelectionUiState.Selected) {
                     val selected = it.opponentPokemon.selected
-                    binding.ivOpponentPokemon.setImage(selected.backImageUrl)
+                    binding.ivOpponentPokemon.setCroppedImage(selected.frontImageUrl)
                     binding.tvOpponentPokemon.text = selected.name
                 }
             }
@@ -101,8 +90,28 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                         this@BattleActivity,
                         hasSkillSelection,
                     )
-                resultLauncher.launch(intent)
+                startActivityForResult(intent, REQUEST_CODE)
             }
         }
+    }
+
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != REQUEST_CODE) return
+        if (resultCode == RESULT_OK) {
+            val result =
+                data?.parcelable<SelectionData>(BattleSelectionActivity.KEY_SELECTION_RESULT)
+            if (result != null) {
+                viewModel.updatePokemonSelection(result)
+            }
+        }
+    }
+
+    companion object {
+        private const val REQUEST_CODE = 1
     }
 }

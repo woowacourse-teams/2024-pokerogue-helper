@@ -80,8 +80,6 @@ class BattleSelectionActivity :
 
     companion object {
         private const val KEY_HAS_SKILL_SELECTION = "hasSkillSelection"
-        const val KEY_SELECTED_POKEMON = "selectedPokemon"
-        const val KEY_SELECTED_SKILL = "selectedSkill"
         const val KEY_SELECTION_RESULT = "selectionResult"
 
         fun intent(
