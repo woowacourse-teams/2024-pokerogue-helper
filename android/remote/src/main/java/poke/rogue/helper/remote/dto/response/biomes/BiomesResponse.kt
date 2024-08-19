@@ -13,4 +13,3 @@ data class BiomesResponse(
     @SerialName("trainerTypeLogos")
     val gymLeaderType: List<String>,
 )
-

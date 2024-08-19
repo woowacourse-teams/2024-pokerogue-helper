@@ -17,5 +17,4 @@ fun GymPokemonResponse.toData(): GymPokemon =
         pokemons = pokemons.toData(),
     )
 
-fun List<GymPokemonResponse>.toData(): List<GymPokemon> =
-    map(GymPokemonResponse::toData)
+fun List<GymPokemonResponse>.toData(): List<GymPokemon> = map(GymPokemonResponse::toData)

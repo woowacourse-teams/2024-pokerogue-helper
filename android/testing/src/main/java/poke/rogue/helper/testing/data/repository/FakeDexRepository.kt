@@ -1,7 +1,7 @@
 package poke.rogue.helper.testing.data.repository
 
-import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonCategory
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetailAbility

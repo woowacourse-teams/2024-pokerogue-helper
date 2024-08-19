@@ -43,5 +43,4 @@ class FakeBiomeRepositoryTest {
             // then
             biomeDetail.id shouldBe "풀숲"
         }
-
 }

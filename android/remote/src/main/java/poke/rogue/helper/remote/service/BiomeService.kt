@@ -7,7 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface BiomeService {
-
     @GET("api/v1/biomes")
     suspend fun biomes(): ApiResponse<List<BiomesResponse>>
 

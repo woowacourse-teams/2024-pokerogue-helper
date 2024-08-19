@@ -17,5 +17,4 @@ fun NextBiomesResponse.toData(): BiomeNextBiome =
         probability = probability,
     )
 
-fun List<NextBiomesResponse>.toData(): List<BiomeNextBiome> =
-    map(NextBiomesResponse::toData)
+fun List<NextBiomesResponse>.toData(): List<BiomeNextBiome> = map(NextBiomesResponse::toData)

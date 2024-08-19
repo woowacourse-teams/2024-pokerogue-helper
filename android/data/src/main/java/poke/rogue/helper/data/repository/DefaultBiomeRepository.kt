@@ -5,7 +5,7 @@ import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.BiomeDetail
 
 class DefaultBiomeRepository(
-    private val remoteBiomeDataSource: RemoteBiomeDataSource
+    private val remoteBiomeDataSource: RemoteBiomeDataSource,
 ) : BiomeRepository {
     private var cachedBiomes: List<Biome> = emptyList()
     private var cachedBiomesDetails: MutableMap<String, BiomeDetail> = mutableMapOf()
