@@ -8,17 +8,19 @@ import poke.rogue.helper.presentation.dex.model.SingleEvolutionUiModel.Companion
 
 data class EvolutionsUiModel(
     val evolutions: List<SingleEvolutionUiModel>
-){
+) {
     fun evolutions(depth: Int) = evolutions.filter { it.depth == depth }
 
     companion object {
         val DUMMY_PICAKCHU_EVOLUTION =
-            listOf(
-                DUMMY_PICHU,
-                DUMMY_PIKACHU,
-                DUMMY_RAICHU,
-                DUMMY_ALOLA_RAICHU,
-                DUMMY_GIGA_PIKACHU,
+            EvolutionsUiModel(
+                listOf(
+                    DUMMY_PICHU,
+                    DUMMY_PIKACHU,
+                    DUMMY_RAICHU,
+                    DUMMY_ALOLA_RAICHU,
+                    DUMMY_GIGA_PIKACHU,
+                )
             )
     }
 }
