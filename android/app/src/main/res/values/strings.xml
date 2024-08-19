@@ -79,7 +79,7 @@
 
     <!--    battle -->
     <string name="battle_title_name">배틀 구도</string>
-    <string name="battle_result_title">결과</string>
+    <string name="battle_result_title">계산 결과</string>
     <string name="battle_calculated_power_title">계산된 위력</string>
     <string name="battle_accuracy_title">명중 확률</string>
     <string name="battle_mine_pokemon_selection">내 포켓몬을 선택해주세요!</string>

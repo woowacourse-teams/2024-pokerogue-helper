@@ -93,6 +93,16 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                 startActivityForResult(intent, REQUEST_CODE)
             }
         }
+
+        repeatOnStarted {
+            viewModel.battleResult.collect {
+                if (it is BattleResultUiState.Success) {
+                    val result = it.result
+                    binding.tvAccuracyContent.text = result.accuracy.toString()
+                    binding.tvCalculatedPowerContent.text = result.power.toString()
+                }
+            }
+        }
     }
 
     override fun onActivityResult(
