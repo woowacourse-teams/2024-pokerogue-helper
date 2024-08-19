@@ -7,6 +7,8 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.TimeMark
 import kotlin.time.TimeSource
 
+// TODO : move to ui/intereaction/SingleClick.kt
+
 @BindingAdapter("duration", "onSingleClick", requireAll = false)
 fun View.setOnSingleClickListener(
     duration: Int = 500,

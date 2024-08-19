@@ -22,7 +22,8 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 
-class PokemonDetailActivity : ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
+class PokemonDetailActivity :
+    ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
