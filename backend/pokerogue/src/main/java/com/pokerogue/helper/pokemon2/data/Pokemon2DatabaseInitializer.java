@@ -1,20 +1,19 @@
-package com.pokerogue.helper.pokemon2;
+package com.pokerogue.helper.pokemon2.data;
 
-import com.pokerogue.helper.pokemon2.MoveRepository;
-import com.pokerogue.helper.pokemon2.Pokemon2Repository;
+import com.pokerogue.helper.pokemon2.repository.MoveRepository;
+import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.Store;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
@@ -33,9 +32,30 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
     List<String> moveKeys = List.of("id", "name", "nameAppend", "effect", "type", "defaultType", "category",
             "moveTarget", "power", "accuracy", "pp", "chance", "priority", "generation", "flags");
-    List<String> pokemonKeys = List.of("speciesId", "name", "type1", "type2", "ability1", "ability2", "abilityHidden",
-            "abilityPassive", "generation", "legendary", "subLegendary", "mythical", "getEvolutionLevels", "baseTotal",
-            "baseStats", "height", "weight", "canChangeForm", "eggMoves", "moves", "biomes");
+    List<String> pokemonKeys = List.of(
+            "id",
+            "speciesName",
+            "formName",
+            "nameKo",
+            "type1",
+            "type2",
+            "ability1",
+            "ability2",
+            "abilityHidden",
+            "abilityPassive",
+            "generation",
+            "legendary",
+            "subLegendary",
+            "mythical",
+            "evolutionLevel",
+            "baseTotal",
+            "baseStats",
+            "height",
+            "weight",
+            "eggMoves",
+            "moves",
+            "biomes"
+    );
 
     @Override
     public void run(ApplicationArguments args) {
@@ -51,19 +71,44 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                     values.add(stringTokenizer.nextToken().strip());
                 }
 
-                if (values.size() != pokemonKeys.size()) {
-                    values.add("EMPTY");
+                if (pokemonKeys.size() != values.size()) {
+                    throw new IllegalArgumentException("데이터가 잘못 되었습니다.");
                 }
-                Map<String, String> map = IntStream.range(0, pokemonKeys.size())
-                        .boxed()
-                        .collect(Collectors.toMap(pokemonKeys::get, values::get));
 
-                pokemon2Repository.save(map.get("name"), map);
+                Pokemon pokemon = createPokemon(values);
+                pokemon2Repository.save(pokemon.id(),pokemon);
             }
-            saveMove();
+//            saveMove();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Pokemon createPokemon(List<String> values) {
+        return new Pokemon(
+                values.get(0),
+                values.get(1),
+                values.get(2),
+                values.get(3),
+                values.get(4),
+                values.get(5),
+                values.get(6),
+                values.get(7),
+                values.get(8),
+                values.get(9),
+                values.get(10),
+                values.get(11),
+                values.get(12),
+                values.get(13),
+                Arrays.stream(values.get(14).split(",")).toList(),
+                values.get(15),
+                values.get(16),
+                values.get(17),
+                values.get(18),
+                Arrays.stream(values.get(19).split(",")).toList(),
+                Arrays.stream(values.get(20).split(",")).toList(),
+                Arrays.stream(values.get(21).split(",")).toList()
+        );
     }
 
     private void saveMove() {
