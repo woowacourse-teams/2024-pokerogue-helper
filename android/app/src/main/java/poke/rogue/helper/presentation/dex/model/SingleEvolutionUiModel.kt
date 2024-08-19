@@ -10,7 +10,7 @@ data class SingleEvolutionUiModel(
     val condition: String? = null,
 ) {
     companion object {
-        private const val LEVEL_DOES_NOT_MATTER = 1
+        const val LEVEL_DOES_NOT_MATTER = 1
 
         val DUMMY_PICHU =
             SingleEvolutionUiModel(
