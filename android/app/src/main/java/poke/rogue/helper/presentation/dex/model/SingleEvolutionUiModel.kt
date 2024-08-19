@@ -5,12 +5,12 @@ data class SingleEvolutionUiModel(
     val pokemonName: String,
     val imageUrl: String,
     val depth: Int,
-    val level: Int,
-    val item: String?,
-    val condition: String?,
+    val level: Int = LEVEL_DOES_NOT_MATTER,
+    val item: String? = null,
+    val condition: String? = null,
 ) {
     companion object {
-        const val LEVEL_DOES_NOT_MATTER = 1
+        private const val LEVEL_DOES_NOT_MATTER = 1
 
         val DUMMY_PICHU =
             SingleEvolutionUiModel(
@@ -18,9 +18,6 @@ data class SingleEvolutionUiModel(
                 pokemonName = "피츄",
                 imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png",
                 depth = 0,
-                level = LEVEL_DOES_NOT_MATTER,
-                item = null,
-                condition = null,
             )
 
         val DUMMY_PIKACHU =
@@ -29,8 +26,6 @@ data class SingleEvolutionUiModel(
                 pokemonName = "피카츄",
                 imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
                 depth = 1,
-                level = LEVEL_DOES_NOT_MATTER,
-                item = null,
                 condition = "친밀도 90",
             )
 
@@ -40,7 +35,6 @@ data class SingleEvolutionUiModel(
                 pokemonName = "라이츄",
                 imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
                 depth = 2,
-                level = LEVEL_DOES_NOT_MATTER,
                 item = "천둥의 돌",
                 condition = "아이템 사용",
             )
@@ -51,7 +45,6 @@ data class SingleEvolutionUiModel(
                 pokemonName = "라이츄{알로라}",
                 imageUrl = "https://data1.pokemonkorea.co.kr/newdata/pokedex/full/002602.png",
                 depth = 2,
-                level = LEVEL_DOES_NOT_MATTER,
                 item = "천둥의 돌",
                 condition = "섬, 해변에서 아이템 사용",
             )
@@ -62,9 +55,25 @@ data class SingleEvolutionUiModel(
                 pokemonName = "피카츄{G-Max}",
                 imageUrl = "https://data1.pokemonkorea.co.kr/newdata/pokedex/full/002502.png",
                 depth = 2,
-                level = LEVEL_DOES_NOT_MATTER,
                 item = "다이 맥스 버섯",
                 condition = "아이템 사용",
+            )
+
+        val DUMMY_PSYDUCK =
+            SingleEvolutionUiModel(
+                pokemonId = "psyduck",
+                pokemonName = "고라파덕",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png",
+                depth = 0,
+            )
+
+        val DUMMY_GOLDUCK =
+            SingleEvolutionUiModel(
+                pokemonId = "golduck",
+                pokemonName = "골덕",
+                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/55.png",
+                level = 33,
+                depth = 1,
             )
     }
 }
