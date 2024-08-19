@@ -59,14 +59,14 @@ class PokemonListViewModelTest {
             queriedPokemons shouldBe
                 listOf(
                     PokemonUiModel(
-                        id = 5,
+                        id = "5",
                         dexNumber = 5,
                         name = "리자드",
                         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
                         types = listOf(TypeUiModel.FIRE),
                     ),
                     PokemonUiModel(
-                        id = 6,
+                        id = "6",
                         dexNumber = 6,
                         name = "리자몽",
                         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",

@@ -21,7 +21,6 @@ import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.PokeException
-import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -62,15 +61,15 @@ class PokemonListViewModel(
                 true,
             )
 
-    private val _navigateToDetailEvent = MutableSharedFlow<Long>()
+    private val _navigateToDetailEvent = MutableSharedFlow<String>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
     private suspend fun queriedPokemons(query: String): List<PokemonUiModel> {
         return try {
             if (query.isBlank()) {
-                pokemonListRepository.pokemons().map(Pokemon::toUi)
+                pokemonListRepository.pokemons().toUi()
             } else {
-                pokemonListRepository.filteredPokemons(query).map(Pokemon::toUi)
+                pokemonListRepository.filteredPokemons(query).toUi()
             }
         } catch (e: PokeException) {
             handlePokemonError(e)
@@ -80,7 +79,7 @@ class PokemonListViewModel(
         }
     }
 
-    override fun navigateToPokemonDetail(pokemonId: Long) {
+    override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
             _navigateToDetailEvent.emit(pokemonId)
         }

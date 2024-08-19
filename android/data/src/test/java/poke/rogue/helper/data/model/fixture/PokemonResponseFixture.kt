@@ -46,10 +46,10 @@ fun pokemonResponses(vararg ids: Long): List<PokemonResponse> = ids.map(::pokemo
  * @param types 포켓몬의 타입 목록. default: 풀, 독
  * @return [Pokemon]
  */
-fun pokemon(id: Long) =
+fun pokemon(id: String) =
     Pokemon(
         id = id,
-        dexNumber = id * 10,
+        dexNumber = id.toLong() * 10,
         name = "pokemon$id",
         imageUrl = "logo$id",
         types = listOf(Type.GRASS, Type.POISON),
@@ -60,4 +60,4 @@ fun pokemon(id: Long) =
  * @param ids 포켓몬의 id 목록 (vararg)
  * @return [List]<[Pokemon]>
  */
-fun pokemons(vararg ids: Long) = ids.map(::pokemon)
+fun pokemons(vararg ids: String) = ids.map(::pokemon)

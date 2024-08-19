@@ -32,22 +32,31 @@ class PokemonDetailViewModel(
         uiState.map { it is PokemonDetailUiState.IsLoading }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), true)
 
-    private val _navigationToDetailEvent = MutableSharedFlow<Long>()
-    val navigationToDetailEvent: SharedFlow<Long> = _navigationToDetailEvent.asSharedFlow()
+    private val _navigationToAbilityDetailEvent = MutableSharedFlow<String>()
+    val navigationToAbilityDetailEvent: SharedFlow<String> = _navigationToAbilityDetailEvent.asSharedFlow()
+
+    private val _navigationToBiomeDetailEvent = MutableSharedFlow<String>()
+    val navigationToDetailEvent: SharedFlow<String> = _navigationToBiomeDetailEvent.asSharedFlow()
 
     private val _navigateToHomeEvent = MutableSharedFlow<Boolean>()
     val navigateToHomeEvent = _navigateToHomeEvent.asSharedFlow()
 
-    fun updatePokemonDetail(pokemonId: Long?) {
+    fun updatePokemonDetail(pokemonId: String) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch(errorHandler) {
             _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
         }
     }
 
-    override fun navigateToAbilityDetail(abilityId: Long) {
+    override fun navigateToAbilityDetail(abilityId: String) {
         viewModelScope.launch {
-            _navigationToDetailEvent.emit(abilityId)
+            _navigationToAbilityDetailEvent.emit(abilityId)
+        }
+    }
+
+    override fun navigateToBiomeDetail(biomeId: String) {
+        viewModelScope.launch {
+            _navigationToBiomeDetailEvent.emit(biomeId)
         }
     }
 
