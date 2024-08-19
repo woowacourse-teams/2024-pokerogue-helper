@@ -38,19 +38,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_pokemon_evolution_chain_null" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <poke.rogue.helper.presentation.dex.detail.evolution.PokemonEvolutionViewGroup
             android:id="@+id/rv_pokemon_evolution_depth_0"
-            visible="@{evolutions.hasEvolutionChain()}"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/rv_pokemon_evolution_depth_1"
+            app:layout_constraintBottom_toTopOf="@id/divider_pokemon_evolution_depth_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_pokemon_detail_evolution" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider_pokemon_evolution_depth_1"
@@ -63,19 +58,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_pokemon_evolution_depth_0" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <poke.rogue.helper.presentation.dex.detail.evolution.PokemonEvolutionViewGroup
             android:id="@+id/rv_pokemon_evolution_depth_1"
-            visible="@{!evolutions.evolutions(1).empty}"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/divider_pokemon_evolution_depth_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_evolution_depth_1"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_pokemon_detail_evolution" />
+            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_evolution_depth_1" />
+
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider_pokemon_evolution_depth_2"
@@ -88,20 +79,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_pokemon_evolution_depth_1" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
+        <poke.rogue.helper.presentation.dex.detail.evolution.PokemonEvolutionViewGroup
             android:id="@+id/rv_pokemon_evolution_depth_2"
-            visible="@{!evolutions.evolutions(2).empty}"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/rv_pokemon_evolution_depth_3"
+            app:layout_constraintBottom_toTopOf="@id/divider_pokemon_evolution_depth_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_evolution_depth_2"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_pokemon_detail_evolution" />
+            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_evolution_depth_2" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider_pokemon_evolution_depth_3"
@@ -115,18 +100,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_pokemon_evolution_depth_2" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <poke.rogue.helper.presentation.dex.detail.evolution.PokemonEvolutionViewGroup
             android:id="@+id/rv_pokemon_evolution_depth_3"
-            visible="@{!evolutions.evolutions(3).empty}"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_evolution_depth_3"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_pokemon_detail_evolution" />
+            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_evolution_depth_3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

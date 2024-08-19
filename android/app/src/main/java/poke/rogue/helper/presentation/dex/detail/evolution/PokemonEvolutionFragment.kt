@@ -21,7 +21,7 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
         initAdapter()
 
-        val evolutions = EvolutionsUiModel.DUMMY_EVE_EVOLUTION
+        val evolutions = EvolutionsUiModel.DUMMY_PICAKCHU_EVOLUTION
 
         binding.evolutions = evolutions
         evolutions.apply {
@@ -34,10 +34,10 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
     private fun initAdapter() {
         binding.apply {
-            rvPokemonEvolutionDepth0.adapter = evolutionDepth0Adapter
-            rvPokemonEvolutionDepth1.adapter = evolutionDepth1Adapter
-            rvPokemonEvolutionDepth2.adapter = evolutionDepth2Adapter
-            rvPokemonEvolutionDepth3.adapter = evolutionDepth3Adapter
+            rvPokemonEvolutionDepth0.recyclerView.adapter = evolutionDepth0Adapter
+            rvPokemonEvolutionDepth1.recyclerView.adapter = evolutionDepth1Adapter
+            rvPokemonEvolutionDepth2.recyclerView.adapter = evolutionDepth2Adapter
+            rvPokemonEvolutionDepth3.recyclerView.adapter = evolutionDepth3Adapter
         }
     }
 
