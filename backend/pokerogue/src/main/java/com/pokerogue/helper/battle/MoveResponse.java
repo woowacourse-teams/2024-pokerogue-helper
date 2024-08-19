@@ -10,15 +10,15 @@ public record MoveResponse(
         String effect
 ) {
 
-    public static MoveResponse of(Move move, String typeLogo, String categoryLogo) {
+    public static MoveResponse of(BattleMove battleMove, String typeLogo, String categoryLogo) {
         return new MoveResponse(
-                move.id(),
-                move.name(),
+                battleMove.id(),
+                battleMove.name(),
                 typeLogo,
                 categoryLogo,
-                move.power(),
-                move.accuracy(),
-                move.effect()
+                battleMove.power(),
+                battleMove.accuracy(),
+                battleMove.effect()
         );
     }
 }

@@ -24,7 +24,7 @@ public class DataInitializer implements ApplicationRunner {
     private static final String LIST_DELIMITER = ",";
 
     private final WeatherRepository weatherRepository;
-    private final MoveRepository moveRepository;
+    private final BattleMoveRepository battleMoveRepository;
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
@@ -38,8 +38,8 @@ public class DataInitializer implements ApplicationRunner {
             weatherRepository.save(weather);
         });
         saveData("battle-move.txt", fields -> {
-            Move move = createMove(fields);
-            moveRepository.save(move);
+            BattleMove battleMove = createMove(fields);
+            battleMoveRepository.save(battleMove);
         });
         saveData("tms.txt", fields -> {
             PokemonMovesByMachine pokemonMovesByMachine = createPokemonMovesByMachine(fields);
@@ -92,8 +92,8 @@ public class DataInitializer implements ApplicationRunner {
         return new Weather(id, name, description, effects);
     }
 
-    private Move createMove(List<String> fields) {
-        return new Move(
+    private BattleMove createMove(List<String> fields) {
+        return new BattleMove(
                 fields.get(1), /* 우선은 한글 이름을 id로 설정, 추후 숫자로 변경 */
                 fields.get(1),
                 fields.get(2),

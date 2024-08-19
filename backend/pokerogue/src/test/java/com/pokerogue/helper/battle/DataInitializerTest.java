@@ -15,7 +15,7 @@ class DataInitializerTest {
     @DisplayName("날씨, 기술 데이터를 세팅한다.")
     void setWeathersData() {
         WeatherRepository weatherRepository = new WeatherRepository();
-        MoveRepository moveRepository = new MoveRepository();
+        BattleMoveRepository battleMoveRepository = new BattleMoveRepository();
         PokemonMovesByMachineRepository pokemonMovesByMachineRepository = new PokemonMovesByMachineRepository();
         PokemonMovesBySelfRepository pokemonMovesBySelfRepository = new PokemonMovesBySelfRepository();
         PokemonMovesByEggRepository pokemonMovesByEggRepository = new PokemonMovesByEggRepository();
@@ -23,7 +23,7 @@ class DataInitializerTest {
         S3Service s3Service = new S3Service(new FakeS3ImageClient());
         DataInitializer dataInitializer = new DataInitializer(
                 weatherRepository,
-                moveRepository,
+                battleMoveRepository,
                 pokemonMovesByMachineRepository,
                 pokemonMovesBySelfRepository,
                 pokemonMovesByEggRepository,
@@ -34,7 +34,7 @@ class DataInitializerTest {
 
         assertAll(() -> {
             assertThat(weatherRepository.findAll()).hasSize(10);
-            assertThat(moveRepository.findAll()).hasSize(902);
+            assertThat(battleMoveRepository.findAll()).hasSize(902);
             assertThat(pokemonMovesByMachineRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesBySelfRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesByEggRepository.findAll()).hasSize(1082);

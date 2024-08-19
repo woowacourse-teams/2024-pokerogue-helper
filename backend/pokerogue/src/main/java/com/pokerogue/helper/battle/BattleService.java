@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class BattleService {
 
     private final WeatherRepository weatherRepository;
-    private final MoveRepository moveRepository;
+    private final BattleMoveRepository battleMoveRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
@@ -36,27 +36,27 @@ public class BattleService {
         allMoveIds.addAll(pokemonMovesBySelf.moveIds());
         allMoveIds.addAll(pokemonMovesByMachine.moveIds());
         allMoveIds.addAll(pokemonMovesByEgg.moveIds());
-        List<Move> moves = allMoveIds.stream()
+        List<BattleMove> battleMoves = allMoveIds.stream()
                 .map(this::findMoveById)
                 .toList();
 
-        return moves.stream()
+        return battleMoves.stream()
                 .map(this::toMoveResponseWithLogo)
                 .toList();
     }
 
-    private Move findMoveById(String id) {
-        return moveRepository.findById(id)
+    private BattleMove findMoveById(String id) {
+        return battleMoveRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 
-    private MoveResponse toMoveResponseWithLogo(Move move) {
-        PokemonType pokemonType = battlePokemonTypeRepository.findByName(move.type())
+    private MoveResponse toMoveResponseWithLogo(BattleMove battleMove) {
+        PokemonType pokemonType = battlePokemonTypeRepository.findByName(battleMove.type())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
         String typeLogo = pokemonType.image();
-        MoveCategory moveCategory = MoveCategory.findByName(move.category().toLowerCase());
+        MoveCategory moveCategory = MoveCategory.findByName(battleMove.category().toLowerCase());
         String categoryLogo = moveCategory.getName();
 
-        return MoveResponse.of(move, typeLogo, categoryLogo);
+        return MoveResponse.of(battleMove, typeLogo, categoryLogo);
     }
 }

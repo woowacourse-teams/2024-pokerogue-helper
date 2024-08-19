@@ -1,6 +1,6 @@
 package com.pokerogue.helper.battle;
 
-public record Move(
+public record BattleMove(
         String id,
         String name,
         String nameAppend,
