@@ -55,7 +55,7 @@ public class BattleService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
         String typeLogo = pokemonType.image();
         MoveCategory moveCategory = MoveCategory.findByName(battleMove.category().toLowerCase());
-        String categoryLogo = moveCategory.getName();
+        String categoryLogo = moveCategory.getImage();
 
         return MoveResponse.of(battleMove, typeLogo, categoryLogo);
     }
