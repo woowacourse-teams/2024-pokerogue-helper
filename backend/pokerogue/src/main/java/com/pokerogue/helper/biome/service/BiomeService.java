@@ -33,6 +33,7 @@ public class BiomeService {
         return biomeRepository.findAll().stream()
                 .map(biome -> BiomeResponse.from(
                         biome,
+                        s3Service.getBiomeImageFromS3(biome.getId()),
                         getTrainerTypes(biome.getMainTypes()),
                         getTrainerTypes(biome.getTrainerTypes()))
                 )
@@ -44,6 +45,7 @@ public class BiomeService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
         return BiomeDetailResponse.of(
                 biome,
+                s3Service.getBiomeImageFromS3(biome.getId()),
                 getWildPokemons(biome),
                 getBossPokemons(biome),
                 getTrainerPokemons(biome),
@@ -104,6 +106,7 @@ public class BiomeService {
         return biome.getTrainers().stream()
                 .map(trainer -> TrainerPokemonResponse.from(
                         trainer,
+                        s3Service.getTrainerImageFromS3(trainer.getId()),
                         getTrainerTypes(trainer.getTrainerTypes()),
                         getBiomePokemons(trainer.getPokemons()))
                 )

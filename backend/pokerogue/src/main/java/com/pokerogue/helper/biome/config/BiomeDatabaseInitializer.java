@@ -37,7 +37,6 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
 
     private final BiomeRepository biomeRepository;
     private final BiomePokemonInfoRepository biomePokemonInfoRepository;
-    private final S3Service s3Service;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -130,7 +129,6 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .map(trainerType -> new Trainer(
                         trainerType.getId(),
                         trainerType.getTrainerName(),
-                        s3Service.getTrainerImageFromS3(trainerType.getId()),
                         trainerType.getTrainerTypes(),
                         getTrainerPokemons(trainerPokemons, trainerType.getTrainerName()))
                 )
@@ -140,7 +138,6 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .map(biomeTypeAndTrainer -> new Biome(
                         biomeTypeAndTrainer.getId(),
                         biomeTypeAndTrainer.getBiomeName(),
-                        s3Service.getBiomeImageFromS3(biomeTypeAndTrainer.getId()),
                         getBiomePokemons(biomePokemons, biomeTypeAndTrainer.getBiomeName()),
                         biomeTypeAndTrainer.getBiomeTypes(),
                         getBiomeTrainers(trainers, biomeTypeAndTrainer.getTrainerNames()),

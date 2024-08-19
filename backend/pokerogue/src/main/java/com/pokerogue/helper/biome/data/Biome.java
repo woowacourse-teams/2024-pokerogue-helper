@@ -11,7 +11,6 @@ public class Biome {
 
     private final String id;
     private final String name;
-    private final String image;
     private final Map<Tier, List<String>> pokemons;
     private final List<String> mainTypes;
     private final List<Trainer> trainers;
@@ -20,7 +19,6 @@ public class Biome {
     public Biome(
             String id,
             String name,
-            String image,
             Map<Tier, List<String>> pokemons,
             List<String> mainTypes,
             List<Trainer> trainers,
@@ -28,7 +26,6 @@ public class Biome {
     ) {
         this.id = id;
         this.name = name;
-        this.image = image;
         this.pokemons = pokemons;
         this.mainTypes = mainTypes;
         this.trainers = trainers;

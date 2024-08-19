@@ -12,11 +12,12 @@ public record TrainerPokemonResponse(
 
     public static TrainerPokemonResponse from(
             Trainer trainer,
+            String trainerImage,
             List<String> trainerTypes,
             List<BiomePokemonResponse> trainerPokemons) {
         return new TrainerPokemonResponse(
                 trainer.getName(),
-                trainer.getImage(),
+                trainerImage,
                 trainerTypes,
                 trainerPokemons
         );
