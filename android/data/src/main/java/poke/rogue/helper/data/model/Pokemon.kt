@@ -1,6 +1,7 @@
 package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse2
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 data class Pokemon(
@@ -42,6 +43,23 @@ fun PokemonResponse.toData(): Pokemon =
         name = name,
         imageUrl = image,
         types = types.map(PokemonTypeResponse::toData),
+    )
+
+fun PokemonResponse2.toData(): Pokemon =
+    Pokemon(
+        id = id,
+        dexNumber = pokedexNumber,
+        name = name,
+        imageUrl = image,
+        types = types.map(PokemonTypeResponse::toData),
+        generation = PokemonGeneration.of(generation),
+        baseStat = baseStats,
+        speed = speed,
+        hp = hp,
+        attack = attack,
+        defense = defense,
+        specialAttack = specialAttack,
+        specialDefense = specialDefense,
     )
 
 fun List<PokemonResponse>.toData(): List<Pokemon> = map(PokemonResponse::toData)

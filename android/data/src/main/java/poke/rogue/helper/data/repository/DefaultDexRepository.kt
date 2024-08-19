@@ -15,7 +15,7 @@ class DefaultDexRepository(
 
     override suspend fun pokemons(): List<Pokemon> {
         if (cachedPokemons.isEmpty()) {
-            cachedPokemons = dexDataSource.pokemons()
+            cachedPokemons = dexDataSource.pokemons2()
         }
         return cachedPokemons
     }
