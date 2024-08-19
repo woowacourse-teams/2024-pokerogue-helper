@@ -3,18 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="evolution"
+            type="poke.rogue.helper.presentation.dex.model.SingleEvolutionUiModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_pokemon_detail_evolution"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf=""
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            imageUrl="@{evolution.imageUrl}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_pokemon_name"
+            app:layout_constraintEnd_toEndOf="@id/tv_pokemon_detail_evolution_pokemon_name"
+            app:layout_constraintStart_toStartOf="@id/tv_pokemon_detail_evolution_pokemon_name"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription"
             tools:src="@tools:sample/avatars" />
@@ -24,9 +31,10 @@
             style="@style/TextAppearance.Poke.TitleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{evolution.pokemonName}"
             app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_pokemon_condition"
-            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_evolution"
-            app:layout_constraintStart_toStartOf="@id/iv_pokemon_detail_evolution"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_evolution"
             tools:text="라이츄-알로라" />
 
@@ -35,8 +43,9 @@
             style="@style/TextAppearance.Poke.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_evolution"
-            app:layout_constraintStart_toStartOf="@id/iv_pokemon_detail_evolution"
+            android:text="@{evolution.condition}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_evolution_pokemon_name"
             tools:text="섬이나 해변에서 아이템 사용" />
 
@@ -45,11 +54,11 @@
             style="@style/TextAppearance.Poke.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_evolution"
-            app:layout_constraintStart_toStartOf="@id/iv_pokemon_detail_evolution"
+            android:text="@{evolution.item}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_evolution_pokemon_condition"
             tools:text="아이템: 천둥의 돌" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
