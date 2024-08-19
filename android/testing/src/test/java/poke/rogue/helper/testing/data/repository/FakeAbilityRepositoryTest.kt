@@ -1,10 +1,10 @@
 package poke.rogue.helper.testing.data.repository
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import poke.rogue.helper.data.repository.AbilityRepository
 
 class FakeAbilityRepositoryTest {
@@ -67,8 +67,8 @@ class FakeAbilityRepositoryTest {
     fun `잘못된 ID값으로 조회하면, 특성 정보를 불러올 때 예외가 발생한다`() =
         runTest {
             // when, then
-            assertThrows<IllegalArgumentException> {
-                repository.abilityDetail(-1)
+            shouldThrow<IllegalArgumentException> {
+                repository.abilityDetail("-1")
             }
         }
 }
