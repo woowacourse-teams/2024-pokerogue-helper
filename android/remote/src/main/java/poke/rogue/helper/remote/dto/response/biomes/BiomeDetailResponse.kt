@@ -19,6 +19,7 @@ class BiomeDetailResponse(
 
 @Serializable
 data class BiomePokemonResponse(
+    val id: String,
     val name: String,
     val image: String,
     @SerialName("pokemonTypeResponses")
