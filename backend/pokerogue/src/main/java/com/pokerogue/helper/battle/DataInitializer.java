@@ -88,6 +88,7 @@ public class DataInitializer implements ApplicationRunner {
         List<String> effects = Arrays.stream(fields.get(3).split(LIST_DELIMITER))
                 .map(String::trim)
                 .toList();
+
         return new Weather(id, name, description, effects);
     }
 
@@ -117,6 +118,7 @@ public class DataInitializer implements ApplicationRunner {
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .toList();
+
         return new PokemonMovesByMachine(pokedexNumber, moveIds);
     }
 
@@ -126,6 +128,7 @@ public class DataInitializer implements ApplicationRunner {
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .toList();
+
         return new PokemonMovesBySelf(pokedexNumber, moveIds);
     }
 
@@ -135,6 +138,7 @@ public class DataInitializer implements ApplicationRunner {
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .toList();
+
         return new PokemonMovesByEgg(pokedexNumber, moveIds);
     }
 
@@ -142,6 +146,7 @@ public class DataInitializer implements ApplicationRunner {
         String name = fields.get(0);
         String engName = fields.get(1);
         String image = s3Service.getPokerogueTypeImageFromS3(engName);
+
         return new PokemonType(name, engName, image);
     }
 

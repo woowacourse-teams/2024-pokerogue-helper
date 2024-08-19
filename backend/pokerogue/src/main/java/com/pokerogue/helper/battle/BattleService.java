@@ -39,6 +39,7 @@ public class BattleService {
         List<Move> moves = allMoveIds.stream()
                 .map(this::findMoveById)
                 .toList();
+
         return moves.stream()
                 .map(this::toMoveResponseWithLogo)
                 .toList();
@@ -55,6 +56,7 @@ public class BattleService {
         String typeLogo = pokemonType.image();
         MoveCategory moveCategory = MoveCategory.findByName(move.category().toLowerCase());
         String categoryLogo = moveCategory.getName();
+
         return MoveResponse.of(move, typeLogo, categoryLogo);
     }
 }
