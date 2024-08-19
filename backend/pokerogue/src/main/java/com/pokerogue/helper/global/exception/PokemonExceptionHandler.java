@@ -14,7 +14,7 @@ public class PokemonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(GlobalCustomException.class)
     public ResponseEntity<String> handleViolationException(GlobalCustomException e) {
-        log.error("error message : {}", e.getMessage());
+        log.error("error message : {}", e.getStackTrace()[0]);
 
         return ResponseEntity.status(e.getHttpStatus())
                 .body(e.getMessage());
@@ -38,7 +38,7 @@ public class PokemonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleUnExpectedException(Exception e) {
-        log.error("error message : {}", e.getStackTrace()[0]);
+        log.error("error message : {}", e);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("핸들링 하지 않은 에러가 발생했습니다.");
