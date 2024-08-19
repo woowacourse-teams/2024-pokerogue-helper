@@ -47,12 +47,11 @@
         <item name="popupTheme">@style/toolbar_menu_text</item>
     </style>
 
-    <style name="Base.Widget.Material3.TabLayout" parent="android:Widget" tools:ignore="PrivateResource">
-        <item name="tabBackground">@drawable/tab_background</item>
-        <item name="tabIndicatorColor">@color/poke_white</item>
-        <item name="tabIndicatorHeight">2dp</item>
-        <item name="tabTextColor">@color/poke_white</item>
-        <item name="tabSelectedTextColor">@color/poke_black</item>
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabMode">fixed</item>
+        <item name="tabSelectedTextColor">@color/poke_white</item>
+        <item name="tabBackground">@color/tablayout_background</item>
+        <item name="tabIndicatorColor">@color/poke_electric</item>
     </style>
 
     <style name="HighlightTextStyle">
