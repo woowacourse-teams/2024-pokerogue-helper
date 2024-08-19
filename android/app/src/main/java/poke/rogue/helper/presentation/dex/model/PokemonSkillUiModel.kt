@@ -5,7 +5,7 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
 
 data class PokemonSkillUiModel(
-    val id: Long,
+    val id: String,
     val name: String,
     val level: Int,
     val power: String,
@@ -20,7 +20,7 @@ data class PokemonSkillUiModel(
 
 fun PokemonSkill.toUi(): PokemonSkillUiModel =
     PokemonSkillUiModel(
-        id = id,
+        id = id.toString(),
         name = name,
         level = level,
         power = if (power == PokemonSkill.NO_POWER_VALUE) PokemonSkillUiModel.NO_POWER else power.toString(),

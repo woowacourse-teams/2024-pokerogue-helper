@@ -22,8 +22,9 @@ class RemoteAbilityDataSource(
             .getOrThrow()
             .map { it.toData() }
 
-    suspend fun abilityDetail(id: Long): AbilityDetail =
-        abilityService.ability(id)
+    // TODO: 서비스에서 실제로 string 값을 보내준다면 id.toLong 에서 toLong 을 제거합시다
+    suspend fun abilityDetail(id: String): AbilityDetail =
+        abilityService.ability(id.toLong())
             .onFailure {
                 logger.logError(throwable, "abilityService - ability($id) 에서 발생")
             }

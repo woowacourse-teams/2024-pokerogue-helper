@@ -12,6 +12,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.annotation.ArrayRes
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -60,6 +61,10 @@ fun Context.stringOf(
     @StringRes resId: Int,
     vararg formatArgs: Any?,
 ) = getString(resId, *formatArgs)
+
+fun Context.stringArrayOf(
+    @ArrayRes resId: Int,
+) = resources.getStringArray(resId)
 
 fun Context.colorOf(
     @ColorRes resId: Int,

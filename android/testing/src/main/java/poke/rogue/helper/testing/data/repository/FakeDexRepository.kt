@@ -1,8 +1,11 @@
 package poke.rogue.helper.testing.data.repository
 
-import poke.rogue.helper.data.model.Ability
+import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonCategory
 import poke.rogue.helper.data.model.PokemonDetail
+import poke.rogue.helper.data.model.PokemonDetailAbility
+import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonGeneration
 import poke.rogue.helper.data.model.PokemonSkill
@@ -27,7 +30,7 @@ class FakeDexRepository : DexRepository {
         }.toFilteredPokemons(sort, filters)
     }
 
-    override suspend fun pokemonDetail(id: Long): PokemonDetail = DUMMY_POKEMON_DETAIL
+    override suspend fun pokemonDetail(id: String): PokemonDetail = DUMMY_POKEMON_DETAIL
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
@@ -57,7 +60,7 @@ class FakeDexRepository : DexRepository {
         val POKEMONS: List<Pokemon> =
             listOf(
                 Pokemon(
-                    id = 1,
+                    id = "1",
                     dexNumber = 1,
                     name = "이상해씨",
                     imageUrl = pokemonImageUrl(pokemonId = 1),
@@ -72,7 +75,7 @@ class FakeDexRepository : DexRepository {
                     speed = 45,
                 ),
                 Pokemon(
-                    id = 2,
+                    id = "2",
                     dexNumber = 2,
                     name = "이상해풀",
                     imageUrl = pokemonImageUrl(pokemonId = 2),
@@ -87,7 +90,7 @@ class FakeDexRepository : DexRepository {
                     speed = 60,
                 ),
                 Pokemon(
-                    id = 3,
+                    id = "3",
                     dexNumber = 3,
                     name = "이상해꽃",
                     imageUrl = pokemonImageUrl(pokemonId = 3),
@@ -102,7 +105,7 @@ class FakeDexRepository : DexRepository {
                     speed = 195,
                 ),
                 Pokemon(
-                    id = 4,
+                    id = "4",
                     dexNumber = 4,
                     name = "파이리",
                     imageUrl = pokemonImageUrl(pokemonId = 4),
@@ -117,7 +120,7 @@ class FakeDexRepository : DexRepository {
                     speed = 65,
                 ),
                 Pokemon(
-                    id = 5,
+                    id = "5",
                     dexNumber = 5,
                     name = "리자드",
                     imageUrl = pokemonImageUrl(pokemonId = 5),
@@ -132,7 +135,7 @@ class FakeDexRepository : DexRepository {
                     speed = 80,
                 ),
                 Pokemon(
-                    id = 6,
+                    id = "6",
                     dexNumber = 6,
                     name = "리자몽",
                     imageUrl = pokemonImageUrl(pokemonId = 6),
@@ -147,7 +150,7 @@ class FakeDexRepository : DexRepository {
                     speed = 100,
                 ),
                 Pokemon(
-                    id = 7,
+                    id = "7",
                     dexNumber = 7,
                     name = "꼬부기",
                     imageUrl = pokemonImageUrl(pokemonId = 7),
@@ -162,7 +165,7 @@ class FakeDexRepository : DexRepository {
                     speed = 43,
                 ),
                 Pokemon(
-                    id = 8,
+                    id = "8",
                     dexNumber = 8,
                     name = "어니부기",
                     imageUrl = pokemonImageUrl(pokemonId = 8),
@@ -177,7 +180,7 @@ class FakeDexRepository : DexRepository {
                     speed = 58,
                 ),
                 Pokemon(
-                    id = 9,
+                    id = "9",
                     dexNumber = 9,
                     name = "거북왕",
                     imageUrl = pokemonImageUrl(pokemonId = 9),
@@ -192,7 +195,7 @@ class FakeDexRepository : DexRepository {
                     speed = 78,
                 ),
                 Pokemon(
-                    id = 373,
+                    id = "373",
                     dexNumber = 373,
                     name = "보만다",
                     imageUrl = pokemonImageUrl(pokemonId = 373),
@@ -211,6 +214,11 @@ class FakeDexRepository : DexRepository {
         val DUMMY_POKEMON_DETAIL =
             PokemonDetail(
                 pokemon = Pokemon.DUMMY,
+                abilities =
+                    listOf(
+                        PokemonDetailAbility("450", "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다.", false, false),
+                        PokemonDetailAbility("419", "엽록소", description = "날씨가 맑을 때 스피드가 올라간다.", false, false),
+                    ),
                 stats =
                     listOf(
                         Stat("hp", 45),
@@ -221,14 +229,17 @@ class FakeDexRepository : DexRepository {
                         Stat("speed", 45),
                         Stat("total", 318),
                     ),
-                abilities =
-                    listOf(
-                        Ability(450, "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다."),
-                        Ability(419, "엽록소", description = "날씨가 맑을 때 스피드가 올라간다."),
+                pokemonCategory = PokemonCategory.EMPTY,
+                evolutions = emptyList(),
+                skills =
+                    PokemonDetailSkills(
+                        selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                        tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
+                        eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
                     ),
-                skills = PokemonSkill.FAKE_SKILLS,
-                height = 0.7f,
-                weight = 6.9f,
+                biomes = Biome.DUMMYS,
+                height = 0.7,
+                weight = 6.9,
             )
     }
 }

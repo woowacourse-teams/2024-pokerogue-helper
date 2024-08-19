@@ -11,7 +11,7 @@ class DefaultDexRepository(
     private val dexDataSource: RemoteDexDataSource,
 ) : DexRepository {
     private var cachedPokemons: List<Pokemon> = emptyList()
-    private var cachedPokemonDetails: MutableMap<Long, PokemonDetail> = mutableMapOf()
+    private var cachedPokemonDetails: MutableMap<String, PokemonDetail> = mutableMapOf()
 
     override suspend fun pokemons(): List<Pokemon> {
         if (cachedPokemons.isEmpty()) {
@@ -32,7 +32,7 @@ class DefaultDexRepository(
         }.toFilteredPokemons(sort, filters)
     }
 
-    override suspend fun pokemonDetail(id: Long): PokemonDetail {
+    override suspend fun pokemonDetail(id: String): PokemonDetail {
         val cached = cachedPokemonDetails[id]
         if (cached != null) {
             return cached

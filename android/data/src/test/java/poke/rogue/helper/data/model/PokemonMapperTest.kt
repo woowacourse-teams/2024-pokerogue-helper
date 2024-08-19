@@ -26,7 +26,7 @@ class PokemonMapperTest {
         // when
         val expectedPokemonData =
             Pokemon(
-                id = 1,
+                id = "1",
                 dexNumber = 1,
                 name = "name",
                 imageUrl = "image",
@@ -46,21 +46,21 @@ class PokemonMapperTest {
         val expectedPokemonDatas =
             listOf(
                 Pokemon(
-                    id = 1,
+                    id = "1",
                     dexNumber = 10,
                     name = "pokemon1",
                     imageUrl = "logo1",
                     types = listOf(Type.GRASS, Type.POISON),
                 ),
                 Pokemon(
-                    id = 2,
+                    id = "2",
                     dexNumber = 20,
                     name = "pokemon2",
                     imageUrl = "logo2",
                     types = listOf(Type.GRASS, Type.POISON),
                 ),
                 Pokemon(
-                    id = 3,
+                    id = "3",
                     dexNumber = 30,
                     name = "pokemon3",
                     imageUrl = "logo3",

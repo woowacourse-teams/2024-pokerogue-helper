@@ -31,11 +31,14 @@ class AbilityDetailViewModelTest {
     fun `특성 id값으로 특성 상세 정보를 불러온다`() =
         runTest {
             // given
-            val abilityId = 1L
+            val abilityId = "1L"
 
             // when
             viewModel.updateAbilityDetail(abilityId)
-            val abilityDetail = viewModel.abilityDetail.first()
+            val abilityDetail =
+                viewModel.abilityDetail.first {
+                    it is AbilityDetailUiState.Success
+                }
             val detail = (abilityDetail as AbilityDetailUiState.Success).data.toUi()
 
             // then
@@ -48,7 +51,7 @@ class AbilityDetailViewModelTest {
         runTest {
             // given
             Dispatchers.setMain(StandardTestDispatcher())
-            val pokemonId = 1L
+            val pokemonId = "1L"
 
             // when
             viewModel.navigateToPokemonDetail(pokemonId)

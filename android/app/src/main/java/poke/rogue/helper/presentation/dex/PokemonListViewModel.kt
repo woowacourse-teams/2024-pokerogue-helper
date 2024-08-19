@@ -64,12 +64,12 @@ class PokemonListViewModel(
                 combine(pokeSort, pokeFilter) { sort, filter ->
                     PokemonListUiState(
                         pokemons =
-                            queriedPokemons(
-                                query = query,
-                                types = filter.selectedTypes,
-                                generation = filter.selectedGeneration,
-                                sort = sort,
-                            ),
+                        queriedPokemons(
+                            query = query,
+                            types = filter.selectedTypes,
+                            generation = filter.selectedGeneration,
+                            sort = sort,
+                        ),
                         sort = sort,
                         filteredTypes = filter.selectedTypes,
                         filteredGeneration = filter.selectedGeneration,
@@ -92,7 +92,7 @@ class PokemonListViewModel(
                 true,
             )
 
-    private val _navigateToDetailEvent = MutableSharedFlow<Long>()
+    private val _navigateToDetailEvent = MutableSharedFlow<String>()
     val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
 
     private suspend fun queriedPokemons(
@@ -119,7 +119,7 @@ class PokemonListViewModel(
         }
     }
 
-    override fun navigateToPokemonDetail(pokemonId: Long) {
+    override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
             _navigateToDetailEvent.emit(pokemonId)
         }
