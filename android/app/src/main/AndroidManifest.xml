@@ -18,6 +18,9 @@
         android:theme="@style/Theme.PokeRogueHelper"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.battle.selection.BattleSelectionActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.battle.BattleActivity"
             android:exported="false" />
         <activity
