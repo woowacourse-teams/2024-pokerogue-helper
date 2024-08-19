@@ -87,9 +87,9 @@ class FakeDexRepositoryTest {
                 repository.filteredPokemons(
                     name = name,
                     filters =
-                    listOf(
-                        PokemonFilter.ByGeneration(generation),
-                    ),
+                        listOf(
+                            PokemonFilter.ByGeneration(generation),
+                        ),
                 )
             // then
             val expect =
@@ -109,10 +109,10 @@ class FakeDexRepositoryTest {
             val actual =
                 repository.filteredPokemons(
                     filters =
-                    listOf(
-                        PokemonFilter.ByGeneration(generation),
-                        PokemonFilter.ByType(Type.FIRE),
-                    ),
+                        listOf(
+                            PokemonFilter.ByGeneration(generation),
+                            PokemonFilter.ByType(Type.FIRE),
+                        ),
                 )
             // then
             val expect =
