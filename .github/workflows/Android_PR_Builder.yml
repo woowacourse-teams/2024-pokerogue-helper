@@ -83,8 +83,8 @@ jobs:
         run: ./gradlew ktlintCheck
         working-directory: android
 
-      - name: run rest
-        run: ./gradlew test
+      - name: run debug unit test
+        run: ./gradlew testDebugUnitTest
         working-directory: android
 
       - name: Build debug APK
