@@ -1,7 +1,9 @@
 package com.pokerogue.helper.pokemon2.service;
 
 
+import com.pokerogue.helper.pokemon2.Ability;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
+import com.pokerogue.helper.pokemon2.data.Type;
 import com.pokerogue.helper.pokemon2.dto.BiomeResponse;
 import com.pokerogue.helper.pokemon2.dto.EggMoveResponse;
 import com.pokerogue.helper.pokemon2.dto.EvolutionResponse;
@@ -11,6 +13,7 @@ import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.dto.Pokemon2DetailResponse;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,47 +66,36 @@ public class Pokemon2Service {
     }
 
     private Pokemon2DetailResponse toPokemon2DetailResponse(Pokemon pokemon) {
-        List<PokemonTypeResponse> pokemonTypeResponses = List.of(
-                PokemonTypeResponse.from(pokemon.type1()),
-                PokemonTypeResponse.from(pokemon.type2())
-        );
-        List<PokemonAbilityResponse> pokemonAbilityResponses = List.of(
-                PokemonAbilityResponse.from(pokemon.abilityPassive()),
-                PokemonAbilityResponse.from(pokemon.abilityHidden()),
-                PokemonAbilityResponse.from(pokemon.ability1()),
-                PokemonAbilityResponse.from(pokemon.ability2())
-        );
+        List<PokemonTypeResponse> pokemonTypeResponses = createTypeResponse(pokemon);
+        List<PokemonAbilityResponse> pokemonAbilityResponses = createAbilityResponse(pokemon);
         //TODO: evol
         EvolutionResponse evolutionResponse = null;
         List<EggMoveResponse> moveResponse = createMoveResponse(pokemon.moves());
         List<EggMoveResponse> eggMoveResponse = createMoveResponse(pokemon.eggMoves());
         List<BiomeResponse> biomeResponse = createBiomeResponse(pokemon.biomes());
+        List<Integer> stats = Arrays.stream(pokemon.baseStats().split(","))
+                .map(Integer::parseInt)
+                .toList();
         return new Pokemon2DetailResponse(
                 pokemon.id(),
-                0L,
+                Long.parseLong(pokemon.speciesId()),
                 pokemon.koName(),
                 "image",
                 pokemonTypeResponses,
                 pokemonAbilityResponses,
-                0,
-                // pokemon.baseTotal(),
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                false,
-                false,
-                false,
-                // pokemon.legendary(),
-                // pokemon.subLegendary(),
-                // pokemon.mythical(),
-                false,
-//                pokemon.weight(),
-//                pokemon.height(),
-                0.0,
-                0.0,
+                Integer.parseInt(pokemon.baseTotal()),
+                stats.get(0),
+                stats.get(1),
+                stats.get(2),
+                stats.get(3),
+                stats.get(4),
+                stats.get(5),
+                Boolean.valueOf(pokemon.legendary()),
+                Boolean.valueOf(pokemon.subLegendary()),
+                Boolean.valueOf(pokemon.mythical()),
+                Boolean.valueOf(pokemon.canChangeForm()),
+                Double.parseDouble(pokemon.weight()),
+                Double.parseDouble(pokemon.height()),
                 evolutionResponse,
                 moveResponse,
                 eggMoveResponse,
@@ -111,11 +103,39 @@ public class Pokemon2Service {
         );
     }
 
-    private List<BiomeResponse> createBiomeResponse(List<String> biomes) {
-        return null;
+    private List<PokemonAbilityResponse> createAbilityResponse(Pokemon pokemon) {
+        Ability passive = Ability.findById(pokemon.abilityPassive());
+        Ability hidden = Ability.findById(pokemon.abilityHidden());
+        Ability ability1 = Ability.findById(pokemon.ability1());
+        Ability ability2 = Ability.findById(pokemon.ability2());
+
+        return List.of(
+                PokemonAbilityResponse.from(passive.getName(), passive.getDescription(), true, false),
+                PokemonAbilityResponse.from(hidden.getName(), hidden.getDescription(), false, true),
+                PokemonAbilityResponse.from(ability1.getName(), ability1.getDescription(), false, false),
+                PokemonAbilityResponse.from(ability2.getName(), ability2.getDescription(), false, false)
+        );
     }
 
-    private List<EggMoveResponse> createMoveResponse(List<String> strings) {
+    private List<PokemonTypeResponse> createTypeResponse(Pokemon pokemon) {
+        Type type1 = Type.findById(pokemon.type1());
+        Type type2 = Type.findById(pokemon.type2());
+        return List.of(
+                PokemonTypeResponse.of(type1.getId(), type1.getName()),
+                PokemonTypeResponse.of(type2.getId(), type2.getName())
+        );
+    }
+
+    private List<BiomeResponse> createBiomeResponse(List<String> biomes) {
+        return biomes.stream()
+                .map(BiomeResponse::from)
+                .toList();
+    }
+
+    private List<EggMoveResponse> createMoveResponse(List<String> moves) {
         return null;
+//        return moves.stream()
+//                .map(EggMoveResponse::from)
+//                .toList();
     }
 }

@@ -1,11 +1,8 @@
 package com.pokerogue.helper.pokemon2.dto;
 
-import jakarta.annotation.Nullable;
-
-@Nullable
 public record PokemonAbilityResponse(String id, String name, String description, Boolean passive, Boolean hidden) {
 
-    public static PokemonAbilityResponse from(String ability) {
-        return new PokemonAbilityResponse("","","",false,false);
+    public static PokemonAbilityResponse from(String name, String description, boolean passive, boolean hidden) {
+        return new PokemonAbilityResponse(name, name, description, passive, hidden);
     }
 }

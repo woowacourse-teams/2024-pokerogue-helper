@@ -9,7 +9,7 @@ public record PokemonTypeResponse(String pokemonTypeName, String pokemonTypeLogo
         return new PokemonTypeResponse(pokemonType.getName(), pokemonType.getImage());
     }
 
-    public static PokemonTypeResponse from(String pokemonTypeName) {
-        return new PokemonTypeResponse(pokemonTypeName, "image");
+    public static PokemonTypeResponse of(String id, String name) {
+        return new PokemonTypeResponse(name, "URL" + id);
     }
 }
