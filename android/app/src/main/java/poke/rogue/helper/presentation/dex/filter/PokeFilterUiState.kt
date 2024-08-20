@@ -1,12 +1,15 @@
 package poke.rogue.helper.presentation.dex.filter
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 
+@Parcelize
 data class PokeFilterUiState(
     val types: List<SelectableUiModel<TypeUiModel>>,
     val generations: List<SelectableUiModel<PokeGenerationUiModel>>,
     val selectedTypes: List<TypeUiModel> = emptyList(),
-) {
+) : Parcelable {
     init {
         require(generations.any { it.isSelected }) {
             "적어도 하나의 세대가 선택되어야 합니다."
