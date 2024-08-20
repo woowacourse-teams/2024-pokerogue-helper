@@ -19,11 +19,8 @@ class BattleSelectionActivity :
     private val viewModel by viewModels<BattleSelectionViewModel> {
         BattleSelectionViewModel.factory(isSkillSelectionRequired)
     }
-    private val isSkillSelectionRequired by lazy {
-        intent.getBooleanExtra(
-            KEY_HAS_SKILL_SELECTION,
-            false,
-        )
+    private val previousSelection by lazy {
+        intent.parcelable<SelectionData>(KEY_PREVIOUS_SELECTION) ?: throw IllegalArgumentException("잘못된 선택 데이터")
     }
     private val selectionPagerAdapter: BattleSelectionPagerAdapter by lazy {
         BattleSelectionPagerAdapter(this)
@@ -79,15 +76,15 @@ class BattleSelectionActivity :
     }
 
     companion object {
-        private const val KEY_HAS_SKILL_SELECTION = "hasSkillSelection"
+        private const val KEY_PREVIOUS_SELECTION = "previousSelection"
         const val KEY_SELECTION_RESULT = "selectionResult"
 
         fun intent(
             context: Context,
-            hasSkillSelection: Boolean,
+            previousSelection: SelectionData,
         ): Intent =
             Intent(context, BattleSelectionActivity::class.java).apply {
-                putExtra(KEY_HAS_SKILL_SELECTION, hasSkillSelection)
+                putExtra(KEY_PREVIOUS_SELECTION, previousSelection)
             }
     }
 }

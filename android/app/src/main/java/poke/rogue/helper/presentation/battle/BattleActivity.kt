@@ -84,11 +84,11 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         }
 
         repeatOnStarted {
-            viewModel.navigateToSelection.collect { hasSkillSelection ->
+            viewModel.navigateToSelection.collect { previousSelection ->
                 val intent =
                     BattleSelectionActivity.intent(
                         this@BattleActivity,
-                        hasSkillSelection,
+                        previousSelection,
                     )
                 startActivityForResult(intent, REQUEST_CODE)
             }
