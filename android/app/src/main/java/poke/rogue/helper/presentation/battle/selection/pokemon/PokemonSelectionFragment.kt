@@ -9,6 +9,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.battle.model.selectedPokemonOrNull
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
@@ -17,7 +18,9 @@ import poke.rogue.helper.presentation.util.view.dp
 class PokemonSelectionFragment :
     ErrorHandleFragment<FragmentPokemonSelectionBinding>(R.layout.fragment_pokemon_selection) {
     private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
-    private val viewModel: PokemonSelectionViewModel by viewModels<PokemonSelectionViewModel>()
+    private val viewModel: PokemonSelectionViewModel by viewModels<PokemonSelectionViewModel> {
+        PokemonSelectionViewModel.factory(sharedViewModel.previousSelection.selectedPokemonOrNull())
+    }
     private val pokemonAdapter: PokemonSelectionAdapter by lazy {
         PokemonSelectionAdapter(viewModel)
     }

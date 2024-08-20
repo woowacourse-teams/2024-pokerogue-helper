@@ -22,19 +22,19 @@ import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.isSkillSelectionRequired
+import poke.rogue.helper.presentation.battle.model.selectedPokemonOrNull
+import poke.rogue.helper.presentation.battle.model.selectedSkillOrNull
 import poke.rogue.helper.presentation.battle.selectedData
 
 class BattleSelectionViewModel(
-    private val previousSelection: SelectionData,
+    val previousSelection: SelectionData,
     logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), NavigationHandler {
-    private val _selectedPokemon =
-        MutableStateFlow<BattleSelectionUiState<PokemonSelectionUiModel>>(BattleSelectionUiState.Empty)
-    val selectedPokemon = _selectedPokemon.asStateFlow()
+    private val _selectedPokemon: MutableStateFlow<BattleSelectionUiState<PokemonSelectionUiModel>>
+    val selectedPokemon: StateFlow<BattleSelectionUiState<PokemonSelectionUiModel>>
 
-    private val _selectedSkill =
-        MutableStateFlow<BattleSelectionUiState<SkillSelectionUiModel>>(BattleSelectionUiState.Empty)
-    val selectedSkill = _selectedSkill.asStateFlow()
+    private val _selectedSkill: MutableStateFlow<BattleSelectionUiState<SkillSelectionUiModel>>
+    val selectedSkill: StateFlow<BattleSelectionUiState<SkillSelectionUiModel>>
 
     private val _currentStep = MutableStateFlow(SelectionStep.POKEMON_SELECTION)
     val currentStep: StateFlow<SelectionStep> = _currentStep.asStateFlow()
@@ -43,6 +43,17 @@ class BattleSelectionViewModel(
         currentStep.map {
             it.isLastStep(previousSelection.isSkillSelectionRequired())
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
+
+    private val _completeSelection = MutableSharedFlow<SelectionData>()
+    val completeSelection = _completeSelection.asSharedFlow()
+
+    init {
+        _selectedPokemon = MutableStateFlow(initializeSelectedPokemon())
+        _selectedSkill = MutableStateFlow(initializeSelectedSkill())
+
+        selectedPokemon = _selectedPokemon.asStateFlow()
+        selectedSkill = _selectedSkill.asStateFlow()
+    }
 
     val canGoNextStep: StateFlow<Boolean> =
         combine(
@@ -56,8 +67,23 @@ class BattleSelectionViewModel(
             }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
-    private val _completeSelection = MutableSharedFlow<SelectionData>()
-    val completeSelection = _completeSelection.asSharedFlow()
+    private fun initializeSelectedPokemon(): BattleSelectionUiState<PokemonSelectionUiModel> {
+        val selectedPokemon = previousSelection.selectedPokemonOrNull()
+        return if (selectedPokemon != null) {
+            BattleSelectionUiState.Selected(selectedPokemon)
+        } else {
+            BattleSelectionUiState.Empty
+        }
+    }
+
+    private fun initializeSelectedSkill(): BattleSelectionUiState<SkillSelectionUiModel> {
+        val selectedSkill = previousSelection.selectedSkillOrNull()
+        return if (selectedSkill != null) {
+            BattleSelectionUiState.Selected(selectedSkill)
+        } else {
+            BattleSelectionUiState.Empty
+        }
+    }
 
     fun selectPokemon(pokemon: PokemonSelectionUiModel) {
         _selectedPokemon.value = BattleSelectionUiState.Selected(pokemon)
