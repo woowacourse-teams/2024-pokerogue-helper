@@ -4,6 +4,7 @@ import com.pokerogue.helper.biome.data.Biome;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,9 @@ public class BiomeRepository {
     public List<Biome> findAll() {
         return biomes.values().stream()
                 .toList();
+    }
+
+    public Optional<Biome> findById(String id) {
+        return Optional.ofNullable(biomes.get(id));
     }
 }
