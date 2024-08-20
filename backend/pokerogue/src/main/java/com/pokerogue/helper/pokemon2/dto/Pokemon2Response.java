@@ -11,6 +11,7 @@ public record Pokemon2Response(
         String id,
         Long pokedexNumber,
         String name,
+        String formName,
         String image,
         List<PokemonTypeResponse> pokemonTypeResponses,
         Integer generation,
@@ -31,6 +32,7 @@ public record Pokemon2Response(
                 pokemon.id(),
                 Long.parseLong(pokemon.speciesId()),
                 pokemon.koName(),
+                pokemon.formName(),
                 "image",
                 List.of(
                         new PokemonTypeResponse(
