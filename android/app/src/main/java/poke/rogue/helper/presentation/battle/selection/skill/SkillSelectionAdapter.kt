@@ -5,13 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemBattleSkillSelectionBinding
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
-import poke.rogue.helper.presentation.battle.selection.BattleSelectionHandler
+import poke.rogue.helper.presentation.battle.selection.SelectableUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class SkillSelectionAdapter(private val selectionHandler: BattleSelectionHandler) :
-    ListAdapter<SkillSelectionUiModel, SkillSelectionViewHolder>(skillComparator) {
-    private var selectedSkillId: String? = null
-
+class SkillSelectionAdapter(private val selectionHandler: SkillSelectionHandler) :
+    ListAdapter<SelectableUiModel<SkillSelectionUiModel>, SkillSelectionViewHolder>(skillComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -30,34 +28,12 @@ class SkillSelectionAdapter(private val selectionHandler: BattleSelectionHandler
         position: Int,
     ) {
         val skill = getItem(position)
-        val isSelected = skill.id == selectedSkillId
-        viewHolder.bind(skill, isSelected)
-    }
-
-    fun updateSelectedSkill(selectedId: String) {
-        var previousSelectedPosition: Int? = null
-        var newSelectedPosition: Int? = null
-
-        currentList.forEachIndexed { index, skill ->
-            if (skill.id == selectedSkillId) {
-                previousSelectedPosition = index
-            }
-            if (skill.id == selectedId) {
-                newSelectedPosition = index
-            }
-            if (previousSelectedPosition != null && newSelectedPosition != null) {
-                return@forEachIndexed
-            }
-        }
-
-        selectedSkillId = selectedId
-        previousSelectedPosition?.let { notifyItemChanged(it) }
-        newSelectedPosition?.let { notifyItemChanged(it) }
+        viewHolder.bind(skill.data, skill.isSelected)
     }
 
     companion object {
         private val skillComparator =
-            ItemDiffCallback<SkillSelectionUiModel>(
+            ItemDiffCallback<SelectableUiModel<SkillSelectionUiModel>>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )

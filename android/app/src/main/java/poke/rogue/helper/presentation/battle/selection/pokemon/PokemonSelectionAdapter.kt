@@ -5,14 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemBattlePokemonSelectionBinding
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
-import poke.rogue.helper.presentation.battle.selection.BattleSelectionHandler
+import poke.rogue.helper.presentation.battle.selection.SelectableUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class PokemonSelectionAdapter(
-    private val selectionHandler: BattleSelectionHandler,
-) : ListAdapter<PokemonSelectionUiModel, PokemonSelectionViewHolder>(pokemonComparator) {
-    private var selectedPokemonId: String? = null
-
+    private val selectionHandler: PokemonSelectionHandler,
+) : ListAdapter<SelectableUiModel<PokemonSelectionUiModel>, PokemonSelectionViewHolder>(pokemonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -31,34 +29,12 @@ class PokemonSelectionAdapter(
         position: Int,
     ) {
         val pokemon = getItem(position)
-        val isSelected = pokemon.id == selectedPokemonId
-        viewHolder.bind(pokemon, isSelected)
-    }
-
-    fun updateSelectedPokemon(selectedId: String) {
-        var previousSelectedPosition: Int? = null
-        var newSelectedPosition: Int? = null
-
-        currentList.forEachIndexed { index, pokemon ->
-            if (pokemon.id == selectedPokemonId) {
-                previousSelectedPosition = index
-            }
-            if (pokemon.id == selectedId) {
-                newSelectedPosition = index
-            }
-            if (previousSelectedPosition != null && newSelectedPosition != null) {
-                return@forEachIndexed
-            }
-        }
-
-        selectedPokemonId = selectedId
-        previousSelectedPosition?.let { notifyItemChanged(it) }
-        newSelectedPosition?.let { notifyItemChanged(it) }
+        viewHolder.bind(pokemon.data, pokemon.isSelected)
     }
 
     companion object {
         private val pokemonComparator =
-            ItemDiffCallback<PokemonSelectionUiModel>(
+            ItemDiffCallback<SelectableUiModel<PokemonSelectionUiModel>>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )

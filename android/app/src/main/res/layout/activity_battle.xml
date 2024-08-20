@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.68" />
+            app:layout_constraintGuide_percent="0.72" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_bottom"
@@ -81,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{vm.selectedWeather.effect}"
+            android:text="@{vm.selectedState.weather.effect}"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@id/spinner_weather"
             app:layout_constraintStart_toStartOf="@id/spinner_weather"
@@ -89,13 +89,13 @@
 
         <TextView
             android:id="@+id/tv_opponent_pokemon"
-            style="@style/TextAppearance.Poke.TitleBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="12dp"
             android:gravity="end"
             android:text="@string/battle_opponent_pokemon_selection"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/iv_opponent_pokemon"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toTopOf="@id/iv_opponent_pokemon" />
@@ -103,17 +103,18 @@
         <ImageView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-20dp"
+            android:layout_marginBottom="-16dp"
             android:src="@drawable/icon_arena"
+            app:layout_constraintBottom_toBottomOf="@id/iv_opponent_pokemon"
             app:layout_constraintEnd_toEndOf="@id/iv_opponent_pokemon"
-            app:layout_constraintStart_toStartOf="@id/iv_opponent_pokemon"
-            app:layout_constraintTop_toBottomOf="@id/iv_opponent_pokemon" />
+            app:layout_constraintStart_toStartOf="@id/iv_opponent_pokemon" />
 
         <ImageView
             android:id="@+id/iv_opponent_pokemon"
-            android:layout_width="120dp"
+            onSingleClick="@{() -> vm.navigateToSelection(false)}"
+            android:layout_width="148dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/icon_pokemon_selection_op"
             app:layout_constraintBottom_toTopOf="@id/iv_mine_pokemon"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -121,54 +122,57 @@
 
         <TextView
             android:id="@+id/tv_mine_pokemon"
-            style="@style/TextAppearance.Poke.TitleBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="12dp"
             android:gravity="start"
             android:text="@string/battle_mine_pokemon_selection"
-            app:layout_constraintBottom_toTopOf="@id/tv_moves_title"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_skill_title"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toEndOf="@id/iv_mine_pokemon" />
 
         <ImageView
+            android:id="@+id/iv_mine_arena"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-24dp"
+            android:layout_marginBottom="-16dp"
             android:src="@drawable/icon_arena"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mine_pokemon"
             app:layout_constraintEnd_toEndOf="@id/iv_mine_pokemon"
-            app:layout_constraintStart_toStartOf="@id/iv_mine_pokemon"
-            app:layout_constraintTop_toBottomOf="@id/iv_mine_pokemon" />
+            app:layout_constraintStart_toStartOf="@id/iv_mine_pokemon" />
 
         <ImageView
             android:id="@+id/iv_mine_pokemon"
-            android:layout_width="120dp"
+            onSingleClick="@{() -> vm.navigateToSelection(true)}"
+            android:layout_width="148dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="-12dp"
-            android:layout_marginBottom="24dp"
             android:src="@drawable/icon_pokemon_selection_mine"
             app:layout_constraintBottom_toTopOf="@id/gl_divider"
             app:layout_constraintStart_toStartOf="@id/gl_start"
             app:layout_constraintTop_toBottomOf="@id/iv_opponent_pokemon" />
 
         <TextView
-            android:id="@+id/tv_moves_title"
-            style="@style/TextAppearance.Poke.TitleBold"
+            android:id="@+id/tv_skill_title"
+            onSingleClick="@{() -> vm.navigateToSelection(true)}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_battle_default"
             android:paddingHorizontal="4dp"
             android:paddingVertical="8dp"
             android:text="@string/battle_move_selection"
+            android:textStyle="bold"
             app:drawableStartCompat="@drawable/icon_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/iv_mine_pokemon"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mine_arena"
             app:layout_constraintEnd_toEndOf="@id/tv_mine_pokemon"
             app:layout_constraintStart_toStartOf="@id/tv_mine_pokemon" />
 
         <TextView
             android:id="@+id/tv_result_title"
             style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -180,6 +184,7 @@
 
         <View
             android:id="@+id/vw_divider"
+            visible="@{vm.isBattleFetchSuccessful}"
             android:layout_width="2dp"
             android:layout_height="0dp"
             android:layout_margin="24dp"
@@ -192,6 +197,7 @@
         <TextView
             android:id="@+id/tv_calculated_power_title"
             style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/battle_calculated_power_title"
@@ -202,10 +208,10 @@
         <TextView
             android:id="@+id/tv_calculated_power_content"
             style="@style/HighlightTextStyle"
+            visible="@{vm.isBattleFetchSuccessful}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="30"
             app:layout_constraintEnd_toEndOf="@id/tv_calculated_power_title"
             app:layout_constraintStart_toStartOf="@id/tv_calculated_power_title"
             app:layout_constraintTop_toBottomOf="@id/tv_calculated_power_title" />
@@ -213,6 +219,7 @@
         <TextView
             android:id="@+id/tv_accuracy_title"
             style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/battle_accuracy_title"
@@ -223,10 +230,10 @@
         <TextView
             android:id="@+id/tv_accuracy_content"
             style="@style/HighlightTextStyle"
+            visible="@{vm.isBattleFetchSuccessful}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="30"
             app:layout_constraintEnd_toEndOf="@id/tv_accuracy_title"
             app:layout_constraintStart_toStartOf="@id/tv_accuracy_title"
             app:layout_constraintTop_toBottomOf="@id/tv_accuracy_title" />

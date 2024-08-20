@@ -1,7 +1,10 @@
 package poke.rogue.helper.presentation.battle.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 
+@Parcelize
 data class PokemonSelectionUiModel(
     val id: String,
     val dexNumber: Long,
@@ -9,7 +12,7 @@ data class PokemonSelectionUiModel(
     val frontImageUrl: String,
     val backImageUrl: String,
     val types: List<TypeUiModel>,
-) {
+) : Parcelable {
     companion object {
         val DUMMY =
             listOf(
