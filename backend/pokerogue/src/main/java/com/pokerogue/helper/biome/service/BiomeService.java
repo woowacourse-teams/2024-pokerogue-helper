@@ -116,6 +116,7 @@ public class BiomeService {
         if (trainerNames.contains("없음")) {
             return List.of();
         }
+
         return biome.getTrainers().stream()
                 .map(trainer -> TrainerPokemonResponse.from(
                         trainer,
@@ -134,6 +135,10 @@ public class BiomeService {
     }
 
     private List<NextBiomeResponse> getNextBiomes(Biome biome) {
+        if (biome.getId().equals("end")) {
+            return List.of();
+        }
+
         return biome.getNextBiome().stream()
                 .map(nextBiome -> NextBiomeResponse.of(biomeRepository.findById(nextBiome.getId())
                         .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND)), nextBiome.getPercent()))
