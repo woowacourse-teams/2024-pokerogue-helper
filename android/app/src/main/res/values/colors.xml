@@ -61,4 +61,7 @@
 
     <color name="poke_chip_stroke_selected">@color/poke_white</color>
     <color name="poke_chip_stroke_default">@color/poke_grey_80</color>
+    <!--    splash-->
+    <color name="splash_background">#151515</color>
+    <color name="splash_logo_background">#151515</color>
 </resources>

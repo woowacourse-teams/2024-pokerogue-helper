@@ -28,11 +28,12 @@
             android:exported="false" />
         <activity
             android:name=".presentation.dex.PokemonListActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".presentation.home.HomeActivity"
             android:exported="true"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.PokeRogueHelper.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
