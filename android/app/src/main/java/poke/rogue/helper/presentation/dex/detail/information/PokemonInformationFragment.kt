@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import poke.rogue.helper.R
-import poke.rogue.helper.data.model.Biome
+import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.databinding.FragmentPokemonInformationBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
@@ -40,7 +40,7 @@ class PokemonInformationFragment :
             activityViewModel.uiState.collect {
                 when (it) {
                     is PokemonDetailUiState.IsLoading -> {}
-                    is PokemonDetailUiState.Success -> biomesAdapter.submitList(Biome.DUMMYS)
+                    is PokemonDetailUiState.Success -> biomesAdapter.submitList(PokemonBiome.DUMMYS)
                 }
             }
         }

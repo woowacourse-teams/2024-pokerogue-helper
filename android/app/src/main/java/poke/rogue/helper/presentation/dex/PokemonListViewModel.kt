@@ -104,6 +104,7 @@ class PokemonListViewModel(
             val filteredTypes = types.map { PokemonFilter.ByType(it.toData()) }
             val filteredGenerations =
                 listOfNotNull(generation.toDataOrNull()).map { PokemonFilter.ByGeneration(it) }
+            sort.toData()
             pokemonListRepository.filteredPokemons(
                 query,
                 sort.toData(),
