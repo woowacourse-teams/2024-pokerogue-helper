@@ -72,10 +72,11 @@ class DefaultDexRepository(
         private var instance: DexRepository? = null
 
         fun init(context: Context) {
-            instance = DefaultDexRepository(
-                RemoteDexDataSource.instance(),
-                LocalDexDataSource.instance(context)
-            )
+            instance =
+                DefaultDexRepository(
+                    RemoteDexDataSource.instance(),
+                    LocalDexDataSource.instance(context),
+                )
         }
 
         fun instance(): DexRepository {

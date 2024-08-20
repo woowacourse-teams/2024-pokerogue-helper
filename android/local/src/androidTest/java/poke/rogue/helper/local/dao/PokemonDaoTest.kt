@@ -10,7 +10,7 @@ import poke.rogue.helper.local.db.PokeRogueDatabase
 import poke.rogue.helper.local.entity.pokemonEntity
 import poke.rogue.helper.local.utils.testContext
 
-class RecentProductDaoTest {
+class PokemonDaoTest {
     private lateinit var dao: PokemonDao
 
     @Before

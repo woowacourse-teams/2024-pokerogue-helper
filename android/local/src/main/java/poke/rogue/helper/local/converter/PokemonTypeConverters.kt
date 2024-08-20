@@ -1,7 +1,6 @@
 package poke.rogue.helper.local.converter
 
 import androidx.room.TypeConverter
-import java.time.LocalDateTime
 
 class PokemonTypeConverters {
     @TypeConverter

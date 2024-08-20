@@ -12,17 +12,19 @@ class LocalDexDataSource(
     private val pokemonDao: PokemonDao,
     private val logger: AnalyticsLogger,
 ) {
-    suspend fun pokemons(): List<Pokemon> = runCatching {
-        pokemonDao.pokemons().map { it.toData() }
-    }.onFailure {
-        logger.logError(it, "LocalDexDataSource - pokemons() 에서 발생")
-    }.getOrThrow()
+    suspend fun pokemons(): List<Pokemon> =
+        runCatching {
+            pokemonDao.pokemons().map { it.toData() }
+        }.onFailure {
+            logger.logError(it, "LocalDexDataSource - pokemons() 에서 발생")
+        }.getOrThrow()
 
-    suspend fun savePokemons(pokemons: List<Pokemon>) = runCatching {
-        pokemonDao.savePokemons(pokemons.map { it.toEntity() })
-    }.onFailure {
-        logger.logError(it, "LocalDexDataSource - savePokemons() 에서 발생")
-    }.getOrThrow()
+    suspend fun savePokemons(pokemons: List<Pokemon>) =
+        runCatching {
+            pokemonDao.savePokemons(pokemons.map { it.toEntity() })
+        }.onFailure {
+            logger.logError(it, "LocalDexDataSource - savePokemons() 에서 발생")
+        }.getOrThrow()
 
     companion object {
         private var instance: LocalDexDataSource? = null

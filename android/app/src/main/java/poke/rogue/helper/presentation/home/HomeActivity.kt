@@ -6,7 +6,6 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import poke.rogue.helper.R
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger

@@ -1,6 +1,5 @@
 package poke.rogue.helper.local.entity
 
-
 fun pokemonEntity(
     id: String = "1",
     dexNumber: Long = 1,
@@ -15,18 +14,19 @@ fun pokemonEntity(
     specialAttack: Int = 65,
     specialDefense: Int = 65,
     speed: Int = 45,
-): PokemonEntity = PokemonEntity(
-    id = id,
-    dexNumber = dexNumber,
-    name = name,
-    imageUrl = imageUrl,
-    types = types,
-    generation = generation,
-    baseStat = baseStat,
-    hp = hp,
-    attack = attack,
-    defense = defense,
-    specialAttack = specialAttack,
-    specialDefense = specialDefense,
-    speed = speed,
-)
+): PokemonEntity =
+    PokemonEntity(
+        id = id,
+        dexNumber = dexNumber,
+        name = name,
+        imageUrl = imageUrl,
+        types = types,
+        generation = generation,
+        baseStat = baseStat,
+        hp = hp,
+        attack = attack,
+        defense = defense,
+        specialAttack = specialAttack,
+        specialDefense = specialDefense,
+        speed = speed,
+    )

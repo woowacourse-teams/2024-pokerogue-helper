@@ -50,7 +50,7 @@ class PokemonIntroActivity() :
 
 class PokemonIntroViewModel(
     private val pokemonRepository: DexRepository,
-    logger: AnalyticsLogger
+    logger: AnalyticsLogger,
 ) : ErrorHandleViewModel(logger) {
     private val _navigationToHomeEvent = MutableEventFlow<Unit>()
     val navigationToHomeEvent = _navigationToHomeEvent.asEventFlow()
@@ -70,9 +70,11 @@ class PokemonIntroViewModel(
     }
 
     companion object {
-        fun factory(pokemonRepository: DexRepository, logger: AnalyticsLogger) =
-            BaseViewModelFactory {
-                PokemonIntroViewModel(pokemonRepository, logger)
-            }
+        fun factory(
+            pokemonRepository: DexRepository,
+            logger: AnalyticsLogger,
+        ) = BaseViewModelFactory {
+            PokemonIntroViewModel(pokemonRepository, logger)
+        }
     }
 }
