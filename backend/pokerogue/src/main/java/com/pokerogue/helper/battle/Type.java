@@ -3,6 +3,7 @@ package com.pokerogue.helper.battle;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Type {
 
@@ -38,18 +39,16 @@ public enum Type {
         this.image = image;
     }
 
-    public static Type fromName(String name) {
+    public static Optional<Type> findByName(String name) {
         return Arrays.stream(values())
                 .filter(type -> type.name.equals(name))
-                .findAny()
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+                .findAny();
     }
 
-    public static Type fromEngName(String engName) {
+    public static Optional<Type> findByEngName(String engName) {
         return Arrays.stream(values())
                 .filter(type -> type.engName.equals(engName))
-                .findAny()
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+                .findAny();
     }
 
     public String getImage() {

@@ -1,6 +1,5 @@
 package com.pokerogue.helper.battle;
 
-import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.io.BufferedReader;
@@ -26,21 +25,15 @@ public class DataInitializer implements ApplicationRunner {
     private static final String FIELD_DELIMITER = "/";
     private static final String LIST_DELIMITER = ",";
 
-    private final WeatherRepository weatherRepository;
     private final BattleMoveRepository battleMoveRepository;
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
     private final BattlePokemonRepository battlePokemonRepository;
     private final TypeMatchingRepository typeMatchingRepository;
-    private final S3Service s3Service;
 
     @Override
     public void run(ApplicationArguments args) {
-        saveData("weather.txt", fields -> {
-            Weather weather = createWeather(fields);
-            weatherRepository.save(weather);
-        });
         saveData("battle-move.txt", fields -> {
             BattleMove battleMove = createMove(fields);
             battleMoveRepository.save(battleMove);
@@ -87,19 +80,9 @@ public class DataInitializer implements ApplicationRunner {
                 .toList();
     }
 
-    private Weather createWeather(List<String> fields) {
-        String id = fields.get(0);
-        String name = fields.get(1);
-        String description = fields.get(2);
-        List<String> effects = Arrays.stream(fields.get(3).split(LIST_DELIMITER))
-                .map(String::trim)
-                .toList();
-
-        return new Weather(id, name, description, effects);
-    }
-
     private BattleMove createMove(List<String> fields) {
-        Type moveType = Type.fromName(fields.get(4));
+        Type moveType = Type.findByName(fields.get(4))
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
 
         return new BattleMove(
                 fields.get(1), /* 우선은 한글 이름을 id로 설정, 추후 숫자로 변경 */
@@ -154,18 +137,24 @@ public class DataInitializer implements ApplicationRunner {
         String name = fields.get(1);
         List<Type> types = new ArrayList<>();
         if (existTypeName(fields.get(2))) {
-            types.add(Type.fromName(fields.get(2)));
+            Type type = Type.findByName(fields.get(2))
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+            types.add(type);
         }
         if (existTypeName(fields.get(3))) {
-            types.add(Type.fromName(fields.get(3)));
+            Type type = Type.findByName(fields.get(3))
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+            types.add(type);
         }
 
         return new BattlePokemon(name, types, name);
     }
 
     private TypeMatching createTypeMatching(List<String> fields) {
-        Type fromType = Type.fromEngName(fields.get(0));
-        Type toType = Type.fromEngName(fields.get(1));
+        Type fromType = Type.findByEngName(fields.get(0))
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+        Type toType = Type.findByEngName(fields.get(1))
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
         double result = convertToDouble(fields.get(2));
 
         return new TypeMatching(fromType, toType, result);

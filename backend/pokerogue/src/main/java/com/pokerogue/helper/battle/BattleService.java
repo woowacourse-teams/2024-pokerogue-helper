@@ -3,6 +3,7 @@ package com.pokerogue.helper.battle;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
-    private final WeatherRepository weatherRepository;
     private final BattleMoveRepository battleMoveRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
@@ -20,7 +20,7 @@ public class BattleService {
     private final TypeMatchingRepository typeMatchingRepository;
 
     public List<WeatherResponse> findWeathers() {
-        return weatherRepository.findAll().stream()
+        return Arrays.stream(Weather.values())
                 .map(WeatherResponse::from)
                 .toList();
     }
@@ -62,7 +62,7 @@ public class BattleService {
 
     public BattleResultResponse calculateBattleResult(String weatherId, String myPokemonId, String rivalPokemonId,
                                                       String myMoveId) {
-        Weather weather = weatherRepository.findById(weatherId)
+        Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
         BattlePokemon myPokemon = battlePokemonRepository.findById(myPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
@@ -88,14 +88,13 @@ public class BattleService {
                 move.effect(),
                 moveType.getName(),
                 move.category(),
-                weather.description(),
-                weather.effects()
+                weather.getDescription(),
+                weather.getEffects()
         );
     }
 
     private double getWeatherMultiplier(Type moveType, Weather weather) {
-        String weatherName = weather.name();
-        if (weatherName.equals("쾌청") || weatherName.equals("강한 쾌청")) {
+        if (weather == Weather.SUNNY || weather == Weather.HARSH_SUN) {
             if (moveType == Type.FIRE) {
                 return 1.5;
             }
@@ -104,7 +103,7 @@ public class BattleService {
             }
             return 1;
         }
-        if (weatherName.equals("비") || weatherName.equals("강한 비")) {
+        if (weather == Weather.RAIN || weather == Weather.HEAVY_RAIN) {
             if (moveType == Type.FIRE) {
                 return 0.5;
             }

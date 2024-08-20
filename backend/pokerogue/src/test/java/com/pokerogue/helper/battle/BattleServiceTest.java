@@ -34,7 +34,7 @@ class BattleServiceTest extends ServiceTest {
     @Test
     @DisplayName("배틀 예상 결과를 계산한다.")
     void calculateBattleResult() {
-        String weatherId = "2";
+        String weatherId = "sunny";
         String myPokemonId = "파이리";
         String rivalPokemonId = "이상해씨";
         String myMoveId = "불꽃세례";
