@@ -104,7 +104,7 @@ class FakeDexRepository : DexRepository {
                     defense = 83,
                     specialAttack = 100,
                     specialDefense = 100,
-                    speed = 195,
+                    speed = 80,
                 ),
                 Pokemon(
                     id = "4",

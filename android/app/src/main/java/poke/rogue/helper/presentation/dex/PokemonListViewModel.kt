@@ -22,7 +22,6 @@ import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.PokeException
-import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
@@ -64,12 +63,12 @@ class PokemonListViewModel(
                 combine(pokeSort, pokeFilter) { sort, filter ->
                     PokemonListUiState(
                         pokemons =
-                            queriedPokemons(
-                                query = query,
-                                types = filter.selectedTypes,
-                                generation = filter.selectedGeneration,
-                                sort = sort,
-                            ),
+                        queriedPokemons(
+                            query = query,
+                            types = filter.selectedTypes,
+                            generation = filter.selectedGeneration,
+                            sort = sort,
+                        ),
                         sort = sort,
                         filteredTypes = filter.selectedTypes,
                         filteredGeneration = filter.selectedGeneration,
@@ -105,12 +104,13 @@ class PokemonListViewModel(
             val filteredTypes = types.map { PokemonFilter.ByType(it.toData()) }
             val filteredGenerations =
                 listOfNotNull(generation.toDataOrNull()).map { PokemonFilter.ByGeneration(it) }
-            val sort = sort.toData()
             pokemonListRepository.filteredPokemons(
                 query,
-                sort,
+                sort.toData(),
                 filteredTypes + filteredGenerations,
-            ).map(Pokemon::toUi)
+            ).map {
+                it.toUi().copy(sortUiModel = sort)
+            }
         } catch (e: PokeException) {
             handlePokemonError(e)
             emptyList()

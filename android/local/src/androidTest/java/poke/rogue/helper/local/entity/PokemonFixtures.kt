@@ -4,6 +4,7 @@ fun pokemonEntity(
     id: String = "1",
     dexNumber: Long = 1,
     name: String = "이상해씨",
+    formName: String = "일반",
     imageUrl: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
     types: Set<String> = setOf("풀", "독"),
     generation: Int = 1,
@@ -29,4 +30,5 @@ fun pokemonEntity(
         specialAttack = specialAttack,
         specialDefense = specialDefense,
         speed = speed,
+        formName = formName,
     )
