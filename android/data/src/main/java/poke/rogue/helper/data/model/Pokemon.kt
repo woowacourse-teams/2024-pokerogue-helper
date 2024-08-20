@@ -1,5 +1,6 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.local.entity.PokemonEntity
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse2
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
@@ -54,6 +55,40 @@ fun PokemonResponse2.toData(): Pokemon =
         types = types.map(PokemonTypeResponse::toData),
         generation = PokemonGeneration.of(generation),
         baseStat = baseStats,
+        speed = speed,
+        hp = hp,
+        attack = attack,
+        defense = defense,
+        specialAttack = specialAttack,
+        specialDefense = specialDefense,
+    )
+
+fun PokemonEntity.toData(): Pokemon =
+    Pokemon(
+        id = id.toString(),
+        dexNumber = dexNumber,
+        name = name,
+        imageUrl = imageUrl,
+        types = types.map(Type::valueOf),
+        generation = PokemonGeneration.of(generation),
+        baseStat = baseStat,
+        speed = speed,
+        hp = hp,
+        attack = attack,
+        defense = defense,
+        specialAttack = specialAttack,
+        specialDefense = specialDefense,
+    )
+
+fun Pokemon.toEntity(): PokemonEntity =
+    PokemonEntity(
+        id = id,
+        dexNumber = dexNumber,
+        name = name,
+        imageUrl = imageUrl,
+        types = types.map(Type::name).toSet(),
+        generation = generation.number,
+        baseStat = baseStat,
         speed = speed,
         hp = hp,
         attack = attack,
