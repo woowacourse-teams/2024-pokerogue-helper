@@ -1,25 +1,29 @@
 package poke.rogue.helper.presentation.dex.filter
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.event.EventFlow
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
 import poke.rogue.helper.presentation.util.event.asEventFlow
 
-class PokeFilterViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(PokeFilterUiState.DEFAULT)
-    val uiState: StateFlow<PokeFilterUiState> = _uiState.asStateFlow()
+class PokeFilterViewModel(
+    private val savedStateHandle: SavedStateHandle,
+) : ViewModel() {
+    val uiState: StateFlow<PokeFilterUiState> =
+        savedStateHandle.getStateFlow(
+            UI_STATE_KEY,
+            PokeFilterUiState.DEFAULT,
+        )
 
     private val _uiEvent = MutableEventFlow<PokeFilterUiEvent>()
     val uiEvent: EventFlow<PokeFilterUiEvent> = _uiEvent.asEventFlow()
 
     fun init(args: PokeFilterUiModel) {
-        _uiState.value =
+        savedStateHandle[UI_STATE_KEY] =
             PokeFilterUiState(
                 types =
                     TypeUiModel.entries.mapIndexed { index, typeUiModel ->
@@ -73,7 +77,8 @@ class PokeFilterViewModel : ViewModel() {
                 }
                 type
             }
-        _uiState.value = uiState.value.copy(types = newTypes, selectedTypes = newSelectedTypes)
+        savedStateHandle[UI_STATE_KEY] =
+            uiState.value.copy(types = newTypes, selectedTypes = newSelectedTypes)
     }
 
     private fun selectTypeExceedingLimit(
@@ -94,7 +99,8 @@ class PokeFilterViewModel : ViewModel() {
                 }
                 type
             }
-        _uiState.value = uiState.value.copy(types = newTypes, selectedTypes = newSelectedTypes)
+        savedStateHandle[UI_STATE_KEY] =
+            uiState.value.copy(types = newTypes, selectedTypes = newSelectedTypes)
     }
 
     fun toggleGeneration(generationId: Int) {
@@ -108,7 +114,7 @@ class PokeFilterViewModel : ViewModel() {
                     type.copy(isSelected = false)
                 }
             }
-        _uiState.value = uiState.value.copy(generations = newGenerations)
+        savedStateHandle[UI_STATE_KEY] = uiState.value.copy(generations = newGenerations)
     }
 
     fun applyFiltering() {
@@ -129,6 +135,7 @@ class PokeFilterViewModel : ViewModel() {
     }
 
     companion object {
+        private const val UI_STATE_KEY = "uiState"
         private const val LIMIT_TYPE_COUNT: Int = 2
     }
 }

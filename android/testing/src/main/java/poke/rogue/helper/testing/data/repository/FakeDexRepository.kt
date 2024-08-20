@@ -1,7 +1,7 @@
 package poke.rogue.helper.testing.data.repository
 
-import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonCategory
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetailAbility
@@ -96,13 +96,13 @@ class FakeDexRepository : DexRepository {
                     imageUrl = pokemonImageUrl(pokemonId = 3),
                     types = listOf(Type.GRASS, Type.POISON),
                     generation = PokemonGeneration.ONE,
-                    baseStat = 195,
+                    baseStat = 525,
                     hp = 80,
                     attack = 82,
                     defense = 83,
                     specialAttack = 100,
                     specialDefense = 100,
-                    speed = 525,
+                    speed = 195,
                 ),
                 Pokemon(
                     id = "4",
@@ -237,7 +237,7 @@ class FakeDexRepository : DexRepository {
                         tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
                         eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
                     ),
-                biomes = Biome.DUMMYS,
+                biomes = PokemonBiome.DUMMYS,
                 height = 0.7,
                 weight = 6.9,
             )

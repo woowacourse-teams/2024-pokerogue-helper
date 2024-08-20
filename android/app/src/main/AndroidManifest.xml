@@ -57,6 +57,7 @@
         <activity
             android:name=".presentation.base.error.NetworkErrorActivity"
             android:exported="false" />
+
         <activity
             android:name=".presentation.dex.detail.PokemonDetailActivity"
             android:exported="false" />

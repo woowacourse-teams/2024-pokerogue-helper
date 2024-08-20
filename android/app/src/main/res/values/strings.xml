@@ -28,7 +28,14 @@
     <string name="home_menu_biome">바이옴 도감</string>
     <string name="home_menu_item">아이템 도감</string>
 
-
+    <!--    pokemon list-->
+    <string name="pokemon_list_title_name">포켓몬 도감</string>
+    <string name="pokemon_list_stat_format">%03d/%03d</string>
+    <string name="pokemon_list_poke_name_format">%s #%d</string>
+    <string name="pokemon_list_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
+    <string name="pokemon_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
+    <string name="pokemon_list_loading_guide">Loading…</string>
+    <string name="pokemon_list_empty_guide">해당하는 포켓몬이 없어요</string>
     <!--    dex-->
     <string name="dex_title_name">포켓몬 도감</string>
     <string name="dex_stat_format">%03d/%03d</string>
@@ -40,15 +47,7 @@
     <string name="dex_filter_chip">필터 %s</string>
     <string name="dex_filter_all_generations">모든 세대</string>
     <string name="dex_filter_generation_format">%d세대</string>
-    
-    <!--    pokemon list-->
-    <string name="pokemon_list_title_name">포켓몬 도감</string>
-    <string name="pokemon_list_stat_format">%03d/%03d</string>
-    <string name="pokemon_list_poke_name_format">%s #%d</string>
-    <string name="pokemon_list_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
-    <string name="pokemon_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
-    <string name="pokemon_list_loading_guide">Loading…</string>
-    <string name="pokemon_list_empty_guide">해당하는 포켓몬이 없어요</string>
+    <string name="dex_pokemon_sort_title">포켓몬 정렬</string>
 
     <!--    pokemon detail-->
     <string name="dex_detail_pokemon_stats_title">기본 스탯</string>
