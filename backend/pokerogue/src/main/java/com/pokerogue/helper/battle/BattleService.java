@@ -60,8 +60,11 @@ public class BattleService {
         return MoveResponse.of(battleMove, typeLogo, categoryLogo);
     }
 
-    public BattleResultResponse calculateBattleResult(String weatherId, String myPokemonId, String rivalPokemonId,
-                                                      String myMoveId) {
+    public BattleResultResponse calculateBattleResult(
+            String weatherId,
+            String myPokemonId,
+            String rivalPokemonId,
+            String myMoveId) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
         BattlePokemon myPokemon = battlePokemonRepository.findById(myPokemonId)
@@ -121,12 +124,8 @@ public class BattleService {
                 .reduce(1d, (a, b) -> a * b);
     }
 
-    private double getSameTypeAttackBonusMultiplier(Type moveType, BattlePokemon myPokemon) {
-        List<Type> rivalPokemonTypes = myPokemon.pokemonTypes();
-        boolean hasSameType = rivalPokemonTypes.stream()
-                .anyMatch(moveType::equals);
-
-        if (hasSameType) {
+    private double getSameTypeAttackBonusMultiplier(Type moveType, BattlePokemon rivalPokemon) {
+        if (rivalPokemon.hasSameType(moveType)) {
             return 1.5;
         }
 
