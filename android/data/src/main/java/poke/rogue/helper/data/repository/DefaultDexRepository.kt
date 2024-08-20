@@ -13,6 +13,12 @@ class DefaultDexRepository(
     private var cachedPokemons: List<Pokemon> = emptyList()
     private var cachedPokemonDetails: MutableMap<String, PokemonDetail> = mutableMapOf()
 
+    override suspend fun warmUp() {
+        if (cachedPokemons.isEmpty()) {
+            cachedPokemons = dexDataSource.pokemons2()
+        }
+    }
+
     override suspend fun pokemons(): List<Pokemon> {
         if (cachedPokemons.isEmpty()) {
             cachedPokemons = dexDataSource.pokemons2()
