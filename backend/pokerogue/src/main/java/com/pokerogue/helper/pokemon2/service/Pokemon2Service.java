@@ -1,7 +1,9 @@
 package com.pokerogue.helper.pokemon2.service;
 
 
-import com.pokerogue.helper.pokemon2.Ability;
+import com.pokerogue.external.s3.service.S3Service;
+import com.pokerogue.helper.pokemon2.data.Ability;
+import com.pokerogue.helper.pokemon2.data.Biome;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.pokemon2.data.Type;
 import com.pokerogue.helper.pokemon2.dto.BiomeResponse;
@@ -28,6 +30,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class Pokemon2Service {
 
+    private final S3Service s3Service;
     private final Pokemon2Repository pokemon2Repository;
     private final MoveRepository moveRepository;
 
@@ -43,7 +46,12 @@ public class Pokemon2Service {
 
     private void initFindAllCache() {
         findAllCache = pokemon2Repository.findAll().values().stream()
-                .map(Pokemon2Response::from)
+                .map(pokemon -> Pokemon2Response.from(
+                        pokemon,
+                        s3Service.getPokemonImageFromS3(pokemon.id()),
+                        s3Service.getTypeImageFromS3(pokemon.type1()),
+                        s3Service.getTypeImageFromS3(pokemon.type2())
+                        ))
                 .sorted(Comparator.comparingLong(Pokemon2Response::pokedexNumber))
                 .toList();
     }
@@ -71,7 +79,6 @@ public class Pokemon2Service {
     private Pokemon2DetailResponse toPokemon2DetailResponse(Pokemon pokemon) {
         List<PokemonTypeResponse> pokemonTypeResponses = createTypeResponse(pokemon);
         List<PokemonAbilityResponse> pokemonAbilityResponses = createAbilityResponse(pokemon);
-        //TODO: evol
         EvolutionResponse evolutionResponse = null;
         List<MoveResponse> moveResponse = createMoveResponse(pokemon.moves());
         List<MoveResponse> eggMoveResponse = createEggMoveResponse(pokemon.eggMoves());
@@ -84,7 +91,7 @@ public class Pokemon2Service {
                 pokemon.id(),
                 Long.parseLong(pokemon.speciesId()),
                 pokemon.koName(),
-                "image",
+                s3Service.getPokemonImageFromS3(pokemon.id()),
                 pokemonTypeResponses,
                 pokemonAbilityResponses,
                 Integer.parseInt(pokemon.baseTotal()),
@@ -114,10 +121,14 @@ public class Pokemon2Service {
         Ability ability2 = Ability.findById(pokemon.ability2());
 
         return List.of(
-                PokemonAbilityResponse.from(passive.getName(), passive.getDescription(), true, false),
-                PokemonAbilityResponse.from(hidden.getName(), hidden.getDescription(), false, true),
-                PokemonAbilityResponse.from(ability1.getName(), ability1.getDescription(), false, false),
-                PokemonAbilityResponse.from(ability2.getName(), ability2.getDescription(), false, false)
+                new PokemonAbilityResponse(pokemon.abilityPassive(), passive.getName(), passive.getDescription(), true,
+                        false),
+                new PokemonAbilityResponse(pokemon.abilityHidden(), hidden.getName(), hidden.getDescription(), false,
+                        true),
+                new PokemonAbilityResponse(pokemon.ability1(), ability1.getName(), ability1.getDescription(), false,
+                        false),
+                new PokemonAbilityResponse(pokemon.ability2(), ability2.getName(), ability2.getDescription(), false,
+                        false)
         );
     }
 
@@ -125,21 +136,30 @@ public class Pokemon2Service {
         Type type1 = Type.findById(pokemon.type1());
         Type type2 = Type.findById(pokemon.type2());
         return List.of(
-                PokemonTypeResponse.of(type1.getId(), type1.getName()),
-                PokemonTypeResponse.of(type2.getId(), type2.getName())
+                new PokemonTypeResponse(type1.getName(), s3Service.getTypeImageFromS3(type1.getId())),
+                new PokemonTypeResponse(type2.getName(), s3Service.getTypeImageFromS3(type2.getId()))
         );
     }
 
     private List<BiomeResponse> createBiomeResponse(List<String> biomes) {
         return biomes.stream()
-                .map(BiomeResponse::from)
+                .map(id -> {
+                            Biome biome = Biome.findById(id);
+                            return new BiomeResponse(
+                                    id,
+                                    biome.getName(),
+                                    s3Service.getBiomeImageFromS3(biome.getId())
+                            );
+                        }
+                )
                 .toList();
     }
 
     private List<MoveResponse> createEggMoveResponse(List<String> moves) {
         return moves.stream()
                 .map(moveRepository::findById)
-                .map(move -> MoveResponse.from(move, 1))
+                .map(move -> MoveResponse.from(move, 1,
+                        s3Service.getTypeImageFromS3(moveRepository.findById(move.id()).type())))
                 .toList();
     }
 
@@ -148,8 +168,9 @@ public class Pokemon2Service {
                 .limit(moves.size() / 2)
                 .mapToObj(index -> MoveResponse.from(
                         moveRepository.findById(moves.get(index)),
-                        Integer.parseInt(moves.get(index + 1)))
-                )
+                        Integer.parseInt(moves.get(index + 1)),
+                        s3Service.getTypeImageFromS3(moveRepository.findById(moves.get(index)).type())
+                ))
                 .toList();
     }
 }

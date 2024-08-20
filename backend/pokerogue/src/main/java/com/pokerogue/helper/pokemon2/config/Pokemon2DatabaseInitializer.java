@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon2.config;
 
+import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.pokemon2.data.Move;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
@@ -64,29 +65,42 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        savePokemon();
-        saveMove();
-    }
+        try (
+                InputStream inputStream = getClass()
+                        .getClassLoader()
+                        .getResourceAsStream("pokemon.txt");
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))
+        ) {
+            savePokemon(br);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-    private void savePokemon() {
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("pokemon.txt");
-             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                List<String> tokens = parseToken(line);
-
-                if (pokemonKeys.size() != tokens.size()) {
-                    throw new IllegalArgumentException(pokemonKeys.size() + " " + tokens.size() + "포켓몬 데이터가 잘못 되었습니다.");
-                }
-
-                Pokemon pokemon = createPokemon(tokens);
-                pokemon2Repository.save(pokemon.id(), pokemon);
-            }
+        try (InputStream inputStream = getClass()
+                .getClassLoader()
+                .getResourceAsStream("move-for-pokemon-response.txt");
+             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))
+        ) {
+            saveMove(br);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private void savePokemon(BufferedReader br) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null) {
+            List<String> tokens = parseToken(line);
+
+            if (pokemonKeys.size() != tokens.size()) {
+                throw new IllegalArgumentException(pokemonKeys.size() + " " + tokens.size() + "포켓몬 데이터가 잘못 되었습니다.");
+            }
+
+            Pokemon pokemon = createPokemon(tokens);
+            pokemon2Repository.save(pokemon.id(), pokemon);
+        }
+    }
+
 
     private List<String> parseToken(String line) {
         StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
@@ -145,24 +159,18 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         );
     }
 
-    private void saveMove() {
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("move-for-pokemon-response.txt");
-             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+    private void saveMove(BufferedReader br) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null) {
+            List<String> tokens = parseToken(line);
 
-            String line;
-            while ((line = br.readLine()) != null) {
-                List<String> tokens = parseToken(line);
-
-                if (moveKeys.size() != tokens.size()) {
-                    throw new IllegalArgumentException(moveKeys.size() + " " + tokens.size() + "기술 데이터가 잘못 되었습니다.");
-                }
-
-                Move move = createMove(tokens);
-
-                moveRepository.save(move.id(), move);
+            if (moveKeys.size() != tokens.size()) {
+                throw new IllegalArgumentException(moveKeys.size() + " " + tokens.size() + "기술 데이터가 잘못 되었습니다.");
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            Move move = createMove(tokens);
+
+            moveRepository.save(move.id(), move);
         }
     }
 

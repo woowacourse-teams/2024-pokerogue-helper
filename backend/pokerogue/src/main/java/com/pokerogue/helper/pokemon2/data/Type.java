@@ -1,7 +1,9 @@
 package com.pokerogue.helper.pokemon2.data;
 
 import java.util.Arrays;
+import lombok.Getter;
 
+@Getter
 public enum Type {
     UNKNOWN("UNKNOWN", "Unknown"),
     NORMAL("NORMAL", "노말"),
@@ -24,6 +26,7 @@ public enum Type {
     FAIRY("FAIRY", "페어리"),
     STELLAR("STELLAR", "스텔라"),
     EMPTY("EMPTY", "EMPTY");
+
     private final String id;
     private final String name;
 
@@ -43,13 +46,5 @@ public enum Type {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 타입 아이디입니다"))
                 ;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
     }
 }

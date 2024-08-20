@@ -2,6 +2,7 @@ package com.pokerogue.helper.pokemon2.dto;
 
 import com.pokerogue.external.pokemon.dto.type.TypeResponse;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
+import com.pokerogue.helper.pokemon2.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import jakarta.annotation.Nullable;
 import java.util.Arrays;
@@ -23,7 +24,7 @@ public record Pokemon2Response(
         Integer specialAttack,
         Integer specialDefense
 ) {
-    public static Pokemon2Response from(Pokemon pokemon) {
+    public static Pokemon2Response from(Pokemon pokemon, String image, String typeLogo1, String typeLogo2) {
         List<Integer> stats = Arrays.stream(pokemon.baseStats().split(","))
                 .map(Integer::parseInt)
                 .toList();
@@ -33,16 +34,10 @@ public record Pokemon2Response(
                 Long.parseLong(pokemon.speciesId()),
                 pokemon.koName(),
                 pokemon.formName(),
-                "image",
+                image,
                 List.of(
-                        new PokemonTypeResponse(
-                                pokemon.type1(),
-                                "image"
-                        ),
-                        new PokemonTypeResponse(
-                                pokemon.type2(),
-                                "image"
-                        )
+                        new PokemonTypeResponse(Type.findById(pokemon.type1()).getName(), typeLogo1),
+                        new PokemonTypeResponse(Type.findById(pokemon.type2()).getName(), typeLogo2)
                 ),
                 Integer.parseInt(pokemon.generation()),
                 Integer.parseInt(pokemon.baseTotal()),

@@ -1,8 +1,9 @@
 package com.pokerogue.helper.pokemon2.data;
 
-import com.pokerogue.helper.pokemon2.Ability;
 import java.util.Arrays;
+import lombok.Getter;
 
+@Getter
 public enum Biome {
     UNKNOWNLOCATION("unknownLocation", "기억할 수 없는 곳"),
     TOWN("TOWN", "마을"),
@@ -54,19 +55,11 @@ public enum Biome {
     public static Biome findById(String id) {
         return Arrays.stream(values())
                 .filter(value -> value.getId().toLowerCase()
-                        .replaceAll("-", "_")
-                        .replaceAll(" ", "_")
+                        .replace("-", "_")
+                        .replace(" ", "_")
                         .equals(id)
                 )
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 바이옴 아이디입니다."));
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
     }
 }
