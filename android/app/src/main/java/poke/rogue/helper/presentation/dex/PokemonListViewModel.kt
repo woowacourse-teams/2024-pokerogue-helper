@@ -63,12 +63,12 @@ class PokemonListViewModel(
                 combine(pokeSort, pokeFilter) { sort, filter ->
                     PokemonListUiState(
                         pokemons =
-                            queriedPokemons(
-                                query = query,
-                                types = filter.selectedTypes,
-                                generation = filter.selectedGeneration,
-                                sort = sort,
-                            ),
+                        queriedPokemons(
+                            query = query,
+                            types = filter.selectedTypes,
+                            generation = filter.selectedGeneration,
+                            sort = sort,
+                        ),
                         sort = sort,
                         filteredTypes = filter.selectedTypes,
                         filteredGeneration = filter.selectedGeneration,
@@ -104,7 +104,6 @@ class PokemonListViewModel(
             val filteredTypes = types.map { PokemonFilter.ByType(it.toData()) }
             val filteredGenerations =
                 listOfNotNull(generation.toDataOrNull()).map { PokemonFilter.ByGeneration(it) }
-            sort.toData()
             pokemonListRepository.filteredPokemons(
                 query,
                 sort.toData(),
