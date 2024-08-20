@@ -5,7 +5,7 @@ public record BattleMove(
         String name,
         String nameAppend,
         String effect,
-        String type,
+        Type type,
         String defaultTypeId,
         String category,
         String moveTarget,

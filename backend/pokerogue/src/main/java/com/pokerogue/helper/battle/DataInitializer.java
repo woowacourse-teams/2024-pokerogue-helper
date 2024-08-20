@@ -31,7 +31,6 @@ public class DataInitializer implements ApplicationRunner {
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
-    private final BattlePokemonTypeRepository battlePokemonTypeRepository;
     private final BattlePokemonRepository battlePokemonRepository;
     private final TypeMatchingRepository typeMatchingRepository;
     private final S3Service s3Service;
@@ -49,10 +48,6 @@ public class DataInitializer implements ApplicationRunner {
         saveData("tms.txt", fields -> {
             PokemonMovesByMachine pokemonMovesByMachine = createPokemonMovesByMachine(fields);
             pokemonMovesByMachineRepository.save(pokemonMovesByMachine);
-        });
-        saveData("type.txt", fields -> {
-            PokemonType pokemonType = createPokemonType(fields);
-            battlePokemonTypeRepository.save(pokemonType);
         });
         saveData("battle-pokemon.txt", fields -> {
             PokemonMovesBySelf pokemonMovesBySelf = createPokemonMovesBySelf(fields);
@@ -104,12 +99,14 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private BattleMove createMove(List<String> fields) {
+        Type moveType = Type.fromName(fields.get(4));
+
         return new BattleMove(
                 fields.get(1), /* 우선은 한글 이름을 id로 설정, 추후 숫자로 변경 */
                 fields.get(1),
                 fields.get(2),
                 fields.get(3),
-                fields.get(4),
+                moveType,
                 fields.get(5),
                 fields.get(6),
                 fields.get(7),
@@ -121,14 +118,6 @@ public class DataInitializer implements ApplicationRunner {
                 convertToInteger(fields.get(13)),
                 fields.get(14)
         );
-    }
-
-    private PokemonType createPokemonType(List<String> fields) {
-        String name = fields.get(0);
-        String engName = fields.get(1);
-        String image = s3Service.getPokerogueTypeImageFromS3(engName);
-
-        return new PokemonType(name, engName, image);
     }
 
     private PokemonMovesByMachine createPokemonMovesByMachine(List<String> fields) {
@@ -163,20 +152,27 @@ public class DataInitializer implements ApplicationRunner {
 
     private BattlePokemon createBattlePokemon(List<String> fields) {
         String name = fields.get(1);
-        List<PokemonType> types = new ArrayList<>();
-        String type1 = fields.get(2);
-        String type2 = fields.get(3);
-        battlePokemonTypeRepository.findByName(type1).ifPresent(types::add);
-        battlePokemonTypeRepository.findByName(type2).ifPresent(types::add);
+        List<Type> types = new ArrayList<>();
+        if (existTypeName(fields.get(2))) {
+            types.add(Type.fromName(fields.get(2)));
+        }
+        if (existTypeName(fields.get(3))) {
+            types.add(Type.fromName(fields.get(3)));
+        }
 
         return new BattlePokemon(name, types, name);
     }
 
     private TypeMatching createTypeMatching(List<String> fields) {
-        String fromType = fields.get(0);
-        String toType = fields.get(1);
+        Type fromType = Type.fromEngName(fields.get(0));
+        Type toType = Type.fromEngName(fields.get(1));
         double result = convertToDouble(fields.get(2));
+
         return new TypeMatching(fromType, toType, result);
+    }
+
+    private boolean existTypeName(String data) {
+        return !data.equals("Type.undefined");
     }
 
     private double convertToDouble(String data) {

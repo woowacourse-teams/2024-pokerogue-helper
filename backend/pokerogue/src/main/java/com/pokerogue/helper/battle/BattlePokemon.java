@@ -4,7 +4,7 @@ import java.util.List;
 
 public record BattlePokemon(
         String id,
-        List<PokemonType> pokemonTypes,
+        List<Type> pokemonTypes,
         String name
 ) {
 }

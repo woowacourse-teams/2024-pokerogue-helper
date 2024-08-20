@@ -16,7 +16,6 @@ public class BattleService {
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
-    private final BattlePokemonTypeRepository battlePokemonTypeRepository;
     private final BattlePokemonRepository battlePokemonRepository;
     private final TypeMatchingRepository typeMatchingRepository;
 
@@ -53,9 +52,8 @@ public class BattleService {
     }
 
     private MoveResponse toMoveResponseWithLogo(BattleMove battleMove) {
-        PokemonType moveType = battlePokemonTypeRepository.findByName(battleMove.type())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-        String typeLogo = moveType.image();
+        Type moveType = battleMove.type();
+        String typeLogo = moveType.getImage();
         MoveCategory moveCategory = MoveCategory.findByName(battleMove.category().toLowerCase());
         String categoryLogo = moveCategory.getImage();
 
@@ -72,8 +70,7 @@ public class BattleService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         BattleMove move = battleMoveRepository.findById(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
-        PokemonType moveType = battlePokemonTypeRepository.findByName(move.type())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+        Type moveType = move.type();
 
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
         double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, rivalPokemon.pokemonTypes());
@@ -82,36 +79,36 @@ public class BattleService {
         // Todo: 강풍 고려
         double totalMultiplier = weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier;
         double finalAccuracy = calculateAccuracy(move, weather);
+
         return new BattleResultResponse(
                 move.power(),
                 totalMultiplier,
                 finalAccuracy,
                 move.name(),
                 move.effect(),
-                moveType.name(),
+                moveType.getName(),
                 move.category(),
                 weather.description(),
                 weather.effects()
         );
     }
 
-    private double getWeatherMultiplier(PokemonType moveType, Weather weather) {
+    private double getWeatherMultiplier(Type moveType, Weather weather) {
         String weatherName = weather.name();
-        String moveTypeName = moveType.name();
         if (weatherName.equals("쾌청") || weatherName.equals("강한 쾌청")) {
-            if (moveTypeName.equals("불꽃")) {
+            if (moveType == Type.FIRE) {
                 return 1.5;
             }
-            if (moveTypeName.equals("물")) {
+            if (moveType == Type.WATER) {
                 return 0.5;
             }
             return 1;
         }
         if (weatherName.equals("비") || weatherName.equals("강한 비")) {
-            if (moveTypeName.equals("불꽃")) {
+            if (moveType == Type.FIRE) {
                 return 0.5;
             }
-            if (moveTypeName.equals("물")) {
+            if (moveType == Type.WATER) {
                 return 1.5;
             }
             return 1;
@@ -119,18 +116,16 @@ public class BattleService {
         return 1;
     }
 
-    private double getTypeMatchingMultiplier(PokemonType moveType, List<PokemonType> defensivePokemonTypes) {
-        String fromType = moveType.engName();
+    private double getTypeMatchingMultiplier(Type moveType, List<Type> defensivePokemonTypes) {
         return defensivePokemonTypes.stream()
-                .map(PokemonType::engName)
-                .map(toType -> typeMatchingRepository.findByFromTypeAndToType(fromType, toType).orElseThrow(
+                .map(toType -> typeMatchingRepository.findByFromTypeAndToType(moveType, toType).orElseThrow(
                         () -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR)))
                 .map(TypeMatching::result)
                 .reduce(1d, (a, b) -> a * b);
     }
 
-    private double getSameTypeAttackBonusMultiplier(PokemonType moveType, BattlePokemon myPokemon) {
-        List<PokemonType> rivalPokemonTypes = myPokemon.pokemonTypes();
+    private double getSameTypeAttackBonusMultiplier(Type moveType, BattlePokemon myPokemon) {
+        List<Type> rivalPokemonTypes = myPokemon.pokemonTypes();
         boolean hasSameType = rivalPokemonTypes.stream()
                 .anyMatch(moveType::equals);
         if (hasSameType) {

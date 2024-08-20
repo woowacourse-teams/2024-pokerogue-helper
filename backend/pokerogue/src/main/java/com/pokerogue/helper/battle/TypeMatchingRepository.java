@@ -23,7 +23,7 @@ public class TypeMatchingRepository {
                 .toList();
     }
 
-    public Optional<TypeMatching> findByFromTypeAndToType(String fromType, String toType) {
+    public Optional<TypeMatching> findByFromTypeAndToType(Type fromType, Type toType) {
         int id = Objects.hash(fromType, toType);
         return Optional.ofNullable(typeMatchings.get(id));
     }
