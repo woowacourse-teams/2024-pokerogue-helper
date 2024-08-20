@@ -24,4 +24,13 @@ public class BattleController {
     public ApiResponse<List<MoveResponse>> moveByPokemonList(@RequestParam("pokedex-number") Integer pokedexNumber) {
         return new ApiResponse<>("포켓몬의 기술 리스트 불러오기에 성공했습니다.", battleService.findMovesByPokemon(pokedexNumber));
     }
+
+    @GetMapping("/api/v1/battle")
+    public ApiResponse<BattleResultResponse> battleResult(@RequestParam("weather-id") String weatherId,
+                                                          @RequestParam("my-pokemon-id") String myPokemonId,
+                                                          @RequestParam("rival-pokemon-id") String rivalPokemonId,
+                                                          @RequestParam("my-move-id") String myMoveId) {
+        return new ApiResponse<>("배틀 예측 결과 불러오기에 성공했습니다.",
+                battleService.calculateBattleResult(weatherId, myPokemonId, rivalPokemonId, myMoveId));
+    }
 }
