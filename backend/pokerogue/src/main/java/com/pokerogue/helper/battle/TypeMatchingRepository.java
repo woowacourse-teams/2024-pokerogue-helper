@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -20,5 +21,10 @@ public class TypeMatchingRepository {
         return typeMatchings.values()
                 .stream()
                 .toList();
+    }
+
+    public Optional<TypeMatching> findByFromTypeAndToType(String fromType, String toType) {
+        int id = Objects.hash(fromType, toType);
+        return Optional.ofNullable(typeMatchings.get(id));
     }
 }

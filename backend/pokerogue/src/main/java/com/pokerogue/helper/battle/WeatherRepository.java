@@ -3,6 +3,7 @@ package com.pokerogue.helper.battle;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -18,5 +19,9 @@ public class WeatherRepository {
         return weathers.values()
                 .stream()
                 .toList();
+    }
+
+    public Optional<Weather> findById(String id) {
+        return Optional.ofNullable(weathers.get(id));
     }
 }
