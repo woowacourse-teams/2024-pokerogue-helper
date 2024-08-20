@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentSkillSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.battle.BattleSelectionUiState
-import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
@@ -18,8 +17,9 @@ import poke.rogue.helper.presentation.util.view.dp
 class SkillSelectionFragment :
     ErrorHandleFragment<FragmentSkillSelectionBinding>(R.layout.fragment_skill_selection) {
     private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
+    private val viewModel: SkillSelectionViewModel by viewModels<SkillSelectionViewModel>()
     private val skillAdapter: SkillSelectionAdapter by lazy {
-        SkillSelectionAdapter(sharedViewModel)
+        SkillSelectionAdapter(viewModel)
     }
 
     override val errorViewModel: ErrorHandleViewModel
@@ -34,7 +34,6 @@ class SkillSelectionFragment :
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initObserver()
-        skillAdapter.submitList(SkillSelectionUiModel.DUMMY)
     }
 
     private fun initViews() {
@@ -48,17 +47,14 @@ class SkillSelectionFragment :
 
     private fun initObserver() {
         repeatOnStarted {
-            sharedViewModel.skills.collect {
+            viewModel.skills.collect {
                 skillAdapter.submitList(it)
             }
         }
 
         repeatOnStarted {
-            sharedViewModel.selectedSkill.collect { selectionState ->
-                if (selectionState is BattleSelectionUiState.Selected) {
-                    val selected = selectionState.selected
-                    skillAdapter.updateSelectedSkill(selected.id)
-                }
+            viewModel.skillSelectedEvent.collect {
+                sharedViewModel.selectSkill(it)
             }
         }
     }

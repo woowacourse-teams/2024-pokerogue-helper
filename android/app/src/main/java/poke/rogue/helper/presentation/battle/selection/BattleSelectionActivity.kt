@@ -11,13 +11,14 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.model.SelectionData
+import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
 
 class BattleSelectionActivity :
     ErrorHandleActivity<ActivityBattleSelectionBinding>(R.layout.activity_battle_selection) {
     private val viewModel by viewModels<BattleSelectionViewModel> {
-        BattleSelectionViewModel.factory(isSkillSelectionRequired)
+        BattleSelectionViewModel.factory(previousSelection)
     }
     private val previousSelection by lazy {
         intent.parcelable<SelectionData>(KEY_PREVIOUS_SELECTION) ?: throw IllegalArgumentException("잘못된 선택 데이터")

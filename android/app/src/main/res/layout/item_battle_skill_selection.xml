@@ -14,7 +14,7 @@
 
         <variable
             name="selectionHandler"
-            type="poke.rogue.helper.presentation.battle.selection.BattleSelectionHandler" />
+            type="poke.rogue.helper.presentation.battle.selection.skill.SkillSelectionHandler" />
     </data>
 
     <LinearLayout

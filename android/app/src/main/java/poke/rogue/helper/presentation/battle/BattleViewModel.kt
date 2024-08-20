@@ -28,7 +28,7 @@ class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) :
     private val _selectedState = MutableStateFlow(BattleSelectionsState.DEFAULT)
     val selectedState = _selectedState.asStateFlow()
 
-    private val _navigateToSelection = MutableSharedFlow<Boolean>()
+    private val _navigateToSelection = MutableSharedFlow<SelectionData>()
     val navigateToSelection = _navigateToSelection.asSharedFlow()
 
     val battleResult: StateFlow<BattleResultUiState> =
@@ -59,6 +59,7 @@ class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) :
                 )
 
             is SelectionData.WithoutSkill -> updateOpponentPokemon(selection.selectedPokemon)
+            is SelectionData.NoSelection -> {}
         }
     }
 
@@ -83,7 +84,28 @@ class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) :
 
     override fun navigateToSelection(hasSkillSelection: Boolean) {
         viewModelScope.launch {
-            _navigateToSelection.emit(hasSkillSelection)
+            val previousPokemonSelection = selectedState.value.minePokemon.selectedData()
+            val previousSelection =
+                if (previousPokemonSelection != null) {
+                    previousSelection(hasSkillSelection, previousPokemonSelection)
+                } else {
+                    SelectionData.NoSelection(hasSkillSelection)
+                }
+            _navigateToSelection.emit(previousSelection)
+        }
+    }
+
+    private fun previousSelection(
+        hasSkillSelection: Boolean,
+        previousPokemonSelection: PokemonSelectionUiModel,
+    ): SelectionData {
+        return if (hasSkillSelection) {
+            val skill =
+                selectedState.value.skill.selectedData()
+                    ?: throw IllegalStateException("")
+            SelectionData.WithSkill(previousPokemonSelection, skill)
+        } else {
+            SelectionData.WithoutSkill(previousPokemonSelection)
         }
     }
 }
