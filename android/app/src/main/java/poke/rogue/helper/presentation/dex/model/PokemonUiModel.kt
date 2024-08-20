@@ -8,8 +8,16 @@ data class PokemonUiModel(
     val id: String = "",
     val dexNumber: Long,
     val name: String,
+    val formName: String = "",
     val imageUrl: String,
     val types: List<TypeUiModel>,
+    val baseStats: Int = 0,
+    val speed: Int = 0,
+    val hp: Int = 0,
+    val attack: Int = 0,
+    val defense: Int = 0,
+    val specialAttack: Int = 0,
+    val specialDefense: Int = 0,
 )
 
 fun Pokemon.toUi(): PokemonUiModel =
@@ -17,8 +25,16 @@ fun Pokemon.toUi(): PokemonUiModel =
         id = id,
         dexNumber = dexNumber,
         name = name,
+        formName = formName,
         imageUrl = imageUrl,
         types = types.toUi(),
+        baseStats = baseStat,
+        speed = speed,
+        hp = hp,
+        attack = attack,
+        defense = defense,
+        specialAttack = specialAttack,
+        specialDefense = specialDefense,
     )
 
 fun List<Pokemon>.toUi(): List<PokemonUiModel> = map(Pokemon::toUi)
