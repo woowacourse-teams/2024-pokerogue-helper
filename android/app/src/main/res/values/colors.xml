@@ -28,13 +28,13 @@
     <color name="poke_steel">#73B1CC</color>
     <color name="poke_ice">#46C8C8</color>
     <color name="poke_water">#3199E2</color>
-    <color name="poke_dragon">#576FBE</color>
+    <color name="poke_dragon">#016ECA</color>
     <color name="poke_poison">#9454CC</color>
     <color name="poke_ghost">#704572</color>
-    <color name="poke_ground">#A4733A</color>
-    <color name="poke_psychic">#E96C8B</color>
+    <color name="poke_ground">#E87236</color>
+    <color name="poke_psychic">#FF6675</color>
     <color name="poke_bug">#9f9f27</color>
-    <color name="poke_rock">#AAA482</color>
+    <color name="poke_rock">#C8B686</color>
     <color name="poke_normal">#828282</color>
     <color name="poke_dark">#514747</color>
     <color name="poke_fairy">#E08CE0</color>
