@@ -1,7 +1,11 @@
 package poke.rogue.helper.presentation.dex.filter
 
-data class SelectableUiModel<T : Any>(
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class SelectableUiModel<T : Parcelable>(
     val id: Int,
     val isSelected: Boolean,
     val data: T,
-)
+) : Parcelable

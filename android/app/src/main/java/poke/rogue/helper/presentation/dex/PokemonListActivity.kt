@@ -14,6 +14,8 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.filter.PokemonFilterBottomSheetFragment
+import poke.rogue.helper.presentation.dex.sort.PokemonSortBottomSheetFragment
+import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
 import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -90,6 +92,20 @@ class PokemonListActivity :
                         },
                     ),
                 )
+                binding.chipPokeSort.bindPokeChip(
+                    PokeChip.Spec(
+                        label = uiState.sort.label.clean(),
+                        trailingIconRes = R.drawable.ic_sort,
+                        isSelected = uiState.isSorted,
+                        padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
+                        onSelect = {
+                            PokemonSortBottomSheetFragment.newInstance(uiState.sort).show(
+                                supportFragmentManager,
+                                PokemonSortBottomSheetFragment.TAG,
+                            )
+                        },
+                    ),
+                )
             }
         }
         repeatOnStarted {
@@ -99,11 +115,18 @@ class PokemonListActivity :
             }
         }
         val fm: FragmentManager = supportFragmentManager
-        fm.setFragmentResultListener(RESULT_KEY, this) { key, bundle ->
-            val args: PokeFilterUiModel =
+
+        fm.setFragmentResultListener(FILTER_RESULT_KEY, this) { key, bundle ->
+            val filterArgs: PokeFilterUiModel =
                 PokemonFilterBottomSheetFragment.argsFrom(bundle)
                     ?: return@setFragmentResultListener
-            viewModel.filterPokemon(args)
+            viewModel.filterPokemon(filterArgs)
+        }
+        fm.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
+            val sortArgs: PokemonSortUiModel =
+                PokemonSortBottomSheetFragment.argsFrom(bundle)
+                    ?: return@setFragmentResultListener
+            viewModel.sortPokemon(sortArgs)
         }
     }
 
@@ -113,8 +136,13 @@ class PokemonListActivity :
         }
     }
 
+    private fun String.clean() =
+        this
+            .replace("\\s".toRegex(), "")
+            .replace("[^a-zA-Z0-9ㄱ-ㅎ가-힣]".toRegex(), "")
+
     companion object {
-        val TAG: String = PokemonListActivity::class.java.simpleName
-        const val RESULT_KEY = "PokemonListActivity_result_key"
+        const val FILTER_RESULT_KEY = "FILTER_RESULT_KEY_result_key"
+        const val SORT_RESULT_KEY = "SORT_RESULT_KEY_result_key"
     }
 }
