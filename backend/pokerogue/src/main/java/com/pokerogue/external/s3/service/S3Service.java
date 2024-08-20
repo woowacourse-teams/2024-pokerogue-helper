@@ -15,7 +15,7 @@ public class S3Service {
     private static final String POKEMON_IMAGE_FOLDER = "image/";
     private static final String TYPE_IMAGE_FOLDER = "type/";
     private static final String BIOME_IMAGE_FOLDER = "pokerogue/biome/";
-    private static final String TRAINER_IMAGE_FOLDER = "pokerogue/trainer/trainer/";
+    private static final String TRAINER_IMAGE_FOLDER = "pokerogue/trainer/";
     private static final String POKEROGUE_TYPE_IMAGE_FOLDER = "pokerogue/type/";
     private static final String POKEROGUE_MOVE_CATEGORY_IMAGE_FOLDER = "pokerogue/move-category/";
     private static final String POKEROGUE_POKEMON_IMAGE_FOLDER = "pokerogue/pokemon/front/";
