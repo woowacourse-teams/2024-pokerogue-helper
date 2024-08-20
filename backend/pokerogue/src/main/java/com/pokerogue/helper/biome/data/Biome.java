@@ -20,6 +20,9 @@ public class Biome {
     private final List<String> nextBiome;
 
     public List<String> getTrainerTypes() {
+        if (name.equals("없음")) {
+            return List.of();
+        }
         Set<String> trainerTypes = new HashSet<>();
         trainers.forEach(trainer -> trainerTypes.addAll(trainer.getTrainerTypes()));
 

@@ -3,6 +3,7 @@ package com.pokerogue.helper.biome.service;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.BiomePokemonType;
 import com.pokerogue.helper.biome.data.Tier;
+import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.dto.BiomeAllPokemonResponse;
 import com.pokerogue.helper.biome.dto.BiomeDetailResponse;
 import com.pokerogue.helper.biome.dto.BiomePokemonResponse;
@@ -109,6 +110,12 @@ public class BiomeService {
     }
 
     private List<TrainerPokemonResponse> getTrainerPokemons(Biome biome) {
+        List<String> trainerNames = biome.getTrainers().stream()
+                .map(Trainer::getName)
+                .toList();
+        if (trainerNames.contains("없음")) {
+            return List.of();
+        }
         return biome.getTrainers().stream()
                 .map(trainer -> TrainerPokemonResponse.from(
                         trainer,
