@@ -1,21 +1,14 @@
 package com.pokerogue.helper.pokemon2.data;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.pokerogue.environment.repository.RepositoryTest;
-import com.pokerogue.helper.global.config.DatabaseInitializer;
+import com.pokerogue.helper.pokemon2.config.Pokemon2DatabaseInitializer;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import org.assertj.core.api.Assertions;
-import org.hibernate.annotations.Source;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.DefaultApplicationArguments;
-import org.springframework.boot.SpringApplication;
 
 
 class Pokemon2DatabaseInitializerTest {

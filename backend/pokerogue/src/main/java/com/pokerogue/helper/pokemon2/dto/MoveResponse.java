@@ -1,4 +1,4 @@
-package com.pokerogue.helper.pokemon2;
+package com.pokerogue.helper.pokemon2.dto;
 
 record MoveResponse(
         String name,

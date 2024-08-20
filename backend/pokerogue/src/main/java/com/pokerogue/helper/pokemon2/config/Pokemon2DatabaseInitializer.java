@@ -1,5 +1,6 @@
-package com.pokerogue.helper.pokemon2.data;
+package com.pokerogue.helper.pokemon2.config;
 
+import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import java.io.BufferedReader;
@@ -31,7 +32,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
     List<String> moveKeys = List.of("id", "name", "nameAppend", "effect", "type", "defaultType", "category",
             "moveTarget", "power", "accuracy", "pp", "chance", "priority", "generation", "flags");
     List<String> pokemonKeys = List.of(
-            "id",
+"id",
             "speciesName",
             "formName",
             "nameKo",
@@ -66,7 +67,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
 
                 while (stringTokenizer.hasMoreTokens()) {
-                    values.add(stringTokenizer.nextToken().strip().toLowerCase());
+                    values.add(stringTokenizer.nextToken().strip().replaceAll(" ", "_").toLowerCase());
                 }
 
                 if (pokemonKeys.size() != values.size()) {
@@ -74,7 +75,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 }
 
                 Pokemon pokemon = createPokemon(values);
-                pokemon2Repository.save(pokemon.id(),pokemon);
+                pokemon2Repository.save(pokemon.id(), pokemon);
             }
 //            saveMove();
         } catch (IOException e) {
