@@ -75,9 +75,10 @@ public class BattleService {
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
         double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, rivalPokemon.pokemonTypes());
         double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myPokemon);
+        double stringWindMultiplier = getStringWindMultiplier(moveType, rivalPokemon.pokemonTypes(), weather);
 
-        // Todo: 강풍 고려
-        double totalMultiplier = weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier;
+        double totalMultiplier =
+                weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
         double finalAccuracy = calculateAccuracy(move, weather);
 
         return new BattleResultResponse(
@@ -115,10 +116,10 @@ public class BattleService {
         return 1;
     }
 
-    private double getTypeMatchingMultiplier(Type moveType, List<Type> defensivePokemonTypes) {
-        return defensivePokemonTypes.stream()
-                .map(toType -> typeMatchingRepository.findByFromTypeAndToType(moveType, toType).orElseThrow(
-                        () -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR)))
+    private double getTypeMatchingMultiplier(Type moveType, List<Type> rivalPokemonTypes) {
+        return rivalPokemonTypes.stream()
+                .map(toType -> typeMatchingRepository.findByFromTypeAndToType(moveType, toType)
+                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR)))
                 .map(TypeMatching::result)
                 .reduce(1d, (a, b) -> a * b);
     }
@@ -129,6 +130,15 @@ public class BattleService {
                 .anyMatch(moveType::equals);
         if (hasSameType) {
             return 1.5;
+        }
+        return 1;
+    }
+
+    private double getStringWindMultiplier(Type moveType, List<Type> rivalPokemonTypes, Weather weather) {
+        TypeMatching typeMatching = typeMatchingRepository.findByFromTypeAndToType(moveType, Type.FLYING)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
+        if (weather == Weather.STRONG_WINDS && rivalPokemonTypes.contains(Type.FLYING) && typeMatching.result() == 2) {
+            return 0.5;
         }
         return 1;
     }
