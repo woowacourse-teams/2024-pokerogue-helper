@@ -87,6 +87,7 @@ class BattleSelectionViewModel(
 
     fun selectPokemon(pokemon: PokemonSelectionUiModel) {
         _selectedPokemon.value = BattleSelectionUiState.Selected(pokemon)
+        _selectedSkill.value = BattleSelectionUiState.Empty
     }
 
     fun selectSkill(skill: SkillSelectionUiModel) {
