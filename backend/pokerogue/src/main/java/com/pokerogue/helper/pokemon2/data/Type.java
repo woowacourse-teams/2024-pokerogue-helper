@@ -34,10 +34,12 @@ public enum Type {
 
     public static Type findById(String id) {
         return Arrays.stream(values())
-                .filter(value -> value.getId().toLowerCase()
-                        .replaceAll("-", "_")
-                        .replaceAll(" ", "_")
-                        .equals(id))
+                .filter(value -> value.getId()
+                        .replace("-", "_")
+                        .replace(" ", "_")
+                        .toLowerCase()
+                        .equals(id)
+                )
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 타입 아이디입니다"))
                 ;

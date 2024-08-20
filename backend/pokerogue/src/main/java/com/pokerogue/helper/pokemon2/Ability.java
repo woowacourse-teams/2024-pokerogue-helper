@@ -329,9 +329,10 @@ public enum Ability {
 
     public static Ability findById(String id) {
         return Arrays.stream(values())
-                .filter(value -> value.getId().toLowerCase()
-                        .replaceAll("-", "_")
-                        .replaceAll(" ", "_")
+                .filter(value -> value.getId()
+                        .replace("-", "_")
+                        .replace(" ", "_")
+                        .toLowerCase()
                         .equals(id))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("잘못된 특성 아이디입니다."));
