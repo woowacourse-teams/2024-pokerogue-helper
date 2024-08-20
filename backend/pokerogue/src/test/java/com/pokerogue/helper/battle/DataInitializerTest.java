@@ -29,11 +29,11 @@ class DataInitializerTest {
         dataInitializer.run(new DefaultApplicationArguments());
 
         assertAll(() -> {
-            assertThat(battleMoveRepository.findAll()).hasSize(902);
+            assertThat(battleMoveRepository.findAll()).hasSize(920);
             assertThat(pokemonMovesByMachineRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesBySelfRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesByEggRepository.findAll()).hasSize(1082);
-            assertThat(battlePokemonRepository.findAll()).isNotEmpty();
+            assertThat(battlePokemonRepository.findAll()).hasSize(1350);
             assertThat(typeMatchingRepository.findAll()).hasSize(361);
         });
     }

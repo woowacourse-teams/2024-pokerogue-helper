@@ -85,7 +85,7 @@ public class DataInitializer implements ApplicationRunner {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
 
         return new BattleMove(
-                fields.get(1), /* 우선은 한글 이름을 id로 설정, 추후 숫자로 변경 */
+                fields.get(0),
                 fields.get(1),
                 fields.get(2),
                 fields.get(3),
@@ -115,7 +115,7 @@ public class DataInitializer implements ApplicationRunner {
 
     private PokemonMovesBySelf createPokemonMovesBySelf(List<String> fields) {
         Integer pokedexNumber = convertToInteger(fields.get(0));
-        List<String> moveIds = Arrays.stream(fields.get(19).split(LIST_DELIMITER))
+        List<String> moveIds = Arrays.stream(fields.get(5).split(LIST_DELIMITER))
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .toList();
@@ -125,7 +125,7 @@ public class DataInitializer implements ApplicationRunner {
 
     private PokemonMovesByEgg createPokemonMovesByEgg(List<String> fields) {
         Integer pokedexNumber = convertToInteger(fields.get(0));
-        List<String> moveIds = Arrays.stream(fields.get(18).split(LIST_DELIMITER))
+        List<String> moveIds = Arrays.stream(fields.get(4).split(LIST_DELIMITER))
                 .map(String::trim)
                 .filter(s -> !s.isEmpty())
                 .toList();
@@ -134,7 +134,7 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private BattlePokemon createBattlePokemon(List<String> fields) {
-        String name = fields.get(1);
+        String id = fields.get(1);
         List<Type> types = new ArrayList<>();
         if (existTypeName(fields.get(2))) {
             Type type = Type.findByName(fields.get(2))
@@ -147,7 +147,7 @@ public class DataInitializer implements ApplicationRunner {
             types.add(type);
         }
 
-        return new BattlePokemon(name, types, name);
+        return new BattlePokemon(id, types);
     }
 
     private TypeMatching createTypeMatching(List<String> fields) {
