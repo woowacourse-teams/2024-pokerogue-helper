@@ -130,7 +130,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         }
 
         List<Trainer> trainers = trainerPokemons.stream()
-                .filter(trainerPokemon -> isExistTrainer(trainerTypes, trainerPokemon.getTrainerName()))
+                .filter(trainerPokemon -> existsByTrainerName(trainerTypes, trainerPokemon.getTrainerName()))
                 .map(trainerPokemon -> new Trainer(
                         trainerPokemon.getId(),
                         trainerPokemon.getTrainerName(),
@@ -168,7 +168,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 );
     }
 
-    private boolean isExistTrainer(List<TrainerType> trainerTypes, String trainerName) {
+    private boolean existsByTrainerName(List<TrainerType> trainerTypes, String trainerName) {
         return trainerTypes.stream()
                 .anyMatch(trainerType -> trainerType.getTrainerName().equals(trainerName));
     }
