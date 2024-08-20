@@ -135,8 +135,8 @@ public class BiomeService {
 
     private List<NextBiomeResponse> getNextBiomes(Biome biome) {
         return biome.getNextBiome().stream()
-                .map(id -> new NextBiomeResponse(id, biomeRepository.findById(id)
-                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND)).getName()))
+                .map(nextBiome -> NextBiomeResponse.of(biomeRepository.findById(nextBiome.getId())
+                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND)), nextBiome.getPercent()))
                 .toList();
     }
 }

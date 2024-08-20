@@ -17,7 +17,7 @@ public class Biome {
     private final Map<Tier, List<String>> pokemons;
     private final List<String> mainTypes;
     private final List<Trainer> trainers;
-    private final List<String> nextBiome;
+    private final List<NextBiome> nextBiome;
 
     public List<String> getTrainerTypes() {
         Set<String> trainerTypes = new HashSet<>();

@@ -7,6 +7,7 @@ import com.pokerogue.helper.biome.data.BiomePokemon;
 import com.pokerogue.helper.biome.data.BiomePokemonInfo;
 import com.pokerogue.helper.biome.data.BiomePokemonType;
 import com.pokerogue.helper.biome.data.BiomeTypeAndTrainer;
+import com.pokerogue.helper.biome.data.NextBiome;
 import com.pokerogue.helper.biome.data.PokemonByBiome;
 import com.pokerogue.helper.biome.data.Tier;
 import com.pokerogue.helper.biome.data.Trainer;
@@ -209,7 +210,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                 .toList();
     }
 
-    private List<String> getNextBiomes(List<BiomeLink> biomeLinks, String biomeId) {
+    private List<NextBiome> getNextBiomes(List<BiomeLink> biomeLinks, String biomeId) {
         return biomeLinks.stream()
                 .filter(biomeLink -> biomeLink.getId().equals(biomeId))
                 .map(BiomeLink::getNextBiomes)
