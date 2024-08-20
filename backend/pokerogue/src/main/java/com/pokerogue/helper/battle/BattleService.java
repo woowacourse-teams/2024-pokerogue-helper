@@ -144,7 +144,7 @@ public class BattleService {
     }
 
     private double calculateAccuracy(BattleMove move, Weather weather) {
-        if (weather.name().equals("안개")) {
+        if (weather == Weather.FOG) {
             return (double) move.accuracy() * 0.9;
         }
         return (double) move.accuracy();
