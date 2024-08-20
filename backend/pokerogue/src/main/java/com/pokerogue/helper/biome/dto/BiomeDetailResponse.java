@@ -10,14 +10,14 @@ public record BiomeDetailResponse(
         List<BiomeAllPokemonResponse> wildPokemons,
         List<BiomeAllPokemonResponse> bossPokemons,
         List<TrainerPokemonResponse> trainerPokemons,
-        List<NextBiomeResponse> map
+        List<NextBiomeResponse> nextBiomes
 ) {
     public static BiomeDetailResponse of(
             Biome biome,
             List<BiomeAllPokemonResponse> wildPokemons,
             List<BiomeAllPokemonResponse> bossPokemons,
             List<TrainerPokemonResponse> trainerPokemons,
-            List<NextBiomeResponse> map
+            List<NextBiomeResponse> nextBiomes
     ) {
         return new BiomeDetailResponse(
                 biome.getId(),
@@ -26,7 +26,7 @@ public record BiomeDetailResponse(
                 wildPokemons,
                 bossPokemons,
                 trainerPokemons,
-                map
+                nextBiomes
         );
     }
 }
