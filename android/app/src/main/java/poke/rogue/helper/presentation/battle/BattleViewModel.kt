@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.battle
 
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,17 +13,21 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.data.repository.BattleRepository
+import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.BattleResultUiModel
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
+import poke.rogue.helper.presentation.battle.model.toUi
 
-class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) :
-    ErrorHandleViewModel(logger),
-    BattleNavigationHandler {
-    private val _weathers = MutableStateFlow(WeatherUiModel.DUMMY)
+class BattleViewModel(
+    private val battleRepository: BattleRepository,
+    logger: AnalyticsLogger = analyticsLogger(),
+) : ErrorHandleViewModel(logger), BattleNavigationHandler {
+    private val _weathers = MutableStateFlow(emptyList<WeatherUiModel>())
     val weathers = _weathers.asStateFlow()
 
     private val _selectedState = MutableStateFlow(BattleSelectionsState.DEFAULT)
@@ -44,9 +49,21 @@ class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) :
         battleResult.map { it.isSuccess() }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
+    init {
+        initWeathers()
+    }
+
+    private fun initWeathers() {
+        viewModelScope.launch(errorHandler) {
+            val allWeathers = battleRepository.weathers().map { it.toUi() }
+            _weathers.value = allWeathers
+        }
+    }
+
     fun updateWeather(newWeather: WeatherUiModel) {
         viewModelScope.launch {
-            _selectedState.value = selectedState.value.copy(weather = newWeather)
+            val selectedWeather = BattleSelectionUiState.Selected(newWeather)
+            _selectedState.value = selectedState.value.copy(weather = selectedWeather)
         }
     }
 
@@ -112,5 +129,10 @@ class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) :
         } else {
             SelectionData.WithoutSkill(previousPokemonSelection)
         }
+    }
+
+    companion object {
+        fun factory(battleRepository: BattleRepository): ViewModelProvider.Factory =
+            BaseViewModelFactory { BattleViewModel(battleRepository) }
     }
 }

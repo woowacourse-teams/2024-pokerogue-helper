@@ -81,7 +81,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{vm.selectedState.weather.effect}"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@id/spinner_weather"
             app:layout_constraintStart_toStartOf="@id/spinner_weather"
