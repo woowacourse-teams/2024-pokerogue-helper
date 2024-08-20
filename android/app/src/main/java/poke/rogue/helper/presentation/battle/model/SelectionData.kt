@@ -20,7 +20,7 @@ sealed class SelectionData : Parcelable {
 }
 
 fun SelectionData.isSkillSelectionRequired(): Boolean =
-    this is SelectionData.WithSkill || (this as? SelectionData.NoSelection)?.isSkillSelectionRequired != null
+    this is SelectionData.WithSkill || (this as? SelectionData.NoSelection)?.isSkillSelectionRequired == true
 
 fun SelectionData.selectedPokemonOrNull(): PokemonSelectionUiModel? {
     return when (this) {

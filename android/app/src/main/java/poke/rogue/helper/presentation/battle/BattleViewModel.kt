@@ -84,7 +84,12 @@ class BattleViewModel(logger: AnalyticsLogger = analyticsLogger()) :
 
     override fun navigateToSelection(hasSkillSelection: Boolean) {
         viewModelScope.launch {
-            val previousPokemonSelection = selectedState.value.minePokemon.selectedData()
+            val previousPokemonSelection =
+                if (hasSkillSelection) {
+                    selectedState.value.minePokemon.selectedData()
+                } else {
+                    selectedState.value.opponentPokemon.selectedData()
+                }
             val previousSelection =
                 if (previousPokemonSelection != null) {
                     previousSelection(hasSkillSelection, previousPokemonSelection)
