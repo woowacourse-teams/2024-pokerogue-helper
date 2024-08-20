@@ -18,7 +18,6 @@ import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
-import timber.log.Timber
 
 class BiomeActivity : ToolbarActivity<ActivityBiomeBinding>(R.layout.activity_biome) {
     private val logger: AnalyticsLogger = analyticsLogger()
@@ -72,11 +71,12 @@ class BiomeActivity : ToolbarActivity<ActivityBiomeBinding>(R.layout.activity_bi
             viewModel.biome.collect { biome ->
                 when (biome) {
                     is BiomeUiState.Loading -> {
-                        Timber.d("Loading")
+                        binding.biomeLoading.isVisible = true
                     }
 
                     is BiomeUiState.Success -> {
                         biomeAdapter.submitList(biome.data.toUi())
+                        binding.biomeLoading.isVisible = false
                     }
                 }
             }
