@@ -88,9 +88,7 @@ public class BattleService {
                 move.name(),
                 move.effect(),
                 moveType.getName(),
-                move.category(),
-                weather.getDescription(),
-                weather.getEffects()
+                move.category()
         );
     }
 
