@@ -54,7 +54,7 @@ public class BattleService {
     private MoveResponse toMoveResponseWithLogo(BattleMove battleMove) {
         Type moveType = battleMove.type();
         String typeLogo = moveType.getImage();
-        MoveCategory moveCategory = MoveCategory.findByName(battleMove.category().toLowerCase());
+        MoveCategory moveCategory = battleMove.category();
         String categoryLogo = moveCategory.getImage();
 
         return MoveResponse.of(battleMove, typeLogo, categoryLogo);
@@ -91,7 +91,7 @@ public class BattleService {
                 move.name(),
                 move.effect(),
                 moveType.getName(),
-                move.category()
+                move.category().getName()
         );
     }
 

@@ -83,6 +83,8 @@ public class DataInitializer implements ApplicationRunner {
     private BattleMove createMove(List<String> fields) {
         Type moveType = Type.findByName(fields.get(4))
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+        MoveCategory moveCategory = MoveCategory.findByEngName(fields.get(6).toLowerCase())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
 
         return new BattleMove(
                 fields.get(0),
@@ -91,7 +93,7 @@ public class DataInitializer implements ApplicationRunner {
                 fields.get(3),
                 moveType,
                 fields.get(5),
-                fields.get(6),
+                moveCategory,
                 fields.get(7),
                 convertToInteger(fields.get(8)),
                 convertToInteger(fields.get(9)),

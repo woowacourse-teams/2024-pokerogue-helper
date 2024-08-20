@@ -7,7 +7,7 @@ public record BattleMove(
         String effect,
         Type type,
         String defaultTypeId,
-        String category,
+        MoveCategory category,
         String moveTarget,
         Integer power,
         Integer accuracy,
