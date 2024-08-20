@@ -20,7 +20,8 @@ public enum Weather {
             List.of("불타입 기술은 모두 실패한다", "불꽃 타입 기술의 위력이 1.5배가 된다", "물 타입 기술의 위력이 1.5배가 된다")),
     HARSH_SUN("harsh_sun", "강한 쾌청", "햇살이 아주 강하다",
             List.of("물타입 기술은 모두 실패한다", "불꽃 타입 기술의 위력이 1.5배가 된다", "물 타입 기술의 위력이 0.5배가 된다")),
-    STRONG_WINDS("strong_winds", "난기류", "수수께끼의 난기류가 강렬하게 불고 있다", List.of("비행 타입의 약점을 없애준다"));
+    STRONG_WINDS("strong_winds", "난기류", "수수께끼의 난기류가 강렬하게 불고 있다", List.of("비행 타입의 약점을 없애준다")),
+    ;
 
     private final String id;
     private final String name;

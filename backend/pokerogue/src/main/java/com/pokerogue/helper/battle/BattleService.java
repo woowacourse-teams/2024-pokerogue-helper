@@ -109,6 +109,7 @@ public class BattleService {
                 return 1.5;
             }
         }
+
         return 1;
     }
 
@@ -124,18 +125,22 @@ public class BattleService {
         List<Type> rivalPokemonTypes = myPokemon.pokemonTypes();
         boolean hasSameType = rivalPokemonTypes.stream()
                 .anyMatch(moveType::equals);
+
         if (hasSameType) {
             return 1.5;
         }
+
         return 1;
     }
 
     private double getStringWindMultiplier(Type moveType, List<Type> rivalPokemonTypes, Weather weather) {
         TypeMatching typeMatching = typeMatchingRepository.findByFromTypeAndToType(moveType, Type.FLYING)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
+
         if (weather == Weather.STRONG_WINDS && rivalPokemonTypes.contains(Type.FLYING) && typeMatching.result() == 2) {
             return 0.5;
         }
+
         return 1;
     }
 
@@ -143,6 +148,7 @@ public class BattleService {
         if (weather == Weather.FOG) {
             return (double) move.accuracy() * 0.9;
         }
+
         return (double) move.accuracy();
     }
 }
