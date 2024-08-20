@@ -20,14 +20,18 @@ class BiomeViewModel(
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-        BiomeUiEventHandler {
+    BiomeUiEventHandler {
     private val _biome = MutableStateFlow<BiomeUiState<List<Biome>>>(BiomeUiState.Loading)
     val biome = _biome.asStateFlow()
 
     private val _navigationToDetailEvent = MutableSharedFlow<String>()
     val navigationToDetailEvent: SharedFlow<String> = _navigationToDetailEvent.asSharedFlow()
 
-    fun updateBiomeList() {
+    init {
+        updateBiomes()
+    }
+
+    private fun updateBiomes() {
         viewModelScope.launch(errorHandler) {
             val biomes = biomeRepository.biomes()
             _biome.value = BiomeUiState.Success(biomes)

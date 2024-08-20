@@ -40,7 +40,6 @@ class BiomeActivity : ToolbarActivity<ActivityBiomeBinding>(R.layout.activity_bi
     private fun initView() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
-        viewModel.updateBiomeList()
     }
 
     private fun initAdapter() {
