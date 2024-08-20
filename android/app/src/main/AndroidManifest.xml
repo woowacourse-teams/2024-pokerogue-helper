@@ -18,6 +18,16 @@
         android:theme="@style/Theme.PokeRogueHelper"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.splash.PokemonIntroActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PokeRogueHelper.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".presentation.battle.selection.BattleSelectionActivity"
             android:exported="false" />
         <activity
@@ -31,15 +41,8 @@
             android:exported="false" />
         <activity
             android:name=".presentation.home.HomeActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:theme="@style/Theme.PokeRogueHelper.Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".presentation.type.TypeActivity"
             android:exported="false" />

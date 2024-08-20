@@ -32,7 +32,6 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
         get() = binding.toolbarHome
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
         super.onCreate(savedInstanceState)
         initViews()
         initObservers()
