@@ -4,6 +4,7 @@ import java.util.List;
 
 public record Pokemon(
         String id,
+        String speciesId,
         String speciesName,
         String formName,
         String koName,
@@ -17,6 +18,7 @@ public record Pokemon(
         String legendary,
         String subLegendary,
         String mythical,
+        String canChangeForm,
         List<String> evolutionLevel,
         String baseTotal,
         String baseStats,

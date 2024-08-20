@@ -6,7 +6,6 @@ import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import jakarta.annotation.Nullable;
 import java.util.List;
 
-@Nullable
 public record Pokemon2Response(
         String id,
         Long pokedexNumber,

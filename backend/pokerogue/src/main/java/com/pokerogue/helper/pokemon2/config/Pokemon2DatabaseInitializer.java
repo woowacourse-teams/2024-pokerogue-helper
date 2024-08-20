@@ -32,7 +32,8 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
     List<String> moveKeys = List.of("id", "name", "nameAppend", "effect", "type", "defaultType", "category",
             "moveTarget", "power", "accuracy", "pp", "chance", "priority", "generation", "flags");
     List<String> pokemonKeys = List.of(
-"id",
+            "id",
+            "speciesId",
             "speciesName",
             "formName",
             "nameKo",
@@ -46,6 +47,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
             "legendary",
             "subLegendary",
             "mythical",
+            "canChangeForm",
             "evolutionLevel",
             "baseTotal",
             "baseStats",
@@ -67,11 +69,19 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
 
                 while (stringTokenizer.hasMoreTokens()) {
-                    values.add(stringTokenizer.nextToken().strip().replaceAll(" ", "_").toLowerCase());
+                    String token = stringTokenizer.nextToken()
+                            .strip()
+                            .replaceAll("-", "_")
+                            .replaceAll(" ", "_")
+                            .toLowerCase();
+                    if ("type.undefined".equals(token)) {
+                        token = "empty";
+                    }
+                    values.add(token);
                 }
 
                 if (pokemonKeys.size() != values.size()) {
-                    throw new IllegalArgumentException("데이터가 잘못 되었습니다.");
+                    throw new IllegalArgumentException(pokemonKeys.size() + " " + values.size() + "데이터가 잘못 되었습니다.");
                 }
 
                 Pokemon pokemon = createPokemon(values);
@@ -99,14 +109,16 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 values.get(11),
                 values.get(12),
                 values.get(13),
-                Arrays.stream(values.get(14).split(",")).toList(),
+                values.get(14),
                 values.get(15),
-                values.get(16),
+                Arrays.stream(values.get(16).split(",")).toList(),
                 values.get(17),
                 values.get(18),
-                Arrays.stream(values.get(19).split(",")).toList(),
-                Arrays.stream(values.get(20).split(",")).toList(),
-                Arrays.stream(values.get(21).split(",")).toList()
+                values.get(19),
+                values.get(20),
+                Arrays.stream(values.get(21).split(",")).toList(),
+                Arrays.stream(values.get(22).split(",")).toList(),
+                Arrays.stream(values.get(23).split(",")).toList()
         );
     }
 
