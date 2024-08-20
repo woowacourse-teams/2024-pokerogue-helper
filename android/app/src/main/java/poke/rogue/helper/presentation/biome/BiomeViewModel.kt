@@ -20,7 +20,7 @@ class BiomeViewModel(
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-    BiomeUiEventHandler {
+        BiomeUiEventHandler {
     private val _biome = MutableStateFlow<BiomeUiState<List<Biome>>>(BiomeUiState.Loading)
     val biome = _biome.asStateFlow()
 

@@ -13,8 +13,7 @@ import poke.rogue.helper.data.repository.BiomeRepository
 class FakeBiomeRepository : BiomeRepository {
     override suspend fun biomes(): List<Biome> = BIOMES
 
-    override suspend fun biomeDetail(id: String): BiomeDetail =
-        BIOME_DETAIL[id] ?: throw IllegalArgumentException("Invalid biome ID")
+    override suspend fun biomeDetail(id: String): BiomeDetail = BIOME_DETAIL[id] ?: throw IllegalArgumentException("Invalid biome ID")
 
     companion object {
         val BIOMES: List<Biome> =
@@ -52,11 +51,11 @@ class FakeBiomeRepository : BiomeRepository {
         val BIOME_DETAIL: Map<String, BiomeDetail> =
             mapOf(
                 "grass" to
-                        BiomeDetail(
-                            id = "grass",
-                            name = "풀숲",
-                            image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
-                            wildPokemons =
+                    BiomeDetail(
+                        id = "grass",
+                        name = "풀숲",
+                        image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
+                        wildPokemons =
                             listOf(
                                 WildPokemon(
                                     "레어",
@@ -70,7 +69,7 @@ class FakeBiomeRepository : BiomeRepository {
                                     ),
                                 ),
                             ),
-                            bossPokemons =
+                        bossPokemons =
                             listOf(
                                 BossPokemon(
                                     "레어",
@@ -84,24 +83,24 @@ class FakeBiomeRepository : BiomeRepository {
                                     ),
                                 ),
                             ),
-                            gymPokemons =
+                        gymPokemons =
                             listOf(
                                 GymPokemon(
                                     gymLeaderName = "오박사",
                                     gymLeaderImage = "",
                                     gymLeaderLogos = emptyList(),
                                     pokemons =
-                                    listOf(
-                                        BiomePokemon(
-                                            id = "이상해꽃",
-                                            name = "이상해꽃",
-                                            image = "",
-                                            types = listOf(Type.GRASS, Type.POISON),
+                                        listOf(
+                                            BiomePokemon(
+                                                id = "이상해꽃",
+                                                name = "이상해꽃",
+                                                image = "",
+                                                types = listOf(Type.GRASS, Type.POISON),
+                                            ),
                                         ),
-                                    ),
                                 ),
                             ),
-                            nextBiomes =
+                        nextBiomes =
                             listOf(
                                 BiomeNextBiome(
                                     id = "tall_grass",
@@ -110,7 +109,7 @@ class FakeBiomeRepository : BiomeRepository {
                                     probability = 0.5,
                                 ),
                             ),
-                        ),
+                    ),
             )
     }
 }
