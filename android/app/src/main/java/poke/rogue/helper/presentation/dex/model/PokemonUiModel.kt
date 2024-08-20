@@ -22,16 +22,17 @@ data class PokemonUiModel(
     private val sortUiModel: PokemonSortUiModel = PokemonSortUiModel.ByDexNumber,
 ) {
     val displayStat: Int
-        get() = when (sortUiModel) {
-            PokemonSortUiModel.ByBaseStat -> baseStats
-            PokemonSortUiModel.BySpeed -> speed
-            PokemonSortUiModel.ByHp -> hp
-            PokemonSortUiModel.ByAttack -> attack
-            PokemonSortUiModel.ByDefense -> defense
-            PokemonSortUiModel.BySpecialAttack -> specialAttack
-            PokemonSortUiModel.BySpecialDefense -> specialDefense
-            else -> 0
-        }
+        get() =
+            when (sortUiModel) {
+                PokemonSortUiModel.ByBaseStat -> baseStats
+                PokemonSortUiModel.BySpeed -> speed
+                PokemonSortUiModel.ByHp -> hp
+                PokemonSortUiModel.ByAttack -> attack
+                PokemonSortUiModel.ByDefense -> defense
+                PokemonSortUiModel.BySpecialAttack -> specialAttack
+                PokemonSortUiModel.BySpecialDefense -> specialDefense
+                else -> 0
+            }
 }
 
 fun Pokemon.toUi(): PokemonUiModel =

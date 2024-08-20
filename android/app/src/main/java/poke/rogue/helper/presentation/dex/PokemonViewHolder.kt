@@ -19,24 +19,28 @@ class PokemonViewHolder(
 
     fun bind(pokemonUiModel: PokemonUiModel) {
         binding.pokemon = pokemonUiModel
-        binding.spec = PokeChip.Spec(
-            label = pokemonUiModel.displayStat.toString(),
-            sizes = PokeChip.Sizes(
-                labelSize = 10,
-            ),
-            colors = PokeChip.Colors(
-                labelColor = R.color.poke_grey_80,
-                selectedContainerColor = R.color.lemon
-            ),
-            strokeWidth = 0.dp,
-            padding = PaddingValues(
-                start = 4.dp,
-                top = 2.dp,
-                end = 4.dp,
-                bottom = 2.dp,
-            ),
-            isSelected = true,
-        )
+        binding.spec =
+            PokeChip.Spec(
+                label = pokemonUiModel.displayStat.toString(),
+                sizes =
+                    PokeChip.Sizes(
+                        labelSize = 10,
+                    ),
+                colors =
+                    PokeChip.Colors(
+                        labelColor = R.color.poke_grey_80,
+                        selectedContainerColor = R.color.lemon,
+                    ),
+                strokeWidth = 0.dp,
+                padding =
+                    PaddingValues(
+                        start = 4.dp,
+                        top = 2.dp,
+                        end = 4.dp,
+                        bottom = 2.dp,
+                    ),
+                isSelected = true,
+            )
         val typesLayout = binding.layoutItemPokemonPokemonTypes
 
         val pokemonTypesAdapter =

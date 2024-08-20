@@ -25,16 +25,17 @@ object RetrofitModule {
             .build()
     }
 
-    private fun json(): Json = if (BuildConfig.DEBUG) {
-        Json {
-            coerceInputValues = true
+    private fun json(): Json =
+        if (BuildConfig.DEBUG) {
+            Json {
+                coerceInputValues = true
+            }
+        } else {
+            Json {
+                ignoreUnknownKeys = true
+                coerceInputValues = true
+            }
         }
-    } else {
-        Json {
-            ignoreUnknownKeys = true
-            coerceInputValues = true
-        }
-    }
 
     private fun jsonConverterFactory(json: Json): Converter.Factory {
         return json.asConverterFactory("application/json".toMediaType())
