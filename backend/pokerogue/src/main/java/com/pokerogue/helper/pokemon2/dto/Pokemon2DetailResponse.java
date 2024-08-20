@@ -6,7 +6,6 @@ import jakarta.annotation.Nullable;
 import java.util.List;
 import lombok.Builder;
 
-@Nullable
 public record Pokemon2DetailResponse(
         String id,
         Long pokedexNumber,
