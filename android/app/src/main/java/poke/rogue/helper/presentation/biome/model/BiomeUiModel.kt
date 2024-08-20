@@ -65,7 +65,7 @@ data class BiomeUiModel(
     }
 }
 
-fun List<String>.toTypeUiModel(): List<TypeUiModel> {
+fun List<String>.toTypeUi(): List<TypeUiModel> {
     return this.map { url ->
         val typeName = url.substringAfter("type/").substringBefore("-")
         TypeUiModel.valueOf(typeName.uppercase(Locale.ROOT))
@@ -77,7 +77,7 @@ fun Biome.toUi(): BiomeUiModel =
         id = id,
         name = name,
         imageUrl = image,
-        types = (pokemonType.toTypeUiModel() + gymLeaderType.toTypeUiModel()).distinct()
+        types = (pokemonType.toTypeUi() + gymLeaderType.toTypeUi()).distinct(),
     )
 
 fun List<Biome>.toUi(): List<BiomeUiModel> = map(Biome::toUi)

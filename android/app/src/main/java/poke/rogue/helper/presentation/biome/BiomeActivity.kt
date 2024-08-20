@@ -11,7 +11,6 @@ import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
-import poke.rogue.helper.presentation.biome.model.BiomeUiModel
 import poke.rogue.helper.presentation.biome.model.toUi
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.logClickEvent
@@ -51,8 +50,8 @@ class BiomeActivity : ToolbarActivity<ActivityBiomeBinding>(R.layout.activity_bi
                 GridSpacingItemDecoration(
                     2,
                     9.dp,
-                    false
-                )
+                    false,
+                ),
             )
         }
     }

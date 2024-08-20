@@ -17,10 +17,10 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 
 class BiomeViewModel(
     private val biomeRepository: BiomeRepository,
-    logger: AnalyticsLogger = analyticsLogger()
+    logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-    BiomeUiEventHandler {
+        BiomeUiEventHandler {
     private val _biome = MutableStateFlow<BiomeUiState<List<Biome>>>(BiomeUiState.Loading)
     val biome = _biome.asStateFlow()
 
