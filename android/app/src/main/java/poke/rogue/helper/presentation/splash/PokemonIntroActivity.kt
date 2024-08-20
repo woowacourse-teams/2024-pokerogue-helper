@@ -28,6 +28,7 @@ class PokemonIntroActivity() :
         super.onCreate(savedInstanceState)
         repeatOnStarted {
             viewModel.navigationToHomeEvent.collect {
+                finish()
                 startActivity<HomeActivity>()
             }
         }
