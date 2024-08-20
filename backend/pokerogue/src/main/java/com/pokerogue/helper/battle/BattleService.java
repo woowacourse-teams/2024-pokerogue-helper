@@ -102,7 +102,6 @@ public class BattleService {
             if (moveType == Type.WATER) {
                 return 0.5;
             }
-            return 1;
         }
         if (weather == Weather.RAIN || weather == Weather.HEAVY_RAIN) {
             if (moveType == Type.FIRE) {
@@ -111,7 +110,6 @@ public class BattleService {
             if (moveType == Type.WATER) {
                 return 1.5;
             }
-            return 1;
         }
         return 1;
     }
