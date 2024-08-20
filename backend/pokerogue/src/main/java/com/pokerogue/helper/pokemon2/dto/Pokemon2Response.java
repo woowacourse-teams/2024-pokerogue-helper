@@ -3,8 +3,10 @@ package com.pokerogue.helper.pokemon2.dto;
 import com.pokerogue.external.pokemon.dto.type.TypeResponse;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+import jakarta.annotation.Nullable;
 import java.util.List;
 
+@Nullable
 public record Pokemon2Response(
         String id,
         Long pokedexNumber,

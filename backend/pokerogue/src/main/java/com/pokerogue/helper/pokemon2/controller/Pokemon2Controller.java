@@ -2,7 +2,7 @@ package com.pokerogue.helper.pokemon2.controller;
 
 
 import com.pokerogue.helper.pokemon2.dto.Pokemon2Response;
-import com.pokerogue.helper.pokemon2.dto.PokemonDetailResponse;
+import com.pokerogue.helper.pokemon2.dto.Pokemon2DetailResponse;
 import com.pokerogue.helper.pokemon2.service.Pokemon2Service;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
@@ -22,8 +22,8 @@ public class Pokemon2Controller {
         return new ApiResponse<>("포켓몬 리스트 불러오기에 성공했습니다.", pokemon2Service.findAll());
     }
 
-    @GetMapping("/api/v1/pokemon2/{id}/all")
-    public ApiResponse<PokemonDetailResponse> findAll(@PathVariable("id") String id) {
+    @GetMapping("/api/v1/pokemon2/{id}")
+    public ApiResponse<Pokemon2DetailResponse> findAll(@PathVariable("id") String id) {
         return new ApiResponse<>("포켓몬 정보 불러오기에 성공했습니다.", pokemon2Service.findById(id));
     }
 }
