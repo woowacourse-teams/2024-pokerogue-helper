@@ -1,6 +1,8 @@
 package poke.rogue.helper.presentation.biome.model
 
+import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.presentation.type.model.TypeUiModel
+import java.util.Locale
 
 data class BiomeUiModel(
     val id: String,
@@ -62,3 +64,20 @@ data class BiomeUiModel(
             )
     }
 }
+
+fun List<String>.toTypeUiModel(): List<TypeUiModel> {
+    return this.map { url ->
+        val typeName = url.substringAfter("type/").substringBefore("-")
+        TypeUiModel.valueOf(typeName.uppercase(Locale.ROOT))
+    }
+}
+
+fun Biome.toUi(): BiomeUiModel =
+    BiomeUiModel(
+        id = id,
+        name = name,
+        imageUrl = image,
+        types = (pokemonType.toTypeUiModel() + gymLeaderType.toTypeUiModel()).distinct()
+    )
+
+fun List<Biome>.toUi(): List<BiomeUiModel> = map(Biome::toUi)
