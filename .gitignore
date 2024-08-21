@@ -1,3 +1,7 @@
 
 .idea/
 .DS_Store
+
+android/keystore/encryption_public_key.pem
+
+android/keystore/pepk.jar

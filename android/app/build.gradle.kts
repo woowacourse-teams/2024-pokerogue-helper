@@ -26,12 +26,12 @@ android {
             storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
             storePassword = "android"
         }
-//        create("release") {
-//            keyAlias = properties.getProperty("KEY_ALIAS")
-//            keyPassword = properties.getProperty("KEY_PASSWORD")
-//            storeFile = file("${project.rootDir.absolutePath}/keystore/poke_key.jks")
-//            storePassword = properties.getProperty("STORE_PASSWORD")
-//        }
+        create("release") {
+            keyAlias = properties.getProperty("KEY_ALIAS")
+            keyPassword = properties.getProperty("KEY_PASSWORD")
+            storeFile = file("${project.rootDir.absolutePath}/keystore/poke_key.jks")
+            storePassword = properties.getProperty("STORE_PASSWORD")
+        }
     }
     defaultConfig {
         applicationId = libs.versions.applicationId.get()
@@ -88,6 +88,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
