@@ -19,6 +19,7 @@ public class S3Service {
     private static final String POKEROGUE_TYPE_IMAGE_FOLDER = "pokerogue/type/";
     private static final String POKEROGUE_MOVE_CATEGORY_IMAGE_FOLDER = "pokerogue/move-category/";
     private static final String POKEROGUE_POKEMON_IMAGE_FOLDER = "pokerogue/pokemon/front/";
+    private static final String POKEROGUE_POKEMON_BACK_IMAGE_FOLDER = "pokerogue/pokemon/back/";
     private static final String SVG_EXTENSION = ".svg";
     private static final String PNG_EXTENSION = ".png";
 
@@ -72,7 +73,16 @@ public class S3Service {
         return s3ImageClient.getFileUrl(key);
     }
 
+    public String getPokemonBackImageFromS3(String pokemonId) {
+        String key = makePokemonBackFileName(pokemonId);
+        return s3ImageClient.getFileUrl(key);
+    }
+
     private String makePokemonFileName(String pokemonId) {
         return POKEROGUE_POKEMON_IMAGE_FOLDER + pokemonId + PNG_EXTENSION;
+    }
+
+    private String makePokemonBackFileName(String pokemonId) {
+        return POKEROGUE_POKEMON_BACK_IMAGE_FOLDER + pokemonId + PNG_EXTENSION;
     }
 }

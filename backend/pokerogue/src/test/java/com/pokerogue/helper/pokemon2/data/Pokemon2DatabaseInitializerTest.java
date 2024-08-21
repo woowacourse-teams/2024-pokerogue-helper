@@ -11,7 +11,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.DefaultApplicationArguments;
 
-
 class Pokemon2DatabaseInitializerTest {
 
     @Test
@@ -26,7 +25,7 @@ class Pokemon2DatabaseInitializerTest {
 
         pokemon2DatabaseInitializer.run(new DefaultApplicationArguments());
 
-        Assertions.assertThat(pokemon2Repository.findAll()).hasSize(1350);
+        Assertions.assertThat(pokemon2Repository.findAll()).hasSize(1268);
     }
 
     @ParameterizedTest

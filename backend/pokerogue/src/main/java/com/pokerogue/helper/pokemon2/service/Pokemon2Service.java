@@ -54,6 +54,7 @@ public class Pokemon2Service {
                 .map(pokemon -> Pokemon2Response.from(
                         pokemon,
                         s3Service.getPokemonImageFromS3(pokemon.id()),
+                        s3Service.getPokemonBackImageFromS3(pokemon.id()),
                         s3Service.getTypeImageFromS3(pokemon.type1()),
                         s3Service.getTypeImageFromS3(pokemon.type2())
                 ))

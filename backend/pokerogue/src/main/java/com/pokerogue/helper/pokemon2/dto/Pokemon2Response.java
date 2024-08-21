@@ -14,6 +14,7 @@ public record Pokemon2Response(
         String name,
         String formName,
         String image,
+        String backImage,
         List<PokemonTypeResponse> pokemonTypeResponses,
         Integer generation,
         Integer totalStats,
@@ -24,7 +25,7 @@ public record Pokemon2Response(
         Integer specialAttack,
         Integer specialDefense
 ) {
-    public static Pokemon2Response from(Pokemon pokemon, String image, String typeLogo1, String typeLogo2) {
+    public static Pokemon2Response from(Pokemon pokemon, String image, String backImage, String typeLogo1, String typeLogo2) {
 
         return new Pokemon2Response(
                 pokemon.id(),
@@ -32,6 +33,7 @@ public record Pokemon2Response(
                 pokemon.koName(),
                 pokemon.formName(),
                 image,
+                backImage,
                 List.of(
                         new PokemonTypeResponse(Type.findById(pokemon.type1()).getName(), typeLogo1),
                         new PokemonTypeResponse(Type.findById(pokemon.type2()).getName(), typeLogo2)
