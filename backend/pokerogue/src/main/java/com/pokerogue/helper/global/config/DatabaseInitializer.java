@@ -21,7 +21,7 @@ import java.util.List;
 
 @Component
 @Transactional
-@Profile("local-mysql")
+@Profile("local")
 @RequiredArgsConstructor
 public class DatabaseInitializer implements ApplicationRunner {
 
