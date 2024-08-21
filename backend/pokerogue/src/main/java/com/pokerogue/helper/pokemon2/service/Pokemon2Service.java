@@ -131,31 +131,33 @@ public class Pokemon2Service {
         );
     }
 
-    private List<List<EvolutionResponse>> createStages(EvolutionChain evolutionChain) {
+    private List<EvolutionResponse> createStages(EvolutionChain evolutionChain) {
         List<List<String>> chain = evolutionChain.getChain();
-        List<List<EvolutionResponse>> ret = new ArrayList<>();
+        List<EvolutionResponse> ret = new ArrayList<>();
 
         Pokemon firstPokemon = pokemon2Repository.findById(chain.get(0).get(0))
                 .orElseThrow(() -> new IllegalArgumentException());
-        ret.add(List.of(new EvolutionResponse(
+
+        ret.add(new EvolutionResponse(
+                firstPokemon.id(),
                 firstPokemon.koName(),
                 1,
                 0,
                 "EMPTY",
                 "EMPTY",
                 s3Service.getPokemonImageFromS3(firstPokemon.id())
-        )));
+        ));
 
         for (int i = 0; i < chain.size() - 1; i++) {
             List<String> stage = chain.get(i);
-            List<EvolutionResponse> tmp = new ArrayList<>();
             for (String id : stage) {
                 List<Evolution> evolutions = evolutionRepository.findEdgeById(id)
                         .orElseThrow(() -> new IllegalArgumentException());
                 for (Evolution evolution : evolutions) {
                     Pokemon pokemon = pokemon2Repository.findById(evolution.to())
                             .orElseThrow(() -> new IllegalArgumentException(""));
-                    tmp.add(new EvolutionResponse(
+                    ret.add(new EvolutionResponse(
+                            pokemon.id(),
                             pokemon.koName(),
                             Integer.parseInt(evolution.level()),
                             i + 1,
@@ -165,7 +167,6 @@ public class Pokemon2Service {
                     ));
                 }
             }
-            ret.add(tmp);
         }
         return ret;
     }

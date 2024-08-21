@@ -43,9 +43,9 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
     List<String> pokemonKeys = List.of(
             "id",
             "speciesId",
+            "nameKo",
             "speciesName",
             "formName",
-            "nameKo",
             "type1",
             "type2",
             "ability1",
