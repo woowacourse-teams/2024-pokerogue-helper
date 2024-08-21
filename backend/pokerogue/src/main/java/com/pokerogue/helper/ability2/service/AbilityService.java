@@ -27,12 +27,6 @@ public class AbilityService {
     private final BiomePokemonTypeImageRepository biomePokemonTypeImageRepository;
 
     public List<AbilityResponse2> findAbilities() {
-        List<AbilityResponse2> list = abilityRepository.findAll().stream()
-                .map(AbilityResponse2::from)
-                .toList();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
         return abilityRepository.findAll().stream()
                 .map(AbilityResponse2::from)
                 .toList();
