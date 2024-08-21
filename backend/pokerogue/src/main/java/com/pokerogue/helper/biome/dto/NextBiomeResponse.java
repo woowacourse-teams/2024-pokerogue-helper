@@ -12,7 +12,19 @@ public record NextBiomeResponse(
         List<BiomeTypeResponse> trainerTypeResponses
 ) {
 
-    public static NextBiomeResponse of(Biome biome, String percent, List<BiomeTypeResponse> pokemonTypeResponses, List<BiomeTypeResponse> trainerTypeResponses) {
-        return new NextBiomeResponse(biome.getId(), biome.getName(), biome.getImage(), percent, pokemonTypeResponses, trainerTypeResponses);
+    public static NextBiomeResponse of(
+            Biome biome,
+            String percent,
+            List<BiomeTypeResponse> pokemonTypeResponses,
+            List<BiomeTypeResponse> trainerTypeResponses
+    ) {
+        return new NextBiomeResponse(
+                biome.getId(),
+                biome.getName(),
+                biome.getImage(),
+                percent,
+                pokemonTypeResponses,
+                trainerTypeResponses
+        );
     }
 }
