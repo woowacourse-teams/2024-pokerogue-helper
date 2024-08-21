@@ -253,14 +253,14 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
     }
 
     private Evolution createEvolution(String from, String values) {
-        List<String> evolveCondtions = Arrays.stream(values.split("@")).toList();
+        List<String> evolveConditions = Arrays.stream(values.split(",")).toList();
 
         return new Evolution(
                 regularize(from),
-                regularize(evolveCondtions.get(0)),
-                regularize(evolveCondtions.get(1)),
-                regularize(evolveCondtions.get(2)),
-                evolveCondtions.get(3)
+                regularize(evolveConditions.get(0)),
+                regularize(evolveConditions.get(1)),
+                regularize(evolveConditions.get(2)),
+                regularize(evolveConditions.get(3))
         );
     }
 
@@ -317,7 +317,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
             String token = stringTokenizer.nextToken().strip();
 
             if (token.contains("undefined")) {
-                token = "empty";
+                token = "";
             }
 
             values.add(token);

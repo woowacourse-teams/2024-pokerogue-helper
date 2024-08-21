@@ -56,8 +56,8 @@ public class Pokemon2Service {
                         pokemon,
                         s3Service.getPokemonImageFromS3(pokemon.id()),
                         s3Service.getPokemonBackImageFromS3(pokemon.id()),
-                        s3Service.getTypeImageFromS3(pokemon.type1()),
-                        s3Service.getTypeImageFromS3(pokemon.type2())
+                        s3Service.getPokerogueTypeImageFromS3(pokemon.type1()),
+                        s3Service.getPokerogueTypeImageFromS3(pokemon.type2())
                 ))
                 .sorted(Comparator.comparingLong(Pokemon2Response::pokedexNumber))
                 .toList();
@@ -153,7 +153,12 @@ public class Pokemon2Service {
             List<String> stage = chain.get(i);
             for (String id : stage) {
                 List<Evolution> evolutions = evolutionRepository.findEdgeById(id)
-                        .orElseThrow(() -> new IllegalArgumentException());
+                        .orElse(null);
+
+                if (evolutions == null) {
+                    continue;
+                }
+
                 for (Evolution evolution : evolutions) {
                     Pokemon pokemon = pokemon2Repository.findById(evolution.to())
                             .orElseThrow(() -> new IllegalArgumentException(""));
@@ -195,8 +200,8 @@ public class Pokemon2Service {
         Type type2 = Type.findById(pokemon.type2());
 
         return List.of(
-                new PokemonTypeResponse(type1.getName(), s3Service.getTypeImageFromS3(type1.getId())),
-                new PokemonTypeResponse(type2.getName(), s3Service.getTypeImageFromS3(type2.getId()))
+                new PokemonTypeResponse(type1.getName(), s3Service.getPokerogueTypeImageFromS3(pokemon.id())),
+                new PokemonTypeResponse(type2.getName(), s3Service.getPokerogueTypeImageFromS3(pokemon.id()))
         );
     }
 
@@ -207,7 +212,7 @@ public class Pokemon2Service {
                             return new BiomeResponse(
                                     id,
                                     biome.getName(),
-                                    s3Service.getBiomeImageFromS3(biome.getId())
+                                    s3Service.getBiomeImageFromS3(id)
                             );
                         }
                 )
@@ -218,7 +223,7 @@ public class Pokemon2Service {
         return moves.stream()
                 .map(r -> moveRepository.findById(r).orElseThrow(() -> new IllegalArgumentException()))
                 .map(move -> MoveResponse.from(move, 1,
-                        s3Service.getTypeImageFromS3(moveRepository.findById(move.id())
+                        s3Service.getPokerogueTypeImageFromS3(moveRepository.findById(move.id())
                                 .orElseThrow(() -> new IllegalArgumentException())
                                 .type())))
                 .toList();
@@ -230,7 +235,7 @@ public class Pokemon2Service {
                 .mapToObj(index -> MoveResponse.from(
                         moveRepository.findById(moves.get(index)).orElseThrow(),
                         Integer.parseInt(moves.get(index + 1)),
-                        s3Service.getTypeImageFromS3(moveRepository.findById(moves.get(index)).orElseThrow().type())
+                        s3Service.getPokerogueTypeImageFromS3(moveRepository.findById(moves.get(index)).orElseThrow().type())
                 ))
                 .toList();
     }
