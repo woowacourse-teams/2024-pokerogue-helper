@@ -5,14 +5,21 @@ import kotlinx.serialization.Serializable
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 @Serializable
-data class PokemonResponse(
-    val id: Long,
+data class PokemonResponse2(
+    val id: String,
     val pokedexNumber: Long,
-    @SerialName("koName")
+    val formName: String,
     val name: String,
     val image: String,
-    @SerialName("formName")
-    val formName: String = "",
     @SerialName("pokemonTypeResponses")
     val types: List<PokemonTypeResponse>,
+    val generation: Int,
+    @SerialName("totalStats")
+    val baseStats: Int,
+    val speed: Int,
+    val hp: Int,
+    val attack: Int,
+    val defense: Int,
+    val specialAttack: Int,
+    val specialDefense: Int,
 )

@@ -1,6 +1,7 @@
 package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
+import timber.log.Timber
 import java.util.Locale
 
 enum class Type(val id: Int, val koName: String) {
@@ -33,7 +34,13 @@ enum class Type(val id: Int, val koName: String) {
         }
 
         fun of(name: String): Type {
-            val type = entries.first { it.name == name.uppercase(Locale.ROOT).trim() || it.koName == name }
+            val type =
+                entries.firstOrNull {
+                    it.name == name.uppercase(Locale.ROOT).trim() || it.koName == name
+                } ?: run {
+                    Timber.e("Unknown type name: $name")
+                    NORMAL
+                }
             return type
         }
     }

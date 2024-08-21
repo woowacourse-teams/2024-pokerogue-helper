@@ -6,6 +6,8 @@ import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonSort
 
 interface DexRepository {
+    suspend fun warmUp()
+
     suspend fun pokemons(): List<Pokemon>
 
     suspend fun filteredPokemons(
