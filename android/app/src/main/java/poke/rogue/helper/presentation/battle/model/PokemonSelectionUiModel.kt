@@ -72,6 +72,6 @@ fun Pokemon.toSelectionUi(): PokemonSelectionUiModel =
         dexNumber = dexNumber,
         name = name,
         frontImageUrl = imageUrl,
-        backImageUrl = imageUrl, // 추후 뒷모습 이미지가 반영되는 경우 변경
+        backImageUrl = imageUrl,
         types = types.map { it.toUi() },
     )
