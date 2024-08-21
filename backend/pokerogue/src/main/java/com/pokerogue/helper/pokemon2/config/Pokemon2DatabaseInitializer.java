@@ -23,6 +23,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -296,10 +297,16 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
     }
 
     private String regularize(String str) {
-        return str.strip()
+        String ret = str.strip()
                 .replace(" ", "_")
                 .replace("-", "_")
                 .toLowerCase();
+
+        if (List.of("empty", "type.undefined", "none").contains(ret)) {
+            return "";
+        }
+
+        return ret;
     }
 
     private List<String> parseToken(String line) {

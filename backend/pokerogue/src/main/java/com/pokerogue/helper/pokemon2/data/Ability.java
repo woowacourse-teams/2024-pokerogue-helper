@@ -314,8 +314,7 @@ public enum Ability {
     TERASHELL("Tera Shell", "테라셸", "모든 타입의 힘이 담긴 등껍질이 HP가 꽉 찼을 때 받는 데미지를 모두 효과가 별로이게 만든다."),
     TERAFORMZERO("Teraform Zero", "제로포밍", "테라파고스가 스텔라폼이 되었을 때 숨겨진 힘에 의해 날씨와 필드의 영향을 모두 무효로 만든다."),
     POISONPUPPETEER("Poison Puppeteer", "독조종", "복숭악동의 기술에 의해 독 상태가 된 상대는 혼란 상태도 되어 버린다."),
-    NONE("none", "none", "none"),
-    EMPTY("empty", "empty", "empty"),
+    EMPTY("", "", ""),
     ;
 
     private final String id;
@@ -337,7 +336,7 @@ public enum Ability {
                         .toLowerCase()
                         .equals(id))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 특성 아이디입니다."));
+                .orElse(EMPTY);
     }
 
     public String getId() {

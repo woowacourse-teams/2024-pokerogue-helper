@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum EvolutionItem {
-    NONE("NONE"),
+    EMPTY(""),
     LINKING_CORD("연결의끈"),
     SUN_STONE("태양의돌"),
     MOON_STONE("달의돌"),
@@ -48,6 +48,6 @@ public enum EvolutionItem {
                         .toLowerCase()
                         .equals(id))
                 .findAny()
-                .orElseThrow();
+                .orElse(EMPTY);
     }
 }

@@ -144,8 +144,8 @@ public class Pokemon2Service {
                 firstPokemon.koName(),
                 1,
                 0,
-                "EMPTY",
-                "EMPTY",
+                "",
+                "",
                 s3Service.getPokemonImageFromS3(firstPokemon.id())
         ));
 
