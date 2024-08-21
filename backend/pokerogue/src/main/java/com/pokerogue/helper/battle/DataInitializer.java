@@ -77,7 +77,15 @@ public class DataInitializer implements ApplicationRunner {
     private List<String> splitFields(String line) {
         return Arrays.stream(line.split(FIELD_DELIMITER))
                 .map(String::trim)
+                .map(this::regularizeEmptyField)
                 .toList();
+    }
+
+    private String regularizeEmptyField(String field) {
+        if (field.equals("EMPTY")) {
+            return "";
+        }
+        return field;
     }
 
     private BattleMove createMove(List<String> fields) {
