@@ -9,6 +9,7 @@ import com.pokerogue.helper.ability2.dto.AbilityPokemonResponse;
 import com.pokerogue.helper.ability2.dto.AbilityTypeResponse;
 import com.pokerogue.helper.ability2.repository.AbilityRepository;
 import com.pokerogue.helper.ability2.dto.AbilityResponse2;
+import com.pokerogue.helper.battle.Type;
 import com.pokerogue.helper.biome.data.BiomePokemonType;
 import com.pokerogue.helper.biome.repository.BiomePokemonTypeImageRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
@@ -51,14 +52,14 @@ public class AbilityService {
     private List<AbilityTypeResponse> getAbilityTypeResponses(String type1, String type2) {
         List<AbilityTypeResponse> abilityTypeResponses = new ArrayList<>();
         if (!type1.equals("Type.undefined")) {
-            abilityTypeResponses.add(new AbilityTypeResponse(
-                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(
-                            BiomePokemonType.getBiomePokemonTypeByName(type1).name()), type1));
+            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByName(type1)
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)).getImage(),
+                    type1));
         }
         if (!type2.equals("Type.undefined")) {
-            abilityTypeResponses.add(new AbilityTypeResponse(
-                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(
-                            BiomePokemonType.getBiomePokemonTypeByName(type2).name()), type2));
+            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByName(type2)
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)).getImage(),
+                    type2));
         }
 
         return abilityTypeResponses;
