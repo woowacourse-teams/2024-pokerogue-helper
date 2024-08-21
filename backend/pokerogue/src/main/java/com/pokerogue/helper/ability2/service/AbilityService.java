@@ -1,17 +1,13 @@
 package com.pokerogue.helper.ability2.service;
 
 import com.pokerogue.external.s3.service.S3Service;
-import com.pokerogue.helper.ability.dto.PokemonAbilityWithPokemonsResponse;
 import com.pokerogue.helper.ability2.data.Ability;
-import com.pokerogue.helper.ability2.data.AbilityPokemon;
 import com.pokerogue.helper.ability2.dto.AbilityDetailResponse;
 import com.pokerogue.helper.ability2.dto.AbilityPokemonResponse;
+import com.pokerogue.helper.ability2.dto.AbilityResponse2;
 import com.pokerogue.helper.ability2.dto.AbilityTypeResponse;
 import com.pokerogue.helper.ability2.repository.AbilityRepository;
-import com.pokerogue.helper.ability2.dto.AbilityResponse2;
 import com.pokerogue.helper.battle.Type;
-import com.pokerogue.helper.biome.data.BiomePokemonType;
-import com.pokerogue.helper.biome.repository.BiomePokemonTypeImageRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.ArrayList;
@@ -25,7 +21,6 @@ public class AbilityService {
 
     private final S3Service s3Service;
     private final AbilityRepository abilityRepository;
-    private final BiomePokemonTypeImageRepository biomePokemonTypeImageRepository;
 
     public List<AbilityResponse2> findAbilities() {
         return abilityRepository.findAll().stream()
