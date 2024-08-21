@@ -47,7 +47,7 @@ class DefaultDexRepository(
         if (cached != null) {
             return cached
         }
-        return remotePokemonDataSource.pokemon2(id).also {
+        return remotePokemonDataSource.pokemon(id).also {
             cachedPokemonDetails[id] = it
         }
     }
