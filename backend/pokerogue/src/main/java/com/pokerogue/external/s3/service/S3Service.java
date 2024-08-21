@@ -63,7 +63,7 @@ public class S3Service {
     }
 
     public String getPokerogueTypeImageFromS3(String typeName) {
-        String key = POKEROGUE_TYPE_IMAGE_FOLDER + typeName + "-1" + PNG_EXTENSION;
+        String key = POKEROGUE_TYPE_IMAGE_FOLDER + typeName;
         return s3ImageClient.getFileUrl(key);
     }
 
