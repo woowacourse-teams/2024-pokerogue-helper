@@ -7,7 +7,7 @@ import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.dto.BiomeAllPokemonResponse;
 import com.pokerogue.helper.biome.dto.BiomeDetailResponse;
 import com.pokerogue.helper.biome.dto.BiomePokemonResponse;
-import com.pokerogue.helper.biome.dto.BiomePokemonTypeResponse;
+import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
 import com.pokerogue.helper.biome.dto.NextBiomeResponse;
 import com.pokerogue.helper.biome.dto.TrainerPokemonResponse;
@@ -32,10 +32,10 @@ public class BiomeService {
 
     public List<BiomeResponse> findBiomes() {
         return biomeRepository.findAll().stream()
-                .map(biome -> BiomeResponse.from(
+                .map(biome -> BiomeResponse.of(
                         biome,
-                        getTrainerTypes(biome.getMainTypes()),
-                        getTrainerTypes(biome.getTrainerTypes()))
+                        getTypesResponses(biome.getMainTypes()),
+                        getTypesResponses(biome.getTrainerTypes()))
                 )
                 .toList();
     }
@@ -88,25 +88,25 @@ public class BiomeService {
                 .toList();
     }
 
-    private List<BiomePokemonTypeResponse> getBiomePokemonTypeResponses(
+    private List<BiomeTypeResponse> getBiomePokemonTypeResponses(
             BiomePokemonType type1,
             BiomePokemonType type2
     ) {
-        List<BiomePokemonTypeResponse> biomePokemonTypeResponses = new ArrayList<>();
+        List<BiomeTypeResponse> biomeTypeRespons = new ArrayList<>();
         if (!type1.getName().equals("없음")) {
-            biomePokemonTypeResponses.add(new BiomePokemonTypeResponse(
+            biomeTypeRespons.add(new BiomeTypeResponse(
                     biomePokemonTypeImageRepository.findPokemonTypeImageUrl(type1.name()),
                     type1.getName())
             );
         }
         if (!type2.getName().equals("없음")) {
-            biomePokemonTypeResponses.add(new BiomePokemonTypeResponse(
+            biomeTypeRespons.add(new BiomeTypeResponse(
                     biomePokemonTypeImageRepository.findPokemonTypeImageUrl(type2.name()),
                     type2.getName())
             );
         }
 
-        return biomePokemonTypeResponses;
+        return biomeTypeRespons;
     }
 
     private List<TrainerPokemonResponse> getTrainerPokemons(Biome biome) {
@@ -120,16 +120,16 @@ public class BiomeService {
         return biome.getTrainers().stream()
                 .map(trainer -> TrainerPokemonResponse.from(
                         trainer,
-                        getTrainerTypes(trainer.getTrainerTypes()),
+                        getTypesResponses(trainer.getTrainerTypes()),
                         getBiomePokemons(trainer.getPokemons()))
                 )
                 .toList();
     }
 
-    private List<String> getTrainerTypes(List<String> trainerTypes) {
-        return trainerTypes.stream()
-                .map(trainerType -> biomePokemonTypeImageRepository.findPokemonTypeImageUrl(
-                        BiomePokemonType.getBiomePokemonTypeByName(trainerType).name())
+    private List<BiomeTypeResponse> getTypesResponses(List<String> types) {
+        return types.stream()
+                .map(type -> new BiomeTypeResponse(biomePokemonTypeImageRepository.findPokemonTypeImageUrl(
+                        BiomePokemonType.getBiomePokemonTypeByName(type).name()), type)
                 )
                 .toList();
     }
@@ -140,8 +140,16 @@ public class BiomeService {
         }
 
         return biome.getNextBiome().stream()
-                .map(nextBiome -> NextBiomeResponse.of(biomeRepository.findById(nextBiome.getId())
-                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND)), nextBiome.getPercent()))
+                .map(nextBiomeInfo -> {
+                    Biome nextBiome = biomeRepository.findById(nextBiomeInfo.getId())
+                            .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
+                    return NextBiomeResponse.of(
+                            nextBiome,
+                            nextBiomeInfo.getPercent(),
+                            getTypesResponses(nextBiome.getMainTypes()),
+                            getTypesResponses(nextBiome.getTrainerTypes())
+                    );
+                })
                 .toList();
     }
 }
