@@ -46,4 +46,9 @@ fun PokemonAbilityResponse.toData(): PokemonDetailAbility =
         hidden = hidden,
     )
 
-fun List<PokemonAbilityResponse>.toData(): List<PokemonDetailAbility> = map(PokemonAbilityResponse::toData)
+fun List<PokemonAbilityResponse>.toData(): List<PokemonDetailAbility> =
+    groupBy { ability ->
+        ability.id
+    }.map { (_, value) ->
+        value.first().toData()
+    }
