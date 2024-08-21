@@ -20,6 +20,10 @@ public enum ErrorMessage {
     MOVE_BY_SELF_NOT_FOUND(HttpStatus.NOT_FOUND, "도감 번호에 해당하는 자력 기술을 찾지 못했습니다."),
     MOVE_NOT_FOUND(HttpStatus.NOT_FOUND, "id에 해당하는 기술을 찾지 못했습니다."),
     MOVE_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "기술 카테고리를 찾지 못했습니다."),
+    WEATHER_NOT_FOUND(HttpStatus.NOT_FOUND, "id에 해당하는 날씨를 찾지 못했습니다."),
+
+    PARSE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "파싱에 실패했습니다."),
+    TYPE_MATCHING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "타입 상성 찾기에 실패했습니다."),
 
     FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다."),
     FILE_EXTENSION_NOT_APPLY(HttpStatus.BAD_REQUEST, "지원하지 않는 파일 형식입니다."),
