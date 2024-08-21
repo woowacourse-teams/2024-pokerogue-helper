@@ -2,7 +2,6 @@ package poke.rogue.helper.remote.service
 
 import poke.rogue.helper.remote.dto.base.ApiResponse
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonDetailResponse
-import poke.rogue.helper.remote.dto.response.pokemon.PokemonDetailResponse2
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse2
 import retrofit2.http.GET
@@ -15,13 +14,8 @@ interface PokeDexService {
     @GET("api/v1/pokemons")
     suspend fun pokemons(): ApiResponse<List<PokemonResponse>>
 
-    @GET("api/v1/pokemon/{id}")
+    @GET("api/v1/pokemon2/{id}")
     suspend fun pokemon(
-        @Path("id") id: Long = 1,
-    ): ApiResponse<PokemonDetailResponse>
-
-    @GET("api/v1/pokemon/{id}")
-    suspend fun pokemon2(
         @Path("id") id: String,
-    ): ApiResponse<PokemonDetailResponse2>
+    ): ApiResponse<PokemonDetailResponse>
 }
