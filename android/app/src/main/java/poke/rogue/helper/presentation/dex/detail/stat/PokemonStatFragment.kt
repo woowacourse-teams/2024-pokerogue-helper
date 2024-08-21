@@ -68,7 +68,7 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
     private fun bindDatas(uiState: PokemonDetailUiState.Success) {
         binding.apply {
             pokemonStatAdapter.submitList(uiState.stats)
-            abilityAdapter.submitList(uiState.abilities.toUi())
+            abilityAdapter.submitList(uiState.abilities)
         }
     }
 
@@ -100,14 +100,3 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
         }
     }
 }
-
-private fun PokemonDetailAbilityUiModel.toUi(): PokemonDetailAbilityUiModel =
-    PokemonDetailAbilityUiModel(
-        id = id,
-        name = name,
-        passive = passive,
-        hidden = hidden
-    )
-
-private fun List<PokemonDetailAbilityUiModel>.toUi(): List<PokemonDetailAbilityUiModel> =
-    map(PokemonDetailAbilityUiModel::toUi)
