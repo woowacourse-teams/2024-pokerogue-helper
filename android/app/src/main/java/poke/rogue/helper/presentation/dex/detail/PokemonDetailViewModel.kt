@@ -44,7 +44,7 @@ class PokemonDetailViewModel(
     fun updatePokemonDetail(pokemonId: String) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch(errorHandler) {
-            _uiState.value = dexRepository.pokemonDetail2(pokemonId).toUi()
+            _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
         }
     }
 

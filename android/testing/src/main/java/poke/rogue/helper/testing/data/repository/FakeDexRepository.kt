@@ -37,9 +37,7 @@ class FakeDexRepository : DexRepository {
         }.toFilteredPokemons(sort, filters)
     }
 
-    override suspend fun pokemonDetail(id: String): PokemonDetail = DUMMY_POKEMON_DETAIL
-
-    override suspend fun pokemonDetail2(id: String): PokemonDetail2 =
+    override suspend fun pokemonDetail(id: String): PokemonDetail2 =
         PokemonDetail2(
             pokemon = Pokemon.DUMMY,
             abilities = DUMMY_POKEMON_DETAIL_ABILTIES,

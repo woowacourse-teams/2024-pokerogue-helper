@@ -17,7 +17,5 @@ interface DexRepository {
         filters: List<PokemonFilter> = emptyList(),
     ): List<Pokemon>
 
-    suspend fun pokemonDetail(id: String): PokemonDetail
-
-    suspend fun pokemonDetail2(id: String): PokemonDetail2
+    suspend fun pokemonDetail(id: String): PokemonDetail2
 }

@@ -30,6 +30,7 @@ data class PokemonDetailResponse(
     val speed: Int,
 )
 
+// TODO: API 연결되면 위에 것 삭제
 @Serializable
 data class PokemonDetailResponse2(
     val id: String,
