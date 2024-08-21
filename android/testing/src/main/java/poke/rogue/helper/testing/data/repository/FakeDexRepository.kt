@@ -1,15 +1,19 @@
 package poke.rogue.helper.testing.data.repository
 
+import poke.rogue.helper.data.model.Evolution
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonCategory
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetail2
 import poke.rogue.helper.data.model.PokemonDetailAbility
+import poke.rogue.helper.data.model.PokemonDetailAbility.Companion.DUMMY_POKEMON_DETAIL_ABILTIES
 import poke.rogue.helper.data.model.PokemonDetailSkills
+import poke.rogue.helper.data.model.PokemonDetailSkills2
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonGeneration
 import poke.rogue.helper.data.model.PokemonSkill
+import poke.rogue.helper.data.model.PokemonSkill2
 import poke.rogue.helper.data.model.PokemonSort
 import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.data.model.Type
@@ -35,9 +39,21 @@ class FakeDexRepository : DexRepository {
 
     override suspend fun pokemonDetail(id: String): PokemonDetail = DUMMY_POKEMON_DETAIL
 
-    override suspend fun pokemonDetail2(id: String): PokemonDetail2 {
-        TODO("Not yet implemented")
-    }
+    override suspend fun pokemonDetail2(id: String): PokemonDetail2 = PokemonDetail2(
+        pokemon = Pokemon.DUMMY,
+        abilities = DUMMY_POKEMON_DETAIL_ABILTIES,
+        stats = Stat.DUMMY_STATS,
+        pokemonCategory = PokemonCategory.EMPTY,
+        evolutions = Evolution.DUMMY_PICAKCHU_EVOLUTION,
+        skills = PokemonDetailSkills2(
+            selfLearn = PokemonSkill2.FAKE_SELF_LEARN_SKILLS,
+            eggLearn = PokemonSkill2.FAKE_EGG_LEARN_SKILLS,
+            tmLearn = PokemonSkill2.FAKE_TM_LEARN_SKILLS,
+        ),
+        biomes = PokemonBiome.DUMMYS,
+        height = 0.7,
+        weight = 6.9,
+    )
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
