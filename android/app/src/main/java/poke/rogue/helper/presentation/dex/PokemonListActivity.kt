@@ -71,6 +71,7 @@ class PokemonListActivity :
         repeatOnStarted {
             viewModel.uiState.collect { uiState ->
                 pokemonAdapter.submitList(uiState.pokemons)
+
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
                         label =
@@ -92,6 +93,7 @@ class PokemonListActivity :
                         },
                     ),
                 )
+
                 binding.chipPokeSort.bindPokeChip(
                     PokeChip.Spec(
                         label = uiState.sort.label.clean(),

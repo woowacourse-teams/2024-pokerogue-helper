@@ -11,7 +11,6 @@ import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
-import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
 import poke.rogue.helper.testing.data.repository.FakeDexRepository
 
@@ -54,24 +53,8 @@ class PokemonListViewModelTest {
                 viewModel.uiState.first { uiState ->
                     uiState.pokemons.isNotEmpty()
                 }.pokemons
-
             // then
-            queriedPokemons shouldBe
-                listOf(
-                    PokemonUiModel(
-                        id = "5",
-                        dexNumber = 5,
-                        name = "리자드",
-                        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
-                        types = listOf(TypeUiModel.FIRE),
-                    ),
-                    PokemonUiModel(
-                        id = "6",
-                        dexNumber = 6,
-                        name = "리자몽",
-                        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
-                        types = listOf(TypeUiModel.FIRE, TypeUiModel.FLYING),
-                    ),
-                )
+            val actualIds = queriedPokemons.map(PokemonUiModel::id)
+            actualIds shouldBe listOf("5", "6")
         }
 }

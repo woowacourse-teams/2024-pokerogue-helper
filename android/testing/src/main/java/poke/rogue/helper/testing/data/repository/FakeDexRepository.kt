@@ -16,6 +16,8 @@ import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.stringmatcher.has
 
 class FakeDexRepository : DexRepository {
+    override suspend fun warmUp() = Unit
+
     override suspend fun pokemons(): List<Pokemon> = POKEMONS
 
     override suspend fun filteredPokemons(
@@ -102,7 +104,7 @@ class FakeDexRepository : DexRepository {
                     defense = 83,
                     specialAttack = 100,
                     specialDefense = 100,
-                    speed = 195,
+                    speed = 80,
                 ),
                 Pokemon(
                     id = "4",
