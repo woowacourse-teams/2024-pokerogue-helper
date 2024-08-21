@@ -182,6 +182,7 @@ dependencies {
     // module
     implementation(project(":data"))
     implementation(project(":local"))
+    implementation(project(":stringmatcher"))
     implementation(project(":analytics"))
     testImplementation(project(":testing"))
     androidTestImplementation(project(":testing"))

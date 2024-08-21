@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="handler"
+            type="poke.rogue.helper.presentation.battle.selection.QueryHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +31,7 @@
 
         <EditText
             android:id="@+id/et_pokemon_selection_search"
+            onTextChanged="@{handler}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_view"

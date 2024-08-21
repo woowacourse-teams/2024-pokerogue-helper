@@ -10,20 +10,25 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
+import poke.rogue.helper.presentation.battle.selection.QueryHandler
 import poke.rogue.helper.presentation.dex.filter.SelectableUiModel
 
 class PokemonSelectionViewModel(
+    private val dexRepository: DexRepository,
     previousSelection: PokemonSelectionUiModel?,
     logger: AnalyticsLogger = analyticsLogger(),
-) : ErrorHandleViewModel(logger), PokemonSelectionHandler {
+) : ErrorHandleViewModel(logger), PokemonSelectionHandler, QueryHandler {
     private val _pokemonSelectedEvent = MutableSharedFlow<PokemonSelectionUiModel>()
     val pokemonSelectedEvent = _pokemonSelectedEvent.asSharedFlow()
 
     private val _pokemons: MutableStateFlow<List<SelectableUiModel<PokemonSelectionUiModel>>>
     val pokemons: StateFlow<List<SelectableUiModel<PokemonSelectionUiModel>>>
+
+    private val searchQuery = MutableStateFlow("")
 
     init {
         _pokemons =
@@ -46,8 +51,16 @@ class PokemonSelectionViewModel(
         }
     }
 
+    override fun queryName(name: String) {
+        viewModelScope.launch {
+            searchQuery.emit(name)
+        }
+    }
+
     companion object {
-        fun factory(previousSelection: PokemonSelectionUiModel?): ViewModelProvider.Factory =
-            BaseViewModelFactory { PokemonSelectionViewModel(previousSelection) }
+        fun factory(
+            dexRepository: DexRepository,
+            previousSelection: PokemonSelectionUiModel?,
+        ): ViewModelProvider.Factory = BaseViewModelFactory { PokemonSelectionViewModel(dexRepository, previousSelection) }
     }
 }

@@ -49,7 +49,7 @@
 
         <ImageView
             android:id="@+id/iv_type"
-            imageUrl="@{skill.typeLogo}"
+            imageRes="@{skill.typeLogo.typeIconResId}"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_gravity="center_vertical"

@@ -141,7 +141,7 @@ class BattleViewModel(
         return if (hasSkillSelection) {
             val skill =
                 selectedState.value.skill.selectedData()
-                    ?: throw IllegalStateException("")
+                    ?: throw IllegalStateException("스킬이 선택되어야 합니다.")
             SelectionData.WithSkill(previousPokemonSelection, skill)
         } else {
             SelectionData.WithoutSkill(previousPokemonSelection)

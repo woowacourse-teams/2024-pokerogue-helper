@@ -19,7 +19,8 @@
         tools:targetApi="31">
         <activity
             android:name=".presentation.battle.selection.BattleSelectionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name=".presentation.battle.BattleActivity"
             android:exported="false" />

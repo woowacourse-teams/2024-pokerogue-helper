@@ -5,7 +5,7 @@ import poke.rogue.helper.remote.dto.response.battle.PokemonSkillResponse
 data class BattleSkill(
     val id: String,
     val name: String,
-    val typeLogo: String,
+    val type: Type,
     val categoryLogo: String,
     val power: Int,
     val accuracy: Int,
@@ -16,7 +16,7 @@ fun PokemonSkillResponse.toData(): BattleSkill =
     BattleSkill(
         id = id,
         name = name,
-        typeLogo = typeLogo,
+        type = Type.valueOf(typeEngName.uppercase()),
         categoryLogo = categoryLogo,
         power = power,
         accuracy = accuracy,

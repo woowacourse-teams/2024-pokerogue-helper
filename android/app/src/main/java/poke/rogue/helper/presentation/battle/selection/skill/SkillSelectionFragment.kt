@@ -52,6 +52,8 @@ class SkillSelectionFragment :
                 LinearSpacingItemDecoration(spacing = 4.dp, false),
             )
         }
+        binding.handler = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun initObserver() {
@@ -68,8 +70,14 @@ class SkillSelectionFragment :
             }
         }
 
+//        repeatOnStarted {
+//            viewModel.skills.collect {
+//                skillAdapter.submitList(it)
+//            }
+//        }
+
         repeatOnStarted {
-            viewModel.skills.collect {
+            viewModel.filteredSkills.collect {
                 skillAdapter.submitList(it)
             }
         }

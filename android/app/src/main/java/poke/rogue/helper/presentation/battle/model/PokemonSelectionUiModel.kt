@@ -2,7 +2,9 @@ package poke.rogue.helper.presentation.battle.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.toUi
 
 @Parcelize
 data class PokemonSelectionUiModel(
@@ -63,3 +65,13 @@ data class PokemonSelectionUiModel(
             )
     }
 }
+
+fun Pokemon.toSelectionUi(): PokemonSelectionUiModel =
+    PokemonSelectionUiModel(
+        id = id,
+        dexNumber = dexNumber,
+        name = name,
+        frontImageUrl = imageUrl,
+        backImageUrl = imageUrl, // 추후 뒷모습 이미지가 반영되는 경우 변경
+        types = types.map { it.toUi() },
+    )
