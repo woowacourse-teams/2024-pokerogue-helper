@@ -1,7 +1,5 @@
 package com.pokerogue.helper.battle;
 
-import com.pokerogue.helper.global.exception.ErrorMessage;
-import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
 import java.util.Optional;
 
