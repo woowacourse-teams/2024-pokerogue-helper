@@ -2,7 +2,9 @@ package com.pokerogue.helper.battle;
 
 import java.util.Arrays;
 import java.util.Optional;
+import lombok.Getter;
 
+@Getter
 public enum MoveCategory {
 
     STATUS("변화", "status", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/move-category/status"),
@@ -30,17 +32,5 @@ public enum MoveCategory {
 
     private boolean hasSameEngName(String name) {
         return this.engName.equals(name);
-    }
-
-    public String getImage() {
-        return image + ".png";
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEngName() {
-        return engName;
     }
 }

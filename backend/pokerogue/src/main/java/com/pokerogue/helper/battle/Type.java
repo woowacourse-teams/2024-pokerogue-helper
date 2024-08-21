@@ -2,7 +2,9 @@ package com.pokerogue.helper.battle;
 
 import java.util.Arrays;
 import java.util.Optional;
+import lombok.Getter;
 
+@Getter
 public enum Type {
 
     GRASS("grass", "풀", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/grass"),
@@ -47,17 +49,5 @@ public enum Type {
         return Arrays.stream(values())
                 .filter(type -> type.engName.equals(engName))
                 .findAny();
-    }
-
-    public String getImage() {
-        return image + ".png";
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEngName() {
-        return engName;
     }
 }
