@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.PokemonDetailSkills
-import poke.rogue.helper.data.model.PokemonSkill2
+import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
@@ -91,9 +91,9 @@ class PokemonDetailViewModelTest {
                         ),
                     skills =
                         PokemonDetailSkills(
-                            selfLearn = PokemonSkill2.FAKE_SELF_LEARN_SKILLS,
-                            eggLearn = PokemonSkill2.FAKE_EGG_LEARN_SKILLS,
-                            tmLearn = PokemonSkill2.FAKE_SELF_LEARN_SKILLS,
+                            selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                            eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
+                            tmLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
                         ),
                     height = 0.7f,
                     weight = 6.9f,

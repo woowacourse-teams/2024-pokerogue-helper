@@ -1,7 +1,6 @@
 package poke.rogue.helper.presentation.dex.model
 
 import poke.rogue.helper.data.model.PokemonSkill
-import poke.rogue.helper.data.model.PokemonSkill2
 import poke.rogue.helper.data.model.SkillCategory2
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
@@ -20,7 +19,7 @@ data class PokemonSkillUiModel(
     }
 }
 
-fun PokemonSkill2.toUi(): PokemonSkillUiModel =
+fun PokemonSkill.toUi(): PokemonSkillUiModel =
     PokemonSkillUiModel(
         id = id,
         name = name,
@@ -31,4 +30,4 @@ fun PokemonSkill2.toUi(): PokemonSkillUiModel =
         category = category,
     )
 
-fun List<PokemonSkill2>.toUi(): List<PokemonSkillUiModel> = map(PokemonSkill2::toUi)
+fun List<PokemonSkill>.toUi(): List<PokemonSkillUiModel> = map(PokemonSkill::toUi)

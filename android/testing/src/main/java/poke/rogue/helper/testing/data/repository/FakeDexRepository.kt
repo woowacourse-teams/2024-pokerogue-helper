@@ -9,7 +9,7 @@ import poke.rogue.helper.data.model.PokemonDetailAbility.Companion.DUMMY_POKEMON
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonGeneration
-import poke.rogue.helper.data.model.PokemonSkill2
+import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.data.model.PokemonSort
 import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.data.model.Type
@@ -42,9 +42,9 @@ class FakeDexRepository : DexRepository {
             evolutions = Evolution.DUMMY_PICAKCHU_EVOLUTION,
             skills =
             PokemonDetailSkills(
-                selfLearn = PokemonSkill2.FAKE_SELF_LEARN_SKILLS,
-                eggLearn = PokemonSkill2.FAKE_EGG_LEARN_SKILLS,
-                tmLearn = PokemonSkill2.FAKE_TM_LEARN_SKILLS,
+                selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
+                tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
             ),
             biomes = PokemonBiome.DUMMYS,
             height = 0.7,
