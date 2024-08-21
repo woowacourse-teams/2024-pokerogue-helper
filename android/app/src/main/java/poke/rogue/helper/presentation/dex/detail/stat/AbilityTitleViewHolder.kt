@@ -21,10 +21,9 @@ class AbilityTitleViewHolder(
     companion object {
         @JvmStatic
         fun TextView.background(ability: PokemonDetailAbilityUiModel) {
-            if (ability.passive)
-                {
-                    this.setBackgroundTint(R.color.poke_electric)
-                }
+            if (ability.passive) {
+                this.setBackgroundTint(R.color.poke_electric)
+            }
 
             if (ability.hidden) {
                 this.setTypeface(null, Typeface.BOLD)
