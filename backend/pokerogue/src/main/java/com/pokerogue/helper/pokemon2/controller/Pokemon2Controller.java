@@ -1,9 +1,11 @@
-package com.pokerogue.helper.pokemon2;
+package com.pokerogue.helper.pokemon2.controller;
 
 
+import com.pokerogue.helper.pokemon2.dto.Pokemon2Response;
+import com.pokerogue.helper.pokemon2.dto.Pokemon2DetailResponse;
+import com.pokerogue.helper.pokemon2.service.Pokemon2Service;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +18,12 @@ public class Pokemon2Controller {
     private final Pokemon2Service pokemon2Service;
 
     @GetMapping("/api/v1/pokemons2")
-    public ApiResponse<List<Map<Object, Object>>> findAll() {
+    public ApiResponse<List<Pokemon2Response>> findAll() {
         return new ApiResponse<>("포켓몬 리스트 불러오기에 성공했습니다.", pokemon2Service.findAll());
     }
 
-    @GetMapping("/api/v1/pokemon2/{stringId}")
-    public ApiResponse<Map<Object, Object>> findAll(@PathVariable("stringId") String id) {
+    @GetMapping("/api/v1/pokemon2/{id}")
+    public ApiResponse<Pokemon2DetailResponse> findAll(@PathVariable("id") String id) {
         return new ApiResponse<>("포켓몬 정보 불러오기에 성공했습니다.", pokemon2Service.findById(id));
     }
 }
