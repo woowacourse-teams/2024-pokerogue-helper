@@ -6,7 +6,7 @@ import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonCategory
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetailAbility.Companion.DUMMY_POKEMON_DETAIL_ABILTIES
-import poke.rogue.helper.data.model.PokemonDetailSkills2
+import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonGeneration
 import poke.rogue.helper.data.model.PokemonSkill2
@@ -41,7 +41,7 @@ class FakeDexRepository : DexRepository {
             pokemonCategory = PokemonCategory.EMPTY,
             evolutions = Evolution.DUMMY_PICAKCHU_EVOLUTION,
             skills =
-            PokemonDetailSkills2(
+            PokemonDetailSkills(
                 selfLearn = PokemonSkill2.FAKE_SELF_LEARN_SKILLS,
                 eggLearn = PokemonSkill2.FAKE_EGG_LEARN_SKILLS,
                 tmLearn = PokemonSkill2.FAKE_TM_LEARN_SKILLS,

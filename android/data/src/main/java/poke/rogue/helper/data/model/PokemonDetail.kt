@@ -11,7 +11,7 @@ data class PokemonDetail(
     val stats: List<Stat>,
     val pokemonCategory: PokemonCategory,
     val evolutions: List<Evolution>,
-    val skills: PokemonDetailSkills2,
+    val skills: PokemonDetailSkills,
     val biomes: List<PokemonBiome>,
     val height: Double,
     val weight: Double,
@@ -41,7 +41,7 @@ fun PokemonDetailResponse2.toData(id: String): PokemonDetail =
         pokemonCategory = PokemonCategory.EMPTY,
         evolutions = evolutions.toData(),
         skills =
-            PokemonDetailSkills2(
+            PokemonDetailSkills(
                 selfLearn = selfLearnSkills.map(PokemonSkillResponse::toData),
                 tmLearn = selfLearnSkills.map(PokemonSkillResponse::toData),
                 eggLearn = eggSkills.map(PokemonSkillResponse::toData),
