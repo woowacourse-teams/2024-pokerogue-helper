@@ -53,7 +53,7 @@ class AbilityServiceTest {
             val fakeResponse = successResponse("ability")
             mockWebServer.enqueue(fakeResponse)
             // when
-            val actual: ApiResponse<AbilityDetailResponse> = service.ability()
+            val actual: ApiResponse<AbilityDetailResponse> = service.ability(1)
             // then
             actual.shouldBeSuccess()
         }
