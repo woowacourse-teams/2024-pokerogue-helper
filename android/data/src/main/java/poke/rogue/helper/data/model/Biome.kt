@@ -6,8 +6,8 @@ data class Biome(
     val id: String,
     val name: String,
     val image: String,
-    val pokemonType: List<String>,
-    val gymLeaderType: List<String>,
+    val pokemonType: List<Type>,
+    val gymLeaderType: List<Type>,
 )
 
 fun BiomesResponse.toData(): Biome =
@@ -15,6 +15,6 @@ fun BiomesResponse.toData(): Biome =
         id = id,
         name = name,
         image = image,
-        pokemonType = pokemonType,
-        gymLeaderType = gymLeaderType,
+        pokemonType = pokemonType.toData(),
+        gymLeaderType = gymLeaderType.toData(),
     )

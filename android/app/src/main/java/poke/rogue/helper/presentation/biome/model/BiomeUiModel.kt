@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.biome.model
 
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.toUi
 import java.util.Locale
 
 data class BiomeUiModel(
@@ -77,7 +78,7 @@ fun Biome.toUi(): BiomeUiModel =
         id = id,
         name = name,
         imageUrl = image,
-        types = (pokemonType.toTypeUi() + gymLeaderType.toTypeUi()).distinct(),
+        types = pokemonType.toUi(),
     )
 
 fun List<Biome>.toUi(): List<BiomeUiModel> = map(Biome::toUi)
