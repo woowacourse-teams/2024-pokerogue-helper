@@ -1,7 +1,7 @@
 package poke.rogue.helper.presentation.dex.model
 
 import poke.rogue.helper.data.model.PokemonSkill
-import poke.rogue.helper.data.model.SkillCategory2
+import poke.rogue.helper.data.model.SkillCategory
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
 
@@ -12,7 +12,7 @@ data class PokemonSkillUiModel(
     val power: String,
     val type: TypeUiModel,
     val accuracy: Int,
-    val category: SkillCategory2,
+    val category: SkillCategory,
 ) {
     companion object {
         const val NO_POWER = "-"

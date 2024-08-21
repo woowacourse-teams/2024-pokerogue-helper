@@ -9,7 +9,7 @@ data class PokemonSkill(
     val power: Int,
     val type: Type,
     val accuracy: Int,
-    val category: SkillCategory2,
+    val category: SkillCategory,
 ) {
     companion object {
         const val NO_POWER_VALUE = -1
@@ -23,7 +23,7 @@ data class PokemonSkill(
                     power = 75,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.specialAttackSkill,
+                    category = SkillCategory.specialAttackSkill,
                 ),
                 PokemonSkill(
                     id = "102",
@@ -32,7 +32,7 @@ data class PokemonSkill(
                     power = 90,
                     type = Type.POISON,
                     accuracy = 100,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "103",
@@ -41,7 +41,7 @@ data class PokemonSkill(
                     power = 90,
                     type = Type.GROUND,
                     accuracy = 100,
-                    category = SkillCategory2.specialAttackSkill,
+                    category = SkillCategory.specialAttackSkill,
                 ),
                 PokemonSkill(
                     id = "104",
@@ -50,7 +50,7 @@ data class PokemonSkill(
                     power = 100,
                     type = Type.GRASS,
                     accuracy = 90,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
             )
 
@@ -63,7 +63,7 @@ data class PokemonSkill(
                     power = 40,
                     type = Type.NORMAL,
                     accuracy = 100,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "2",
@@ -72,7 +72,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "3",
@@ -81,7 +81,7 @@ data class PokemonSkill(
                     power = 45,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "4",
@@ -90,7 +90,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "5",
@@ -99,7 +99,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 90,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "6",
@@ -108,7 +108,7 @@ data class PokemonSkill(
                     power = 55,
                     type = Type.GRASS,
                     accuracy = 95,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "7",
@@ -117,7 +117,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.POISON,
                     accuracy = 75,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "8",
@@ -126,7 +126,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 75,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "9",
@@ -135,7 +135,7 @@ data class PokemonSkill(
                     power = 80,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "10",
@@ -144,7 +144,7 @@ data class PokemonSkill(
                     power = 90,
                     type = Type.NORMAL,
                     accuracy = 85,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "11",
@@ -153,7 +153,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "12",
@@ -162,7 +162,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "13",
@@ -171,7 +171,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "14",
@@ -180,7 +180,7 @@ data class PokemonSkill(
                     power = 120,
                     type = Type.GRASS,
                     accuracy = 85,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "15",
@@ -189,7 +189,7 @@ data class PokemonSkill(
                     power = 120,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.specialAttackSkill,
+                    category = SkillCategory.specialAttackSkill,
                 ),
             )
 
@@ -202,7 +202,7 @@ data class PokemonSkill(
                     power = 40,
                     type = Type.NORMAL,
                     accuracy = 100,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "2",
@@ -211,7 +211,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "3",
@@ -220,7 +220,7 @@ data class PokemonSkill(
                     power = 45,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "4",
@@ -229,7 +229,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "5",
@@ -238,7 +238,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 90,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "6",
@@ -247,7 +247,7 @@ data class PokemonSkill(
                     power = 55,
                     type = Type.GRASS,
                     accuracy = 95,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "7",
@@ -256,7 +256,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.POISON,
                     accuracy = 75,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "8",
@@ -265,7 +265,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 75,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "9",
@@ -274,7 +274,7 @@ data class PokemonSkill(
                     power = 80,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "10",
@@ -283,7 +283,7 @@ data class PokemonSkill(
                     power = 90,
                     type = Type.NORMAL,
                     accuracy = 85,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "11",
@@ -292,7 +292,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "12",
@@ -301,7 +301,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "13",
@@ -310,7 +310,7 @@ data class PokemonSkill(
                     power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.changeStatusSkill,
+                    category = SkillCategory.changeStatusSkill,
                 ),
                 PokemonSkill(
                     id = "14",
@@ -319,7 +319,7 @@ data class PokemonSkill(
                     power = 120,
                     type = Type.GRASS,
                     accuracy = 85,
-                    category = SkillCategory2.physicalAttackSkill,
+                    category = SkillCategory.physicalAttackSkill,
                 ),
                 PokemonSkill(
                     id = "15",
@@ -328,7 +328,7 @@ data class PokemonSkill(
                     power = 120,
                     type = Type.GRASS,
                     accuracy = 100,
-                    category = SkillCategory2.specialAttackSkill,
+                    category = SkillCategory.specialAttackSkill,
                 ),
             )
     }
@@ -343,7 +343,7 @@ fun PokemonSkillResponse.toData(): PokemonSkill =
         type = Type.of(type),
         accuracy = accuracy,
         category =
-        SkillCategory2(
+        SkillCategory(
             category,
             categoryLogo,
         ),
