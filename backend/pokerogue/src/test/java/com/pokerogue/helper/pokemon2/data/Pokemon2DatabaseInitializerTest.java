@@ -1,6 +1,7 @@
 package com.pokerogue.helper.pokemon2.data;
 
 import com.pokerogue.helper.pokemon2.config.Pokemon2DatabaseInitializer;
+import com.pokerogue.helper.pokemon2.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import org.assertj.core.api.Assertions;
@@ -19,7 +20,8 @@ class Pokemon2DatabaseInitializerTest {
         Pokemon2Repository pokemon2Repository = new Pokemon2Repository();
         Pokemon2DatabaseInitializer pokemon2DatabaseInitializer = new Pokemon2DatabaseInitializer(
                 pokemon2Repository,
-                new MoveRepository()
+                new MoveRepository(),
+                new EvolutionRepository()
         );
 
         pokemon2DatabaseInitializer.run(new DefaultApplicationArguments());
@@ -35,7 +37,8 @@ class Pokemon2DatabaseInitializerTest {
         Pokemon2Repository pokemon2Repository = new Pokemon2Repository();
         Pokemon2DatabaseInitializer pokemon2DatabaseInitializer = new Pokemon2DatabaseInitializer(
                 pokemon2Repository,
-                new MoveRepository()
+                new MoveRepository(),
+                new EvolutionRepository()
         );
 
         pokemon2DatabaseInitializer.run(new DefaultApplicationArguments());

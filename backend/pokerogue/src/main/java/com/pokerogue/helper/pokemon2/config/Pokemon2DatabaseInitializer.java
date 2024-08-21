@@ -1,8 +1,10 @@
 package com.pokerogue.helper.pokemon2.config;
 
-import com.pokerogue.external.s3.service.S3Service;
+import com.pokerogue.helper.pokemon2.data.EvolutionChain;
 import com.pokerogue.helper.pokemon2.data.Move;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
+import com.pokerogue.helper.pokemon2.data.Evolution;
+import com.pokerogue.helper.pokemon2.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import java.io.BufferedReader;
@@ -11,7 +13,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Queue;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -26,16 +34,8 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
     private final Pokemon2Repository pokemon2Repository;
     private final MoveRepository moveRepository;
+    private final EvolutionRepository evolutionRepository;
 
-    List<String> moveKeys = List.of(
-            "id",
-            "name",
-            "effect",
-            "power",
-            "accuracy",
-            "type",
-            "category"
-    );
     List<String> pokemonKeys = List.of(
             "id",
             "speciesId",
@@ -62,6 +62,23 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
             "moves",
             "biomes"
     );
+    List<String> moveKeys = List.of(
+            "id",
+            "name",
+            "effect",
+            "power",
+            "accuracy",
+            "type",
+            "category"
+    );
+
+    List<String> evolutionChainKeys = List.of(
+            "from",
+            "to",
+            "level",
+            "item",
+            "condition"
+    );
 
     @Override
     public void run(ApplicationArguments args) {
@@ -85,22 +102,114 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
 
-    private void savePokemon(BufferedReader br) throws IOException {
-        String line;
-        while ((line = br.readLine()) != null) {
-            List<String> tokens = parseToken(line);
-
-            if (pokemonKeys.size() != tokens.size()) {
-                throw new IllegalArgumentException(pokemonKeys.size() + " " + tokens.size() + "포켓몬 데이터가 잘못 되었습니다.");
-            }
-
-            Pokemon pokemon = createPokemon(tokens);
-            pokemon2Repository.save(pokemon.id(), pokemon);
+        try (InputStream inputStream = getClass()
+                .getClassLoader()
+                .getResourceAsStream("evolution-for-pokemon-response.txt");
+             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))
+        ) {
+            saveEvolution(br);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
+    private void saveEvolution(BufferedReader br) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null) {
+            List<String> tokens = parseToken(line);
+            String speciesName = regularize(tokens.get(0));
+
+            for (int i = 1; i < tokens.size(); i++) {
+                Evolution evolution = createEvolution(speciesName, tokens.get(i));
+                evolutionRepository.saveEdge(speciesName, evolution);
+            }
+        }
+
+        for (Pokemon pokemon : pokemon2Repository.findAll().values()) {
+            List<String> normalForms = List.of("mega", "mega_x", "mega_y", "primal", "g_max", "e_max");
+
+            if (normalForms.contains(regularize(pokemon.formName()))) {
+
+                evolutionRepository.saveEdge(pokemon.id(),
+                        new Evolution(pokemon.speciesName(), pokemon.id(),
+                                "EMPTY", "EMPTY", "EMPTY"));
+            }
+        }
+
+        createEvolutionChains();
+    }
+
+    private void createEvolutionChains() {
+
+        List<String> evolutions = evolutionRepository.findAll()
+                .keySet()
+                .stream()
+                .sorted(Comparator.comparing(r -> pokemon2Repository.findById(r).speciesId()))
+                .toList();
+
+        Set<String> vis = new HashSet<>();
+        for (String from : evolutions) {
+
+            if (vis.contains(from)) {
+                continue;
+            }
+
+            EvolutionChain chain = new EvolutionChain();
+            createChain(vis, from, chain);
+            evolutionRepository.saveChain(from, chain);
+        }
+
+        for (String from : pokemon2Repository.findAll().keySet()) {
+            if (
+                    evolutionRepository.findSpeciesMatchingEvolutionChain(from) == null ||
+                    evolutionRepository.findSpeciesMatchingEvolutionChain(from).getChain().isEmpty()
+            ) {
+                evolutionRepository.saveChain(from, new EvolutionChain(List.of(List.of(from))));
+            }
+        }
+
+    }
+
+    private void createChain(Set<String> vis, String from, EvolutionChain chain) {
+        Queue<String> q = new LinkedList<>();
+        vis.add(from);
+        q.add(from);
+        int depth = 0;
+        while (!q.isEmpty()) {
+            int qs = q.size();
+            while (qs-- > 0) {
+                String cur = q.poll();
+                List<Evolution> edges = evolutionRepository.findEdgeById(cur);
+                if (edges == null) {
+                    continue;
+                }
+                for (Evolution edge : edges) {
+                    if (vis.contains(edge.to())) {
+                        continue;
+                    }
+                    q.add(edge.to());
+                    vis.add(edge.to());
+                    chain.push(edge, depth);
+                }
+            }
+            depth++;
+        }
+
+        chain.getAllIds().forEach(id -> evolutionRepository.saveChain(id, chain));
+    }
+
+    private Evolution createEvolution(String from, String values) {
+        List<String> evolveCondtions = Arrays.stream(values.split("@")).toList();
+
+        return new Evolution(
+                regularize(from),
+                regularize(evolveCondtions.get(0)),
+                regularize(evolveCondtions.get(1)),
+                regularize(evolveCondtions.get(2)),
+                evolveCondtions.get(3)
+        );
+    }
 
     private List<String> parseToken(String line) {
         StringTokenizer stringTokenizer = new StringTokenizer(line, "/");
@@ -120,9 +229,24 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
     }
 
     private String regularize(String str) {
-        return str.replace(" ", "_")
+        return str.strip()
+                .replace(" ", "_")
                 .replace("-", "_")
                 .toLowerCase();
+    }
+
+    private void savePokemon(BufferedReader br) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null) {
+            List<String> tokens = parseToken(line);
+
+            if (pokemonKeys.size() != tokens.size()) {
+                throw new IllegalArgumentException(pokemonKeys.size() + " " + tokens.size() + "포켓몬 데이터가 잘못 되었습니다.");
+            }
+
+            Pokemon pokemon = createPokemon(tokens);
+            pokemon2Repository.save(pokemon.id(), pokemon);
+        }
     }
 
     private Pokemon createPokemon(List<String> values) {
@@ -158,6 +282,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 Arrays.stream(regularize(values.get(23)).split(",")).toList()
         );
     }
+
 
     private void saveMove(BufferedReader br) throws IOException {
         String line;

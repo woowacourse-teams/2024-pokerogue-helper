@@ -4,17 +4,22 @@ package com.pokerogue.helper.pokemon2.service;
 import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.pokemon2.data.Ability;
 import com.pokerogue.helper.pokemon2.data.Biome;
+import com.pokerogue.helper.pokemon2.data.Evolution;
+import com.pokerogue.helper.pokemon2.data.EvolutionChain;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.pokemon2.data.Type;
 import com.pokerogue.helper.pokemon2.dto.BiomeResponse;
 import com.pokerogue.helper.pokemon2.dto.EvolutionResponse;
+import com.pokerogue.helper.pokemon2.dto.EvolutionResponses;
 import com.pokerogue.helper.pokemon2.dto.MoveResponse;
 import com.pokerogue.helper.pokemon2.dto.Pokemon2Response;
 import com.pokerogue.helper.pokemon2.dto.PokemonAbilityResponse;
+import com.pokerogue.helper.pokemon2.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.dto.Pokemon2DetailResponse;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -33,6 +38,7 @@ public class Pokemon2Service {
     private final S3Service s3Service;
     private final Pokemon2Repository pokemon2Repository;
     private final MoveRepository moveRepository;
+    private final EvolutionRepository evolutionRepository;
 
     private List<Pokemon2Response> findAllCache = List.of();
     private Map<String, Pokemon2DetailResponse> findByIdCache = new HashMap<>();
@@ -51,7 +57,7 @@ public class Pokemon2Service {
                         s3Service.getPokemonImageFromS3(pokemon.id()),
                         s3Service.getTypeImageFromS3(pokemon.type1()),
                         s3Service.getTypeImageFromS3(pokemon.type2())
-                        ))
+                ))
                 .sorted(Comparator.comparingLong(Pokemon2Response::pokedexNumber))
                 .toList();
     }
@@ -79,7 +85,7 @@ public class Pokemon2Service {
     private Pokemon2DetailResponse toPokemon2DetailResponse(Pokemon pokemon) {
         List<PokemonTypeResponse> pokemonTypeResponses = createTypeResponse(pokemon);
         List<PokemonAbilityResponse> pokemonAbilityResponses = createAbilityResponse(pokemon);
-        EvolutionResponse evolutionResponse = null;
+        EvolutionResponses evolutionResponses = createEvolutionResponse(pokemon);
         List<MoveResponse> moveResponse = createMoveResponse(pokemon.moves());
         List<MoveResponse> eggMoveResponse = createEggMoveResponse(pokemon.eggMoves());
         List<BiomeResponse> biomeResponse = createBiomeResponse(pokemon.biomes());
@@ -107,11 +113,58 @@ public class Pokemon2Service {
                 Boolean.valueOf(pokemon.canChangeForm()),
                 Double.parseDouble(pokemon.weight()),
                 Double.parseDouble(pokemon.height()),
-                evolutionResponse,
+                evolutionResponses,
                 moveResponse,
                 eggMoveResponse,
                 biomeResponse
         );
+    }
+
+    private EvolutionResponses createEvolutionResponse(Pokemon pokemon) {
+        EvolutionChain chain = evolutionRepository.findSpeciesMatchingEvolutionChain(pokemon.id());
+
+        int currentStage = IntStream.range(0, chain.getChain().size())
+                .filter(i -> chain.getChain().get(i).stream().anyMatch(r -> r.equals(pokemon.id())))
+                .sum();
+
+        return new EvolutionResponses(
+                currentStage,
+                createStages(chain)
+        );
+    }
+
+    private List<List<EvolutionResponse>> createStages(EvolutionChain evolutionChain) {
+        List<List<String>> chain = evolutionChain.getChain();
+        List<List<EvolutionResponse>> ret = new ArrayList<>();
+
+        Pokemon firstPokemon = pokemon2Repository.findById(chain.get(0).get(0));
+        ret.add(List.of(new EvolutionResponse(
+                firstPokemon.koName(),
+                1,
+                "EMPTY",
+                "EMPTY",
+                s3Service.getPokemonImageFromS3(firstPokemon.id())
+        )));
+
+        for (int i = 0; i < chain.size() - 1; i++) {
+            List<String> stage = chain.get(i);
+            List<EvolutionResponse> tmp = new ArrayList<>();
+            for (String id : stage) {
+                List<Evolution> evolutions = evolutionRepository.findEdgeById(id);
+                for (Evolution evolution : evolutions) {
+                    Pokemon pokemon = pokemon2Repository.findById(evolution.to());
+                    tmp.add(new EvolutionResponse(
+                            pokemon.koName(),
+                            Integer.parseInt(evolution.level()),
+                            evolution.item(),
+                            evolution.condition(),
+                            s3Service.getPokemonImageFromS3(pokemon.id())
+                    ));
+                }
+            }
+            ret.add(tmp);
+        }
+        return ret;
     }
 
     private List<PokemonAbilityResponse> createAbilityResponse(Pokemon pokemon) {

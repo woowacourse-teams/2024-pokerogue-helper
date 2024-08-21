@@ -1,10 +1,7 @@
 package com.pokerogue.helper.pokemon2.dto;
 
-import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
-import jakarta.annotation.Nullable;
 import java.util.List;
-import lombok.Builder;
 
 public record Pokemon2DetailResponse(
         String id,
@@ -26,7 +23,7 @@ public record Pokemon2DetailResponse(
         Boolean canChangeForm,
         Double weight,
         Double height,
-        EvolutionResponse evolutions,
+        EvolutionResponses evolutions,
         List<MoveResponse> moves,
         List<MoveResponse> eggMoveResponses,
         List<BiomeResponse> biomes
