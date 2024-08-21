@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
@@ -28,7 +31,12 @@ class BiomeViewModel(
     val navigationToDetailEvent: SharedFlow<String> = _navigationToDetailEvent.asSharedFlow()
 
     init {
-        updateBiomes()
+        refreshEvent
+            .onStart {
+                emit(Unit)
+            }.onEach {
+                updateBiomes()
+            }.launchIn(viewModelScope)
     }
 
     private fun updateBiomes() {

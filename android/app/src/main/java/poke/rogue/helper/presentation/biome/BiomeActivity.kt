@@ -9,7 +9,8 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeBinding
-import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
+import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.biome.model.toUi
 import poke.rogue.helper.presentation.util.context.startActivity
@@ -18,13 +19,15 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class BiomeActivity : ToolbarActivity<ActivityBiomeBinding>(R.layout.activity_biome) {
+class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activity_biome) {
     private val logger: AnalyticsLogger = analyticsLogger()
     private val viewModel by viewModels<BiomeViewModel> {
         BiomeViewModel.factory(
             DefaultBiomeRepository.instance(),
         )
     }
+    override val errorViewModel: ErrorHandleViewModel
+        get() = viewModel
     private val biomeAdapter: BiomeAdapter by lazy { BiomeAdapter(viewModel) }
     override val toolbar: Toolbar
         get() = binding.toolbarBiome
@@ -59,7 +62,7 @@ class BiomeActivity : ToolbarActivity<ActivityBiomeBinding>(R.layout.activity_bi
         repeatOnStarted {
             viewModel.navigationToDetailEvent.collect { biomeId ->
                 startActivity<BiomeDetailActivity> {
-                    putExtra(BiomeDetailActivity.BIOME_ID, biomeId)
+                    putExtras(BiomeDetailActivity.intent(this@BiomeActivity, biomeId))
                     logger.logClickEvent(NAVIGATE_TO_BIOME_DETAIL)
                 }
             }

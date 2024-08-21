@@ -2,7 +2,7 @@ package poke.rogue.helper.testing.data.repository
 
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.BiomeDetail
-import poke.rogue.helper.data.model.BiomeNextBiome
+import poke.rogue.helper.data.model.NextBiome
 import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.model.biome.BiomePokemon
 import poke.rogue.helper.data.model.biome.BossPokemon
@@ -13,8 +13,7 @@ import poke.rogue.helper.data.repository.BiomeRepository
 class FakeBiomeRepository : BiomeRepository {
     override suspend fun biomes(): List<Biome> = BIOMES
 
-    override suspend fun biomeDetail(id: String): BiomeDetail =
-        BIOME_DETAIL[id] ?: throw IllegalArgumentException("Invalid biome ID")
+    override suspend fun biomeDetail(id: String): BiomeDetail = BIOME_DETAIL[id] ?: throw IllegalArgumentException("Invalid biome ID")
 
     companion object {
         val BIOMES: List<Biome> =
@@ -24,14 +23,14 @@ class FakeBiomeRepository : BiomeRepository {
                     name = "풀숲",
                     image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
                     pokemonType = listOf(Type.GRASS, Type.BUG),
-                    gymLeaderType = listOf(Type.GRASS)
+                    gymLeaderType = listOf(Type.GRASS),
                 ),
                 Biome(
                     id = "tall_grass",
                     name = "높은 풀숲",
                     image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_tall_grass_bg.png?w=200&tok=b3497c",
                     pokemonType = listOf(Type.BUG),
-                    gymLeaderType = listOf(Type.GRASS)
+                    gymLeaderType = listOf(Type.GRASS),
                 ),
                 Biome(
                     id = "cave",
@@ -52,11 +51,11 @@ class FakeBiomeRepository : BiomeRepository {
         val BIOME_DETAIL: Map<String, BiomeDetail> =
             mapOf(
                 "grass" to
-                        BiomeDetail(
-                            id = "grass",
-                            name = "풀숲",
-                            image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
-                            wildPokemons =
+                    BiomeDetail(
+                        id = "grass",
+                        name = "풀숲",
+                        image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
+                        wildPokemons =
                             listOf(
                                 WildPokemon(
                                     "레어",
@@ -64,13 +63,13 @@ class FakeBiomeRepository : BiomeRepository {
                                         BiomePokemon(
                                             id = "이상해씨",
                                             name = "이상해씨",
-                                            image = "",
+                                            imageUrl = "",
                                             types = listOf(Type.BUG, Type.GRASS),
                                         ),
                                     ),
                                 ),
                             ),
-                            bossPokemons =
+                        bossPokemons =
                             listOf(
                                 BossPokemon(
                                     "레어",
@@ -78,39 +77,41 @@ class FakeBiomeRepository : BiomeRepository {
                                         BiomePokemon(
                                             id = "이상해풀",
                                             name = "이상해풀",
-                                            image = "",
+                                            imageUrl = "",
                                             types = listOf(Type.GRASS, Type.POISON),
                                         ),
                                     ),
                                 ),
                             ),
-                            gymPokemons =
+                        gymPokemons =
                             listOf(
                                 GymPokemon(
                                     gymLeaderName = "오박사",
                                     gymLeaderImage = "",
-                                    gymLeaderLogos = emptyList(),
+                                    gymLeaderTypeLogos = emptyList(),
                                     pokemons =
-                                    listOf(
-                                        BiomePokemon(
-                                            id = "이상해꽃",
-                                            name = "이상해꽃",
-                                            image = "",
-                                            types = listOf(Type.GRASS, Type.POISON),
+                                        listOf(
+                                            BiomePokemon(
+                                                id = "이상해꽃",
+                                                name = "이상해꽃",
+                                                imageUrl = "",
+                                                types = listOf(Type.GRASS, Type.POISON),
+                                            ),
                                         ),
-                                    ),
                                 ),
                             ),
-                            nextBiomes =
+                        nextBiomes =
                             listOf(
-                                BiomeNextBiome(
+                                NextBiome(
                                     id = "tall_grass",
                                     name = "높은 풀숲",
                                     image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_tall_grass_bg.png?w=200&tok=b3497c",
+                                    pokemonType = emptyList(),
+                                    gymLeaderType = emptyList(),
                                     probability = 0.5,
                                 ),
                             ),
-                        ),
+                    ),
             )
     }
 }

@@ -78,7 +78,7 @@ fun Biome.toUi(): BiomeUiModel =
         id = id,
         name = name,
         imageUrl = image,
-        types = pokemonType.toUi(),
+        types = (gymLeaderType.toUi() + pokemonType.toUi()).distinct().take(4),
     )
 
 fun List<Biome>.toUi(): List<BiomeUiModel> = map(Biome::toUi)

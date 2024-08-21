@@ -8,6 +8,9 @@
         <variable
             name="nextBiome"
             type="poke.rogue.helper.presentation.biome.model.NextBiomeUiModel" />
+        <variable
+            name="handler"
+            type="poke.rogue.helper.presentation.biome.detail.BiomeDetailHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +18,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_pokemon_corner_radius"
         android:paddingHorizontal="30dp"
+        onSingleClick="@{view -> handler.navigateToBiomeDetail(nextBiome.biome.id)}"
         android:paddingVertical="15dp">
 
         <TextView

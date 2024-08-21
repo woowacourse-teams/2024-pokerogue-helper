@@ -6,7 +6,7 @@ import poke.rogue.helper.presentation.type.model.toUi
 
 data class PokemonUiModel(
     val id: String = "",
-    val dexNumber: Long,
+    val dexNumber: Long = 0,
     val name: String,
     val imageUrl: String,
     val types: List<TypeUiModel>,

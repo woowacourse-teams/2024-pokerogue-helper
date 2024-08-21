@@ -5,9 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemBiomeGymBinding
 import poke.rogue.helper.presentation.biome.model.BiomePokemonUiModel
+import poke.rogue.helper.presentation.dex.PokemonListNavigateHandler
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class BiomeGymAdapter : ListAdapter<BiomePokemonUiModel, BiomeGymViewHolder>(gymPokemonComparator) {
+class BiomeGymAdapter(
+    private val onClickPokemon: PokemonListNavigateHandler,
+) : ListAdapter<BiomePokemonUiModel, BiomeGymViewHolder>(gymPokemonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -18,6 +21,7 @@ class BiomeGymAdapter : ListAdapter<BiomePokemonUiModel, BiomeGymViewHolder>(gym
                 parent,
                 false,
             ),
+            onClickPokemon,
         )
     }
 

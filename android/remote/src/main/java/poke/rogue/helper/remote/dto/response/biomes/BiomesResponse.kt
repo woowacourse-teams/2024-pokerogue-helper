@@ -9,8 +9,8 @@ data class BiomesResponse(
     val id: String,
     val name: String,
     val image: String,
-    @SerialName("pokemonTypeLogos")
-    val pokemonType: List<PokemonTypeResponse>,
-    @SerialName("trainerTypeLogos")
-    val gymLeaderType: List<PokemonTypeResponse>,
+    @SerialName("pokemonTypeResponses")
+    val pokemonTypes: List<PokemonTypeResponse>,
+    @SerialName("trainerTypeResponses")
+    val gymLeaderTypes: List<PokemonTypeResponse>,
 )
