@@ -17,7 +17,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -145,7 +145,10 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         List<String> evolutions = evolutionRepository.findAll()
                 .keySet()
                 .stream()
-                .sorted(Comparator.comparing(r -> pokemon2Repository.findById(r).speciesId()))
+                .sorted(Comparator.comparing(r -> pokemon2Repository.findById(r)
+                        .orElseThrow(()-> new IllegalArgumentException(""))
+                        .speciesId()
+                ))
                 .toList();
 
         Set<String> vis = new HashSet<>();
@@ -162,8 +165,8 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
         for (String from : pokemon2Repository.findAll().keySet()) {
             if (
-                    evolutionRepository.findSpeciesMatchingEvolutionChain(from) == null ||
-                    evolutionRepository.findSpeciesMatchingEvolutionChain(from).getChain().isEmpty()
+                    evolutionRepository.findEvolutionChainById(from).isEmpty() ||
+                    evolutionRepository.findEvolutionChainById(from).get().getChain().isEmpty()
             ) {
                 evolutionRepository.saveChain(from, new EvolutionChain(List.of(List.of(from))));
             }
@@ -180,11 +183,11 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
             int qs = q.size();
             while (qs-- > 0) {
                 String cur = q.poll();
-                List<Evolution> edges = evolutionRepository.findEdgeById(cur);
-                if (edges == null) {
+                Optional<List<Evolution>> edges = evolutionRepository.findEdgeById(cur);
+                if (edges.isEmpty()) {
                     continue;
                 }
-                for (Evolution edge : edges) {
+                for (Evolution edge : edges.get()) {
                     if (vis.contains(edge.to())) {
                         continue;
                     }

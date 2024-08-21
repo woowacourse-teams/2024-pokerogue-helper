@@ -4,6 +4,7 @@ package com.pokerogue.helper.pokemon2.repository;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TreeMap;
 import org.springframework.stereotype.Repository;
 
@@ -15,8 +16,8 @@ public class Pokemon2Repository {
         return Collections.unmodifiableMap(data);
     }
 
-    public Pokemon findById(String id) {
-        return data.get(id);
+    public Optional<Pokemon> findById(String id) {
+        return Optional.ofNullable(data.get(id));
     }
 
     public void save(String key, Pokemon pokemon) {

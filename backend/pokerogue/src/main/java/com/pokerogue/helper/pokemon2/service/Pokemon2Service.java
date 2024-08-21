@@ -121,7 +121,8 @@ public class Pokemon2Service {
     }
 
     private EvolutionResponses createEvolutionResponse(Pokemon pokemon) {
-        EvolutionChain chain = evolutionRepository.findSpeciesMatchingEvolutionChain(pokemon.id());
+        EvolutionChain chain = evolutionRepository.findEvolutionChainById(pokemon.id())
+                .orElseThrow(() -> new IllegalArgumentException());
 
         int currentStage = IntStream.range(0, chain.getChain().size())
                 .filter(i -> chain.getChain().get(i).stream().anyMatch(r -> r.equals(pokemon.id())))
@@ -137,7 +138,8 @@ public class Pokemon2Service {
         List<List<String>> chain = evolutionChain.getChain();
         List<List<EvolutionResponse>> ret = new ArrayList<>();
 
-        Pokemon firstPokemon = pokemon2Repository.findById(chain.get(0).get(0));
+        Pokemon firstPokemon = pokemon2Repository.findById(chain.get(0).get(0))
+                .orElseThrow(() -> new IllegalArgumentException());
         ret.add(List.of(new EvolutionResponse(
                 firstPokemon.koName(),
                 1,
@@ -150,9 +152,11 @@ public class Pokemon2Service {
             List<String> stage = chain.get(i);
             List<EvolutionResponse> tmp = new ArrayList<>();
             for (String id : stage) {
-                List<Evolution> evolutions = evolutionRepository.findEdgeById(id);
+                List<Evolution> evolutions = evolutionRepository.findEdgeById(id)
+                        .orElseThrow(() -> new IllegalArgumentException());
                 for (Evolution evolution : evolutions) {
-                    Pokemon pokemon = pokemon2Repository.findById(evolution.to());
+                    Pokemon pokemon = pokemon2Repository.findById(evolution.to())
+                            .orElseThrow(() -> new IllegalArgumentException(""));
                     tmp.add(new EvolutionResponse(
                             pokemon.koName(),
                             Integer.parseInt(evolution.level()),
@@ -210,9 +214,11 @@ public class Pokemon2Service {
 
     private List<MoveResponse> createEggMoveResponse(List<String> moves) {
         return moves.stream()
-                .map(moveRepository::findById)
+                .map(r->moveRepository.findById(r).orElseThrow(()->new IllegalArgumentException()))
                 .map(move -> MoveResponse.from(move, 1,
-                        s3Service.getTypeImageFromS3(moveRepository.findById(move.id()).type())))
+                        s3Service.getTypeImageFromS3(moveRepository.findById(move.id())
+                                .orElseThrow(() -> new IllegalArgumentException())
+                                .type())))
                 .toList();
     }
 
@@ -220,9 +226,9 @@ public class Pokemon2Service {
         return IntStream.iterate(0, index -> index + 2)
                 .limit(moves.size() / 2)
                 .mapToObj(index -> MoveResponse.from(
-                        moveRepository.findById(moves.get(index)),
+                        moveRepository.findById(moves.get(index)).orElseThrow(),
                         Integer.parseInt(moves.get(index + 1)),
-                        s3Service.getTypeImageFromS3(moveRepository.findById(moves.get(index)).type())
+                        s3Service.getTypeImageFromS3(moveRepository.findById(moves.get(index)).orElseThrow().type())
                 ))
                 .toList();
     }

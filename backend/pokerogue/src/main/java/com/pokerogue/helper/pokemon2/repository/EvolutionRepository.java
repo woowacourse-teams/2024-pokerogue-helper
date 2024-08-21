@@ -3,9 +3,11 @@ package com.pokerogue.helper.pokemon2.repository;
 import com.pokerogue.helper.pokemon2.data.Evolution;
 import com.pokerogue.helper.pokemon2.data.EvolutionChain;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -14,15 +16,15 @@ public class EvolutionRepository {
     private final Map<String, EvolutionChain> chains = new HashMap<>();
 
     public Map<String, List<Evolution>> findAll() {
-        return data;
+        return Collections.unmodifiableMap(data);
     }
 
-    public List<Evolution> findEdgeById(String id) {
-        return data.get(id);
+    public Optional<List<Evolution>> findEdgeById(String id) {
+        return Optional.ofNullable(data.get(id));
     }
 
-    public EvolutionChain findSpeciesMatchingEvolutionChain(String id) {
-        return chains.get(id);
+    public Optional<EvolutionChain> findEvolutionChainById(String id) {
+        return Optional.ofNullable(chains.get(id));
     }
 
     public void saveEdge(String key, Evolution value) {
