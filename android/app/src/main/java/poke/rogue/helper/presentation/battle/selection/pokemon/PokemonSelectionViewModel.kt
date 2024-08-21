@@ -13,7 +13,7 @@ import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
-import poke.rogue.helper.presentation.battle.selection.SelectableUiModel
+import poke.rogue.helper.presentation.dex.filter.SelectableUiModel
 
 class PokemonSelectionViewModel(
     previousSelection: PokemonSelectionUiModel?,

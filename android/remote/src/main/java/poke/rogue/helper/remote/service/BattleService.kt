@@ -13,5 +13,5 @@ interface BattleService {
     @GET("api/v1/moves")
     suspend fun availableSkills(
         @Query("pokedex-number") dexNumber: Long,
-    ): ApiResponse<PokemonSkillResponse>
+    ): ApiResponse<List<PokemonSkillResponse>>
 }

@@ -4,6 +4,7 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.getOrThrow
 import poke.rogue.helper.data.exception.onFailure
+import poke.rogue.helper.data.model.BattleSkill
 import poke.rogue.helper.data.model.Weather
 import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.remote.injector.ServiceModule
@@ -17,6 +18,14 @@ class RemoteBattleDataSource(
         battleService.weathers()
             .onFailure {
                 logger.logError(throwable, "battleService - weathers() 에서 발생")
+            }
+            .getOrThrow()
+            .map { it.toData() }
+
+    suspend fun availableSkills(dexNumber: Long): List<BattleSkill> =
+        battleService.availableSkills(dexNumber)
+            .onFailure {
+                logger.logError(throwable, "battleService - availableSkills($dexNumber) 에서 발생")
             }
             .getOrThrow()
             .map { it.toData() }

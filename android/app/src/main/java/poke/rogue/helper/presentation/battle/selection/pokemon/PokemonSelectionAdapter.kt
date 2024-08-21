@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemBattlePokemonSelectionBinding
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
-import poke.rogue.helper.presentation.battle.selection.SelectableUiModel
+import poke.rogue.helper.presentation.dex.filter.SelectableUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class PokemonSelectionAdapter(

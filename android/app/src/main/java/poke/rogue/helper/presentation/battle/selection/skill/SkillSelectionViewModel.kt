@@ -9,13 +9,18 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.data.repository.BattleRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
-import poke.rogue.helper.presentation.battle.selection.SelectableUiModel
+import poke.rogue.helper.presentation.battle.model.toUi
+import poke.rogue.helper.presentation.dex.filter.SelectableUiModel
+import poke.rogue.helper.presentation.dex.filter.toSelectableModelsBy
+import poke.rogue.helper.presentation.dex.filter.toSelectableModelsWithAllDeselected
 
 class SkillSelectionViewModel(
+    private val battleRepository: BattleRepository,
     previousSelection: SelectionData.WithSkill?,
     logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), SkillSelectionHandler {
@@ -26,11 +31,12 @@ class SkillSelectionViewModel(
     val skills = _skills.asStateFlow()
 
     init {
-        // TODO: 기존에 선택한 포켓몬 dex Number로 서버 요청
-        _skills.value =
-            SkillSelectionUiModel.DUMMY.mapIndexed { index, skill ->
-                SelectableUiModel(index, previousSelection?.selectedSkill?.id == skill.id, skill)
+        if (previousSelection != null) {
+            viewModelScope.launch(errorHandler) {
+                val availableSkills = battleRepository.availableSkills(previousSelection.selectedPokemon.dexNumber).map { it.toUi() }
+                _skills.value = availableSkills.toSelectableModelsBy { it.id == previousSelection.selectedSkill.id }
             }
+        }
     }
 
     override fun selectSkill(selected: SkillSelectionUiModel) {
@@ -45,15 +51,16 @@ class SkillSelectionViewModel(
     }
 
     fun updateSkills(pokemonDexNumber: Long) {
-        // TODO: dex number로 레포지토리에 요청
-        _skills.value =
-            SkillSelectionUiModel.DUMMY.mapIndexed { index, skill ->
-                SelectableUiModel(index, false, skill)
-            }
+        viewModelScope.launch(errorHandler) {
+            val availableSkills = battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
+            _skills.value = availableSkills.toSelectableModelsWithAllDeselected()
+        }
     }
 
     companion object {
-        fun factory(previousSelection: SelectionData.WithSkill?): ViewModelProvider.Factory =
-            BaseViewModelFactory { SkillSelectionViewModel(previousSelection) }
+        fun factory(
+            battleRepository: BattleRepository,
+            previousSelection: SelectionData.WithSkill?,
+        ): ViewModelProvider.Factory = BaseViewModelFactory { SkillSelectionViewModel(battleRepository, previousSelection) }
     }
 }
