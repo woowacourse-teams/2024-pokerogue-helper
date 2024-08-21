@@ -70,12 +70,6 @@ class SkillSelectionFragment :
             }
         }
 
-//        repeatOnStarted {
-//            viewModel.skills.collect {
-//                skillAdapter.submitList(it)
-//            }
-//        }
-
         repeatOnStarted {
             viewModel.filteredSkills.collect {
                 skillAdapter.submitList(it)
