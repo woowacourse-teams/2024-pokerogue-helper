@@ -24,12 +24,12 @@ class PokemonDetailViewModel(
 ) :
     ErrorHandleViewModel(logger),
         PokemonDetailNavigateHandler {
-    private val _uiState: MutableStateFlow<PokemonDetailUiState> =
-        MutableStateFlow(PokemonDetailUiState.IsLoading)
+    private val _uiState: MutableStateFlow<PokemonDetailUiState2> =
+        MutableStateFlow(PokemonDetailUiState2.IsLoading)
     val uiState = _uiState.asStateFlow()
 
     val isEmpty: StateFlow<Boolean> =
-        uiState.map { it is PokemonDetailUiState.IsLoading }
+        uiState.map { it is PokemonDetailUiState2.IsLoading }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), true)
 
     private val _navigationToAbilityDetailEvent = MutableSharedFlow<String>()
@@ -44,7 +44,7 @@ class PokemonDetailViewModel(
     fun updatePokemonDetail(pokemonId: String) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch(errorHandler) {
-            _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
+            _uiState.value = dexRepository.pokemonDetail2(pokemonId).toUi()
         }
     }
 

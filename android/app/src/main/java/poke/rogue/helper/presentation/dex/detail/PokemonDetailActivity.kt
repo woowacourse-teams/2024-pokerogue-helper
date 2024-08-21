@@ -74,8 +74,8 @@ class PokemonDetailActivity :
         repeatOnStarted {
             viewModel.uiState.collect { pokemonDetail ->
                 when (pokemonDetail) {
-                    is PokemonDetailUiState.IsLoading -> return@collect
-                    is PokemonDetailUiState.Success -> {
+                    is PokemonDetailUiState2.IsLoading -> return@collect
+                    is PokemonDetailUiState2.Success -> {
                         bindPokemonDetail(pokemonDetail)
                     }
                 }
@@ -109,7 +109,7 @@ class PokemonDetailActivity :
         }
     }
 
-    private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
+    private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState2.Success) {
         with(binding) {
             ivPokemonDetailPokemon.loadImageWithProgress(
                 pokemonDetail.pokemon.imageUrl,
