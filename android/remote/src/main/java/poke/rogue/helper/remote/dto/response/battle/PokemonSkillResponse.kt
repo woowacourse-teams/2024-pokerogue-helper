@@ -6,7 +6,9 @@ import kotlinx.serialization.Serializable
 data class PokemonSkillResponse(
     val id: String,
     val name: String,
+    val typeEngName: String,
     val typeLogo: String,
+    val categoryEngName: String,
     val categoryLogo: String,
     val power: Int,
     val accuracy: Int,
