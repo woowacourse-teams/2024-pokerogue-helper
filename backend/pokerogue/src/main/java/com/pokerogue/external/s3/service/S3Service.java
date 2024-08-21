@@ -19,6 +19,8 @@ public class S3Service {
     private static final String POKEROGUE_TYPE_IMAGE_FOLDER = "pokerogue/type/";
     private static final String POKEROGUE_MOVE_CATEGORY_IMAGE_FOLDER = "pokerogue/move-category/";
     private static final String POKEROGUE_POKEMON_IMAGE_FOLDER = "pokerogue/pokemon/front/";
+    private static final String SVG_EXTENSION = ".svg";
+    private static final String PNG_EXTENSION = ".png";
 
     private final S3ImageClient s3ImageClient;
 
@@ -40,7 +42,7 @@ public class S3Service {
     }
 
     private String makeBiomeFileName(String biomeId) {
-        return BIOME_IMAGE_FOLDER + biomeId;
+        return BIOME_IMAGE_FOLDER + biomeId + PNG_EXTENSION;
     }
 
     public String getTrainerImageFromS3(String trainerId) {
@@ -49,7 +51,7 @@ public class S3Service {
     }
 
     private String makeTrainerFileName(String trainerId) {
-        return TRAINER_IMAGE_FOLDER + trainerId;
+        return TRAINER_IMAGE_FOLDER + trainerId + PNG_EXTENSION;
     }
 
     private String makeRandomFileName() {
@@ -57,7 +59,7 @@ public class S3Service {
     }
 
     private String makeTypeFileName(String typeName) {
-        return TYPE_IMAGE_FOLDER + typeName;
+        return TYPE_IMAGE_FOLDER + typeName + SVG_EXTENSION;
     }
 
     public String getPokerogueTypeImageFromS3(String typeName) {
@@ -71,6 +73,6 @@ public class S3Service {
     }
 
     private String makePokemonFileName(String pokemonId) {
-        return POKEROGUE_POKEMON_IMAGE_FOLDER + pokemonId;
+        return POKEROGUE_POKEMON_IMAGE_FOLDER + pokemonId + PNG_EXTENSION;
     }
 }
