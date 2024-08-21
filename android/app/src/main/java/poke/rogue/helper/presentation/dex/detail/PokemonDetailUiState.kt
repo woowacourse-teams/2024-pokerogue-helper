@@ -1,6 +1,6 @@
 package poke.rogue.helper.presentation.dex.detail
 
-import poke.rogue.helper.data.model.PokemonDetail2
+import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetailSkills2
 import poke.rogue.helper.data.model.Stat
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
@@ -22,7 +22,7 @@ sealed interface PokemonDetailUiState {
     data object IsLoading : PokemonDetailUiState
 }
 
-fun PokemonDetail2.toUi(): PokemonDetailUiState.Success =
+fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
     PokemonDetailUiState.Success(
         pokemon = pokemon.toUi(),
         stats = stats.map(Stat::toUi),

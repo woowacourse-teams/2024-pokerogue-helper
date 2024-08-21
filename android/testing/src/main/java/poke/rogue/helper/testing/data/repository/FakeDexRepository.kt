@@ -4,7 +4,7 @@ import poke.rogue.helper.data.model.Evolution
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonCategory
-import poke.rogue.helper.data.model.PokemonDetail2
+import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetailAbility.Companion.DUMMY_POKEMON_DETAIL_ABILTIES
 import poke.rogue.helper.data.model.PokemonDetailSkills2
 import poke.rogue.helper.data.model.PokemonFilter
@@ -33,8 +33,8 @@ class FakeDexRepository : DexRepository {
         }.toFilteredPokemons(sort, filters)
     }
 
-    override suspend fun pokemonDetail(id: String): PokemonDetail2 =
-        PokemonDetail2(
+    override suspend fun pokemonDetail(id: String): PokemonDetail =
+        PokemonDetail(
             pokemon = Pokemon.DUMMY,
             abilities = DUMMY_POKEMON_DETAIL_ABILTIES,
             stats = Stat.DUMMY_STATS,
