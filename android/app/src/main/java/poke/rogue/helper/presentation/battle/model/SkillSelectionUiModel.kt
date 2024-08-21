@@ -2,48 +2,26 @@ package poke.rogue.helper.presentation.battle.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import poke.rogue.helper.data.model.BattleSkill
 import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.toUi
 
 @Parcelize
 data class SkillSelectionUiModel(
     val id: String,
     val name: String,
-    val type: TypeUiModel,
-    val category: String,
+    val typeLogo: TypeUiModel,
+    val categoryLogo: String,
 ) : Parcelable {
     companion object {
-        val DUMMY =
-            listOf(
-                SkillSelectionUiModel(
-                    id = "1",
-                    name = "몸통박치기",
-                    type = TypeUiModel.NORMAL,
-                    category = "Physical Attack",
-                ),
-                SkillSelectionUiModel(
-                    id = "2",
-                    name = "울음소리",
-                    type = TypeUiModel.NORMAL,
-                    category = "Status Change",
-                ),
-                SkillSelectionUiModel(
-                    id = "3",
-                    name = "덩굴채찍",
-                    type = TypeUiModel.GRASS,
-                    category = "Physical Attack",
-                ),
-                SkillSelectionUiModel(
-                    id = "4",
-                    name = "성장",
-                    type = TypeUiModel.NORMAL,
-                    category = "Status Change",
-                ),
-                SkillSelectionUiModel(
-                    id = "5",
-                    name = "씨뿌리기",
-                    type = TypeUiModel.GRASS,
-                    category = "Status Change",
-                ),
-            )
+        val DUMMY = listOf<SkillSelectionUiModel>()
     }
 }
+
+fun BattleSkill.toUi(): SkillSelectionUiModel =
+    SkillSelectionUiModel(
+        id = id,
+        name = name,
+        typeLogo = type.toUi(),
+        categoryLogo = categoryLogo,
+    )

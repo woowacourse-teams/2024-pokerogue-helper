@@ -49,7 +49,7 @@
 
         <ImageView
             android:id="@+id/iv_type"
-            imageRes="@{skill.type.typeIconResId}"
+            imageRes="@{skill.typeLogo.typeIconResId}"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_gravity="center_vertical"
@@ -61,7 +61,7 @@
 
         <ImageView
             android:id="@+id/iv_category"
-            imageUrl="@{skill.category}"
+            imageUrl="@{skill.categoryLogo}"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_gravity="center_vertical"
