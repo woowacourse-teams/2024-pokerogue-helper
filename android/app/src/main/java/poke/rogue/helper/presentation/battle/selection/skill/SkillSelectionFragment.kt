@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
+import poke.rogue.helper.data.repository.DefaultBattleRepository
 import poke.rogue.helper.databinding.FragmentSkillSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -22,6 +23,7 @@ class SkillSelectionFragment :
     private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
     private val viewModel: SkillSelectionViewModel by viewModels<SkillSelectionViewModel> {
         SkillSelectionViewModel.factory(
+            DefaultBattleRepository.instance(),
             sharedViewModel.previousSelection as? SelectionData.WithSkill,
         )
     }
@@ -50,6 +52,8 @@ class SkillSelectionFragment :
                 LinearSpacingItemDecoration(spacing = 4.dp, false),
             )
         }
+        binding.handler = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun initObserver() {
@@ -67,7 +71,7 @@ class SkillSelectionFragment :
         }
 
         repeatOnStarted {
-            viewModel.skills.collect {
+            viewModel.filteredSkills.collect {
                 skillAdapter.submitList(it)
             }
         }

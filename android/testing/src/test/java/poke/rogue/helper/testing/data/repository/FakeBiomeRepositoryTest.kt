@@ -38,9 +38,9 @@ class FakeBiomeRepositoryTest {
     fun `올바른 바이옴 ID값으로 조회하면, 바이옴 상세 정보를 반환한다`() =
         runTest {
             // when
-            val biomeDetail = repository.biomeDetail("풀숲")
+            val biomeDetail = repository.biomeDetail("grass")
 
             // then
-            biomeDetail.id shouldBe "풀숲"
+            biomeDetail.id shouldBe "grass"
         }
 }

@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemPokemonListPokemonBinding
+import poke.rogue.helper.presentation.dex.PokemonListNavigateHandler
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class BiomPokemonAdapter :
+class BiomPokemonAdapter(private val onClickPokemon: PokemonListNavigateHandler) :
     ListAdapter<PokemonUiModel, BiomePokemonViewHolder>(poketmonComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -19,6 +20,7 @@ class BiomPokemonAdapter :
                 parent,
                 false,
             ),
+            onClickPokemon,
         )
 
     override fun onBindViewHolder(

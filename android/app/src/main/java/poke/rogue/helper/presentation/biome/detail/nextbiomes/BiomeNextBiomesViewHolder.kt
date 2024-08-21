@@ -3,16 +3,20 @@ package poke.rogue.helper.presentation.biome.detail.nextbiomes
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemBiomeNextBiomesBinding
 import poke.rogue.helper.presentation.biome.BiomeTypesAdapter
+import poke.rogue.helper.presentation.biome.detail.BiomeDetailHandler
 import poke.rogue.helper.presentation.biome.model.NextBiomeUiModel
 import poke.rogue.helper.presentation.util.view.dp
 
-class BiomeNextBiomesViewHolder(private val binding: ItemBiomeNextBiomesBinding) :
+class BiomeNextBiomesViewHolder(
+    private val binding: ItemBiomeNextBiomesBinding,
+    private val onClickNextBiome: BiomeDetailHandler,
+) :
     RecyclerView.ViewHolder(
-        binding.root,
-    ) {
+            binding.root,
+        ) {
     fun bind(nextBiome: NextBiomeUiModel) {
         binding.nextBiome = nextBiome
-
+        binding.handler = onClickNextBiome
         val typesLayout = binding.flBiomeTypeIcons
         val biomeTypesAdapter =
             BiomeTypesAdapter(

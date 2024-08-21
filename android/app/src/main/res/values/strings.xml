@@ -100,7 +100,9 @@
     <string name="battle_title_name">배틀 구도</string>
     <string name="battle_result_title">계산 결과</string>
     <string name="battle_calculated_power_title">계산된 위력</string>
-    <string name="battle_accuracy_title">명중 확률</string>
+    <string name="battle_power_title">기술 위력</string>
+    <string name="battle_multiplier_title">배수</string>
+    <string name="battle_accuracy_title">명중 확률 : %s</string>
     <string name="battle_mine_pokemon_selection">내 포켓몬을 선택해주세요!</string>
     <string name="battle_opponent_pokemon_selection">상대 포켓몬을 선택해주세요!</string>
     <string name="battle_move_selection">기술을 선택해주세요!</string>
@@ -110,6 +112,8 @@
     <string name="battle_selection_title">포켓몬을 선택하세요</string>
     <string name="battle_selection_next_btn">다음</string>
     <string name="battle_selection_previous_btn">이전</string>
+    <string name="battle_result_multiplier">*</string>
+    <string name="battle_result_equal">=</string>
 
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>

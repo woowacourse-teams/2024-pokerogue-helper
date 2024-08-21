@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import poke.rogue.helper.R
+import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.FragmentPokemonSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -19,7 +20,10 @@ class PokemonSelectionFragment :
     ErrorHandleFragment<FragmentPokemonSelectionBinding>(R.layout.fragment_pokemon_selection) {
     private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
     private val viewModel: PokemonSelectionViewModel by viewModels<PokemonSelectionViewModel> {
-        PokemonSelectionViewModel.factory(sharedViewModel.previousSelection.selectedPokemonOrNull())
+        PokemonSelectionViewModel.factory(
+            DefaultDexRepository.instance(),
+            sharedViewModel.previousSelection.selectedPokemonOrNull(),
+        )
     }
     private val pokemonAdapter: PokemonSelectionAdapter by lazy {
         PokemonSelectionAdapter(viewModel)
@@ -37,10 +41,12 @@ class PokemonSelectionFragment :
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initObserver()
-        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun initViews() {
+        binding.handler = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         with(binding.rvPokemons) {
             adapter = pokemonAdapter
             addItemDecoration(
@@ -51,7 +57,7 @@ class PokemonSelectionFragment :
 
     private fun initObserver() {
         repeatOnStarted {
-            viewModel.pokemons.collect {
+            viewModel.filteredPokemon.collect {
                 pokemonAdapter.submitList(it)
             }
         }

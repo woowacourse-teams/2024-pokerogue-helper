@@ -1,6 +1,7 @@
 package poke.rogue.helper.remote.injector
 
 import poke.rogue.helper.remote.service.AbilityService
+import poke.rogue.helper.remote.service.BattleService
 import poke.rogue.helper.remote.service.BiomeService
 import poke.rogue.helper.remote.service.PokeDexService
 import retrofit2.create
@@ -12,6 +13,8 @@ object ServiceModule {
 
     fun biomeService(): BiomeService = ServicePool.biomeService
 
+    fun battleService(): BattleService = ServicePool.battleService
+
     private object ServicePool {
         val pokeDexService: PokeDexService by lazy {
             RetrofitModule.retrofit().create()
@@ -20,6 +23,9 @@ object ServiceModule {
             RetrofitModule.retrofit().create()
         }
         val biomeService: BiomeService by lazy {
+            RetrofitModule.retrofit().create()
+        }
+        val battleService: BattleService by lazy {
             RetrofitModule.retrofit().create()
         }
     }

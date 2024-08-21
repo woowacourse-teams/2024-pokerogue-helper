@@ -5,7 +5,7 @@ import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 
 data class BattleSelectionsState(
-    val weather: WeatherUiModel,
+    val weather: BattleSelectionUiState<WeatherUiModel>,
     val minePokemon: BattleSelectionUiState<PokemonSelectionUiModel>,
     val skill: BattleSelectionUiState<SkillSelectionUiModel>,
     val opponentPokemon: BattleSelectionUiState<PokemonSelectionUiModel>,
@@ -17,7 +17,7 @@ data class BattleSelectionsState(
     companion object {
         val DEFAULT =
             BattleSelectionsState(
-                WeatherUiModel.DEFAULT_SELECTED,
+                BattleSelectionUiState.Empty,
                 BattleSelectionUiState.Empty,
                 BattleSelectionUiState.Empty,
                 BattleSelectionUiState.Empty,

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="biomeUiModel"
-            type="poke.rogue.helper.presentation.biome.model.BiomeUiModel" />
+            name="vm"
+            type="poke.rogue.helper.presentation.biome.detail.BiomeDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,14 +31,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="30dp"
-            android:text="@{biomeUiModel.name}"
+            android:text="@{vm.uiState.name}"
             app:layout_constraintStart_toStartOf="@id/iv_biome_detail_image"
             app:layout_constraintTop_toBottomOf="@id/toolbar_biome_detail"
             tools:text="눈덮인 숲" />
 
         <ImageView
             android:id="@+id/iv_biome_detail_image"
-            imageUrl="@{biomeUiModel.imageUrl}"
+            imageUrl="@{vm.uiState.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/gl_end"

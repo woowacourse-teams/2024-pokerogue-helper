@@ -2,7 +2,7 @@ package poke.rogue.helper.testing.data.repository
 
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.BiomeDetail
-import poke.rogue.helper.data.model.BiomeNextBiome
+import poke.rogue.helper.data.model.NextBiome
 import poke.rogue.helper.data.model.Type
 import poke.rogue.helper.data.model.biome.BiomePokemon
 import poke.rogue.helper.data.model.biome.BossPokemon
@@ -19,40 +19,40 @@ class FakeBiomeRepository : BiomeRepository {
         val BIOMES: List<Biome> =
             listOf(
                 Biome(
-                    id = "풀숲",
+                    id = "grass",
                     name = "풀숲",
                     image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
-                    pokemonType = listOf("Grass", "Bug"),
-                    gymLeaderType = listOf("Grass"),
+                    pokemonType = listOf(Type.GRASS, Type.BUG),
+                    gymLeaderType = listOf(Type.GRASS),
                 ),
                 Biome(
-                    id = "높은 풀숲",
+                    id = "tall_grass",
                     name = "높은 풀숲",
                     image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_tall_grass_bg.png?w=200&tok=b3497c",
-                    pokemonType = listOf("Bug"),
-                    gymLeaderType = listOf("Bug"),
+                    pokemonType = listOf(Type.BUG),
+                    gymLeaderType = listOf(Type.GRASS),
                 ),
                 Biome(
-                    id = "동굴",
+                    id = "cave",
                     name = "동굴",
                     image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_cave_bg.png?w=200&tok=905d8b",
-                    pokemonType = listOf("Grass"),
-                    gymLeaderType = listOf("Grass"),
+                    pokemonType = listOf(Type.GRASS),
+                    gymLeaderType = listOf(Type.GRASS),
                 ),
                 Biome(
-                    id = "악지",
+                    id = "badlands",
                     name = "악지",
                     image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_badlands_bg.png?w=200&tok=37d070",
-                    pokemonType = listOf("Dark", "Fighting"),
-                    gymLeaderType = listOf("Dark", "Fighting"),
+                    pokemonType = listOf(Type.DARK, Type.FIGHTING),
+                    gymLeaderType = listOf(Type.DARK, Type.FIGHTING),
                 ),
             )
 
         val BIOME_DETAIL: Map<String, BiomeDetail> =
             mapOf(
-                "풀숲" to
+                "grass" to
                     BiomeDetail(
-                        id = "풀숲",
+                        id = "grass",
                         name = "풀숲",
                         image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
                         wildPokemons =
@@ -63,7 +63,7 @@ class FakeBiomeRepository : BiomeRepository {
                                         BiomePokemon(
                                             id = "이상해씨",
                                             name = "이상해씨",
-                                            image = "",
+                                            imageUrl = "",
                                             types = listOf(Type.BUG, Type.GRASS),
                                         ),
                                     ),
@@ -77,7 +77,7 @@ class FakeBiomeRepository : BiomeRepository {
                                         BiomePokemon(
                                             id = "이상해풀",
                                             name = "이상해풀",
-                                            image = "",
+                                            imageUrl = "",
                                             types = listOf(Type.GRASS, Type.POISON),
                                         ),
                                     ),
@@ -88,13 +88,13 @@ class FakeBiomeRepository : BiomeRepository {
                                 GymPokemon(
                                     gymLeaderName = "오박사",
                                     gymLeaderImage = "",
-                                    gymLeaderLogos = emptyList(),
+                                    gymLeaderTypeLogos = emptyList(),
                                     pokemons =
                                         listOf(
                                             BiomePokemon(
                                                 id = "이상해꽃",
                                                 name = "이상해꽃",
-                                                image = "",
+                                                imageUrl = "",
                                                 types = listOf(Type.GRASS, Type.POISON),
                                             ),
                                         ),
@@ -102,10 +102,12 @@ class FakeBiomeRepository : BiomeRepository {
                             ),
                         nextBiomes =
                             listOf(
-                                BiomeNextBiome(
-                                    id = "높은 풀숲",
+                                NextBiome(
+                                    id = "tall_grass",
                                     name = "높은 풀숲",
                                     image = "https://wiki.pokerogue.net/_media/ko:biomes:ko_tall_grass_bg.png?w=200&tok=b3497c",
+                                    pokemonType = emptyList(),
+                                    gymLeaderType = emptyList(),
                                     probability = 0.5,
                                 ),
                             ),

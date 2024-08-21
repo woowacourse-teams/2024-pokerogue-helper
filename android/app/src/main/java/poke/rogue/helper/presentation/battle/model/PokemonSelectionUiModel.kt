@@ -2,7 +2,9 @@ package poke.rogue.helper.presentation.battle.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.toUi
 
 @Parcelize
 data class PokemonSelectionUiModel(
@@ -17,7 +19,7 @@ data class PokemonSelectionUiModel(
         val DUMMY =
             listOf(
                 PokemonSelectionUiModel(
-                    id = "Bulbasaur",
+                    id = "bulbasaur",
                     dexNumber = 1,
                     name = "이상해씨",
                     frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
@@ -29,7 +31,7 @@ data class PokemonSelectionUiModel(
                         ),
                 ),
                 PokemonSelectionUiModel(
-                    id = "Charmander",
+                    id = "charmander",
                     dexNumber = 4,
                     name = "파이리",
                     frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
@@ -37,7 +39,7 @@ data class PokemonSelectionUiModel(
                     types = listOf(TypeUiModel.FIRE),
                 ),
                 PokemonSelectionUiModel(
-                    id = "Squirtle",
+                    id = "squirtle",
                     dexNumber = 7,
                     name = "꼬북이",
                     frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
@@ -45,7 +47,7 @@ data class PokemonSelectionUiModel(
                     types = listOf(TypeUiModel.WATER),
                 ),
                 PokemonSelectionUiModel(
-                    id = "Pikachu",
+                    id = "pikachu",
                     dexNumber = 25,
                     name = "피카츄",
                     frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
@@ -63,3 +65,13 @@ data class PokemonSelectionUiModel(
             )
     }
 }
+
+fun Pokemon.toSelectionUi(): PokemonSelectionUiModel =
+    PokemonSelectionUiModel(
+        id = id,
+        dexNumber = dexNumber,
+        name = name,
+        frontImageUrl = imageUrl,
+        backImageUrl = imageUrl,
+        types = types.map { it.toUi() },
+    )

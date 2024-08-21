@@ -11,12 +11,12 @@
         "image": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/image/be4b7db8-0cae-4479-85cb-286b71192756",
         "pokemonTypeResponses": [
           {
-            "pokemonTypeName": "poison",
-            "pokemonTypeLogo": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/poison.svg"
+            "typeName": "poison",
+            "typeLogo": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/poison.svg"
           },
           {
-            "pokemonTypeName": "grass",
-            "pokemonTypeLogo": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/grass.svg"
+            "typeName": "grass",
+            "typeLogo": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/grass.svg"
           }
         ]
       }

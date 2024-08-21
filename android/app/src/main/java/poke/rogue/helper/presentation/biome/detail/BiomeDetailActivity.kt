@@ -3,31 +3,47 @@ package poke.rogue.helper.presentation.biome.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
+import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
-import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
-import poke.rogue.helper.presentation.biome.BiomeDetailPagerAdapter
-import poke.rogue.helper.presentation.biome.model.BiomeUiModel
+import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
+import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.util.context.startActivity
+import poke.rogue.helper.presentation.util.context.toast
+import poke.rogue.helper.presentation.util.logClickEvent
+import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class BiomeDetailActivity :
-    ToolbarActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {
+    ErrorHandleActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {
     private lateinit var pagerAdapter: BiomeDetailPagerAdapter
-
+    private val viewModel: BiomeDetailViewModel by viewModels {
+        BiomeDetailViewModel.factory(
+            DefaultBiomeRepository.instance(),
+            analyticsLogger(),
+        )
+    }
+    override val errorViewModel: ErrorHandleViewModel
+        get() = viewModel
     override val toolbar: Toolbar
         get() = binding.toolbarBiomeDetail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val biomeId = intent.getIntExtra(BIOME_ID, 1)
+        if (savedInstanceState == null) {
+            val biomeId = intent.getStringExtra(BIOME_ID).orEmpty()
+            viewModel.init(biomeId)
+        }
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
         initAdapter()
+        initObservers()
     }
 
     private fun initAdapter() {
-        val detail = BiomeUiModel.DUMMYS[1]
-        binding.biomeUiModel = detail
-
         pagerAdapter = BiomeDetailPagerAdapter(this)
         binding.vpBiome.apply {
             adapter = pagerAdapter
@@ -39,8 +55,33 @@ class BiomeDetailActivity :
         }.attach()
     }
 
+    private fun initObservers() {
+        repeatOnStarted {
+            viewModel.uiEvent.collect { event ->
+                when (event) {
+                    is BiomeDetailUiEvent.NavigateToNextBiomeDetail -> {
+                        val biomeId = event.biomeId
+                        startActivity<BiomeDetailActivity> {
+                            putExtras(BiomeDetailActivity.intent(this@BiomeDetailActivity, biomeId))
+                            analyticsLogger().logClickEvent(NAVIGATE_TO_NEXT_BIOME_DETAIL)
+                        }
+                    }
+                    is BiomeDetailUiEvent.NavigateToPokemonDetail -> {
+                        val pokemonId = event.pokemonId
+                        toast("Pokemon ID: $pokemonId")
+                        // TODO 포켓몬 상세 화면으로 이동
+//                        startActivity<PokemonDetailActivity> {
+//                            putExtras(PokemonDetailActivity.intent(this@BiomeDetailActivity, pokemonId))
+//                        }
+                    }
+                }
+            }
+        }
+    }
+
     companion object {
-        const val BIOME_ID = "biomeId"
+        private const val BIOME_ID = "biomeId"
+        private const val NAVIGATE_TO_NEXT_BIOME_DETAIL = "Nav_Next_Biome_Detail"
 
         fun intent(
             context: Context,

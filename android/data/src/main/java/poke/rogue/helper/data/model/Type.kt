@@ -34,14 +34,13 @@ enum class Type(val id: Int, val koName: String) {
         }
 
         fun of(name: String): Type {
-            Timber.d("type name: $name")
-            if (name == "EMPTY") {
-                return NORMAL
-            }
-            if (name == "Unknown") {
-                return NORMAL
-            }
-            val type = entries.first { it.name == name.uppercase(Locale.ROOT).trim() || it.koName == name }
+            val type =
+                entries.firstOrNull {
+                    it.name == name.uppercase(Locale.ROOT).trim() || it.koName == name
+                } ?: run {
+                    Timber.e("Unknown type name: $name")
+                    NORMAL
+                }
             return type
         }
     }

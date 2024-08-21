@@ -12,6 +12,6 @@ interface AbilityService {
 
     @GET("api/v1/ability/{id}")
     suspend fun ability(
-        @Path("id") id: Long = 1102,
+        @Path("id") id: Long,
     ): ApiResponse<AbilityDetailResponse>
 }

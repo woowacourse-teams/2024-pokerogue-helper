@@ -40,7 +40,9 @@ class AbilityViewModel(
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<AbilityUiState<List<AbilityUiModel>>> =
         refreshEvent.onStart {
-            emit(Unit)
+            if (searchQuery.value.isEmpty()) {
+                emit(Unit)
+            }
         }.flatMapLatest {
             searchQuery
                 .debounce(300)
