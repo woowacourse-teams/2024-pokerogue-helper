@@ -1,5 +1,7 @@
 package poke.rogue.helper.presentation.dex.model
 
+import poke.rogue.helper.data.model.Evolution
+
 data class SingleEvolutionUiModel(
     val pokemonId: String,
     val pokemonName: String,
@@ -162,3 +164,14 @@ data class SingleEvolutionUiModel(
             )
     }
 }
+
+fun Evolution.toUi(): SingleEvolutionUiModel =
+    SingleEvolutionUiModel(
+        pokemonId = pokemonId,
+        pokemonName = pokemonName,
+        imageUrl = imageUrl,
+        depth = depth,
+        level = level,
+        item = item,
+        condition = condition,
+    )
