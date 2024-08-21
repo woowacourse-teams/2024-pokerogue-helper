@@ -1,5 +1,7 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.remote.dto.response.biom.PokemonBiomeResponse
+
 data class PokemonBiome(
     val id: String,
     val name: String,
@@ -26,3 +28,12 @@ data class PokemonBiome(
             )
     }
 }
+
+
+fun PokemonBiomeResponse.toData(): PokemonBiome = PokemonBiome(
+    id = id,
+    name = name,
+    imageUrl = image,
+)
+
+fun List<PokemonBiomeResponse>.toData(): List<PokemonBiome> = map(PokemonBiomeResponse::toData)
