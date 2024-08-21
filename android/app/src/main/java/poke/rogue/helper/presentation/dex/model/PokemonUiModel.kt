@@ -7,6 +7,7 @@ import poke.rogue.helper.presentation.type.model.toUi
 
 data class PokemonUiModel(
     val id: String = "",
+    val hashId: Long = 0,
     val dexNumber: Long = 0,
     val name: String,
     val formName: String = "",
@@ -52,4 +53,6 @@ fun Pokemon.toUi(): PokemonUiModel =
         specialDefense = specialDefense,
     )
 
-fun List<Pokemon>.toUi(): List<PokemonUiModel> = map(Pokemon::toUi)
+fun List<Pokemon>.toUi(): List<PokemonUiModel> = mapIndexed { index, pokemon ->
+    pokemon.toUi().copy(hashId = index.toLong())
+}
