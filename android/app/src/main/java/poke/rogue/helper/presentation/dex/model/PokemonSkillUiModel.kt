@@ -1,6 +1,8 @@
 package poke.rogue.helper.presentation.dex.model
 
 import poke.rogue.helper.data.model.PokemonSkill
+import poke.rogue.helper.data.model.PokemonSkill2
+import poke.rogue.helper.data.model.SkillCategory2
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
 
@@ -11,22 +13,22 @@ data class PokemonSkillUiModel(
     val power: String,
     val type: TypeUiModel,
     val accuracy: Int,
-    val category: SkillCategoryUiModel,
+    val category: SkillCategory2,
 ) {
     companion object {
         const val NO_POWER = "-"
     }
 }
 
-fun PokemonSkill.toUi(): PokemonSkillUiModel =
+fun PokemonSkill2.toUi(): PokemonSkillUiModel =
     PokemonSkillUiModel(
-        id = id.toString(),
+        id = id,
         name = name,
         level = level,
         power = if (power == PokemonSkill.NO_POWER_VALUE) PokemonSkillUiModel.NO_POWER else power.toString(),
         type = type.toUi(),
         accuracy = accuracy,
-        category = category.toUi(),
+        category = category,
     )
 
-fun List<PokemonSkill>.toUi(): List<PokemonSkillUiModel> = map(PokemonSkill::toUi)
+fun List<PokemonSkill2>.toUi(): List<PokemonSkillUiModel> = map(PokemonSkill2::toUi)
