@@ -6,6 +6,7 @@ import java.util.Objects;
 public record EvolutionResponse(
         String name,
         Integer level,
+        Integer depth,
         String item,
         String condition,
         String image

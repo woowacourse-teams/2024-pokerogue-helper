@@ -12,15 +12,14 @@ import com.pokerogue.helper.pokemon2.dto.BiomeResponse;
 import com.pokerogue.helper.pokemon2.dto.EvolutionResponse;
 import com.pokerogue.helper.pokemon2.dto.EvolutionResponses;
 import com.pokerogue.helper.pokemon2.dto.MoveResponse;
+import com.pokerogue.helper.pokemon2.dto.Pokemon2DetailResponse;
 import com.pokerogue.helper.pokemon2.dto.Pokemon2Response;
 import com.pokerogue.helper.pokemon2.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.pokemon2.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
-import com.pokerogue.helper.pokemon2.dto.Pokemon2DetailResponse;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -140,6 +139,7 @@ public class Pokemon2Service {
         ret.add(List.of(new EvolutionResponse(
                 firstPokemon.koName(),
                 1,
+                0,
                 "EMPTY",
                 "EMPTY",
                 s3Service.getPokemonImageFromS3(firstPokemon.id())
@@ -157,6 +157,7 @@ public class Pokemon2Service {
                     tmp.add(new EvolutionResponse(
                             pokemon.koName(),
                             Integer.parseInt(evolution.level()),
+                            i + 1,
                             evolution.item(),
                             evolution.condition(),
                             s3Service.getPokemonImageFromS3(pokemon.id())
@@ -212,7 +213,7 @@ public class Pokemon2Service {
 
     private List<MoveResponse> createEggMoveResponse(List<String> moves) {
         return moves.stream()
-                .map(r->moveRepository.findById(r).orElseThrow(()->new IllegalArgumentException()))
+                .map(r -> moveRepository.findById(r).orElseThrow(() -> new IllegalArgumentException()))
                 .map(move -> MoveResponse.from(move, 1,
                         s3Service.getTypeImageFromS3(moveRepository.findById(move.id())
                                 .orElseThrow(() -> new IllegalArgumentException())
