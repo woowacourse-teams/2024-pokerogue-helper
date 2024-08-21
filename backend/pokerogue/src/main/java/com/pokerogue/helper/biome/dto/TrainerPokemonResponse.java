@@ -6,13 +6,13 @@ import java.util.List;
 public record TrainerPokemonResponse(
         String trainerName,
         String trainerImage,
-        List<String> trainerTypeLogos,
+        List<BiomeTypeResponse> trainerTypeResponses,
         List<BiomePokemonResponse> pokemons
 ) {
 
     public static TrainerPokemonResponse from(
             Trainer trainer,
-            List<String> trainerTypes,
+            List<BiomeTypeResponse> trainerTypes,
             List<BiomePokemonResponse> trainerPokemons) {
         return new TrainerPokemonResponse(
                 trainer.getName(),
