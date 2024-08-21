@@ -11,12 +11,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.BattleRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.battle.model.BattleResultUiModel
+import poke.rogue.helper.presentation.battle.model.BattlePredictionUiModel
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
@@ -39,11 +40,12 @@ class BattleViewModel(
     val battleResult: StateFlow<BattleResultUiState> =
         selectedState.map {
             if (it.allSelected) {
-                BattleResultUiState.Success(BattleResultUiModel.DUMMY)
+                val result = fetchBattlePredictionResult()
+                BattleResultUiState.Success(result)
             } else {
                 BattleResultUiState.Idle
             }
-        }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), BattleResultUiState.Idle)
+        }.stateIn(viewModelScope + errorHandler, SharingStarted.WhileSubscribed(5000), BattleResultUiState.Idle)
 
     val isBattleFetchSuccessful =
         battleResult.map { it.isSuccess() }
@@ -51,6 +53,21 @@ class BattleViewModel(
 
     init {
         initWeathers()
+    }
+
+    private suspend fun fetchBattlePredictionResult(): BattlePredictionUiModel {
+        with(selectedState.value) {
+            val weatherId = weather.selectedData()?.id
+            val myPokemonId = minePokemon.selectedData()?.id
+            val mySkillId = skill.selectedData()?.id
+            val opponentPokemonId = opponentPokemon.selectedData()?.id
+            return battleRepository.calculatedBattlePrediction(
+                weatherId = "$weatherId",
+                myPokemonId = "$myPokemonId",
+                mySkillId = "$mySkillId",
+                opponentPokemonId = "$opponentPokemonId",
+            ).toUi()
+        }
     }
 
     private fun initWeathers() {

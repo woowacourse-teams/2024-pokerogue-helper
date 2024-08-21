@@ -106,8 +106,10 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
             viewModel.battleResult.collect {
                 if (it is BattleResultUiState.Success) {
                     val result = it.result
-                    binding.tvAccuracyContent.text = result.accuracy.toString()
-                    binding.tvCalculatedPowerContent.text = result.power.toString()
+                    binding.tvPowerContent.text = result.power
+                    binding.tvMultiplierContent.text = result.multiplier
+                    binding.tvCalculatedPowerContent.text = result.calculatedResult
+                    binding.tvAccuracyContent.text = getString(R.string.battle_accuracy_title, result.accuracy)
                 }
             }
         }
