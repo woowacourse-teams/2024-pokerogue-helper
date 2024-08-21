@@ -6,6 +6,7 @@ import poke.rogue.helper.data.exception.getOrThrow
 import poke.rogue.helper.data.exception.onFailure
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonDetail
+import poke.rogue.helper.data.model.PokemonDetail2
 import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse2
 import poke.rogue.helper.remote.injector.ServiceModule
@@ -39,6 +40,14 @@ class RemoteDexDataSource(
             }
             .getOrThrow()
             .toData(id.toLong())
+
+    suspend fun pokemon2(id: String): PokemonDetail2 =
+        pokeDexService.pokemon2(id)
+            .onFailure {
+                logger.logError(throwable, "pokeDexService - pokemon2($id) 에서 발생")
+            }
+            .getOrThrow()
+            .toData(id)
 
     companion object {
         private var instance: RemoteDexDataSource? = null
