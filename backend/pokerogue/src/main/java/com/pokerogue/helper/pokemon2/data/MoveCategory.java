@@ -28,7 +28,6 @@ public enum MoveCategory {
         return Arrays.stream(values())
                 .filter(category -> category.id.equals(id))
                 .findAny()
-                .orElseThrow()
-                ;
+                .orElseThrow();
     }
 }

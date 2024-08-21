@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum Type {
+
     UNKNOWN("UNKNOWN", "Unknown"),
     NORMAL("NORMAL", "노말"),
     FIGHTING("FIGHTING", "격투"),
@@ -44,7 +45,6 @@ public enum Type {
                         .equals(id)
                 )
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 타입 아이디입니다"))
-                ;
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 타입 아이디입니다"));
     }
 }

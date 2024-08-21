@@ -25,9 +25,6 @@ public record Pokemon2Response(
         Integer specialDefense
 ) {
     public static Pokemon2Response from(Pokemon pokemon, String image, String typeLogo1, String typeLogo2) {
-        List<Integer> stats = Arrays.stream(pokemon.baseStats().split(","))
-                .map(Integer::parseInt)
-                .toList();
 
         return new Pokemon2Response(
                 pokemon.id(),
@@ -39,14 +36,14 @@ public record Pokemon2Response(
                         new PokemonTypeResponse(Type.findById(pokemon.type1()).getName(), typeLogo1),
                         new PokemonTypeResponse(Type.findById(pokemon.type2()).getName(), typeLogo2)
                 ),
-                Integer.parseInt(pokemon.generation()),
-                Integer.parseInt(pokemon.baseTotal()),
-                stats.get(0),
-                stats.get(1),
-                stats.get(2),
-                stats.get(3),
-                stats.get(4),
-                stats.get(5)
+                pokemon.generation(),
+                pokemon.baseTotal(),
+                pokemon.hp(),
+                pokemon.attack(),
+                pokemon.defense(),
+                pokemon.specialAttack(),
+                pokemon.specialDefense(),
+                pokemon.speed()
         );
     }
 }

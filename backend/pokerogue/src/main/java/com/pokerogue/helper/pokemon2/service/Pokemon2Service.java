@@ -89,9 +89,6 @@ public class Pokemon2Service {
         List<MoveResponse> moveResponse = createMoveResponse(pokemon.moves());
         List<MoveResponse> eggMoveResponse = createEggMoveResponse(pokemon.eggMoves());
         List<BiomeResponse> biomeResponse = createBiomeResponse(pokemon.biomes());
-        List<Integer> stats = Arrays.stream(pokemon.baseStats().split(","))
-                .map(Integer::parseInt)
-                .toList();
 
         return new Pokemon2DetailResponse(
                 pokemon.id(),
@@ -100,19 +97,19 @@ public class Pokemon2Service {
                 s3Service.getPokemonImageFromS3(pokemon.id()),
                 pokemonTypeResponses,
                 pokemonAbilityResponses,
-                Integer.parseInt(pokemon.baseTotal()),
-                stats.get(0),
-                stats.get(1),
-                stats.get(2),
-                stats.get(3),
-                stats.get(4),
-                stats.get(5),
-                Boolean.valueOf(pokemon.legendary()),
-                Boolean.valueOf(pokemon.subLegendary()),
-                Boolean.valueOf(pokemon.mythical()),
-                Boolean.valueOf(pokemon.canChangeForm()),
-                Double.parseDouble(pokemon.weight()),
-                Double.parseDouble(pokemon.height()),
+                pokemon.baseTotal(),
+                pokemon.hp(),
+                pokemon.attack(),
+                pokemon.defense(),
+                pokemon.specialAttack(),
+                pokemon.specialDefense(),
+                pokemon.speed(),
+                pokemon.legendary(),
+                pokemon.subLegendary(),
+                pokemon.mythical(),
+                pokemon.canChangeForm(),
+                pokemon.weight(),
+                pokemon.height(),
                 evolutionResponses,
                 moveResponse,
                 eggMoveResponse,
@@ -192,6 +189,7 @@ public class Pokemon2Service {
     private List<PokemonTypeResponse> createTypeResponse(Pokemon pokemon) {
         Type type1 = Type.findById(pokemon.type1());
         Type type2 = Type.findById(pokemon.type2());
+
         return List.of(
                 new PokemonTypeResponse(type1.getName(), s3Service.getTypeImageFromS3(type1.getId())),
                 new PokemonTypeResponse(type2.getName(), s3Service.getTypeImageFromS3(type2.getId()))

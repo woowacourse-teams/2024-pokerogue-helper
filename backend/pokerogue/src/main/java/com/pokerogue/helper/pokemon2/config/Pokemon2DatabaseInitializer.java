@@ -146,7 +146,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 .keySet()
                 .stream()
                 .sorted(Comparator.comparing(r -> pokemon2Repository.findById(r)
-                        .orElseThrow(()-> new IllegalArgumentException(""))
+                        .orElseThrow(() -> new IllegalArgumentException(""))
                         .speciesId()
                 ))
                 .toList();
@@ -258,6 +258,13 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         for (int i = 0; i < moves.size(); i += 2) {
             moves.set(i, regularize(moves.get(i)));
         }
+
+        List<Integer> stats = Arrays.stream(regularize(values.get(18)).split(","))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .toList();
+
+
         return new Pokemon(
                 regularize(values.get(0)),
                 regularize(values.get(1)),
@@ -270,16 +277,21 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 regularize(values.get(8)),
                 regularize(values.get(9)),
                 regularize(values.get(10)),
-                regularize(values.get(11)),
-                regularize(values.get(12)),
-                regularize(values.get(13)),
-                regularize(values.get(14)),
-                regularize(values.get(15)),
+                Integer.valueOf(regularize(values.get(11))),
+                Boolean.valueOf(regularize(values.get(12))),
+                Boolean.valueOf(regularize(values.get(13))),
+                Boolean.valueOf(regularize(values.get(14))),
+                Boolean.valueOf(regularize(values.get(15))),
                 Arrays.stream(regularize(values.get(16)).split(",")).toList(),
-                regularize(values.get(17)),
-                regularize(values.get(18)),
-                regularize(values.get(19)),
-                regularize(values.get(20)),
+                Integer.parseInt(values.get(17)),
+                stats.get(0),
+                stats.get(1),
+                stats.get(2),
+                stats.get(3),
+                stats.get(4),
+                stats.get(5),
+                Double.parseDouble(values.get(19)),
+                Double.parseDouble(values.get(20)),
                 Arrays.stream(regularize(values.get(21)).split(",")).toList(),
                 moves,
                 Arrays.stream(regularize(values.get(23)).split(",")).toList()
