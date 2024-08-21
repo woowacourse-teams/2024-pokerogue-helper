@@ -1,5 +1,7 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonSkillResponse
+
 data class PokemonSkill(
     val id: String,
     val name: String,
@@ -331,3 +333,29 @@ data class PokemonSkill(
             )
     }
 }
+
+data class PokemonSkill2(
+    val id: String,
+    val name: String,
+    val level: Int,
+    val power: Int,
+    val type: Type,
+    val accuracy: Int,
+    val category: SkillCategory2,
+)
+
+fun PokemonSkillResponse.toData(): PokemonSkill2 =
+    PokemonSkill2(
+        id = id,
+        name = name,
+        level = level,
+        power = power,
+        type = Type.of(type),
+        accuracy = accuracy,
+        category = SkillCategory2(
+            category,
+            categoryLogo
+        ),
+    )
+
+fun List<PokemonSkillResponse>.toData(): List<PokemonSkill2> = map(PokemonSkillResponse::toData)
