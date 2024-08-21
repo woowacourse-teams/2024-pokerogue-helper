@@ -3,6 +3,8 @@ package poke.rogue.helper.remote.dto.response.pokemon
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
+import poke.rogue.helper.remote.dto.response.ability.AbilityResponse2
+import poke.rogue.helper.remote.dto.response.biom.BiomeResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 @Serializable
@@ -26,4 +28,39 @@ data class PokemonDetailResponse(
     val specialAttack: Int,
     val specialDefense: Int,
     val speed: Int,
+)
+
+@Serializable
+data class PokemonDetailResponse2(
+    val id: String,
+    @SerialName("pokedexNumber")
+    val dexNumber: Long,
+    val name: String,
+    @SerialName("pokemonImage")
+    val imageUrl: String,
+    @SerialName("pokemonTypeResponses")
+    val types: List<PokemonTypeResponse>,
+    @SerialName("pokemonAbilityResponses")
+    val abilities: List<AbilityResponse2>,
+    val totalStats: Int,
+    val hp: Int,
+    val attack: Int,
+    val defense: Int,
+    val specialAttack: Int,
+    val specialDefense: Int,
+    val speed: Int,
+    val evolutions: List<EvolutionResponse>,
+    @SerialName("eggMoves")
+    val eggSkills: List<PokemonSkillResponse>,
+    @SerialName("moves")
+    val selfLearnSkills: List<PokemonSkillResponse>,
+    // double?
+    val weight: Float,
+    // double?
+    val height: Float,
+    val biomes: List<BiomeResponse>,
+    val mythical: Boolean,
+    val subLegendary: Boolean,
+    val legendary: Boolean,
+    val canChangeForm: Boolean,
 )
