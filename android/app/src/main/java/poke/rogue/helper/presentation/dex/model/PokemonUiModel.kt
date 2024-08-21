@@ -53,6 +53,7 @@ fun Pokemon.toUi(): PokemonUiModel =
         specialDefense = specialDefense,
     )
 
-fun List<Pokemon>.toUi(): List<PokemonUiModel> = mapIndexed { index, pokemon ->
-    pokemon.toUi().copy(hashId = index.toLong())
-}
+fun List<Pokemon>.toUi(): List<PokemonUiModel> =
+    mapIndexed { index, pokemon ->
+        pokemon.toUi().copy(hashId = index.toLong())
+    }
