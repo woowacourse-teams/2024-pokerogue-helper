@@ -67,6 +67,9 @@
     <string name="pokemon_detail_skill_type">타입</string>
     <string name="pokemon_detail_skill_category">분류</string>
 
+    <string name="pokemon_detail_egg_skill_title">알 기술</string>
+    <string name="pokemon_detail_self_learn_skill_title">자력으로 배우는 기술</string>
+
     <!--    pokemon detail information-->
     <string name="pokemon_detail_information_weight">체중</string>
     <string name="pokemon_detail_information_height">키</string>
