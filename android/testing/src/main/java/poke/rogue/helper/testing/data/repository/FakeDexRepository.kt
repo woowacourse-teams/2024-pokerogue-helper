@@ -39,21 +39,23 @@ class FakeDexRepository : DexRepository {
 
     override suspend fun pokemonDetail(id: String): PokemonDetail = DUMMY_POKEMON_DETAIL
 
-    override suspend fun pokemonDetail2(id: String): PokemonDetail2 = PokemonDetail2(
-        pokemon = Pokemon.DUMMY,
-        abilities = DUMMY_POKEMON_DETAIL_ABILTIES,
-        stats = Stat.DUMMY_STATS,
-        pokemonCategory = PokemonCategory.EMPTY,
-        evolutions = Evolution.DUMMY_PICAKCHU_EVOLUTION,
-        skills = PokemonDetailSkills2(
-            selfLearn = PokemonSkill2.FAKE_SELF_LEARN_SKILLS,
-            eggLearn = PokemonSkill2.FAKE_EGG_LEARN_SKILLS,
-            tmLearn = PokemonSkill2.FAKE_TM_LEARN_SKILLS,
-        ),
-        biomes = PokemonBiome.DUMMYS,
-        height = 0.7,
-        weight = 6.9,
-    )
+    override suspend fun pokemonDetail2(id: String): PokemonDetail2 =
+        PokemonDetail2(
+            pokemon = Pokemon.DUMMY,
+            abilities = DUMMY_POKEMON_DETAIL_ABILTIES,
+            stats = Stat.DUMMY_STATS,
+            pokemonCategory = PokemonCategory.EMPTY,
+            evolutions = Evolution.DUMMY_PICAKCHU_EVOLUTION,
+            skills =
+                PokemonDetailSkills2(
+                    selfLearn = PokemonSkill2.FAKE_SELF_LEARN_SKILLS,
+                    eggLearn = PokemonSkill2.FAKE_EGG_LEARN_SKILLS,
+                    tmLearn = PokemonSkill2.FAKE_TM_LEARN_SKILLS,
+                ),
+            biomes = PokemonBiome.DUMMYS,
+            height = 0.7,
+            weight = 6.9,
+        )
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,

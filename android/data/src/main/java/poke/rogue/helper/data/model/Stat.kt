@@ -5,35 +5,36 @@ data class Stat(
     val amount: Int,
 ) {
     companion object {
-        val DUMMY_STATS = listOf(
-            Stat(
-                name = "hp",
-                amount = 45,
-            ),
-            Stat(
-                name = "attack",
-                amount = 49,
-            ),
-            Stat(
-                name = "defense",
-                amount = 49,
-            ),
-            Stat(
-                name = "specialAttack",
-                amount = 65,
-            ),
-            Stat(
-                name = "specialDefense",
-                amount = 65,
-            ),
-            Stat(
-                name = "speed",
-                amount = 45,
-            ),
-            Stat(
-                name = "totalStats",
-                amount = 318,
+        val DUMMY_STATS =
+            listOf(
+                Stat(
+                    name = "hp",
+                    amount = 45,
+                ),
+                Stat(
+                    name = "attack",
+                    amount = 49,
+                ),
+                Stat(
+                    name = "defense",
+                    amount = 49,
+                ),
+                Stat(
+                    name = "specialAttack",
+                    amount = 65,
+                ),
+                Stat(
+                    name = "specialDefense",
+                    amount = 65,
+                ),
+                Stat(
+                    name = "speed",
+                    amount = 45,
+                ),
+                Stat(
+                    name = "totalStats",
+                    amount = 318,
+                ),
             )
-        )
     }
 }

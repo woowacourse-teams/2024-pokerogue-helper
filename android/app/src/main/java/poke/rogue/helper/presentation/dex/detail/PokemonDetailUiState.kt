@@ -24,7 +24,7 @@ sealed interface PokemonDetailUiState {
     data object IsLoading : PokemonDetailUiState
 }
 
-sealed interface PokemonDetailUiState2{
+sealed interface PokemonDetailUiState2 {
     data class Success(
         val pokemon: PokemonUiModel,
         val stats: List<StatUiModel>,
@@ -32,9 +32,9 @@ sealed interface PokemonDetailUiState2{
         val skills: PokemonDetailSkills2,
         val height: Float,
         val weight: Float,
-    ): PokemonDetailUiState2
+    ) : PokemonDetailUiState2
 
-    data object IsLoading: PokemonDetailUiState2
+    data object IsLoading : PokemonDetailUiState2
 }
 
 fun PokemonDetail.toUi(): PokemonDetailUiState.Success =

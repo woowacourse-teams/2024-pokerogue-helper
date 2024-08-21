@@ -163,7 +163,6 @@ data class Evolution(
                 depth = 1,
             )
 
-
         val DUMMY_PICAKCHU_EVOLUTION =
             listOf(
                 DUMMY_PICHU,
@@ -192,7 +191,6 @@ data class Evolution(
                 DUMMY_GLACEON,
             )
     }
-
 }
 
 fun EvolutionResponse.toData(): Evolution =
@@ -206,5 +204,4 @@ fun EvolutionResponse.toData(): Evolution =
         condition = condition,
     )
 
-fun List<EvolutionResponse>.toData(): List<Evolution> =
-    map(EvolutionResponse::toData)
+fun List<EvolutionResponse>.toData(): List<Evolution> = map(EvolutionResponse::toData)

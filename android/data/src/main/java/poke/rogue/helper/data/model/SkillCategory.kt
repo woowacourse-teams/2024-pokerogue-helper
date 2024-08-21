@@ -29,7 +29,7 @@ data class SkillCategory2(
     val name: String,
     val logo: String,
 ) {
-companion object {
+    companion object {
         val physicalAttackSkill =
             SkillCategory2(
                 name = "물리",

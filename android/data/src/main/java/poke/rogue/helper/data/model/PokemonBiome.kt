@@ -29,11 +29,11 @@ data class PokemonBiome(
     }
 }
 
-
-fun PokemonBiomeResponse.toData(): PokemonBiome = PokemonBiome(
-    id = id,
-    name = name,
-    imageUrl = image,
-)
+fun PokemonBiomeResponse.toData(): PokemonBiome =
+    PokemonBiome(
+        id = id,
+        name = name,
+        imageUrl = image,
+    )
 
 fun List<PokemonBiomeResponse>.toData(): List<PokemonBiome> = map(PokemonBiomeResponse::toData)
