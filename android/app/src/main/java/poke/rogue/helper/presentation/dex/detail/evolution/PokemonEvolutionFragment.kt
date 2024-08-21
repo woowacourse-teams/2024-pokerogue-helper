@@ -13,10 +13,10 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding>(R.layout.fragment_pokemon_evolution) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModels()
 
-    private val evolutionDepth0Adapter by lazy { EvolutionAdapter() }
-    private val evolutionDepth1Adapter by lazy { EvolutionAdapter() }
-    private val evolutionDepth2Adapter by lazy { EvolutionAdapter() }
-    private val evolutionDepth3Adapter by lazy { EvolutionAdapter() }
+    private val evolutionDepth0Adapter by lazy { EvolutionAdapter(activityViewModel) }
+    private val evolutionDepth1Adapter by lazy { EvolutionAdapter(activityViewModel) }
+    private val evolutionDepth2Adapter by lazy { EvolutionAdapter(activityViewModel) }
+    private val evolutionDepth3Adapter by lazy { EvolutionAdapter(activityViewModel) }
 
     override fun onViewCreated(
         view: View,
