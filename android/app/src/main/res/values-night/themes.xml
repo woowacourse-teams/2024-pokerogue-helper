@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.PokeRogueHelper" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/black</item> <!-- 우리 앱의 first color-->

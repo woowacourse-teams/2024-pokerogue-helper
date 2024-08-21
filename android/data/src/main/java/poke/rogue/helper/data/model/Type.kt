@@ -31,9 +31,13 @@ enum class Type(val id: Int) {
         fun fromId(id: Int): Type {
             return typeById[id] ?: throw IllegalArgumentException("Unknown type ID: $id")
         }
+
+        fun of(name: String): Type {
+            return valueOf(name.uppercase(Locale.ROOT))
+        }
     }
 }
 
-fun PokemonTypeResponse.toData(): Type = Type.valueOf(pokemonTypeName.uppercase(Locale.ROOT))
+fun PokemonTypeResponse.toData(): Type = Type.of(pokemonTypeName)
 
 fun List<PokemonTypeResponse>.toData(): List<Type> = map(PokemonTypeResponse::toData)

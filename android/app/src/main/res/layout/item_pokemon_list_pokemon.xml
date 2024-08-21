@@ -9,6 +9,10 @@
             type="poke.rogue.helper.presentation.dex.model.PokemonUiModel" />
 
         <variable
+            name="spec"
+            type="poke.rogue.helper.ui.component.PokeChip.Spec" />
+
+        <variable
             name="listener"
             type="poke.rogue.helper.presentation.dex.PokemonListNavigateHandler" />
     </data>
@@ -18,6 +22,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_pokemon_corner_radius">
+
+        <poke.rogue.helper.ui.component.PokeChip
+            pokeChipSpec="@{spec}"
+            visible="@{pokemon.displayStat != 0}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:containerColor="@color/lemon"
+            tools:label="231"
+            tools:labelColor="@color/poke_grey_80" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_item_poketmon_poketmon"

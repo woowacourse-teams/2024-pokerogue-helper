@@ -4,6 +4,7 @@ import android.app.Application
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
+import poke.rogue.helper.data.repository.DefaultDexRepository
 import timber.log.Timber
 
 class PokeRogueHelperApp : Application() {
@@ -11,6 +12,7 @@ class PokeRogueHelperApp : Application() {
         super.onCreate()
         initTimber()
         initFirebase()
+        DefaultDexRepository.init(this)
     }
 
     private fun initTimber() {

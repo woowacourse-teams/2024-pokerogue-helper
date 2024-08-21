@@ -26,8 +26,15 @@ object RetrofitModule {
     }
 
     private fun json(): Json =
-        Json {
-            coerceInputValues = true
+        if (BuildConfig.DEBUG) {
+            Json {
+                coerceInputValues = true
+            }
+        } else {
+            Json {
+                ignoreUnknownKeys = true
+                coerceInputValues = true
+            }
         }
 
     private fun jsonConverterFactory(json: Json): Converter.Factory {
@@ -54,8 +61,8 @@ object RetrofitModule {
                     client
                 }
             }
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .build()
 
