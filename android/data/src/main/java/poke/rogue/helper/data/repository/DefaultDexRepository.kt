@@ -5,6 +5,7 @@ import poke.rogue.helper.data.datasource.LocalDexDataSource
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonDetail
+import poke.rogue.helper.data.model.PokemonDetail2
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonSort
 import poke.rogue.helper.stringmatcher.has
@@ -15,6 +16,7 @@ class DefaultDexRepository(
 ) : DexRepository {
     private var cachedPokemons: List<Pokemon> = emptyList()
     private var cachedPokemonDetails: MutableMap<String, PokemonDetail> = mutableMapOf()
+    private var cachedPokemonDetails2: MutableMap<String, PokemonDetail2> = mutableMapOf()
 
     override suspend fun warmUp() {
         if (localPokemonDataSource.pokemons().isEmpty()) {
@@ -49,6 +51,16 @@ class DefaultDexRepository(
         }
         return remotePokemonDataSource.pokemon(id).also {
             cachedPokemonDetails[id] = it
+        }
+    }
+
+    override suspend fun pokemonDetail2(id: String): PokemonDetail2 {
+        val cached = cachedPokemonDetails2[id]
+        if (cached != null) {
+            return cached
+        }
+        return remotePokemonDataSource.pokemon2(id).also {
+            cachedPokemonDetails2[id] = it
         }
     }
 

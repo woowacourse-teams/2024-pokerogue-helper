@@ -4,6 +4,7 @@ import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonCategory
 import poke.rogue.helper.data.model.PokemonDetail
+import poke.rogue.helper.data.model.PokemonDetail2
 import poke.rogue.helper.data.model.PokemonDetailAbility
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonFilter
@@ -33,6 +34,10 @@ class FakeDexRepository : DexRepository {
     }
 
     override suspend fun pokemonDetail(id: String): PokemonDetail = DUMMY_POKEMON_DETAIL
+
+    override suspend fun pokemonDetail2(id: String): PokemonDetail2 {
+        TODO("Not yet implemented")
+    }
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
