@@ -3,7 +3,7 @@ package poke.rogue.helper.remote.dto.response.pokemon
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
-import poke.rogue.helper.remote.dto.response.ability.AbilityResponse2
+import poke.rogue.helper.remote.dto.response.ability.PokemonAbilityResponse
 import poke.rogue.helper.remote.dto.response.biom.PokemonBiomeResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
@@ -41,7 +41,7 @@ data class PokemonDetailResponse2(
     @SerialName("pokemonTypeResponses")
     val types: List<PokemonTypeResponse>,
     @SerialName("pokemonAbilityResponses")
-    val abilities: List<AbilityResponse2>,
+    val abilities: List<PokemonAbilityResponse>,
     val totalStats: Int,
     val hp: Int,
     val attack: Int,
