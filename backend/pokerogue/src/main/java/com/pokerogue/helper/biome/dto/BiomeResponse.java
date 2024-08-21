@@ -7,11 +7,11 @@ public record BiomeResponse(
         String id,
         String name,
         String image,
-        List<String> pokemonTypeLogos,
-        List<String> trainerTypeLogos
+        List<BiomeTypeResponse> pokemonTypeResponses,
+        List<BiomeTypeResponse> trainerTypeResponses
 ) {
 
-    public static BiomeResponse from(Biome biome, List<String> pokemonTypeLogos, List<String> trainerTypeLogos) {
+    public static BiomeResponse of(Biome biome, List<BiomeTypeResponse> pokemonTypeLogos, List<BiomeTypeResponse> trainerTypeLogos) {
         return new BiomeResponse(
                 biome.getId(),
                 biome.getName(),
