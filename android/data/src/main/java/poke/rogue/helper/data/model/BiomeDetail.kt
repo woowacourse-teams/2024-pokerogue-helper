@@ -13,7 +13,7 @@ data class BiomeDetail(
     val wildPokemons: List<WildPokemon>,
     val bossPokemons: List<BossPokemon>,
     val gymPokemons: List<GymPokemon>,
-    val nextBiomes: List<BiomeNextBiome>,
+    val nextBiomes: List<NextBiome>,
 )
 
 fun BiomeDetailResponse.toData(): BiomeDetail =

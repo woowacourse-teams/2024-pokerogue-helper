@@ -47,11 +47,27 @@ fun PokemonResponse.toData(): Pokemon =
         types = types.map(PokemonTypeResponse::toData),
     )
 
-fun PokemonResponse2.toData(): Pokemon =
-    Pokemon(
+fun PokemonResponse2.toData(): Pokemon {
+    // TODO : 바꿔야 함 - 임시로 걍 바꿈
+    val newFormName =
+        formName.split("_").map {
+            it[0].uppercase() + it.substring(1).lowercase()
+        }.joinToString("_")
+
+    val formattedName =
+        if (formName.isBlank() || formName.trim().lowercase() == "empty" || formName.trim()
+                .lowercase() == "normal"
+        ) {
+            name
+        } else {
+            "$name-$newFormName"
+        }
+
+    return Pokemon(
         id = id,
         dexNumber = pokedexNumber,
-        name = name,
+        name = formattedName,
+        formName = formName,
         imageUrl = image,
         types = types.map(PokemonTypeResponse::toData),
         generation = PokemonGeneration.of(generation),
@@ -63,6 +79,7 @@ fun PokemonResponse2.toData(): Pokemon =
         specialAttack = specialAttack,
         specialDefense = specialDefense,
     )
+}
 
 fun PokemonEntity.toData(): Pokemon =
     Pokemon(

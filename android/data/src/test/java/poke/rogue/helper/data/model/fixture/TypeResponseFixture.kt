@@ -11,8 +11,8 @@ import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
  */
 fun pokemonTypeResponse(typeName: String) =
     PokemonTypeResponse(
-        pokemonTypeName = typeName,
-        pokemonTypeLogo = "logo $typeName",
+        typeName = typeName,
+        typeLogo = "logo $typeName",
     )
 
 /**

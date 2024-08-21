@@ -11,6 +11,8 @@ data class PokemonResponse(
     @SerialName("koName")
     val name: String,
     val image: String,
+    @SerialName("formName")
+    val formName: String = "",
     @SerialName("pokemonTypeResponses")
     val types: List<PokemonTypeResponse>,
 )

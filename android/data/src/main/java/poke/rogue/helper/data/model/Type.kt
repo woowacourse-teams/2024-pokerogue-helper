@@ -1,28 +1,29 @@
 package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
+import timber.log.Timber
 import java.util.Locale
 
-enum class Type(val id: Int) {
-    NORMAL(0),
-    FIRE(1),
-    WATER(2),
-    ELECTRIC(3),
-    GRASS(4),
-    ICE(5),
-    FIGHTING(6),
-    POISON(7),
-    GROUND(8),
-    FLYING(9),
-    PSYCHIC(10),
-    BUG(11),
-    ROCK(12),
-    GHOST(13),
-    DRAGON(14),
-    DARK(15),
-    STEEL(16),
-    FAIRY(17),
-    STELLAR(18),
+enum class Type(val id: Int, val koName: String) {
+    NORMAL(0, "노말"),
+    FIRE(1, "불꽃"),
+    WATER(2, "물"),
+    ELECTRIC(3, "전기"),
+    GRASS(4, "풀"),
+    ICE(5, "얼음"),
+    FIGHTING(6, "격투"),
+    POISON(7, "독"),
+    GROUND(8, "땅"),
+    FLYING(9, "비행"),
+    PSYCHIC(10, "에스퍼"),
+    BUG(11, "벌레"),
+    ROCK(12, "바위"),
+    GHOST(13, "고스트"),
+    DRAGON(14, "드래곤"),
+    DARK(15, "악"),
+    STEEL(16, "강철"),
+    FAIRY(17, "페어리"),
+    STELLAR(18, "스텔라"),
     ;
 
     companion object {
@@ -33,11 +34,18 @@ enum class Type(val id: Int) {
         }
 
         fun of(name: String): Type {
-            return valueOf(name.uppercase(Locale.ROOT))
+            val type =
+                entries.firstOrNull {
+                    it.name == name.uppercase(Locale.ROOT).trim() || it.koName == name
+                } ?: run {
+                    Timber.e("Unknown type name: $name")
+                    NORMAL
+                }
+            return type
         }
     }
 }
 
-fun PokemonTypeResponse.toData(): Type = Type.of(pokemonTypeName)
+fun PokemonTypeResponse.toData(): Type = Type.of(typeName)
 
 fun List<PokemonTypeResponse>.toData(): List<Type> = map(PokemonTypeResponse::toData)

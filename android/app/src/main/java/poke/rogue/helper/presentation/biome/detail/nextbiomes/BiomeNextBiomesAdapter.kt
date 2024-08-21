@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemBiomeNextBiomesBinding
+import poke.rogue.helper.presentation.biome.detail.BiomeDetailHandler
 import poke.rogue.helper.presentation.biome.model.NextBiomeUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class BiomeNextBiomesAdapter :
+class BiomeNextBiomesAdapter(private val onClickNextBiome: BiomeDetailHandler) :
     ListAdapter<NextBiomeUiModel, BiomeNextBiomesViewHolder>(biomeComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -19,6 +20,7 @@ class BiomeNextBiomesAdapter :
                 parent,
                 false,
             ),
+            onClickNextBiome,
         )
     }
 

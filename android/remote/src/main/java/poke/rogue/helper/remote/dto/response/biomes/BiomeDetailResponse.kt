@@ -13,7 +13,7 @@ class BiomeDetailResponse(
     val bossPokemons: List<BossPokemonResponse>,
     @SerialName("trainerPokemons")
     val gymPokemons: List<GymPokemonResponse>,
-    @SerialName("map")
+    @SerialName("nextBiomes")
     val nextBiomes: List<NextBiomesResponse>,
 )
 
@@ -44,8 +44,8 @@ data class GymPokemonResponse(
     val gymLeaderName: String,
     @SerialName("trainerImage")
     val gymLeaderImage: String,
-    @SerialName("trainerTypeLogos")
-    val gymLeaderLogos: List<String>,
+    @SerialName("trainerTypeResponses")
+    val gymLeaderTypeLogos: List<PokemonTypeResponse>,
     val pokemons: List<BiomePokemonResponse>,
 )
 
@@ -54,5 +54,10 @@ data class NextBiomesResponse(
     val id: String,
     val name: String,
     val image: String,
+    @SerialName("pokemonTypeResponses")
+    val pokemonTypes: List<PokemonTypeResponse>,
+    @SerialName("trainerTypeResponses")
+    val gymLeaderTypes: List<PokemonTypeResponse>,
+    @SerialName("percent")
     val probability: Double,
 )

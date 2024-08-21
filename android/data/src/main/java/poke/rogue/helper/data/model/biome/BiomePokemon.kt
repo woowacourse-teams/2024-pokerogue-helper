@@ -7,7 +7,7 @@ import poke.rogue.helper.remote.dto.response.biomes.BiomePokemonResponse
 data class BiomePokemon(
     val id: String,
     val name: String,
-    val image: String,
+    val imageUrl: String,
     val types: List<Type>,
 )
 
@@ -15,7 +15,7 @@ fun BiomePokemonResponse.toData(): BiomePokemon =
     BiomePokemon(
         id = id,
         name = name,
-        image = image,
+        imageUrl = image,
         types = types.toData(),
     )
 

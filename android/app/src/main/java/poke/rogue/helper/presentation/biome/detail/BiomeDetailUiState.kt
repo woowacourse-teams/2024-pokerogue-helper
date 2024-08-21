@@ -1,11 +1,17 @@
-package poke.rogue.helper.presentation.biome.model
+package poke.rogue.helper.presentation.biome.detail
 
+import poke.rogue.helper.data.model.BiomeDetail
+import poke.rogue.helper.presentation.biome.model.BiomePokemonUiModel
+import poke.rogue.helper.presentation.biome.model.BiomeUiModel
+import poke.rogue.helper.presentation.biome.model.NextBiomeUiModel
+import poke.rogue.helper.presentation.biome.model.toUi
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 
-class BiomeDetailUiModel(
-    val id: Long,
+class BiomeDetailUiState(
+    val id: String,
     val name: String,
+    val imageUrl: String,
     val wildPokemons: List<BiomePokemonUiModel>,
     val bossPokemons: List<BiomePokemonUiModel>,
     val gymPokemons: List<BiomePokemonUiModel>,
@@ -17,15 +23,26 @@ class BiomeDetailUiModel(
 
         fun dummyUrl(id: Long) = "$DUMMY_IMAGE_URL$id.png"
 
-        val DUMMY: BiomeDetailUiModel =
-            BiomeDetailUiModel(
-                id = 1,
+        val Default: BiomeDetailUiState =
+            BiomeDetailUiState(
+                id = "NO_ID",
                 name = "풀숲",
+                imageUrl = "",
+                wildPokemons = emptyList(),
+                bossPokemons = emptyList(),
+                gymPokemons = emptyList(),
+                nextBiomes = emptyList(),
+            )
+        val DUMMY: BiomeDetailUiState =
+            BiomeDetailUiState(
+                id = "1",
+                name = "풀숲",
+                imageUrl = "https://wiki.pokerogue.net/_media/ko:biomes:ko_grassy_fields_bg.png?w=200&tok=745c5b",
                 wildPokemons =
                     listOf(
                         BiomePokemonUiModel(
                             grade = "일반",
-                            typeUrl = null,
+                            type = null,
                             gymLeaderUrl = null,
                             pokemons =
                                 (1..9).map {
@@ -39,7 +56,7 @@ class BiomeDetailUiModel(
                         ),
                         BiomePokemonUiModel(
                             grade = "희귀",
-                            typeUrl = null,
+                            type = null,
                             gymLeaderUrl = null,
                             pokemons =
                                 (10..21).map {
@@ -53,7 +70,7 @@ class BiomeDetailUiModel(
                         ),
                         BiomePokemonUiModel(
                             grade = "전설",
-                            typeUrl = null,
+                            type = null,
                             gymLeaderUrl = null,
                             pokemons =
                                 (22..24).map {
@@ -70,7 +87,7 @@ class BiomeDetailUiModel(
                     listOf(
                         BiomePokemonUiModel(
                             grade = "일반",
-                            typeUrl = null,
+                            type = null,
                             gymLeaderUrl = null,
                             pokemons =
                                 (990..1005).map {
@@ -84,7 +101,7 @@ class BiomeDetailUiModel(
                         ),
                         BiomePokemonUiModel(
                             grade = "희귀",
-                            typeUrl = null,
+                            type = null,
                             gymLeaderUrl = null,
                             pokemons =
                                 (1006..1011).map {
@@ -99,7 +116,7 @@ class BiomeDetailUiModel(
                         BiomePokemonUiModel(
                             grade = "전설",
                             gymLeaderUrl = null,
-                            typeUrl = null,
+                            type = null,
                             pokemons =
                                 (1012..1015).map {
                                     PokemonUiModel(
@@ -116,7 +133,7 @@ class BiomeDetailUiModel(
                         BiomePokemonUiModel(
                             grade = "심지박사",
                             gymLeaderUrl = "https://wiki.pokerogue.net/_media/trainers:opal.png",
-                            typeUrl = "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/fairy.svg",
+                            type = TypeUiModel.FAIRY,
                             pokemons =
                                 (871..874).map {
                                     PokemonUiModel(
@@ -130,7 +147,7 @@ class BiomeDetailUiModel(
                         BiomePokemonUiModel(
                             grade = "꼬상조교",
                             gymLeaderUrl = "https://wiki.pokerogue.net/_media/trainers:bede.png",
-                            typeUrl = "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/dragon.svg",
+                            type = TypeUiModel.FAIRY,
                             pokemons =
                                 (901..905).map {
                                     PokemonUiModel(
@@ -144,7 +161,7 @@ class BiomeDetailUiModel(
                         BiomePokemonUiModel(
                             grade = "비토학생",
                             gymLeaderUrl = "https://wiki.pokerogue.net/_media/trainers:valerie.png",
-                            typeUrl = "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/type/poison.svg",
+                            type = TypeUiModel.FAIRY,
                             pokemons =
                                 (100..105).map {
                                     PokemonUiModel(
@@ -175,14 +192,13 @@ class BiomeDetailUiModel(
     }
 }
 
-data class NextBiomeUiModel(
-    val biome: BiomeUiModel,
-    val probability: Double,
-)
-
-data class BiomePokemonUiModel(
-    val grade: String,
-    val gymLeaderUrl: String?,
-    val typeUrl: String?,
-    val pokemons: List<PokemonUiModel>,
-)
+fun BiomeDetail.toUiState(): BiomeDetailUiState =
+    BiomeDetailUiState(
+        id = id,
+        name = name,
+        imageUrl = image,
+        wildPokemons = wildPokemons.map { it.toUi() },
+        bossPokemons = bossPokemons.map { it.toUi() },
+        gymPokemons = gymPokemons.map { it.toUi() },
+        nextBiomes = nextBiomes.map { it.toUi() },
+    )
