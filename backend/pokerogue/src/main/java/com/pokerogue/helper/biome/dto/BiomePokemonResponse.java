@@ -6,6 +6,6 @@ public record BiomePokemonResponse(
         String id,
         String name,
         String image,
-        List<BiomePokemonTypeResponse> pokemonTypeResponses
+        List<BiomeTypeResponse> pokemonTypeResponses
 ) {
 }

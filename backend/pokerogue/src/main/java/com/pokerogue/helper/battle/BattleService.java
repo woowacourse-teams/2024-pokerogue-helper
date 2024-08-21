@@ -42,22 +42,13 @@ public class BattleService {
                 .toList();
 
         return battleMoves.stream()
-                .map(this::toMoveResponseWithLogo)
+                .map(MoveResponse::from)
                 .toList();
     }
 
     private BattleMove findMoveById(String id) {
         return battleMoveRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
-    }
-
-    private MoveResponse toMoveResponseWithLogo(BattleMove battleMove) {
-        Type moveType = battleMove.type();
-        String typeLogo = moveType.getImage();
-        MoveCategory moveCategory = battleMove.category();
-        String categoryLogo = moveCategory.getImage();
-
-        return MoveResponse.of(battleMove, typeLogo, categoryLogo);
     }
 
     public BattleResultResponse calculateBattleResult(
