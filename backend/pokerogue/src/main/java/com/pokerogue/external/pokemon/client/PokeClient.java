@@ -6,7 +6,7 @@ import com.pokerogue.external.pokemon.dto.ability.AbilityResponse;
 import com.pokerogue.external.pokemon.dto.pokemon.PokemonSaveResponse;
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.external.pokemon.dto.type.TypeMatchingResponse;
-import com.pokerogue.external.pokemon.dto.type.TypeResponse;
+import com.pokerogue.external.pokemon.dto.type.PokemonTypeResponse;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -62,12 +62,12 @@ public class PokeClient {
                 .body(DataUrls.class);
     }
 
-    public TypeResponse getTypeResponse(String id) {
+    public PokemonTypeResponse getTypeResponse(String id) {
         return restClient.get()
                 .uri("/type/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(TypeResponse.class);
+                .body(PokemonTypeResponse.class);
     }
 
     public CountResponse getPokemonResponsesCount() {

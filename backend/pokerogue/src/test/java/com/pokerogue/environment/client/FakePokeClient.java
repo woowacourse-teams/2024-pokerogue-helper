@@ -10,7 +10,7 @@ import com.pokerogue.external.pokemon.dto.ability.AbilityResponse;
 import com.pokerogue.external.pokemon.dto.pokemon.PokemonSaveResponse;
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse;
 import com.pokerogue.external.pokemon.dto.type.TypeMatchingResponse;
-import com.pokerogue.external.pokemon.dto.type.TypeResponse;
+import com.pokerogue.external.pokemon.dto.type.PokemonTypeResponse;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -89,10 +89,10 @@ public class FakePokeClient extends PokeClient {
     }
 
     @Override
-    public TypeResponse getTypeResponse(String id) {
+    public PokemonTypeResponse getTypeResponse(String id) {
         String path = String.format(TYPE_JSON_PATH, id);
 
-        return deserializeTestFixture(TypeResponse.class, path);
+        return deserializeTestFixture(PokemonTypeResponse.class, path);
     }
 
     @Override

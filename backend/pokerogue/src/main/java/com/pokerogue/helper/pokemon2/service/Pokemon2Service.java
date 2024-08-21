@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -56,8 +57,7 @@ public class Pokemon2Service {
                         pokemon,
                         s3Service.getPokemonImageFromS3(pokemon.id()),
                         s3Service.getPokemonBackImageFromS3(pokemon.id()),
-                        s3Service.getPokerogueTypeImageFromS3(pokemon.type1()),
-                        s3Service.getPokerogueTypeImageFromS3(pokemon.type2())
+                        createTypeResponse(pokemon)
                 ))
                 .sorted(Comparator.comparingLong(Pokemon2Response::pokedexNumber))
                 .toList();
@@ -198,11 +198,13 @@ public class Pokemon2Service {
     private List<PokemonTypeResponse> createTypeResponse(Pokemon pokemon) {
         Type type1 = Type.findById(pokemon.type1());
         Type type2 = Type.findById(pokemon.type2());
-
-        return List.of(
-                new PokemonTypeResponse(type1.getName(), s3Service.getPokerogueTypeImageFromS3(pokemon.id())),
-                new PokemonTypeResponse(type2.getName(), s3Service.getPokerogueTypeImageFromS3(pokemon.id()))
-        );
+        return Stream.of(type1, type2)
+                .distinct()
+                .filter(type -> type != Type.EMPTY)
+                .map(type -> new PokemonTypeResponse(type.getName(),
+                        s3Service.getPokerogueTypeImageFromS3(type.getId().toLowerCase())))
+                .toList()
+                ;
     }
 
     private List<BiomeResponse> createBiomeResponse(List<String> biomes) {
@@ -235,7 +237,8 @@ public class Pokemon2Service {
                 .mapToObj(index -> MoveResponse.from(
                         moveRepository.findById(moves.get(index)).orElseThrow(),
                         Integer.parseInt(moves.get(index + 1)),
-                        s3Service.getPokerogueTypeImageFromS3(moveRepository.findById(moves.get(index)).orElseThrow().type())
+                        s3Service.getPokerogueTypeImageFromS3(
+                                moveRepository.findById(moves.get(index)).orElseThrow().type())
                 ))
                 .toList();
     }
