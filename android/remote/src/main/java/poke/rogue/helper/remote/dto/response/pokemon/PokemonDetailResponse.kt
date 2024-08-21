@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse2
-import poke.rogue.helper.remote.dto.response.biom.BiomeResponse
+import poke.rogue.helper.remote.dto.response.biom.PokemonBiomeResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 @Serializable
@@ -58,7 +58,7 @@ data class PokemonDetailResponse2(
     val weight: Float,
     // double?
     val height: Float,
-    val biomes: List<BiomeResponse>,
+    val biomes: List<PokemonBiomeResponse>,
     val mythical: Boolean,
     val subLegendary: Boolean,
     val legendary: Boolean,
