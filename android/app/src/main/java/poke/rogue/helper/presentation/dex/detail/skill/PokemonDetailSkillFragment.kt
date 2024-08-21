@@ -8,7 +8,7 @@ import com.google.android.material.divider.MaterialDividerItemDecoration.VERTICA
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonSkillsBinding
 import poke.rogue.helper.presentation.base.BindingFragment
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState2
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -76,9 +76,9 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
         repeatOnStarted {
             activityViewModel.uiState.collect { state ->
                 when (state) {
-                    is PokemonDetailUiState2.IsLoading -> {}
+                    is PokemonDetailUiState.IsLoading -> {}
                     // TODO: skill 을 현재는 한 종류의 스킬 목록만 사용하고 있음..... 이후에는 여러개의 스킬을 받아야함
-                    is PokemonDetailUiState2.Success -> {
+                    is PokemonDetailUiState.Success -> {
                         eggSkillsAdapter.submitList(state.skills.eggLearn.toUi())
                         skillsAdapter.submitList(state.skills.selfLearn.toUi())
                     }

@@ -39,7 +39,7 @@ class PokemonDetailViewModelTest {
             val expectedPokemonDetailUiState = viewModel.uiState
 
             // then
-            expectedPokemonDetailUiState.value shouldBe PokemonDetailUiState2.IsLoading
+            expectedPokemonDetailUiState.value shouldBe PokemonDetailUiState.IsLoading
         }
 
     @Test
@@ -54,11 +54,11 @@ class PokemonDetailViewModelTest {
             // then
             val pokemonDetailUiState =
                 viewModel.uiState.first { uiState ->
-                    uiState is PokemonDetailUiState2.Success
+                    uiState is PokemonDetailUiState.Success
                 }
 
             pokemonDetailUiState shouldBe
-                PokemonDetailUiState2.Success(
+                PokemonDetailUiState.Success(
                     pokemon =
                         PokemonUiModel(
                             id = "1",

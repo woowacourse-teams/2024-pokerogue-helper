@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonStatBinding
 import poke.rogue.helper.presentation.base.BindingFragment
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState2
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
@@ -39,8 +39,8 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
         repeatOnStarted {
             activityViewModel.uiState.collect { uiState ->
                 when (uiState) {
-                    is PokemonDetailUiState2.IsLoading -> return@collect
-                    is PokemonDetailUiState2.Success -> bindDatas(uiState)
+                    is PokemonDetailUiState.IsLoading -> return@collect
+                    is PokemonDetailUiState.Success -> bindDatas(uiState)
                 }
             }
         }
@@ -66,7 +66,7 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
         }
     }
 
-    private fun bindDatas(uiState: PokemonDetailUiState2.Success) {
+    private fun bindDatas(uiState: PokemonDetailUiState.Success) {
         binding.apply {
             pokemonStatAdapter.submitList(uiState.stats)
             abilityAdapter.submitList(uiState.abilities.toUi())
