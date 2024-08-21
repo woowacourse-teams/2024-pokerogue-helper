@@ -10,3 +10,12 @@ data class AbilityResponse(
     val title: String,
     val description: String,
 )
+
+@Serializable
+data class AbilityResponse2(
+    val id: String,
+    val name: String,
+    val description: String,
+    val passive: Boolean,
+    val hidden: Boolean,
+)
