@@ -64,7 +64,7 @@ fun Stat.toUi() =
                 color = R.color.stat_speed,
             )
 
-        "totalStats" ->
+        "total" ->
             StatUiModel(
                 name = "종족값",
                 amount = amount,

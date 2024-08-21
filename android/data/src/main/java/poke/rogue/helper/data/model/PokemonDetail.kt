@@ -1,7 +1,7 @@
 package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.biom.PokemonBiomeResponse
-import poke.rogue.helper.remote.dto.response.pokemon.PokemonDetailResponse2
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonDetailResponse
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonSkillResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
@@ -17,7 +17,7 @@ data class PokemonDetail(
     val weight: Double,
 )
 
-fun PokemonDetailResponse2.toData(id: String): PokemonDetail =
+fun PokemonDetailResponse.toData(id: String): PokemonDetail =
     PokemonDetail(
         pokemon =
             Pokemon(

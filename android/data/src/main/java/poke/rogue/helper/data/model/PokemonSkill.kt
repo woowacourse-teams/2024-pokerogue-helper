@@ -13,6 +13,7 @@ data class PokemonSkill(
 ) {
     companion object {
         const val NO_POWER_VALUE = -1
+        const val NO_ACCURACY_VALUE = -1
 
         val FAKE_EGG_LEARN_SKILLS =
             listOf(

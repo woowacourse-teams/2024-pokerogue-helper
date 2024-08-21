@@ -1,6 +1,7 @@
 package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.pokemon.EvolutionResponse
+import poke.rogue.helper.remote.dto.response.pokemon.EvolutionsResponse
 
 data class Evolution(
     val pokemonId: String,
@@ -205,3 +206,5 @@ fun EvolutionResponse.toData(): Evolution =
     )
 
 fun List<EvolutionResponse>.toData(): List<Evolution> = map(EvolutionResponse::toData)
+
+fun EvolutionsResponse.toData(): List<Evolution> = evolutions.flatten().toData()

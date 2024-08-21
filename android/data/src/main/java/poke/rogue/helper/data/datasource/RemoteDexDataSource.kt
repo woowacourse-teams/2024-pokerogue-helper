@@ -33,7 +33,7 @@ class RemoteDexDataSource(
             .map(PokemonResponse2::toData)
 
     suspend fun pokemon(id: String): PokemonDetail =
-        pokeDexService.pokemon2(id)
+        pokeDexService.pokemon(id)
             .onFailure {
                 logger.logError(throwable, "pokeDexService - pokemon2($id) 에서 발생")
             }
