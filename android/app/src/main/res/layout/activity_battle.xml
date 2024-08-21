@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textStyle="italic"
+            android:gravity="end"
             app:layout_constraintEnd_toEndOf="@id/spinner_weather"
             app:layout_constraintStart_toStartOf="@id/spinner_weather"
             app:layout_constraintTop_toBottomOf="@id/spinner_weather" />
@@ -111,7 +112,7 @@
         <ImageView
             android:id="@+id/iv_opponent_pokemon"
             onSingleClick="@{() -> vm.navigateToSelection(false)}"
-            android:layout_width="148dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pokemon_selection_op"
             app:layout_constraintBottom_toTopOf="@id/iv_mine_pokemon"
@@ -144,7 +145,7 @@
         <ImageView
             android:id="@+id/iv_mine_pokemon"
             onSingleClick="@{() -> vm.navigateToSelection(true)}"
-            android:layout_width="148dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="-12dp"
             android:src="@drawable/icon_pokemon_selection_mine"

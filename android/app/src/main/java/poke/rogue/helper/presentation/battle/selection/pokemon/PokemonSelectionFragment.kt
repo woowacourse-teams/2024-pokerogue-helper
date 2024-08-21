@@ -41,10 +41,12 @@ class PokemonSelectionFragment :
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initObserver()
-        binding.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun initViews() {
+        binding.handler = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         with(binding.rvPokemons) {
             adapter = pokemonAdapter
             addItemDecoration(
@@ -55,7 +57,7 @@ class PokemonSelectionFragment :
 
     private fun initObserver() {
         repeatOnStarted {
-            viewModel.pokemons.collect {
+            viewModel.filteredPokemon.collect {
                 pokemonAdapter.submitList(it)
             }
         }

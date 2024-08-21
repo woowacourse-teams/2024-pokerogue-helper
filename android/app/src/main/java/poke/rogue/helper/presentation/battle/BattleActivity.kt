@@ -16,7 +16,7 @@ import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
-import poke.rogue.helper.presentation.util.view.setCroppedImage
+import poke.rogue.helper.presentation.util.view.setImage
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModels<BattleViewModel> {
@@ -70,7 +70,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
             viewModel.selectedState.collect {
                 if (it.minePokemon is BattleSelectionUiState.Selected) {
                     val selected = it.minePokemon.selected
-                    binding.ivMinePokemon.setCroppedImage(selected.backImageUrl)
+                    binding.ivMinePokemon.setImage(selected.backImageUrl)
                     binding.tvMinePokemon.text = selected.name
                 }
 
@@ -80,7 +80,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
                 if (it.opponentPokemon is BattleSelectionUiState.Selected) {
                     val selected = it.opponentPokemon.selected
-                    binding.ivOpponentPokemon.setCroppedImage(selected.frontImageUrl)
+                    binding.ivOpponentPokemon.setImage(selected.frontImageUrl)
                     binding.tvOpponentPokemon.text = selected.name
                 }
 
