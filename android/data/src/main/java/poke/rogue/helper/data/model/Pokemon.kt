@@ -1,12 +1,15 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.local.entity.PokemonEntity
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse2
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 data class Pokemon(
     val id: String,
     val dexNumber: Long,
     val name: String,
+    val formName: String = "",
     val imageUrl: String,
     val types: List<Type>,
     val generation: PokemonGeneration = PokemonGeneration.ONE,
@@ -42,6 +45,58 @@ fun PokemonResponse.toData(): Pokemon =
         name = name,
         imageUrl = image,
         types = types.map(PokemonTypeResponse::toData),
+    )
+
+fun PokemonResponse2.toData(): Pokemon =
+    Pokemon(
+        id = id,
+        dexNumber = pokedexNumber,
+        name = name,
+        imageUrl = image,
+        types = types.map(PokemonTypeResponse::toData),
+        generation = PokemonGeneration.of(generation),
+        baseStat = baseStats,
+        speed = speed,
+        hp = hp,
+        attack = attack,
+        defense = defense,
+        specialAttack = specialAttack,
+        specialDefense = specialDefense,
+    )
+
+fun PokemonEntity.toData(): Pokemon =
+    Pokemon(
+        id = id.toString(),
+        dexNumber = dexNumber,
+        name = name,
+        imageUrl = imageUrl,
+        types = types.map(Type::valueOf),
+        generation = PokemonGeneration.of(generation),
+        baseStat = baseStat,
+        speed = speed,
+        hp = hp,
+        attack = attack,
+        defense = defense,
+        specialAttack = specialAttack,
+        specialDefense = specialDefense,
+    )
+
+fun Pokemon.toEntity(): PokemonEntity =
+    PokemonEntity(
+        id = id,
+        dexNumber = dexNumber,
+        name = name,
+        formName = formName,
+        imageUrl = imageUrl,
+        types = types.map(Type::name).toSet(),
+        generation = generation.number,
+        baseStat = baseStat,
+        speed = speed,
+        hp = hp,
+        attack = attack,
+        defense = defense,
+        specialAttack = specialAttack,
+        specialDefense = specialDefense,
     )
 
 fun List<PokemonResponse>.toData(): List<Pokemon> = map(PokemonResponse::toData)

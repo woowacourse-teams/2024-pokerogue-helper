@@ -1,13 +1,16 @@
 package poke.rogue.helper.presentation.battle.model
 
+import android.os.Parcelable
 import androidx.annotation.DrawableRes
+import kotlinx.parcelize.Parcelize
 import poke.rogue.helper.R
 
+@Parcelize
 data class WeatherUiModel(
     val icon: WeatherIcon,
     val description: String,
     val effect: String,
-) {
+) : Parcelable {
     companion object {
         val DEFAULT_SELECTED = WeatherUiModel(WeatherIcon.NONE, "날씨가 없다", "")
 

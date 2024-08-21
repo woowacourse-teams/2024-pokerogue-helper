@@ -29,20 +29,18 @@ class PokeSortViewModel(
     }
 
     override fun toggleSort(id: Int) {
-        uiState.value.pokemonSorts.forEach { sort ->
-            if (sort.id == id) {
-                val newSort =
-                    uiState.value.pokemonSorts.map { type ->
-                        if (type.id == id) {
-                            type.copy(isSelected = !type.isSelected)
-                        } else {
-                            type.copy(isSelected = false)
-                        }
-                    }
-                savedStateHandle[UI_STATE_KEY] = uiState.value.copy(pokemonSorts = newSort)
-                applySorting()
+        val pokemonSorts = uiState.value.pokemonSorts
+        if (pokemonSorts.any { it.id == id && it.isSelected }) return applySorting()
+        val newSorts =
+            pokemonSorts.map { sort ->
+                if (sort.id == id) {
+                    sort.copy(isSelected = !sort.isSelected)
+                } else {
+                    sort.copy(isSelected = false)
+                }
             }
-        }
+        savedStateHandle[UI_STATE_KEY] = uiState.value.copy(pokemonSorts = newSorts)
+        applySorting()
     }
 
     private fun applySorting() {

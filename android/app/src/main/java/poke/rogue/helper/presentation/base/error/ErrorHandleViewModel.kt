@@ -23,7 +23,6 @@ abstract class ErrorHandleViewModel(private val logger: AnalyticsLogger) : ViewM
 
     protected open val errorHandler =
         CoroutineExceptionHandler { _, throwable ->
-            logger.logError(throwable, throwable.message)
             handlePokemonError(throwable)
         }
 
@@ -33,6 +32,7 @@ abstract class ErrorHandleViewModel(private val logger: AnalyticsLogger) : ViewM
             emitErrorEvent(ErrorEvent.UnknownError(throwable))
             return
         }
+        logger.logError(throwable, throwable.message)
         when (throwable) {
             is NetworkException -> emitErrorEvent(ErrorEvent.NetworkException)
             is HttpException -> emitErrorEvent(ErrorEvent.HttpException(throwable))

@@ -3,13 +3,12 @@ package poke.rogue.helper.presentation.battle.selection.pokemon
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemBattlePokemonSelectionBinding
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
-import poke.rogue.helper.presentation.battle.selection.BattleSelectionHandler
 import poke.rogue.helper.presentation.biome.BiomeTypesAdapter
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonSelectionViewHolder(
     private val binding: ItemBattlePokemonSelectionBinding,
-    private val selectionHandler: BattleSelectionHandler,
+    private val selectionHandler: PokemonSelectionHandler,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
         pokemonSelectionUiModel: PokemonSelectionUiModel,
