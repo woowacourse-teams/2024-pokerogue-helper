@@ -1,7 +1,9 @@
 package poke.rogue.helper.presentation.dex.detail.stat
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemAbilityTitleBinding
@@ -20,14 +22,25 @@ class AbilityTitleViewHolder(
 
     companion object {
         @JvmStatic
-        fun TextView.background(ability: PokemonDetailAbilityUiModel) {
-            if (ability.passive) {
-                this.setBackgroundTint(R.color.poke_electric)
-            }
-
-            if (ability.hidden) {
-                this.setTypeface(null, Typeface.BOLD)
+        @BindingAdapter("passive")
+        fun TextView.passive(passive: Boolean) {
+            if (passive) {
+                setTypeface(null, Typeface.BOLD)
+                setTextColor(context.getColor(R.color.poke_electric))
+            } else {
+                setTypeface(null, Typeface.NORMAL)
             }
         }
+
+        @JvmStatic
+        @BindingAdapter("hidden")
+        fun TextView.hidden(hidden: Boolean) {
+            if (hidden) {
+                setTypeface(null, Typeface.BOLD)
+            } else {
+                setTypeface(null, Typeface.NORMAL)
+            }
+        }
+
     }
 }
