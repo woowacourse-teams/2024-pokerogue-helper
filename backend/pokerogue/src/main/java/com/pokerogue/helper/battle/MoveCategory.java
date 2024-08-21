@@ -33,4 +33,8 @@ public enum MoveCategory {
     private boolean hasSameEngName(String name) {
         return this.engName.equals(name);
     }
+
+    public String getImage() {
+        return image + ".png";
+    }
 }
