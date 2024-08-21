@@ -30,7 +30,7 @@ public class PokemonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<String> handleNullPointerException(NullPointerException e) {
-        log.error("error message : {}", e.getStackTrace()[0]);
+        log.error("error message : {}", e);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("Null Pointer 에러가 발생했습니다.");
