@@ -41,11 +41,11 @@ class FakeDexRepository : DexRepository {
             pokemonCategory = PokemonCategory.EMPTY,
             evolutions = Evolution.DUMMY_PICAKCHU_EVOLUTION,
             skills =
-            PokemonDetailSkills(
-                selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
-                eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
-                tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
-            ),
+                PokemonDetailSkills(
+                    selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                    eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
+                    tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
+                ),
             biomes = PokemonBiome.DUMMYS,
             height = 0.7,
             weight = 6.9,
@@ -70,7 +70,7 @@ class FakeDexRepository : DexRepository {
     companion object {
         private const val FORMAT_POKEMON_IMAGE_URL =
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other" +
-                    "/official-artwork/"
+                "/official-artwork/"
 
         private const val POSTFIX_PNG = ".png"
 
@@ -229,6 +229,5 @@ class FakeDexRepository : DexRepository {
                     speed = 100,
                 ),
             )
-
     }
 }

@@ -8,7 +8,7 @@
 
         <variable
             name="ability"
-            type="poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel" />
+            type="poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel" />
 
         <variable
             name="onClickAbility"

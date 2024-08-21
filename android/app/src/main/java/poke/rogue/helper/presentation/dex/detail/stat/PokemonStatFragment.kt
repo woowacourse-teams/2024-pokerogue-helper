@@ -14,7 +14,6 @@ import poke.rogue.helper.databinding.FragmentPokemonStatBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
-import poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -102,10 +101,13 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
     }
 }
 
-private fun PokemonDetailAbilityUiModel.toUi(): AbilityTitleUiModel =
-    AbilityTitleUiModel(
+private fun PokemonDetailAbilityUiModel.toUi(): PokemonDetailAbilityUiModel =
+    PokemonDetailAbilityUiModel(
         id = id,
         name = name,
+        passive = passive,
+        hidden = hidden
     )
 
-private fun List<PokemonDetailAbilityUiModel>.toUi(): List<AbilityTitleUiModel> = map(PokemonDetailAbilityUiModel::toUi)
+private fun List<PokemonDetailAbilityUiModel>.toUi(): List<PokemonDetailAbilityUiModel> =
+    map(PokemonDetailAbilityUiModel::toUi)

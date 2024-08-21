@@ -343,10 +343,10 @@ fun PokemonSkillResponse.toData(): PokemonSkill =
         type = Type.of(type),
         accuracy = accuracy,
         category =
-        SkillCategory(
-            category,
-            categoryLogo,
-        ),
+            SkillCategory(
+                category,
+                categoryLogo,
+            ),
     )
 
 fun List<PokemonSkillResponse>.toData(): List<PokemonSkill> = map(PokemonSkillResponse::toData)

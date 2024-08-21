@@ -10,4 +10,3 @@ data class AbilityResponse(
     val title: String,
     val description: String,
 )
-

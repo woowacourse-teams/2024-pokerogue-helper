@@ -1,6 +1,5 @@
 package poke.rogue.helper.data.model
 
-import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
 import poke.rogue.helper.remote.dto.response.ability.PokemonAbilityResponse
 
 data class PokemonDetailAbility(
@@ -37,15 +36,6 @@ data class PokemonDetailAbility(
             )
     }
 }
-
-fun AbilityResponse.toNewData(): PokemonDetailAbility =
-    PokemonDetailAbility(
-        id = id.toString(),
-        name = title,
-        description = description,
-        passive = false,
-        hidden = false,
-    )
 
 fun PokemonAbilityResponse.toData(): PokemonDetailAbility =
     PokemonDetailAbility(
