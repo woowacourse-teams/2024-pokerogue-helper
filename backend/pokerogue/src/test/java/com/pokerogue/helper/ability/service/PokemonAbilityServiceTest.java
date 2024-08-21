@@ -73,7 +73,7 @@ class PokemonAbilityServiceTest extends ServiceTest {
         return pokemonAbilityWithPokemons.pokemons().stream()
                 .map(SameAbilityPokemonResponse::pokemonTypeResponses)
                 .map(pokemonTypeResponses -> pokemonTypeResponses.stream()
-                        .map(PokemonTypeResponse::pokemonTypeName)
+                        .map(PokemonTypeResponse::typeName)
                         .toList())
                 .toList();
     }
