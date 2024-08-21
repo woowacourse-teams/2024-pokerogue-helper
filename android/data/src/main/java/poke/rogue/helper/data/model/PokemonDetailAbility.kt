@@ -1,6 +1,7 @@
 package poke.rogue.helper.data.model
 
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
+import poke.rogue.helper.remote.dto.response.ability.AbilityResponse2
 
 data class PokemonDetailAbility(
     val id: String,
@@ -18,3 +19,15 @@ fun AbilityResponse.toNewData(): PokemonDetailAbility =
         passive = false,
         hidden = false,
     )
+
+fun AbilityResponse2.toData(): PokemonDetailAbility =
+    PokemonDetailAbility(
+        id = id,
+        name = name,
+        description = description,
+        passive = passive,
+        hidden = hidden,
+    )
+
+fun List<AbilityResponse2>.toData(): List<PokemonDetailAbility> =
+    map(AbilityResponse2::toData)
