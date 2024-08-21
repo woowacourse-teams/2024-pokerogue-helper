@@ -6,6 +6,7 @@ import com.pokerogue.helper.pokemon2.data.Ability;
 import com.pokerogue.helper.pokemon2.data.Biome;
 import com.pokerogue.helper.pokemon2.data.Evolution;
 import com.pokerogue.helper.pokemon2.data.EvolutionChain;
+import com.pokerogue.helper.pokemon2.data.EvolutionItem;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.pokemon2.data.Type;
 import com.pokerogue.helper.pokemon2.dto.BiomeResponse;
@@ -161,7 +162,7 @@ public class Pokemon2Service {
                             pokemon.koName(),
                             Integer.parseInt(evolution.level()),
                             i + 1,
-                            evolution.item(),
+                            EvolutionItem.findById(evolution.item()).getKoName(),
                             evolution.condition(),
                             s3Service.getPokemonImageFromS3(pokemon.id())
                     ));
