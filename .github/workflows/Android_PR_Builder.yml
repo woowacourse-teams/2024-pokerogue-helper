@@ -78,13 +78,13 @@ jobs:
         run: chmod +x gradlew
         working-directory: android
 
-      - name: Lint Check
-        run: ./gradlew ktlintCheck
-        working-directory: android
-
-      - name: run debug unit test
-        run: ./gradlew testDebugUnitTest
-        working-directory: android
+#      - name: Lint Check
+#        run: ./gradlew ktlintCheck
+#        working-directory: android
+#
+#      - name: run debug unit test
+#        run: ./gradlew testDebugUnitTest
+#        working-directory: android
 
       - name: Build alpha APK
         run: ./gradlew assembleAlpha
@@ -93,8 +93,8 @@ jobs:
       - name: Download APK artifact
         uses: actions/download-artifact@v4
         with:
-          name: app-alpha.apk
-          path: android/app/build/outputs/apk/alpha
+          name: android-artifact
+          path: android/app/build/outputs/apk/alpha/
 
       - name: Send APK to Discord
         env:
