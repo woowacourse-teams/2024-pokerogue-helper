@@ -17,7 +17,6 @@ import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import timber.log.Timber
 
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
@@ -73,7 +72,6 @@ class PokemonDetailViewModel(
     override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
             _navigateToPokemonDetailEvent.emit(pokemonId)
-            Timber.d("navigateToPokemonDetail: $pokemonId")
         }
     }
 

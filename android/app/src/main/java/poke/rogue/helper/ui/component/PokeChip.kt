@@ -285,6 +285,16 @@ class PokeChip
                     "leadingIconRes 와 label 중 하나는 반드시 있어야 합니다."
                 }
             }
+
+            companion object {
+                // TODO: 바이옴 쪽에서는 pokeChip 을 사용하지 않는다.
+                // 그런데 바이옴 쪽에서 포켓몬 UI 를 pokeChip 을 사용한다.
+                // 이 때문에 바이옴 상세에서 에러가 터진다.
+                // PokeChip.bindPokeChip 메서드 참고
+                val EMPTY = Spec(
+                    label = "INVALID_LABEL"
+                )
+            }
         }
 
         data class Colors(
@@ -319,6 +329,9 @@ class PokeChip
             @JvmStatic
             @BindingAdapter("pokeChipSpec")
             fun PokeChip.bindPokeChip(chipSpec: Spec) {
+                if (chipSpec == Spec.EMPTY) {
+                    return
+                }
                 initPokeChip(chipSpec)
             }
         }
