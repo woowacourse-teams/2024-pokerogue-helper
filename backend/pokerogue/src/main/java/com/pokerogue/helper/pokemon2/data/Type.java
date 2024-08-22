@@ -26,7 +26,7 @@ public enum Type {
     DARK("DARK", "악"),
     FAIRY("FAIRY", "페어리"),
     STELLAR("STELLAR", "스텔라"),
-    EMPTY("EMPTY", "EMPTY");
+    EMPTY("", "");
 
     private final String id;
     private final String name;
@@ -45,6 +45,6 @@ public enum Type {
                         .equals(id)
                 )
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 타입 아이디입니다"));
+                .orElse(EMPTY);
     }
 }

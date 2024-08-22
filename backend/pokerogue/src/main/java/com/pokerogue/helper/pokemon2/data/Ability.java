@@ -269,8 +269,8 @@ public enum Ability {
     DRAGONSMAW("Dragon's Maw", "용의턱", "드래곤타입 기술의 위력이 올라간다."),
     CHILLINGNEIGH("Chilling Neigh", "백의울음", "상대를 쓰러뜨리면 차가운 울음소리를 내면서 공격이 올라간다."),
     GRIMNEIGH("Grim Neigh", "흑의울음", "상대를 쓰러뜨리면 무서운 울음소리를 내면서 특수공격이 올라간다."),
-    ASONEGLASTRIER("As One", "혼연일체", "버드렉스의 긴장감과 블리자포스의 백의울음 두 가지 특성을 겸비한다."),
-    ASONESPECTRIER("As One", "혼연일체", "버드렉스의 긴장감과 레이스포스의 흑의울음 두 가지 특성을 겸비한다."),
+    ASONEGLASTRIER("As One glastrier", "혼연일체", "버드렉스의 긴장감과 블리자포스의 백의울음 두 가지 특성을 겸비한다."),
+    ASONESPECTRIER("As One spectrier", "혼연일체", "버드렉스의 긴장감과 레이스포스의 흑의울음 두 가지 특성을 겸비한다."),
     LINGERINGAROMA("Lingering Aroma", "가시지않는향기", "상대가 접촉하면 가시지 않는 향기가 상대에게 배어 버린다."),
     SEEDSOWER("Seed Sower", "넘치는씨", "공격을 받으면 필드를 그래스필드로 만든다."),
     THERMALEXCHANGE("Thermal Exchange", "열교환", "불꽃타입 기술로 공격받으면 공격이 올라간다. 화상 상태가 되지 않는다."),
@@ -314,7 +314,7 @@ public enum Ability {
     TERASHELL("Tera Shell", "테라셸", "모든 타입의 힘이 담긴 등껍질이 HP가 꽉 찼을 때 받는 데미지를 모두 효과가 별로이게 만든다."),
     TERAFORMZERO("Teraform Zero", "제로포밍", "테라파고스가 스텔라폼이 되었을 때 숨겨진 힘에 의해 날씨와 필드의 영향을 모두 무효로 만든다."),
     POISONPUPPETEER("Poison Puppeteer", "독조종", "복숭악동의 기술에 의해 독 상태가 된 상대는 혼란 상태도 되어 버린다."),
-    EMPTY("empty", "empty", "empty"),
+    EMPTY("", "", ""),
     ;
 
     private final String id;
@@ -332,10 +332,11 @@ public enum Ability {
                 .filter(value -> value.getId()
                         .replace("-", "_")
                         .replace(" ", "_")
+                        .replace("'", "")
                         .toLowerCase()
                         .equals(id))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 특성 아이디입니다."));
+                .orElse(EMPTY);
     }
 
     public String getId() {

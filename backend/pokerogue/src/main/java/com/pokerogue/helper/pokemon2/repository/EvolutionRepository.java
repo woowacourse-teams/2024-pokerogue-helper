@@ -12,15 +12,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class EvolutionRepository {
-    private final Map<String, List<Evolution>> data = new HashMap<>();
+    private final Map<String, List<Evolution>> edges = new HashMap<>();
     private final Map<String, EvolutionChain> chains = new HashMap<>();
 
     public Map<String, List<Evolution>> findAll() {
-        return Collections.unmodifiableMap(data);
+        return Collections.unmodifiableMap(edges);
     }
 
     public Optional<List<Evolution>> findEdgeById(String id) {
-        return Optional.ofNullable(data.get(id));
+        return Optional.ofNullable(edges.get(id));
     }
 
     public Optional<EvolutionChain> findEvolutionChainById(String id) {
@@ -28,8 +28,8 @@ public class EvolutionRepository {
     }
 
     public void saveEdge(String key, Evolution value) {
-        data.putIfAbsent(key, new ArrayList<>());
-        data.get(key).add(value);
+        edges.putIfAbsent(key, new ArrayList<>());
+        edges.get(key).add(value);
     }
 
     public void saveChain(String id, EvolutionChain value) {

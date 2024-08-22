@@ -6,6 +6,7 @@ import com.pokerogue.helper.pokemon2.data.Ability;
 import com.pokerogue.helper.pokemon2.data.Biome;
 import com.pokerogue.helper.pokemon2.data.Evolution;
 import com.pokerogue.helper.pokemon2.data.EvolutionChain;
+import com.pokerogue.helper.pokemon2.data.EvolutionItem;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.pokemon2.data.Type;
 import com.pokerogue.helper.pokemon2.dto.BiomeResponse;
@@ -27,6 +28,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -54,8 +56,8 @@ public class Pokemon2Service {
                 .map(pokemon -> Pokemon2Response.from(
                         pokemon,
                         s3Service.getPokemonImageFromS3(pokemon.id()),
-                        s3Service.getTypeImageFromS3(pokemon.type1()),
-                        s3Service.getTypeImageFromS3(pokemon.type2())
+                        s3Service.getPokemonBackImageFromS3(pokemon.id()),
+                        createTypeResponse(pokemon)
                 ))
                 .sorted(Comparator.comparingLong(Pokemon2Response::pokedexNumber))
                 .toList();
@@ -130,71 +132,101 @@ public class Pokemon2Service {
         );
     }
 
-    private List<List<EvolutionResponse>> createStages(EvolutionChain evolutionChain) {
+    private List<EvolutionResponse> createStages(EvolutionChain evolutionChain) {
         List<List<String>> chain = evolutionChain.getChain();
-        List<List<EvolutionResponse>> ret = new ArrayList<>();
+        List<EvolutionResponse> ret = new ArrayList<>();
 
         Pokemon firstPokemon = pokemon2Repository.findById(chain.get(0).get(0))
                 .orElseThrow(() -> new IllegalArgumentException());
-        ret.add(List.of(new EvolutionResponse(
+
+        ret.add(new EvolutionResponse(
+                firstPokemon.id(),
                 firstPokemon.koName(),
                 1,
                 0,
-                "EMPTY",
-                "EMPTY",
+                "",
+                "",
                 s3Service.getPokemonImageFromS3(firstPokemon.id())
-        )));
+        ));
 
         for (int i = 0; i < chain.size() - 1; i++) {
             List<String> stage = chain.get(i);
-            List<EvolutionResponse> tmp = new ArrayList<>();
             for (String id : stage) {
                 List<Evolution> evolutions = evolutionRepository.findEdgeById(id)
-                        .orElseThrow(() -> new IllegalArgumentException());
+                        .orElse(null);
+
+                if (evolutions == null) {
+                    continue;
+                }
+
                 for (Evolution evolution : evolutions) {
                     Pokemon pokemon = pokemon2Repository.findById(evolution.to())
                             .orElseThrow(() -> new IllegalArgumentException(""));
-                    tmp.add(new EvolutionResponse(
+                    ret.add(new EvolutionResponse(
+                            pokemon.id(),
                             pokemon.koName(),
                             Integer.parseInt(evolution.level()),
                             i + 1,
-                            evolution.item(),
+                            EvolutionItem.findById(evolution.item()).getKoName(),
                             evolution.condition(),
                             s3Service.getPokemonImageFromS3(pokemon.id())
                     ));
                 }
             }
-            ret.add(tmp);
         }
         return ret;
     }
 
     private List<PokemonAbilityResponse> createAbilityResponse(Pokemon pokemon) {
+        List<PokemonAbilityResponse> ret = new ArrayList<>();
+
         Ability passive = Ability.findById(pokemon.abilityPassive());
         Ability hidden = Ability.findById(pokemon.abilityHidden());
         Ability ability1 = Ability.findById(pokemon.ability1());
         Ability ability2 = Ability.findById(pokemon.ability2());
 
-        return List.of(
-                new PokemonAbilityResponse(pokemon.abilityPassive(), passive.getName(), passive.getDescription(), true,
-                        false),
-                new PokemonAbilityResponse(pokemon.abilityHidden(), hidden.getName(), hidden.getDescription(), false,
-                        true),
-                new PokemonAbilityResponse(pokemon.ability1(), ability1.getName(), ability1.getDescription(), false,
-                        false),
-                new PokemonAbilityResponse(pokemon.ability2(), ability2.getName(), ability2.getDescription(), false,
-                        false)
-        );
+        ret.add(new PokemonAbilityResponse(
+                pokemon.abilityPassive(), passive.getName(), passive.getDescription(),
+                true, false
+        ));
+
+        List<PokemonAbilityResponse> defaultAbilities = Stream.of(ability1, ability2)
+                .distinct()
+                .filter(ability -> ability != Ability.EMPTY)
+                .map(ability -> new PokemonAbilityResponse(
+                        pokemon.ability1(), ability.getName(),
+                        ability.getDescription(), false, false)
+                )
+                .toList();
+
+        ret.addAll(defaultAbilities);
+
+        if (hidden != Ability.EMPTY) {
+            ret.add(new PokemonAbilityResponse(pokemon.abilityHidden(), hidden.getName(), hidden.getDescription(),
+                    false,
+                    true));
+
+            for (int i = 1; i < ret.size() - 1; i++) {
+                if (Ability.findById(ret.get(i).id()) == hidden) {
+                    ret.remove(i);
+                    break;
+                }
+            }
+
+        }
+
+        return ret;
     }
 
     private List<PokemonTypeResponse> createTypeResponse(Pokemon pokemon) {
         Type type1 = Type.findById(pokemon.type1());
         Type type2 = Type.findById(pokemon.type2());
-
-        return List.of(
-                new PokemonTypeResponse(type1.getName(), s3Service.getTypeImageFromS3(type1.getId())),
-                new PokemonTypeResponse(type2.getName(), s3Service.getTypeImageFromS3(type2.getId()))
-        );
+        return Stream.of(type1, type2)
+                .distinct()
+                .filter(type -> type != Type.EMPTY)
+                .map(type -> new PokemonTypeResponse(type.getName(),
+                        s3Service.getPokerogueTypeImageFromS3(type.getId().toLowerCase())))
+                .toList();
     }
 
     private List<BiomeResponse> createBiomeResponse(List<String> biomes) {
@@ -204,7 +236,7 @@ public class Pokemon2Service {
                             return new BiomeResponse(
                                     id,
                                     biome.getName(),
-                                    s3Service.getBiomeImageFromS3(biome.getId())
+                                    s3Service.getBiomeImageFromS3(id)
                             );
                         }
                 )
@@ -215,7 +247,7 @@ public class Pokemon2Service {
         return moves.stream()
                 .map(r -> moveRepository.findById(r).orElseThrow(() -> new IllegalArgumentException()))
                 .map(move -> MoveResponse.from(move, 1,
-                        s3Service.getTypeImageFromS3(moveRepository.findById(move.id())
+                        s3Service.getPokerogueTypeImageFromS3(moveRepository.findById(move.id())
                                 .orElseThrow(() -> new IllegalArgumentException())
                                 .type())))
                 .toList();
@@ -227,7 +259,8 @@ public class Pokemon2Service {
                 .mapToObj(index -> MoveResponse.from(
                         moveRepository.findById(moves.get(index)).orElseThrow(),
                         Integer.parseInt(moves.get(index + 1)),
-                        s3Service.getTypeImageFromS3(moveRepository.findById(moves.get(index)).orElseThrow().type())
+                        s3Service.getPokerogueTypeImageFromS3(
+                                moveRepository.findById(moves.get(index)).orElseThrow().type())
                 ))
                 .toList();
     }

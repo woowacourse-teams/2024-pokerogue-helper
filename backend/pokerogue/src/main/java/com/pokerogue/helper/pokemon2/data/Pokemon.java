@@ -5,9 +5,9 @@ import java.util.List;
 public record Pokemon(
         String id,
         String speciesId,
+        String koName,
         String speciesName,
         String formName,
-        String koName,
         String type1,
         String type2,
         String ability1,
