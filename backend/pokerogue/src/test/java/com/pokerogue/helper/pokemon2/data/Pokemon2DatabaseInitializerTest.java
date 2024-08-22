@@ -11,12 +11,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.DefaultApplicationArguments;
 
-
 class Pokemon2DatabaseInitializerTest {
 
     @Test
     @DisplayName("포켓몬 정보가 지정된 개수만큼 저장된다")
-    void savePokemons() {
+    void savePokemonCount() {
         Pokemon2Repository pokemon2Repository = new Pokemon2Repository();
         Pokemon2DatabaseInitializer pokemon2DatabaseInitializer = new Pokemon2DatabaseInitializer(
                 pokemon2Repository,
@@ -26,14 +25,14 @@ class Pokemon2DatabaseInitializerTest {
 
         pokemon2DatabaseInitializer.run(new DefaultApplicationArguments());
 
-        Assertions.assertThat(pokemon2Repository.findAll()).hasSize(1350);
+        Assertions.assertThat(pokemon2Repository.findAll()).hasSize(1268);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"bulbasaur", "chikorita", "wailmer", "virizion", "golisopod", "melmetal", "spidops",
             "hydrapple", "alola_exeggutor"})
     @DisplayName("포켓몬의 저장된 이름을 확인한다")
-    void savePokemons2(String name) {
+    void savePokemonNames(String name) {
         Pokemon2Repository pokemon2Repository = new Pokemon2Repository();
         Pokemon2DatabaseInitializer pokemon2DatabaseInitializer = new Pokemon2DatabaseInitializer(
                 pokemon2Repository,

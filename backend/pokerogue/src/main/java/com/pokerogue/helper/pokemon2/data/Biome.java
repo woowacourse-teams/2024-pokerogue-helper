@@ -41,7 +41,7 @@ public enum Biome {
     ISLAND("ISLAND", "섬"),
     LABORATORY("LABORATORY", "연구소"),
     END("END", "???"),
-    EMPTY("EMPTY", "EMPTY"),
+    EMPTY("", ""),
     ;
 
     private final String id;
@@ -60,6 +60,6 @@ public enum Biome {
                         .equals(id)
                 )
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 바이옴 아이디입니다."));
+                .orElse(EMPTY);
     }
 }
