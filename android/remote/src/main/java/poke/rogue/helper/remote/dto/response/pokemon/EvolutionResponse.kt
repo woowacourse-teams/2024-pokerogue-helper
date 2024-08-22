@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class EvolutionResponse(
+    @SerialName("id")
     val pokemonId: String = "",
     @SerialName("name")
     val pokemonName: String,
@@ -20,5 +21,5 @@ data class EvolutionResponse(
 data class EvolutionsResponse(
     val currentDepth: Int,
     @SerialName("stages")
-    val evolutions: List<List<EvolutionResponse>>,
+    val evolutions: List<EvolutionResponse>,
 )

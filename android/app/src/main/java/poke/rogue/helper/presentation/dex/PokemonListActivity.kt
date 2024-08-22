@@ -11,6 +11,7 @@ import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonListBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.filter.PokemonFilterBottomSheetFragment
 import poke.rogue.helper.presentation.dex.sort.PokemonSortBottomSheetFragment
@@ -112,8 +113,7 @@ class PokemonListActivity :
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 hideKeyboard()
-                // TODO 포켓몬 상세 화면으로 이동 : 일단 주석처리
-//                startActivity(PokemonDetailActivity.intent(this, pokemonId))
+                startActivity(PokemonDetailActivity.intent(this, pokemonId))
             }
         }
         val fm: FragmentManager = supportFragmentManager

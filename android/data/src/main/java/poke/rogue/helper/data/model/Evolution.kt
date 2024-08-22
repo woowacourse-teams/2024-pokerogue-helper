@@ -207,4 +207,4 @@ fun EvolutionResponse.toData(): Evolution =
 
 fun List<EvolutionResponse>.toData(): List<Evolution> = map(EvolutionResponse::toData)
 
-fun EvolutionsResponse.toData(): List<Evolution> = evolutions.flatten().toData()
+fun EvolutionsResponse.toData(): List<Evolution> = evolutions.toData()
