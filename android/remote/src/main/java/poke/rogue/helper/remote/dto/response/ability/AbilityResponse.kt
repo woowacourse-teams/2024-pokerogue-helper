@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AbilityResponse2(
+data class AbilityResponse(
     val id: String,
     @SerialName("koName")
     val name: String,

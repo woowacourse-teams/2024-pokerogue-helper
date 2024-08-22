@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import poke.rogue.helper.remote.dto.base.ApiResponse
 import poke.rogue.helper.remote.dto.response.ability.AbilityDetailResponse2
-import poke.rogue.helper.remote.dto.response.ability.AbilityResponse2
+import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
 import poke.rogue.helper.remote.injector.RetrofitModule
 import poke.rogue.helper.remote.service.utils.getOrThrow
 import poke.rogue.helper.remote.service.utils.httpErrorResponse
@@ -42,7 +42,7 @@ class AbilityServiceTest {
             mockWebServer.enqueue(fakeResponse)
 
             // when
-            val actual: ApiResponse<List<AbilityResponse2>> = service.abilities()
+            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
 
             // then
             actual.shouldBeSuccess()
@@ -68,7 +68,7 @@ class AbilityServiceTest {
             val fakeResponse = httpErrorResponse(404)
             mockWebServer.enqueue(fakeResponse)
             // when
-            val actual: ApiResponse<List<AbilityResponse2>> = service.abilities()
+            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
             // then
             assertSoftly {
                 actual.shouldBeHttpException()
@@ -83,7 +83,7 @@ class AbilityServiceTest {
             val fakeResponse = MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START)
             mockWebServer.enqueue(fakeResponse)
             // when
-            val actual: ApiResponse<List<AbilityResponse2>> = service.abilities()
+            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
             // then
             assertSoftly {
                 actual.shouldBeNetworkException()
@@ -98,7 +98,7 @@ class AbilityServiceTest {
             val fakeResponse = MockResponse()
             mockWebServer.enqueue(fakeResponse)
             // when
-            val actual: ApiResponse<List<AbilityResponse2>> = service.abilities()
+            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
             println(actual)
             // then
             assertSoftly {

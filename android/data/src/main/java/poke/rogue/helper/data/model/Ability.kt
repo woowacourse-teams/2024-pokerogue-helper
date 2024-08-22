@@ -1,6 +1,6 @@
 package poke.rogue.helper.data.model
 
-import poke.rogue.helper.remote.dto.response.ability.AbilityResponse2
+import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
 
 data class Ability(
     val id: String = "0",
@@ -8,7 +8,7 @@ data class Ability(
     val description: String,
 )
 
-fun AbilityResponse2.toData(): Ability =
+fun AbilityResponse.toData(): Ability =
     Ability(
         id = id,
         title = name,
