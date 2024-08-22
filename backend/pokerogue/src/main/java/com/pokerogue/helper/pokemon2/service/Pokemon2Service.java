@@ -178,21 +178,44 @@ public class Pokemon2Service {
     }
 
     private List<PokemonAbilityResponse> createAbilityResponse(Pokemon pokemon) {
+        List<PokemonAbilityResponse> ret = new ArrayList<>();
+
         Ability passive = Ability.findById(pokemon.abilityPassive());
         Ability hidden = Ability.findById(pokemon.abilityHidden());
         Ability ability1 = Ability.findById(pokemon.ability1());
         Ability ability2 = Ability.findById(pokemon.ability2());
 
-        return List.of(
-                new PokemonAbilityResponse(pokemon.abilityPassive(), passive.getName(), passive.getDescription(), true,
-                        false),
-                new PokemonAbilityResponse(pokemon.abilityHidden(), hidden.getName(), hidden.getDescription(), false,
-                        true),
-                new PokemonAbilityResponse(pokemon.ability1(), ability1.getName(), ability1.getDescription(), false,
-                        false),
-                new PokemonAbilityResponse(pokemon.ability2(), ability2.getName(), ability2.getDescription(), false,
-                        false)
-        );
+        ret.add(new PokemonAbilityResponse(
+                pokemon.abilityPassive(), passive.getName(), passive.getDescription(),
+                true, false
+        ));
+
+        List<PokemonAbilityResponse> defaultAbilities = Stream.of(ability1, ability2)
+                .distinct()
+                .filter(ability -> ability != Ability.EMPTY)
+                .map(ability -> new PokemonAbilityResponse(
+                        pokemon.ability1(), ability.getName(),
+                        ability.getDescription(), false, false)
+                )
+                .toList();
+
+        ret.addAll(defaultAbilities);
+
+        if (hidden != Ability.EMPTY) {
+            ret.add(new PokemonAbilityResponse(pokemon.abilityHidden(), hidden.getName(), hidden.getDescription(),
+                    false,
+                    true));
+
+            for (int i = 1; i < ret.size() - 1; i++) {
+                if (Ability.findById(ret.get(i).id()) == hidden) {
+                    ret.remove(i);
+                    break;
+                }
+            }
+
+        }
+
+        return ret;
     }
 
     private List<PokemonTypeResponse> createTypeResponse(Pokemon pokemon) {
