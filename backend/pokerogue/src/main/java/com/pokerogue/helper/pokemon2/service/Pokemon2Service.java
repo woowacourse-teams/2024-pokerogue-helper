@@ -226,8 +226,7 @@ public class Pokemon2Service {
                 .filter(type -> type != Type.EMPTY)
                 .map(type -> new PokemonTypeResponse(type.getName(),
                         s3Service.getPokerogueTypeImageFromS3(type.getId().toLowerCase())))
-                .toList()
-                ;
+                .toList();
     }
 
     private List<BiomeResponse> createBiomeResponse(List<String> biomes) {
