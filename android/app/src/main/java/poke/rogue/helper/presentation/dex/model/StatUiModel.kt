@@ -66,7 +66,7 @@ fun Stat.toUi() =
 
         "total" ->
             StatUiModel(
-                name = "총합",
+                name = "종족값",
                 amount = amount,
                 limit = MAX_TOTAL_LIMIT,
                 color = R.color.stat_total,

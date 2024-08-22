@@ -33,12 +33,12 @@ class RemoteDexDataSource(
             .map(PokemonResponse2::toData)
 
     suspend fun pokemon(id: String): PokemonDetail =
-        pokeDexService.pokemon(id.toLong())
+        pokeDexService.pokemon(id)
             .onFailure {
-                logger.logError(throwable, "pokeDexService - pokemon($id) 에서 발생")
+                logger.logError(throwable, "pokeDexService - pokemon2($id) 에서 발생")
             }
             .getOrThrow()
-            .toData(id.toLong())
+            .toData(id)
 
     companion object {
         private var instance: RemoteDexDataSource? = null

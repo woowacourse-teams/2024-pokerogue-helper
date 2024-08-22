@@ -1,7 +1,8 @@
 package poke.rogue.helper.data.model
 
-import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
+import poke.rogue.helper.remote.dto.response.biom.PokemonBiomeResponse
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonDetailResponse
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonSkillResponse
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
 
 data class PokemonDetail(
@@ -16,18 +17,17 @@ data class PokemonDetail(
     val weight: Double,
 )
 
-// TODO: 서버에서 String 으로 주면 id: Long -> id.String() 으로 변경
-fun PokemonDetailResponse.toData(id: Long): PokemonDetail =
+fun PokemonDetailResponse.toData(id: String): PokemonDetail =
     PokemonDetail(
         pokemon =
             Pokemon(
-                id = id.toString(),
+                id = id,
                 dexNumber = dexNumber,
                 name = name,
                 imageUrl = imageUrl,
                 types = types.map(PokemonTypeResponse::toData),
             ),
-        abilities = abilities.map(AbilityResponse::toNewData),
+        abilities = abilities.toData(),
         stats =
             listOf(
                 Stat("hp", hp),
@@ -39,14 +39,14 @@ fun PokemonDetailResponse.toData(id: Long): PokemonDetail =
                 Stat("total", totalStats),
             ),
         pokemonCategory = PokemonCategory.EMPTY,
-        evolutions = emptyList(),
+        evolutions = evolutions.toData(),
         skills =
             PokemonDetailSkills(
-                selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
-                tmLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
-                eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
+                selfLearn = selfLearnSkills.map(PokemonSkillResponse::toData),
+                tmLearn = selfLearnSkills.map(PokemonSkillResponse::toData),
+                eggLearn = eggSkills.map(PokemonSkillResponse::toData),
             ),
-        biomes = PokemonBiome.DUMMYS,
+        biomes = biomes.map(PokemonBiomeResponse::toData),
         height = height.toDouble(),
         weight = weight.toDouble(),
     )

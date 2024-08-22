@@ -10,16 +10,174 @@
         tools:context=".presentation.dex.detail.skill.PokemonDetailSkillFragment">
 
         <TextView
-            android:id="@+id/tv_pokemon_detail_skill_level"
+            android:id="@+id/pokemon_detail_egg_skill_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pokemon_detail_egg_skill_title"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tv_pokemon_detail_egg_skill_level"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_pokemon_detail_egg_skill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginEnd="100dp"
+            app:dividerThickness="2dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_egg_skill_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pokemon_detail_egg_skill_title" />
+
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_egg_skill_level"
             style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_skill_level"
             android:textSize="16dp"
+            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_egg_skill_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_egg_skill_name"
+            app:layout_constraintWidth_percent="0.1"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_egg_skill_name"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/pokemon_detail_skill_name"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_egg_skill_level"
+            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_egg_skill_power"
+            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_egg_skill_level"
+            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_detail_egg_skill"
+            app:layout_constraintWidth_percent="0.25"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_egg_skill_power"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/pokemon_detail_skill_power"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_egg_skill_level"
+            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_egg_skill_accuracy"
+            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_egg_skill_name"
+            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_egg_skill_name"
+            app:layout_constraintWidth_percent="0.1"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_egg_skill_accuracy"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/pokemon_detail_skill_accuracy"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_egg_skill_level"
+            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_egg_skill_type"
+            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_egg_skill_power"
+            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_egg_skill_name"
+            app:layout_constraintWidth_percent="0.2"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_egg_skill_type"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/pokemon_detail_skill_type"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_egg_skill_level"
+            app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_egg_skill_category"
+            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_egg_skill_accuracy"
+            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_egg_skill_name"
+            app:layout_constraintWidth_percent="0.2"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_egg_skill_category"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/pokemon_detail_skill_category"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_egg_skill_level"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_egg_skill_type"
+            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_egg_skill_name"
+            app:layout_constraintWidth_percent="0.2"
+            tools:ignore="SpUsage" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_pokemon_egg_skill_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerThickness="1.5dp"
+            app:layout_constraintBottom_toTopOf="@id/rv_pokemon_detail_egg_skills"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_egg_skill_name" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pokemon_detail_egg_skills"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/pokemon_detail_self_learn_skill_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_pokemon_egg_skill_title"
+            tools:listitem="@layout/item_pokemon_detail_skill" />
+
+        <TextView
+            android:id="@+id/pokemon_detail_self_learn_skill_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:text="@string/pokemon_detail_self_learn_skill_title"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_skill_name"
+            app:layout_constraintStart_toStartOf="@id/tv_pokemon_detail_skill_level"
+            app:layout_constraintTop_toBottomOf="@id/rv_pokemon_detail_egg_skills" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_pokemon_detail_self_skill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginEnd="100dp"
+            app:dividerThickness="2dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_skill_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pokemon_detail_self_learn_skill_title" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_skill_level"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/pokemon_detail_skill_level"
+            android:textSize="16dp"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_skill_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_skill_name"
+            app:layout_constraintTop_toBottomOf="@id/pokemon_detail_self_learn_skill_title"
             app:layout_constraintWidth_percent="0.1"
             tools:ignore="SpUsage" />
 
@@ -34,7 +192,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_pokemon_detail_skill_level"
             app:layout_constraintEnd_toStartOf="@id/tv_pokemon_detail_skill_power"
             app:layout_constraintStart_toEndOf="@id/tv_pokemon_detail_skill_level"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_pokemon_detail_skill_level"
             app:layout_constraintWidth_percent="0.25"
             tools:ignore="SpUsage" />
 
@@ -102,7 +260,7 @@
             android:id="@+id/divider_pokemon_skill_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:dividerThickness="2dp"
+            app:dividerThickness="1.5dp"
             app:layout_constraintBottom_toTopOf="@id/rv_pokemon_detail_skills"
             app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_skill_name" />
 

@@ -1,10 +1,11 @@
 package poke.rogue.helper.testing.data.repository
 
+import poke.rogue.helper.data.model.Evolution
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonCategory
 import poke.rogue.helper.data.model.PokemonDetail
-import poke.rogue.helper.data.model.PokemonDetailAbility
+import poke.rogue.helper.data.model.PokemonDetailAbility.Companion.DUMMY_POKEMON_DETAIL_ABILTIES
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonGeneration
@@ -32,7 +33,23 @@ class FakeDexRepository : DexRepository {
         }.toFilteredPokemons(sort, filters)
     }
 
-    override suspend fun pokemonDetail(id: String): PokemonDetail = DUMMY_POKEMON_DETAIL
+    override suspend fun pokemonDetail(id: String): PokemonDetail =
+        PokemonDetail(
+            pokemon = Pokemon.DUMMY,
+            abilities = DUMMY_POKEMON_DETAIL_ABILTIES,
+            stats = Stat.DUMMY_STATS,
+            pokemonCategory = PokemonCategory.EMPTY,
+            evolutions = Evolution.DUMMY_PICAKCHU_EVOLUTION,
+            skills =
+                PokemonDetailSkills(
+                    selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
+                    eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
+                    tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
+                ),
+            biomes = PokemonBiome.DUMMYS,
+            height = 0.7,
+            weight = 6.9,
+        )
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
@@ -211,37 +228,6 @@ class FakeDexRepository : DexRepository {
                     specialDefense = 80,
                     speed = 100,
                 ),
-            )
-
-        val DUMMY_POKEMON_DETAIL =
-            PokemonDetail(
-                pokemon = Pokemon.DUMMY,
-                abilities =
-                    listOf(
-                        PokemonDetailAbility("450", "심록", description = "HP가 줄었을 때 풀타입 기술의 위력이 올라간다.", false, false),
-                        PokemonDetailAbility("419", "엽록소", description = "날씨가 맑을 때 스피드가 올라간다.", false, false),
-                    ),
-                stats =
-                    listOf(
-                        Stat("hp", 45),
-                        Stat("attack", 49),
-                        Stat("defense", 49),
-                        Stat("specialAttack", 65),
-                        Stat("specialDefense", 65),
-                        Stat("speed", 45),
-                        Stat("total", 318),
-                    ),
-                pokemonCategory = PokemonCategory.EMPTY,
-                evolutions = emptyList(),
-                skills =
-                    PokemonDetailSkills(
-                        selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
-                        tmLearn = PokemonSkill.FAKE_TM_LEARN_SKILLS,
-                        eggLearn = PokemonSkill.FAKE_EGG_LEARN_SKILLS,
-                    ),
-                biomes = PokemonBiome.DUMMYS,
-                height = 0.7,
-                weight = 6.9,
             )
     }
 }

@@ -1,5 +1,7 @@
 package poke.rogue.helper.data.model
 
+import poke.rogue.helper.remote.dto.response.pokemon.PokemonSkillResponse
+
 data class PokemonSkill(
     val id: String,
     val name: String,
@@ -11,6 +13,7 @@ data class PokemonSkill(
 ) {
     companion object {
         const val NO_POWER_VALUE = -1
+        const val NO_ACCURACY_VALUE = -1
 
         val FAKE_EGG_LEARN_SKILLS =
             listOf(
@@ -67,7 +70,7 @@ data class PokemonSkill(
                     id = "2",
                     name = "울음소리",
                     level = 1,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -85,7 +88,7 @@ data class PokemonSkill(
                     id = "4",
                     name = "성장",
                     level = 6,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -94,7 +97,7 @@ data class PokemonSkill(
                     id = "5",
                     name = "씨뿌리기",
                     level = 9,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 90,
                     category = SkillCategory.changeStatusSkill,
@@ -112,7 +115,7 @@ data class PokemonSkill(
                     id = "7",
                     name = "독가루",
                     level = 15,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.POISON,
                     accuracy = 75,
                     category = SkillCategory.changeStatusSkill,
@@ -121,7 +124,7 @@ data class PokemonSkill(
                     id = "8",
                     name = "수면가루",
                     level = 15,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 75,
                     category = SkillCategory.changeStatusSkill,
@@ -148,7 +151,7 @@ data class PokemonSkill(
                     id = "11",
                     name = "달콤한향기",
                     level = 24,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -157,7 +160,7 @@ data class PokemonSkill(
                     id = "12",
                     name = "광합성",
                     level = 27,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -166,7 +169,7 @@ data class PokemonSkill(
                     id = "13",
                     name = "고민씨",
                     level = 30,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -206,7 +209,7 @@ data class PokemonSkill(
                     id = "2",
                     name = "울음소리",
                     level = 1,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -224,7 +227,7 @@ data class PokemonSkill(
                     id = "4",
                     name = "성장",
                     level = 6,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -233,7 +236,7 @@ data class PokemonSkill(
                     id = "5",
                     name = "씨뿌리기",
                     level = 9,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 90,
                     category = SkillCategory.changeStatusSkill,
@@ -251,7 +254,7 @@ data class PokemonSkill(
                     id = "7",
                     name = "독가루",
                     level = 15,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.POISON,
                     accuracy = 75,
                     category = SkillCategory.changeStatusSkill,
@@ -260,7 +263,7 @@ data class PokemonSkill(
                     id = "8",
                     name = "수면가루",
                     level = 15,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 75,
                     category = SkillCategory.changeStatusSkill,
@@ -287,7 +290,7 @@ data class PokemonSkill(
                     id = "11",
                     name = "달콤한향기",
                     level = 24,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.NORMAL,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -296,7 +299,7 @@ data class PokemonSkill(
                     id = "12",
                     name = "광합성",
                     level = 27,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -305,7 +308,7 @@ data class PokemonSkill(
                     id = "13",
                     name = "고민씨",
                     level = 30,
-                    power = PokemonSkill.NO_POWER_VALUE,
+                    power = NO_POWER_VALUE,
                     type = Type.GRASS,
                     accuracy = 100,
                     category = SkillCategory.changeStatusSkill,
@@ -331,3 +334,20 @@ data class PokemonSkill(
             )
     }
 }
+
+fun PokemonSkillResponse.toData(): PokemonSkill =
+    PokemonSkill(
+        id = id,
+        name = name,
+        level = level,
+        power = power,
+        type = Type.of(type),
+        accuracy = accuracy,
+        category =
+            SkillCategory(
+                category,
+                categoryLogo,
+            ),
+    )
+
+fun List<PokemonSkillResponse>.toData(): List<PokemonSkill> = map(PokemonSkillResponse::toData)

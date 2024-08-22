@@ -96,7 +96,7 @@
         <ImageView
             android:id="@+id/tv_item_pokemon_detail_skill_category"
             style="@style/TextAppearance.Poke.Description"
-            imageRes="@{skill.category.iconResId}"
+            imageUrl="@{skill.category.logo}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"

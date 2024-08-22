@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.dex.model
 
+import poke.rogue.helper.data.model.Evolution
 import poke.rogue.helper.presentation.dex.model.SingleEvolutionUiModel.Companion.DUMMY_ALOLA_RAICHU
 import poke.rogue.helper.presentation.dex.model.SingleEvolutionUiModel.Companion.DUMMY_EEVEE
 import poke.rogue.helper.presentation.dex.model.SingleEvolutionUiModel.Companion.DUMMY_ESPEON
@@ -65,3 +66,5 @@ data class EvolutionsUiModel(
             )
     }
 }
+
+fun List<Evolution>.toUi(): EvolutionsUiModel = EvolutionsUiModel(evolutions = map(Evolution::toUi))

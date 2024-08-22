@@ -7,6 +7,7 @@ import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.ui.component.PokeChip
 
 class BiomePokemonViewHolder(
     private val binding: ItemPokemonListPokemonBinding,
@@ -15,6 +16,7 @@ class BiomePokemonViewHolder(
     fun bind(pokemonItem: PokemonUiModel) {
         binding.pokemon = pokemonItem
         binding.listener = onClickPokemon
+        binding.spec = pokeChipSpec
         val typesLayout = binding.layoutItemPokemonPokemonTypes
 
         val pokemonTypesAdapter =
@@ -38,5 +40,7 @@ class BiomePokemonViewHolder(
                 iconSize = 14.dp,
                 spacing = 0.dp,
             )
+
+        private val pokeChipSpec = PokeChip.Spec.EMPTY
     }
 }

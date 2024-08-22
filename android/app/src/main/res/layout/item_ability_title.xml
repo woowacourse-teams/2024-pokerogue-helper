@@ -8,7 +8,7 @@
 
         <variable
             name="ability"
-            type="poke.rogue.helper.presentation.dex.model.AbilityTitleUiModel" />
+            type="poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel" />
 
         <variable
             name="onClickAbility"
@@ -16,21 +16,18 @@
 
     </data>
 
-
     <TextView
         android:id="@+id/tv_ability_title"
+        hidden="@{ability.hidden}"
+        onSingleClick="@{()->onClickAbility.navigateToAbilityDetail(ability.id)}"
+        passive="@{ability.passive}"
         android:layout_width="102dp"
         android:layout_height="67dp"
         android:background="@drawable/bg_ability_title"
-        android:backgroundTint="@color/poke_grey_80"
         android:gravity="center"
         android:text="@{ability.name}"
-        onSingleClick="@{()->onClickAbility.navigateToAbilityDetail(ability.id)}"
         android:textAppearance="@style/TextAppearance.Poke.TitleBold"
         android:textColor="@color/poke_white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="악취" />
 
 

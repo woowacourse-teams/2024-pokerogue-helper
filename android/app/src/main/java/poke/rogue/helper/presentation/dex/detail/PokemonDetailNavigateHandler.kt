@@ -6,4 +6,6 @@ interface PokemonDetailNavigateHandler {
     fun navigateToBiomeDetail(biomeId: String)
 
     fun navigateToHome()
+
+    fun navigateToPokemonDetail(pokemonId: String)
 }
