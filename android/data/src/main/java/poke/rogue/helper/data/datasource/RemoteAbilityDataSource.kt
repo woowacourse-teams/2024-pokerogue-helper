@@ -16,7 +16,7 @@ class RemoteAbilityDataSource(
     private val logger: AnalyticsLogger,
 ) {
     suspend fun abilities(): List<Ability> =
-        abilityService.abilities2()
+        abilityService.abilities()
             .onFailure {
                 logger.logError(throwable, "abilityService - abilities() 에서 발생")
             }
@@ -25,7 +25,7 @@ class RemoteAbilityDataSource(
 
     // TODO: 서비스에서 실제로 string 값을 보내준다면 id.toLong 에서 toLong 을 제거합시다
     suspend fun abilityDetail(id: String): AbilityDetail =
-        abilityService.ability2(id)
+        abilityService.ability(id)
             .onFailure {
                 logger.logError(throwable, "abilityService - ability($id) 에서 발생")
             }
