@@ -9,7 +9,7 @@ import com.pokerogue.external.pokemon.dto.pokemon.PokemonSaveResponse;
 import com.pokerogue.external.pokemon.dto.pokemon.StatDetail;
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonNameAndDexNumber;
 import com.pokerogue.external.pokemon.dto.pokemon.species.PokemonSpeciesResponse;
-import com.pokerogue.external.pokemon.dto.type.PokemonTypeResponse;
+import com.pokerogue.external.pokemon.dto.type.TypeResponse;
 import com.pokerogue.helper.ability.domain.PokemonAbility;
 import com.pokerogue.helper.type.domain.PokemonType;
 import java.util.Comparator;
@@ -50,7 +50,7 @@ public class DtoParser {
                 .orElse(NOT_EXIST_IN_API_RESPONSE);
     }
 
-    public PokemonType getPokemonType(PokemonTypeResponse pokemonTypeResponse, String typeImage) {
+    public PokemonType getPokemonType(TypeResponse pokemonTypeResponse, String typeImage) {
         String koName = getPossibleName(pokemonTypeResponse.names());
 
         return new PokemonType(pokemonTypeResponse.name(), koName, typeImage);

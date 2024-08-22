@@ -11,7 +11,7 @@ public record Pokemon2Response(
         String formName,
         String image,
         String backImage,
-        List<PokemonTypeResponse> pokemonPokemonTypeResponse,
+        List<PokemonTypeResponse> pokemonTypeResponse,
         Integer generation,
         Integer totalStats,
         Integer hp,
