@@ -179,12 +179,12 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
             for (Pokemon pokemon : pokemon2Repository.findAll().values()) {
                 List<String> normalForms = List.of("mega", "mega-x", "mega-y", "primal", "gigantamax", "eternamax");
-
                 if (normalForms.contains(regularize(pokemon.formName()))) {
 
-                    evolutionRepository.saveEdge(pokemon.id(),
-                            new Evolution(pokemon.speciesName(), pokemon.id(),
-                                    "", "", ""));
+                    evolutionRepository.saveEdge(
+                            pokemon.speciesName(),
+                            new Evolution(pokemon.speciesName(), "1", pokemon.id(), "", pokemon.formName())
+                    );
                 }
             }
             createEvolutionChains();
