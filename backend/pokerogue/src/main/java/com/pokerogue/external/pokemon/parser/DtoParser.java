@@ -50,10 +50,10 @@ public class DtoParser {
                 .orElse(NOT_EXIST_IN_API_RESPONSE);
     }
 
-    public PokemonType getPokemonType(TypeResponse pokemonTypeResponse, String typeImage) {
-        String koName = getPossibleName(pokemonTypeResponse.names());
+    public PokemonType getPokemonType(TypeResponse typeResponse, String typeImage) {
+        String koName = getPossibleName(typeResponse.names());
 
-        return new PokemonType(pokemonTypeResponse.name(), koName, typeImage);
+        return new PokemonType(typeResponse.name(), koName, typeImage);
     }
 
     public PokemonDetail getPokemonDetails(PokemonSaveResponse pokemonSaveResponse) {
