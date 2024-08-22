@@ -12,8 +12,8 @@ import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.util.context.startActivity
-import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
@@ -62,17 +62,15 @@ class BiomeDetailActivity :
                     is BiomeDetailUiEvent.NavigateToNextBiomeDetail -> {
                         val biomeId = event.biomeId
                         startActivity<BiomeDetailActivity> {
-                            putExtras(BiomeDetailActivity.intent(this@BiomeDetailActivity, biomeId))
+                            putExtras(intent(this@BiomeDetailActivity, biomeId))
                             analyticsLogger().logClickEvent(NAVIGATE_TO_NEXT_BIOME_DETAIL)
                         }
                     }
                     is BiomeDetailUiEvent.NavigateToPokemonDetail -> {
                         val pokemonId = event.pokemonId
-                        toast("Pokemon ID: $pokemonId")
-                        // TODO 포켓몬 상세 화면으로 이동
-//                        startActivity<PokemonDetailActivity> {
-//                            putExtras(PokemonDetailActivity.intent(this@BiomeDetailActivity, pokemonId))
-//                        }
+                        startActivity<PokemonDetailActivity> {
+                            putExtras(PokemonDetailActivity.intent(this@BiomeDetailActivity, pokemonId))
+                        }
                     }
                 }
             }

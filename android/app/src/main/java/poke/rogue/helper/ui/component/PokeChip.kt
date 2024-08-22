@@ -291,9 +291,10 @@ class PokeChip
                 // 그런데 바이옴 쪽에서 포켓몬 UI 를 pokeChip 을 사용한다.
                 // 이 때문에 바이옴 상세에서 에러가 터진다.
                 // PokeChip.bindPokeChip 메서드 참고
-                val EMPTY = Spec(
-                    label = "INVALID_LABEL"
-                )
+                val EMPTY =
+                    Spec(
+                        label = "INVALID_LABEL",
+                    )
             }
         }
 
