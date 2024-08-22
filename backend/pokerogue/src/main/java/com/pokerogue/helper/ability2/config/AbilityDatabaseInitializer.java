@@ -5,7 +5,6 @@ import com.pokerogue.helper.ability2.data.AbilityInfo;
 import com.pokerogue.helper.ability2.data.AbilityPokemon;
 import com.pokerogue.helper.ability2.data.AbilityPokemonInfo;
 import com.pokerogue.helper.ability2.repository.AbilityRepository;
-import com.pokerogue.helper.biome.data.BiomePokemonType;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.io.BufferedReader;
