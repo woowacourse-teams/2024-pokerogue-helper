@@ -32,7 +32,7 @@ data class Stat(
                     amount = 45,
                 ),
                 Stat(
-                    name = "totalStats",
+                    name = "total",
                     amount = 318,
                 ),
             )

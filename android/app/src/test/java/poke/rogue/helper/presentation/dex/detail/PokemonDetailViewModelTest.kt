@@ -8,9 +8,11 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.R
+import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.data.repository.DexRepository
+import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
@@ -89,6 +91,8 @@ class PokemonDetailViewModelTest {
                             PokemonDetailAbilityUiModel("450", "심록", false, false),
                             PokemonDetailAbilityUiModel("419", "엽록소", false, true),
                         ),
+                    evolutions =
+                        EvolutionsUiModel.DUMMY_PICAKCHU_EVOLUTION,
                     skills =
                         PokemonDetailSkills(
                             selfLearn = PokemonSkill.FAKE_SELF_LEARN_SKILLS,
@@ -97,6 +101,24 @@ class PokemonDetailViewModelTest {
                         ),
                     height = 0.7f,
                     weight = 6.9f,
+                    biomes =
+                        listOf(
+                            PokemonBiome(
+                                "1",
+                                "평야",
+                                "https://pokeroguedex.com/biomes/plains.png",
+                            ),
+                            PokemonBiome(
+                                "2",
+                                "높은 풀숲",
+                                "https://pokeroguedex.com/biomes/tall-grass.png",
+                            ),
+                            PokemonBiome(
+                                "3",
+                                "동굴",
+                                "https://pokeroguedex.com/biomes/cave.png",
+                            ),
+                        ),
                 )
         }
 }
