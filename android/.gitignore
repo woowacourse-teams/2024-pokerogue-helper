@@ -13,6 +13,7 @@ captures/
 .externalNativeBuild/
 .cxx/
 *.apk
+*.aab
 output.json
 
 # IntelliJ
@@ -26,6 +27,8 @@ render.experimental.xml
 *.jks
 *.keystore
 !debug.keystore
+*.dm
+output-metadata.json
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json

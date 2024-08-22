@@ -32,7 +32,7 @@ class PokemonAdapter(private val onClickPokeMonItem: PokemonListNavigateHandler)
     companion object {
         val poketmonComparator =
             ItemDiffCallback<PokemonUiModel>(
-                onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
+                onItemsTheSame = { oldItem, newItem -> oldItem.hashId == newItem.hashId },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
     }

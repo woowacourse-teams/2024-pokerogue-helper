@@ -62,7 +62,7 @@ class BiomeDetailActivity :
                     is BiomeDetailUiEvent.NavigateToNextBiomeDetail -> {
                         val biomeId = event.biomeId
                         startActivity<BiomeDetailActivity> {
-                            putExtras(intent(this@BiomeDetailActivity, biomeId))
+                            putExtras(BiomeDetailActivity.intent(this@BiomeDetailActivity, biomeId))
                             analyticsLogger().logClickEvent(NAVIGATE_TO_NEXT_BIOME_DETAIL)
                         }
                     }

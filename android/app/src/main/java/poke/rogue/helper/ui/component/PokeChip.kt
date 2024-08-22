@@ -335,5 +335,12 @@ class PokeChip
                 }
                 initPokeChip(chipSpec)
             }
+
+//        fun PokeChip.bindPokeChip(chipSpec: Spec?) {
+//            chipSpec?.let { initPokeChip(it) }
+//            if (chipSpec == null) {
+//                visibility = GONE
+//            }
+//        }
         }
     }
