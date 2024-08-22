@@ -26,12 +26,12 @@ android {
             storeFile = File("${project.rootDir.absolutePath}/keystore/debug.keystore")
             storePassword = "android"
         }
-//        create("release") {
-//            keyAlias = properties.getProperty("KEY_ALIAS")
-//            keyPassword = properties.getProperty("KEY_PASSWORD")
-//            storeFile = file("${project.rootDir.absolutePath}/keystore/poke_key.jks")
-//            storePassword = properties.getProperty("STORE_PASSWORD")
-//        }
+        create("release") {
+            keyAlias = properties.getProperty("KEY_ALIAS")
+            keyPassword = properties.getProperty("KEY_PASSWORD")
+            storeFile = file("${project.rootDir.absolutePath}/keystore/poke_key.jks")
+            storePassword = properties.getProperty("STORE_PASSWORD")
+        }
     }
     defaultConfig {
         applicationId = libs.versions.applicationId.get()
@@ -81,23 +81,15 @@ android {
         }
 
         release {
-            isMinifyEnabled = false
-//            isShrinkResources = true
-//            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
             )
+            signingConfig = signingConfigs.getByName("release")
         }
-    }
-
-    productFlavors {
-//        demo {
-//            applicationIdSuffix = ".demo"
-//            versionNameSuffix = "-demo"
-//        }
-//        full {
-//        }
     }
 
     compileOptions {
