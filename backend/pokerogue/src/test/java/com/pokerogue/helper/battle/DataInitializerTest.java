@@ -33,7 +33,7 @@ class DataInitializerTest {
             assertThat(pokemonMovesByMachineRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesBySelfRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesByEggRepository.findAll()).hasSize(1082);
-            assertThat(battlePokemonRepository.findAll()).hasSize(1350);
+            assertThat(battlePokemonRepository.findAll()).hasSize(1268);
             assertThat(typeMatchingRepository.findAll()).hasSize(361);
         });
     }
