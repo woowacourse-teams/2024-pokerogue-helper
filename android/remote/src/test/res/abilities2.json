@@ -1,0 +1,35 @@
+{
+  "message": "특성 리스트 불러오기에 성공했습니다.",
+  "data": [
+    {
+      "id": "pure_power",
+      "koName": "순수한힘",
+      "description": "요가의 힘으로 물리공격의 위력이 2배가 된다."
+    },
+    {
+      "id": "mummy",
+      "koName": "미라",
+      "description": "상대가 접촉하면 상대를 미라로 만들어버린다."
+    },
+    {
+      "id": "toxic_chain",
+      "koName": "독사슬",
+      "description": "독소를 머금은 사슬의 힘으로 기술에 맞은 상대를 맹독 상태로 만들 때가 있다."
+    },
+    {
+      "id": "shed_skin",
+      "koName": "탈피",
+      "description": "몸의 껍질을 벗어 던져 상태 이상을 회복할 때가 있다."
+    },
+    {
+      "id": "water_absorb",
+      "koName": "저수",
+      "description": "물타입의 기술을 받으면 데미지를 받지 않고 회복한다."
+    },
+    {
+      "id": "suction_cups",
+      "koName": "흡반",
+      "description": "흡반으로 지면에 달라붙어 포켓몬을 교체시키는 기술이나 도구의 효과를 발휘하지 못하게 한다."
+    }
+  ]
+}
