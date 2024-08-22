@@ -1,9 +1,9 @@
 package com.pokerogue.helper.pokemon2.config;
 
+import com.pokerogue.helper.pokemon2.data.Evolution;
 import com.pokerogue.helper.pokemon2.data.EvolutionChain;
 import com.pokerogue.helper.pokemon2.data.Move;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
-import com.pokerogue.helper.pokemon2.data.Evolution;
 import com.pokerogue.helper.pokemon2.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -178,7 +177,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
             }
 
             for (Pokemon pokemon : pokemon2Repository.findAll().values()) {
-                List<String> normalForms = List.of("mega", "mega-x", "mega-y", "primal", "gigantamax", "eternamax");
+                List<String> normalForms = List.of("mega", "mega_x", "mega_y", "primal", "gigantamax", "eternamax");
                 if (normalForms.contains(regularize(pokemon.formName()))) {
 
                     evolutionRepository.saveEdge(
