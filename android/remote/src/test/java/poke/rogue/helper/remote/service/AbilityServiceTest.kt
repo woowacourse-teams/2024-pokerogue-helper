@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import poke.rogue.helper.remote.dto.base.ApiResponse
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
+import poke.rogue.helper.remote.dto.response.ability.AbilityResponse2
 import poke.rogue.helper.remote.injector.RetrofitModule
 import poke.rogue.helper.remote.service.utils.getOrThrow
 import poke.rogue.helper.remote.service.utils.httpErrorResponse
@@ -37,6 +38,20 @@ class AbilityServiceTest {
     fun `포켓몬의 모든 특성들을 가져온다`() =
         runTest {
             // given
+            val fakeResponse = successResponse("abilities2")
+            mockWebServer.enqueue(fakeResponse)
+
+            // when
+            val actual: ApiResponse<List<AbilityResponse2>> = service.abilities2()
+
+            // then
+            actual.shouldBeSuccess()
+        }
+
+    @Test
+    fun `포켓몬의 모든 특성들을 가져온다 old api version`() =
+        runTest {
+            // given
             val fakeResponse = successResponse("abilities")
             mockWebServer.enqueue(fakeResponse)
             // when
@@ -46,7 +61,7 @@ class AbilityServiceTest {
         }
 
 //    @Test
-//    fun `id 에 해당하는 특성을 가져온다`() =
+//    fun `id 에 해당하는 특성을 가져온다  old api version`() =
 //        runTest {
 //            // given
 //            val fakeResponse = successResponse("ability")
@@ -88,7 +103,7 @@ class AbilityServiceTest {
         }
 
     @Test
-    fun `UnKnownException - 직렬화 예외 발생`() =
+    fun `UnKnownException - 직렬화 예외 발생  old api version`() =
         runTest {
             // given
             val fakeResponse = MockResponse()
