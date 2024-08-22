@@ -10,6 +10,7 @@ import okhttp3.mockwebserver.SocketPolicy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import poke.rogue.helper.remote.dto.base.ApiResponse
+import poke.rogue.helper.remote.dto.response.ability.AbilityDetailResponse2
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse2
 import poke.rogue.helper.remote.injector.RetrofitModule
@@ -60,6 +61,19 @@ class AbilityServiceTest {
             actual.shouldBeSuccess()
         }
 
+    @Test
+    fun `id 에 해당하는 특성을 가져온다`() =
+        runTest {
+            // given
+            val fakeResponse = successResponse("ability2")
+            mockWebServer.enqueue(fakeResponse)
+            // when
+            val actual: ApiResponse<AbilityDetailResponse2> = service.ability2("water_absorb")
+
+            // then
+            actual.shouldBeSuccess()
+        }
+
 //    @Test
 //    fun `id 에 해당하는 특성을 가져온다  old api version`() =
 //        runTest {
@@ -79,7 +93,7 @@ class AbilityServiceTest {
             val fakeResponse = httpErrorResponse(404)
             mockWebServer.enqueue(fakeResponse)
             // when
-            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
+            val actual: ApiResponse<List<AbilityResponse2>> = service.abilities2()
             // then
             assertSoftly {
                 actual.shouldBeHttpException()
@@ -94,7 +108,7 @@ class AbilityServiceTest {
             val fakeResponse = MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START)
             mockWebServer.enqueue(fakeResponse)
             // when
-            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
+            val actual: ApiResponse<List<AbilityResponse2>> = service.abilities2()
             // then
             assertSoftly {
                 actual.shouldBeNetworkException()
@@ -103,13 +117,13 @@ class AbilityServiceTest {
         }
 
     @Test
-    fun `UnKnownException - 직렬화 예외 발생  old api version`() =
+    fun `UnKnownException - 직렬화 예외 발생`() =
         runTest {
             // given
             val fakeResponse = MockResponse()
             mockWebServer.enqueue(fakeResponse)
             // when
-            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
+            val actual: ApiResponse<List<AbilityResponse2>> = service.abilities2()
             println(actual)
             // then
             assertSoftly {
