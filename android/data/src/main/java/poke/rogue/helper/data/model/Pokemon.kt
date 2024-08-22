@@ -11,6 +11,7 @@ data class Pokemon(
     val name: String,
     val formName: String = "",
     val imageUrl: String,
+    val backImageUrl: String,
     val types: List<Type>,
     val generation: PokemonGeneration = PokemonGeneration.ONE,
     val baseStat: Int = 0,
@@ -26,6 +27,7 @@ data class Pokemon(
         private const val DUMMY_IMAGE_URL =
             "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
         private val DUMMY_TYPES = listOf(Type.GRASS, Type.POISON)
+        private const val DUMMY_BACK_IMAGE_URL = ""
 
         val DUMMY =
             Pokemon(
@@ -33,6 +35,7 @@ data class Pokemon(
                 dexNumber = 1,
                 name = DUMMY_POKEMON_NAME,
                 imageUrl = DUMMY_IMAGE_URL,
+                backImageUrl = DUMMY_BACK_IMAGE_URL,
                 types = DUMMY_TYPES,
             )
     }
@@ -44,6 +47,7 @@ fun PokemonResponse.toData(): Pokemon =
         dexNumber = pokedexNumber,
         name = name,
         imageUrl = image,
+        backImageUrl = "",
         types = types.map(PokemonTypeResponse::toData),
     )
 
@@ -73,6 +77,7 @@ fun PokemonResponse2.toData(): Pokemon {
         name = formattedName,
         formName = formName,
         imageUrl = image,
+        backImageUrl = backImage,
         types = types.map(PokemonTypeResponse::toData),
         generation = PokemonGeneration.of(generation),
         baseStat = baseStats,
@@ -87,10 +92,11 @@ fun PokemonResponse2.toData(): Pokemon {
 
 fun PokemonEntity.toData(): Pokemon =
     Pokemon(
-        id = id.toString(),
+        id = id,
         dexNumber = dexNumber,
         name = name,
         imageUrl = imageUrl,
+        backImageUrl = backImageUrl,
         types = types.map(Type::valueOf),
         generation = PokemonGeneration.of(generation),
         baseStat = baseStat,
@@ -109,6 +115,7 @@ fun Pokemon.toEntity(): PokemonEntity =
         name = name,
         formName = formName,
         imageUrl = imageUrl,
+        backImageUrl = backImageUrl,
         types = types.map(Type::name).toSet(),
         generation = generation.number,
         baseStat = baseStat,
