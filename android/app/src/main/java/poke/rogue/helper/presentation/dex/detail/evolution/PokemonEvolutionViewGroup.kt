@@ -7,6 +7,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ViewGroupPokemonEvolutionBinding
+import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
+import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonEvolutionViewGroup
     @JvmOverloads
@@ -21,5 +23,8 @@ class PokemonEvolutionViewGroup
         init {
             recyclerView = binding.recyclerView
             recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            val itemDecoration =
+                LinearSpacingItemDecoration(spacing = 8.dp, orientation = LinearSpacingItemDecoration.Orientation.HORIZONTAL)
+            recyclerView.addItemDecoration(itemDecoration)
         }
     }
