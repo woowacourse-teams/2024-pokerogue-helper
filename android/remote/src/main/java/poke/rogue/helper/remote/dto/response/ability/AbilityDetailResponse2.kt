@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AbilityResponse(
-    val id: String,
+data class AbilityDetailResponse2(
     @SerialName("koName")
     val name: String,
     val description: String,
+    val pokemons: List<AbilityPokemonResponse>,
 )

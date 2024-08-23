@@ -1,6 +1,7 @@
 package poke.rogue.helper.data.model
 
 import poke.rogue.helper.local.entity.PokemonEntity
+import poke.rogue.helper.remote.dto.response.ability.AbilityPokemonResponse
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse
 import poke.rogue.helper.remote.dto.response.pokemon.PokemonResponse2
 import poke.rogue.helper.remote.dto.response.type.PokemonTypeResponse
@@ -128,3 +129,13 @@ fun Pokemon.toEntity(): PokemonEntity =
     )
 
 fun List<PokemonResponse>.toData(): List<Pokemon> = map(PokemonResponse::toData)
+
+fun AbilityPokemonResponse.toData(): Pokemon =
+    Pokemon(
+        id = id,
+        dexNumber = pokedexNumber,
+        name = name,
+        imageUrl = image,
+        backImageUrl = image,
+        types = pokemonTypeResponses.toData(),
+    )

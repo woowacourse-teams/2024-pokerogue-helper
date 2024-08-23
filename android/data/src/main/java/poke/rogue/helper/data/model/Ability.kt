@@ -8,10 +8,9 @@ data class Ability(
     val description: String,
 )
 
-// TODO: 서버에서 String 으로 주면 id.toString 제거해도 된다
 fun AbilityResponse.toData(): Ability =
     Ability(
-        id = id.toString(),
-        title = title,
+        id = id,
+        title = name,
         description = description,
     )
