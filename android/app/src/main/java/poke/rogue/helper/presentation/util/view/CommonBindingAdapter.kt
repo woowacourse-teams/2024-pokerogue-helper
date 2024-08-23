@@ -46,7 +46,6 @@ fun ImageView.setCroppedImage(imageUrl: String?) {
         .load(imageUrl)
         .placeholder(R.drawable.ic_pikachu_silhouette)
         .error(R.drawable.ic_ditto_silhouette)
-        .transform(CropMarginTransformation())
         .into(this)
 }
 

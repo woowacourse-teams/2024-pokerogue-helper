@@ -11,11 +11,12 @@ data class PokemonSkillUiModel(
     val level: Int,
     val power: String,
     val type: TypeUiModel,
-    val accuracy: Int,
+    val accuracy: String,
     val category: SkillCategory,
 ) {
     companion object {
         const val NO_POWER = "-"
+        const val NO_ACCURACY = "-"
     }
 }
 
@@ -26,7 +27,7 @@ fun PokemonSkill.toUi(): PokemonSkillUiModel =
         level = level,
         power = if (power == PokemonSkill.NO_POWER_VALUE) PokemonSkillUiModel.NO_POWER else power.toString(),
         type = type.toUi(),
-        accuracy = accuracy,
+        accuracy = if (accuracy == PokemonSkill.NO_ACCURACY_VALUE) PokemonSkillUiModel.NO_ACCURACY else accuracy.toString(),
         category = category,
     )
 
