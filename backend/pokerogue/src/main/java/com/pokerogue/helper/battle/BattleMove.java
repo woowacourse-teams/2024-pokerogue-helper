@@ -17,4 +17,8 @@ public record BattleMove(
         Integer generation,
         String flags
 ) {
+
+    public boolean isAttackMove() {
+        return this.category != MoveCategory.STATUS;
+    }
 }

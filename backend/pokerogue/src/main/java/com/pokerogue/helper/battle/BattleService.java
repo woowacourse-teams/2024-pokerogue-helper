@@ -66,14 +66,8 @@ public class BattleService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
         Type moveType = move.type();
 
-        double weatherMultiplier = getWeatherMultiplier(moveType, weather);
-        double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, rivalPokemon.pokemonTypes());
-        double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myPokemon);
-        double stringWindMultiplier = getStringWindMultiplier(moveType, rivalPokemon.pokemonTypes(), weather);
-
-        double totalMultiplier =
-                weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
         double finalAccuracy = calculateAccuracy(move, weather);
+        double totalMultiplier = getTotalMultiplier(move, weather, rivalPokemon, myPokemon);
 
         return new BattleResultResponse(
                 move.power(),
@@ -86,20 +80,51 @@ public class BattleService {
         );
     }
 
+    private double calculateAccuracy(BattleMove move, Weather weather) {
+        if (weather == Weather.FOG) {
+            return (double) move.accuracy() * 0.9;
+        }
+
+        return (double) move.accuracy();
+    }
+
+    private double getTotalMultiplier(
+            BattleMove move,
+            Weather weather,
+            BattlePokemon rivalPokemon,
+            BattlePokemon myPokemon) {
+        if (!move.isAttackMove()) {
+            return 1;
+        }
+        Type moveType = move.type();
+        double weatherMultiplier = getWeatherMultiplier(moveType, weather);
+        double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, rivalPokemon.pokemonTypes());
+        double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myPokemon);
+        double stringWindMultiplier = getStringWindMultiplier(moveType, rivalPokemon.pokemonTypes(), weather);
+
+        return weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
+    }
+
     private double getWeatherMultiplier(Type moveType, Weather weather) {
-        if (weather == Weather.SUNNY || weather == Weather.HARSH_SUN) {
-            if (moveType == Type.FIRE) {
+        if (moveType == Type.FIRE) {
+            if (weather == Weather.SUNNY || weather == Weather.HARSH_SUN) {
                 return 1.5;
             }
-            if (moveType == Type.WATER) {
+            if (weather == Weather.RAIN) {
                 return 0.5;
+            }
+            if (weather == Weather.HEAVY_RAIN) {
+                return 0;
             }
         }
-        if (weather == Weather.RAIN || weather == Weather.HEAVY_RAIN) {
-            if (moveType == Type.FIRE) {
+        if (moveType == Type.WATER) {
+            if (weather == Weather.SUNNY) {
                 return 0.5;
             }
-            if (moveType == Type.WATER) {
+            if (weather == Weather.HARSH_SUN) {
+                return 0;
+            }
+            if (weather == Weather.RAIN || weather == Weather.HEAVY_RAIN) {
                 return 1.5;
             }
         }
@@ -132,13 +157,5 @@ public class BattleService {
         }
 
         return 1;
-    }
-
-    private double calculateAccuracy(BattleMove move, Weather weather) {
-        if (weather == Weather.FOG) {
-            return (double) move.accuracy() * 0.9;
-        }
-
-        return (double) move.accuracy();
     }
 }
