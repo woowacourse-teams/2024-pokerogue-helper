@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -82,8 +83,10 @@ class SkillSelectionViewModel(
 
     fun updateSkills(pokemonDexNumber: Long) {
         viewModelScope.launch(errorHandler) {
+            _skills.value = emptyList()
             val availableSkills =
                 battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
+            delay(50)
             _skills.value = availableSkills.toSelectableModelsWithAllDeselected()
         }
     }
