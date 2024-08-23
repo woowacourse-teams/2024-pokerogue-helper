@@ -25,6 +25,7 @@ fun PokemonDetailResponse.toData(id: String): PokemonDetail =
                 dexNumber = dexNumber,
                 name = name,
                 imageUrl = imageUrl,
+                backImageUrl = "",
                 types = types.map(PokemonTypeResponse::toData),
             ),
         abilities = abilities.toData(),
