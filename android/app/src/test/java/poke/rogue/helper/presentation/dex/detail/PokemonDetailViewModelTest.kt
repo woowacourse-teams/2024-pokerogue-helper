@@ -11,6 +11,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonSkill
+import poke.rogue.helper.data.repository.BiomeRepository
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
@@ -18,24 +19,31 @@ import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
+import poke.rogue.helper.testing.data.repository.FakeBiomeRepository
 import poke.rogue.helper.testing.data.repository.FakeDexRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
 class PokemonDetailViewModelTest {
-    private lateinit var repository: DexRepository
+    private lateinit var dexRepository: DexRepository
+    private lateinit var biomeRepository: BiomeRepository
     private lateinit var viewModel: PokemonDetailViewModel
 
     @BeforeEach
     fun setUp() {
-        repository = FakeDexRepository()
+        dexRepository = FakeDexRepository()
+        biomeRepository = FakeBiomeRepository()
     }
 
     @Test
     fun `포켓몬 상세 데이터를 불러올 때 처음은 로딩 상태이다`() =
         runTest {
             // given
-            viewModel = PokemonDetailViewModel(repository)
+            viewModel =
+                PokemonDetailViewModel(
+                    dexRepository,
+                    biomeRepository,
+                )
 
             // when
             val expectedPokemonDetailUiState = viewModel.uiState
@@ -48,7 +56,11 @@ class PokemonDetailViewModelTest {
     fun `포켓몬 상세 데이터를 불러온다`() =
         runTest {
             // given
-            viewModel = PokemonDetailViewModel(repository)
+            viewModel =
+                PokemonDetailViewModel(
+                    dexRepository,
+                    biomeRepository,
+                )
 
             // when
             viewModel.updatePokemonDetail(pokemonId = "1")

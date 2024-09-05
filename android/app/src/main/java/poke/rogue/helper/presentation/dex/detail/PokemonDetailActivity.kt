@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
+import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
@@ -25,7 +26,7 @@ import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
-        PokemonDetailViewModel.factory(DefaultDexRepository.instance())
+        PokemonDetailViewModel.factory(DefaultDexRepository.instance(), DefaultBiomeRepository.instance())
     }
 
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
@@ -78,6 +79,16 @@ class PokemonDetailActivity :
                     is PokemonDetailUiState.IsLoading -> return@collect
                     is PokemonDetailUiState.Success -> {
                         bindPokemonDetail(pokemonDetail)
+                    }
+                }
+            }
+        }
+        repeatOnStarted {
+            viewModel.uiState2.collect { pokemonDetail ->
+                when (pokemonDetail) {
+                    is PokemonDetailUiState2.IsLoading -> return@collect
+                    is PokemonDetailUiState2.Success -> {
+                        bindPokemonDetail2(pokemonDetail)
                     }
                 }
             }
@@ -135,6 +146,28 @@ class PokemonDetailActivity :
 
         pokemonTypesAdapter.addTypes(
             types = pokemonDetail.pokemon.types,
+            config = typesUiConfig,
+            spacingBetweenTypes = 0.dp,
+        )
+    }
+
+    private fun bindPokemonDetail2(pokemonDetail2: PokemonDetailUiState2.Success) {
+        with(binding) {
+            ivPokemonDetailPokemon.loadImageWithProgress(
+                pokemonDetail2.pokemon.imageUrl,
+                progressIndicatorPokemonDetail,
+            )
+
+            tvPokemonDetailPokemonName.text =
+                stringOf(
+                    R.string.pokemon_list_poke_name_format,
+                    pokemonDetail2.pokemon.name,
+                    pokemonDetail2.pokemon.dexNumber,
+                )
+        }
+
+        pokemonTypesAdapter.addTypes(
+            types = pokemonDetail2.pokemon.types,
             config = typesUiConfig,
             spacingBetweenTypes = 0.dp,
         )

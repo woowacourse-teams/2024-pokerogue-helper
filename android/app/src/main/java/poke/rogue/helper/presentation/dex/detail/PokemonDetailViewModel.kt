@@ -14,19 +14,27 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.data.repository.BiomeRepository
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
+    private val biomeRepository: BiomeRepository,
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-        PokemonDetailNavigateHandler {
+    PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> =
         MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
+
+    private val _uiState2: MutableStateFlow<PokemonDetailUiState2> = MutableStateFlow(PokemonDetailUiState2.IsLoading)
+    val uiState2 = _uiState2.asStateFlow()
+
+    val isEmpty2: StateFlow<Boolean> = uiState2.map { it is PokemonDetailUiState2.IsLoading }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), true)
 
     val isEmpty: StateFlow<Boolean> =
         uiState.map { it is PokemonDetailUiState.IsLoading }
@@ -44,10 +52,17 @@ class PokemonDetailViewModel(
     private val _navigateToPokemonDetailEvent = MutableSharedFlow<String>()
     val navigateToPokemonDetailEvent = _navigateToPokemonDetailEvent.asSharedFlow()
 
-    fun updatePokemonDetail(pokemonId: String) {
+    fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch {
             _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
+        }
+
+        viewModelScope.launch {
+            val pd = dexRepository.pokemonDetail(pokemonId)
+            val biomes = biomeRepository.biomes()
+
+            _uiState2.value = pd.toUi(biomes)
         }
     }
 
@@ -76,7 +91,9 @@ class PokemonDetailViewModel(
     }
 
     companion object {
-        fun factory(dexRepository: DexRepository): ViewModelProvider.Factory =
-            BaseViewModelFactory { PokemonDetailViewModel(dexRepository) }
+        fun factory(
+            dexRepository: DexRepository,
+            biomeRepository: BiomeRepository,
+        ): ViewModelProvider.Factory = BaseViewModelFactory { PokemonDetailViewModel(dexRepository, biomeRepository) }
     }
 }
