@@ -13,7 +13,6 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonStatBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState2
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -36,10 +35,10 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
 
         initAdapter()
         repeatOnStarted {
-            activityViewModel.uiState2.collect { uiState ->
+            activityViewModel.uiState.collect { uiState ->
                 when (uiState) {
-                    is PokemonDetailUiState2.IsLoading -> return@collect
-                    is PokemonDetailUiState2.Success -> bindData2(uiState)
+                    is PokemonDetailUiState.IsLoading -> return@collect
+                    is PokemonDetailUiState.Success -> bindData(uiState)
                 }
             }
         }
@@ -65,10 +64,10 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
         }
     }
 
-    private fun bindData2(uiState2: PokemonDetailUiState2.Success) {
+    private fun bindData(uiState: PokemonDetailUiState.Success) {
         binding.apply {
-            pokemonStatAdapter.submitList(uiState2.stats)
-            abilityAdapter.submitList(uiState2.abilities)
+            pokemonStatAdapter.submitList(uiState.stats)
+            abilityAdapter.submitList(uiState.abilities)
         }
     }
 

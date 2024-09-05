@@ -74,11 +74,11 @@ class PokemonDetailActivity :
 
     private fun observePokemonDetailUi() {
         repeatOnStarted {
-            viewModel.uiState2.collect { pokemonDetail ->
+            viewModel.uiState.collect { pokemonDetail ->
                 when (pokemonDetail) {
-                    is PokemonDetailUiState2.IsLoading -> return@collect
-                    is PokemonDetailUiState2.Success -> {
-                        bindPokemonDetail2(pokemonDetail)
+                    is PokemonDetailUiState.IsLoading -> return@collect
+                    is PokemonDetailUiState.Success -> {
+                        bindPokemonDetail(pokemonDetail)
                     }
                 }
             }
@@ -136,28 +136,6 @@ class PokemonDetailActivity :
 
         pokemonTypesAdapter.addTypes(
             types = pokemonDetail.pokemon.types,
-            config = typesUiConfig,
-            spacingBetweenTypes = 0.dp,
-        )
-    }
-
-    private fun bindPokemonDetail2(pokemonDetail2: PokemonDetailUiState2.Success) {
-        with(binding) {
-            ivPokemonDetailPokemon.loadImageWithProgress(
-                pokemonDetail2.pokemon.imageUrl,
-                progressIndicatorPokemonDetail,
-            )
-
-            tvPokemonDetailPokemonName.text =
-                stringOf(
-                    R.string.pokemon_list_poke_name_format,
-                    pokemonDetail2.pokemon.name,
-                    pokemonDetail2.pokemon.dexNumber,
-                )
-        }
-
-        pokemonTypesAdapter.addTypes(
-            types = pokemonDetail2.pokemon.types,
             config = typesUiConfig,
             spacingBetweenTypes = 0.dp,
         )

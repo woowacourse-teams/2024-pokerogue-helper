@@ -9,7 +9,6 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonSkillsBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState2
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -75,10 +74,10 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
 
     private fun initObservers() {
         repeatOnStarted {
-            activityViewModel.uiState2.collect { state ->
+            activityViewModel.uiState.collect { state ->
                 when (state) {
-                    is PokemonDetailUiState2.IsLoading -> {}
-                    is PokemonDetailUiState2.Success -> {
+                    is PokemonDetailUiState.IsLoading -> {}
+                    is PokemonDetailUiState.Success -> {
                         eggSkillsAdapter.submitList(state.skills.eggLearn.toUi())
                         skillsAdapter.submitList(state.skills.selfLearn.toUi())
                     }

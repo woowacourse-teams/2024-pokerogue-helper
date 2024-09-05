@@ -7,7 +7,6 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonEvolutionBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState2
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
@@ -40,10 +39,10 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
     private fun initObserver() {
         repeatOnStarted {
-            activityViewModel.uiState2.collect { uiState ->
+            activityViewModel.uiState.collect { uiState ->
                 when (uiState) {
-                    is PokemonDetailUiState2.IsLoading -> {}
-                    is PokemonDetailUiState2.Success -> {
+                    is PokemonDetailUiState.IsLoading -> {}
+                    is PokemonDetailUiState.Success -> {
                         binding.evolutions = uiState.evolutions
                         uiState.evolutions.apply {
                             evolutions(depth = 0).let(evolutionDepth0Adapter::submitList)

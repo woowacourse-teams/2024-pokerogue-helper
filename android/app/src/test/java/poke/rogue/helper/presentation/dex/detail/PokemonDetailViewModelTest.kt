@@ -8,12 +8,12 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.R
-import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.data.repository.BiomeRepository
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
+import poke.rogue.helper.presentation.dex.model.PokemonBiomeUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
@@ -115,20 +115,23 @@ class PokemonDetailViewModelTest {
                     weight = 6.9f,
                     biomes =
                         listOf(
-                            PokemonBiome(
-                                "1",
-                                "평야",
-                                "https://pokeroguedex.com/biomes/plains.png",
+                            PokemonBiomeUiModel(
+                                id = "1",
+                                name = "평야",
+                                imageUrl = "https://pokeroguedex.com/biomes/plains.png",
+                                types = listOf(TypeUiModel.GRASS),
                             ),
-                            PokemonBiome(
-                                "2",
-                                "높은 풀숲",
-                                "https://pokeroguedex.com/biomes/tall-grass.png",
+                            PokemonBiomeUiModel(
+                                id = "2",
+                                name = "높은 풀숲",
+                                imageUrl = "https://pokeroguedex.com/biomes/tall-grass.png",
+                                types = listOf(TypeUiModel.GRASS),
                             ),
-                            PokemonBiome(
-                                "3",
+                            PokemonBiomeUiModel(
+                                id = "3",
                                 "동굴",
                                 "https://pokeroguedex.com/biomes/cave.png",
+                                types = listOf(TypeUiModel.GRASS),
                             ),
                         ),
                 )

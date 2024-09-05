@@ -1,7 +1,6 @@
 package poke.rogue.helper.presentation.dex.detail
 
 import poke.rogue.helper.data.model.Biome
-import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.Stat
@@ -22,29 +21,13 @@ sealed interface PokemonDetailUiState {
         val skills: PokemonDetailSkills,
         val height: Float,
         val weight: Float,
-        val biomes: List<PokemonBiome>,
+        val biomes: List<PokemonBiomeUiModel>,
     ) : PokemonDetailUiState
 
     data object IsLoading : PokemonDetailUiState
 }
 
-sealed interface PokemonDetailUiState2 {
-    data class Success(
-        val pokemon: PokemonUiModel,
-        val stats: List<StatUiModel>,
-        val abilities: List<PokemonDetailAbilityUiModel>,
-        val evolutions: EvolutionsUiModel,
-        val skills: PokemonDetailSkills,
-        val height: Float,
-        val weight: Float,
-        val biomes: List<PokemonBiomeUiModel>,
-    ) : PokemonDetailUiState2
-
-    data object IsLoading : PokemonDetailUiState2
-}
-
-
-fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
+fun PokemonDetail.toUi(allBiomes: List<Biome>): PokemonDetailUiState.Success =
     PokemonDetailUiState.Success(
         pokemon = pokemon.toUi(),
         stats = stats.map(Stat::toUi),
@@ -53,16 +36,5 @@ fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
         skills = skills,
         height = height.toFloat(),
         weight = weight.toFloat(),
-        biomes = biomes,
+        biomes = biomes.toUi(allBiomes),
     )
-
-fun PokemonDetail.toUi(allBiomes: List<Biome>): PokemonDetailUiState2.Success = PokemonDetailUiState2.Success(
-    pokemon = pokemon.toUi(),
-    stats = stats.map(Stat::toUi),
-    abilities = abilities.toPokemonDetailUi(),
-    evolutions = evolutions.toUi(),
-    skills = skills,
-    height = height.toFloat(),
-    weight = weight.toFloat(),
-    biomes = biomes.toUi(allBiomes),
-)

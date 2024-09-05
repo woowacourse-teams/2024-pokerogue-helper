@@ -25,16 +25,9 @@ class PokemonDetailViewModel(
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-    PokemonDetailNavigateHandler {
-    private val _uiState: MutableStateFlow<PokemonDetailUiState> =
-        MutableStateFlow(PokemonDetailUiState.IsLoading)
+        PokemonDetailNavigateHandler {
+    private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
-
-    private val _uiState2: MutableStateFlow<PokemonDetailUiState2> = MutableStateFlow(PokemonDetailUiState2.IsLoading)
-    val uiState2 = _uiState2.asStateFlow()
-
-    val isEmpty2: StateFlow<Boolean> = uiState2.map { it is PokemonDetailUiState2.IsLoading }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), true)
 
     val isEmpty: StateFlow<Boolean> =
         uiState.map { it is PokemonDetailUiState.IsLoading }
@@ -55,14 +48,10 @@ class PokemonDetailViewModel(
     fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch {
-            _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
-        }
-
-        viewModelScope.launch {
             val pd = dexRepository.pokemonDetail(pokemonId)
             val biomes = biomeRepository.biomes()
 
-            _uiState2.value = pd.toUi(biomes)
+            _uiState.value = pd.toUi(biomes)
         }
     }
 

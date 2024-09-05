@@ -12,15 +12,16 @@ data class PokemonBiomeUiModel(
     val types: List<TypeUiModel>,
 )
 
-fun List<PokemonBiome>.toUi(allBiomes: List<Biome>): List<PokemonBiomeUiModel> = this.flatMap { pokemonBiome ->
-    allBiomes.filter { biome ->
-        pokemonBiome.id == biome.id
-    }.map { biome ->
-        PokemonBiomeUiModel(
-            id = pokemonBiome.id,
-            name = biome.name,
-            imageUrl = biome.image,
-            types = biome.pokemonType.toUi(),
-        )
+fun List<PokemonBiome>.toUi(allBiomes: List<Biome>): List<PokemonBiomeUiModel> =
+    this.flatMap { pokemonBiome ->
+        allBiomes.filter { biome ->
+            pokemonBiome.id == biome.id
+        }.map { biome ->
+            PokemonBiomeUiModel(
+                id = pokemonBiome.id,
+                name = biome.name,
+                imageUrl = biome.image,
+                types = biome.pokemonType.toUi(),
+            )
+        }
     }
-}
