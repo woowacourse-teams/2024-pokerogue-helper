@@ -36,14 +36,6 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
 
         initAdapter()
         repeatOnStarted {
-            activityViewModel.uiState.collect { uiState ->
-                when (uiState) {
-                    is PokemonDetailUiState.IsLoading -> return@collect
-                    is PokemonDetailUiState.Success -> bindDatas(uiState)
-                }
-            }
-        }
-        repeatOnStarted {
             activityViewModel.uiState2.collect { uiState ->
                 when (uiState) {
                     is PokemonDetailUiState2.IsLoading -> return@collect
@@ -77,13 +69,6 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
         binding.apply {
             pokemonStatAdapter.submitList(uiState2.stats)
             abilityAdapter.submitList(uiState2.abilities)
-        }
-    }
-
-    private fun bindDatas(uiState: PokemonDetailUiState.Success) {
-        binding.apply {
-            pokemonStatAdapter.submitList(uiState.stats)
-            abilityAdapter.submitList(uiState.abilities)
         }
     }
 
