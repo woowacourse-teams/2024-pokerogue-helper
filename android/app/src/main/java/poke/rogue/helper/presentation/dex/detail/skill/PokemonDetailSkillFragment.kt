@@ -75,18 +75,6 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
 
     private fun initObservers() {
         repeatOnStarted {
-            activityViewModel.uiState.collect { state ->
-                when (state) {
-                    is PokemonDetailUiState.IsLoading -> {}
-                    // TODO: skill 을 현재는 한 종류의 스킬 목록만 사용하고 있음..... 이후에는 여러개의 스킬을 받아야함
-                    is PokemonDetailUiState.Success -> {
-                        eggSkillsAdapter.submitList(state.skills.eggLearn.toUi())
-                        skillsAdapter.submitList(state.skills.selfLearn.toUi())
-                    }
-                }
-            }
-        }
-        repeatOnStarted {
             activityViewModel.uiState2.collect { state ->
                 when (state) {
                     is PokemonDetailUiState2.IsLoading -> {}
