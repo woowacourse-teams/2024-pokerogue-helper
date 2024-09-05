@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.battle.selection.pokemon
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -12,9 +13,12 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.selectedPokemonOrNull
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
+import poke.rogue.helper.presentation.util.activity.hideKeyboard
+import poke.rogue.helper.presentation.util.fragment.hideKeyboard
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
+import poke.rogue.helper.presentation.util.view.setOnSearchAction
 
 class PokemonSelectionFragment :
     ErrorHandleFragment<FragmentPokemonSelectionBinding>(R.layout.fragment_pokemon_selection) {
@@ -40,6 +44,7 @@ class PokemonSelectionFragment :
     ) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        initListener()
         initObserver()
     }
 
@@ -55,6 +60,16 @@ class PokemonSelectionFragment :
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initListener() {
+        binding.rvPokemons.setOnTouchListener { _, _ ->
+            hideKeyboard()
+            false
+        }
+
+        binding.etPokemonSelectionSearch.setOnSearchAction { hideKeyboard() }
+    }
+
     private fun initObserver() {
         repeatOnStarted {
             viewModel.filteredPokemon.collect {
@@ -64,6 +79,7 @@ class PokemonSelectionFragment :
 
         repeatOnStarted {
             viewModel.pokemonSelectedEvent.collect {
+                requireActivity().hideKeyboard()
                 sharedViewModel.selectPokemon(it)
             }
         }

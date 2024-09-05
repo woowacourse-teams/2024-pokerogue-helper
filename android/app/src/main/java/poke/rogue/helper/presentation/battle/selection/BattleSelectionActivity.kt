@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.battle.selection
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.model.SelectionData
+import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
@@ -36,14 +38,26 @@ class BattleSelectionActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
+        initListener()
         initObserver()
     }
 
     private fun initViews() {
         binding.lifecycleOwner = this
         binding.vm = viewModel
-        binding.pagerBattleSelection.adapter = selectionPagerAdapter
-        binding.pagerBattleSelection.isUserInputEnabled = false
+
+        with(binding.pagerBattleSelection) {
+            adapter = selectionPagerAdapter
+            isUserInputEnabled = false
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initListener() {
+        binding.root.setOnTouchListener { v, event ->
+            hideKeyboard()
+            true
+        }
     }
 
     private fun initObserver() {

@@ -1,9 +1,11 @@
 package poke.rogue.helper.presentation.util.fragment
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -85,4 +87,9 @@ val Fragment.viewLifeCycleScope
 
 inline fun <reified T : Activity> Fragment.startActivity(argusBuilder: Intent.() -> Unit = {}) {
     startActivity(Intent(requireContext(), T::class.java).apply(argusBuilder))
+}
+
+fun Fragment.hideKeyboard() {
+    val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(requireView().windowToken, 0)
 }
