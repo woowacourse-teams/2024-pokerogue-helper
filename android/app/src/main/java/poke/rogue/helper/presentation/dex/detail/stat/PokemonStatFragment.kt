@@ -13,6 +13,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonStatBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState2
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -42,6 +43,14 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
                 }
             }
         }
+        repeatOnStarted {
+            activityViewModel.uiState2.collect { uiState ->
+                when (uiState) {
+                    is PokemonDetailUiState2.IsLoading -> return@collect
+                    is PokemonDetailUiState2.Success -> bindData2(uiState)
+                }
+            }
+        }
     }
 
     override fun onResume() {
@@ -61,6 +70,13 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
                     orientation = LinearSpacingItemDecoration.Orientation.HORIZONTAL,
                 ),
             )
+        }
+    }
+
+    private fun bindData2(uiState2: PokemonDetailUiState2.Success) {
+        binding.apply {
+            pokemonStatAdapter.submitList(uiState2.stats)
+            abilityAdapter.submitList(uiState2.abilities)
         }
     }
 
