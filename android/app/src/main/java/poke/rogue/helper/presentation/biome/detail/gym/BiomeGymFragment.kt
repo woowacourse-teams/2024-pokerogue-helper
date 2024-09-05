@@ -36,6 +36,9 @@ class BiomeGymFragment :
     private fun initObservers() {
         repeatOnStarted {
             viewModel.uiState.collect { state ->
+                state.gymPokemons.isEmpty().let {
+                    binding.biomeDetailEmpty.visibility = if (it) View.VISIBLE else View.GONE
+                }
                 gymPokemonAdapter.submitList(state.gymPokemons)
             }
         }

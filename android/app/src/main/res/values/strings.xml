@@ -93,6 +93,9 @@
         <item>다음 바이옴</item>
     </string-array>
 
+    <!--    biome detail gym -->
+    <string name="biome_detail_gym">등장하는 체육관 관장이 없어요</string>
+
     <!--    item -->
     <string name="item_title_name">아이템 도감</string>
 
