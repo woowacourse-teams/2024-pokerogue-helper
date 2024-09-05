@@ -96,6 +96,9 @@
     <!--    biome detail gym -->
     <string name="biome_detail_gym">등장하는 체육관 관장이 없어요</string>
 
+    <!--    biome detail boss -->
+    <string name="biome_detail_boss">등장하는 보스 포켓몬이 없어요</string>
+
     <!--    item -->
     <string name="item_title_name">아이템 도감</string>
 

@@ -36,6 +36,9 @@ class BiomeBossFragment :
     private fun initObservers() {
         repeatOnStarted {
             viewModel.uiState.collect { state ->
+                state.bossPokemons.isEmpty().let {
+                    binding.biomeDetailEmpty.visibility = if (it) View.VISIBLE else View.GONE
+                }
                 bossPokemonAdapter.submitList(state.bossPokemons)
             }
         }
