@@ -48,10 +48,10 @@ class PokemonDetailViewModel(
     fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch {
-            val pd = dexRepository.pokemonDetail(pokemonId)
+            val pokemonDetail = dexRepository.pokemonDetail(pokemonId)
             val biomes = biomeRepository.biomes()
 
-            _uiState.value = pd.toUi(biomes)
+            _uiState.value = pokemonDetail.toUi(biomes)
         }
     }
 

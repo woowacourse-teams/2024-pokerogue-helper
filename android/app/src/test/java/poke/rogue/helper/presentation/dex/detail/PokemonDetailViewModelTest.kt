@@ -13,7 +13,6 @@ import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.data.repository.BiomeRepository
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
-import poke.rogue.helper.presentation.dex.model.PokemonBiomeUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
@@ -113,27 +112,7 @@ class PokemonDetailViewModelTest {
                         ),
                     height = 0.7f,
                     weight = 6.9f,
-                    biomes =
-                        listOf(
-                            PokemonBiomeUiModel(
-                                id = "1",
-                                name = "평야",
-                                imageUrl = "https://pokeroguedex.com/biomes/plains.png",
-                                types = listOf(TypeUiModel.GRASS),
-                            ),
-                            PokemonBiomeUiModel(
-                                id = "2",
-                                name = "높은 풀숲",
-                                imageUrl = "https://pokeroguedex.com/biomes/tall-grass.png",
-                                types = listOf(TypeUiModel.GRASS),
-                            ),
-                            PokemonBiomeUiModel(
-                                id = "3",
-                                "동굴",
-                                "https://pokeroguedex.com/biomes/cave.png",
-                                types = listOf(TypeUiModel.GRASS),
-                            ),
-                        ),
+                    biomes = listOf(),
                 )
         }
 }
