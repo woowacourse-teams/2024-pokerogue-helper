@@ -7,6 +7,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonInformationBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState2
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
@@ -35,15 +36,25 @@ class PokemonInformationFragment :
     }
 
     private fun initObserver() {
+//        repeatOnStarted {
+//            activityViewModel.uiState.collect { pokemonDetailUiState ->
+//                when (pokemonDetailUiState) {
+//                    is PokemonDetailUiState.IsLoading -> {}
+//                    is PokemonDetailUiState.Success -> biomesAdapter.submitList(pokemonDetailUiState.biomes)
+//                }
+//            }
+//        }
+
         repeatOnStarted {
-            activityViewModel.uiState.collect { pokemonDetailUiState ->
-                when (pokemonDetailUiState) {
-                    is PokemonDetailUiState.IsLoading -> {}
-                    is PokemonDetailUiState.Success -> biomesAdapter.submitList(pokemonDetailUiState.biomes)
+            activityViewModel.uiState2.collect { pokemonDetailUiState2 ->
+                when (pokemonDetailUiState2) {
+                    is PokemonDetailUiState2.IsLoading -> {}
+                    is PokemonDetailUiState2.Success -> biomesAdapter.submitList(pokemonDetailUiState2.biomes)
                 }
             }
         }
     }
+
 
     override fun onResume() {
         super.onResume()
