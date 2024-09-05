@@ -74,16 +74,6 @@ class PokemonDetailActivity :
 
     private fun observePokemonDetailUi() {
         repeatOnStarted {
-            viewModel.uiState.collect { pokemonDetail ->
-                when (pokemonDetail) {
-                    is PokemonDetailUiState.IsLoading -> return@collect
-                    is PokemonDetailUiState.Success -> {
-                        bindPokemonDetail(pokemonDetail)
-                    }
-                }
-            }
-        }
-        repeatOnStarted {
             viewModel.uiState2.collect { pokemonDetail ->
                 when (pokemonDetail) {
                     is PokemonDetailUiState2.IsLoading -> return@collect
