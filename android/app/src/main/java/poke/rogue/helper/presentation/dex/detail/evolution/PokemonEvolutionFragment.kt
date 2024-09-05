@@ -40,23 +40,6 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
     private fun initObserver() {
         repeatOnStarted {
-            activityViewModel.uiState.collect { uiState ->
-                when (uiState) {
-                    is PokemonDetailUiState.IsLoading -> {}
-                    is PokemonDetailUiState.Success -> {
-                        binding.evolutions = uiState.evolutions
-                        uiState.evolutions.apply {
-                            evolutions(depth = 0).let(evolutionDepth0Adapter::submitList)
-                            evolutions(depth = 1).let(evolutionDepth1Adapter::submitList)
-                            evolutions(depth = 2).let(evolutionDepth2Adapter::submitList)
-                            evolutions(depth = 3).let(evolutionDepth3Adapter::submitList)
-                        }
-                    }
-                }
-            }
-        }
-
-        repeatOnStarted {
             activityViewModel.uiState2.collect { uiState ->
                 when (uiState) {
                     is PokemonDetailUiState2.IsLoading -> {}
