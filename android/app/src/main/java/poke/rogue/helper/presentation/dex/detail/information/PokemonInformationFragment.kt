@@ -36,15 +36,6 @@ class PokemonInformationFragment :
     }
 
     private fun initObserver() {
-//        repeatOnStarted {
-//            activityViewModel.uiState.collect { pokemonDetailUiState ->
-//                when (pokemonDetailUiState) {
-//                    is PokemonDetailUiState.IsLoading -> {}
-//                    is PokemonDetailUiState.Success -> biomesAdapter.submitList(pokemonDetailUiState.biomes)
-//                }
-//            }
-//        }
-
         repeatOnStarted {
             activityViewModel.uiState2.collect { pokemonDetailUiState2 ->
                 when (pokemonDetailUiState2) {
