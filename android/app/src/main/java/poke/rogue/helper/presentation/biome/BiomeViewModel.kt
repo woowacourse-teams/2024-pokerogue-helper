@@ -23,12 +23,15 @@ class BiomeViewModel(
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-        BiomeUiEventHandler {
+    BiomeUiEventHandler {
     private val _biome = MutableStateFlow<BiomeUiState<List<Biome>>>(BiomeUiState.Loading)
     val biome = _biome.asStateFlow()
 
     private val _navigationToDetailEvent = MutableSharedFlow<String>()
     val navigationToDetailEvent: SharedFlow<String> = _navigationToDetailEvent.asSharedFlow()
+
+    private val _navigateToGuideEvent = MutableSharedFlow<Unit>()
+    val navigateToGuideEvent: SharedFlow<Unit> = _navigateToGuideEvent.asSharedFlow()
 
     init {
         refreshEvent
@@ -49,6 +52,12 @@ class BiomeViewModel(
     override fun navigateToDetail(biomeId: String) {
         viewModelScope.launch {
             _navigationToDetailEvent.emit(biomeId)
+        }
+    }
+
+    override fun navigateToGuide() {
+        viewModelScope.launch {
+            _navigateToGuideEvent.emit(Unit)
         }
     }
 
