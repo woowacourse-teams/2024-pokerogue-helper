@@ -5,7 +5,6 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
 
-
 fun AnalyticsLogger.logPokemonSort(sort: PokemonSortUiModel) {
     val eventType = "pokemon_dex_sort"
     logEvent(

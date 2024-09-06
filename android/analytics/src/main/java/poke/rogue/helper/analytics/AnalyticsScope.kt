@@ -15,8 +15,9 @@ import timber.log.Timber
  *
  *  ref: https://velog.io/@murjune/kotlin-Coroutine-supervisorScope-vs-SupervisorJob-%EC%96%B4%EB%96%A4%EA%B1%B8-%EC%82%AC%EC%9A%A9%ED%95%98%EB%9D%BC%EB%8A%94%EA%B1%B0%EC%A7%80
  */
-private val analyticsExcpetionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-    Timber.e(throwable)
-}
+private val analyticsExcpetionHandler =
+    CoroutineExceptionHandler { coroutineContext, throwable ->
+        Timber.e(throwable)
+    }
 internal val analyticsScope =
     CoroutineScope(SupervisorJob() + Dispatchers.IO + analyticsExcpetionHandler)

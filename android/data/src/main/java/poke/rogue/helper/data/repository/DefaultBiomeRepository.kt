@@ -33,7 +33,7 @@ class DefaultBiomeRepository(
             return instance
                 ?: DefaultBiomeRepository(
                     RemoteBiomeDataSource.instance(),
-                    analyticsLogger()
+                    analyticsLogger(),
                 ).also {
                     instance = it
                 }

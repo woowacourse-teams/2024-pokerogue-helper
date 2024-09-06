@@ -40,7 +40,7 @@ class DefaultAbilityRepository(
         fun instance(): AbilityRepository {
             return instance ?: DefaultAbilityRepository(
                 RemoteAbilityDataSource.instance(),
-                analyticsLogger()
+                analyticsLogger(),
             ).also {
                 instance = it
             }

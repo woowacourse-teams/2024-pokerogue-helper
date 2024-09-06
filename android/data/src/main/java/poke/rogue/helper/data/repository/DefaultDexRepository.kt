@@ -46,12 +46,13 @@ class DefaultDexRepository(
         }.toFilteredPokemons(sort, filters)
     }
 
-    override suspend fun pokemonDetail(id: String): PokemonDetail = coroutineScope {
-        return@coroutineScope remotePokemonDataSource.pokemon(id).also {
-            val pokemonName = it.pokemon.name + " " + it.pokemon.formName
-            analyticsLogger.logPokemonDetail(id, pokemonName)
+    override suspend fun pokemonDetail(id: String): PokemonDetail =
+        coroutineScope {
+            return@coroutineScope remotePokemonDataSource.pokemon(id).also {
+                val pokemonName = it.pokemon.name + " " + it.pokemon.formName
+                analyticsLogger.logPokemonDetail(id, pokemonName)
+            }
         }
-    }
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
@@ -77,7 +78,7 @@ class DefaultDexRepository(
                 DefaultDexRepository(
                     RemoteDexDataSource.instance(),
                     LocalDexDataSource.instance(context),
-                    analyticsLogger()
+                    analyticsLogger(),
                 )
         }
 
