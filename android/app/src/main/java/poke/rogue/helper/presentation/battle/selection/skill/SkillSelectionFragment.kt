@@ -12,9 +12,7 @@ import poke.rogue.helper.data.repository.DefaultBattleRepository
 import poke.rogue.helper.databinding.FragmentSkillSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.battle.hasSelectedChanged
 import poke.rogue.helper.presentation.battle.model.SelectionData
-import poke.rogue.helper.presentation.battle.selectedData
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.util.fragment.hideKeyboard
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -72,16 +70,17 @@ class SkillSelectionFragment :
 
     private fun initObserver() {
         repeatOnStarted {
-            sharedViewModel.selectedPokemon.collectLatest {
-                val dexNumber = it.selectedData()?.dexNumber
-                if (dexNumber != null && it.hasSelectedChanged()) {
-                    viewModel.updateSkills(dexNumber)
+            sharedViewModel.pokemonSelectionUpdate.collect { newDexNumber ->
+                if (newDexNumber != viewModel.previousPokemonDexNumber) {
+                    viewModel.updateSkills(newDexNumber)
+                } else {
+                    viewModel.updatePreviousSkills(newDexNumber)
                 }
             }
         }
 
         repeatOnStarted {
-            viewModel.filteredSkills.collect {
+            viewModel.filteredSkills.collectLatest {
                 skillAdapter.submitList(it)
             }
         }

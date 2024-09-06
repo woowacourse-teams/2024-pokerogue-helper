@@ -24,7 +24,7 @@ import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.isSkillSelectionRequired
 import poke.rogue.helper.presentation.battle.model.selectedPokemonOrNull
 import poke.rogue.helper.presentation.battle.model.selectedSkillOrNull
-import poke.rogue.helper.presentation.battle.selectedData
+import poke.rogue.helper.presentation.battle.requireSelectedData
 
 class BattleSelectionViewModel(
     val previousSelection: SelectionData,
@@ -32,6 +32,9 @@ class BattleSelectionViewModel(
 ) : ErrorHandleViewModel(logger), NavigationHandler {
     private val _selectedPokemon: MutableStateFlow<BattleSelectionUiState<PokemonSelectionUiModel>>
     val selectedPokemon: StateFlow<BattleSelectionUiState<PokemonSelectionUiModel>>
+
+    private val _pokemonSelectionUpdate = MutableSharedFlow<Long>(replay = 1)
+    val pokemonSelectionUpdate = _pokemonSelectionUpdate.asSharedFlow()
 
     private val _selectedSkill: MutableStateFlow<BattleSelectionUiState<SkillSelectionUiModel>>
     val selectedSkill: StateFlow<BattleSelectionUiState<SkillSelectionUiModel>>
@@ -86,13 +89,12 @@ class BattleSelectionViewModel(
     }
 
     fun selectPokemon(pokemon: PokemonSelectionUiModel) {
-        _selectedPokemon.value =
-            BattleSelectionUiState.Selected(pokemon, hasSelectionChanged = true)
+        _selectedPokemon.value = BattleSelectionUiState.Selected(pokemon)
         _selectedSkill.value = BattleSelectionUiState.Empty
     }
 
     fun selectSkill(skill: SkillSelectionUiModel) {
-        _selectedSkill.value = BattleSelectionUiState.Selected(skill, hasSelectionChanged = true)
+        _selectedSkill.value = BattleSelectionUiState.Selected(skill)
     }
 
     override fun navigateToNextPage() {
@@ -101,19 +103,21 @@ class BattleSelectionViewModel(
             return
         }
         val nextIndex = currentStep.value.ordinal + 1
-        val nextPage = SelectionStep.entries.getOrNull(nextIndex)
-        if (nextPage != null) {
-            _currentStep.value = nextPage
+        val nextPage = SelectionStep.entries.getOrNull(nextIndex) ?: error("잘못된 페이지 접근")
+        if (nextPage == SelectionStep.SKILL_SELECTION) {
+            viewModelScope.launch {
+                val selected = selectedPokemon.value.requireSelectedData("포켓몬을 선택하세요")
+                _pokemonSelectionUpdate.emit(selected.dexNumber)
+            }
         }
+        _currentStep.value = nextPage
     }
 
     private fun handleSelectionResult() {
-        val pokemon =
-            selectedPokemon.value.selectedData() ?: throw IllegalStateException("포켓몬을 선택하세요")
+        val pokemon = selectedPokemon.value.requireSelectedData("포켓몬을 선택하세요")
         val result =
             if (previousSelection.isSkillSelectionRequired()) {
-                val skill =
-                    selectedSkill.value.selectedData() ?: throw IllegalStateException("스킬을 선택하세요")
+                val skill = selectedSkill.value.requireSelectedData("스킬을 선택하세요")
                 SelectionData.WithSkill(pokemon, skill)
             } else {
                 SelectionData.WithoutSkill(pokemon)

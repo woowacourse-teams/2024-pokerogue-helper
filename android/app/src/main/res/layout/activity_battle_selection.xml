@@ -88,7 +88,7 @@
             android:id="@+id/btn_prev"
             style="@style/TextAppearance.Poke.TitleBold"
             onSingleClick="@{() -> vm.navigateToPrevPage()}"
-            visible="@{vm.currentStep.hasPreviousStep()}"
+            visible="@{vm.currentStep.isFirstStep()}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
