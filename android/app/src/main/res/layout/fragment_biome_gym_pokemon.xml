@@ -21,7 +21,7 @@
             tools:listitem="@layout/item_biome_gym" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/biome_detail_empty"
+            android:id="@+id/biome_detail_gym_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,18 +34,17 @@
                 android:layout_height="170dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/ic_ditto_silhouette"
-                app:layout_constraintBottom_toTopOf="@id/tv_empty"
+                app:layout_constraintBottom_toTopOf="@id/tv_biome_detail_gym_empty"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/tv_empty"
+                android:id="@+id/tv_biome_detail_gym_empty"
                 style="@style/TextAppearance.Poke.TitleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/biome_detail_gym"
-                android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
