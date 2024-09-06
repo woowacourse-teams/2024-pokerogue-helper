@@ -1,7 +1,6 @@
 package poke.rogue.helper.presentation.biome
 
 import android.os.Bundle
-import android.webkit.WebView
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
