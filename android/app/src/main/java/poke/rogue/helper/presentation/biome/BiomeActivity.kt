@@ -1,6 +1,7 @@
 package poke.rogue.helper.presentation.biome
 
 import android.os.Bundle
+import android.webkit.WebView
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
@@ -69,6 +70,14 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
         }
 
         repeatOnStarted {
+            viewModel.navigateToGuideEvent.collect {
+                startActivity<BiomeGuideActivity> {
+                    logger.logClickEvent(NAVIGATE_TO_BIOME_GUIDE)
+                }
+            }
+        }
+
+        repeatOnStarted {
             viewModel.biome.collect { biome ->
                 when (biome) {
                     is BiomeUiState.Loading -> {
@@ -86,5 +95,6 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
 
     companion object {
         private const val NAVIGATE_TO_BIOME_DETAIL = "Nav_Biome_Detail"
+        private const val NAVIGATE_TO_BIOME_GUIDE = "Nav_Biome_Guide"
     }
 }

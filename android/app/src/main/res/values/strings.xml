@@ -86,6 +86,7 @@
 
     <!--    biome -->
     <string name="biome_title_name">바이옴 도감</string>
+    <string name="biome_guide_url">https://bluedell.com/%ED%8F%AC%EC%BC%93%EB%A1%9C%EA%B7%B8-%EB%B0%94%EC%9D%B4%EC%98%B4/</string>
     <string-array name="biome_tab_titles">
         <item>체육관</item>
         <item>보스</item>
