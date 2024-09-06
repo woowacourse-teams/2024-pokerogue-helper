@@ -23,27 +23,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/biome_title_name" />
-
-        <TextView
-            android:id="@+id/tv_biome_detail_title"
-            style="@style/TextAppearance.Poke.TitleLargeBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="30dp"
-            android:text="@{vm.uiState.name}"
-            app:layout_constraintStart_toStartOf="@id/iv_biome_detail_image"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_biome_detail"
-            tools:text="눈덮인 숲" />
+            app:title="@{vm.uiState.name}" />
 
         <ImageView
+            android:layout_marginTop="20dp"
             android:id="@+id/iv_biome_detail_image"
             imageUrl="@{vm.uiState.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_biome_detail_title"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_biome_detail"
             tools:srcCompat="@tools:sample/avatars" />
 
         <com.google.android.material.tabs.TabLayout
