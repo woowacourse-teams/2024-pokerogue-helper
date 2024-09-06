@@ -10,6 +10,7 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailViewModel
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.view.setVisible
 
 class BiomeBossFragment :
     ErrorHandleFragment<FragmentBiomeBossPokemonBinding>(R.layout.fragment_biome_boss_pokemon) {
@@ -36,6 +37,9 @@ class BiomeBossFragment :
     private fun initObservers() {
         repeatOnStarted {
             viewModel.uiState.collect { state ->
+                state.bossPokemons.isEmpty().let {
+                    binding.biomeDetailBossEmpty.setVisible(it)
+                }
                 bossPokemonAdapter.submitList(state.bossPokemons)
             }
         }
