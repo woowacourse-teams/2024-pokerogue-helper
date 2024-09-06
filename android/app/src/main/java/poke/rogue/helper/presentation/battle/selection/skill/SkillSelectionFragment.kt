@@ -6,13 +6,14 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import kotlinx.coroutines.flow.collectLatest
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultBattleRepository
 import poke.rogue.helper.databinding.FragmentSkillSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.battle.hasSelectedChanged
 import poke.rogue.helper.presentation.battle.model.SelectionData
-import poke.rogue.helper.presentation.battle.model.selectedPokemonOrNull
 import poke.rogue.helper.presentation.battle.selectedData
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.util.fragment.hideKeyboard
@@ -66,19 +67,14 @@ class SkillSelectionFragment :
             hideKeyboard()
             false
         }
-
         binding.etSkillSelectionSearch.setOnSearchAction { hideKeyboard() }
     }
 
     private fun initObserver() {
         repeatOnStarted {
-            sharedViewModel.selectedPokemon.collect {
+            sharedViewModel.selectedPokemon.collectLatest {
                 val dexNumber = it.selectedData()?.dexNumber
-                val selectedPokemonId = it.selectedData()?.id
-                val previousSelectedPokemonId =
-                    sharedViewModel.previousSelection.selectedPokemonOrNull()?.id
-
-                if (dexNumber != null && previousSelectedPokemonId != selectedPokemonId) {
+                if (dexNumber != null && it.hasSelectedChanged()) {
                     viewModel.updateSkills(dexNumber)
                 }
             }

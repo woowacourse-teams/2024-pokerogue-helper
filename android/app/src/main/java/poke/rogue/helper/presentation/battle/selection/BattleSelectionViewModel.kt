@@ -86,12 +86,13 @@ class BattleSelectionViewModel(
     }
 
     fun selectPokemon(pokemon: PokemonSelectionUiModel) {
-        _selectedPokemon.value = BattleSelectionUiState.Selected(pokemon)
+        _selectedPokemon.value =
+            BattleSelectionUiState.Selected(pokemon, hasSelectionChanged = true)
         _selectedSkill.value = BattleSelectionUiState.Empty
     }
 
     fun selectSkill(skill: SkillSelectionUiModel) {
-        _selectedSkill.value = BattleSelectionUiState.Selected(skill)
+        _selectedSkill.value = BattleSelectionUiState.Selected(skill, hasSelectionChanged = true)
     }
 
     override fun navigateToNextPage() {

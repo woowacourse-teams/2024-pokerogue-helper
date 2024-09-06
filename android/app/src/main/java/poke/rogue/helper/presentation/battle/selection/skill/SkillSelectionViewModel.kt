@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
@@ -48,7 +48,7 @@ class SkillSelectionViewModel(
         searchQuery
             .debounce(300L)
             .flatMapLatest { query ->
-                skills.map { skillsList ->
+                skills.mapLatest { skillsList ->
                     if (query.isBlank()) {
                         skillsList
                     } else {
