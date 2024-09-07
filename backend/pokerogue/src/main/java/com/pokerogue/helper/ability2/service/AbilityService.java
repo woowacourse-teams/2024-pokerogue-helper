@@ -33,11 +33,11 @@ public class AbilityService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<AbilityPokemonResponse> abilityPokemonResponses = ability.getPokemons().stream()
                 .map(abilityPokemon -> new AbilityPokemonResponse(
-                        abilityPokemon.getId(),
-                        abilityPokemon.getPokedexNumber(),
-                        abilityPokemon.getName(),
-                        s3Service.getPokemonImageFromS3(abilityPokemon.getId()),
-                        getAbilityTypeResponses(abilityPokemon.getType1(), abilityPokemon.getType2())
+                        abilityPokemon.id(),
+                        Long.parseLong(abilityPokemon.speciesId()),
+                        abilityPokemon.koName(),
+                        s3Service.getPokemonImageFromS3(abilityPokemon.id()),
+                        getAbilityTypeResponses(abilityPokemon.type1(), abilityPokemon.type2())
                 ))
                 .toList();
 
@@ -46,13 +46,13 @@ public class AbilityService {
 
     private List<AbilityTypeResponse> getAbilityTypeResponses(String type1, String type2) {
         List<AbilityTypeResponse> abilityTypeResponses = new ArrayList<>();
-        if (!type1.equals("Type.undefined")) {
-            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByName(type1)
+        if (!type1.equals("Type.undefined") && !type1.isEmpty()) {
+            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByEngName(type1)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)).getImage(),
                     type1));
         }
-        if (!type2.equals("Type.undefined")) {
-            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByName(type2)
+        if (!type2.equals("Type.undefined") && !type2.isEmpty()) {
+            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByEngName(type2)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)).getImage(),
                     type2));
         }

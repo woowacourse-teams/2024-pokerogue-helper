@@ -2,7 +2,6 @@ package com.pokerogue.helper.ability2.data;
 
 import java.util.List;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public class AbilityInfo {
