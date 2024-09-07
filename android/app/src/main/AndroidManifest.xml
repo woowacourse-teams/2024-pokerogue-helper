@@ -68,7 +68,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".presentation.biome.BiomeGuideActivity"
+            android:name=".presentation.biome.guide.BiomeGuideActivity"
             android:exported="false" />
     </application>
 
