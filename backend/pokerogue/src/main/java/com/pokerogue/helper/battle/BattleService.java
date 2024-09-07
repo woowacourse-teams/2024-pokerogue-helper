@@ -100,17 +100,17 @@ public class BattleService {
         }
         Type moveType = move.type();
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
-        double typeMatchingMultiplier = getTypeMatchingMultiplier(
-                moveType,
-                List.of(
-                        Type.findByName(rivalPokemon.type1()).orElseThrow(),
-                        Type.findByName(rivalPokemon.type2()).orElseThrow())
-        );
+        System.out.println(rivalPokemon.type1() + " : " + rivalPokemon.type2());
+        List<Type> types = new ArrayList<>();
+        if (!rivalPokemon.type1().isEmpty()) {
+            types.add(Type.findByEngName(rivalPokemon.type1()).orElseThrow());
+        }
+        if (!rivalPokemon.type2().isEmpty()) {
+            types.add(Type.findByEngName(rivalPokemon.type2()).orElseThrow());
+        }
+        double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, types);
         double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myPokemon);
-        double stringWindMultiplier = getStringWindMultiplier(moveType,
-                List.of(
-                        Type.findByName(rivalPokemon.type1()).orElseThrow(),
-                        Type.findByName(rivalPokemon.type2()).orElseThrow()), weather);
+        double stringWindMultiplier = getStringWindMultiplier(moveType, types, weather);
 
         return weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
     }
