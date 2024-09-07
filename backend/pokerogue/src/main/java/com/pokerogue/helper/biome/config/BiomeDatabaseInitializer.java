@@ -47,7 +47,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         List<TrainerType> trainerTypes = new ArrayList<>();
         List<TrainerPokemon> trainerPokemons = new ArrayList<>();
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-pokemons.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/biome/biome-pokemons.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomePokemon = bufferedReader.readLine();
@@ -60,7 +60,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-links.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/biome/biome-links.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomeLink = bufferedReader.readLine();
@@ -73,7 +73,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-types-trainers.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(
+                "data/biome/biome-types-trainers.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomeTypeAndTrainer = bufferedReader.readLine();
@@ -86,7 +87,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer-types.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/biome/trainer-types.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String trainerType = bufferedReader.readLine();
@@ -99,7 +100,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer-pokemons.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(
+                "data/biome/trainer-pokemons.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String trainerPokemon = bufferedReader.readLine();

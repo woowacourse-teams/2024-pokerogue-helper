@@ -87,12 +87,12 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        save("pokemon.txt", this::savePokemon);
-        save("move-for-pokemon-response.txt", this::saveMove);
-        save("evolution-for-pokemon-response.txt", this::saveEvolution);
+        save("data/pokemon/pokemon.txt", this::savePokemon);
+        save("data/pokemon/move-for-pokemon-response.txt", this::saveMove);
+        save("data/pokemon/evolution-for-pokemon-response.txt", this::saveEvolution);
         List<AbilityInfo> abilityInfos = new ArrayList<>();
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("ability.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/ability/ability.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String abilityInfo = bufferedReader.readLine();

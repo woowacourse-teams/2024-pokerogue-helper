@@ -34,15 +34,15 @@ public class DataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        saveData("battle-move.txt", fields -> {
+        saveData("data/battle/battle-move.txt", fields -> {
             BattleMove battleMove = createMove(fields);
             battleMoveRepository.save(battleMove);
         });
-        saveData("tms.txt", fields -> {
+        saveData("data/battle/tms.txt", fields -> {
             PokemonMovesByMachine pokemonMovesByMachine = createPokemonMovesByMachine(fields);
             pokemonMovesByMachineRepository.save(pokemonMovesByMachine);
         });
-        saveData("battle-pokemon.txt", fields -> {
+        saveData("data/battle/battle-pokemon.txt", fields -> {
             PokemonMovesBySelf pokemonMovesBySelf = createPokemonMovesBySelf(fields);
             pokemonMovesBySelfRepository.save(pokemonMovesBySelf);
             PokemonMovesByEgg pokemonMovesByEgg = createPokemonMovesByEgg(fields);
@@ -50,7 +50,7 @@ public class DataInitializer implements ApplicationRunner {
             BattlePokemon battlePokemon = createBattlePokemon(fields);
             battlePokemonRepository.save(battlePokemon);
         });
-        saveData("type-matching.txt", fields -> {
+        saveData("data/battle/type-matching.txt", fields -> {
             TypeMatching typeMatching = createTypeMatching(fields);
             typeMatchingRepository.save(typeMatching);
         });
