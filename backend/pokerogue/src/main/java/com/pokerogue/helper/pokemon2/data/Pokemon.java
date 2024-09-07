@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon2.data;
 
+import com.pokerogue.helper.battle.Type;
 import java.util.List;
 
 public record Pokemon(
@@ -34,4 +35,8 @@ public record Pokemon(
         List<String> biomes
 ) {
 
+    public boolean hasSameType(Type moveType) {
+        String engName = moveType.getEngName();
+        return (engName.equals(type1) || engName.equals(type2));
+    }
 }

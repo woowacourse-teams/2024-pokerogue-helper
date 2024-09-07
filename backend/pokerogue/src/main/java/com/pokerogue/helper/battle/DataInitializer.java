@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -29,7 +28,6 @@ public class DataInitializer implements ApplicationRunner {
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
-    private final BattlePokemonRepository battlePokemonRepository;
     private final TypeMatchingRepository typeMatchingRepository;
 
     @Override
@@ -47,8 +45,6 @@ public class DataInitializer implements ApplicationRunner {
             pokemonMovesBySelfRepository.save(pokemonMovesBySelf);
             PokemonMovesByEgg pokemonMovesByEgg = createPokemonMovesByEgg(fields);
             pokemonMovesByEggRepository.save(pokemonMovesByEgg);
-            BattlePokemon battlePokemon = createBattlePokemon(fields);
-            battlePokemonRepository.save(battlePokemon);
         });
         saveData("data/battle/type-matching.txt", fields -> {
             TypeMatching typeMatching = createTypeMatching(fields);
@@ -143,23 +139,6 @@ public class DataInitializer implements ApplicationRunner {
         return new PokemonMovesByEgg(pokedexNumber, moveIds);
     }
 
-    private BattlePokemon createBattlePokemon(List<String> fields) {
-        String id = fields.get(1);
-        List<Type> types = new ArrayList<>();
-        if (existTypeName(fields.get(2))) {
-            Type type = Type.findByName(fields.get(2))
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-            types.add(type);
-        }
-        if (existTypeName(fields.get(3))) {
-            Type type = Type.findByName(fields.get(3))
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-            types.add(type);
-        }
-
-        return new BattlePokemon(id, types);
-    }
-
     private TypeMatching createTypeMatching(List<String> fields) {
         Type fromType = Type.findByEngName(fields.get(0))
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
@@ -168,10 +147,6 @@ public class DataInitializer implements ApplicationRunner {
         double result = convertToDouble(fields.get(2));
 
         return new TypeMatching(fromType, toType, result);
-    }
-
-    private boolean existTypeName(String data) {
-        return !data.equals("Type.undefined");
     }
 
     private double convertToDouble(String data) {

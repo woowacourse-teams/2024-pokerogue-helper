@@ -16,14 +16,12 @@ class DataInitializerTest {
         PokemonMovesByMachineRepository pokemonMovesByMachineRepository = new PokemonMovesByMachineRepository();
         PokemonMovesBySelfRepository pokemonMovesBySelfRepository = new PokemonMovesBySelfRepository();
         PokemonMovesByEggRepository pokemonMovesByEggRepository = new PokemonMovesByEggRepository();
-        BattlePokemonRepository battlePokemonRepository = new BattlePokemonRepository();
         TypeMatchingRepository typeMatchingRepository = new TypeMatchingRepository();
         DataInitializer dataInitializer = new DataInitializer(
                 battleMoveRepository,
                 pokemonMovesByMachineRepository,
                 pokemonMovesBySelfRepository,
                 pokemonMovesByEggRepository,
-                battlePokemonRepository,
                 typeMatchingRepository
         );
         dataInitializer.run(new DefaultApplicationArguments());
@@ -33,7 +31,6 @@ class DataInitializerTest {
             assertThat(pokemonMovesByMachineRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesBySelfRepository.findAll()).hasSize(1082);
             assertThat(pokemonMovesByEggRepository.findAll()).hasSize(1082);
-            assertThat(battlePokemonRepository.findAll()).hasSize(1268);
             assertThat(typeMatchingRepository.findAll()).hasSize(361);
         });
     }

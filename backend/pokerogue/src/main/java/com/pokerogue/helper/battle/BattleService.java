@@ -2,6 +2,8 @@ package com.pokerogue.helper.battle;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.pokemon2.data.Pokemon;
+import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +18,7 @@ public class BattleService {
     private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
     private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
     private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
-    private final BattlePokemonRepository battlePokemonRepository;
+    private final Pokemon2Repository pokemon2Repository;
     private final TypeMatchingRepository typeMatchingRepository;
 
     public List<WeatherResponse> findWeathers() {
@@ -58,9 +60,9 @@ public class BattleService {
             String myMoveId) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
-        BattlePokemon myPokemon = battlePokemonRepository.findById(myPokemonId)
+        Pokemon myPokemon = pokemon2Repository.findById(myPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        BattlePokemon rivalPokemon = battlePokemonRepository.findById(rivalPokemonId)
+        Pokemon rivalPokemon = pokemon2Repository.findById(rivalPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         BattleMove move = battleMoveRepository.findById(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
@@ -91,16 +93,24 @@ public class BattleService {
     private double getTotalMultiplier(
             BattleMove move,
             Weather weather,
-            BattlePokemon rivalPokemon,
-            BattlePokemon myPokemon) {
+            Pokemon rivalPokemon,
+            Pokemon myPokemon) {
         if (!move.isAttackMove()) {
             return 1;
         }
         Type moveType = move.type();
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
-        double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, rivalPokemon.pokemonTypes());
+        double typeMatchingMultiplier = getTypeMatchingMultiplier(
+                moveType,
+                List.of(
+                        Type.findByName(rivalPokemon.type1()).orElseThrow(),
+                        Type.findByName(rivalPokemon.type2()).orElseThrow())
+        );
         double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myPokemon);
-        double stringWindMultiplier = getStringWindMultiplier(moveType, rivalPokemon.pokemonTypes(), weather);
+        double stringWindMultiplier = getStringWindMultiplier(moveType,
+                List.of(
+                        Type.findByName(rivalPokemon.type1()).orElseThrow(),
+                        Type.findByName(rivalPokemon.type2()).orElseThrow()), weather);
 
         return weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
     }
@@ -140,7 +150,7 @@ public class BattleService {
                 .reduce(1d, (a, b) -> a * b);
     }
 
-    private double getSameTypeAttackBonusMultiplier(Type moveType, BattlePokemon rivalPokemon) {
+    private double getSameTypeAttackBonusMultiplier(Type moveType, Pokemon rivalPokemon) {
         if (rivalPokemon.hasSameType(moveType)) {
             return 1.5;
         }
