@@ -16,11 +16,8 @@ sealed class SelectionData : Parcelable {
     ) : SelectionData()
 
     @Parcelize
-    data class NoSelection(val isSkillSelectionRequired: Boolean) : SelectionData()
+    data object NoSelection : SelectionData()
 }
-
-fun SelectionData.isSkillSelectionRequired(): Boolean =
-    this is SelectionData.WithSkill || (this as? SelectionData.NoSelection)?.isSkillSelectionRequired == true
 
 fun SelectionData.selectedPokemonOrNull(): PokemonSelectionUiModel? {
     return when (this) {

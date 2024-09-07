@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="poke.rogue.helper.presentation.battle.model.SelectionMode"/>
 
         <variable
             name="vm"
@@ -111,7 +112,7 @@
 
         <ImageView
             android:id="@+id/iv_opponent_pokemon"
-            onSingleClick="@{() -> vm.navigateToSelection(false)}"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.POKEMON_ONLY)}"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_pokemon_selection_op"
@@ -144,7 +145,7 @@
 
         <ImageView
             android:id="@+id/iv_mine_pokemon"
-            onSingleClick="@{() -> vm.navigateToSelection(true)}"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.POKEMON_AND_SKILL)}"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="-12dp"
@@ -155,7 +156,7 @@
 
         <TextView
             android:id="@+id/tv_skill_title"
-            onSingleClick="@{() -> vm.navigateToSelection(true)}"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.SKILL_FIRST)}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_battle_default"
