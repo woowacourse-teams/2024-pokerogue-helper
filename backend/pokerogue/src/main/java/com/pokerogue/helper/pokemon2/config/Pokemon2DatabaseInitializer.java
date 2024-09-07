@@ -5,10 +5,8 @@ import com.pokerogue.helper.ability2.data.AbilityInfo;
 import com.pokerogue.helper.ability2.repository.AbilityRepository;
 import com.pokerogue.helper.pokemon2.data.Evolution;
 import com.pokerogue.helper.pokemon2.data.EvolutionChain;
-import com.pokerogue.helper.pokemon2.data.Move;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.pokemon2.repository.EvolutionRepository;
-import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,7 +36,6 @@ import org.springframework.stereotype.Component;
 public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
     private final Pokemon2Repository pokemon2Repository;
-    private final MoveRepository moveRepository;
     private final EvolutionRepository evolutionRepository;
     private final AbilityRepository abilityRepository;
     private final List<String> pokemonKeys = List.of(
@@ -88,44 +85,8 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         save("data/pokemon/pokemon.txt", this::savePokemon);
-        save("data/pokemon/move-for-pokemon-response.txt", this::saveMove);
         save("data/pokemon/evolution-for-pokemon-response.txt", this::saveEvolution);
-        List<AbilityInfo> abilityInfos = new ArrayList<>();
-
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/ability/ability.txt");
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
-            while (true) {
-                String abilityInfo = bufferedReader.readLine();
-                if (abilityInfo == null) {
-                    break;
-                }
-                abilityInfos.add(new AbilityInfo(abilityInfo));
-            }
-        } catch (IOException e) {
-            log.error("error message : {}", e.getStackTrace()[0]);
-        }
-
-        abilityInfos.stream()
-                .map(abilityInfo -> new Ability(
-                        abilityInfo.getId(),
-                        abilityInfo.getName(),
-                        abilityInfo.getDescription(),
-                        getAbilityPokemon(abilityInfo.getPokemons()))
-                ).forEach(abilityRepository::save);
-    }
-
-    private List<Pokemon> getAbilityPokemon(List<String> pokemons) {
-        List<Pokemon> abilityPokemons = new ArrayList<>();
-        for (int i = 0; i < pokemons.size(); i++) {
-            String pokemonId = pokemons.get(i);
-
-            Pokemon pokemon = pokemon2Repository.findById(pokemonId)
-                    .orElseThrow();
-
-            abilityPokemons.add(pokemon);
-        }
-
-        return abilityPokemons;
+        saveAbility();
     }
 
     private void save(String file, Consumer<BufferedReader> consumer) {
@@ -304,38 +265,6 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         );
     }
 
-
-    private void saveMove(BufferedReader br) {
-        try {
-            String line;
-            while ((line = br.readLine()) != null) {
-                List<String> tokens = parseToken(line);
-
-                if (moveKeys.size() != tokens.size()) {
-                    throw new IllegalArgumentException(moveKeys.size() + " " + tokens.size() + "기술 데이터가 잘못 되었습니다.");
-                }
-
-                Move move = createMove(tokens);
-
-                moveRepository.save(move.id(), move);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private Move createMove(List<String> tokens) {
-        return new Move(
-                regularize(tokens.get(0)),
-                regularize(tokens.get(1)),
-                tokens.get(2),
-                tokens.get(3),
-                tokens.get(4),
-                regularize(tokens.get(5)),
-                regularize(tokens.get(6))
-        );
-    }
-
     private String regularize(String str) {
         String ret = str.strip()
                 .replace(" ", "_")
@@ -364,5 +293,44 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         }
 
         return values;
+    }
+
+    private void saveAbility() {
+        List<AbilityInfo> abilityInfos = new ArrayList<>();
+
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/ability/ability.txt");
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+            while (true) {
+                String abilityInfo = bufferedReader.readLine();
+                if (abilityInfo == null) {
+                    break;
+                }
+                abilityInfos.add(new AbilityInfo(abilityInfo));
+            }
+        } catch (IOException e) {
+            log.error("error message : {}", e.getStackTrace()[0]);
+        }
+
+        abilityInfos.stream()
+                .map(abilityInfo -> new Ability(
+                        abilityInfo.getId(),
+                        abilityInfo.getName(),
+                        abilityInfo.getDescription(),
+                        getAbilityPokemon(abilityInfo.getPokemons()))
+                ).forEach(abilityRepository::save);
+    }
+
+    private List<Pokemon> getAbilityPokemon(List<String> pokemons) {
+        List<Pokemon> abilityPokemons = new ArrayList<>();
+        for (int i = 0; i < pokemons.size(); i++) {
+            String pokemonId = pokemons.get(i);
+
+            Pokemon pokemon = pokemon2Repository.findById(pokemonId)
+                    .orElseThrow();
+
+            abilityPokemons.add(pokemon);
+        }
+
+        return abilityPokemons;
     }
 }

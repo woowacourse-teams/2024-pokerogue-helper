@@ -4,6 +4,7 @@ package com.pokerogue.helper.pokemon2.service;
 import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.ability2.data.Ability;
 import com.pokerogue.helper.ability2.repository.AbilityRepository;
+import com.pokerogue.helper.battle.BattleMoveRepository;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
 import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
@@ -20,7 +21,6 @@ import com.pokerogue.helper.pokemon2.dto.Pokemon2DetailResponse;
 import com.pokerogue.helper.pokemon2.dto.Pokemon2Response;
 import com.pokerogue.helper.pokemon2.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.pokemon2.repository.EvolutionRepository;
-import com.pokerogue.helper.pokemon2.repository.MoveRepository;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class Pokemon2Service {
 
     private final S3Service s3Service;
     private final Pokemon2Repository pokemon2Repository;
-    private final MoveRepository moveRepository;
+    private final BattleMoveRepository battleMoveRepository;
     private final EvolutionRepository evolutionRepository;
     private final BiomeRepository biomeRepository;
     private final AbilityRepository abilityRepository;
@@ -267,11 +267,11 @@ public class Pokemon2Service {
 
     private List<MoveResponse> createEggMoveResponse(List<String> moves) {
         return moves.stream()
-                .map(r -> moveRepository.findById(r).orElseThrow(IllegalArgumentException::new))
+                .map(r -> battleMoveRepository.findById(r).orElseThrow(IllegalArgumentException::new))
                 .map(move -> MoveResponse.from(move, 1,
-                        s3Service.getPokerogueTypeImageFromS3(moveRepository.findById(move.id())
+                        s3Service.getPokerogueTypeImageFromS3(battleMoveRepository.findById(move.id())
                                 .orElseThrow(IllegalArgumentException::new)
-                                .type())))
+                                .type().getEngName())))
                 .toList();
     }
 
@@ -279,10 +279,10 @@ public class Pokemon2Service {
         return IntStream.iterate(0, index -> index + 2)
                 .limit(moves.size() / 2)
                 .mapToObj(index -> MoveResponse.from(
-                        moveRepository.findById(moves.get(index)).orElseThrow(),
+                        battleMoveRepository.findById(moves.get(index)).orElseThrow(),
                         Integer.parseInt(moves.get(index + 1)),
                         s3Service.getPokerogueTypeImageFromS3(
-                                moveRepository.findById(moves.get(index)).orElseThrow().type())
+                                battleMoveRepository.findById(moves.get(index)).orElseThrow().type().getEngName())
                 ))
                 .toList();
     }

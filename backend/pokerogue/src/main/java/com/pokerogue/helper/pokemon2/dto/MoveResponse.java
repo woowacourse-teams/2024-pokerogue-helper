@@ -1,7 +1,7 @@
 package com.pokerogue.helper.pokemon2.dto;
 
-import com.pokerogue.helper.pokemon2.data.Move;
-import com.pokerogue.helper.pokemon2.data.MoveCategory;
+import com.pokerogue.helper.battle.BattleMove;
+import com.pokerogue.helper.battle.MoveCategory;
 import com.pokerogue.helper.pokemon2.data.Type;
 
 public record MoveResponse(
@@ -16,16 +16,16 @@ public record MoveResponse(
         String categoryLogo
 ) {
 
-    public static MoveResponse from(Move move, Integer level, String typeImageFromS3) {
-        MoveCategory moveCategory = MoveCategory.findById(move.category());
-        Type type1 = Type.findById(move.type());
+    public static MoveResponse from(BattleMove battleMove, Integer level, String typeImageFromS3) {
+        MoveCategory moveCategory = battleMove.category();
+        Type type1 = Type.findById(battleMove.type().getName());
 
         return new MoveResponse(
-                move.id(),
-                move.name(),
+                battleMove.id(),
+                battleMove.name(),
                 level,
-                Integer.parseInt(move.power()),
-                Integer.parseInt(move.accuracy()),
+                battleMove.power(),
+                battleMove.accuracy(),
                 type1.getName(),
                 typeImageFromS3,
                 moveCategory.getName(),
