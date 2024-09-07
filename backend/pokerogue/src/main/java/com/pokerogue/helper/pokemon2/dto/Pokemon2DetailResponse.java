@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon2.dto;
 
+import com.pokerogue.helper.biome.dto.BiomeResponse;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
 

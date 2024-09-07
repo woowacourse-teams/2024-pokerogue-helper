@@ -47,4 +47,14 @@ public enum Type {
                 .findFirst()
                 .orElse(EMPTY);
     }
+
+    public static Type findByName(String name) {
+        return Arrays.stream(values())
+                .filter(value -> value.getName()
+                        .toLowerCase()
+                        .equals(name)
+                )
+                .findFirst()
+                .orElse(EMPTY);
+    }
 }
