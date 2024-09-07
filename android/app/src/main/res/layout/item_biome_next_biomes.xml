@@ -46,7 +46,7 @@
             style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Double.toString(nextBiome.probability) + '%'}"
+            android:text="@{String.format(@string/biome_detail_next_biome_probability, nextBiome.probability)}"
             app:layout_constraintEnd_toEndOf="@id/iv_biome"
             app:layout_constraintTop_toTopOf="@id/tv_biome_name"
             tools:text="33%" />

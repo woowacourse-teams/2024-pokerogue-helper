@@ -100,6 +100,9 @@
     <!--    biome detail boss -->
     <string name="biome_detail_boss">등장하는 보스 포켓몬이 없어요</string>
 
+    <!--    biome detail next biome -->
+    <string name="biome_detail_next_biome_probability">%.1f%%</string>
+
     <!--    item -->
     <string name="item_title_name">아이템 도감</string>
 
