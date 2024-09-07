@@ -1,7 +1,6 @@
 package com.pokerogue.helper.pokemon2.data;
 
 import java.util.Arrays;
-import java.util.Optional;
 import lombok.Getter;
 
 @Getter
