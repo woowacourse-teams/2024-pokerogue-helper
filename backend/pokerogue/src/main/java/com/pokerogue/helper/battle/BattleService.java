@@ -39,6 +39,7 @@ public class BattleService {
         allMoveIds.addAll(pokemon.tmsMoves());
         allMoveIds.addAll(pokemon.eggMoves());
         List<BattleMove> battleMoves = allMoveIds.stream()
+                .distinct()
                 .map(this::findMoveById)
                 .toList();
 
