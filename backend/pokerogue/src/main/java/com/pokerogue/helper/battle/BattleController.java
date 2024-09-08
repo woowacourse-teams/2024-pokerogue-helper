@@ -21,8 +21,8 @@ public class BattleController {
     }
 
     @GetMapping("/api/v1/moves")
-    public ApiResponse<List<MoveResponse>> moveByPokemonList(@RequestParam("pokedex-number") Integer pokedexNumber) {
-        return new ApiResponse<>("포켓몬의 기술 리스트 불러오기에 성공했습니다.", battleService.findMovesByPokemon(pokedexNumber));
+    public ApiResponse<List<MoveResponse>> moveByPokemonList(@RequestParam("pokemon-id") String pokemonId) {
+        return new ApiResponse<>("포켓몬의 기술 리스트 불러오기에 성공했습니다.", battleService.findMovesByPokemon(pokemonId));
     }
 
     @GetMapping("/api/v1/battle")

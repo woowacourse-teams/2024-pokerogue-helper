@@ -32,6 +32,7 @@ public record Pokemon(
         Double weight,
         List<String> eggMoves,
         List<String> moves,
+        List<String> tmsMoves,
         List<String> biomes
 ) {
 

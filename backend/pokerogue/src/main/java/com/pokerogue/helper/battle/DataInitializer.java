@@ -25,9 +25,6 @@ public class DataInitializer implements ApplicationRunner {
     private static final String LIST_DELIMITER = ",";
 
     private final BattleMoveRepository battleMoveRepository;
-    private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
-    private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
-    private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
     private final TypeMatchingRepository typeMatchingRepository;
 
     @Override
@@ -35,16 +32,6 @@ public class DataInitializer implements ApplicationRunner {
         saveData("data/battle/battle-move.txt", fields -> {
             BattleMove battleMove = createMove(fields);
             battleMoveRepository.save(battleMove);
-        });
-        saveData("data/battle/tms.txt", fields -> {
-            PokemonMovesByMachine pokemonMovesByMachine = createPokemonMovesByMachine(fields);
-            pokemonMovesByMachineRepository.save(pokemonMovesByMachine);
-        });
-        saveData("data/battle/battle-pokemon.txt", fields -> {
-            PokemonMovesBySelf pokemonMovesBySelf = createPokemonMovesBySelf(fields);
-            pokemonMovesBySelfRepository.save(pokemonMovesBySelf);
-            PokemonMovesByEgg pokemonMovesByEgg = createPokemonMovesByEgg(fields);
-            pokemonMovesByEggRepository.save(pokemonMovesByEgg);
         });
         saveData("data/battle/type-matching.txt", fields -> {
             TypeMatching typeMatching = createTypeMatching(fields);
@@ -107,36 +94,6 @@ public class DataInitializer implements ApplicationRunner {
                 convertToInteger(fields.get(13)),
                 fields.get(14)
         );
-    }
-
-    private PokemonMovesByMachine createPokemonMovesByMachine(List<String> fields) {
-        Integer pokedexNumber = convertToInteger(fields.get(0));
-        List<String> moveIds = Arrays.stream(fields.get(2).split(LIST_DELIMITER))
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .toList();
-
-        return new PokemonMovesByMachine(pokedexNumber, moveIds);
-    }
-
-    private PokemonMovesBySelf createPokemonMovesBySelf(List<String> fields) {
-        Integer pokedexNumber = convertToInteger(fields.get(0));
-        List<String> moveIds = Arrays.stream(fields.get(5).split(LIST_DELIMITER))
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .toList();
-
-        return new PokemonMovesBySelf(pokedexNumber, moveIds);
-    }
-
-    private PokemonMovesByEgg createPokemonMovesByEgg(List<String> fields) {
-        Integer pokedexNumber = convertToInteger(fields.get(0));
-        List<String> moveIds = Arrays.stream(fields.get(4).split(LIST_DELIMITER))
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .toList();
-
-        return new PokemonMovesByEgg(pokedexNumber, moveIds);
     }
 
     private TypeMatching createTypeMatching(List<String> fields) {

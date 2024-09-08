@@ -13,24 +13,15 @@ class DataInitializerTest {
     @DisplayName("날씨, 기술 데이터를 세팅한다.")
     void setWeathersData() {
         BattleMoveRepository battleMoveRepository = new BattleMoveRepository();
-        PokemonMovesByMachineRepository pokemonMovesByMachineRepository = new PokemonMovesByMachineRepository();
-        PokemonMovesBySelfRepository pokemonMovesBySelfRepository = new PokemonMovesBySelfRepository();
-        PokemonMovesByEggRepository pokemonMovesByEggRepository = new PokemonMovesByEggRepository();
         TypeMatchingRepository typeMatchingRepository = new TypeMatchingRepository();
         DataInitializer dataInitializer = new DataInitializer(
                 battleMoveRepository,
-                pokemonMovesByMachineRepository,
-                pokemonMovesBySelfRepository,
-                pokemonMovesByEggRepository,
                 typeMatchingRepository
         );
         dataInitializer.run(new DefaultApplicationArguments());
 
         assertAll(() -> {
             assertThat(battleMoveRepository.findAll()).hasSize(920);
-            assertThat(pokemonMovesByMachineRepository.findAll()).hasSize(1082);
-            assertThat(pokemonMovesBySelfRepository.findAll()).hasSize(1082);
-            assertThat(pokemonMovesByEggRepository.findAll()).hasSize(1082);
             assertThat(typeMatchingRepository.findAll()).hasSize(361);
         });
     }

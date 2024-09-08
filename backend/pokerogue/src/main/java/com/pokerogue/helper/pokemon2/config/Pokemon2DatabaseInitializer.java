@@ -15,9 +15,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
@@ -34,6 +36,10 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Pokemon2DatabaseInitializer implements ApplicationRunner {
+
+    private static final int FIRST_LINE_NUMBER = 3;
+    private static final String FIELD_DELIMITER = "/";
+    private static final String LIST_DELIMITER = ",";
 
     private final Pokemon2Repository pokemon2Repository;
     private final EvolutionRepository evolutionRepository;
@@ -101,9 +107,9 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         }
     }
 
-
     private void savePokemon(BufferedReader br) {
         try {
+            Map<String, List<String>> tmsInfos = saveTms("data/battle/tms.txt");
             String line;
             while ((line = br.readLine()) != null) {
                 List<String> tokens = parseToken(line);
@@ -112,7 +118,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                     throw new IllegalArgumentException(pokemonKeys.size() + " " + tokens.size() + "포켓몬 데이터가 잘못 되었습니다.");
                 }
 
-                Pokemon pokemon = createPokemon(tokens);
+                Pokemon pokemon = createPokemon(tokens, tmsInfos);
                 pokemon2Repository.save(pokemon.id(), pokemon);
             }
         } catch (IOException e) {
@@ -120,7 +126,45 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         }
     }
 
-    private Pokemon createPokemon(List<String> values) {
+    private Map<String, List<String>> saveTms(String path) {
+        Map<String, List<String>> tmsInfos = new HashMap<>();
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
+             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            int lineCount = 0;
+            String line;
+            while ((line = br.readLine()) != null) {
+                lineCount++;
+                if (lineCount < FIRST_LINE_NUMBER) {
+                    continue;
+                }
+                List<String> fields = splitFields(line);
+                List<String> moveIds = Arrays.stream(fields.get(2).split(LIST_DELIMITER))
+                        .map(String::trim)
+                        .filter(s -> !s.isEmpty())
+                        .toList();
+                tmsInfos.put(fields.get(0), moveIds);
+            }
+        } catch (IOException e) {
+            log.error("error message : {}", e.getMessage(), e);
+        }
+        return tmsInfos;
+    }
+
+    private List<String> splitFields(String line) {
+        return Arrays.stream(line.split(FIELD_DELIMITER))
+                .map(String::trim)
+                .map(this::regularizeEmptyField)
+                .toList();
+    }
+
+    private String regularizeEmptyField(String field) {
+        if (field.equals("EMPTY")) {
+            return "";
+        }
+        return field;
+    }
+
+    private Pokemon createPokemon(List<String> values, Map<String, List<String>> tmsInfos) {
         List<String> moves = Arrays.stream(values.get(22).split(","))
                 .collect(Collectors.toList());
         for (int i = 0; i < moves.size(); i += 2) {
@@ -132,6 +176,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 .boxed()
                 .toList();
 
+        List<String> tmsMoves = tmsInfos.get(regularize(values.get(1)));
         return new Pokemon(
                 regularize(values.get(0)),
                 regularize(values.get(1)),
@@ -161,6 +206,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 Double.parseDouble(values.get(20)),
                 Arrays.stream(regularize(values.get(21)).split(",")).toList(),
                 moves,
+                tmsMoves,
                 Arrays.stream(regularize(values.get(23)).split(",")).toList()
         );
     }

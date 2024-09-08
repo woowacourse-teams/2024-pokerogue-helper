@@ -15,9 +15,6 @@ import org.springframework.stereotype.Service;
 public class BattleService {
 
     private final BattleMoveRepository battleMoveRepository;
-    private final PokemonMovesByEggRepository pokemonMovesByEggRepository;
-    private final PokemonMovesBySelfRepository pokemonMovesBySelfRepository;
-    private final PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
     private final Pokemon2Repository pokemon2Repository;
     private final TypeMatchingRepository typeMatchingRepository;
 
@@ -27,18 +24,20 @@ public class BattleService {
                 .toList();
     }
 
-    public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
+    public List<MoveResponse> findMovesByPokemon(String pokemonId) {
         List<String> allMoveIds = new ArrayList<>();
-        PokemonMovesBySelf pokemonMovesBySelf = pokemonMovesBySelfRepository.findByPokedexNumber(pokedexNumber)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_BY_SELF_NOT_FOUND));
-        PokemonMovesByMachine pokemonMovesByMachine = pokemonMovesByMachineRepository.findByPokedexNumber(pokedexNumber)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_BY_MACHINE_NOT_FOUND));
-        PokemonMovesByEgg pokemonMovesByEgg = pokemonMovesByEggRepository.findByPokedexNumber(pokedexNumber)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_BY_EGG_NOT_FOUND));
+        Pokemon pokemon = pokemon2Repository.findById(pokemonId)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
-        allMoveIds.addAll(pokemonMovesBySelf.moveIds());
-        allMoveIds.addAll(pokemonMovesByMachine.moveIds());
-        allMoveIds.addAll(pokemonMovesByEgg.moveIds());
+        List<String> moves = new ArrayList<>();
+        for (int i = 0; i < pokemon.moves().size(); i++) {
+            if (i % 2 == 0) {
+                moves.add(pokemon.moves().get(i));
+            }
+        }
+        allMoveIds.addAll(moves);
+        allMoveIds.addAll(pokemon.tmsMoves());
+        allMoveIds.addAll(pokemon.eggMoves());
         List<BattleMove> battleMoves = allMoveIds.stream()
                 .map(this::findMoveById)
                 .toList();
