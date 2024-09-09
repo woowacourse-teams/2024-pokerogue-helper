@@ -20,40 +20,39 @@ import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.isSelected
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.SelectionData
+import poke.rogue.helper.presentation.battle.model.SelectionMode
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.isSkillSelectionRequired
-import poke.rogue.helper.presentation.battle.model.selectedPokemonOrNull
-import poke.rogue.helper.presentation.battle.model.selectedSkillOrNull
+import poke.rogue.helper.presentation.battle.model.selectedPokemon
+import poke.rogue.helper.presentation.battle.model.selectedSkill
 import poke.rogue.helper.presentation.battle.selectedData
 
 class BattleSelectionViewModel(
+    private val selectionMode: SelectionMode,
     val previousSelection: SelectionData,
     logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), NavigationHandler {
-    private val _selectedPokemon: MutableStateFlow<BattleSelectionUiState<PokemonSelectionUiModel>>
-    val selectedPokemon: StateFlow<BattleSelectionUiState<PokemonSelectionUiModel>>
+    private val _selectedPokemon: MutableStateFlow<BattleSelectionUiState<PokemonSelectionUiModel>> =
+        MutableStateFlow(initializeSelectedPokemon())
+    val selectedPokemon = _selectedPokemon.asStateFlow()
 
-    private val _selectedSkill: MutableStateFlow<BattleSelectionUiState<SkillSelectionUiModel>>
-    val selectedSkill: StateFlow<BattleSelectionUiState<SkillSelectionUiModel>>
+    private val _pokemonSelectionUpdate = MutableSharedFlow<Long>(replay = 1)
+    val pokemonSelectionUpdate = _pokemonSelectionUpdate.asSharedFlow()
 
-    private val _currentStep = MutableStateFlow(SelectionStep.POKEMON_SELECTION)
+    private val _selectedSkill: MutableStateFlow<BattleSelectionUiState<SkillSelectionUiModel>> =
+        MutableStateFlow(initializeSelectedSkill())
+    val selectedSkill = _selectedSkill.asStateFlow()
+
+    private val _currentStep = MutableStateFlow(initialStep(selectionMode))
     val currentStep: StateFlow<SelectionStep> = _currentStep.asStateFlow()
 
     val isLastStep: StateFlow<Boolean> =
         currentStep.map {
-            it.isLastStep(previousSelection.isSkillSelectionRequired())
+            it.isLastStep(selectionMode.isSkillSelectionRequired())
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
     private val _completeSelection = MutableSharedFlow<SelectionData>()
     val completeSelection = _completeSelection.asSharedFlow()
-
-    init {
-        _selectedPokemon = MutableStateFlow(initializeSelectedPokemon())
-        _selectedSkill = MutableStateFlow(initializeSelectedSkill())
-
-        selectedPokemon = _selectedPokemon.asStateFlow()
-        selectedSkill = _selectedSkill.asStateFlow()
-    }
 
     val canGoNextStep: StateFlow<Boolean> =
         combine(
@@ -68,7 +67,7 @@ class BattleSelectionViewModel(
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
     private fun initializeSelectedPokemon(): BattleSelectionUiState<PokemonSelectionUiModel> {
-        val selectedPokemon = previousSelection.selectedPokemonOrNull()
+        val selectedPokemon = previousSelection.selectedPokemon()
         return if (selectedPokemon != null) {
             BattleSelectionUiState.Selected(selectedPokemon)
         } else {
@@ -77,11 +76,23 @@ class BattleSelectionViewModel(
     }
 
     private fun initializeSelectedSkill(): BattleSelectionUiState<SkillSelectionUiModel> {
-        val selectedSkill = previousSelection.selectedSkillOrNull()
+        val selectedSkill = previousSelection.selectedSkill()
         return if (selectedSkill != null) {
             BattleSelectionUiState.Selected(selectedSkill)
         } else {
             BattleSelectionUiState.Empty
+        }
+    }
+
+    private fun initialStep(selectionMode: SelectionMode): SelectionStep {
+        return when {
+            selectionMode == SelectionMode.SKILL_FIRST && previousSelection != SelectionData.NoSelection -> {
+                val selected = requireNotNull(previousSelection.selectedPokemon()) { "포켓몬이 선택되지 않았습니다." }
+                updateDexNumberForSkills(selected.dexNumber)
+                SelectionStep.SKILL_SELECTION
+            }
+
+            else -> SelectionStep.POKEMON_SELECTION
         }
     }
 
@@ -100,19 +111,26 @@ class BattleSelectionViewModel(
             return
         }
         val nextIndex = currentStep.value.ordinal + 1
-        val nextPage = SelectionStep.entries.getOrNull(nextIndex)
-        if (nextPage != null) {
-            _currentStep.value = nextPage
+        val nextPage = SelectionStep.entries.getOrNull(nextIndex) ?: error("잘못된 페이지 접근")
+        if (nextPage == SelectionStep.SKILL_SELECTION) {
+            val selected =
+                requireNotNull(selectedPokemon.value.selectedData()) { "포켓몬이 선택되어야 합니다." }
+            updateDexNumberForSkills(selected.dexNumber)
+        }
+        _currentStep.value = nextPage
+    }
+
+    private fun updateDexNumberForSkills(dexNumber: Long) {
+        viewModelScope.launch {
+            _pokemonSelectionUpdate.emit(dexNumber)
         }
     }
 
     private fun handleSelectionResult() {
-        val pokemon =
-            selectedPokemon.value.selectedData() ?: throw IllegalStateException("포켓몬을 선택하세요")
+        val pokemon = requireNotNull(selectedPokemon.value.selectedData()) { "포켓몬이 선택되어야 합니다." }
         val result =
-            if (previousSelection.isSkillSelectionRequired()) {
-                val skill =
-                    selectedSkill.value.selectedData() ?: throw IllegalStateException("스킬을 선택하세요")
+            if (selectionMode.isSkillSelectionRequired()) {
+                val skill = requireNotNull(selectedSkill.value.selectedData()) { "스킬이 선택되어야 합니다." }
                 SelectionData.WithSkill(pokemon, skill)
             } else {
                 SelectionData.WithoutSkill(pokemon)
@@ -133,7 +151,9 @@ class BattleSelectionViewModel(
     }
 
     companion object {
-        fun factory(previousSelection: SelectionData): ViewModelProvider.Factory =
-            BaseViewModelFactory { BattleSelectionViewModel(previousSelection) }
+        fun factory(
+            selectionMode: SelectionMode,
+            previousSelection: SelectionData,
+        ): ViewModelProvider.Factory = BaseViewModelFactory { BattleSelectionViewModel(selectionMode, previousSelection) }
     }
 }

@@ -1,10 +1,11 @@
 package poke.rogue.helper.presentation.battle
 
 import WeatherSpinnerAdapter
-import android.content.Intent
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
@@ -25,6 +26,19 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)
     }
+
+    private val activityResultLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data =
+                    result.data?.parcelable<SelectionData>(BattleSelectionActivity.KEY_SELECTION_RESULT)
+                if (data != null) {
+                    viewModel.updatePokemonSelection(data)
+                }
+            }
+        }
     override val toolbar: Toolbar
         get() = binding.toolbarBattle
 
@@ -69,36 +83,37 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         repeatOnStarted {
             viewModel.selectedState.collect {
                 if (it.minePokemon is BattleSelectionUiState.Selected) {
-                    val selected = it.minePokemon.selected
+                    val selected = it.minePokemon.content
                     binding.ivMinePokemon.setImage(selected.backImageUrl)
                     binding.tvMinePokemon.text = selected.name
                 }
 
                 if (it.skill is BattleSelectionUiState.Selected) {
-                    binding.tvSkillTitle.text = it.skill.selected.name
+                    binding.tvSkillTitle.text = it.skill.content.name
                 }
 
                 if (it.opponentPokemon is BattleSelectionUiState.Selected) {
-                    val selected = it.opponentPokemon.selected
+                    val selected = it.opponentPokemon.content
                     binding.ivOpponentPokemon.setImage(selected.frontImageUrl)
                     binding.tvOpponentPokemon.text = selected.name
                 }
 
                 if (it.weather is BattleSelectionUiState.Selected) {
-                    val selected = it.weather.selected
+                    val selected = it.weather.content
                     binding.tvWeatherDescription.text = selected.effect
                 }
             }
         }
 
         repeatOnStarted {
-            viewModel.navigateToSelection.collect { previousSelection ->
+            viewModel.navigateToSelection.collect { (selectionMode, previousSelection) ->
                 val intent =
                     BattleSelectionActivity.intent(
                         this@BattleActivity,
+                        selectionMode,
                         previousSelection,
                     )
-                startActivityForResult(intent, REQUEST_CODE)
+                activityResultLauncher.launch(intent)
             }
         }
 
@@ -109,29 +124,10 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                     binding.tvPowerContent.text = result.power
                     binding.tvMultiplierContent.text = result.multiplier
                     binding.tvCalculatedPowerContent.text = result.calculatedResult
-                    binding.tvAccuracyContent.text = getString(R.string.battle_accuracy_title, result.accuracy)
+                    binding.tvAccuracyContent.text =
+                        getString(R.string.battle_accuracy_title, result.accuracy)
                 }
             }
         }
-    }
-
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?,
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode != REQUEST_CODE) return
-        if (resultCode == RESULT_OK) {
-            val result =
-                data?.parcelable<SelectionData>(BattleSelectionActivity.KEY_SELECTION_RESULT)
-            if (result != null) {
-                viewModel.updatePokemonSelection(result)
-            }
-        }
-    }
-
-    companion object {
-        private const val REQUEST_CODE = 1
     }
 }
