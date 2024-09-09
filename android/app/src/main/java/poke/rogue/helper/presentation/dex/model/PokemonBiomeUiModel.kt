@@ -25,3 +25,13 @@ fun List<PokemonBiome>.toUi(allBiomes: List<Biome>): List<PokemonBiomeUiModel> =
             )
         }
     }
+
+fun PokemonBiome.toUi(): PokemonBiomeUiModel =
+    PokemonBiomeUiModel(
+        id = id,
+        name = name,
+        imageUrl = imageUrl,
+        types = pokemonType.toUi(),
+    )
+
+fun List<PokemonBiome>.toUi(): List<PokemonBiomeUiModel> = this.map(PokemonBiome::toUi)
