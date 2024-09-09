@@ -6,7 +6,9 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.datasource.LocalDexDataSource
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
+import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonSort
@@ -16,6 +18,7 @@ import poke.rogue.helper.stringmatcher.has
 class DefaultDexRepository(
     private val remotePokemonDataSource: RemoteDexDataSource,
     private val localPokemonDataSource: LocalDexDataSource,
+    private val biomeRepository: BiomeRepository,
     private val analyticsLogger: AnalyticsLogger,
 ) : DexRepository {
     private var cachedPokemons: List<Pokemon> = emptyList()
@@ -46,13 +49,31 @@ class DefaultDexRepository(
         }.toFilteredPokemons(sort, filters)
     }
 
-    override suspend fun pokemonDetail(id: String): PokemonDetail =
-        coroutineScope {
-            return@coroutineScope remotePokemonDataSource.pokemon(id).also {
+    override suspend fun pokemonDetail(id: String): PokemonDetail {
+        val allBiomes = biomeRepository.biomes()
+        return coroutineScope {
+            return@coroutineScope pokemonDetail(id, allBiomes).also {
                 val pokemonName = it.pokemon.name + " " + it.pokemon.formName
                 analyticsLogger.logPokemonDetail(id, pokemonName)
             }
         }
+    }
+
+    private suspend fun pokemonDetail(
+        id: String,
+        allBiomes: List<Biome>,
+    ): PokemonDetail {
+        val pokemonDetail = remotePokemonDataSource.pokemon(id)
+        val pokemonDetailIds = pokemonDetail.biomes.map(PokemonBiome::id)
+        val pokemonBiomes =
+            allBiomes
+                .filter { biome -> biome.id in pokemonDetailIds }
+                .toPokemonBiome()
+
+        return pokemonDetail.copy(
+            biomes = pokemonBiomes,
+        )
+    }
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
@@ -78,6 +99,7 @@ class DefaultDexRepository(
                 DefaultDexRepository(
                     RemoteDexDataSource.instance(),
                     LocalDexDataSource.instance(context),
+                    DefaultBiomeRepository.instance(),
                     analyticsLogger(),
                 )
         }
@@ -89,3 +111,13 @@ class DefaultDexRepository(
         }
     }
 }
+
+private fun Biome.toPokemonBiome(): PokemonBiome =
+    PokemonBiome(
+        id = id,
+        name = name,
+        imageUrl = image,
+        pokemonType = pokemonType,
+    )
+
+private fun List<Biome>.toPokemonBiome(): List<PokemonBiome> = map(Biome::toPokemonBiome)
