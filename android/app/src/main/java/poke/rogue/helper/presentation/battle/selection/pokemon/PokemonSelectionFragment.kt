@@ -11,9 +11,8 @@ import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.FragmentPokemonSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.battle.model.selectedPokemonOrNull
+import poke.rogue.helper.presentation.battle.model.selectedPokemon
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
-import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.fragment.hideKeyboard
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
@@ -26,7 +25,7 @@ class PokemonSelectionFragment :
     private val viewModel: PokemonSelectionViewModel by viewModels<PokemonSelectionViewModel> {
         PokemonSelectionViewModel.factory(
             DefaultDexRepository.instance(),
-            sharedViewModel.previousSelection.selectedPokemonOrNull(),
+            sharedViewModel.previousSelection.selectedPokemon(),
         )
     }
     private val pokemonAdapter: PokemonSelectionAdapter by lazy {

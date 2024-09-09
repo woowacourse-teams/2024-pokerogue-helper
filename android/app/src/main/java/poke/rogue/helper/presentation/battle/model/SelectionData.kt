@@ -19,7 +19,7 @@ sealed class SelectionData : Parcelable {
     data object NoSelection : SelectionData()
 }
 
-fun SelectionData.selectedPokemonOrNull(): PokemonSelectionUiModel? {
+fun SelectionData.selectedPokemon(): PokemonSelectionUiModel? {
     return when (this) {
         is SelectionData.NoSelection -> null
         is SelectionData.WithSkill -> this.selectedPokemon
@@ -27,7 +27,7 @@ fun SelectionData.selectedPokemonOrNull(): PokemonSelectionUiModel? {
     }
 }
 
-fun SelectionData.selectedSkillOrNull(): SkillSelectionUiModel? {
+fun SelectionData.selectedSkill(): SkillSelectionUiModel? {
     return when (this) {
         is SelectionData.NoSelection -> null
         is SelectionData.WithSkill -> this.selectedSkill

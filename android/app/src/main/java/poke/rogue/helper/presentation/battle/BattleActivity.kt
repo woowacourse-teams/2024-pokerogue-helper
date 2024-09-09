@@ -83,23 +83,23 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         repeatOnStarted {
             viewModel.selectedState.collect {
                 if (it.minePokemon is BattleSelectionUiState.Selected) {
-                    val selected = it.minePokemon.selected
+                    val selected = it.minePokemon.content
                     binding.ivMinePokemon.setImage(selected.backImageUrl)
                     binding.tvMinePokemon.text = selected.name
                 }
 
                 if (it.skill is BattleSelectionUiState.Selected) {
-                    binding.tvSkillTitle.text = it.skill.selected.name
+                    binding.tvSkillTitle.text = it.skill.content.name
                 }
 
                 if (it.opponentPokemon is BattleSelectionUiState.Selected) {
-                    val selected = it.opponentPokemon.selected
+                    val selected = it.opponentPokemon.content
                     binding.ivOpponentPokemon.setImage(selected.frontImageUrl)
                     binding.tvOpponentPokemon.text = selected.name
                 }
 
                 if (it.weather is BattleSelectionUiState.Selected) {
-                    val selected = it.weather.selected
+                    val selected = it.weather.content
                     binding.tvWeatherDescription.text = selected.effect
                 }
             }

@@ -46,7 +46,11 @@ class BattleViewModel(
             } else {
                 BattleResultUiState.Idle
             }
-        }.stateIn(viewModelScope + errorHandler, SharingStarted.WhileSubscribed(5000), BattleResultUiState.Idle)
+        }.stateIn(
+            viewModelScope + errorHandler,
+            SharingStarted.WhileSubscribed(5000),
+            BattleResultUiState.Idle,
+        )
 
     val isBattleFetchSuccessful =
         battleResult.map { it.isSuccess() }
@@ -129,7 +133,8 @@ class BattleViewModel(
                 if (selectedPokemon == null) {
                     SelectionData.NoSelection
                 } else {
-                    previousSelection(selectionMode != SelectionMode.POKEMON_ONLY, selectedPokemon)
+                    val hasSkillSelection = selectionMode != SelectionMode.POKEMON_ONLY
+                    previousSelection(hasSkillSelection, selectedPokemon)
                 }
 
             val navigationData = SelectionNavigationData(selectionMode, data)
@@ -142,7 +147,8 @@ class BattleViewModel(
         previousPokemonSelection: PokemonSelectionUiModel,
     ): SelectionData {
         return if (hasSkillSelection) {
-            val skill = selectedState.value.skill.requireSelectedData("스킬이 선택되어야 합니다.")
+            val skill =
+                requireNotNull(selectedState.value.skill.selectedData()) { "스킬이 선택되어야 합니다." }
             SelectionData.WithSkill(previousPokemonSelection, skill)
         } else {
             SelectionData.WithoutSkill(previousPokemonSelection)

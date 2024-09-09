@@ -69,7 +69,7 @@ class BattleSelectionActivity :
         repeatOnStarted {
             viewModel.selectedPokemon.collect { selectionState ->
                 if (selectionState is BattleSelectionUiState.Selected) {
-                    val selected = selectionState.selected
+                    val selected = selectionState.content
                     binding.ivPokemon.setImage(selected.frontImageUrl)
                     binding.toolbarBattleSelection.title = selected.name
                 }

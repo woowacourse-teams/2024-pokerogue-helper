@@ -23,9 +23,9 @@ import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.SelectionMode
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.isSkillSelectionRequired
-import poke.rogue.helper.presentation.battle.model.selectedPokemonOrNull
-import poke.rogue.helper.presentation.battle.model.selectedSkillOrNull
-import poke.rogue.helper.presentation.battle.requireSelectedData
+import poke.rogue.helper.presentation.battle.model.selectedPokemon
+import poke.rogue.helper.presentation.battle.model.selectedSkill
+import poke.rogue.helper.presentation.battle.selectedData
 
 class BattleSelectionViewModel(
     private val selectionMode: SelectionMode,
@@ -67,7 +67,7 @@ class BattleSelectionViewModel(
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
     private fun initializeSelectedPokemon(): BattleSelectionUiState<PokemonSelectionUiModel> {
-        val selectedPokemon = previousSelection.selectedPokemonOrNull()
+        val selectedPokemon = previousSelection.selectedPokemon()
         return if (selectedPokemon != null) {
             BattleSelectionUiState.Selected(selectedPokemon)
         } else {
@@ -76,7 +76,7 @@ class BattleSelectionViewModel(
     }
 
     private fun initializeSelectedSkill(): BattleSelectionUiState<SkillSelectionUiModel> {
-        val selectedSkill = previousSelection.selectedSkillOrNull()
+        val selectedSkill = previousSelection.selectedSkill()
         return if (selectedSkill != null) {
             BattleSelectionUiState.Selected(selectedSkill)
         } else {
@@ -87,10 +87,11 @@ class BattleSelectionViewModel(
     private fun initialStep(selectionMode: SelectionMode): SelectionStep {
         return when {
             selectionMode == SelectionMode.SKILL_FIRST && previousSelection != SelectionData.NoSelection -> {
-                val selected = previousSelection.selectedPokemonOrNull() ?: error("포켓몬이 선택되지 않았습니다.")
+                val selected = requireNotNull(previousSelection.selectedPokemon()) { "포켓몬이 선택되지 않았습니다." }
                 updateDexNumberForSkills(selected.dexNumber)
                 SelectionStep.SKILL_SELECTION
             }
+
             else -> SelectionStep.POKEMON_SELECTION
         }
     }
@@ -112,7 +113,8 @@ class BattleSelectionViewModel(
         val nextIndex = currentStep.value.ordinal + 1
         val nextPage = SelectionStep.entries.getOrNull(nextIndex) ?: error("잘못된 페이지 접근")
         if (nextPage == SelectionStep.SKILL_SELECTION) {
-            val selected = selectedPokemon.value.requireSelectedData("포켓몬을 선택하세요")
+            val selected =
+                requireNotNull(selectedPokemon.value.selectedData()) { "포켓몬이 선택되어야 합니다." }
             updateDexNumberForSkills(selected.dexNumber)
         }
         _currentStep.value = nextPage
@@ -125,10 +127,10 @@ class BattleSelectionViewModel(
     }
 
     private fun handleSelectionResult() {
-        val pokemon = selectedPokemon.value.requireSelectedData("포켓몬을 선택하세요")
+        val pokemon = requireNotNull(selectedPokemon.value.selectedData()) { "포켓몬이 선택되어야 합니다." }
         val result =
             if (selectionMode.isSkillSelectionRequired()) {
-                val skill = selectedSkill.value.requireSelectedData("스킬을 선택하세요")
+                val skill = requireNotNull(selectedSkill.value.selectedData()) { "스킬이 선택되어야 합니다." }
                 SelectionData.WithSkill(pokemon, skill)
             } else {
                 SelectionData.WithoutSkill(pokemon)
