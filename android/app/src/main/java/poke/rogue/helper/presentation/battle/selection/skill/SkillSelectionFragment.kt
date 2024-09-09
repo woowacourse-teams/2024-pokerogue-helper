@@ -87,6 +87,7 @@ class SkillSelectionFragment :
 
         repeatOnStarted {
             viewModel.skillSelectedEvent.collect {
+                hideKeyboard()
                 sharedViewModel.selectSkill(it)
             }
         }

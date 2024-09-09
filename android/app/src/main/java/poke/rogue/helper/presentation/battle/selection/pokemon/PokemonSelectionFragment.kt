@@ -79,7 +79,7 @@ class PokemonSelectionFragment :
 
         repeatOnStarted {
             viewModel.pokemonSelectedEvent.collect {
-                requireActivity().hideKeyboard()
+                hideKeyboard()
                 sharedViewModel.selectPokemon(it)
             }
         }
