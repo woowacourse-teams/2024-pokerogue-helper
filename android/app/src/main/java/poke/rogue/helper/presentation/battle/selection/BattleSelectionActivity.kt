@@ -59,9 +59,8 @@ class BattleSelectionActivity :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initListener() {
-        binding.root.setOnTouchListener { v, event ->
+        binding.root.setOnClickListener {
             hideKeyboard()
-            true
         }
     }
 
