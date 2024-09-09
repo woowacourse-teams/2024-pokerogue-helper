@@ -8,30 +8,28 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import poke.rogue.helper.R
+import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonSkill
-import poke.rogue.helper.data.repository.BiomeRepository
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
+import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
-import poke.rogue.helper.testing.data.repository.FakeBiomeRepository
 import poke.rogue.helper.testing.data.repository.FakeDexRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
 class PokemonDetailViewModelTest {
     private lateinit var dexRepository: DexRepository
-    private lateinit var biomeRepository: BiomeRepository
     private lateinit var viewModel: PokemonDetailViewModel
 
     @BeforeEach
     fun setUp() {
         dexRepository = FakeDexRepository()
-        biomeRepository = FakeBiomeRepository()
     }
 
     @Test
@@ -41,7 +39,6 @@ class PokemonDetailViewModelTest {
             viewModel =
                 PokemonDetailViewModel(
                     dexRepository,
-                    biomeRepository,
                 )
 
             // when
@@ -58,7 +55,6 @@ class PokemonDetailViewModelTest {
             viewModel =
                 PokemonDetailViewModel(
                     dexRepository,
-                    biomeRepository,
                 )
 
             // when
@@ -112,7 +108,7 @@ class PokemonDetailViewModelTest {
                         ),
                     height = 0.7f,
                     weight = 6.9f,
-                    biomes = listOf(),
+                    biomes = PokemonBiome.DUMMYS.toUi(),
                 )
         }
 }
