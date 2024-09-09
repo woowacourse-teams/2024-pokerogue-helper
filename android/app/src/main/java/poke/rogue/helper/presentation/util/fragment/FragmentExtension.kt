@@ -91,5 +91,7 @@ inline fun <reified T : Activity> Fragment.startActivity(argusBuilder: Intent.()
 
 fun Fragment.hideKeyboard() {
     val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+    if (imm.isAcceptingText) {
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+    }
 }
