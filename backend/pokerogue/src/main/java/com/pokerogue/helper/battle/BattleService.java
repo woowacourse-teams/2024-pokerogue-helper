@@ -6,7 +6,9 @@ import com.pokerogue.helper.pokemon2.data.Pokemon;
 import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ public class BattleService {
     private final BattleMoveRepository battleMoveRepository;
     private final Pokemon2Repository pokemon2Repository;
     private final TypeMatchingRepository typeMatchingRepository;
+
+    private Map<Integer, List<MoveResponse>> findByDexnumberCache = new HashMap<>();
 
     public List<WeatherResponse> findWeathers() {
         return Arrays.stream(Weather.values())
@@ -29,6 +33,44 @@ public class BattleService {
         Pokemon pokemon = pokemon2Repository.findById(pokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
+        List<String> moves = new ArrayList<>();
+        for (int i = 0; i < pokemon.moves().size(); i++) {
+            if (i % 2 == 0) {
+                moves.add(pokemon.moves().get(i));
+            }
+        }
+        allMoveIds.addAll(moves);
+        allMoveIds.addAll(pokemon.tmsMoves());
+        allMoveIds.addAll(pokemon.eggMoves());
+        List<BattleMove> battleMoves = allMoveIds.stream()
+                .distinct()
+                .map(this::findMoveById)
+                .toList();
+
+        return battleMoves.stream()
+                .map(MoveResponse::from)
+                .toList();
+    }
+
+    public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
+        if (findByDexnumberCache.isEmpty()) {
+            initFindByDexnumberCache();
+        }
+
+        return findByDexnumberCache.get(pokedexNumber);
+    }
+
+    private void initFindByDexnumberCache() {
+        for (Pokemon pokemon : pokemon2Repository.findAll().values()) {
+            int pokemonId = Integer.parseInt(pokemon.speciesId());
+            if (!findByDexnumberCache.containsKey(pokemonId)) {
+                findByDexnumberCache.put(pokemonId, makeMoveResponse(pokemon));
+            }
+        }
+    }
+
+    private List<MoveResponse> makeMoveResponse(Pokemon pokemon) {
+        List<String> allMoveIds = new ArrayList<>();
         List<String> moves = new ArrayList<>();
         for (int i = 0; i < pokemon.moves().size(); i++) {
             if (i % 2 == 0) {
