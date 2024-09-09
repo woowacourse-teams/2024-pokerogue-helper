@@ -6,6 +6,7 @@ import poke.rogue.helper.data.datasource.RemoteBiomeDataSource
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.BiomeDetail
 import poke.rogue.helper.data.utils.logBiomeDetail
+import poke.rogue.helper.stringmatcher.has
 
 class DefaultBiomeRepository(
     private val remoteBiomeDataSource: RemoteBiomeDataSource,
@@ -18,6 +19,13 @@ class DefaultBiomeRepository(
             cachedBiomes = remoteBiomeDataSource.biomes()
         }
         return cachedBiomes
+    }
+
+    override suspend fun biomes(query: String): List<Biome> {
+        if (query.isBlank()) {
+            return biomes()
+        }
+        return biomes().filter { it.name.has(query) }
     }
 
     override suspend fun biomeDetail(id: String): BiomeDetail {

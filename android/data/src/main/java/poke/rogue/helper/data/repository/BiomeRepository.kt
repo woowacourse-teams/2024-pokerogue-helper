@@ -6,5 +6,7 @@ import poke.rogue.helper.data.model.BiomeDetail
 interface BiomeRepository {
     suspend fun biomes(): List<Biome>
 
+    suspend fun biomes(query: String): List<Biome>
+
     suspend fun biomeDetail(id: String): BiomeDetail
 }
