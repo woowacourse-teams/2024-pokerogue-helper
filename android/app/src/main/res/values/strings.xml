@@ -86,12 +86,22 @@
 
     <!--    biome -->
     <string name="biome_title_name">바이옴 도감</string>
+    <string name="biome_guide_url">https://wiki.pokerogue.net/ko:biomes:biomes</string>
     <string-array name="biome_tab_titles">
         <item>체육관</item>
         <item>보스</item>
         <item>야생</item>
         <item>다음 바이옴</item>
     </string-array>
+
+    <!--    biome detail gym -->
+    <string name="biome_detail_gym">등장하는 체육관 관장이 없어요</string>
+
+    <!--    biome detail boss -->
+    <string name="biome_detail_boss">등장하는 보스 포켓몬이 없어요</string>
+
+    <!--    biome detail next biome -->
+    <string name="biome_detail_next_biome_probability">%.1f%%</string>
 
     <!--    item -->
     <string name="item_title_name">아이템 도감</string>

@@ -135,12 +135,14 @@ class PokemonListViewModel(
         viewModelScope.launch {
             pokeFilter.value = filter
         }
+        analyticsLogger().logPokemonFilter(filter)
     }
 
     fun sortPokemon(sort: PokemonSortUiModel) {
         viewModelScope.launch {
             pokeSort.value = sort
         }
+        analyticsLogger().logPokemonSort(sort)
     }
 
     companion object {
