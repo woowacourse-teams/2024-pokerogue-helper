@@ -64,14 +64,11 @@ class DefaultDexRepository(
         allBiomes: List<Biome>,
     ): PokemonDetail {
         val pokemonDetail = remotePokemonDataSource.pokemon(id)
-
+        val pokemonDetailIds = pokemonDetail.biomes.map(PokemonBiome::id)
         val pokemonBiomes =
-            pokemonDetail.biomes
-                .flatMap { pokemonBiome ->
-                    allBiomes
-                        .filter { biome -> pokemonBiome.id == biome.id }
-                        .map { filteredBiome -> filteredBiome.toPokemonBiome() }
-                }
+            allBiomes
+                .filter { biome -> biome.id in pokemonDetailIds }
+                .toPokemonBiome()
 
         return pokemonDetail.copy(
             biomes = pokemonBiomes,
@@ -122,3 +119,5 @@ private fun Biome.toPokemonBiome(): PokemonBiome =
         imageUrl = image,
         pokemonType = pokemonType,
     )
+
+private fun List<Biome>.toPokemonBiome(): List<PokemonBiome> = map(Biome::toPokemonBiome)
