@@ -6,7 +6,6 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import kotlinx.coroutines.flow.collectLatest
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultBattleRepository
 import poke.rogue.helper.databinding.FragmentSkillSelectionBinding
@@ -80,7 +79,7 @@ class SkillSelectionFragment :
         }
 
         repeatOnStarted {
-            viewModel.filteredSkills.collectLatest {
+            viewModel.filteredSkills.collect {
                 skillAdapter.submitList(it)
             }
         }

@@ -25,8 +25,8 @@ import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.toUi
 import poke.rogue.helper.presentation.battle.selection.QueryHandler
 import poke.rogue.helper.presentation.dex.filter.SelectableUiModel
+import poke.rogue.helper.presentation.dex.filter.initialized
 import poke.rogue.helper.presentation.dex.filter.toSelectableModelsBy
-import poke.rogue.helper.presentation.dex.filter.toSelectableModelsWithAllDeselected
 import poke.rogue.helper.stringmatcher.has
 
 class SkillSelectionViewModel(
@@ -79,9 +79,8 @@ class SkillSelectionViewModel(
         previousPokemonDexNumber = pokemonDexNumber
         viewModelScope.launch(errorHandler) {
             _skills.value = emptyList()
-            val availableSkills =
-                battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
-            _skills.value = availableSkills.toSelectableModelsWithAllDeselected()
+            val availableSkills = battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
+            _skills.value = availableSkills.initialized()
         }
     }
 

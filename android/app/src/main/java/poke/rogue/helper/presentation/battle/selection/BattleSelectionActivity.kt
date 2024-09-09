@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.battle.selection
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -57,7 +56,6 @@ class BattleSelectionActivity :
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private fun initListener() {
         binding.root.setOnClickListener {
             hideKeyboard()
