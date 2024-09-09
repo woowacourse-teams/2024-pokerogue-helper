@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
@@ -26,7 +25,7 @@ import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
-        PokemonDetailViewModel.factory(DefaultDexRepository.instance(), DefaultBiomeRepository.instance())
+        PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
 
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter

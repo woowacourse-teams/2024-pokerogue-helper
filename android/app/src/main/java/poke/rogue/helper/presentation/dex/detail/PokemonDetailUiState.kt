@@ -36,5 +36,17 @@ fun PokemonDetail.toUi(allBiomes: List<Biome>): PokemonDetailUiState.Success =
         skills = skills,
         height = height.toFloat(),
         weight = weight.toFloat(),
-        biomes = biomes.toUi(allBiomes),
+        biomes = biomes.toUi(),
+    )
+
+fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
+    PokemonDetailUiState.Success(
+        pokemon = pokemon.toUi(),
+        stats = stats.map(Stat::toUi),
+        abilities = abilities.toPokemonDetailUi(),
+        evolutions = evolutions.toUi(),
+        skills = skills,
+        height = height.toFloat(),
+        weight = weight.toFloat(),
+        biomes = biomes.toUi(),
     )

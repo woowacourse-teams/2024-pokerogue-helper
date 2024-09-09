@@ -14,14 +14,12 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
-import poke.rogue.helper.data.repository.BiomeRepository
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
-    private val biomeRepository: BiomeRepository,
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
@@ -49,9 +47,7 @@ class PokemonDetailViewModel(
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch {
             val pokemonDetail = dexRepository.pokemonDetail(pokemonId)
-            val biomes = biomeRepository.biomes()
-
-            _uiState.value = pokemonDetail.toUi(biomes)
+            _uiState.value = pokemonDetail.toUi()
         }
     }
 
@@ -80,9 +76,7 @@ class PokemonDetailViewModel(
     }
 
     companion object {
-        fun factory(
-            dexRepository: DexRepository,
-            biomeRepository: BiomeRepository,
-        ): ViewModelProvider.Factory = BaseViewModelFactory { PokemonDetailViewModel(dexRepository, biomeRepository) }
+        fun factory(dexRepository: DexRepository): ViewModelProvider.Factory =
+            BaseViewModelFactory { PokemonDetailViewModel(dexRepository) }
     }
 }
