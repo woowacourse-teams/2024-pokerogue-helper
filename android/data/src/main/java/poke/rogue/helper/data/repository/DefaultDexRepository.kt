@@ -17,7 +17,6 @@ class DefaultDexRepository(
     private val biomeRepository: BiomeRepository,
 ) : DexRepository {
     private var cachedPokemons: List<Pokemon> = emptyList()
-    private var cachedPokemonDetails: MutableMap<String, PokemonDetail> = mutableMapOf()
 
     override suspend fun warmUp() {
         if (localPokemonDataSource.pokemons().isEmpty()) {
