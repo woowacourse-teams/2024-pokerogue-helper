@@ -12,6 +12,7 @@ import poke.rogue.helper.databinding.ActivityBiomeBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
+import poke.rogue.helper.presentation.biome.guide.BiomeGuideActivity
 import poke.rogue.helper.presentation.biome.model.toUi
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.logClickEvent
@@ -69,6 +70,14 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
         }
 
         repeatOnStarted {
+            viewModel.navigateToGuideEvent.collect {
+                startActivity<BiomeGuideActivity> {
+                    logger.logClickEvent(NAVIGATE_TO_BIOME_GUIDE)
+                }
+            }
+        }
+
+        repeatOnStarted {
             viewModel.biome.collect { biome ->
                 when (biome) {
                     is BiomeUiState.Loading -> {
@@ -86,5 +95,6 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
 
     companion object {
         private const val NAVIGATE_TO_BIOME_DETAIL = "Nav_Biome_Detail"
+        private const val NAVIGATE_TO_BIOME_GUIDE = "Nav_Biome_Guide"
     }
 }
