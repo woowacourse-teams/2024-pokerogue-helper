@@ -4,7 +4,6 @@ import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.presentation.battle.model.SelectionData
 
-// TODO : 조대리님 적용해주세요
 fun AnalyticsLogger.logPokemonSkillSelection(selection: SelectionData.WithSkill) {
     val eventType = "pokemon_battle_skill_selection"
     logEvent(
@@ -15,7 +14,6 @@ fun AnalyticsLogger.logPokemonSkillSelection(selection: SelectionData.WithSkill)
     )
 }
 
-// TODO : 조대리님 적용해주세요
 fun AnalyticsLogger.logBattlePokemonSelection(selection: SelectionData.WithoutSkill) {
     val eventType = "pokemon_battle_selection"
     logEvent(

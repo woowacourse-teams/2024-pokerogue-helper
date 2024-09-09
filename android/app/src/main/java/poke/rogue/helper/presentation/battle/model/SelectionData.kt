@@ -2,22 +2,8 @@ package poke.rogue.helper.presentation.battle.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.presentation.battle.model.SelectionData.WithSkill
 import poke.rogue.helper.presentation.battle.model.SelectionData.WithoutSkill
-
-fun WithSkill.toAnalyticsParams(): List<AnalyticsEvent.Param> {
-    return listOf(
-        AnalyticsEvent.Param(key = "pokemon_id", value = selectedPokemon.id),
-        AnalyticsEvent.Param(key = "skill_id", value = selectedSkill.id),
-    )
-}
-
-fun WithoutSkill.toAnalyticsParams(): List<AnalyticsEvent.Param> {
-    return listOf(
-        AnalyticsEvent.Param(key = "pokemon_id", value = selectedPokemon.id),
-    )
-}
 
 sealed class SelectionData : Parcelable {
     @Parcelize

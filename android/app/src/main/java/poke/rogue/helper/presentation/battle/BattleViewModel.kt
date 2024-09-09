@@ -27,7 +27,7 @@ import poke.rogue.helper.presentation.battle.model.toUi
 
 class BattleViewModel(
     private val battleRepository: BattleRepository,
-    logger: AnalyticsLogger = analyticsLogger(),
+    private val logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), BattleNavigationHandler {
     private val _weathers = MutableStateFlow(emptyList<WeatherUiModel>())
     val weathers = _weathers.asStateFlow()
@@ -92,12 +92,18 @@ class BattleViewModel(
     fun updatePokemonSelection(selection: SelectionData) {
         when (selection) {
             is SelectionData.WithSkill ->
-                updateMyPokemon(
-                    selection.selectedPokemon,
-                    selection.selectedSkill,
-                )
+                {
+                    updateMyPokemon(
+                        selection.selectedPokemon,
+                        selection.selectedSkill,
+                    )
+                    logger.logPokemonSkillSelection(selection)
+                }
 
-            is SelectionData.WithoutSkill -> updateOpponentPokemon(selection.selectedPokemon)
+            is SelectionData.WithoutSkill -> {
+                updateOpponentPokemon(selection.selectedPokemon)
+                logger.logBattlePokemonSelection(selection)
+            }
             is SelectionData.NoSelection -> {}
         }
     }
