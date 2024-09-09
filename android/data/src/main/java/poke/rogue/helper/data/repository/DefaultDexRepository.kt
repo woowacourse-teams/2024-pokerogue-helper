@@ -3,7 +3,9 @@ package poke.rogue.helper.data.repository
 import android.content.Context
 import poke.rogue.helper.data.datasource.LocalDexDataSource
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
+import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonSort
@@ -12,6 +14,7 @@ import poke.rogue.helper.stringmatcher.has
 class DefaultDexRepository(
     private val remotePokemonDataSource: RemoteDexDataSource,
     private val localPokemonDataSource: LocalDexDataSource,
+    private val biomeRepository: BiomeRepository,
 ) : DexRepository {
     private var cachedPokemons: List<Pokemon> = emptyList()
     private var cachedPokemonDetails: MutableMap<String, PokemonDetail> = mutableMapOf()
@@ -43,13 +46,20 @@ class DefaultDexRepository(
     }
 
     override suspend fun pokemonDetail(id: String): PokemonDetail {
-        val cached = cachedPokemonDetails[id]
-        if (cached != null) {
-            return cached
-        }
-        return remotePokemonDataSource.pokemon(id).also {
-            cachedPokemonDetails[id] = it
-        }
+        val allBiomes = biomeRepository.biomes()
+        val pokemonDetail = remotePokemonDataSource.pokemon(id)
+
+        val pokemonBiomes =
+            pokemonDetail.biomes
+                .flatMap { pokemonBiome ->
+                    allBiomes
+                        .filter { biome -> pokemonBiome.id == biome.id }
+                        .map { filteredBiome -> filteredBiome.toPokemonBiome() }
+                }
+
+        return pokemonDetail.copy(
+            biomes = pokemonBiomes,
+        )
     }
 
     private fun List<Pokemon>.toFilteredPokemons(
@@ -76,6 +86,7 @@ class DefaultDexRepository(
                 DefaultDexRepository(
                     RemoteDexDataSource.instance(),
                     LocalDexDataSource.instance(context),
+                    DefaultBiomeRepository.instance(),
                 )
         }
 
@@ -86,3 +97,11 @@ class DefaultDexRepository(
         }
     }
 }
+
+private fun Biome.toPokemonBiome(): PokemonBiome =
+    PokemonBiome(
+        id = id,
+        name = name,
+        imageUrl = image,
+        pokemonType = pokemonType,
+    )
