@@ -1,20 +1,24 @@
 package poke.rogue.helper.data.repository
 
 import android.content.Context
+import kotlinx.coroutines.coroutineScope
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.datasource.LocalDexDataSource
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonSort
+import poke.rogue.helper.data.utils.logPokemonDetail
 import poke.rogue.helper.stringmatcher.has
 
 class DefaultDexRepository(
     private val remotePokemonDataSource: RemoteDexDataSource,
     private val localPokemonDataSource: LocalDexDataSource,
+    private val analyticsLogger: AnalyticsLogger,
 ) : DexRepository {
     private var cachedPokemons: List<Pokemon> = emptyList()
-    private var cachedPokemonDetails: MutableMap<String, PokemonDetail> = mutableMapOf()
 
     override suspend fun warmUp() {
         if (localPokemonDataSource.pokemons().isEmpty()) {
@@ -42,15 +46,13 @@ class DefaultDexRepository(
         }.toFilteredPokemons(sort, filters)
     }
 
-    override suspend fun pokemonDetail(id: String): PokemonDetail {
-        val cached = cachedPokemonDetails[id]
-        if (cached != null) {
-            return cached
+    override suspend fun pokemonDetail(id: String): PokemonDetail =
+        coroutineScope {
+            return@coroutineScope remotePokemonDataSource.pokemon(id).also {
+                val pokemonName = it.pokemon.name + " " + it.pokemon.formName
+                analyticsLogger.logPokemonDetail(id, pokemonName)
+            }
         }
-        return remotePokemonDataSource.pokemon(id).also {
-            cachedPokemonDetails[id] = it
-        }
-    }
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
@@ -76,6 +78,7 @@ class DefaultDexRepository(
                 DefaultDexRepository(
                     RemoteDexDataSource.instance(),
                     LocalDexDataSource.instance(context),
+                    analyticsLogger(),
                 )
         }
 
