@@ -250,15 +250,15 @@ public class Pokemon2Service {
         return biomes.stream()
                 .map(id -> {
                             if (id.isEmpty()) {
-                                return new BiomeResponse("", "", "", List.of(), List.of());
+                                return new BiomeResponse("", "", ""/*, List.of(), List.of()*/);
                             }
                             Biome biome = biomeRepository.findById(id).orElseThrow();
                             return new BiomeResponse(
                                     id,
                                     biome.getName(),
-                                    s3Service.getBiomeImageFromS3(id),
-                                    createTypeResponse(biome.getMainTypes()),
-                                    createTypeResponse(biome.getTrainerTypes())
+                                    s3Service.getBiomeImageFromS3(id)
+                                    //createTypeResponse(biome.getMainTypes()),
+                                    //createTypeResponse(biome.getTrainerTypes())
                             );
                         }
                 )
