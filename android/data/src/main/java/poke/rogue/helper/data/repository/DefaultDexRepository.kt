@@ -52,14 +52,17 @@ class DefaultDexRepository(
     override suspend fun pokemonDetail(id: String): PokemonDetail {
         val allBiomes = biomeRepository.biomes()
         return coroutineScope {
-            return@coroutineScope pokemonDetail2(id, allBiomes).also {
+            return@coroutineScope pokemonDetail(id, allBiomes).also {
                 val pokemonName = it.pokemon.name + " " + it.pokemon.formName
                 analyticsLogger.logPokemonDetail(id, pokemonName)
             }
         }
     }
 
-    private suspend fun pokemonDetail2(id: String, allBiomes: List<Biome>): PokemonDetail {
+    private suspend fun pokemonDetail(
+        id: String,
+        allBiomes: List<Biome>,
+    ): PokemonDetail {
         val pokemonDetail = remotePokemonDataSource.pokemon(id)
 
         val pokemonBiomes =
