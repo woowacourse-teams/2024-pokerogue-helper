@@ -87,6 +87,7 @@
     <!--    biome -->
     <string name="biome_title_name">바이옴 도감</string>
     <string name="biome_guide_url">https://wiki.pokerogue.net/ko:biomes:biomes</string>
+    <string name="biome_search_hint">바이옴 이름으로 검색하세요.</string>
     <string-array name="biome_tab_titles">
         <item>체육관</item>
         <item>보스</item>

@@ -34,6 +34,14 @@
                 android:padding="12dp"
                 android:src="@drawable/ic_biome_map" />
 
+            <androidx.appcompat.widget.SearchView
+                style="@style/CustomSearchViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:theme="@style/CustomSearchViewTheme"
+                app:queryHint="@string/biome_search_hint" />
+
         </com.google.android.material.appbar.MaterialToolbar>
 
         <androidx.recyclerview.widget.RecyclerView
