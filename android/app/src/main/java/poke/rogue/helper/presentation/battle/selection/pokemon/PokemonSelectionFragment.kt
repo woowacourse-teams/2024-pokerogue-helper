@@ -19,8 +19,7 @@ import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setOnSearchAction
 
-class PokemonSelectionFragment :
-    ErrorHandleFragment<FragmentPokemonSelectionBinding>(R.layout.fragment_pokemon_selection) {
+class PokemonSelectionFragment : ErrorHandleFragment<FragmentPokemonSelectionBinding>(R.layout.fragment_pokemon_selection) {
     private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
     private val viewModel: PokemonSelectionViewModel by viewModels<PokemonSelectionViewModel> {
         PokemonSelectionViewModel.factory(
@@ -72,7 +71,12 @@ class PokemonSelectionFragment :
     private fun initObserver() {
         repeatOnStarted {
             viewModel.filteredPokemon.collect {
-                pokemonAdapter.submitList(it)
+                pokemonAdapter.submitList(it) {
+                    if (sharedViewModel.previousSelection.selectedPokemon() != null) {
+                        val position = it.indexOfFirst { it.isSelected }
+                        binding.rvPokemons.scrollToPosition(position)
+                    }
+                }
             }
         }
 

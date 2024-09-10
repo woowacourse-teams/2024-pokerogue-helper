@@ -24,7 +24,7 @@ fun BattlePrediction.toUi(format: String = DEFAULT_NUMBER_FORMAT): BattlePredict
     val formattedResult = if (calculatedResult < 0) NO_EFFECT_VALUE else String.format(format, calculatedResult)
     val color =
         when {
-            multiplier < 1.0 -> R.color.poke_grey_65
+            multiplier < 1.0 -> R.color.poke_grey_60
             multiplier in 1.0..2.9 -> R.color.poke_red_20
             multiplier >= 3 -> R.color.poke_green_20
             else -> R.color.poke_white
