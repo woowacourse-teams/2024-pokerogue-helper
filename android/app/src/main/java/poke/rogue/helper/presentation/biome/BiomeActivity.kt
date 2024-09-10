@@ -1,12 +1,10 @@
 package poke.rogue.helper.presentation.biome
 
 import android.os.Bundle
-import android.view.MotionEvent
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.delay
 import poke.rogue.helper.R
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
@@ -100,12 +98,17 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
                         biomeAdapter.submitList(biome.data.toUi())
                         binding.biomeLoading.isVisible = false
 
-                        biomeAdapter.registerAdapterDataObserver(object :
-                            RecyclerView.AdapterDataObserver() {
-                            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                                binding.rvBiomeList.scrollToPosition(0)
-                            }
-                        })
+                        biomeAdapter.registerAdapterDataObserver(
+                            object :
+                                RecyclerView.AdapterDataObserver() {
+                                override fun onItemRangeInserted(
+                                    positionStart: Int,
+                                    itemCount: Int,
+                                ) {
+                                    binding.rvBiomeList.scrollToPosition(0)
+                                }
+                            },
+                        )
                     }
                 }
             }

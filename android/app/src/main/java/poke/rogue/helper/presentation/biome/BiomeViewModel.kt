@@ -27,8 +27,8 @@ class BiomeViewModel(
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-    BiomeUiEventHandler, BiomeQueryHandler {
-
+        BiomeUiEventHandler,
+        BiomeQueryHandler {
     private val _navigationToDetailEvent = MutableSharedFlow<String>()
     val navigationToDetailEvent: SharedFlow<String> = _navigationToDetailEvent.asSharedFlow()
 
