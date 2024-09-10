@@ -30,7 +30,7 @@ class PokemonIntroViewModel(
                 coroutineScope {
                     val warmUp = async { pokemonRepository.warmUp() }
                     val delay = async { delay(1000) }
-                    listOf(warmUp, delay).awaitAll()
+                    awaitAll(warmUp, delay)
                 }
                 _navigationToHomeEvent.emit(Unit)
             }
