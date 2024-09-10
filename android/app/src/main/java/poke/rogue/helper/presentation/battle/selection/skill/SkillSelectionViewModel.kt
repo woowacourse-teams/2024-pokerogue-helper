@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,7 +12,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
@@ -26,8 +25,8 @@ import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.toUi
 import poke.rogue.helper.presentation.battle.selection.QueryHandler
 import poke.rogue.helper.presentation.dex.filter.SelectableUiModel
+import poke.rogue.helper.presentation.dex.filter.initialized
 import poke.rogue.helper.presentation.dex.filter.toSelectableModelsBy
-import poke.rogue.helper.presentation.dex.filter.toSelectableModelsWithAllDeselected
 import poke.rogue.helper.stringmatcher.has
 
 class SkillSelectionViewModel(
@@ -35,6 +34,12 @@ class SkillSelectionViewModel(
     previousSelection: SelectionData.WithSkill?,
     logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), SkillSelectionHandler, QueryHandler {
+    var previousPokemonDexNumber: Long? = previousSelection?.selectedPokemon?.dexNumber
+        private set
+
+    var previousSkillsId: String? = previousSelection?.selectedSkill?.id
+        private set
+
     private val _skillSelectedEvent = MutableSharedFlow<SkillSelectionUiModel>()
     val skillSelectedEvent = _skillSelectedEvent.asSharedFlow()
 
@@ -48,7 +53,7 @@ class SkillSelectionViewModel(
         searchQuery
             .debounce(300L)
             .flatMapLatest { query ->
-                skills.map { skillsList ->
+                skills.mapLatest { skillsList ->
                     if (query.isBlank()) {
                         skillsList
                     } else {
@@ -57,18 +62,6 @@ class SkillSelectionViewModel(
                 }
             }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), skills.value)
-
-    init {
-        if (previousSelection != null) {
-            viewModelScope.launch(errorHandler) {
-                val availableSkills =
-                    battleRepository.availableSkills(previousSelection.selectedPokemon.dexNumber)
-                        .map { it.toUi() }
-                _skills.value =
-                    availableSkills.toSelectableModelsBy { it.id == previousSelection.selectedSkill.id }
-            }
-        }
-    }
 
     override fun selectSkill(selected: SkillSelectionUiModel) {
         _skills.value =
@@ -79,15 +72,25 @@ class SkillSelectionViewModel(
         viewModelScope.launch {
             _skillSelectedEvent.emit(selected)
         }
+        previousSkillsId = selected.id
     }
 
     fun updateSkills(pokemonDexNumber: Long) {
+        previousPokemonDexNumber = pokemonDexNumber
         viewModelScope.launch(errorHandler) {
             _skills.value = emptyList()
-            val availableSkills =
-                battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
-            delay(50)
-            _skills.value = availableSkills.toSelectableModelsWithAllDeselected()
+            val availableSkills = battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
+            _skills.value = availableSkills.initialized()
+        }
+    }
+
+    fun updatePreviousSkills(pokemonDexNumber: Long) {
+        if (skills.value.isEmpty()) {
+            viewModelScope.launch(errorHandler) {
+                val availableSkills =
+                    battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
+                _skills.value = availableSkills.toSelectableModelsBy { it.id == previousSkillsId }
+            }
         }
     }
 

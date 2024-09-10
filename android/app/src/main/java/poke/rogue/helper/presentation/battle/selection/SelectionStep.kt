@@ -5,7 +5,7 @@ enum class SelectionStep {
     SKILL_SELECTION,
     ;
 
-    fun hasPreviousStep(): Boolean = this.ordinal > 0
+    fun isFirstStep(): Boolean = this.ordinal > 0
 
     fun isLastStep(hasSkillSelection: Boolean): Boolean {
         return if (hasSkillSelection) {

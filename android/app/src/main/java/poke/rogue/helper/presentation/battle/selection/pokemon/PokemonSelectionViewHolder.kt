@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.battle.selection.pokemon
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemBattlePokemonSelectionBinding
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
-import poke.rogue.helper.presentation.biome.BiomeTypesAdapter
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonSelectionViewHolder(
@@ -18,7 +17,7 @@ class PokemonSelectionViewHolder(
         binding.isSelected = isSelected
         binding.selectionHandler = selectionHandler
 
-        val typeAdapter = BiomeTypesAdapter(context = binding.root.context, binding.flexboxTypes)
+        val typeAdapter = BattlePokemonTypesAdapter(context = binding.root.context, binding.flexboxTypes)
         typeAdapter.addTypes(
             types = pokemonSelectionUiModel.types,
             spacingBetweenTypes = 8.dp,

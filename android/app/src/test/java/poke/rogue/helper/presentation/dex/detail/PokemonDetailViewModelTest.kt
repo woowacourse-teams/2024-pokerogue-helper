@@ -16,6 +16,7 @@ import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
+import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
 import poke.rogue.helper.testing.data.repository.FakeDexRepository
@@ -23,19 +24,22 @@ import poke.rogue.helper.testing.data.repository.FakeDexRepository
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
 class PokemonDetailViewModelTest {
-    private lateinit var repository: DexRepository
+    private lateinit var dexRepository: DexRepository
     private lateinit var viewModel: PokemonDetailViewModel
 
     @BeforeEach
     fun setUp() {
-        repository = FakeDexRepository()
+        dexRepository = FakeDexRepository()
     }
 
     @Test
     fun `포켓몬 상세 데이터를 불러올 때 처음은 로딩 상태이다`() =
         runTest {
             // given
-            viewModel = PokemonDetailViewModel(repository)
+            viewModel =
+                PokemonDetailViewModel(
+                    dexRepository,
+                )
 
             // when
             val expectedPokemonDetailUiState = viewModel.uiState
@@ -48,7 +52,10 @@ class PokemonDetailViewModelTest {
     fun `포켓몬 상세 데이터를 불러온다`() =
         runTest {
             // given
-            viewModel = PokemonDetailViewModel(repository)
+            viewModel =
+                PokemonDetailViewModel(
+                    dexRepository,
+                )
 
             // when
             viewModel.updatePokemonDetail(pokemonId = "1")
@@ -101,24 +108,7 @@ class PokemonDetailViewModelTest {
                         ),
                     height = 0.7f,
                     weight = 6.9f,
-                    biomes =
-                        listOf(
-                            PokemonBiome(
-                                "1",
-                                "평야",
-                                "https://pokeroguedex.com/biomes/plains.png",
-                            ),
-                            PokemonBiome(
-                                "2",
-                                "높은 풀숲",
-                                "https://pokeroguedex.com/biomes/tall-grass.png",
-                            ),
-                            PokemonBiome(
-                                "3",
-                                "동굴",
-                                "https://pokeroguedex.com/biomes/cave.png",
-                            ),
-                        ),
+                    biomes = PokemonBiome.DUMMYS.toUi(),
                 )
         }
 }

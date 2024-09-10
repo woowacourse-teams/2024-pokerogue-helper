@@ -71,8 +71,12 @@
     <string name="pokemon_detail_self_learn_skill_title">자력으로 배우는 기술</string>
 
     <!--    pokemon detail information-->
-    <string name="pokemon_detail_information_weight">체중</string>
-    <string name="pokemon_detail_information_height">키</string>
+    <string name="pokemon_detail_information_weight_title">체중</string>
+    <string name="pokemon_detail_information_height_title">키</string>
+    <string name="pokemon_detail_biome_title">바이옴</string>
+    <string name="pokemon_detail_information_weight">%.1f  kg</string>
+    <string name="pokemon_detail_information_height">%.1f  m</string>
+
 
     <!--    pokemon detail evolution-->
     <string name="pokemon_detail_evolution_no_evolution_chain">진화 체인이 없는 포켓몬입니다.</string>

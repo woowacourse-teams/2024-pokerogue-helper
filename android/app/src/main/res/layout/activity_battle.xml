@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="poke.rogue.helper.presentation.battle.model.SelectionMode" />
+
         <variable
             name="vm"
             type="poke.rogue.helper.presentation.battle.BattleViewModel" />
@@ -53,14 +55,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.68" />
+            app:layout_constraintGuide_percent="0.7" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_end="40dp" />
+            app:layout_constraintGuide_end="20dp" />
 
         <Spinner
             android:id="@+id/spinner_weather"
@@ -77,12 +79,12 @@
 
         <TextView
             android:id="@+id/tv_weather_description"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.CaptionLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textStyle="italic"
             android:gravity="end"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@id/spinner_weather"
             app:layout_constraintStart_toStartOf="@id/spinner_weather"
             app:layout_constraintTop_toBottomOf="@id/spinner_weather" />
@@ -111,11 +113,11 @@
 
         <ImageView
             android:id="@+id/iv_opponent_pokemon"
-            onSingleClick="@{() -> vm.navigateToSelection(false)}"
-            android:layout_width="140dp"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.POKEMON_ONLY)}"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:src="@drawable/icon_pokemon_selection_op"
-            app:layout_constraintBottom_toTopOf="@id/iv_mine_pokemon"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintTop_toBottomOf="@id/tv_weather_description" />
 
@@ -144,10 +146,11 @@
 
         <ImageView
             android:id="@+id/iv_mine_pokemon"
-            onSingleClick="@{() -> vm.navigateToSelection(true)}"
-            android:layout_width="140dp"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.POKEMON_AND_SKILL)}"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-12dp"
+            android:layout_marginTop="-24dp"
+            android:layout_marginBottom="12dp"
             android:src="@drawable/icon_pokemon_selection_mine"
             app:layout_constraintBottom_toTopOf="@id/gl_divider"
             app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -155,7 +158,7 @@
 
         <TextView
             android:id="@+id/tv_skill_title"
-            onSingleClick="@{() -> vm.navigateToSelection(true)}"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.SKILL_FIRST)}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_battle_default"
@@ -187,12 +190,12 @@
             visible="@{vm.isBattleFetchSuccessful}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/battle_power_title"
             android:layout_marginTop="20dp"
-            app:layout_constraintHorizontal_chainStyle="spread"
+            android:text="@string/battle_power_title"
             app:layout_constraintEnd_toStartOf="@id/tv_multiplier"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@id/gl_start"
-            app:layout_constraintTop_toBottomOf="@id/tv_result_title"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_result_title" />
 
         <TextView
             android:id="@+id/tv_power_content"
@@ -204,7 +207,7 @@
             app:layout_constraintEnd_toEndOf="@id/tv_power_title"
             app:layout_constraintStart_toStartOf="@id/tv_power_title"
             app:layout_constraintTop_toBottomOf="@id/tv_power_title"
-            tools:text="30"/>
+            tools:text="30" />
 
         <TextView
             android:id="@+id/tv_multiplier"
@@ -212,12 +215,12 @@
             visible="@{vm.isBattleFetchSuccessful}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/battle_result_multiplier"
             android:gravity="center_vertical"
+            android:text="@string/battle_result_multiplier"
+            app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
             app:layout_constraintEnd_toStartOf="@id/tv_multiplier_title"
             app:layout_constraintStart_toEndOf="@id/tv_power_title"
-            app:layout_constraintTop_toTopOf="@id/tv_power_title"
-            app:layout_constraintBottom_toBottomOf="@id/tv_power_title"/>
+            app:layout_constraintTop_toTopOf="@id/tv_power_title" />
 
         <TextView
             android:id="@+id/tv_multiplier_title"
@@ -226,8 +229,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/battle_multiplier_title"
-            app:layout_constraintEnd_toStartOf="@id/tv_equal"
             app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
+            app:layout_constraintEnd_toStartOf="@id/tv_equal"
             app:layout_constraintStart_toEndOf="@id/tv_multiplier"
             app:layout_constraintTop_toTopOf="@id/tv_power_title" />
 
@@ -250,10 +253,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/battle_result_equal"
-            app:layout_constraintEnd_toStartOf="@id/tv_calculated_power_title"
             app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
+            app:layout_constraintEnd_toStartOf="@id/tv_calculated_power_title"
             app:layout_constraintStart_toEndOf="@id/tv_multiplier_title"
-            app:layout_constraintTop_toTopOf="@id/tv_power_title"/>
+            app:layout_constraintTop_toTopOf="@id/tv_power_title" />
 
         <TextView
             android:id="@+id/tv_calculated_power_title"
@@ -262,9 +265,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/battle_calculated_power_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintStart_toEndOf="@id/tv_equal"
-            app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
             app:layout_constraintTop_toTopOf="@id/tv_power_title" />
 
         <TextView
@@ -277,7 +280,7 @@
             app:layout_constraintEnd_toEndOf="@id/tv_calculated_power_title"
             app:layout_constraintStart_toStartOf="@id/tv_calculated_power_title"
             app:layout_constraintTop_toBottomOf="@id/tv_calculated_power_title"
-            tools:text="30"/>
+            tools:text="30" />
 
         <TextView
             android:id="@+id/tv_accuracy_content"
@@ -286,11 +289,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/battle_accuracy_title"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
-            app:layout_constraintStart_toStartOf="@id/tv_calculated_power_content"
             app:layout_constraintEnd_toEndOf="@id/tv_calculated_power_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_calculated_power_content"/>
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/tv_calculated_power_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_calculated_power_content" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
