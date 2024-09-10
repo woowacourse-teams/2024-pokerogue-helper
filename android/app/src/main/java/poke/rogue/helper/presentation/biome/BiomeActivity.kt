@@ -89,6 +89,13 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
                     is BiomeUiState.Success -> {
                         biomeAdapter.submitList(biome.data.toUi())
                         binding.biomeLoading.isVisible = false
+
+                        biomeAdapter.registerAdapterDataObserver(object :
+                            RecyclerView.AdapterDataObserver() {
+                            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                                binding.rvBiomeList.scrollToPosition(0)
+                            }
+                        })
                     }
                 }
             }
