@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.delay
 import poke.rogue.helper.R
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
@@ -78,7 +80,7 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
         }
 
         repeatOnStarted {
-            viewModel.biome.collect { biome ->
+            viewModel.biomes.collect { biome ->
                 when (biome) {
                     is BiomeUiState.Loading -> {
                         binding.biomeLoading.isVisible = true

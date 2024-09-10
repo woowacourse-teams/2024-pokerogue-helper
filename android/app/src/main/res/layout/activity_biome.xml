@@ -35,6 +35,7 @@
                 android:src="@drawable/ic_biome_map" />
 
             <androidx.appcompat.widget.SearchView
+                app:onQueryTextChange="@{vm}"
                 style="@style/CustomSearchViewStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

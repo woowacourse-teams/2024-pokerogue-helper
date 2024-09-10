@@ -2,15 +2,19 @@ package poke.rogue.helper.presentation.biome
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.model.Biome
@@ -23,9 +27,7 @@ class BiomeViewModel(
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-        BiomeUiEventHandler {
-    private val _biome = MutableStateFlow<BiomeUiState<List<Biome>>>(BiomeUiState.Loading)
-    val biome = _biome.asStateFlow()
+    BiomeUiEventHandler, BiomeQueryHandler {
 
     private val _navigationToDetailEvent = MutableSharedFlow<String>()
     val navigationToDetailEvent: SharedFlow<String> = _navigationToDetailEvent.asSharedFlow()
@@ -33,19 +35,25 @@ class BiomeViewModel(
     private val _navigateToGuideEvent = MutableSharedFlow<Unit>()
     val navigateToGuideEvent: SharedFlow<Unit> = _navigateToGuideEvent.asSharedFlow()
 
-    init {
-        refreshEvent
-            .onStart {
-                emit(Unit)
-            }.onEach {
-                updateBiomes()
-            }.launchIn(viewModelScope)
-    }
+    val searchQuery = MutableStateFlow("")
 
-    private fun updateBiomes() {
-        viewModelScope.launch(errorHandler) {
-            val biomes = biomeRepository.biomes()
-            _biome.value = BiomeUiState.Success(biomes)
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+    val biomes: StateFlow<BiomeUiState<List<Biome>>> =
+        searchQuery
+            .debounce(300L)
+            .mapLatest { query ->
+                val biomes = biomeRepository.biomes(query)
+                BiomeUiState.Success(biomes)
+            }
+            .stateIn(
+                viewModelScope + errorHandler,
+                SharingStarted.WhileSubscribed(5000L),
+                BiomeUiState.Loading,
+            )
+
+    override fun queryName(name: String) {
+        viewModelScope.launch {
+            searchQuery.emit(name)
         }
     }
 
