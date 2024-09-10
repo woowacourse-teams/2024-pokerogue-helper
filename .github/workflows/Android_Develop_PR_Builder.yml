@@ -71,6 +71,22 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
+      - name: Create Google-Services.json
+        env:
+          GOOGLE_SERVICES_ALPHA: ${{ secrets.GOOGLE_SERVICES_ALPHA }}
+          GOOGLE_SERVICES_BETA: ${{ secrets.GOOGLE_SERVICES_BETA }}
+          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+        run: |
+          touch ./app/src/debug/google-services.json
+          touch ./app/src/alpha/google-services.json
+          touch ./app/src/beta/google-services.json
+          mkdir ./app/src/release
+          touch ./app/src/release/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/debug/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
+          echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
+          echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
+
       - name: Create Local Properties
         run: touch local.properties
 
@@ -90,6 +106,7 @@ jobs:
     name: Alpha APK to Discord
     runs-on: ubuntu-latest
     needs: [ ktlintCheck, testAlphaUnitTest ]
+    if: ${{ github.event.pull_request.merged == true }}  # PR이 머지되었을 때만 실행
     steps:
       - uses: actions/checkout@v4
       - name: Gradle cache
