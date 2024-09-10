@@ -52,6 +52,7 @@ fun pokemon(id: String) =
         dexNumber = id.toLong() * 10,
         name = "pokemon$id",
         imageUrl = "logo$id",
+        backImageUrl = "",
         types = listOf(Type.GRASS, Type.POISON),
     )
 

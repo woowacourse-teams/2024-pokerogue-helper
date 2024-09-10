@@ -10,6 +10,7 @@ data class PokemonEntity(
     val formName: String,
     val name: String,
     val imageUrl: String,
+    val backImageUrl: String,
     val types: Set<String>,
     val generation: Int,
     val baseStat: Int,

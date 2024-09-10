@@ -11,7 +11,6 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.battle.selection.BattleSelectionActivity">
@@ -89,11 +88,11 @@
             android:id="@+id/btn_prev"
             style="@style/TextAppearance.Poke.TitleBold"
             onSingleClick="@{() -> vm.navigateToPrevPage()}"
-            visible="@{vm.currentStep.hasPreviousStep()}"
+            visible="@{vm.currentStep.isFirstStep()}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/bg_before_button"
+            android:background="@drawable/bg_button_enabled_selector"
             android:text="@string/battle_selection_previous_btn"
             android:textColor="@color/poke_black"
             app:layout_constraintBottom_toBottomOf="@id/gl_bottom"

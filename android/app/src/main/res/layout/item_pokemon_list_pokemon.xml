@@ -37,7 +37,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_item_poketmon_poketmon"
-            cropImageUrl="@{pokemon.imageUrl}"
+            imageUrl="@{pokemon.imageUrl}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingTop="10dp"

@@ -10,6 +10,7 @@ import okhttp3.mockwebserver.SocketPolicy
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import poke.rogue.helper.remote.dto.base.ApiResponse
+import poke.rogue.helper.remote.dto.response.ability.AbilityDetailResponse2
 import poke.rogue.helper.remote.dto.response.ability.AbilityResponse
 import poke.rogue.helper.remote.injector.RetrofitModule
 import poke.rogue.helper.remote.service.utils.getOrThrow
@@ -37,25 +38,28 @@ class AbilityServiceTest {
     fun `포켓몬의 모든 특성들을 가져온다`() =
         runTest {
             // given
-            val fakeResponse = successResponse("abilities")
+            val fakeResponse = successResponse("abilities2")
             mockWebServer.enqueue(fakeResponse)
+
             // when
             val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
+
             // then
             actual.shouldBeSuccess()
         }
 
-//    @Test
-//    fun `id 에 해당하는 특성을 가져온다`() =
-//        runTest {
-//            // given
-//            val fakeResponse = successResponse("ability")
-//            mockWebServer.enqueue(fakeResponse)
-//            // when
-//            val actual: ApiResponse<AbilityDetailResponse> = service.ability(1)
-//            // then
-//            actual.shouldBeSuccess()
-//        }
+    @Test
+    fun `id 에 해당하는 특성을 가져온다`() =
+        runTest {
+            // given
+            val fakeResponse = successResponse("ability2")
+            mockWebServer.enqueue(fakeResponse)
+            // when
+            val actual: ApiResponse<AbilityDetailResponse2> = service.ability("water_absorb")
+
+            // then
+            actual.shouldBeSuccess()
+        }
 
     @Test
     fun `HttpException 발생`() =

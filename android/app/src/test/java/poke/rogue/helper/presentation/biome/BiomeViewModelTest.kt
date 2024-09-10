@@ -53,4 +53,19 @@ class BiomeViewModelTest {
             // then
             actualId shouldBe biomeId
         }
+
+    @Test
+    fun `바이옴 가이드 화면으로 이동한다`() =
+        runTest {
+            // given
+            Dispatchers.setMain(StandardTestDispatcher())
+            viewModel = BiomeViewModel(repository)
+
+            // when
+            viewModel.navigateToGuide()
+            val actual = viewModel.navigateToGuideEvent.first()
+
+            // then
+            actual shouldBe Unit
+        }
 }

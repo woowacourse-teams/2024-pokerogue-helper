@@ -25,6 +25,7 @@
             imageUrl="@{evolution.imageUrl}"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_pokemon_name"
             app:layout_constraintEnd_toEndOf="@id/tv_pokemon_detail_evolution_pokemon_name"
             app:layout_constraintStart_toStartOf="@id/tv_pokemon_detail_evolution_pokemon_name"
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{evolution.pokemonName}"
-            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_pokemon_condition"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_level"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_evolution"
@@ -46,7 +47,7 @@
 
         <TextView
             android:id="@+id/tv_pokemon_detail_evolution_level"
-            style="@style/TextAppearance.Poke.Caption"
+            style="@style/TextAppearance.Poke.CaptionLarge"
             evolutionLevel="@{evolution.level}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +60,7 @@
 
         <TextView
             android:id="@+id/tv_pokemon_detail_evolution_pokemon_condition"
-            style="@style/TextAppearance.Poke.Caption"
+            style="@style/TextAppearance.Poke.CaptionLarge"
             condition="@{evolution.condition}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +72,7 @@
 
         <TextView
             android:id="@+id/tv_pokemon_detail_evolution_pokemon_evolutioin_item"
-            style="@style/TextAppearance.Poke.Caption"
+            style="@style/TextAppearance.Poke.CaptionLarge"
             item="@{evolution.item}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

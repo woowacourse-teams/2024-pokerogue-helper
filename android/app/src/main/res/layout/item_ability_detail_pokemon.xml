@@ -21,7 +21,7 @@
 
         <ImageView
             android:id="@+id/iv_ability_detail_pokemon"
-            cropImageUrl="@{pokemon.imageUrl}"
+            imageUrl="@{pokemon.imageUrl}"
             onSingleClick="@{()->uiEventHandler.navigateToPokemonDetail(pokemon.id)}"
             android:layout_width="0dp"
             android:layout_height="0dp"

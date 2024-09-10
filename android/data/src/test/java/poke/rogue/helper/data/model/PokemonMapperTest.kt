@@ -30,6 +30,7 @@ class PokemonMapperTest {
                 dexNumber = 1,
                 name = "name",
                 imageUrl = "image",
+                backImageUrl = "",
                 types = listOf(Type.FIRE, Type.WATER),
             )
 
@@ -50,6 +51,7 @@ class PokemonMapperTest {
                     dexNumber = 10,
                     name = "pokemon1",
                     imageUrl = "logo1",
+                    backImageUrl = "",
                     types = listOf(Type.GRASS, Type.POISON),
                 ),
                 Pokemon(
@@ -57,6 +59,7 @@ class PokemonMapperTest {
                     dexNumber = 20,
                     name = "pokemon2",
                     imageUrl = "logo2",
+                    backImageUrl = "",
                     types = listOf(Type.GRASS, Type.POISON),
                 ),
                 Pokemon(
@@ -64,6 +67,7 @@ class PokemonMapperTest {
                     dexNumber = 30,
                     name = "pokemon3",
                     imageUrl = "logo3",
+                    backImageUrl = "",
                     types = listOf(Type.GRASS, Type.POISON),
                 ),
             )
