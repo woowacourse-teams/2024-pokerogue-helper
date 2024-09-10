@@ -46,61 +46,70 @@ jobs:
           echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
         working-directory: android
 
-
-      - name: Create Local Properties
-        run: touch local.properties
-        working-directory: android
-
-      - name: Access Local Properties
-        env:
-          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
-        #          POKE_RELEASE_URL: ${{ secrets.HOST_RELEASE_URI }}
-        #          KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
-        #          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-        #          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        #          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        #          STORE_FILE: ${{ secrets.STORE_FILE }}
-        run: |
-          echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
-        #          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
-        #          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
-        #          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
-        #          echo STORE_FILE= $STORE_FILE >> local.properties
-        working-directory: android
-
-      #      - name: Create Key Store
-      #        env:
-      #          KEY_STORE_BASE_64: ${{secrets.KEY_STORE_BASE_64}}
-      #        run: |
-      #          echo "$KEY_STORE_BASE_64" | base64 -d > ./funch_key_store.jks
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-        working-directory: android
-
-#      - name: Lint Check
-#        run: ./gradlew ktlintCheck
-#        working-directory: android
-#
-#      - name: run debug unit test
-#        run: ./gradlew testDebugUnitTest
-#        working-directory: android
-
-      - name: Build alpha APK
-        run: ./gradlew assembleAlpha
-        working-directory: android
-
-      - name: Download APK artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: android-artifact
-          path: android/app/build/outputs/apk/alpha/
-          if-no-files-found: error
-
-      - name: Send APK to Discord
+      - name: Send to Google-Service.json to Discord
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.AN_DISCORD_WEB_HOOK }}
         run: |
-          curl -F "payload_json={\"content\":\"Here is the latest app-alpha.apk!\"}" \
-               -F "file=@app-alpha.apk" \
-               $DISCORD_WEBHOOK_URL
+          curl -F "payload_json={\"content\":\"Here is the latest google-services.json!\"}" \
+               -F " file=@app/src/debug/google-services.json" \
+                $DISCORD_WEBHOOK_URL
+#
+#
+#      - name: Create Local Properties
+#        run: touch local.properties
+#        working-directory: android
+#
+#      - name: Access Local Properties
+#        env:
+#          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
+#        #          POKE_RELEASE_URL: ${{ secrets.HOST_RELEASE_URI }}
+#        #          KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
+#        #          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+#        #          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+#        #          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+#        #          STORE_FILE: ${{ secrets.STORE_FILE }}
+#        run: |
+#          echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
+#        #          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
+#        #          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
+#        #          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
+#        #          echo STORE_FILE= $STORE_FILE >> local.properties
+#        working-directory: android
+#
+#      #      - name: Create Key Store
+#      #        env:
+#      #          KEY_STORE_BASE_64: ${{secrets.KEY_STORE_BASE_64}}
+#      #        run: |
+#      #          echo "$KEY_STORE_BASE_64" | base64 -d > ./funch_key_store.jks
+#
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#        working-directory: android
+#
+##      - name: Lint Check
+##        run: ./gradlew ktlintCheck
+##        working-directory: android
+##
+##      - name: run debug unit test
+##        run: ./gradlew testDebugUnitTest
+##        working-directory: android
+#
+#      - name: Build alpha APK
+#        run: ./gradlew assembleAlpha
+#        working-directory: android
+#
+#      - name: Upload alpha APK artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: android-artifact
+#          path: android/app/build/outputs/apk/alpha/
+#          if-no-files-found: error
+#
+#
+#      - name: Send APK to Discord
+#        env:
+#          DISCORD_WEBHOOK_URL: ${{ secrets.AN_DISCORD_WEB_HOOK }}
+#        run: |
+#          curl -F "payload_json={\"content\":\"Here is the latest app-alpha.apk!\"}" \
+#               -F "file=@app-alpha.apk" \
+#               $DISCORD_WEBHOOK_URL
