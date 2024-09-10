@@ -91,15 +91,16 @@ jobs:
         working-directory: android
 
       - name: Download APK artifact
-        uses: actions/download-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: android-artifact
           path: android/app/build/outputs/apk/alpha/
+          if-no-files-found: error
 
       - name: Send APK to Discord
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.AN_DISCORD_WEB_HOOK }}
         run: |
           curl -F "payload_json={\"content\":\"Here is the latest app-alpha.apk!\"}" \
-               -F "file=@app-debug.apk" \
+               -F "file=@app-alpha.apk" \
                $DISCORD_WEBHOOK_URL
