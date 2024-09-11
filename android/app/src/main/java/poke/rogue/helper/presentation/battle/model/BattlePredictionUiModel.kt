@@ -22,6 +22,7 @@ data class BattlePredictionUiModel(
 fun BattlePrediction.toUi(format: String = DEFAULT_NUMBER_FORMAT): BattlePredictionUiModel {
     val formattedPower = if (power < 0) NO_EFFECT_VALUE else power.toString()
     val formattedResult = if (calculatedResult < 0) NO_EFFECT_VALUE else String.format(format, calculatedResult)
+    val formattedAccuracy = if (accuracy < 0) NO_EFFECT_VALUE else String.format(format, accuracy)
     val color =
         when {
             multiplier < 1.0 -> R.color.poke_grey_60
@@ -32,7 +33,7 @@ fun BattlePrediction.toUi(format: String = DEFAULT_NUMBER_FORMAT): BattlePredict
 
     return BattlePredictionUiModel(
         power = formattedPower,
-        accuracy = String.format(format, accuracy),
+        accuracy = formattedAccuracy,
         multiplier = String.format(format, multiplier),
         calculatedResult = formattedResult,
         colorRes = color,
