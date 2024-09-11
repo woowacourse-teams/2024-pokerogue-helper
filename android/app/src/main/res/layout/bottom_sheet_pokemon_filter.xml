@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.dex.filter.PokeFilterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+            android:id="@+id/drag_handle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_poke_filter_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            onSingleClick="@{() -> vm.closeFilter()}"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:padding="8dp"
+            android:src="@drawable/icon_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_poke_filter_type"
+            style="@style/TextAppearance.Poke.TitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="12dp"
+            android:text="타입 필터"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/chip_group_poke_filter_type"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <poke.rogue.helper.ui.component.PokeChipGroup
+            android:id="@+id/chip_group_poke_filter_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="10dp"
+            app:direction="row"
+            app:itemSpacing="4dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_poke_filter_generation"
+            app:lineSpacing="10dp" />
+
+        <TextView
+            android:id="@+id/tv_poke_filter_generation"
+            style="@style/TextAppearance.Poke.TitleBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="12dp"
+            android:text="세대 필터"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/chip_group_poke_filter_generation"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <poke.rogue.helper.ui.component.PokeChipGroup
+            android:id="@+id/chip_group_poke_filter_generation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="30dp"
+            app:direction="row"
+            app:itemSpacing="4dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_poke_filter_apply"
+            app:lineSpacing="8dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_poke_filter_apply"
+            onSingleClick="@{() -> vm.applyFiltering()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/lemon"
+            android:elevation="8dp"
+            android:padding="16dp"
+            android:text="적용하기"
+            android:textColor="@color/poke_black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
