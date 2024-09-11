@@ -9,8 +9,8 @@ public record Pokemon(
         String koName,
         String speciesName,
         String formName,
-        String type1,
-        String type2,
+        String firstType,
+        String secondType,
         String ability1,
         String ability2,
         String abilityHidden,
@@ -32,12 +32,12 @@ public record Pokemon(
         Double weight,
         List<String> eggMoves,
         List<String> moves,
-        List<String> tmsMoves,
+        List<String> technicalMachineMoves,
         List<String> biomes
 ) {
 
     public boolean hasSameType(Type moveType) {
         String engName = moveType.getEngName();
-        return (engName.equals(type1) || engName.equals(type2));
+        return (engName.equals(firstType) || engName.equals(secondType));
     }
 }

@@ -223,16 +223,15 @@ public class Pokemon2Service {
                     break;
                 }
             }
-
         }
 
         return ret;
     }
 
     private List<PokemonTypeResponse> createTypeResponse(Pokemon pokemon) {
-        Type type1 = Type.findById(pokemon.type1());
-        Type type2 = Type.findById(pokemon.type2());
-        return Stream.of(type1, type2)
+        Type firstType = Type.findById(pokemon.firstType());
+        Type secondType = Type.findById(pokemon.secondType());
+        return Stream.of(firstType, secondType)
                 .distinct()
                 .filter(type -> type != Type.EMPTY)
                 .map(type -> new PokemonTypeResponse(type.getName(),
@@ -245,9 +244,9 @@ public class Pokemon2Service {
                 .distinct()
                 .filter(type -> !type.isEmpty())
                 .map(type -> {
-                    Type type1 = Type.findByName(type);
+                    Type firstType = Type.findByName(type);
                     return new BiomeTypeResponse(
-                            s3Service.getPokerogueTypeImageFromS3(type1.getId().toLowerCase()),
+                            s3Service.getPokerogueTypeImageFromS3(firstType.getId().toLowerCase()),
                             type);
                 })
                 .toList();

@@ -37,24 +37,24 @@ public class AbilityService {
                         Long.parseLong(abilityPokemon.speciesId()),
                         abilityPokemon.koName(),
                         s3Service.getPokemonImageFromS3(abilityPokemon.id()),
-                        getAbilityTypeResponses(abilityPokemon.type1(), abilityPokemon.type2())
+                        getAbilityTypeResponses(abilityPokemon.firstType(), abilityPokemon.secondType())
                 ))
                 .toList();
 
         return AbilityDetailResponse.of(ability, abilityPokemonResponses);
     }
 
-    private List<AbilityTypeResponse> getAbilityTypeResponses(String type1, String type2) {
+    private List<AbilityTypeResponse> getAbilityTypeResponses(String firstType, String secondType) {
         List<AbilityTypeResponse> abilityTypeResponses = new ArrayList<>();
-        if (!type1.equals("Type.undefined") && !type1.isEmpty()) {
-            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByEngName(type1)
+        if (!firstType.equals("Type.undefined") && !firstType.isEmpty()) {
+            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByEngName(firstType)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)).getImage(),
-                    type1));
+                    firstType));
         }
-        if (!type2.equals("Type.undefined") && !type2.isEmpty()) {
-            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByEngName(type2)
+        if (!secondType.equals("Type.undefined") && !secondType.isEmpty()) {
+            abilityTypeResponses.add(new AbilityTypeResponse(Type.findByEngName(secondType)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)).getImage(),
-                    type2));
+                    secondType));
         }
 
         return abilityTypeResponses;

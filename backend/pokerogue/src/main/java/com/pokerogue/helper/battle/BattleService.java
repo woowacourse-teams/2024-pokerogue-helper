@@ -40,7 +40,7 @@ public class BattleService {
             }
         }
         allMoveIds.addAll(moves);
-        allMoveIds.addAll(pokemon.tmsMoves());
+        allMoveIds.addAll(pokemon.technicalMachineMoves());
         allMoveIds.addAll(pokemon.eggMoves());
         List<BattleMove> battleMoves = allMoveIds.stream()
                 .distinct()
@@ -78,7 +78,7 @@ public class BattleService {
             }
         }
         allMoveIds.addAll(moves);
-        allMoveIds.addAll(pokemon.tmsMoves());
+        allMoveIds.addAll(pokemon.technicalMachineMoves());
         allMoveIds.addAll(pokemon.eggMoves());
         List<BattleMove> battleMoves = allMoveIds.stream()
                 .distinct()
@@ -143,12 +143,12 @@ public class BattleService {
         Type moveType = move.type();
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
         List<Type> types = new ArrayList<>();
-        if (!rivalPokemon.type1().isEmpty()) {
-            types.add(Type.findByEngName(rivalPokemon.type1())
+        if (!rivalPokemon.firstType().isEmpty()) {
+            types.add(Type.findByEngName(rivalPokemon.firstType())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)));
         }
-        if (!rivalPokemon.type2().isEmpty()) {
-            types.add(Type.findByEngName(rivalPokemon.type2())
+        if (!rivalPokemon.secondType().isEmpty()) {
+            types.add(Type.findByEngName(rivalPokemon.secondType())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)));
         }
         double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, types);

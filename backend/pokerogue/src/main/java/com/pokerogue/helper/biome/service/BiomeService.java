@@ -86,28 +86,28 @@ public class BiomeService {
                         biomePokemonInfo.koName(),
                         s3Service.getPokemonImageFromS3(biomePokemonInfo.id()),
                         getBiomePokemonTypeResponses(
-                                Type.findById(biomePokemonInfo.type1()),
-                                Type.findById(biomePokemonInfo.type2()))
+                                Type.findById(biomePokemonInfo.firstType()),
+                                Type.findById(biomePokemonInfo.secondType()))
                 ))
                 .distinct()
                 .toList();
     }
 
     private List<BiomeTypeResponse> getBiomePokemonTypeResponses(
-            Type type1,
-            Type type2
+            Type firstType,
+            Type secondType
     ) {
         List<BiomeTypeResponse> biomeTypeRespons = new ArrayList<>();
-        if (!type1.getName().isEmpty() && !type1.getName().equals("Unknown")) {
+        if (!firstType.getName().isEmpty() && !firstType.getName().equals("Unknown")) {
             biomeTypeRespons.add(new BiomeTypeResponse(
-                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(type1.name()),
-                    type1.getName())
+                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(firstType.name()),
+                    firstType.getName())
             );
         }
-        if (!type2.getName().isEmpty() && !type2.getName().equals("Unknown")) {
+        if (!secondType.getName().isEmpty() && !secondType.getName().equals("Unknown")) {
             biomeTypeRespons.add(new BiomeTypeResponse(
-                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(type2.name()),
-                    type2.getName())
+                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(secondType.name()),
+                    secondType.getName())
             );
         }
 

@@ -52,8 +52,8 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
             "nameKo",
             "speciesName",
             "formName",
-            "type1",
-            "type2",
+            "firstType",
+            "secondType",
             "ability1",
             "ability2",
             "abilityHidden",
@@ -111,7 +111,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
 
     private void savePokemon(BufferedReader br) {
         try {
-            Map<String, List<String>> tmsInfos = saveTms("data/battle/tms.txt");
+            Map<String, List<String>> technicalMachineMoveInfos = savetechnicalMachineMoves("data/battle/tms.txt");
             String line;
             while ((line = br.readLine()) != null) {
                 List<String> tokens = parseToken(line);
@@ -120,7 +120,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                     throw new IllegalArgumentException(pokemonKeys.size() + " " + tokens.size() + "포켓몬 데이터가 잘못 되었습니다.");
                 }
 
-                Pokemon pokemon = createPokemon(tokens, tmsInfos);
+                Pokemon pokemon = createPokemon(tokens, technicalMachineMoveInfos);
                 pokemon2Repository.save(pokemon.id(), pokemon);
             }
         } catch (IOException e) {
@@ -128,8 +128,8 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         }
     }
 
-    private Map<String, List<String>> saveTms(String path) {
-        Map<String, List<String>> tmsInfos = new HashMap<>();
+    private Map<String, List<String>> savetechnicalMachineMoves(String path) {
+        Map<String, List<String>> technicalMachineMoveInfos = new HashMap<>();
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
              BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             int lineCount = 0;
@@ -144,12 +144,12 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                         .map(String::trim)
                         .filter(s -> !s.isEmpty())
                         .toList();
-                tmsInfos.put(fields.get(0), moveIds);
+                technicalMachineMoveInfos.put(fields.get(0), moveIds);
             }
         } catch (IOException e) {
             log.error("error message : {}", e.getMessage(), e);
         }
-        return tmsInfos;
+        return technicalMachineMoveInfos;
     }
 
     private List<String> splitFields(String line) {
@@ -166,7 +166,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
         return field;
     }
 
-    private Pokemon createPokemon(List<String> values, Map<String, List<String>> tmsInfos) {
+    private Pokemon createPokemon(List<String> values, Map<String, List<String>> technicalMachineMoveInfos) {
         List<String> moves = Arrays.stream(values.get(22).split(","))
                 .collect(Collectors.toList());
         for (int i = 0; i < moves.size(); i += 2) {
@@ -178,7 +178,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 .boxed()
                 .toList();
 
-        List<String> tmsMoves = tmsInfos.get(regularize(values.get(1)));
+        List<String> technicalMachineMoves = technicalMachineMoveInfos.get(regularize(values.get(1)));
         return new Pokemon(
                 regularize(values.get(0)),
                 regularize(values.get(1)),
@@ -208,7 +208,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 Double.parseDouble(values.get(20)),
                 Arrays.stream(regularize(values.get(21)).split(",")).toList(),
                 moves,
-                tmsMoves,
+                technicalMachineMoves,
                 Arrays.stream(regularize(values.get(23)).split(",")).toList()
         );
     }
