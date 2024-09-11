@@ -1,0 +1,225 @@
+name: Android PR Builder
+
+on:
+  push:
+    branches: [ an/develop ]
+
+defaults:
+  run:
+    working-directory: ./android
+
+jobs:
+  ktlintCheck:
+    name: ktLint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Create Local Properties
+        run: touch local.properties
+
+      - name: Access Local Properties
+        env:
+          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
+        run: |
+          echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Lint Check
+        run: ./gradlew ktlintCheck
+
+  testAlphaUnitTest:
+    name: Test Alpha Unit Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Create Google-Services.json
+        env:
+          GOOGLE_SERVICES_ALPHA: ${{ secrets.GOOGLE_SERVICES_ALPHA }}
+          GOOGLE_SERVICES_BETA: ${{ secrets.GOOGLE_SERVICES_BETA }}
+          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+        run: |
+          touch ./app/src/debug/google-services.json
+          touch ./app/src/alpha/google-services.json
+          touch ./app/src/beta/google-services.json
+          mkdir ./app/src/release
+          touch ./app/src/release/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/debug/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
+          echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
+          echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
+
+      - name: Create Local Properties
+        run: touch local.properties
+
+      - name: Access Local Properties
+        env:
+          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
+        run: |
+          echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: run alpha unit test
+        run: ./gradlew testAlphaUnitTest
+
+  Distribution:
+    name: Alpha APK to Discord
+    runs-on: ubuntu-latest
+    needs: [ ktlintCheck, testAlphaUnitTest ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Create Google-Services.json
+        env:
+          GOOGLE_SERVICES_ALPHA: ${{ secrets.GOOGLE_SERVICES_ALPHA }}
+          GOOGLE_SERVICES_BETA: ${{ secrets.GOOGLE_SERVICES_BETA }}
+          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+        run: |
+          touch ./app/src/debug/google-services.json
+          touch ./app/src/alpha/google-services.json
+          touch ./app/src/beta/google-services.json
+          mkdir ./app/src/release
+          touch ./app/src/release/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/debug/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
+          echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
+          echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
+
+      - name: Check google-services.json content
+        run: cat ./app/src/debug/google-services.json
+
+      - name: Create Local Properties
+        run: touch local.properties
+
+      - name: Access Local Properties
+        env:
+          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
+        #          POKE_RELEASE_URL: ${{ secrets.HOST_RELEASE_URI }}
+        #          KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
+        #          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+        #          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        #          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        #          STORE_FILE: ${{ secrets.STORE_FILE }}
+        run: |
+          echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
+        #          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
+        #          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
+        #          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
+        #          echo STORE_FILE= $STORE_FILE >> local.properties
+      #      - name: Create Key Store
+      #        env:
+      #          KEY_STORE_BASE_64: ${{secrets.KEY_STORE_BASE_64}}
+      #        run: |
+      #          echo "$KEY_STORE_BASE_64" | base64 -d > ./funch_key_store.jks
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build alpha APK
+        run: ./gradlew assembleAlpha
+
+      - name: Upload alpha APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-artifact
+          path: android/app/build/outputs/apk/alpha/
+          if-no-files-found: error
+
+      - name: Check APK existence
+        run: ls -al app/build/outputs/apk/alpha/
+
+      - name: Extract Version Name
+        env:
+          title: ${{ github.event.pull_request.title }}
+        run: |
+          version=$(echo '${{ env.title }}' | grep -oP '\d+\.\d+\.\d+')
+          echo "version=v$version" >> $GITHUB_ENV
+
+      - name: Send alpha version APK to Discord with Embeds
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.AlPHA_APK_DISCORD_WEB_HOOK }}
+          VERSION: ${{ env.version }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          CONTENT="최신 개발 버전 APK 가 나왔어요!🎉 
+           [배포 버전] : $VERSION! 
+           [해당 PR 제목] : $PR_TITLE"
+          EMBED=$(jq -n \
+            --arg title "PR Merged: $PR_TITLE" \
+            --arg url "$PR_URL" \
+            --arg description "Version: $VERSION 🎉" \
+            '{
+              "title": $title,
+              "url": $url,
+              "description": $description,
+              "color": 3066993
+            }'
+          )
+
+          PAYLOAD=$(jq -n \
+            --arg content "$CONTENT" \
+            --argjson embeds "[$EMBED]" \
+            '{
+              "content": $content,
+              "embeds": $embeds
+            }'
+            )
+
+
+          curl -F "payload_json=$PAYLOAD" \
+               -F "file=@app/build/outputs/apk/alpha/app-alpha.apk" \
+                $DISCORD_WEBHOOK_URL
+
