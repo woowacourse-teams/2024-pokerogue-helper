@@ -1,10 +1,7 @@
 package poke.rogue.helper.presentation.splash
 
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
@@ -30,15 +27,12 @@ class PokemonIntroViewModel(
             .onEach {
                 try {
                     coroutineScope {
-                        val warmUp = async { pokemonRepository.warmUp() }
-                        val delay = async { delay(MIN_SPLASH_TIME) }
-                        awaitAll(warmUp, delay)
                         pokemonRepository.warmUp()
                     }
-                    _navigationToHomeEvent.emit(Unit)
                 } catch (e: Exception) {
                     Timber.e(e)
-                    handlePokemonError(e)
+                } finally {
+                    _navigationToHomeEvent.emit(Unit)
                 }
             }
             .launchIn(viewModelScope + errorHandler)
