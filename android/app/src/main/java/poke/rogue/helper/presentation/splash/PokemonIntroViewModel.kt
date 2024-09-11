@@ -15,6 +15,7 @@ import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
 import poke.rogue.helper.presentation.util.event.asEventFlow
+import timber.log.Timber
 
 class PokemonIntroViewModel(
     private val pokemonRepository: DexRepository,
@@ -27,17 +28,24 @@ class PokemonIntroViewModel(
         refreshEvent
             .onStart { emit(Unit) }
             .onEach {
-                coroutineScope {
-                    val warmUp = async { pokemonRepository.warmUp() }
-                    val delay = async { delay(1000) }
-                    awaitAll(warmUp, delay)
+                try {
+                    coroutineScope {
+                        val warmUp = async { pokemonRepository.warmUp() }
+                        val delay = async { delay(MIN_SPLASH_TIME) }
+                        awaitAll(warmUp, delay)
+                        pokemonRepository.warmUp()
+                    }
+                    _navigationToHomeEvent.emit(Unit)
+                } catch (e: Exception) {
+                    Timber.e(e)
+                    handlePokemonError(e)
                 }
-                _navigationToHomeEvent.emit(Unit)
             }
             .launchIn(viewModelScope + errorHandler)
     }
 
     companion object {
+        private const val MIN_SPLASH_TIME = 1000L
         fun factory(
             pokemonRepository: DexRepository,
             logger: AnalyticsLogger,
