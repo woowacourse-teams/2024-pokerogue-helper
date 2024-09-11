@@ -2,8 +2,8 @@ package com.pokerogue.helper.battle;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
-import com.pokerogue.helper.pokemon2.data.Pokemon;
-import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
+import com.pokerogue.helper.pokemon.data.Pokemon;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class BattleService {
 
     private final BattleMoveRepository battleMoveRepository;
-    private final Pokemon2Repository pokemon2Repository;
+    private final PokemonRepository pokemonRepository;
     private final TypeMatchingRepository typeMatchingRepository;
 
     private Map<Integer, List<MoveResponse>> findByDexnumberCache = new HashMap<>();
@@ -30,7 +30,7 @@ public class BattleService {
 
     public List<MoveResponse> findMovesByPokemon(String pokemonId) {
         List<String> allMoveIds = new ArrayList<>();
-        Pokemon pokemon = pokemon2Repository.findById(pokemonId)
+        Pokemon pokemon = pokemonRepository.findById(pokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
         List<String> moves = new ArrayList<>();
@@ -61,7 +61,7 @@ public class BattleService {
     }
 
     private void initFindByDexnumberCache() {
-        for (Pokemon pokemon : pokemon2Repository.findAll().values()) {
+        for (Pokemon pokemon : pokemonRepository.findAll().values()) {
             int pokemonId = Integer.parseInt(pokemon.speciesId());
             if (!findByDexnumberCache.containsKey(pokemonId)) {
                 findByDexnumberCache.put(pokemonId, makeMoveResponse(pokemon));
@@ -102,9 +102,9 @@ public class BattleService {
             String myMoveId) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
-        Pokemon myPokemon = pokemon2Repository.findById(myPokemonId)
+        Pokemon myPokemon = pokemonRepository.findById(myPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Pokemon rivalPokemon = pokemon2Repository.findById(rivalPokemonId)
+        Pokemon rivalPokemon = pokemonRepository.findById(rivalPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         BattleMove move = battleMoveRepository.findById(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));

@@ -16,8 +16,8 @@ import com.pokerogue.helper.biome.repository.BiomePokemonTypeImageRepository;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
-import com.pokerogue.helper.pokemon2.data.Type;
-import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
+import com.pokerogue.helper.pokemon.data.Type;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class BiomeService {
 
     private final S3Service s3Service;
     private final BiomeRepository biomeRepository;
-    private final Pokemon2Repository pokemon2Repository;
+    private final PokemonRepository pokemonRepository;
     private final BiomePokemonTypeImageRepository biomePokemonTypeImageRepository;
 
     public List<BiomeResponse> findBiomes() {
@@ -78,7 +78,7 @@ public class BiomeService {
 
     private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
         return biomePokemons.stream()
-                .map(biomePokemon -> pokemon2Repository.findById(biomePokemon)
+                .map(biomePokemon -> pokemonRepository.findById(biomePokemon)
                             .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
                 )
                 .map(biomePokemonInfo -> new BiomePokemonResponse(

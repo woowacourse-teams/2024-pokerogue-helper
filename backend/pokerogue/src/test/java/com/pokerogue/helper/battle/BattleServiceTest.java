@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.pokerogue.environment.service.ServiceTest;
-import com.pokerogue.helper.pokemon2.data.Pokemon;
-import com.pokerogue.helper.pokemon2.repository.Pokemon2Repository;
+import com.pokerogue.helper.pokemon.data.Pokemon;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,12 +17,12 @@ class BattleServiceTest extends ServiceTest {
     private BattleService battleService;
 
     @Autowired
-    private Pokemon2Repository pokemon2Repository;
+    private PokemonRepository pokemonRepository;
 
     @Test
     @DisplayName("포켓몬의 기술(자력 기술, 머신 기술, 알 기술) 리스트를 조회한다.")
     void findMovesByPokemon() {
-        List<String> pokemonIds = pokemon2Repository.findAll().values()
+        List<String> pokemonIds = pokemonRepository.findAll().values()
                 .stream()
                 .map(Pokemon::id)
                 .toList();
