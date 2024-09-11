@@ -7,7 +7,6 @@ import com.pokerogue.helper.ability.repository.AbilityRepository;
 import com.pokerogue.helper.battle.BattleMoveRepository;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
-import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
@@ -19,9 +18,9 @@ import com.pokerogue.helper.pokemon.data.Type;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponse;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponses;
 import com.pokerogue.helper.pokemon.dto.MoveResponse;
+import com.pokerogue.helper.pokemon.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonDetailResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
-import com.pokerogue.helper.pokemon.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.pokemon.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
@@ -239,32 +238,17 @@ public class PokemonService {
                 .toList();
     }
 
-    private List<BiomeTypeResponse> createTypeResponse(List<String> types) {
-        return types.stream()
-                .distinct()
-                .filter(type -> !type.isEmpty())
-                .map(type -> {
-                    Type firstType = Type.findByName(type);
-                    return new BiomeTypeResponse(
-                            s3Service.getPokerogueTypeImageFromS3(firstType.getId().toLowerCase()),
-                            type);
-                })
-                .toList();
-    }
-
     private List<BiomeResponse> createBiomeResponse(List<String> biomes) {
         return biomes.stream()
                 .map(id -> {
                             if (id.isEmpty()) {
-                                return new BiomeResponse("", "", ""/*, List.of(), List.of()*/);
+                                return new BiomeResponse("", "", "");
                             }
                             Biome biome = biomeRepository.findById(id).orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
                             return new BiomeResponse(
                                     id,
                                     biome.getName(),
                                     s3Service.getBiomeImageFromS3(id)
-                                    //createTypeResponse(biome.getMainTypes()),
-                                    //createTypeResponse(biome.getTrainerTypes())
                             );
                         }
                 )
