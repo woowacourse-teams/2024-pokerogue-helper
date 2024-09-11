@@ -3,6 +3,8 @@ package com.pokerogue.helper.pokemon2.config;
 import com.pokerogue.helper.ability2.data.Ability;
 import com.pokerogue.helper.ability2.data.AbilityInfo;
 import com.pokerogue.helper.ability2.repository.AbilityRepository;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon2.data.Evolution;
 import com.pokerogue.helper.pokemon2.data.EvolutionChain;
 import com.pokerogue.helper.pokemon2.data.Pokemon;
@@ -245,7 +247,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
                 .keySet()
                 .stream()
                 .sorted(Comparator.comparing(r -> pokemon2Repository.findById(r)
-                        .orElseThrow(() -> new IllegalArgumentException(""))
+                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
                         .speciesId()
                 ))
                 .toList();
@@ -372,7 +374,7 @@ public class Pokemon2DatabaseInitializer implements ApplicationRunner {
             String pokemonId = pokemons.get(i);
 
             Pokemon pokemon = pokemon2Repository.findById(pokemonId)
-                    .orElseThrow();
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
             abilityPokemons.add(pokemon);
         }

@@ -9,6 +9,8 @@ import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
 import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon2.data.Evolution;
 import com.pokerogue.helper.pokemon2.data.EvolutionChain;
 import com.pokerogue.helper.pokemon2.data.EvolutionItem;
@@ -125,7 +127,7 @@ public class Pokemon2Service {
 
     private EvolutionResponses createEvolutionResponse(Pokemon pokemon) {
         EvolutionChain chain = evolutionRepository.findEvolutionChainById(pokemon.id())
-                .orElseThrow(() -> new IllegalArgumentException());
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.EVOLUTION_NOT_FOUND));
 
         int currentStage = IntStream.range(0, chain.getChain().size())
                 .filter(i -> chain.getChain().get(i).stream().anyMatch(r -> r.equals(pokemon.id())))
@@ -142,7 +144,7 @@ public class Pokemon2Service {
         List<EvolutionResponse> ret = new ArrayList<>();
 
         Pokemon firstPokemon = pokemon2Repository.findById(chain.get(0).get(0))
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
         ret.add(new EvolutionResponse(
                 firstPokemon.id(),
@@ -166,7 +168,7 @@ public class Pokemon2Service {
 
                 for (Evolution evolution : evolutions) {
                     Pokemon pokemon = pokemon2Repository.findById(evolution.to())
-                            .orElseThrow(() -> new IllegalArgumentException(""));
+                            .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
                     ret.add(new EvolutionResponse(
                             pokemon.id(),
                             pokemon.koName(),
@@ -185,14 +187,17 @@ public class Pokemon2Service {
     private List<PokemonAbilityResponse> createAbilityResponse(Pokemon pokemon) {
         List<PokemonAbilityResponse> ret = new ArrayList<>();
 
-        Ability passive = abilityRepository.findById(pokemon.abilityPassive()).orElseThrow();
+        Ability passive = abilityRepository.findById(pokemon.abilityPassive())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         ret.add(new PokemonAbilityResponse(
                 pokemon.abilityPassive(), passive.getName(), passive.getDescription(),
                 true, false
         ));
 
-        Ability ability1 = abilityRepository.findById(pokemon.ability1()).orElseThrow();
-        Ability ability2 = abilityRepository.findById(pokemon.ability2()).orElseThrow();
+        Ability ability1 = abilityRepository.findById(pokemon.ability1())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
+        Ability ability2 = abilityRepository.findById(pokemon.ability2())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<PokemonAbilityResponse> defaultAbilities = Stream.of(ability1, ability2)
                 .distinct()
                 .map(ability -> new PokemonAbilityResponse(
@@ -204,13 +209,16 @@ public class Pokemon2Service {
         ret.addAll(defaultAbilities);
 
         if (!pokemon.abilityHidden().isEmpty()) {
-            Ability hidden = abilityRepository.findById(pokemon.abilityHidden()).orElseThrow();
+            Ability hidden = abilityRepository.findById(pokemon.abilityHidden())
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
             ret.add(new PokemonAbilityResponse(pokemon.abilityHidden(), hidden.getName(), hidden.getDescription(),
                     false,
                     true));
 
             for (int i = 1; i < ret.size() - 1; i++) {
-                if (abilityRepository.findById(ret.get(i).id()).orElseThrow() == hidden) {
+                if (abilityRepository.findById(ret.get(i).id())
+                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND)) == hidden
+                ) {
                     ret.remove(i);
                     break;
                 }
@@ -251,7 +259,7 @@ public class Pokemon2Service {
                             if (id.isEmpty()) {
                                 return new BiomeResponse("", "", ""/*, List.of(), List.of()*/);
                             }
-                            Biome biome = biomeRepository.findById(id).orElseThrow();
+                            Biome biome = biomeRepository.findById(id).orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
                             return new BiomeResponse(
                                     id,
                                     biome.getName(),
@@ -266,10 +274,10 @@ public class Pokemon2Service {
 
     private List<MoveResponse> createEggMoveResponse(List<String> moves) {
         return moves.stream()
-                .map(r -> battleMoveRepository.findById(r).orElseThrow(IllegalArgumentException::new))
+                .map(r -> battleMoveRepository.findById(r).orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)))
                 .map(move -> MoveResponse.from(move, 1,
                         s3Service.getPokerogueTypeImageFromS3(battleMoveRepository.findById(move.id())
-                                .orElseThrow(IllegalArgumentException::new)
+                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND))
                                 .type().getEngName())))
                 .toList();
     }
@@ -278,10 +286,12 @@ public class Pokemon2Service {
         return IntStream.iterate(0, index -> index + 2)
                 .limit(moves.size() / 2)
                 .mapToObj(index -> MoveResponse.from(
-                        battleMoveRepository.findById(moves.get(index)).orElseThrow(),
+                        battleMoveRepository.findById(moves.get(index)).orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)),
                         Integer.parseInt(moves.get(index + 1)),
                         s3Service.getPokerogueTypeImageFromS3(
-                                battleMoveRepository.findById(moves.get(index)).orElseThrow().type().getEngName())
+                                battleMoveRepository.findById(moves.get(index))
+                                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND))
+                                        .type().getEngName())
                 ))
                 .toList();
     }

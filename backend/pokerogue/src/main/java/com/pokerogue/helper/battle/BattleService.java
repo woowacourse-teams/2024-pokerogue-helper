@@ -144,10 +144,12 @@ public class BattleService {
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
         List<Type> types = new ArrayList<>();
         if (!rivalPokemon.type1().isEmpty()) {
-            types.add(Type.findByEngName(rivalPokemon.type1()).orElseThrow());
+            types.add(Type.findByEngName(rivalPokemon.type1())
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)));
         }
         if (!rivalPokemon.type2().isEmpty()) {
-            types.add(Type.findByEngName(rivalPokemon.type2()).orElseThrow());
+            types.add(Type.findByEngName(rivalPokemon.type2())
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)));
         }
         double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, types);
         double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myPokemon);
