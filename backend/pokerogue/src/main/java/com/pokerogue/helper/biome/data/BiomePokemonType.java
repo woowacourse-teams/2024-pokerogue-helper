@@ -45,7 +45,6 @@ public enum BiomePokemonType {
     }
 
     public static BiomePokemonType getBiomePokemonTypeById(String id) {
-        System.out.println(id);
         return Arrays.stream(values())
                 .filter(biomePokemonType -> biomePokemonType.id.equals(id))
                 .findFirst()

@@ -142,7 +142,6 @@ public class BattleService {
         }
         Type moveType = move.type();
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
-        System.out.println(rivalPokemon.type1() + " : " + rivalPokemon.type2());
         List<Type> types = new ArrayList<>();
         if (!rivalPokemon.type1().isEmpty()) {
             types.add(Type.findByEngName(rivalPokemon.type1()).orElseThrow());

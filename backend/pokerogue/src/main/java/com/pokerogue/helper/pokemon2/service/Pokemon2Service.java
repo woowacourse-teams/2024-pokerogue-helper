@@ -184,7 +184,6 @@ public class Pokemon2Service {
 
     private List<PokemonAbilityResponse> createAbilityResponse(Pokemon pokemon) {
         List<PokemonAbilityResponse> ret = new ArrayList<>();
-        //System.out.println(pokemon.abilityPassive() + " " + pokemon.abilityHidden() + " " + pokemon.ability1() + " " + pokemon.ability2());
 
         Ability passive = abilityRepository.findById(pokemon.abilityPassive()).orElseThrow();
         ret.add(new PokemonAbilityResponse(
