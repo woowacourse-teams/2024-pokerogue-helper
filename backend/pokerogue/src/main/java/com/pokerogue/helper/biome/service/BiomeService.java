@@ -98,13 +98,13 @@ public class BiomeService {
             Type secondType
     ) {
         List<BiomeTypeResponse> biomeTypeRespons = new ArrayList<>();
-        if (!firstType.getName().isEmpty() && !firstType.getName().equals("Unknown")) {
+        if (!firstType.equals(Type.EMPTY) && !firstType.equals(Type.UNKNOWN)) {
             biomeTypeRespons.add(new BiomeTypeResponse(
                     biomePokemonTypeImageRepository.findPokemonTypeImageUrl(firstType.name()),
                     firstType.getName())
             );
         }
-        if (!secondType.getName().isEmpty() && !secondType.getName().equals("Unknown")) {
+        if (!secondType.equals(Type.EMPTY) && !secondType.equals(Type.UNKNOWN)) {
             biomeTypeRespons.add(new BiomeTypeResponse(
                     biomePokemonTypeImageRepository.findPokemonTypeImageUrl(secondType.name()),
                     secondType.getName())
