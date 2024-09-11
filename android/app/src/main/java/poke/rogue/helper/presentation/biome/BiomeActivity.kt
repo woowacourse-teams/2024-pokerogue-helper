@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.R
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
