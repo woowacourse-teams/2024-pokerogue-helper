@@ -1,20 +1,44 @@
 package com.pokerogue.helper.pokemon.dto;
 
-import com.pokerogue.helper.pokemon.domain.Pokemon;
+import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
-
 import java.util.List;
 
 public record PokemonResponse(
-        Long id,
+        String id,
         Long pokedexNumber,
-        String koName,
+        String name,
+        String formName,
         String image,
-        List<PokemonTypeResponse> pokemonTypeResponses
+        String backImage,
+        List<PokemonTypeResponse> pokemonTypeResponse,
+        Integer generation,
+        Integer totalStats,
+        Integer hp,
+        Integer speed,
+        Integer attack,
+        Integer defense,
+        Integer specialAttack,
+        Integer specialDefense
 ) {
+    public static PokemonResponse from(Pokemon pokemon, String image, String backImage, List<PokemonTypeResponse> pokemonTypeResponse) {
 
-    public static PokemonResponse of(Pokemon pokemon, List<PokemonTypeResponse> pokemonTypeResponses) {
-        return new PokemonResponse(pokemon.getId(), pokemon.getPokedexNumber(), pokemon.getKoName(), pokemon.getImage(),
-                pokemonTypeResponses);
+        return new PokemonResponse(
+                pokemon.id(),
+                Long.parseLong(pokemon.speciesId()),
+                pokemon.koName(),
+                pokemon.formName(),
+                image,
+                backImage,
+                pokemonTypeResponse,
+                pokemon.generation(),
+                pokemon.baseTotal(),
+                pokemon.hp(),
+                pokemon.attack(),
+                pokemon.defense(),
+                pokemon.specialAttack(),
+                pokemon.specialDefense(),
+                pokemon.speed()
+        );
     }
 }

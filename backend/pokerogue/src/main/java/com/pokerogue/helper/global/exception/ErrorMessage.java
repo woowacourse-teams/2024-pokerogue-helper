@@ -21,6 +21,7 @@ public enum ErrorMessage {
     MOVE_NOT_FOUND(HttpStatus.NOT_FOUND, "id에 해당하는 기술을 찾지 못했습니다."),
     MOVE_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "기술 카테고리를 찾지 못했습니다."),
     WEATHER_NOT_FOUND(HttpStatus.NOT_FOUND, "id에 해당하는 날씨를 찾지 못했습니다."),
+    EVOLUTION_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 진화 정보를 찾지 못했습니다."),
 
     PARSE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "파싱에 실패했습니다."),
     TYPE_MATCHING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "타입 상성 찾기에 실패했습니다."),

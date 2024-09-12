@@ -1,5 +1,6 @@
 package com.pokerogue.helper.biome.service;
 
+import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.BiomePokemonType;
 import com.pokerogue.helper.biome.data.Tier;
@@ -7,15 +8,16 @@ import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.dto.BiomeAllPokemonResponse;
 import com.pokerogue.helper.biome.dto.BiomeDetailResponse;
 import com.pokerogue.helper.biome.dto.BiomePokemonResponse;
-import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
+import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
 import com.pokerogue.helper.biome.dto.NextBiomeResponse;
 import com.pokerogue.helper.biome.dto.TrainerPokemonResponse;
-import com.pokerogue.helper.biome.repository.BiomePokemonInfoRepository;
 import com.pokerogue.helper.biome.repository.BiomePokemonTypeImageRepository;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.pokemon.data.Type;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +28,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BiomeService {
 
+    private final S3Service s3Service;
     private final BiomeRepository biomeRepository;
-    private final BiomePokemonInfoRepository biomePokemonInfoRepository;
+    private final PokemonRepository pokemonRepository;
     private final BiomePokemonTypeImageRepository biomePokemonTypeImageRepository;
 
     public List<BiomeResponse> findBiomes() {
@@ -75,34 +78,36 @@ public class BiomeService {
 
     private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
         return biomePokemons.stream()
-                .map(biomePokemon -> biomePokemonInfoRepository.findById(biomePokemon)
+                .map(biomePokemon -> pokemonRepository.findById(biomePokemon)
                             .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
                 )
                 .map(biomePokemonInfo -> new BiomePokemonResponse(
-                        biomePokemonInfo.getId(),
-                        biomePokemonInfo.getName(),
-                        biomePokemonInfo.getImage(),
-                        getBiomePokemonTypeResponses(biomePokemonInfo.getType1(), biomePokemonInfo.getType2())
+                        biomePokemonInfo.id(),
+                        biomePokemonInfo.koName(),
+                        s3Service.getPokemonImageFromS3(biomePokemonInfo.id()),
+                        getBiomePokemonTypeResponses(
+                                Type.findById(biomePokemonInfo.firstType()),
+                                Type.findById(biomePokemonInfo.secondType()))
                 ))
                 .distinct()
                 .toList();
     }
 
     private List<BiomeTypeResponse> getBiomePokemonTypeResponses(
-            BiomePokemonType type1,
-            BiomePokemonType type2
+            Type firstType,
+            Type secondType
     ) {
         List<BiomeTypeResponse> biomeTypeRespons = new ArrayList<>();
-        if (!type1.getName().equals("없음")) {
+        if (!firstType.equals(Type.EMPTY) && !firstType.equals(Type.UNKNOWN)) {
             biomeTypeRespons.add(new BiomeTypeResponse(
-                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(type1.name()),
-                    type1.getName())
+                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(firstType.name()),
+                    firstType.getName())
             );
         }
-        if (!type2.getName().equals("없음")) {
+        if (!secondType.equals(Type.EMPTY) && !secondType.equals(Type.UNKNOWN)) {
             biomeTypeRespons.add(new BiomeTypeResponse(
-                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(type2.name()),
-                    type2.getName())
+                    biomePokemonTypeImageRepository.findPokemonTypeImageUrl(secondType.name()),
+                    secondType.getName())
             );
         }
 

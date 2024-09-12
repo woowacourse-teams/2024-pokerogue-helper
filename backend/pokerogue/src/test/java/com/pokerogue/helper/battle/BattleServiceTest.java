@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.pokerogue.environment.service.ServiceTest;
+import com.pokerogue.helper.pokemon.data.Pokemon;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,18 +17,18 @@ class BattleServiceTest extends ServiceTest {
     private BattleService battleService;
 
     @Autowired
-    private PokemonMovesByMachineRepository pokemonMovesByMachineRepository;
+    private PokemonRepository pokemonRepository;
 
     @Test
     @DisplayName("포켓몬의 기술(자력 기술, 머신 기술, 알 기술) 리스트를 조회한다.")
     void findMovesByPokemon() {
-        List<Integer> pokedexNumbers = pokemonMovesByMachineRepository.findAll()
+        List<String> pokemonIds = pokemonRepository.findAll().values()
                 .stream()
-                .map(PokemonMovesByMachine::pokedexNumber)
+                .map(Pokemon::id)
                 .toList();
 
-        pokedexNumbers.forEach(pokedexNumber -> {
-            List<MoveResponse> moveResponses = battleService.findMovesByPokemon(pokedexNumber);
+        pokemonIds.forEach(pokemonId -> {
+            List<MoveResponse> moveResponses = battleService.findMovesByPokemon(pokemonId);
             assertThat(moveResponses).isNotEmpty();
         });
     }
