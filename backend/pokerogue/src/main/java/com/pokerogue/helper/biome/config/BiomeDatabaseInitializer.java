@@ -4,16 +4,13 @@ import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.BiomeLink;
 import com.pokerogue.helper.biome.data.BiomePokemon;
-import com.pokerogue.helper.biome.data.BiomePokemonInfo;
 import com.pokerogue.helper.biome.data.BiomePokemonType;
 import com.pokerogue.helper.biome.data.BiomeTypeAndTrainer;
 import com.pokerogue.helper.biome.data.NextBiome;
-import com.pokerogue.helper.biome.data.PokemonByBiome;
 import com.pokerogue.helper.biome.data.Tier;
 import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.data.TrainerPokemon;
 import com.pokerogue.helper.biome.data.TrainerType;
-import com.pokerogue.helper.biome.repository.BiomePokemonInfoRepository;
 import com.pokerogue.helper.biome.repository.BiomePokemonTypeImageRepository;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
@@ -41,7 +38,6 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
     private final S3Service s3Service;
     private final BiomePokemonTypeImageRepository biomePokemonTypeImageRepository;
     private final BiomeRepository biomeRepository;
-    private final BiomePokemonInfoRepository biomePokemonInfoRepository;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -50,9 +46,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
         List<BiomeTypeAndTrainer> biomeTypesAndTrainers = new ArrayList<>();
         List<TrainerType> trainerTypes = new ArrayList<>();
         List<TrainerPokemon> trainerPokemons = new ArrayList<>();
-        List<PokemonByBiome> pokemonByBiomes = new ArrayList<>();
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-pokemons.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/biome/biome-pokemons.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomePokemon = bufferedReader.readLine();
@@ -65,7 +60,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-links.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/biome/biome-links.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomeLink = bufferedReader.readLine();
@@ -78,7 +73,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("biome-types-trainers.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(
+                "data/biome/biome-types-trainers.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String biomeTypeAndTrainer = bufferedReader.readLine();
@@ -91,7 +87,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer-types.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/biome/trainer-types.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String trainerType = bufferedReader.readLine();
@@ -104,7 +100,8 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
             log.error("error message : {}", e.getStackTrace()[0]);
         }
 
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("trainer-pokemons.txt");
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(
+                "data/biome/trainer-pokemons.txt");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             while (true) {
                 String trainerPokemon = bufferedReader.readLine();
@@ -112,19 +109,6 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                     break;
                 }
                 trainerPokemons.add(new TrainerPokemon(trainerPokemon));
-            }
-        } catch (IOException e) {
-            log.error("error message : {}", e.getStackTrace()[0]);
-        }
-
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("pokemon-by-biome.txt");
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
-            while (true) {
-                String pokemonByBiome = bufferedReader.readLine();
-                if (pokemonByBiome == null) {
-                    break;
-                }
-                pokemonByBiomes.add(new PokemonByBiome(pokemonByBiome));
             }
         } catch (IOException e) {
             log.error("error message : {}", e.getStackTrace()[0]);
@@ -151,16 +135,6 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                         getNextBiomes(biomeLinks, biomeTypeAndTrainer.getId()))
                 )
                 .forEach(biomeRepository::save);
-
-        pokemonByBiomes.stream()
-                .map(pokemonByBiome -> new BiomePokemonInfo(
-                        pokemonByBiome.getId(),
-                        pokemonByBiome.getName(),
-                        s3Service.getPokemonImageFromS3(pokemonByBiome.getId()),
-                        BiomePokemonType.getBiomePokemonTypeByName(pokemonByBiome.getType1()),
-                        BiomePokemonType.getBiomePokemonTypeByName(pokemonByBiome.getType2())
-                ))
-                .forEach(biomePokemonInfoRepository::save);
 
         Arrays.stream(BiomePokemonType.values())
                 .forEach(biomePokemonType -> biomePokemonTypeImageRepository.save(
