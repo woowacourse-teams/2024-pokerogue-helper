@@ -1,6 +1,5 @@
 package com.pokerogue.helper.pokemon.dto;
 
-import com.pokerogue.helper.biome.dto.BiomeResponse;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
 
@@ -27,6 +26,6 @@ public record PokemonDetailResponse(
         EvolutionResponses evolutions,
         List<MoveResponse> moves,
         List<MoveResponse> eggMoveResponses,
-        List<BiomeResponse> biomes
+        List<PokemonBiomeResponse> biomes
 ) {
 }

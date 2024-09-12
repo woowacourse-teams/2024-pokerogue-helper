@@ -19,6 +19,7 @@ import com.pokerogue.helper.pokemon.dto.EvolutionResponse;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponses;
 import com.pokerogue.helper.pokemon.dto.MoveResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonAbilityResponse;
+import com.pokerogue.helper.pokemon.dto.PokemonBiomeResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonDetailResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.EvolutionRepository;
@@ -95,7 +96,7 @@ public class PokemonService {
         EvolutionResponses evolutionResponses = createEvolutionResponse(pokemon);
         List<MoveResponse> moveResponse = createMoveResponse(pokemon.moves());
         List<MoveResponse> eggMoveResponse = createEggMoveResponse(pokemon.eggMoves());
-        List<BiomeResponse> biomeResponse = createBiomeResponse(pokemon.biomes());
+        List<PokemonBiomeResponse> biomeResponse = createBiomeResponse(pokemon.biomes());
 
         return new PokemonDetailResponse(
                 pokemon.id(),
@@ -238,14 +239,14 @@ public class PokemonService {
                 .toList();
     }
 
-    private List<BiomeResponse> createBiomeResponse(List<String> biomes) {
+    private List<PokemonBiomeResponse> createBiomeResponse(List<String> biomes) {
         return biomes.stream()
                 .map(id -> {
                             if (id.isEmpty()) {
-                                return new BiomeResponse("", "", "");
+                                return new PokemonBiomeResponse("", "", "");
                             }
                             Biome biome = biomeRepository.findById(id).orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
-                            return new BiomeResponse(
+                            return new PokemonBiomeResponse(
                                     id,
                                     biome.getName(),
                                     s3Service.getBiomeImageFromS3(id)
