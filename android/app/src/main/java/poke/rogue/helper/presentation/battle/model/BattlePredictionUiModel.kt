@@ -21,21 +21,26 @@ data class BattlePredictionUiModel(
 
 fun BattlePrediction.toUi(format: String = DEFAULT_NUMBER_FORMAT): BattlePredictionUiModel {
     val formattedPower = if (power < 0) NO_EFFECT_VALUE else power.toString()
-    val formattedResult = if (calculatedResult < 0) NO_EFFECT_VALUE else String.format(format, calculatedResult)
     val formattedAccuracy = if (accuracy < 0) NO_EFFECT_VALUE else String.format(format, accuracy)
-    val color =
-        when {
-            multiplier < 1.0 -> R.color.poke_grey_60
-            multiplier in 1.0..2.9 -> R.color.poke_red_20
-            multiplier >= 3 -> R.color.poke_green_20
-            else -> R.color.poke_white
-        }
+    val formattedMultiplier = if (power < 0) NO_EFFECT_VALUE else String.format(format, multiplier)
+    val formattedResult =
+        if (calculatedResult < 0) NO_EFFECT_VALUE else String.format(format, calculatedResult)
+
+    val color = selectedColorResource(multiplier)
 
     return BattlePredictionUiModel(
         power = formattedPower,
         accuracy = formattedAccuracy,
-        multiplier = String.format(format, multiplier),
+        multiplier = formattedMultiplier,
         calculatedResult = formattedResult,
         colorRes = color,
     )
 }
+
+private fun selectedColorResource(value: Double): Int =
+    when {
+        value < 1.0 -> R.color.poke_grey_60
+        value in 1.0..2.9 -> R.color.poke_red_20
+        value >= 3 -> R.color.poke_green_20
+        else -> R.color.poke_white
+    }
