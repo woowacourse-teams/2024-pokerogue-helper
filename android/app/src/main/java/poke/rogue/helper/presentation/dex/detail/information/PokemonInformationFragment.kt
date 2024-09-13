@@ -39,10 +39,18 @@ class PokemonInformationFragment :
             activityViewModel.uiState.collect { pokemonDetailUiState ->
                 when (pokemonDetailUiState) {
                     is PokemonDetailUiState.IsLoading -> {}
-                    is PokemonDetailUiState.Success -> biomesAdapter.submitList(pokemonDetailUiState.biomes)
+                    is PokemonDetailUiState.Success -> bindPokemonInformation(pokemonDetailUiState)
                 }
             }
         }
+    }
+
+    private fun bindPokemonInformation(pokemonDetail: PokemonDetailUiState.Success) {
+        binding.apply {
+            height = pokemonDetail.height
+            weight = pokemonDetail.weight
+        }
+        biomesAdapter.submitList(pokemonDetail.biomes)
     }
 
     override fun onResume() {
