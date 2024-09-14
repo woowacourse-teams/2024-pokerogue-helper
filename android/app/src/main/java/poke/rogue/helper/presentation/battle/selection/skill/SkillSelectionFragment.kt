@@ -80,7 +80,12 @@ class SkillSelectionFragment :
 
         repeatOnStarted {
             viewModel.filteredSkills.collect {
-                skillAdapter.submitList(it)
+                skillAdapter.submitList(it) {
+                    if (viewModel.previousSkillId != null) {
+                        val position = it.indexOfFirst { it.isSelected }
+                        binding.rvSkills.scrollToPosition(position)
+                    }
+                }
             }
         }
 
