@@ -51,9 +51,7 @@ class FakeDexRepository : DexRepository {
             weight = 6.9,
         )
 
-    override suspend fun pokemon(id: String): Pokemon {
-        TODO("Not yet implemented")
-    }
+    override suspend fun pokemon(id: String): Pokemon = pokemons().find { it.id == id } ?: error("존재하지 않는 포켓몬 ID : $id")
 
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
