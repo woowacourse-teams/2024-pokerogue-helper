@@ -1,8 +1,10 @@
-name: Backend CD
+name: Backend Production Server CD
 
 on:
   push:
-    branches: [ "be/develop" ]
+    branches: [ "be/release" ]
+    tags:
+      - 'v*'
 
 permissions:
   contents: read

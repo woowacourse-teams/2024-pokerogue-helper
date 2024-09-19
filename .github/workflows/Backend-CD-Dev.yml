@@ -2,7 +2,7 @@ name: Backend Development Server CD
 
 on:
   push:
-    branches: [ "be/infra/#284-deploy-v1.0.0" ]
+    branches: [ "be/develop" ]
 
 permissions:
   contents: read
