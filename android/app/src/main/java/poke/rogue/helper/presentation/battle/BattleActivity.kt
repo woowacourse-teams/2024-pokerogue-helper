@@ -22,7 +22,7 @@ import poke.rogue.helper.presentation.util.view.setImage
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModels<BattleViewModel> {
-        BattleViewModel.factory(DefaultBattleRepository.instance())
+        BattleViewModel.factory(DefaultBattleRepository.instance(this))
     }
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)

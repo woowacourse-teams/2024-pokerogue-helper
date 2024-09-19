@@ -12,7 +12,7 @@ data class BattleSelectionsState(
 ) {
     val allSelected: Boolean
         get() =
-            minePokemon.isSelected() && skill.isSelected() && opponentPokemon.isSelected()
+            minePokemon.isSelected() && skill.isSelected() && opponentPokemon.isSelected() && weather.isSelected()
 
     companion object {
         val DEFAULT =
