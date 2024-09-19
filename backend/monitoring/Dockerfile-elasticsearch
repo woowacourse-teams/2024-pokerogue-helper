@@ -1,3 +1,0 @@
-FROM elasticsearch:8.14.3
-
-COPY ./config/elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml

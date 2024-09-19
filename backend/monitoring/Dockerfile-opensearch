@@ -1,0 +1,3 @@
+FROM opensearchproject/opensearch:latest
+
+COPY ./config/opensearch/opensearch.yml /usr/share/opensearch/config/opensearch.yml
