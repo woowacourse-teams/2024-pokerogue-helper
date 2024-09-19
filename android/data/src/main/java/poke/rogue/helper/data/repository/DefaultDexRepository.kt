@@ -59,6 +59,13 @@ class DefaultDexRepository(
         }
     }
 
+    override suspend fun pokemon(id: String): Pokemon {
+        cachedPokemons.find { it.id == id }?.let {
+            return it
+        }
+        return pokemons().find { it.id == id } ?: error("아이디에 해당하는 포켓몬이 존재하지 않습니다. id : $id")
+    }
+
     private suspend fun pokemonDetail(
         id: String,
         allBiomes: List<Biome>,
