@@ -61,8 +61,6 @@ jobs:
         run: |
           cd /home/ubuntu
           
-          sudo mkdir -p log/nginx && sudo touch log/nginx/error.log && sudo touch log/nginx/access.log
-          
           sudo chmod 666 /var/run/docker.sock
           
           if [ "$(docker ps -qa -f name=server)" ]; then
