@@ -16,9 +16,16 @@ class DefaultBattleRepository(
     private val remoteBattleDataSource: RemoteBattleDataSource,
     private val pokemonRepository: DexRepository,
 ) : BattleRepository {
+    private val cachedSkills: HashMap<Long, List<BattleSkill>> = hashMapOf()
+
     override suspend fun weathers(): List<Weather> = remoteBattleDataSource.weathers()
 
-    override suspend fun availableSkills(dexNumber: Long): List<BattleSkill> = remoteBattleDataSource.availableSkills(dexNumber).distinct()
+    override suspend fun availableSkills(dexNumber: Long): List<BattleSkill> =
+        cachedSkills[dexNumber] ?: run {
+            val skills = remoteBattleDataSource.availableSkills(dexNumber).distinct()
+            cachedSkills[dexNumber] = skills
+            skills
+        }
 
     override suspend fun calculatedBattlePrediction(
         weatherId: String,
@@ -47,13 +54,18 @@ class DefaultBattleRepository(
         localBattleDataSource.pokemonWithSkill().map {
             it?.let { pokemonWithSkill ->
                 val pokemon = pokemonRepository.pokemon(pokemonWithSkill.pokemonId)
-                val skill =
-                    availableSkills(pokemon.dexNumber).find {
-                        it.id == pokemonWithSkill.skillId
-                    } ?: error("아이디에 해당하는 스킬이 존재하지 않습니다. id: ${pokemonWithSkill.skillId}")
+                val skill = skill(pokemon.dexNumber, pokemonWithSkill.skillId)
                 PokemonWithSkill(pokemon, skill)
             }
         }
+
+    private suspend fun skill(
+        dexNumber: Long,
+        skillId: String,
+    ): BattleSkill =
+        availableSkills(dexNumber).find {
+            it.id == skillId
+        } ?: error("아이디에 해당하는 스킬이 존재하지 않습니다. id: $skillId")
 
     companion object {
         private var instance: BattleRepository? = null
