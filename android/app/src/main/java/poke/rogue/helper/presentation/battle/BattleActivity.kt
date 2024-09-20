@@ -15,6 +15,7 @@ import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
+import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
@@ -123,6 +124,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                     val result = it.result
                     binding.tvPowerContent.text = result.power
                     binding.tvMultiplierContent.text = result.multiplier
+                    binding.tvMultiplierContent.setTextColor(colorOf(result.colorRes))
                     binding.tvCalculatedPowerContent.text = result.calculatedResult
                     binding.tvAccuracyContent.text =
                         getString(R.string.battle_accuracy_title, result.accuracy)

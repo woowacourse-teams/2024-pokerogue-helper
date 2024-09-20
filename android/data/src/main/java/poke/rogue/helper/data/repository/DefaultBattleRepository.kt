@@ -8,7 +8,7 @@ import poke.rogue.helper.data.model.Weather
 class DefaultBattleRepository(private val remoteBattleDataSource: RemoteBattleDataSource) : BattleRepository {
     override suspend fun weathers(): List<Weather> = remoteBattleDataSource.weathers()
 
-    override suspend fun availableSkills(dexNumber: Long): List<BattleSkill> = remoteBattleDataSource.availableSkills(dexNumber)
+    override suspend fun availableSkills(dexNumber: Long): List<BattleSkill> = remoteBattleDataSource.availableSkills(dexNumber).distinct()
 
     override suspend fun calculatedBattlePrediction(
         weatherId: String,

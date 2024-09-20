@@ -37,7 +37,7 @@ class SkillSelectionViewModel(
     var previousPokemonDexNumber: Long? = previousSelection?.selectedPokemon?.dexNumber
         private set
 
-    var previousSkillsId: String? = previousSelection?.selectedSkill?.id
+    var previousSkillId: String? = previousSelection?.selectedSkill?.id
         private set
 
     private val _skillSelectedEvent = MutableSharedFlow<SkillSelectionUiModel>()
@@ -72,7 +72,7 @@ class SkillSelectionViewModel(
         viewModelScope.launch {
             _skillSelectedEvent.emit(selected)
         }
-        previousSkillsId = selected.id
+        previousSkillId = selected.id
     }
 
     fun updateSkills(pokemonDexNumber: Long) {
@@ -89,7 +89,7 @@ class SkillSelectionViewModel(
             viewModelScope.launch(errorHandler) {
                 val availableSkills =
                     battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
-                _skills.value = availableSkills.toSelectableModelsBy { it.id == previousSkillsId }
+                _skills.value = availableSkills.toSelectableModelsBy { it.id == previousSkillId }
             }
         }
     }
