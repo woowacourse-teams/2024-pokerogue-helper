@@ -8,17 +8,16 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import poke.rogue.helper.data.exception.UnknownException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 class GlideImageCacher(private val context: Context) : ImageCacher {
     override suspend fun cacheImages(urls: List<String>) =
-        withContext(Dispatchers.IO) {
+        coroutineScope {
             urls.forEach { url ->
                 launch {
                     cacheImage(url)
@@ -26,8 +25,10 @@ class GlideImageCacher(private val context: Context) : ImageCacher {
             }
         }
 
-    // 백그라운드 작업에서는 submit() 메서드를 사용, 이 경우 RequestListener도 백그라운드 스레드에서 호출
-    // UI 작업을 할 때는 into() 메서드를 사용, 이 경우 Main 스레드에서 RequestListener 이 호출
+    /**
+     * 백그라운드 작업에서는 submit() 메서드를 사용, 이 경우 RequestListener도 백그라운드 스레드에서 호출
+     * UI 작업을 할 때는 into() 메서드를 사용, 이 경우 Main 스레드에서 RequestListener 이 호출
+     */
     private suspend fun cacheImage(url: String) =
         suspendCancellableCoroutine<Unit> { con ->
             val requestListener =

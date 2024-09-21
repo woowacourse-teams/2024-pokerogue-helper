@@ -40,6 +40,7 @@ class PokemonIntroViewModel(
 
     companion object {
         private const val MIN_SPLASH_TIME = 1000L
+
         fun factory(
             pokemonRepository: DexRepository,
             logger: AnalyticsLogger,
