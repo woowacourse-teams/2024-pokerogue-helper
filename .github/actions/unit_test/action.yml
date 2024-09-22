@@ -39,16 +39,16 @@ runs:
     - name: Create Google-Services.json
       shell: bash
       run: |
-        touch ./app/src/debug/google-services.json
-        touch ./app/src/alpha/google-services.json
-        touch ./app/src/beta/google-services.json
-        mkdir ./app/src/release
-        touch ./app/src/release/google-services.json
-        echo ${{ inputs.GOOGLE_SERVICES_ALPHA }} >> ./app/src/debug/google-services.json
-        echo ${{ inputs.GOOGLE_SERVICES_ALPHA }} >> ./app/src/alpha/google-services.json
-        echo ${{ inputs.GOOGLE_SERVICES_BETA }} >> ./app/src/beta/google-services.json
-        echo ${{ inputs.GOOGLE_SERVICES }} >> ./app/src/release/google-services.json
-      working-directory: ./android
+        touch ./android/app/src/debug/google-services.json
+        touch ./android/app/src/alpha/google-services.json
+        touch ./android/app/src/beta/google-services.json
+        mkdir ./android/app/src/release
+        touch ./android/app/src/release/google-services.json
+        echo ${{ inputs.GOOGLE_SERVICES_ALPHA }} >> ./android/app/src/debug/google-services.json
+        echo ${{ inputs.GOOGLE_SERVICES_ALPHA }} >> ./android/app/src/alpha/google-services.json
+        echo ${{ inputs.GOOGLE_SERVICES_BETA }} >> ./android/app/src/beta/google-services.json
+        echo ${{ inputs.GOOGLE_SERVICES }} >> ./android/app/src/release/google-services.json
+    
 
     - name: Create Local Properties
       shell: bash
