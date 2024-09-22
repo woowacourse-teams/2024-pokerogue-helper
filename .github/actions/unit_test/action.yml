@@ -18,6 +18,7 @@ inputs:
 
 runs:
   using: 'composite'
+
   steps:
     - name: Gradle cache
       uses: actions/cache@v3
