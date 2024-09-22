@@ -3,9 +3,10 @@ name: 'ktLint Check'
 description: 'Run ktLint Check using Gradle'
 
 inputs:
-  BASE_URL:
+  POKE_BASE_URL:
     description: 'Base URL for local.properties'
     required: true
+
 
 runs:
   using: 'composite'
