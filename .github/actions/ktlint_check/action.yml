@@ -31,16 +31,20 @@ runs:
     - name: Create Local Properties
       shell: bash
       run: touch local.properties
+      working-directory: ./android
 
     - name: Access Local Properties
       shell: bash
       run: |
         echo POKE_BASE_URL=\"${{ inputs.POKE_BASE_URL }}\" >> local.properties
+      working-directory: ./android
 
     - name: Grant execute permission for gradlew
       shell: bash
       run: chmod +x gradlew
+      working-directory: ./android
 
     - name: Lint Check
       shell: bash
       run: ./gradlew ktlintCheck
+      working-directory: ./android

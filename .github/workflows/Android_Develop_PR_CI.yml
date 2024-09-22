@@ -4,18 +4,10 @@ on:
   pull_request:
     branches: [ an/develop ]
 
-defaults:
-  run:
-    working-directory: ./android
-
 jobs:
   ktlintCheck:
     name: ktLint Check
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./android
 
     steps:
       - uses: actions/checkout@v4
@@ -28,13 +20,9 @@ jobs:
     name: Test Alpha Unit Test
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./android
-
     steps:
       - uses: actions/checkout@v4
-      - name: Run ktLint Check
+      - name: Run Alpha Unit Test
         uses: ./.github/actions/unit_test
         with:
           POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
