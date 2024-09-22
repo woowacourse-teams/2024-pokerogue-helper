@@ -2,8 +2,11 @@ package poke.rogue.helper.data.repository
 
 import android.content.Context
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.data.cache.GlideImageCacher
+import poke.rogue.helper.data.cache.ImageCacher
 import poke.rogue.helper.data.datasource.LocalDexDataSource
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
 import poke.rogue.helper.data.model.Biome
@@ -18,6 +21,7 @@ import poke.rogue.helper.stringmatcher.has
 class DefaultDexRepository(
     private val remotePokemonDataSource: RemoteDexDataSource,
     private val localPokemonDataSource: LocalDexDataSource,
+    private val imageCacher: ImageCacher,
     private val biomeRepository: BiomeRepository,
     private val analyticsLogger: AnalyticsLogger,
 ) : DexRepository {
@@ -25,10 +29,22 @@ class DefaultDexRepository(
 
     override suspend fun warmUp() {
         if (localPokemonDataSource.pokemons().isEmpty()) {
-            localPokemonDataSource.savePokemons(remotePokemonDataSource.pokemons2())
+            val pokemons = remotePokemonDataSource.pokemons2()
+            cachePokemonData(pokemons)
         }
         cachedPokemons = localPokemonDataSource.pokemons()
     }
+
+    private suspend fun cachePokemonData(pokemons: List<Pokemon>) =
+        coroutineScope {
+            val urls = pokemons.take(PLELOAD_POKEMON_COUNT).map { it.imageUrl }
+            launch {
+                imageCacher.cacheImages(urls)
+            }
+            launch {
+                localPokemonDataSource.savePokemons(pokemons)
+            }
+        }
 
     override suspend fun pokemons(): List<Pokemon> {
         if (cachedPokemons.isEmpty()) {
@@ -93,12 +109,15 @@ class DefaultDexRepository(
 
     companion object {
         private var instance: DexRepository? = null
+        const val PLELOAD_POKEMON_COUNT = 24
 
         fun init(context: Context) {
+            GlideImageCacher.init(context)
             instance =
                 DefaultDexRepository(
                     RemoteDexDataSource.instance(),
                     LocalDexDataSource.instance(context),
+                    GlideImageCacher.instance(),
                     DefaultBiomeRepository.instance(),
                     analyticsLogger(),
                 )
