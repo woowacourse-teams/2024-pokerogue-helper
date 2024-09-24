@@ -24,7 +24,7 @@ class SkillSelectionFragment :
     private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
     private val viewModel: SkillSelectionViewModel by viewModels<SkillSelectionViewModel> {
         SkillSelectionViewModel.factory(
-            DefaultBattleRepository.instance(requireContext()),
+            DefaultBattleRepository.instance(requireContext().applicationContext),
             sharedViewModel.previousSelection as? SelectionData.WithSkill,
         )
     }
