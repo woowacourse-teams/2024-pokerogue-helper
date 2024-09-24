@@ -1,4 +1,4 @@
-package com.pokerogue.helper.battle;
+package com.pokerogue.helper.type.data;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -29,25 +29,25 @@ public enum Type {
     UNKNOWN("unknown", "언노운", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/unknown"),
     ;
 
-    private final String engName;
     private final String name;
+    private final String koName;
     private final String image;
 
-    Type(String engName, String name, String image) {
-        this.engName = engName;
+    Type(String name, String koName, String image) {
         this.name = name;
+        this.koName = koName;
         this.image = image;
     }
 
     public static Optional<Type> findByName(String name) {
         return Arrays.stream(values())
-                .filter(type -> type.name.equals(name))
+                .filter(type -> type.koName.equals(name))
                 .findAny();
     }
 
     public static Optional<Type> findByEngName(String engName) {
         return Arrays.stream(values())
-                .filter(type -> type.engName.equals(engName))
+                .filter(type -> type.name.equals(engName))
                 .findAny();
     }
 }

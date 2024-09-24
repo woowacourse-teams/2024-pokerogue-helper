@@ -12,7 +12,7 @@ import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.data.TrainerPokemon;
 import com.pokerogue.helper.biome.data.TrainerType;
 import com.pokerogue.helper.biome.repository.BiomePokemonTypeImageRepository;
-import com.pokerogue.helper.biome.repository.BiomeRepository;
+import com.pokerogue.helper.biome.repository.InMemoryBiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.io.BufferedReader;
@@ -37,7 +37,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
 
     private final S3Service s3Service;
     private final BiomePokemonTypeImageRepository biomePokemonTypeImageRepository;
-    private final BiomeRepository biomeRepository;
+    private final InMemoryBiomeRepository inMemoryBiomeRepository;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -134,7 +134,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                         getBiomeTrainers(trainers, biomeTypeAndTrainer.getTrainerNames()),
                         getNextBiomes(biomeLinks, biomeTypeAndTrainer.getId()))
                 )
-                .forEach(biomeRepository::save);
+                .forEach(inMemoryBiomeRepository::save);
 
         Arrays.stream(BiomePokemonType.values())
                 .forEach(biomePokemonType -> biomePokemonTypeImageRepository.save(

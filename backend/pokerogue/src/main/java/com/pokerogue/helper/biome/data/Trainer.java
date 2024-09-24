@@ -8,9 +8,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Trainer {
 
-    private final String id;
+    private final String id; // Todo: 지우기
     private final String name;
-    private final String image;
-    private final List<String> trainerTypes;
-    private final List<String> pokemons;
+    private final String image; // Todo: 지우기
+    private final List<String> types; // Todo: List<Type>
+    private final List<String> pokemonIds;
 }

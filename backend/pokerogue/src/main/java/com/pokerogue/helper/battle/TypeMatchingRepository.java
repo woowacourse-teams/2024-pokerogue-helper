@@ -1,5 +1,6 @@
 package com.pokerogue.helper.battle;
 
+import com.pokerogue.helper.type.data.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

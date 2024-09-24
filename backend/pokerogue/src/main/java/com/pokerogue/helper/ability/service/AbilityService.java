@@ -6,8 +6,8 @@ import com.pokerogue.helper.ability.dto.AbilityDetailResponse;
 import com.pokerogue.helper.ability.dto.AbilityPokemonResponse;
 import com.pokerogue.helper.ability.dto.AbilityResponse;
 import com.pokerogue.helper.ability.dto.AbilityTypeResponse;
-import com.pokerogue.helper.ability.repository.AbilityRepository;
-import com.pokerogue.helper.battle.Type;
+import com.pokerogue.helper.ability.repository.InMemoryAbilityRepository;
+import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.ArrayList;
@@ -20,18 +20,18 @@ import org.springframework.stereotype.Service;
 public class AbilityService {
 
     private final S3Service s3Service;
-    private final AbilityRepository abilityRepository;
+    private final InMemoryAbilityRepository inMemoryAbilityRepository;
 
     public List<AbilityResponse> findAbilities() {
-        return abilityRepository.findAll().stream()
+        return inMemoryAbilityRepository.findAll().stream()
                 .map(AbilityResponse::from)
                 .toList();
     }
 
     public AbilityDetailResponse findAbilityDetails(String id) {
-        Ability ability = abilityRepository.findById(id)
+        Ability ability = inMemoryAbilityRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
-        List<AbilityPokemonResponse> abilityPokemonResponses = ability.getPokemons().stream()
+        List<AbilityPokemonResponse> abilityPokemonResponses = ability.getInMemoryPokemons().stream()
                 .map(abilityPokemon -> new AbilityPokemonResponse(
                         abilityPokemon.id(),
                         Long.parseLong(abilityPokemon.speciesId()),

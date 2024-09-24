@@ -2,14 +2,14 @@ package com.pokerogue.helper.pokemon.config;
 
 import com.pokerogue.helper.ability.data.Ability;
 import com.pokerogue.helper.ability.data.AbilityInfo;
-import com.pokerogue.helper.ability.repository.AbilityRepository;
+import com.pokerogue.helper.ability.repository.InMemoryAbilityRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.EvolutionChain;
-import com.pokerogue.helper.pokemon.data.Pokemon;
+import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
 import com.pokerogue.helper.pokemon.repository.EvolutionRepository;
-import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,9 +43,9 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
     private static final String FIELD_DELIMITER = "/";
     private static final String LIST_DELIMITER = ",";
 
-    private final PokemonRepository pokemonRepository;
+    private final InMemoryPokemonRepository inMemoryPokemonRepository;
     private final EvolutionRepository evolutionRepository;
-    private final AbilityRepository abilityRepository;
+    private final InMemoryAbilityRepository inMemoryAbilityRepository;
     private final List<String> pokemonKeys = List.of(
             "id",
             "speciesId",
@@ -120,8 +120,8 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
                     throw new IllegalArgumentException(pokemonKeys.size() + " " + tokens.size() + "포켓몬 데이터가 잘못 되었습니다.");
                 }
 
-                Pokemon pokemon = createPokemon(tokens, technicalMachineMoveInfos);
-                pokemonRepository.save(pokemon.id(), pokemon);
+                InMemoryPokemon inMemoryPokemon = createPokemon(tokens, technicalMachineMoveInfos);
+                inMemoryPokemonRepository.save(inMemoryPokemon.id(), inMemoryPokemon);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -166,7 +166,7 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
         return field;
     }
 
-    private Pokemon createPokemon(List<String> values, Map<String, List<String>> technicalMachineMoveInfos) {
+    private InMemoryPokemon createPokemon(List<String> values, Map<String, List<String>> technicalMachineMoveInfos) {
         List<String> moves = Arrays.stream(values.get(22).split(","))
                 .collect(Collectors.toList());
         for (int i = 0; i < moves.size(); i += 2) {
@@ -179,7 +179,7 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
                 .toList();
 
         List<String> technicalMachineMoves = technicalMachineMoveInfos.get(regularize(values.get(1)));
-        return new Pokemon(
+        return new InMemoryPokemon(
                 regularize(values.get(0)),
                 regularize(values.get(1)),
                 regularize(values.get(2)),
@@ -226,13 +226,13 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
                 }
             }
 
-            for (Pokemon pokemon : pokemonRepository.findAll().values()) {
+            for (InMemoryPokemon inMemoryPokemon : inMemoryPokemonRepository.findAll().values()) {
                 List<String> normalForms = List.of("mega", "mega_x", "mega_y", "primal", "gigantamax", "eternamax");
-                if (normalForms.contains(regularize(pokemon.formName()))) {
+                if (normalForms.contains(regularize(inMemoryPokemon.formName()))) {
 
                     evolutionRepository.saveEdge(
-                            pokemon.speciesName(),
-                            new Evolution(pokemon.speciesName(), "1", pokemon.id(), "", pokemon.formName())
+                            inMemoryPokemon.speciesName(),
+                            new Evolution(inMemoryPokemon.speciesName(), "1", inMemoryPokemon.id(), "", inMemoryPokemon.formName())
                     );
                 }
             }
@@ -246,7 +246,7 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
         List<String> evolutions = evolutionRepository.findAll()
                 .keySet()
                 .stream()
-                .sorted(Comparator.comparing(r -> pokemonRepository.findById(r)
+                .sorted(Comparator.comparing(r -> inMemoryPokemonRepository.findById(r)
                         .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
                         .speciesId()
                 ))
@@ -262,7 +262,7 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
             evolutionRepository.saveChain(from, chain);
         }
 
-        for (String from : pokemonRepository.findAll().keySet()) {
+        for (String from : inMemoryPokemonRepository.findAll().keySet()) {
             if (
                     evolutionRepository.findEvolutionChainById(from).isEmpty() ||
                     evolutionRepository.findEvolutionChainById(from).get().getChain().isEmpty()
@@ -365,20 +365,20 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
                         abilityInfo.getName(),
                         abilityInfo.getDescription(),
                         getAbilityPokemon(abilityInfo.getPokemons()))
-                ).forEach(abilityRepository::save);
+                ).forEach(inMemoryAbilityRepository::save);
     }
 
-    private List<Pokemon> getAbilityPokemon(List<String> pokemons) {
-        List<Pokemon> abilityPokemons = new ArrayList<>();
+    private List<InMemoryPokemon> getAbilityPokemon(List<String> pokemons) {
+        List<InMemoryPokemon> abilityInMemoryPokemons = new ArrayList<>();
         for (int i = 0; i < pokemons.size(); i++) {
             String pokemonId = pokemons.get(i);
 
-            Pokemon pokemon = pokemonRepository.findById(pokemonId)
+            InMemoryPokemon inMemoryPokemon = inMemoryPokemonRepository.findById(pokemonId)
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
-            abilityPokemons.add(pokemon);
+            abilityInMemoryPokemons.add(inMemoryPokemon);
         }
 
-        return abilityPokemons;
+        return abilityInMemoryPokemons;
     }
 }

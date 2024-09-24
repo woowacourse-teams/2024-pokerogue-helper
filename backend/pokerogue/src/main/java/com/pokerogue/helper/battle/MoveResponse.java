@@ -1,5 +1,7 @@
 package com.pokerogue.helper.battle;
 
+import com.pokerogue.helper.type.data.Type;
+
 public record MoveResponse(
         String id,
         String name,
@@ -19,7 +21,7 @@ public record MoveResponse(
         return new MoveResponse(
                 battleMove.id(),
                 battleMove.name(),
-                type.getEngName(),
+                type.getName(),
                 type.getImage(),
                 moveCategory.getEngName(),
                 moveCategory.getImage(),
