@@ -18,7 +18,7 @@ public record MoveResponse(
 
     public static MoveResponse from(BattleMove battleMove, Integer level, String typeImageFromS3) {
         MoveCategory moveCategory = battleMove.category();
-        Type firstType = Type.findById(battleMove.type().getName());
+        Type firstType = Type.findById(battleMove.type().getKoName());
 
         return new MoveResponse(
                 battleMove.id(),

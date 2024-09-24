@@ -13,11 +13,11 @@ import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
 import com.pokerogue.helper.biome.dto.NextBiomeResponse;
 import com.pokerogue.helper.biome.dto.TrainerPokemonResponse;
 import com.pokerogue.helper.biome.repository.BiomePokemonTypeImageRepository;
-import com.pokerogue.helper.biome.repository.BiomeRepository;
+import com.pokerogue.helper.biome.repository.InMemoryBiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Type;
-import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +29,12 @@ import org.springframework.stereotype.Service;
 public class BiomeService {
 
     private final S3Service s3Service;
-    private final BiomeRepository biomeRepository;
-    private final PokemonRepository pokemonRepository;
+    private final InMemoryBiomeRepository inMemoryBiomeRepository;
+    private final InMemoryPokemonRepository inMemoryPokemonRepository;
     private final BiomePokemonTypeImageRepository biomePokemonTypeImageRepository;
 
     public List<BiomeResponse> findBiomes() {
-        return biomeRepository.findAll().stream()
+        return inMemoryBiomeRepository.findAll().stream()
                 .map(biome -> BiomeResponse.of(
                         biome,
                         getTypesResponses(biome.getMainTypes()),
@@ -44,7 +44,7 @@ public class BiomeService {
     }
 
     public BiomeDetailResponse findBiome(String id) {
-        Biome biome = biomeRepository.findById(id)
+        Biome biome = inMemoryBiomeRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
 
         return BiomeDetailResponse.of(
@@ -78,7 +78,7 @@ public class BiomeService {
 
     private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
         return biomePokemons.stream()
-                .map(biomePokemon -> pokemonRepository.findById(biomePokemon)
+                .map(biomePokemon -> inMemoryPokemonRepository.findById(biomePokemon)
                             .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
                 )
                 .map(biomePokemonInfo -> new BiomePokemonResponse(
@@ -125,8 +125,8 @@ public class BiomeService {
         return biome.getTrainers().stream()
                 .map(trainer -> TrainerPokemonResponse.from(
                         trainer,
-                        getTypesResponses(trainer.getTrainerTypes()),
-                        getBiomePokemons(trainer.getPokemons()))
+                        getTypesResponses(trainer.getTypes()),
+                        getBiomePokemons(trainer.getPokemonIds()))
                 )
                 .toList();
     }
@@ -144,9 +144,9 @@ public class BiomeService {
             return List.of();
         }
 
-        return biome.getNextBiome().stream()
+        return biome.getNextBiomes().stream()
                 .map(nextBiomeInfo -> {
-                    Biome nextBiome = biomeRepository.findById(nextBiomeInfo.getId())
+                    Biome nextBiome = inMemoryBiomeRepository.findById(nextBiomeInfo.getName())
                             .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
                     return NextBiomeResponse.of(
                             nextBiome,

@@ -1,5 +1,7 @@
 package com.pokerogue.helper.battle;
 
+import com.pokerogue.helper.type.data.Type;
+
 public record BattleMove(
         String id,
         String name,
