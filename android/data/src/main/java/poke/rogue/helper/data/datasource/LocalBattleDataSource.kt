@@ -15,7 +15,9 @@ class LocalBattleDataSource(private val battleDataStore: BattleDataStore) {
         battleDataStore.savePokemonWithSkill(pokemonId, skillId)
     }
 
-    suspend fun savePokemon(pokemonId: String) = battleDataStore.savePokemon(pokemonId)
+    suspend fun savePokemon(pokemonId: String) {
+        battleDataStore.savePokemon(pokemonId)
+    }
 
     fun pokemonWithSkill(): Flow<PokemonWithSkillIds?> = battleDataStore.pokemonWithSkillId().map { it?.toData() }
 
