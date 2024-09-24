@@ -14,6 +14,7 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.biome.guide.BiomeGuideActivity
 import poke.rogue.helper.presentation.biome.model.toUi
+import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -36,6 +37,7 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initListener()
         initView()
         initAdapter()
         initObservers()
@@ -44,6 +46,13 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
     private fun initView() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
+    }
+
+    private fun initListener() {
+        binding.rvBiomeList.setOnTouchListener { _, _ ->
+            hideKeyboard()
+            false
+        }
     }
 
     private fun initAdapter() {
@@ -78,14 +87,16 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
         }
 
         repeatOnStarted {
-            viewModel.biome.collect { biome ->
+            viewModel.biomes.collect { biome ->
                 when (biome) {
                     is BiomeUiState.Loading -> {
                         binding.biomeLoading.isVisible = true
                     }
 
                     is BiomeUiState.Success -> {
-                        biomeAdapter.submitList(biome.data.toUi())
+                        biomeAdapter.submitList(biome.data.toUi()) {
+                            binding.rvBiomeList.scrollToPosition(0)
+                        }
                         binding.biomeLoading.isVisible = false
                     }
                 }
