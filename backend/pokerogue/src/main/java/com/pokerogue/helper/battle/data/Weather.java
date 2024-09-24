@@ -1,4 +1,4 @@
-package com.pokerogue.helper.battle;
+package com.pokerogue.helper.battle.data;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.pokerogue.helper.battle;
+package com.pokerogue.helper.battle.dto;
 
 public record BattleResultResponse(
         int power,

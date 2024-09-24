@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.pokerogue.environment.service.ServiceTest;
+import com.pokerogue.helper.battle.dto.BattleResultResponse;
+import com.pokerogue.helper.battle.dto.MoveResponse;
+import com.pokerogue.helper.battle.service.BattleService;
 import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
 import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
 import java.util.List;

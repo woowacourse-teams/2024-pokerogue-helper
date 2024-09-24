@@ -1,5 +1,8 @@
 package com.pokerogue.helper.battle;
 
+import com.pokerogue.helper.battle.data.BattleMove;
+import com.pokerogue.helper.battle.data.MoveCategory;
+import com.pokerogue.helper.battle.data.TypeMatching;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.type.data.Type;
