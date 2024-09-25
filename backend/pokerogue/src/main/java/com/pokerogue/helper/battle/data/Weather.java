@@ -1,5 +1,7 @@
 package com.pokerogue.helper.battle.data;
 
+import com.pokerogue.helper.battle.service.BattleMultiplier;
+import com.pokerogue.helper.type.data.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -39,5 +41,61 @@ public enum Weather {
         return Arrays.stream(values())
                 .filter(weather -> weather.id.equals(id))
                 .findAny();
+    }
+
+    public BattleMultiplier getBattleMultiplierByAttackMoveType(Type attackMoveType) {
+        if (this == Weather.SUNNY) {
+            return getSunnyAttackTypeMultiplier(attackMoveType);
+        }
+        if (this == Weather.HARSH_SUN) {
+            return getHarshSunAttackTypeMultiplier(attackMoveType);
+        }
+        if (this == Weather.RAIN) {
+            return getRainAttackTypeMultiplier(attackMoveType);
+        }
+        if (this == Weather.HEAVY_RAIN) {
+            return getHeavyRainAttackTypeMultiplier(attackMoveType);
+        }
+        return BattleMultiplier.DEFAULT_MULTIPLIER;
+    }
+
+    private BattleMultiplier getSunnyAttackTypeMultiplier(Type attackMoveType) {
+        if (attackMoveType == Type.FIRE) {
+            return BattleMultiplier.STRONG_MULTIPLIER;
+        }
+        if (attackMoveType == Type.WATER) {
+            return BattleMultiplier.WEAK_MULTIPLIER;
+        }
+        return BattleMultiplier.DEFAULT_MULTIPLIER;
+    }
+
+    private BattleMultiplier getHarshSunAttackTypeMultiplier(Type attackMoveType) {
+        if (attackMoveType == Type.FIRE) {
+            return BattleMultiplier.STRONG_MULTIPLIER;
+        }
+        if (attackMoveType == Type.WATER) {
+            return BattleMultiplier.ZERO_MULTIPLIER;
+        }
+        return BattleMultiplier.DEFAULT_MULTIPLIER;
+    }
+
+    private BattleMultiplier getRainAttackTypeMultiplier(Type attackMoveType) {
+        if (attackMoveType == Type.WATER) {
+            return BattleMultiplier.STRONG_MULTIPLIER;
+        }
+        if (attackMoveType == Type.FIRE) {
+            return BattleMultiplier.WEAK_MULTIPLIER;
+        }
+        return BattleMultiplier.DEFAULT_MULTIPLIER;
+    }
+
+    private BattleMultiplier getHeavyRainAttackTypeMultiplier(Type attackMoveType) {
+        if (attackMoveType == Type.WATER) {
+            return BattleMultiplier.STRONG_MULTIPLIER;
+        }
+        if (attackMoveType == Type.FIRE) {
+            return BattleMultiplier.ZERO_MULTIPLIER;
+        }
+        return BattleMultiplier.DEFAULT_MULTIPLIER;
     }
 }
