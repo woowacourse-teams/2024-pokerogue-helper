@@ -15,7 +15,7 @@ public class Evolution {
     private String from;
 
     @Field("level")
-    private String level;
+    private Integer level;
 
     @Field("to")
     private String to;
