@@ -19,7 +19,7 @@ public class BattleService {
 
     private final BattleMoveRepository battleMoveRepository;
     private final InMemoryPokemonRepository inMemoryPokemonRepository;
-    private final TypeMatchingRepository typeMatchingRepository;
+    private final InMemoryTypeMatchingRepository typeMatchingRepository;
 
     private Map<Integer, List<MoveResponse>> findByDexnumberCache = new HashMap<>();
 

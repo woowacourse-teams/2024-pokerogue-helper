@@ -120,7 +120,7 @@ public class BiomeDatabaseInitializer implements ApplicationRunner {
                         trainerPokemon.getId(),
                         trainerPokemon.getTrainerName(),
                         s3Service.getTrainerImageFromS3(trainerPokemon.getId()),
-                        getTrainerTypes(trainerTypes, trainerPokemon.getTrainerName()),
+                        new ArrayList<>(),
                         trainerPokemon.getTrainerPokemons())
                 ).toList();
 
