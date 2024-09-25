@@ -48,4 +48,4 @@ jobs:
 
       - name: Run Test
         working-directory: ./backend/pokerogue
-        run: SPRING_PROFILES_ACTIVE=local-mysql ./gradlew clean test
+        run: ./gradlew clean test
