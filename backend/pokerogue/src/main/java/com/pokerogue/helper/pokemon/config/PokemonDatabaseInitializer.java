@@ -232,7 +232,8 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
 
                     evolutionRepository.saveEdge(
                             inMemoryPokemon.speciesName(),
-                            new Evolution(inMemoryPokemon.speciesName(), "1", inMemoryPokemon.id(), "", inMemoryPokemon.formName())
+                            new Evolution(inMemoryPokemon.speciesName(), "1", inMemoryPokemon.id(), "",
+                                    inMemoryPokemon.formName())
                     );
                 }
             }
@@ -287,11 +288,11 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
                     continue;
                 }
                 for (Evolution edge : edges.get()) {
-                    if (vis.contains(edge.to())) {
+                    if (vis.contains(edge.getTo())) {
                         continue;
                     }
-                    q.add(edge.to());
-                    vis.add(edge.to());
+                    q.add(edge.getTo());
+                    vis.add(edge.getTo());
                     chain.push(edge, depth);
                 }
             }

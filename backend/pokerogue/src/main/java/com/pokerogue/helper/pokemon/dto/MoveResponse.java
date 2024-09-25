@@ -2,7 +2,9 @@ package com.pokerogue.helper.pokemon.dto;
 
 import com.pokerogue.helper.battle.BattleMove;
 import com.pokerogue.helper.battle.MoveCategory;
-import com.pokerogue.helper.pokemon.data.Type;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.type.data.Type;
 
 public record MoveResponse(
         String id,
@@ -18,7 +20,8 @@ public record MoveResponse(
 
     public static MoveResponse from(BattleMove battleMove, Integer level, String typeImageFromS3) {
         MoveCategory moveCategory = battleMove.category();
-        Type firstType = Type.findById(battleMove.type().getKoName());
+        Type firstType = Type.findByName(battleMove.type().getKoName())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
 
         return new MoveResponse(
                 battleMove.id(),

@@ -1,14 +1,25 @@
 package com.pokerogue.helper.pokemon.data;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FormChange {
 
-    private final String from;
-    private final String previousForm;
-    private final String currentForm;
-    private final String item; // Todo: enum
+    @Field("from")
+    private String from;
+
+    @Field("previousForm")
+    private String previousForm;
+
+    @Field("currentForm")
+    private String currentForm;
+
+    @Field("item")
+    private EvolutionItem item;
 }

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.Getter;
 
 
+@Getter
 public class EvolutionChain {
     private List<List<String>> chain = new ArrayList<>();
 
@@ -21,8 +23,8 @@ public class EvolutionChain {
             chain.add(new ArrayList<>());
         }
 
-        chain.get(depth).add(evolution.from());
-        chain.get(depth + 1).add(evolution.to());
+        chain.get(depth).add(evolution.getFrom());
+        chain.get(depth + 1).add(evolution.getTo());
 
         chain.set(depth, chain.get(depth).stream().distinct().collect(Collectors.toList()));
         chain.set(depth + 1, chain.get(depth + 1).stream().distinct().collect(Collectors.toList()));

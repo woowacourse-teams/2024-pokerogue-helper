@@ -79,7 +79,7 @@ public class BiomeService {
     private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
         return biomePokemons.stream()
                 .map(biomePokemon -> inMemoryPokemonRepository.findById(biomePokemon)
-                            .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
+                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
                 )
                 .map(biomePokemonInfo -> new BiomePokemonResponse(
                         biomePokemonInfo.id(),

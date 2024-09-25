@@ -1,11 +1,11 @@
 package com.pokerogue.helper.pokemon.data;
 
 import java.util.Arrays;
+import java.util.Optional;
 import lombok.Getter;
 
 @Getter
 public enum EvolutionItem {
-    EMPTY(""),
     LINKING_CORD("연결의끈"),
     SUN_STONE("태양의돌"),
     MOON_STONE("달의돌"),
@@ -42,12 +42,11 @@ public enum EvolutionItem {
         this.koName = koName;
     }
 
-    public static EvolutionItem findById(String id) {
+    public static Optional<EvolutionItem> findById(String id) {
         return Arrays.stream(values())
                 .filter(value -> value.name()
                         .toLowerCase()
                         .equals(id))
-                .findAny()
-                .orElse(EMPTY);
+                .findAny();
     }
 }
