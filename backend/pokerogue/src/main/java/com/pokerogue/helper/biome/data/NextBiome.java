@@ -1,8 +1,10 @@
 package com.pokerogue.helper.biome.data;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class NextBiome {
 
     private String name;
@@ -10,7 +12,7 @@ public class NextBiome {
 
     public NextBiome(String name, String percentage) {
         this.name = name;
-        this.percentage = Integer.parseInt(percentage); // Todo
+        this.percentage = Integer.parseInt(percentage);
     }
 
     public String getPercent() {
