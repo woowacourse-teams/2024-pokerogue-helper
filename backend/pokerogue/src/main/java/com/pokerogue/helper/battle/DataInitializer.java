@@ -2,7 +2,7 @@ package com.pokerogue.helper.battle;
 
 import com.pokerogue.helper.battle.data.BattleMove;
 import com.pokerogue.helper.battle.data.MoveCategory;
-import com.pokerogue.helper.battle.data.TypeMatching;
+import com.pokerogue.helper.battle.data.InMemoryTypeMatching;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.type.data.Type;
@@ -29,7 +29,7 @@ public class DataInitializer implements ApplicationRunner {
     private static final String LIST_DELIMITER = ",";
 
     private final BattleMoveRepository battleMoveRepository;
-    private final TypeMatchingRepository typeMatchingRepository;
+    private final InMemoryTypeMatchingRepository inMemoryTypeMatchingRepository;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -38,8 +38,8 @@ public class DataInitializer implements ApplicationRunner {
             battleMoveRepository.save(battleMove);
         });
         saveData("data/battle/type-matching.txt", fields -> {
-            TypeMatching typeMatching = createTypeMatching(fields);
-            typeMatchingRepository.save(typeMatching);
+            InMemoryTypeMatching inMemoryTypeMatching = createTypeMatching(fields);
+            inMemoryTypeMatchingRepository.save(inMemoryTypeMatching);
         });
     }
 
@@ -100,14 +100,14 @@ public class DataInitializer implements ApplicationRunner {
         );
     }
 
-    private TypeMatching createTypeMatching(List<String> fields) {
+    private InMemoryTypeMatching createTypeMatching(List<String> fields) {
         Type fromType = Type.findByEngName(fields.get(0))
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
         Type toType = Type.findByEngName(fields.get(1))
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
         double result = convertToDouble(fields.get(2));
 
-        return new TypeMatching(fromType, toType, result);
+        return new InMemoryTypeMatching(fromType, toType, result);
     }
 
     private double convertToDouble(String data) {
