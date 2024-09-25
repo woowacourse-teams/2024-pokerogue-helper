@@ -5,12 +5,7 @@ import com.pokerogue.helper.type.data.Type;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WeatherMultiplier {
-
-    private static final double STRONG_MULTIPLIER = 1.5;
-    private static final double WEAK_MULTIPLIER = 0.5;
-    private static final double ZERO_MULTIPLIER = 0;
-    private static final double DEFAULT_MULTIPLIER = 1;
+public class WeatherMultiplier extends BattleMultiplier {
 
     public double getByAttackMoveType(Weather weather, Type attackMoveType) {
         if (weather == Weather.SUNNY) {
