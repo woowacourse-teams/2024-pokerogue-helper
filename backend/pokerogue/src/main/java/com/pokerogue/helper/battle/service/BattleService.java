@@ -1,10 +1,8 @@
 package com.pokerogue.helper.battle.service;
 
-import com.pokerogue.helper.battle.data.TypeMatching;
 import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.battle.dto.BattleResultResponse;
 import com.pokerogue.helper.battle.dto.WeatherResponse;
-import com.pokerogue.helper.battle.repository.TypeMatchingRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
@@ -21,9 +19,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
+    private static final double FOG_ACCURACY_EFFECT = 0.9;
+
     private final MoveRepository moveRepository;
     private final PokemonRepository pokemonRepository;
-    private final TypeMatchingRepository typeMatchingRepository;
+    private final WeatherMultiplier weatherMultiplier;
+    private final TypeMultiplier typeMultiplier;
 
     public List<WeatherResponse> findWeathers() {
         return Arrays.stream(Weather.values())
@@ -43,11 +44,11 @@ public class BattleService {
         Pokemon rivalPokemon = pokemonRepository.findById(rivalPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         Move move = moveRepository.findById(myMoveId)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
         Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
 
         double finalAccuracy = calculateAccuracy(move, weather);
-        double totalMultiplier = getTotalMultiplier(move, weather, rivalPokemon, myPokemon);
+        double totalMultiplier = calculateTotalMultiplier(move, weather, rivalPokemon, myPokemon);
 
         return new BattleResultResponse(
                 move.getPower(),
@@ -62,13 +63,13 @@ public class BattleService {
 
     private double calculateAccuracy(Move move, Weather weather) {
         if (weather == Weather.FOG) {
-            return (double) move.getAccuracy() * 0.9;
+            return (double) move.getAccuracy() * FOG_ACCURACY_EFFECT;
         }
 
-        return (double) move.getAccuracy();
+        return move.getAccuracy();
     }
 
-    private double getTotalMultiplier(
+    private double calculateTotalMultiplier(
             Move move,
             Weather weather,
             Pokemon rivalPokemon,
@@ -76,72 +77,20 @@ public class BattleService {
         if (!move.isAttackMove()) {
             return 1;
         }
-        Type moveType = Type.valueOf(move.getType()); // Todo
-        double weatherMultiplier = getWeatherMultiplier(moveType, weather);
+        Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
         List<Type> types = rivalPokemon.getTypes()
-                .stream()
-                .map(String::toUpperCase) // Todo
+                .stream() // Todo
+                .map(String::toUpperCase)
                 .map(Type::valueOf)
                 .toList();
-        double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, types);
-        double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myPokemon);
-        double stringWindMultiplier = getStringWindMultiplier(moveType, types, weather);
-
-        return weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
-    }
-
-    private double getWeatherMultiplier(Type moveType, Weather weather) {
-        if (moveType == Type.FIRE) {
-            if (weather == Weather.SUNNY || weather == Weather.HARSH_SUN) {
-                return 1.5;
-            }
-            if (weather == Weather.RAIN) {
-                return 0.5;
-            }
-            if (weather == Weather.HEAVY_RAIN) {
-                return 0;
-            }
-        }
-        if (moveType == Type.WATER) {
-            if (weather == Weather.SUNNY) {
-                return 0.5;
-            }
-            if (weather == Weather.HARSH_SUN) {
-                return 0;
-            }
-            if (weather == Weather.RAIN || weather == Weather.HEAVY_RAIN) {
-                return 1.5;
-            }
+        double weatherMultiplierByAttackMoveType = weatherMultiplier.getByAttackMoveType(weather, moveType);
+        double typeMatchingMultiplier = typeMultiplier.getByTypeMatching(moveType, types);
+        double sameTypeBonusMultiplier = typeMultiplier.getBySameTypeAttackBonus(moveType, myPokemon);
+        double totalMultiplier = weatherMultiplierByAttackMoveType * typeMatchingMultiplier * sameTypeBonusMultiplier;
+        if (weather == Weather.STRONG_WINDS) {
+            totalMultiplier *= typeMultiplier.getByStrongWind(moveType, types);
         }
 
-        return 1;
-    }
-
-    private double getTypeMatchingMultiplier(Type moveType, List<Type> rivalPokemonTypes) {
-        return rivalPokemonTypes.stream()
-                .map(toType -> typeMatchingRepository.findByFromAndTo(moveType.getName(), toType.getName())
-                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR)))
-                .map(TypeMatching::getResult)
-                .reduce(1d, (a, b) -> a * b);
-    }
-
-    private double getSameTypeAttackBonusMultiplier(Type moveType, Pokemon rivalPokemon) {
-        if (rivalPokemon.hasSameType(moveType)) {
-            return 1.5;
-        }
-
-        return 1;
-    }
-
-    private double getStringWindMultiplier(Type moveType, List<Type> rivalPokemonTypes, Weather weather) {
-        TypeMatching typeMatching = typeMatchingRepository.findByFromAndTo(moveType.getName(), Type.FLYING.getName())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
-
-        if (weather == Weather.STRONG_WINDS && rivalPokemonTypes.contains(Type.FLYING)
-                && typeMatching.getResult() == 2) {
-            return 0.5;
-        }
-
-        return 1;
+        return totalMultiplier;
     }
 }
