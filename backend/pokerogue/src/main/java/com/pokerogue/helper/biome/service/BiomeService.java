@@ -124,9 +124,9 @@ public class BiomeService {
                     return NextBiomeResponse.of(
                             nextBiome,
                             s3Service.getBiomeImageFromS3(nextBiome.getId()),
-                            nextBiomeInfo.getPercent(),
+                            String.valueOf(nextBiomeInfo.getPercentage()),
                             getTypesResponses(nextBiome.getTypes()),
-                            getTypesResponses(nextBiome.getTrainerTypes())
+                            getTrainerTypesResponses(nextBiome.getTrainers())
                     );
                 })
                 .toList();

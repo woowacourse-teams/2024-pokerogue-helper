@@ -16,8 +16,4 @@ public class NextBiome {
 
     @Field("percentage")
     private int percentage;
-
-    public String getPercent() {
-        return String.valueOf(percentage);
-    }
 }

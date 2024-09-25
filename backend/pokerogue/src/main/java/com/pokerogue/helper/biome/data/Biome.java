@@ -1,8 +1,6 @@
 package com.pokerogue.helper.biome.data;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,12 +35,4 @@ public class Biome {
 
     @Field("trainers")
     private List<Trainer> trainers;
-
-    public List<String> getTrainerTypes() {
-        Set<String> trainerTypes = new HashSet<>();
-        trainers.forEach(trainer -> trainerTypes.addAll(trainer.getTypes()));
-
-        return trainerTypes.stream()
-                .toList();
-    }
 }
