@@ -1,12 +1,15 @@
 package com.pokerogue.helper.pokemon.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class LevelMove {
 
-    private final int level;
-    private final String moveId;
+    private int level;
+    private String moveId;
 }

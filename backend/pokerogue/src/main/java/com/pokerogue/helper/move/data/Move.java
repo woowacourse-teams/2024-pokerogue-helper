@@ -2,65 +2,66 @@ package com.pokerogue.helper.move.data;
 
 import com.pokerogue.helper.battle.data.MoveCategory;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import software.amazon.awssdk.services.s3.endpoints.internal.Value.Str;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "move")
 public class Move {
 
     @Id
-    private final String id;
+    private String id;
 
     @Field("name")
-    private final String name;
+    private String name;
 
     @Field("koName")
-    private final String koName;
+    private String koName;
 
     @Field("type")
-    private final String type; // Todo enum 사용
+    private String type; // Todo enum 사용
 
     @Field("moveCategory")
-    private final String moveCategory; // Todo
+    private String moveCategory; // Todo
 
     @Field("moveTarget")
-    private final String moveTarget; // Todo enum 만들기
+    private String moveTarget; // Todo enum 만들기
 
     @Field("power")
-    private final int power;
+    private int power;
 
     @Field("accuracy")
-    private final int accuracy;
+    private int accuracy;
 
     @Field("powerPoint")
-    private final int powerPoint;
+    private int powerPoint;
 
     @Field("effect")
-    private final String effect;
+    private String effect;
 
     @Field("effectChance")
-    private final int effectChance;
+    private int effectChance;
 
     @Field("priority")
-    private final int priority;
+    private int priority;
 
     @Field("generation")
-    private final int generation;
+    private int generation;
 
     @Field("released")
-    private final String released;
+    private String released;
 
     @Field("flags")
-    private final List<String> flags; // Todo enum 사용
+    private List<String> flags; // Todo enum 사용
 
     @Field("pokemonIds")
-    private final List<String> pokemonIds;
+    private List<String> pokemonIds;
 
     public boolean isAttackMove() {
         return MoveCategory.valueOf(this.moveCategory.toUpperCase()) != MoveCategory.STATUS; // Todo

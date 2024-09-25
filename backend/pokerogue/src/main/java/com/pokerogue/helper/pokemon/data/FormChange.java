@@ -1,14 +1,16 @@
 package com.pokerogue.helper.pokemon.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class FormChange {
 
-    private final String from;
-    private final String previousForm;
-    private final String currentForm;
-    private final String item; // Todo: enum
+    private String from;
+    private String previousForm;
+    private String currentForm;
+    private String item; // Todo: enum
 }
