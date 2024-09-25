@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @RequiredArgsConstructor
 public enum ErrorMessage {
-  
+
     POKEMON_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 포켓몬을 찾지 못했습니다."),
     POKEMON_ABILITY_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 특성을 찾지 못했습니다."),
     POKEMON_TYPE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 타입을 찾지 못했습니다."),
@@ -20,6 +20,8 @@ public enum ErrorMessage {
     MOVE_BY_SELF_NOT_FOUND(HttpStatus.NOT_FOUND, "도감 번호에 해당하는 자력 기술을 찾지 못했습니다."),
     MOVE_NOT_FOUND(HttpStatus.NOT_FOUND, "id에 해당하는 기술을 찾지 못했습니다."),
     MOVE_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "기술 카테고리를 찾지 못했습니다."),
+    MOVE_TARGET_NOT_FOUND(HttpStatus.NOT_FOUND, "기술 타켓을 찾지 못했습니다."),
+    MOVE_FLAG_NOT_FOUND(HttpStatus.NOT_FOUND, "기술 플래그를 찾지 못했습니다."),
     WEATHER_NOT_FOUND(HttpStatus.NOT_FOUND, "id에 해당하는 날씨를 찾지 못했습니다."),
     EVOLUTION_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 진화 정보를 찾지 못했습니다."),
 
