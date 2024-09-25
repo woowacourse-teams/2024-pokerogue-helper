@@ -2,9 +2,7 @@ package com.pokerogue.helper.battle;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
-import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.data.MoveCategory;
-import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
 import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
 import com.pokerogue.helper.type.data.Type;
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
-    private final MoveRepository moveRepository;
+    private final BattleMoveRepository moveRepository;
     private final InMemoryPokemonRepository inMemoryPokemonRepository;
     private final TypeMatchingRepository typeMatchingRepository;
 
@@ -39,46 +37,43 @@ public class BattleService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         InMemoryPokemon rivalInMemoryPokemon = inMemoryPokemonRepository.findById(rivalPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Move move = moveRepository.findById(myMoveId)
+        BattleMove move = moveRepository.findById(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
-        Type moveType = Type.findByEngName(move.getType())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+        Type moveType = move.type();
 
         double finalAccuracy = calculateAccuracy(move, weather);
         double totalMultiplier = getTotalMultiplier(move, weather, rivalInMemoryPokemon, myInMemoryPokemon);
 
-        MoveCategory moveCategory = MoveCategory.findByEngName(move.getMoveCategory())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
+        MoveCategory moveCategory = move.category();
 
         return new BattleResultResponse(
-                move.getPower(),
+                move.power(),
                 totalMultiplier,
                 finalAccuracy,
-                move.getKoName(),
-                move.getEffect(),
+                move.name(),
+                move.effect(),
                 moveType.getKoName(),
                 moveCategory.getName()
         );
     }
 
-    private double calculateAccuracy(Move move, Weather weather) {
+    private double calculateAccuracy(BattleMove move, Weather weather) {
         if (weather == Weather.FOG) {
-            return (double) move.getAccuracy() * 0.9;
+            return (double) move.accuracy() * 0.9;
         }
 
-        return (double) move.getAccuracy();
+        return (double) move.accuracy();
     }
 
     private double getTotalMultiplier(
-            Move move,
+            BattleMove move,
             Weather weather,
             InMemoryPokemon rivalInMemoryPokemon,
             InMemoryPokemon myInMemoryPokemon) {
-        if (!isAttackMove(move)) {
+        if (move.isAttackMove()) {
             return 1;
         }
-        Type moveType = Type.findByEngName(move.getType())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+        Type moveType = move.type();
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
         List<Type> types = new ArrayList<>();
         if (!rivalInMemoryPokemon.firstType().isEmpty()) {
@@ -94,10 +89,6 @@ public class BattleService {
         double stringWindMultiplier = getStringWindMultiplier(moveType, types, weather);
 
         return weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
-    }
-
-    private boolean isAttackMove(Move move) {
-        return !move.getMoveCategory().equals("status");
     }
 
     private double getWeatherMultiplier(Type moveType, Weather weather) {
