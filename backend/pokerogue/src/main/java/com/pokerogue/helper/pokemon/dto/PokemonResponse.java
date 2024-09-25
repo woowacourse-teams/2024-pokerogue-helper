@@ -26,7 +26,7 @@ public record PokemonResponse(
 
         return new PokemonResponse(
                 pokemon.getId(),
-                (long) pokemon.getPokedexNumber(), //todo: DTO를 바꿀 것인지?
+                (long) pokemon.getPokedexNumber(),
                 pokemon.getKoName(),
                 pokemon.getFormName(),
                 image,
