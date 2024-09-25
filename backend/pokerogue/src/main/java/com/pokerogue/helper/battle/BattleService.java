@@ -2,14 +2,15 @@ package com.pokerogue.helper.battle;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.move.data.Move;
+import com.pokerogue.helper.move.data.MoveCategory;
+import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
 import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
 import com.pokerogue.helper.type.data.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,83 +18,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
-    private final BattleMoveRepository battleMoveRepository;
+    private final MoveRepository moveRepository;
     private final InMemoryPokemonRepository inMemoryPokemonRepository;
     private final TypeMatchingRepository typeMatchingRepository;
-
-    private Map<Integer, List<MoveResponse>> findByDexnumberCache = new HashMap<>();
 
     public List<WeatherResponse> findWeathers() {
         return Arrays.stream(Weather.values())
                 .map(WeatherResponse::from)
                 .toList();
-    }
-
-    public List<MoveResponse> findMovesByPokemon(String pokemonId) {
-        List<String> allMoveIds = new ArrayList<>();
-        InMemoryPokemon inMemoryPokemon = inMemoryPokemonRepository.findById(pokemonId)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-
-        List<String> moves = new ArrayList<>();
-        for (int i = 0; i < inMemoryPokemon.moves().size(); i++) {
-            if (i % 2 == 0) {
-                moves.add(inMemoryPokemon.moves().get(i));
-            }
-        }
-        allMoveIds.addAll(moves);
-        allMoveIds.addAll(inMemoryPokemon.technicalMachineMoves());
-        allMoveIds.addAll(inMemoryPokemon.eggMoves());
-        List<BattleMove> battleMoves = allMoveIds.stream()
-                .distinct()
-                .map(this::findMoveById)
-                .toList();
-
-        return battleMoves.stream()
-                .map(MoveResponse::from)
-                .toList();
-    }
-
-    public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
-        if (findByDexnumberCache.isEmpty()) {
-            initFindByDexnumberCache();
-        }
-
-        return findByDexnumberCache.get(pokedexNumber);
-    }
-
-    private void initFindByDexnumberCache() {
-        for (InMemoryPokemon inMemoryPokemon : inMemoryPokemonRepository.findAll().values()) {
-            int pokemonId = Integer.parseInt(inMemoryPokemon.speciesId());
-            if (!findByDexnumberCache.containsKey(pokemonId)) {
-                findByDexnumberCache.put(pokemonId, makeMoveResponse(inMemoryPokemon));
-            }
-        }
-    }
-
-    private List<MoveResponse> makeMoveResponse(InMemoryPokemon inMemoryPokemon) {
-        List<String> allMoveIds = new ArrayList<>();
-        List<String> moves = new ArrayList<>();
-        for (int i = 0; i < inMemoryPokemon.moves().size(); i++) {
-            if (i % 2 == 0) {
-                moves.add(inMemoryPokemon.moves().get(i));
-            }
-        }
-        allMoveIds.addAll(moves);
-        allMoveIds.addAll(inMemoryPokemon.technicalMachineMoves());
-        allMoveIds.addAll(inMemoryPokemon.eggMoves());
-        List<BattleMove> battleMoves = allMoveIds.stream()
-                .distinct()
-                .map(this::findMoveById)
-                .toList();
-
-        return battleMoves.stream()
-                .map(MoveResponse::from)
-                .toList();
-    }
-
-    private BattleMove findMoveById(String id) {
-        return battleMoveRepository.findById(id)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 
     public BattleResultResponse calculateBattleResult(
@@ -107,41 +39,46 @@ public class BattleService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         InMemoryPokemon rivalInMemoryPokemon = inMemoryPokemonRepository.findById(rivalPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        BattleMove move = battleMoveRepository.findById(myMoveId)
+        Move move = moveRepository.findById(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
-        Type moveType = move.type();
+        Type moveType = Type.findByEngName(move.getType())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
 
         double finalAccuracy = calculateAccuracy(move, weather);
         double totalMultiplier = getTotalMultiplier(move, weather, rivalInMemoryPokemon, myInMemoryPokemon);
 
+        MoveCategory moveCategory = MoveCategory.findByEngName(move.getMoveCategory())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
+
         return new BattleResultResponse(
-                move.power(),
+                move.getPower(),
                 totalMultiplier,
                 finalAccuracy,
-                move.name(),
-                move.effect(),
+                move.getKoName(),
+                move.getEffect(),
                 moveType.getKoName(),
-                move.category().getName()
+                moveCategory.getName()
         );
     }
 
-    private double calculateAccuracy(BattleMove move, Weather weather) {
+    private double calculateAccuracy(Move move, Weather weather) {
         if (weather == Weather.FOG) {
-            return (double) move.accuracy() * 0.9;
+            return (double) move.getAccuracy() * 0.9;
         }
 
-        return (double) move.accuracy();
+        return (double) move.getAccuracy();
     }
 
     private double getTotalMultiplier(
-            BattleMove move,
+            Move move,
             Weather weather,
             InMemoryPokemon rivalInMemoryPokemon,
             InMemoryPokemon myInMemoryPokemon) {
-        if (!move.isAttackMove()) {
+        if (!isAttackMove(move)) {
             return 1;
         }
-        Type moveType = move.type();
+        Type moveType = Type.findByEngName(move.getType())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
         List<Type> types = new ArrayList<>();
         if (!rivalInMemoryPokemon.firstType().isEmpty()) {
@@ -157,6 +94,10 @@ public class BattleService {
         double stringWindMultiplier = getStringWindMultiplier(moveType, types, weather);
 
         return weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
+    }
+
+    private boolean isAttackMove(Move move) {
+        return !move.getMoveCategory().equals("status");
     }
 
     private double getWeatherMultiplier(Type moveType, Weather weather) {

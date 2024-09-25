@@ -4,11 +4,11 @@ package com.pokerogue.helper.pokemon.service;
 import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.ability.data.Ability;
 import com.pokerogue.helper.ability.repository.InMemoryAbilityRepository;
-import com.pokerogue.helper.battle.BattleMoveRepository;
 import com.pokerogue.helper.biome.data.Biome;
-import com.pokerogue.helper.biome.repository.InMemoryBiomeRepository;
+import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.EvolutionChain;
 import com.pokerogue.helper.pokemon.data.EvolutionItem;
@@ -16,10 +16,10 @@ import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
 import com.pokerogue.helper.pokemon.data.Type;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponse;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponses;
-import com.pokerogue.helper.pokemon.dto.MoveResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonBiomeResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonDetailResponse;
+import com.pokerogue.helper.pokemon.dto.PokemonMoveResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
@@ -42,9 +42,9 @@ public class PokemonService {
 
     private final S3Service s3Service;
     private final InMemoryPokemonRepository inMemoryPokemonRepository;
-    private final BattleMoveRepository battleMoveRepository;
+    private final MoveRepository moveRepository;
     private final EvolutionRepository evolutionRepository;
-    private final InMemoryBiomeRepository inMemoryBiomeRepository;
+    private final BiomeRepository biomeRepository;
     private final InMemoryAbilityRepository inMemoryAbilityRepository;
 
     private List<PokemonResponse> findAllCache = List.of();
@@ -93,8 +93,8 @@ public class PokemonService {
         List<PokemonTypeResponse> pokemonTypeResponses = createTypeResponse(inMemoryPokemon);
         List<PokemonAbilityResponse> pokemonAbilityResponses = createAbilityResponse(inMemoryPokemon);
         EvolutionResponses evolutionResponses = createEvolutionResponse(inMemoryPokemon);
-        List<MoveResponse> moveResponse = createMoveResponse(inMemoryPokemon.moves());
-        List<MoveResponse> eggMoveResponse = createEggMoveResponse(inMemoryPokemon.eggMoves());
+        List<PokemonMoveResponse> pokemonMoveResponse = createMoveResponse(inMemoryPokemon.moves());
+        List<PokemonMoveResponse> eggPokemonMoveResponse = createEggMoveResponse(inMemoryPokemon.eggMoves());
         List<PokemonBiomeResponse> biomeResponse = createBiomeResponse(inMemoryPokemon.biomes());
 
         return new PokemonDetailResponse(
@@ -118,8 +118,8 @@ public class PokemonService {
                 inMemoryPokemon.weight(),
                 inMemoryPokemon.height(),
                 evolutionResponses,
-                moveResponse,
-                eggMoveResponse,
+                pokemonMoveResponse,
+                eggPokemonMoveResponse,
                 biomeResponse
         );
     }
@@ -244,7 +244,7 @@ public class PokemonService {
                             if (id.isEmpty()) {
                                 return new PokemonBiomeResponse("", "", "");
                             }
-                            Biome biome = inMemoryBiomeRepository.findById(id).orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
+                            Biome biome = biomeRepository.findById(id).orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
                             return new PokemonBiomeResponse(
                                     id,
                                     biome.getName(),
@@ -255,26 +255,26 @@ public class PokemonService {
                 .toList();
     }
 
-    private List<MoveResponse> createEggMoveResponse(List<String> moves) {
+    private List<PokemonMoveResponse> createEggMoveResponse(List<String> moves) {
         return moves.stream()
-                .map(r -> battleMoveRepository.findById(r).orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)))
-                .map(move -> MoveResponse.from(move, 1,
-                        s3Service.getPokerogueTypeImageFromS3(battleMoveRepository.findById(move.id())
+                .map(r -> moveRepository.findById(r).orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)))
+                .map(move -> PokemonMoveResponse.from(move, 1,
+                        s3Service.getPokerogueTypeImageFromS3(moveRepository.findById(move.getId())
                                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND))
-                                .type().getName())))
+                                .getType())))
                 .toList();
     }
 
-    private List<MoveResponse> createMoveResponse(List<String> moves) {
+    private List<PokemonMoveResponse> createMoveResponse(List<String> moves) {
         return IntStream.iterate(0, index -> index + 2)
                 .limit(moves.size() / 2)
-                .mapToObj(index -> MoveResponse.from(
-                        battleMoveRepository.findById(moves.get(index)).orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)),
+                .mapToObj(index -> PokemonMoveResponse.from(
+                        moveRepository.findById(moves.get(index)).orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)),
                         Integer.parseInt(moves.get(index + 1)),
                         s3Service.getPokerogueTypeImageFromS3(
-                                battleMoveRepository.findById(moves.get(index))
+                                moveRepository.findById(moves.get(index))
                                         .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND))
-                                        .type().getName())
+                                        .getType())
                 ))
                 .toList();
     }
