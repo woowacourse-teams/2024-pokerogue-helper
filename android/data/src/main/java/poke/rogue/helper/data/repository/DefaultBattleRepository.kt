@@ -16,7 +16,7 @@ class DefaultBattleRepository(
     private val remoteBattleDataSource: RemoteBattleDataSource,
     private val pokemonRepository: DexRepository,
 ) : BattleRepository {
-    private val cachedSkills: HashMap<Long, List<BattleSkill>> = hashMapOf()
+    private val cachedSkills: MutableMap<Long, List<BattleSkill>> = hashMapOf()
 
     override suspend fun weathers(): List<Weather> = remoteBattleDataSource.weathers()
 
@@ -40,7 +40,8 @@ class DefaultBattleRepository(
             opponentPokemonId = opponentPokemonId,
         )
 
-    override suspend fun savePokemon(pokemonId: String) = localBattleDataSource.savePokemon(pokemonId)
+    override suspend fun savePokemon(pokemonId: String) =
+        localBattleDataSource.savePokemon(pokemonId)
 
     override suspend fun savePokemonWithSkill(
         pokemonId: String,
@@ -57,6 +58,17 @@ class DefaultBattleRepository(
                 val skill = skill(pokemon.dexNumber, pokemonWithSkill.skillId)
                 PokemonWithSkill(pokemon, skill)
             }
+        }
+
+    override suspend fun saveWeather(weatherId: String) =
+        localBattleDataSource.saveWeather(weatherId)
+
+    override fun selectedWeatherStream(): Flow<Weather?> =
+        localBattleDataSource.weatherId().map {
+            if (it == null) {
+                return@map null
+            }
+            weathers().find { weather -> weather.id == it }
         }
 
     private suspend fun skill(
