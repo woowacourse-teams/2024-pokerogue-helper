@@ -10,5 +10,5 @@ public class FormChange {
     private final String from;
     private final String previousForm;
     private final String currentForm;
-    private final String item; // Todo: enum
+    private final EvolutionItem item;
 }
