@@ -1,16 +1,26 @@
 package com.pokerogue.helper.biome.data;
 
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Trainer {
 
-    private final String id; // Todo: 지우기
-    private final String name;
-    private final String image; // Todo: 지우기
-    private final List<String> types; // Todo: List<Type>
-    private final List<String> pokemonIds;
+    @Field("name")
+    private String name;
+
+    @Field("koName")
+    private String koName;
+
+    @Field("types")
+    private List<String> types; // Todo: List<Type>
+
+    @Field("pokemonIds")
+    private List<String> pokemonIds;
 }

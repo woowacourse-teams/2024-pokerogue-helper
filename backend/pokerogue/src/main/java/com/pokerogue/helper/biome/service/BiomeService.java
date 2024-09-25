@@ -93,6 +93,7 @@ public class BiomeService {
         return biome.getTrainers().stream()
                 .map(trainer -> TrainerPokemonResponse.from(
                         trainer,
+                        s3Service.getTrainerImageFromS3(trainer.getName()),
                         getTypesResponses(trainer.getTypes()),
                         getBiomePokemons(trainer.getPokemonIds()))
                 )
