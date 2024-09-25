@@ -1,8 +1,5 @@
 package com.pokerogue.helper.biome.data;
 
-import com.pokerogue.helper.global.exception.ErrorMessage;
-import com.pokerogue.helper.global.exception.GlobalCustomException;
-import java.util.Arrays;
 import lombok.Getter;
 
 @Getter
@@ -25,26 +22,11 @@ public enum Tier {
         this.name = name;
     }
 
-    public static Tier getTierByName(String name) {
-        return Arrays.stream(values())
-                .filter(tier -> tier.name.equals(name))
-                .findFirst()
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TIER_NOT_FOUND));
-    }
-
     public static boolean isWild(String tier) {
         return !tier.contains("보스");
     }
 
     public static boolean isBoss(String tier) {
         return tier.contains("보스");
-    }
-
-    public boolean isWildPokemon() {
-        return !this.name.contains("보스");
-    }
-
-    public boolean isBossPokemon() {
-        return this.name.contains("보스");
     }
 }

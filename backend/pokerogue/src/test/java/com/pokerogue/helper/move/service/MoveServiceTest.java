@@ -24,7 +24,8 @@ class MoveServiceTest extends ServiceTest {
     }
 
     @Test
-    void name() {
+    @DisplayName("단일 기술 정보를 불러온다")
+    void findMove() {
         MoveResponse moveResponse = moveService.findMove("earth_power");
 
         assertAll(

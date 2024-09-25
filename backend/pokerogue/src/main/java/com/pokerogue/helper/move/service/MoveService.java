@@ -42,13 +42,7 @@ public class MoveService {
     }
 
     private List<MoveResponse> makeMoveResponse(Pokemon pokemon) {
-        List<String> allMoveIds = new ArrayList<>();
-        List<String> levelMoves = pokemon.getLevelMoves().stream()
-                .map(LevelMove::getMoveId)
-                .toList();
-        allMoveIds.addAll(levelMoves);
-        allMoveIds.addAll(pokemon.getTechnicalMachineMoveIds());
-        allMoveIds.addAll(pokemon.getEggMoveIds());
+        List<String> allMoveIds = getAllMoveIds(pokemon);
         List<Move> moves = allMoveIds.stream()
                 .distinct()
                 .map(this::findMoveById)
@@ -57,6 +51,17 @@ public class MoveService {
         return moves.stream()
                 .map(MoveResponse::from)
                 .toList();
+    }
+
+    private static List<String> getAllMoveIds(Pokemon pokemon) {
+        List<String> allMoveIds = new ArrayList<>();
+        List<String> levelMoves = pokemon.getLevelMoves().stream()
+                .map(LevelMove::getMoveId)
+                .toList();
+        allMoveIds.addAll(levelMoves);
+        allMoveIds.addAll(pokemon.getTechnicalMachineMoveIds());
+        allMoveIds.addAll(pokemon.getEggMoveIds());
+        return allMoveIds;
     }
 
     private Move findMoveById(String id) {

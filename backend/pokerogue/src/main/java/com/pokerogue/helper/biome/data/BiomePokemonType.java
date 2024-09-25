@@ -37,21 +37,14 @@ public enum BiomePokemonType {
         this.id = id;
     }
 
-    public static BiomePokemonType getBiomePokemonTypeByName(String name) {
-        return Arrays.stream(values())
-                .filter(biomePokemonType -> biomePokemonType.name.equals(name))
-                .findFirst()
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+    public static String getTypeNameById(String id) {
+        return getBiomePokemonTypeById(id).name;
     }
 
-    public static BiomePokemonType getBiomePokemonTypeById(String id) {
+    private static BiomePokemonType getBiomePokemonTypeById(String id) {
         return Arrays.stream(values())
                 .filter(biomePokemonType -> biomePokemonType.id.equals(id))
                 .findFirst()
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-    }
-
-    public static String getTypeNameById(String id) {
-        return getBiomePokemonTypeById(id).name;
     }
 }

@@ -17,4 +17,12 @@ public class NativePokemon {
 
     @Field("pokemonIds")
     private List<String> pokemonIds;
+
+    public boolean isWild() {
+        return !tier.contains("보스");
+    }
+
+    public boolean isBoss() {
+        return tier.contains("보스");
+    }
 }
