@@ -12,39 +12,36 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class TypeMultiplier extends BattleMultiplier {
+public class TypeMultiplierProvider {
 
     private static final double STRONG_TYPE_MATCHING_RESULT = 2;
 
     private final TypeMatchingRepository typeMatchingRepository;
 
-    public double getByTypeMatching(Type attackMoveType, List<Type> rivalPokemonTypes) {
+    public List<BattleMultiplier> getAllByTypeMatchings(Type attackMoveType, List<Type> rivalPokemonTypes) {
         return rivalPokemonTypes.stream()
                 .map(toType -> findTypeMatchingByFromAndTo(attackMoveType, toType))
                 .map(TypeMatching::getResult)
-                .reduce(DEFAULT_MULTIPLIER, this::multiply);
+                .map(BattleMultiplier::valueOf)
+                .toList();
     }
 
-    private double multiply(double a, double b) {
-        return a * b;
-    }
-
-    public double getBySameTypeAttackBonus(Type moveType, Pokemon rivalPokemon) {
+    public BattleMultiplier getBySameTypeAttackBonus(Type moveType, Pokemon rivalPokemon) {
         if (rivalPokemon.hasSameType(moveType)) {
-            return STRONG_MULTIPLIER;
+            return BattleMultiplier.STRONG_MULTIPLIER;
         }
 
-        return DEFAULT_MULTIPLIER;
+        return BattleMultiplier.DEFAULT_MULTIPLIER;
     }
 
-    public double getByStrongWind(Type moveType, List<Type> rivalPokemonTypes) {
+    public BattleMultiplier getByStrongWind(Type moveType, List<Type> rivalPokemonTypes) {
         TypeMatching typeMatching = findTypeMatchingByFromAndTo(moveType, Type.FLYING);
         if (rivalPokemonTypes.contains(Type.FLYING)
                 && typeMatching.getResult() == STRONG_TYPE_MATCHING_RESULT) {
-            return WEAK_MULTIPLIER;
+            return BattleMultiplier.WEAK_MULTIPLIER;
         }
 
-        return DEFAULT_MULTIPLIER;
+        return BattleMultiplier.DEFAULT_MULTIPLIER;
     }
 
     private TypeMatching findTypeMatchingByFromAndTo(Type from, Type to) {

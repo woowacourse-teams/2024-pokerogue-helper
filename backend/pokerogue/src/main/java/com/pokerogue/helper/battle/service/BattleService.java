@@ -2,7 +2,6 @@ package com.pokerogue.helper.battle.service;
 
 import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.battle.dto.BattleResultResponse;
-import com.pokerogue.helper.battle.dto.WeatherResponse;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
@@ -10,7 +9,6 @@ import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
-import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,18 +18,10 @@ import org.springframework.stereotype.Service;
 public class BattleService {
 
     private static final double FOG_ACCURACY_EFFECT = 0.9;
-    private static final double DEFAULT_MULTIPLIER = 1;
 
     private final MoveRepository moveRepository;
     private final PokemonRepository pokemonRepository;
-    private final WeatherMultiplier weatherMultiplier;
-    private final TypeMultiplier typeMultiplier;
-
-    public List<WeatherResponse> findWeathers() {
-        return Arrays.stream(Weather.values())
-                .map(WeatherResponse::from)
-                .toList();
-    }
+    private final TypeMultiplierProvider typeMultiplierProvider;
 
     public BattleResultResponse calculateBattleResult(
             String weatherId,
@@ -76,22 +66,28 @@ public class BattleService {
             Pokemon rivalPokemon,
             Pokemon myPokemon) {
         if (!move.isAttackMove()) {
-            return 1;
+            return BattleMultiplier.DEFAULT_MULTIPLIER.getValue();
         }
+
         Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
         List<Type> types = rivalPokemon.getTypes()
                 .stream() // Todo
                 .map(String::toUpperCase)
                 .map(Type::valueOf)
                 .toList();
-        double weatherMultiplierByAttackMoveType = weatherMultiplier.getByAttackMoveType(weather, moveType);
-        double typeMatchingMultiplier = typeMultiplier.getByTypeMatching(moveType, types);
-        double sameTypeBonusMultiplier = typeMultiplier.getBySameTypeAttackBonus(moveType, myPokemon);
-        double totalMultiplier = weatherMultiplierByAttackMoveType * typeMatchingMultiplier * sameTypeBonusMultiplier;
+        BattleMultiplier weatherMultiplier = weather.getBattleMultiplierByAttackMoveType(moveType);
+        BattleMultiplier sameTypeBonusMultiplier = typeMultiplierProvider.getBySameTypeAttackBonus(moveType, myPokemon);
+        List<BattleMultiplier> typeMatchingMultipliers = typeMultiplierProvider.getAllByTypeMatchings(moveType, types);
+
+        BattleMultiplier typeMatchingMultiplier = BattleMultiplier.multiply(
+                typeMatchingMultipliers.toArray(new BattleMultiplier[0]));
+        BattleMultiplier totalMultiplier = BattleMultiplier.multiply(weatherMultiplier, sameTypeBonusMultiplier,
+                typeMatchingMultiplier);
         if (weather == Weather.STRONG_WINDS) {
-            totalMultiplier *= typeMultiplier.getByStrongWind(moveType, types);
+            BattleMultiplier strongWindMultiplier = typeMultiplierProvider.getByStrongWind(moveType, types);
+            totalMultiplier.multiply(strongWindMultiplier);
         }
 
-        return totalMultiplier;
+        return totalMultiplier.getValue();
     }
 }

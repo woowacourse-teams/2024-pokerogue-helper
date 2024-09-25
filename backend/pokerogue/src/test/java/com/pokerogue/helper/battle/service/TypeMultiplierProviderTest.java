@@ -11,10 +11,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class TypeMultiplierTest extends ServiceTest {
+class TypeMultiplierProviderTest extends ServiceTest {
 
     @Autowired
-    private TypeMultiplier typeMultiplier;
+    private TypeMultiplierProvider typeMultiplierProvider;
 
     @Autowired
     private PokemonRepository pokemonRepository;
@@ -30,9 +30,10 @@ class TypeMultiplierTest extends ServiceTest {
                 .toList();
         Type attackMoveType = Type.FIRE;
 
-        double result = typeMultiplier.getByTypeMatching(attackMoveType, rivalPokemonTypes);
+        List<BattleMultiplier> multipliers = typeMultiplierProvider.getAllByTypeMatchings(attackMoveType,
+                rivalPokemonTypes);
 
-        assertThat(result).isEqualTo(2);
+        assertThat(multipliers).contains(BattleMultiplier.valueOf(2));
     }
 
     @Test
@@ -41,9 +42,9 @@ class TypeMultiplierTest extends ServiceTest {
         Pokemon rivalPokemon = pokemonRepository.findById("squirtle").get();
         Type attackMoveType = Type.WATER;
 
-        double result = typeMultiplier.getBySameTypeAttackBonus(attackMoveType, rivalPokemon);
+        BattleMultiplier multiplier = typeMultiplierProvider.getBySameTypeAttackBonus(attackMoveType, rivalPokemon);
 
-        assertThat(result).isEqualTo(1.5);
+        assertThat(multiplier).isEqualTo(BattleMultiplier.STRONG_MULTIPLIER);
     }
 
     @Test
@@ -57,8 +58,8 @@ class TypeMultiplierTest extends ServiceTest {
                 .toList();
         Type attackMoveType = Type.ELECTRIC;
 
-        double result = typeMultiplier.getByStrongWind(attackMoveType, rivalPokemonTypes);
+        BattleMultiplier multiplier = typeMultiplierProvider.getByStrongWind(attackMoveType, rivalPokemonTypes);
 
-        assertThat(result).isEqualTo(0.5);
+        assertThat(multiplier).isEqualTo(BattleMultiplier.WEAK_MULTIPLIER);
     }
 }
