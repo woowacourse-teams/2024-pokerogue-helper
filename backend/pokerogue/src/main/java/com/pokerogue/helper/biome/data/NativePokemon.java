@@ -1,8 +1,10 @@
 package com.pokerogue.helper.biome.data;
 
 import java.util.List;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public class NativePokemon {
 

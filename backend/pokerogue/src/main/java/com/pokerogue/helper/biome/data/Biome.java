@@ -53,9 +53,7 @@ public class Biome {
 
     public List<String> getTrainerTypes() {
         Set<String> trainerTypes = new HashSet<>();
-        trainers.stream()
-                .filter(trainer -> !trainer.getName().equals("없음"))
-                .forEach(trainer -> trainerTypes.addAll(trainer.getTypes()));
+        trainers.forEach(trainer -> trainerTypes.addAll(trainer.getTypes()));
 
         return trainerTypes.stream()
                 .toList();

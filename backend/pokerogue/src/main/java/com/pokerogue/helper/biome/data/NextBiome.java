@@ -8,6 +8,10 @@ public class NextBiome {
     private String name;
     private int percentage;
 
+    public NextBiome() {
+
+    }
+
     public NextBiome(String name, String percentage) {
         this.name = name;
         this.percentage = Integer.parseInt(percentage); // Todo

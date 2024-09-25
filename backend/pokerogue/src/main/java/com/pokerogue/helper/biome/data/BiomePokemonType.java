@@ -50,4 +50,8 @@ public enum BiomePokemonType {
                 .findFirst()
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
     }
+
+    public static String getTypeNameById(String id) {
+        return getBiomePokemonTypeById(id).name;
+    }
 }
