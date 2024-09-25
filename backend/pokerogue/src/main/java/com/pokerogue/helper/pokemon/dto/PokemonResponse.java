@@ -1,6 +1,6 @@
 package com.pokerogue.helper.pokemon.dto;
 
-import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
+import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
 
@@ -21,24 +21,25 @@ public record PokemonResponse(
         Integer specialAttack,
         Integer specialDefense
 ) {
-    public static PokemonResponse from(InMemoryPokemon inMemoryPokemon, String image, String backImage, List<PokemonTypeResponse> pokemonTypeResponse) {
+    public static PokemonResponse from(Pokemon pokemon, String image, String backImage,
+                                       List<PokemonTypeResponse> pokemonTypeResponse) {
 
         return new PokemonResponse(
-                inMemoryPokemon.id(),
-                Long.parseLong(inMemoryPokemon.speciesId()),
-                inMemoryPokemon.koName(),
-                inMemoryPokemon.formName(),
+                pokemon.getId(),
+                (long) pokemon.getPokedexNumber(), //todo: DTO를 바꿀 것인지?
+                pokemon.getKoName(),
+                pokemon.getFormName(),
                 image,
                 backImage,
                 pokemonTypeResponse,
-                inMemoryPokemon.generation(),
-                inMemoryPokemon.baseTotal(),
-                inMemoryPokemon.hp(),
-                inMemoryPokemon.attack(),
-                inMemoryPokemon.defense(),
-                inMemoryPokemon.specialAttack(),
-                inMemoryPokemon.specialDefense(),
-                inMemoryPokemon.speed()
+                pokemon.getGeneration(),
+                pokemon.getBaseTotal(),
+                pokemon.getHp(),
+                pokemon.getAttack(),
+                pokemon.getDefense(),
+                pokemon.getSpecialAttack(),
+                pokemon.getSpecialDefense(),
+                pokemon.getSpeed()
         );
     }
 }
