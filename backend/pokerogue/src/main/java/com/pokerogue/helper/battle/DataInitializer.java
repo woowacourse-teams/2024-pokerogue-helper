@@ -2,7 +2,6 @@ package com.pokerogue.helper.battle;
 
 import com.pokerogue.helper.battle.data.BattleMove;
 import com.pokerogue.helper.battle.data.MoveCategory;
-import com.pokerogue.helper.battle.data.InMemoryTypeMatching;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.type.data.Type;
@@ -29,7 +28,6 @@ public class DataInitializer implements ApplicationRunner {
     private static final String LIST_DELIMITER = ",";
 
     private final BattleMoveRepository battleMoveRepository;
-    private final InMemoryTypeMatchingRepository inMemoryTypeMatchingRepository;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -37,15 +35,12 @@ public class DataInitializer implements ApplicationRunner {
             BattleMove battleMove = createMove(fields);
             battleMoveRepository.save(battleMove);
         });
-        saveData("data/battle/type-matching.txt", fields -> {
-            InMemoryTypeMatching inMemoryTypeMatching = createTypeMatching(fields);
-            inMemoryTypeMatchingRepository.save(inMemoryTypeMatching);
-        });
     }
 
     private void saveData(String path, Consumer<List<String>> createAndSaveOperation) {
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
-             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (InputStream inputStream = getClass().getClassLoader()
+                .getResourceAsStream(path); BufferedReader br = new BufferedReader(
+                new InputStreamReader(inputStream))) {
             int lineCount = 0;
             String line;
             while ((line = br.readLine()) != null) {
@@ -62,10 +57,7 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private List<String> splitFields(String line) {
-        return Arrays.stream(line.split(FIELD_DELIMITER))
-                .map(String::trim)
-                .map(this::regularizeEmptyField)
-                .toList();
+        return Arrays.stream(line.split(FIELD_DELIMITER)).map(String::trim).map(this::regularizeEmptyField).toList();
     }
 
     private String regularizeEmptyField(String field) {
@@ -81,33 +73,10 @@ public class DataInitializer implements ApplicationRunner {
         MoveCategory moveCategory = MoveCategory.findByEngName(fields.get(6).toLowerCase())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
 
-        return new BattleMove(
-                fields.get(0),
-                fields.get(1),
-                fields.get(2),
-                fields.get(3),
-                moveType,
-                fields.get(5),
-                moveCategory,
-                fields.get(7),
-                convertToInteger(fields.get(8)),
-                convertToInteger(fields.get(9)),
-                convertToInteger(fields.get(10)),
-                convertToInteger(fields.get(11)),
-                convertToInteger(fields.get(12)),
-                convertToInteger(fields.get(13)),
-                fields.get(14)
-        );
-    }
-
-    private InMemoryTypeMatching createTypeMatching(List<String> fields) {
-        Type fromType = Type.findByEngName(fields.get(0))
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-        Type toType = Type.findByEngName(fields.get(1))
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-        double result = convertToDouble(fields.get(2));
-
-        return new InMemoryTypeMatching(fromType, toType, result);
+        return new BattleMove(fields.get(0), fields.get(1), fields.get(2), fields.get(3), moveType, fields.get(5),
+                moveCategory, fields.get(7), convertToInteger(fields.get(8)), convertToInteger(fields.get(9)),
+                convertToInteger(fields.get(10)), convertToInteger(fields.get(11)), convertToInteger(fields.get(12)),
+                convertToInteger(fields.get(13)), fields.get(14));
     }
 
     private double convertToDouble(String data) {

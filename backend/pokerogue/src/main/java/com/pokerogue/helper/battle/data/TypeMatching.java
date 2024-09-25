@@ -1,25 +1,28 @@
 package com.pokerogue.helper.battle.data;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Document(collection = "typeMatching")
 public class TypeMatching {
 
     @Id
-    private final String id;
+    private String id;
 
     @Field("from")
-    private final String from; // Todo: enum
+    private String from; // Todo: enum
 
     @Field("to")
-    private final String to; // Todo: enum
+    private String to; // Todo: enum
 
     @Field("result")
-    private final double result;
+    private double result;
 }

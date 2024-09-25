@@ -1,13 +1,13 @@
 package com.pokerogue.helper.battle.service;
 
-import com.pokerogue.helper.battle.data.BattleMove;
 import com.pokerogue.helper.battle.BattleMoveRepository;
+import com.pokerogue.helper.battle.data.BattleMove;
+import com.pokerogue.helper.battle.data.TypeMatching;
+import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.battle.dto.BattleResultResponse;
 import com.pokerogue.helper.battle.dto.MoveResponse;
-import com.pokerogue.helper.battle.InMemoryTypeMatchingRepository;
-import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.battle.dto.WeatherResponse;
-import com.pokerogue.helper.battle.data.InMemoryTypeMatching;
+import com.pokerogue.helper.battle.repository.TypeMatchingRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
@@ -27,7 +27,7 @@ public class BattleService {
 
     private final BattleMoveRepository battleMoveRepository;
     private final InMemoryPokemonRepository inMemoryPokemonRepository;
-    private final InMemoryTypeMatchingRepository inMemoryTypeMatchingRepository;
+    private final TypeMatchingRepository typeMatchingRepository;
 
     private Map<Integer, List<MoveResponse>> findByDexnumberCache = new HashMap<>();
 
@@ -196,9 +196,9 @@ public class BattleService {
 
     private double getTypeMatchingMultiplier(Type moveType, List<Type> rivalPokemonTypes) {
         return rivalPokemonTypes.stream()
-                .map(toType -> inMemoryTypeMatchingRepository.findByFromTypeAndToType(moveType, toType)
+                .map(toType -> typeMatchingRepository.findByFromAndTo(moveType.getName(), toType.getName())
                         .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR)))
-                .map(InMemoryTypeMatching::result)
+                .map(TypeMatching::getResult)
                 .reduce(1d, (a, b) -> a * b);
     }
 
@@ -211,10 +211,11 @@ public class BattleService {
     }
 
     private double getStringWindMultiplier(Type moveType, List<Type> rivalPokemonTypes, Weather weather) {
-        InMemoryTypeMatching inMemoryTypeMatching = inMemoryTypeMatchingRepository.findByFromTypeAndToType(moveType, Type.FLYING)
+        TypeMatching typeMatching = typeMatchingRepository.findByFromAndTo(moveType.getName(), Type.FLYING.getName())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
 
-        if (weather == Weather.STRONG_WINDS && rivalPokemonTypes.contains(Type.FLYING) && inMemoryTypeMatching.result() == 2) {
+        if (weather == Weather.STRONG_WINDS && rivalPokemonTypes.contains(Type.FLYING)
+                && typeMatching.getResult() == 2) {
             return 0.5;
         }
 

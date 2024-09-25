@@ -13,16 +13,13 @@ class DataInitializerTest {
     @DisplayName("날씨, 기술 데이터를 세팅한다.")
     void setWeathersData() {
         BattleMoveRepository battleMoveRepository = new BattleMoveRepository();
-        InMemoryTypeMatchingRepository inMemoryTypeMatchingRepository = new InMemoryTypeMatchingRepository();
         DataInitializer dataInitializer = new DataInitializer(
-                battleMoveRepository,
-                inMemoryTypeMatchingRepository
+                battleMoveRepository
         );
         dataInitializer.run(new DefaultApplicationArguments());
 
         assertAll(() -> {
             assertThat(battleMoveRepository.findAll()).hasSize(920);
-            assertThat(inMemoryTypeMatchingRepository.findAll()).hasSize(361);
         });
     }
 }
