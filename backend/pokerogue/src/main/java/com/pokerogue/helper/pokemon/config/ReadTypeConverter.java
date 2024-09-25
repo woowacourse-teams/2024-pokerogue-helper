@@ -1,7 +1,8 @@
 package com.pokerogue.helper.pokemon.config;
 
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.type.data.Type;
-import java.util.Optional;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
 
@@ -10,7 +11,7 @@ public class ReadTypeConverter implements Converter<String, Type> {
 
     @Override
     public Type convert(String name) {
-        Optional<Type> optionalGender = Type.findByEngName(name);
-        return optionalGender.orElseThrow();
+        return Type.findByEngName(name)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
     }
 }

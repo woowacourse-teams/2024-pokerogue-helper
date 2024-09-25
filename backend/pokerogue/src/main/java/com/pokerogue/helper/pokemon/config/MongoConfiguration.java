@@ -29,7 +29,6 @@ public class MongoConfiguration {
             adapter.registerConverter(new ReadTypeConverter());
             adapter.registerConverter(new ReadItemConverter());
         });
-
     }
 
 }
