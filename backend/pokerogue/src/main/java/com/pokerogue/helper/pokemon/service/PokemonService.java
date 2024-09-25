@@ -4,15 +4,13 @@ package com.pokerogue.helper.pokemon.service;
 import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.ability.data.Ability;
 import com.pokerogue.helper.ability.repository.InMemoryAbilityRepository;
+import com.pokerogue.helper.battle.BattleMove;
 import com.pokerogue.helper.battle.BattleMoveRepository;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.repository.InMemoryBiomeRepository;
-import com.pokerogue.helper.global.exception.ErrorMessage;
-import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Evolution;
-import com.pokerogue.helper.pokemon.data.EvolutionChain;
-import com.pokerogue.helper.pokemon.data.EvolutionItem;
-import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
+import com.pokerogue.helper.pokemon.data.LevelMove;
+import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponse;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponses;
 import com.pokerogue.helper.pokemon.dto.MoveResponse;
@@ -20,9 +18,7 @@ import com.pokerogue.helper.pokemon.dto.PokemonAbilityResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonBiomeResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonDetailResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
-import com.pokerogue.helper.pokemon.repository.EvolutionRepository;
-import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
-import com.pokerogue.helper.type.data.Type;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -33,18 +29,16 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class PokemonService {
-
     private final S3Service s3Service;
-    private final InMemoryPokemonRepository inMemoryPokemonRepository;
+
+    private final PokemonRepository pokemonRepository;
     private final BattleMoveRepository battleMoveRepository;
-    private final EvolutionRepository evolutionRepository;
     private final InMemoryBiomeRepository inMemoryBiomeRepository;
     private final InMemoryAbilityRepository inMemoryAbilityRepository;
 
@@ -59,12 +53,24 @@ public class PokemonService {
     }
 
     private void initFindAllCache() {
-        findAllCache = inMemoryPokemonRepository.findAll()
-                .values()
+        findAllCache = pokemonRepository.findAll()
                 .stream()
-                .map(pokemon -> PokemonResponse.from(pokemon, s3Service.getPokemonImageFromS3(pokemon.id()),
-                        s3Service.getPokemonBackImageFromS3(pokemon.id()), createTypeResponse(pokemon)))
+                .map(pokemon -> PokemonResponse.from(
+                        pokemon,
+                        s3Service.getPokemonImageFromS3(pokemon.getId()),
+                        s3Service.getPokemonBackImageFromS3(pokemon.getId()),
+                        createTypeResponse(pokemon)))
                 .sorted(Comparator.comparingLong(PokemonResponse::pokedexNumber))
+                .toList();
+    }
+
+    private List<PokemonTypeResponse> createTypeResponse(Pokemon pokemon) {
+        return pokemon.getTypes()
+                .stream()
+                .map(type -> new PokemonTypeResponse(
+                        type.getKoName(),
+                        type.getImage()
+                ))
                 .toList();
     }
 
@@ -72,48 +78,49 @@ public class PokemonService {
         if (findByIdCache.isEmpty()) {
             initFindByIdCache();
         }
+
         return findByIdCache.get(id);
     }
 
     private void initFindByIdCache() {
-        List<PokemonDetailResponse> pokemonDetailRespons = inMemoryPokemonRepository.findAll()
-                .values()
+        List<PokemonDetailResponse> pokemonDetailResponse = pokemonRepository.findAll()
                 .stream()
-                .map(this::toPokemon2DetailResponse)
+                .map(this::toPokemonDetailResponse)
                 .toList();
 
-        findByIdCache = pokemonDetailRespons.stream()
+        findByIdCache = pokemonDetailResponse.stream()
                 .collect(Collectors.toMap(PokemonDetailResponse::id, Function.identity()));
+
     }
 
-    private PokemonDetailResponse toPokemon2DetailResponse(InMemoryPokemon inMemoryPokemon) {
-        List<PokemonTypeResponse> pokemonTypeResponses = createTypeResponse(inMemoryPokemon);
-        List<PokemonAbilityResponse> pokemonAbilityResponses = createAbilityResponse(inMemoryPokemon);
-        EvolutionResponses evolutionResponses = createEvolutionResponse(inMemoryPokemon);
-        List<MoveResponse> moveResponse = createMoveResponse(inMemoryPokemon.moves());
-        List<MoveResponse> eggMoveResponse = createEggMoveResponse(inMemoryPokemon.eggMoves());
-        List<PokemonBiomeResponse> biomeResponse = createBiomeResponse(inMemoryPokemon.biomes());
+    private PokemonDetailResponse toPokemonDetailResponse(Pokemon pokemon) {
+        List<PokemonTypeResponse> pokemonTypeResponses = createTypeResponse(pokemon);
+        List<PokemonAbilityResponse> pokemonAbilityResponses = createAbilityResponse(pokemon);
+        EvolutionResponses evolutionResponses = createEvolutionResponse(pokemon);
+        List<MoveResponse> moveResponse = createMoveResponse(pokemon.getLevelMoves());
+        List<MoveResponse> eggMoveResponse = createEggMoveResponse(pokemon.getEggMoveIds());
+        List<PokemonBiomeResponse> biomeResponse = createBiomeResponse(pokemon.getBiomeIds());
 
         return new PokemonDetailResponse(
-                inMemoryPokemon.id(),
-                Long.parseLong(inMemoryPokemon.speciesId()),
-                inMemoryPokemon.koName(),
-                s3Service.getPokemonImageFromS3(inMemoryPokemon.id()),
+                pokemon.getId(),
+                (long) pokemon.getPokedexNumber(),
+                pokemon.getKoName(),
+                s3Service.getPokemonImageFromS3(pokemon.getImageId()),
                 pokemonTypeResponses,
                 pokemonAbilityResponses,
-                inMemoryPokemon.baseTotal(),
-                inMemoryPokemon.hp(),
-                inMemoryPokemon.attack(),
-                inMemoryPokemon.defense(),
-                inMemoryPokemon.specialAttack(),
-                inMemoryPokemon.specialDefense(),
-                inMemoryPokemon.speed(),
-                inMemoryPokemon.legendary(),
-                inMemoryPokemon.subLegendary(),
-                inMemoryPokemon.mythical(),
-                inMemoryPokemon.canChangeForm(),
-                inMemoryPokemon.weight(),
-                inMemoryPokemon.height(),
+                pokemon.getBaseTotal(),
+                pokemon.getHp(),
+                pokemon.getAttack(),
+                pokemon.getDefense(),
+                pokemon.getSpecialAttack(),
+                pokemon.getSpecialDefense(),
+                pokemon.getSpeed(),
+                pokemon.isLegendary(),
+                pokemon.isSubLegendary(),
+                pokemon.isMythical(),
+                pokemon.isCanChangeForm(),
+                pokemon.getWeight(),
+                pokemon.getHeight(),
                 evolutionResponses,
                 moveResponse,
                 eggMoveResponse,
@@ -121,135 +128,114 @@ public class PokemonService {
         );
     }
 
-    private EvolutionResponses createEvolutionResponse(InMemoryPokemon inMemoryPokemon) {
-        EvolutionChain chain = evolutionRepository.findEvolutionChainById(inMemoryPokemon.id())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.EVOLUTION_NOT_FOUND));
-
-        int currentStage = IntStream.range(0, chain.getChain().size())
-                .filter(i -> chain.getChain().get(i).stream().anyMatch(r -> r.equals(inMemoryPokemon.id())))
-                .sum();
-
-        return new EvolutionResponses(currentStage, createStages(chain));
+    private EvolutionResponses createEvolutionResponse(Pokemon pokemon) {
+        List<Evolution> evolutions = pokemon.getEvolutions();
+        final int currentDepth = IntStream.range(0, evolutions.size())
+                .filter(depth -> evolutions.get(depth).getFrom().equals(pokemon.getId()))
+                .findAny()
+                .orElse(0);
+        return new EvolutionResponses(currentDepth, getEvolutionResponses(evolutions, pokemon.getId(),
+                s3Service.getPokemonImageFromS3(pokemon.getImageId())));
     }
 
-    private List<EvolutionResponse> createStages(EvolutionChain evolutionChain) {
-        List<List<String>> chain = evolutionChain.getChain();
-        List<EvolutionResponse> ret = new ArrayList<>();
-
-        InMemoryPokemon firstInMemoryPokemon = inMemoryPokemonRepository.findById(chain.get(0).get(0))
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-
-        ret.add(new EvolutionResponse(firstInMemoryPokemon.id(), firstInMemoryPokemon.koName(), 1, 0, "", "",
-                s3Service.getPokemonImageFromS3(firstInMemoryPokemon.id())));
-
-        for (int i = 0; i < chain.size() - 1; i++) {
-            List<String> stage = chain.get(i);
-            for (String id : stage) {
-                Optional<List<Evolution>> evolutions = evolutionRepository.findEdgeById(id);
-
-                if (evolutions.isEmpty()) {
-                    continue;
-                }
-
-                for (Evolution evolution : evolutions.get()) {
-                    InMemoryPokemon inMemoryPokemon = inMemoryPokemonRepository.findById(evolution.getTo())
-                            .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-                    ret.add(new EvolutionResponse(inMemoryPokemon.id(), inMemoryPokemon.koName(),
-                            Integer.parseInt(evolution.getLevel()), i + 1,
-                            EvolutionItem.findById(evolution.getItem())
-                                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.ITEM_NOT_FOUND))
-                                    .getKoName(), evolution.getCondition(),
-                            s3Service.getPokemonImageFromS3(inMemoryPokemon.id())));
-                }
-            }
+    private List<EvolutionResponse> getEvolutionResponses(
+            List<Evolution> evolutions,
+            String pokemonId,
+            String imageId
+    ) {
+        List<EvolutionResponse> evolutionResponses = new ArrayList<>();
+        for (int depth = 0; depth < evolutions.size(); depth++) {
+            evolutionResponses.add(EvolutionResponse.from(
+                    evolutions.get(depth),
+                    depth,
+                    pokemonId,
+                    s3Service.getPokemonImageFromS3(imageId)
+            ));
         }
-        return ret;
+        return evolutionResponses;
     }
 
-    private List<PokemonAbilityResponse> createAbilityResponse(InMemoryPokemon inMemoryPokemon) {
-        List<PokemonAbilityResponse> ret = new ArrayList<>();
 
-        Ability passive = inMemoryAbilityRepository.findById(inMemoryPokemon.abilityPassive())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
-        ret.add(new PokemonAbilityResponse(inMemoryPokemon.abilityPassive(), passive.getName(),
-                passive.getDescription(), true, false));
-
-        Ability ability1 = inMemoryAbilityRepository.findById(inMemoryPokemon.ability1())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
-        Ability ability2 = inMemoryAbilityRepository.findById(inMemoryPokemon.ability2())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
-        List<PokemonAbilityResponse> defaultAbilities = Stream.of(ability1, ability2)
-                .distinct()
-                .map(ability -> new PokemonAbilityResponse(inMemoryPokemon.ability1(), ability.getName(),
-                        ability.getDescription(), false, false))
-                .toList();
-
-        ret.addAll(defaultAbilities);
-
-        if (!inMemoryPokemon.abilityHidden().isEmpty()) {
-            Ability hidden = inMemoryAbilityRepository.findById(inMemoryPokemon.abilityHidden())
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
-            ret.add(new PokemonAbilityResponse(inMemoryPokemon.abilityHidden(), hidden.getName(),
-                    hidden.getDescription(), false, true));
-
-            for (int i = 1; i < ret.size() - 1; i++) {
-                if (inMemoryAbilityRepository.findById(ret.get(i).id())
-                            .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND))
-                    == hidden) {
-                    ret.remove(i);
-                    break;
-                }
-            }
-        }
-
-        return ret;
-    }
-
-    private List<PokemonTypeResponse> createTypeResponse(InMemoryPokemon inMemoryPokemon) {
-        Optional<Type> firstType = Type.findByEngName(inMemoryPokemon.firstType());
-        Optional<Type> secondType = Type.findByEngName(inMemoryPokemon.secondType());
-
-        return Stream.of(firstType, secondType)
-                .distinct()
+    private List<PokemonAbilityResponse> createAbilityResponse(Pokemon pokemon) {
+        List<PokemonAbilityResponse> responses = pokemon.getNormalAbilityIds().stream()
+                .map(inMemoryAbilityRepository::findById)
                 .filter(Optional::isPresent)
-                .map(type -> new PokemonTypeResponse(type.get().getName(),
-                        s3Service.getPokerogueTypeImageFromS3(type.get().getName().toLowerCase())))
-                .toList();
+                .map(Optional::get)
+                .map(ability -> new PokemonAbilityResponse(
+                        ability.getId(),
+                        ability.getKoName(),
+                        ability.getDescription(),
+                        false,
+                        false
+                ))
+                .collect(Collectors.toList());
+
+        Optional<Ability> hidden = inMemoryAbilityRepository.findById(pokemon.getHiddenAbilityId());
+        Optional<Ability> passive = inMemoryAbilityRepository.findById(pokemon.getPassiveAbilityId());
+
+        passive.ifPresent(
+                ability -> responses.add(new PokemonAbilityResponse(
+                        ability.getId(),
+                        ability.getKoName(),
+                        ability.getDescription(),
+                        true,
+                        false))
+        );
+
+        hidden.ifPresent(
+                ability -> responses.add(new PokemonAbilityResponse(
+                        ability.getId(),
+                        ability.getKoName(),
+                        ability.getDescription(),
+                        false,
+                        true))
+        );
+
+        return responses;
     }
+
 
     private List<PokemonBiomeResponse> createBiomeResponse(List<String> biomes) {
-        return biomes.stream().map(id -> {
-            if (id.isEmpty()) {
-                return new PokemonBiomeResponse("", "", "");
-            }
-            Biome biome = inMemoryBiomeRepository.findById(id)
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
-            return new PokemonBiomeResponse(id, biome.getName(), s3Service.getBiomeImageFromS3(id));
-        }).toList();
+        return biomes.stream()
+                .map(inMemoryBiomeRepository::findById)
+                .map(this::getBiomeValue)
+                .toList();
+    }
+
+    private PokemonBiomeResponse getBiomeValue(Optional<Biome> optional) {
+        return optional.map(value -> new PokemonBiomeResponse(
+                value.getId(),
+                value.getKoName(),
+                s3Service.getBiomeImageFromS3(value.getImage()))
+        ).orElse(PokemonBiomeResponse.EMPTY);
     }
 
     private List<MoveResponse> createEggMoveResponse(List<String> moves) {
         return moves.stream()
-                .map(r -> battleMoveRepository.findById(r)
-                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)))
-                .map(move -> MoveResponse.from(move, 1, s3Service.getPokerogueTypeImageFromS3(
-                        battleMoveRepository.findById(move.id())
-                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND))
-                                .type()
-                                .getName())))
+                .map(battleMoveRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(move -> MoveResponse.from(move, 1, move.type().getImage()))
                 .toList();
     }
 
-    private List<MoveResponse> createMoveResponse(List<String> moves) {
-        return IntStream.iterate(0, index -> index + 2)
-                .limit(moves.size() / 2)
-                .mapToObj(index -> MoveResponse.from(battleMoveRepository.findById(moves.get(index))
-                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)),
-                        Integer.parseInt(moves.get(index + 1)), s3Service.getPokerogueTypeImageFromS3(
-                                battleMoveRepository.findById(moves.get(index))
-                                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND))
-                                        .type()
-                                        .getName())))
+    private List<MoveResponse> createMoveResponse(List<LevelMove> moves) {
+        return moves.stream()
+                .map(move -> {
+                            BattleMove battleMove = battleMoveRepository.findById(move.getMoveId()).orElseThrow();
+                            return new MoveResponse(
+                                    battleMove.id(),
+                                    battleMove.name(),
+                                    move.getLevel(),
+                                    battleMove.power(),
+                                    battleMove.accuracy(),
+                                    battleMove.type().getKoName(),
+                                    battleMove.type().getImage(),
+                                    battleMove.category().getName(),
+                                    battleMove.category().getImage()
+                            );
+                        }
+                )
                 .toList();
     }
 }
