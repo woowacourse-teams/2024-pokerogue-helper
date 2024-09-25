@@ -1,8 +1,8 @@
 name: Backend CI
 
 on:
-  push:
-    branches: [ "be/test/#339-ci-mongo" ]
+  pull_request:
+    branches: [ "be/develop" ]
   workflow_call:
 
 permissions:
