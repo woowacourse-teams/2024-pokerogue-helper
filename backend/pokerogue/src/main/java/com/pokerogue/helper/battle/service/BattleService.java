@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class BattleService {
 
     private static final double FOG_ACCURACY_EFFECT = 0.9;
+    private static final double DEFAULT_MULTIPLIER = 1;
 
     private final MoveRepository moveRepository;
     private final PokemonRepository pokemonRepository;

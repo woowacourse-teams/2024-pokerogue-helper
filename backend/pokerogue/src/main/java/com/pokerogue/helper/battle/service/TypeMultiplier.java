@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TypeMultiplier extends BattleMultiplier {
 
+    private static final double STRONG_TYPE_MATCHING_RESULT = 2;
+
     private final TypeMatchingRepository typeMatchingRepository;
 
     public double getByTypeMatching(Type attackMoveType, List<Type> rivalPokemonTypes) {
@@ -38,7 +40,7 @@ public class TypeMultiplier extends BattleMultiplier {
     public double getByStrongWind(Type moveType, List<Type> rivalPokemonTypes) {
         TypeMatching typeMatching = findTypeMatchingByFromAndTo(moveType, Type.FLYING);
         if (rivalPokemonTypes.contains(Type.FLYING)
-                && typeMatching.getResult() == 2) {
+                && typeMatching.getResult() == STRONG_TYPE_MATCHING_RESULT) {
             return WEAK_MULTIPLIER;
         }
 

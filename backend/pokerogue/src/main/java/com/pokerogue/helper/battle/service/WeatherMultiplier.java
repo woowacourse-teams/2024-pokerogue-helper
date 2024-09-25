@@ -20,7 +20,7 @@ public class WeatherMultiplier extends BattleMultiplier {
         if (weather == Weather.HEAVY_RAIN) {
             return getHeavyRainAttackTypeMultiplier(attackMoveType);
         }
-        return 1;
+        return DEFAULT_MULTIPLIER;
     }
 
     private double getSunnyAttackTypeMultiplier(Type attackMoveType) {
