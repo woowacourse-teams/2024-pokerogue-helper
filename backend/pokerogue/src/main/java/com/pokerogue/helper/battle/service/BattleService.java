@@ -1,23 +1,19 @@
 package com.pokerogue.helper.battle.service;
 
-import com.pokerogue.helper.battle.BattleMoveRepository;
-import com.pokerogue.helper.battle.data.BattleMove;
 import com.pokerogue.helper.battle.data.TypeMatching;
 import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.battle.dto.BattleResultResponse;
-import com.pokerogue.helper.battle.dto.MoveResponse;
 import com.pokerogue.helper.battle.dto.WeatherResponse;
 import com.pokerogue.helper.battle.repository.TypeMatchingRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
-import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
-import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
+import com.pokerogue.helper.move.data.Move;
+import com.pokerogue.helper.move.repository.MoveRepository;
+import com.pokerogue.helper.pokemon.data.Pokemon;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +21,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
-    private final BattleMoveRepository battleMoveRepository;
-    private final InMemoryPokemonRepository inMemoryPokemonRepository;
+    private final MoveRepository moveRepository;
+    private final PokemonRepository pokemonRepository;
     private final TypeMatchingRepository typeMatchingRepository;
-
-    private Map<Integer, List<MoveResponse>> findByDexnumberCache = new HashMap<>();
 
     public List<WeatherResponse> findWeathers() {
         return Arrays.stream(Weather.values())
@@ -44,57 +38,53 @@ public class BattleService {
             String myMoveId) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
-        InMemoryPokemon myInMemoryPokemon = inMemoryPokemonRepository.findById(myPokemonId)
+        Pokemon myPokemon = pokemonRepository.findById(myPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        InMemoryPokemon rivalInMemoryPokemon = inMemoryPokemonRepository.findById(rivalPokemonId)
+        Pokemon rivalPokemon = pokemonRepository.findById(rivalPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        BattleMove move = battleMoveRepository.findById(myMoveId)
+        Move move = moveRepository.findById(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
-        Type moveType = move.type();
+        Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
 
         double finalAccuracy = calculateAccuracy(move, weather);
-        double totalMultiplier = getTotalMultiplier(move, weather, rivalInMemoryPokemon, myInMemoryPokemon);
+        double totalMultiplier = getTotalMultiplier(move, weather, rivalPokemon, myPokemon);
 
         return new BattleResultResponse(
-                move.power(),
+                move.getPower(),
                 totalMultiplier,
                 finalAccuracy,
-                move.name(),
-                move.effect(),
+                move.getName(),
+                move.getEffect(),
                 moveType.getKoName(),
-                move.category().getName()
+                move.getMoveCategory()
         );
     }
 
-    private double calculateAccuracy(BattleMove move, Weather weather) {
+    private double calculateAccuracy(Move move, Weather weather) {
         if (weather == Weather.FOG) {
-            return (double) move.accuracy() * 0.9;
+            return (double) move.getAccuracy() * 0.9;
         }
 
-        return (double) move.accuracy();
+        return (double) move.getAccuracy();
     }
 
     private double getTotalMultiplier(
-            BattleMove move,
+            Move move,
             Weather weather,
-            InMemoryPokemon rivalInMemoryPokemon,
-            InMemoryPokemon myInMemoryPokemon) {
+            Pokemon rivalPokemon,
+            Pokemon myPokemon) {
         if (!move.isAttackMove()) {
             return 1;
         }
-        Type moveType = move.type();
+        Type moveType = Type.valueOf(move.getType()); // Todo
         double weatherMultiplier = getWeatherMultiplier(moveType, weather);
-        List<Type> types = new ArrayList<>();
-        if (!rivalInMemoryPokemon.firstType().isEmpty()) {
-            types.add(Type.findByEngName(rivalInMemoryPokemon.firstType())
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)));
-        }
-        if (!rivalInMemoryPokemon.secondType().isEmpty()) {
-            types.add(Type.findByEngName(rivalInMemoryPokemon.secondType())
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)));
-        }
+        List<Type> types = rivalPokemon.getTypes()
+                .stream()
+                .map(String::toUpperCase) // Todo
+                .map(Type::valueOf)
+                .toList();
         double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, types);
-        double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myInMemoryPokemon);
+        double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myPokemon);
         double stringWindMultiplier = getStringWindMultiplier(moveType, types, weather);
 
         return weatherMultiplier * typeMatchingMultiplier * sameTypeBonusMultiplier * stringWindMultiplier;
@@ -135,8 +125,8 @@ public class BattleService {
                 .reduce(1d, (a, b) -> a * b);
     }
 
-    private double getSameTypeAttackBonusMultiplier(Type moveType, InMemoryPokemon rivalInMemoryPokemon) {
-        if (rivalInMemoryPokemon.hasSameType(moveType)) {
+    private double getSameTypeAttackBonusMultiplier(Type moveType, Pokemon rivalPokemon) {
+        if (rivalPokemon.hasSameType(moveType)) {
             return 1.5;
         }
 

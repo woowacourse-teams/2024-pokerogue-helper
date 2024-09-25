@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.data;
 
+import com.pokerogue.helper.type.data.Type;
 import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -110,4 +111,10 @@ public class Pokemon {
 
     @Field("biomeIds")
     private final List<String> biomeIds;
+
+    public boolean hasSameType(Type type) {
+        String name = type.getName();
+        return this.types.stream()
+                .anyMatch(name::equals);
+    }
 }

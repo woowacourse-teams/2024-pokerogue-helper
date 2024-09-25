@@ -1,5 +1,6 @@
 package com.pokerogue.helper.move.data;
 
+import com.pokerogue.helper.battle.data.MoveCategory;
 import java.util.List;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -60,4 +61,8 @@ public class Move {
 
     @Field("pokemonIds")
     private final List<String> pokemonIds;
+
+    public boolean isAttackMove() {
+        return MoveCategory.valueOf(this.moveCategory.toUpperCase()) != MoveCategory.STATUS; // Todo
+    }
 }
