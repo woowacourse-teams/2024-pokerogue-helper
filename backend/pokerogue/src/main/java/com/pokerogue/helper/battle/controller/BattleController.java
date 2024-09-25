@@ -1,9 +1,8 @@
 package com.pokerogue.helper.battle.controller;
 
 import com.pokerogue.helper.battle.dto.BattleResultResponse;
-import com.pokerogue.helper.battle.service.BattleService;
-import com.pokerogue.helper.battle.dto.MoveResponse;
 import com.pokerogue.helper.battle.dto.WeatherResponse;
+import com.pokerogue.helper.battle.service.BattleService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +21,6 @@ public class BattleController {
     @GetMapping("/api/v1/weathers")
     public ApiResponse<List<WeatherResponse>> weatherList() {
         return new ApiResponse<>("날씨 리스트 불러오기에 성공했습니다.", battleService.findWeathers());
-    }
-
-    @GetMapping("/api/v1/moves")
-    public ApiResponse<List<MoveResponse>> moveByPokemonList(@RequestParam("pokedex-number") Integer pokedexNumber) {
-        return new ApiResponse<>("포켓몬의 기술 리스트 불러오기에 성공했습니다.", battleService.findMovesByPokemon(pokedexNumber));
     }
 
     @GetMapping("/api/v1/battle")
