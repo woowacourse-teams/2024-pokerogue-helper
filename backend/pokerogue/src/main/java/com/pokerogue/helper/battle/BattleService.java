@@ -70,7 +70,7 @@ public class BattleService {
             Weather weather,
             InMemoryPokemon rivalInMemoryPokemon,
             InMemoryPokemon myInMemoryPokemon) {
-        if (move.isAttackMove()) {
+        if (!move.isAttackMove()) {
             return 1;
         }
         Type moveType = move.type();

@@ -120,6 +120,7 @@ public class BiomeService {
                 .map(nextBiomeInfo -> {
                     Biome nextBiome = biomeRepository.findById(nextBiomeInfo.getName())
                             .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
+
                     return NextBiomeResponse.of(
                             nextBiome,
                             s3Service.getBiomeImageFromS3(nextBiome.getId()),
