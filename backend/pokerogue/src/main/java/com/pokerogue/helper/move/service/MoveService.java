@@ -9,9 +9,7 @@ import com.pokerogue.helper.pokemon.data.LevelMove;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,23 +20,9 @@ public class MoveService {
     private final PokemonRepository pokemonRepository;
     private final MoveRepository moveRepository;
 
-    private Map<Integer, List<MoveResponse>> findByDexnumberCache = new HashMap<>();
-
     public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
-        if (findByDexnumberCache.isEmpty()) {
-            initFindByDexnumberCache();
-        }
-
-        return findByDexnumberCache.get(pokedexNumber);
-    }
-
-    private void initFindByDexnumberCache() {
-        for (Pokemon pokemon : pokemonRepository.findAll()) {
-            int pokedexNumber = pokemon.getPokedexNumber();
-            if (!findByDexnumberCache.containsKey(pokedexNumber)) {
-                findByDexnumberCache.put(pokedexNumber, makeMoveResponse(pokemon));
-            }
-        }
+        List<Pokemon> pokemons = pokemonRepository.findByPokedexNumber(pokedexNumber);
+        return makeMoveResponse(pokemons.get(0));
     }
 
     private List<MoveResponse> makeMoveResponse(Pokemon pokemon) {
