@@ -1,4 +1,4 @@
-package com.pokerogue.helper.type.entity;
+package com.pokerogue.helper.type.collection;
 
 import com.pokerogue.helper.type.data.Type;
 import lombok.AccessLevel;

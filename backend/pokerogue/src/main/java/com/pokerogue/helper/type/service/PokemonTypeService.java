@@ -1,11 +1,11 @@
 package com.pokerogue.helper.type.service;
 
 
+import com.pokerogue.helper.type.collection.TypeMatching;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeMatchingResponse;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import com.pokerogue.helper.type.dto.TypeMatchingResponse;
-import com.pokerogue.helper.type.entity.TypeMatching;
 import com.pokerogue.helper.type.repository.TypeMatchingRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

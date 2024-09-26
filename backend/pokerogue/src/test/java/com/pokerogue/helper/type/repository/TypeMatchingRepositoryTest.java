@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.pokerogue.environment.repository.MongoRepositoryTest;
+import com.pokerogue.helper.type.collection.TypeMatching;
 import com.pokerogue.helper.type.data.Type;
-import com.pokerogue.helper.type.entity.TypeMatching;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
