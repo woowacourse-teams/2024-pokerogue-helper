@@ -2,7 +2,7 @@ name: Backend Development Server CD
 
 on:
   push:
-    branches: [ "be/develop" ]
+    branches: [ "be/infra/#346-set-dev-mongo-db" ]
 
 permissions:
   contents: read
