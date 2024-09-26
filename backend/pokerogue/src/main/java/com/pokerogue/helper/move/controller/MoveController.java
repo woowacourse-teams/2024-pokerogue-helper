@@ -19,16 +19,16 @@ public class MoveController {
     private final MoveService moveService;
 
     @GetMapping("/api/v1/moves")
-    public ApiResponse<List<MoveResponse>> moveByPokemonList(@RequestParam("pokedex-number") Integer pokedexNumber) {
+    public ApiResponse<List<MoveResponse>> moveListByPokedexNumber(@RequestParam("pokedex-number") Integer pokedexNumber) {
         log.info("---- URI : {}, Param : {}", "/api/v1/moves?pokedex-number=", pokedexNumber);
 
-        return new ApiResponse<>("포켓몬의 기술 불러오기에 성공했습니다.", moveService.findMovesByPokemon(pokedexNumber));
+        return new ApiResponse<>("포켓몬의 기술 리스트 불러오기에 성공했습니다.", moveService.findMovesByPokemon(pokedexNumber));
     }
 
     @GetMapping("/api/v1/move/{id}")
     public ApiResponse<MoveResponse> moveDetails(@PathVariable String id) {
         log.info("---- URI : {}, Param : {}", "/api/v1/move/{id}", id);
 
-        return new ApiResponse<>("포켓몬의 기술 리스트 불러오기에 성공했습니다.", moveService.findMove(id));
+        return new ApiResponse<>("포켓몬의 기술 불러오기에 성공했습니다.", moveService.findMove(id));
     }
 }
