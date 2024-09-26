@@ -44,6 +44,7 @@ public class TypeMultiplierProvider {
 
     private boolean isStrongWindConditionMet(Type moveType, List<Type> rivalPokemonTypes) {
         TypeMatching typeMatching = findTypeMatchingByFromAndTo(moveType, Type.FLYING);
+
         return rivalPokemonTypes.contains(Type.FLYING)
                 && typeMatching.getResult() == STRONG_TYPE_MATCHING_RESULT;
     }
