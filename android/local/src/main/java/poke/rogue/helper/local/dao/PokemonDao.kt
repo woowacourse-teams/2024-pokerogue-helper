@@ -18,6 +18,7 @@ interface PokemonDao {
 
     companion object {
         fun instance(context: Context): PokemonDao {
+            PokeRogueDatabase.dropDatabase(context)
             return PokeRogueDatabase.instance(context).pokemonDao()
         }
     }
