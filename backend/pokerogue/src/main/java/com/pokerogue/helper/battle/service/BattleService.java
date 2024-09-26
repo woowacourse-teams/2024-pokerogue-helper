@@ -23,6 +23,7 @@ public class BattleService {
     private final MoveRepository moveRepository;
     private final PokemonRepository pokemonRepository;
     private final TypeMultiplierProvider typeMultiplierProvider;
+    private final WeatherMultiplierProvider weatherMultiplierProvider;
 
     public BattleResultResponse calculateBattleResult(
             String weatherId,
@@ -76,7 +77,7 @@ public class BattleService {
                 .map(String::toUpperCase)
                 .map(Type::valueOf)
                 .toList();
-        BattleMultiplier weatherMultiplier = weather.getBattleMultiplierByAttackMoveType(moveType);
+        BattleMultiplier weatherMultiplier = weatherMultiplierProvider.getByAttackMoveType(weather, moveType);
         BattleMultiplier sameTypeBonusMultiplier = typeMultiplierProvider.getBySameTypeAttackBonus(moveType, myPokemon);
         List<BattleMultiplier> typeMatchingMultipliers = typeMultiplierProvider.getAllByTypeMatchings(moveType, types);
 
