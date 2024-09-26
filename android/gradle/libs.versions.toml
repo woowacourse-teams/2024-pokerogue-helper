@@ -31,6 +31,7 @@ coil = "2.6.0"
 glide = "4.14.2"
 ktlint = "12.1.0"
 splash-screen = "1.0.1"
+datastore = "1.0.0"
 
 # Google & Firebase
 google-services = "4.4.2"
@@ -81,6 +82,7 @@ room = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 # Google & Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
