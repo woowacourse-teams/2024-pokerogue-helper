@@ -9,9 +9,14 @@ import poke.rogue.helper.data.model.biome.BossPokemon
 import poke.rogue.helper.data.model.biome.GymPokemon
 import poke.rogue.helper.data.model.biome.WildPokemon
 import poke.rogue.helper.data.repository.BiomeRepository
+import poke.rogue.helper.stringmatcher.has
 
 class FakeBiomeRepository : BiomeRepository {
     override suspend fun biomes(): List<Biome> = BIOMES
+
+    override suspend fun biomes(query: String): List<Biome> {
+        return BIOMES.filter { biome -> biome.name.has(query) }
+    }
 
     override suspend fun biomeDetail(id: String): BiomeDetail = BIOME_DETAIL[id] ?: throw IllegalArgumentException("Invalid biome ID")
 

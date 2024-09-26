@@ -30,7 +30,7 @@ class BiomeViewModelTest {
         runTest {
             // given,when
             viewModel = BiomeViewModel(repository)
-            val biomes = viewModel.biome.first { it is BiomeUiState.Success }
+            val biomes = viewModel.biomes.first { it is BiomeUiState.Success }
             val actualBiomes = (biomes as BiomeUiState.Success).data
 
             // then
@@ -67,5 +67,27 @@ class BiomeViewModelTest {
 
             // then
             actual shouldBe Unit
+        }
+
+    @Test
+    fun `올바른 바이옴 이름을 검색했을 때, 해당하는 바이옴을 반환한다`() =
+        runTest {
+            // when
+            val biome = repository.biomes("악지")
+
+            // then
+            val actual = biome.find { it.name == "악지" }?.name
+            val expect = "악지"
+            actual shouldBe expect
+        }
+
+    @Test
+    fun `잘못된 바이옴 이름을 검색했을 때, 빈 리스트를 반환한다`() =
+        runTest {
+            // when
+            val biome = repository.biomes("잘못된 이름")
+
+            // then
+            biome.size shouldBe 0
         }
 }
