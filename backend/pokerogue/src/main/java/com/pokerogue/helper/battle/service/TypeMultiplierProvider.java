@@ -35,13 +35,17 @@ public class TypeMultiplierProvider {
     }
 
     public BattleMultiplier getByStrongWind(Type moveType, List<Type> rivalPokemonTypes) {
-        TypeMatching typeMatching = findTypeMatchingByFromAndTo(moveType, Type.FLYING);
-        if (rivalPokemonTypes.contains(Type.FLYING)
-                && typeMatching.getResult() == STRONG_TYPE_MATCHING_RESULT) {
+        if (isStrongWindConditionMet(moveType, rivalPokemonTypes)) {
             return BattleMultiplier.WEAK_MULTIPLIER;
         }
 
         return BattleMultiplier.DEFAULT_MULTIPLIER;
+    }
+
+    private boolean isStrongWindConditionMet(Type moveType, List<Type> rivalPokemonTypes) {
+        TypeMatching typeMatching = findTypeMatchingByFromAndTo(moveType, Type.FLYING);
+        return rivalPokemonTypes.contains(Type.FLYING)
+                && typeMatching.getResult() == STRONG_TYPE_MATCHING_RESULT;
     }
 
     private TypeMatching findTypeMatchingByFromAndTo(Type from, Type to) {
