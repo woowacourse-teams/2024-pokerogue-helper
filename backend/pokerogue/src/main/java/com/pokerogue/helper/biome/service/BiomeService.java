@@ -2,7 +2,6 @@ package com.pokerogue.helper.biome.service;
 
 import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.biome.data.Biome;
-import com.pokerogue.helper.biome.data.BiomePokemonType;
 import com.pokerogue.helper.biome.data.NativePokemon;
 import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.dto.BiomeAllPokemonResponse;
@@ -16,6 +15,7 @@ import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.type.data.Type;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,7 +43,9 @@ public class BiomeService {
         return types.stream()
                 .map(type -> new BiomeTypeResponse(
                         s3Service.getPokerogueTypeImageFromS3(type),
-                        BiomePokemonType.getTypeNameById(type)))
+                        Type.findByEngName(type)
+                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND))
+                                .getKoName()))
                 .toList();
     }
 
@@ -53,7 +55,9 @@ public class BiomeService {
                 .flatMap(List::stream)
                 .map(type -> new BiomeTypeResponse(
                         s3Service.getPokerogueTypeImageFromS3(type),
-                        BiomePokemonType.getTypeNameById(type)))
+                        Type.findByEngName(type)
+                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND))
+                                .getKoName()))
                 .toList();
     }
 
