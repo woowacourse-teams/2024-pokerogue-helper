@@ -40,7 +40,7 @@ class BattleViewModel(
     val selectedState = _selectedState.asStateFlow()
 
     val weatherPos: StateFlow<Int> = combine(
-        battleRepository.selectedWeatherStream(),
+        battleRepository.savedWeatherStream(),
         weathers,
     ) { weather, weathers ->
         if (weather == null || weathers.isEmpty()) return@combine null
@@ -103,12 +103,12 @@ class BattleViewModel(
     private fun initSavedSelection() {
         viewModelScope.launch {
             launch {
-                battleRepository.savedPokemon().first()?.let {
+                battleRepository.savedPokemonStream().first()?.let {
                     updateOpponentPokemon(it.toSelectionUi())
                 }
             }
             launch {
-                battleRepository.savedPokemonWithSkill().first()?.let { (pokemon, skill) ->
+                battleRepository.savedPokemonWithSkillStream().first()?.let { (pokemon, skill) ->
                     updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
                 }
             }
