@@ -20,7 +20,7 @@ public class BattleCalculator {
 
     public double calculateAccuracy(Move move, Weather weather) {
         if (weather == Weather.FOG) {
-            return (double) move.getAccuracy() * FOG_ACCURACY_EFFECT;
+            return move.getAccuracy() * FOG_ACCURACY_EFFECT;
         }
 
         return move.getAccuracy();
@@ -32,7 +32,7 @@ public class BattleCalculator {
             Pokemon rivalPokemon,
             Pokemon myPokemon) {
         if (!move.isAttackMove()) {
-            return BattleMultiplier.DEFAULT_MULTIPLIER.getValue();
+            return BattleMultiplier.DEFAULT_MULTIPLIER.getDoubleValue();
         }
 
         Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
@@ -51,7 +51,7 @@ public class BattleCalculator {
             totalMultiplier = applyStrongWindMultiplier(totalMultiplier, moveType, rivalPokemonTypes);
         }
 
-        return totalMultiplier.getValue();
+        return totalMultiplier.getDoubleValue();
     }
 
     private BattleMultiplier getWeatherMultiplier(Weather weather, Type moveType) {

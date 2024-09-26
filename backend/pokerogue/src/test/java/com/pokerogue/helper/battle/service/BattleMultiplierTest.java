@@ -2,6 +2,7 @@ package com.pokerogue.helper.battle.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,10 @@ class BattleMultiplierTest {
     @Test
     @DisplayName("배틀배수끼리 동등하다.")
     void hasSemanticEquality() {
-        BattleMultiplier multiplier = BattleMultiplier.valueOf(3);
-        BattleMultiplier otherMultiplier = BattleMultiplier.valueOf(3);
+        BigDecimal multiplierValue = BigDecimal.valueOf(0.3).add(BigDecimal.valueOf(0.3).add(BigDecimal.valueOf(0.3)));
+        BattleMultiplier multiplier = BattleMultiplier.valueOf(multiplierValue);
+        BigDecimal otherMultiplierValue = BigDecimal.valueOf(0.9);
+        BattleMultiplier otherMultiplier = BattleMultiplier.valueOf(otherMultiplierValue);
 
         assertThat(multiplier).isEqualTo(otherMultiplier);
     }
@@ -23,7 +26,7 @@ class BattleMultiplierTest {
     @MethodSource(value = "constantBattleMultipliers")
     @DisplayName("배틀 배수 상수는 캐싱한다.")
     void cacheConstants(BattleMultiplier constantBattleMultiplier) {
-        double constantValue = constantBattleMultiplier.getValue();
+        BigDecimal constantValue = constantBattleMultiplier.getValue();
 
         BattleMultiplier sameValueMultiplier = BattleMultiplier.valueOf(constantValue);
 
@@ -42,22 +45,25 @@ class BattleMultiplierTest {
     @Test
     @DisplayName("배틀 배수 두 개를 곱한다.")
     void multiply() {
-        BattleMultiplier multiplier = BattleMultiplier.valueOf(2);
+        BattleMultiplier multiplier = BattleMultiplier.valueOf(BigDecimal.valueOf(2));
+        BattleMultiplier otherMultiplier = BattleMultiplier.valueOf(BigDecimal.valueOf(1.5));
 
-        BattleMultiplier multipliedResult = multiplier.multiply(BattleMultiplier.valueOf(1.5));
+        BattleMultiplier multipliedResult = multiplier.multiply(otherMultiplier);
 
-        assertThat(multipliedResult).isEqualTo(BattleMultiplier.valueOf(3));
+        BigDecimal expectedResultValue = BigDecimal.valueOf(3);
+        assertThat(multipliedResult).isEqualTo(BattleMultiplier.valueOf(expectedResultValue));
     }
 
     @Test
     @DisplayName("배틀 배수 여러개를 곱한다.")
     void multiplyMultiple() {
-        BattleMultiplier alpha = BattleMultiplier.valueOf(2);
-        BattleMultiplier beta = BattleMultiplier.valueOf(1.5);
-        BattleMultiplier gamma = BattleMultiplier.valueOf(0.5);
+        BattleMultiplier alpha = BattleMultiplier.valueOf(BigDecimal.valueOf(2));
+        BattleMultiplier beta = BattleMultiplier.valueOf(BigDecimal.valueOf(1.5));
+        BattleMultiplier gamma = BattleMultiplier.valueOf(BigDecimal.valueOf(0.5));
 
         BattleMultiplier multipliedResult = BattleMultiplier.multiply(alpha, beta, gamma);
 
-        assertThat(multipliedResult).isEqualTo(BattleMultiplier.valueOf(1.5));
+        BigDecimal expectedResultValue = BigDecimal.valueOf(1.5);
+        assertThat(multipliedResult).isEqualTo(BattleMultiplier.valueOf(expectedResultValue));
     }
 }

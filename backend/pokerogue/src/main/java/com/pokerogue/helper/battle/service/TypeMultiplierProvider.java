@@ -6,6 +6,7 @@ import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.type.data.Type;
+import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ public class TypeMultiplierProvider {
         return rivalPokemonTypes.stream()
                 .map(toType -> findTypeMatchingByFromAndTo(attackMoveType, toType))
                 .map(TypeMatching::getResult)
+                .map(BigDecimal::valueOf)
                 .map(BattleMultiplier::valueOf)
                 .toList();
     }

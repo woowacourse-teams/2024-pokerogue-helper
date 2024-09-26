@@ -6,6 +6,7 @@ import com.pokerogue.environment.service.ServiceTest;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
+import java.math.BigDecimal;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class TypeMultiplierProviderTest extends ServiceTest {
         List<BattleMultiplier> multipliers = typeMultiplierProvider.getAllByTypeMatchings(attackMoveType,
                 rivalPokemonTypes);
 
-        assertThat(multipliers).contains(BattleMultiplier.valueOf(2));
+        assertThat(multipliers).contains(BattleMultiplier.valueOf(BigDecimal.valueOf(2)));
     }
 
     @Test
