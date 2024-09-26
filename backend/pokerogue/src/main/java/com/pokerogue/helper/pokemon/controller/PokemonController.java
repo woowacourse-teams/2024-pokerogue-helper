@@ -18,12 +18,12 @@ public class PokemonController {
     private final PokemonService pokemonService;
 
     @GetMapping("/api/v1/pokemons2")
-    public ApiResponse<List<PokemonResponse>> findAll() {
+    public ApiResponse<List<PokemonResponse>> pokemonList() {
         return new ApiResponse<>("포켓몬 리스트 불러오기에 성공했습니다.", pokemonService.findAll());
     }
 
     @GetMapping("/api/v1/pokemon2/{id}")
-    public ApiResponse<PokemonDetailResponse> findAll(@PathVariable("id") String id) {
+    public ApiResponse<PokemonDetailResponse> pokemonDetails(@PathVariable("id") String id) {
         return new ApiResponse<>("포켓몬 정보 불러오기에 성공했습니다.", pokemonService.findById(id));
     }
 }
