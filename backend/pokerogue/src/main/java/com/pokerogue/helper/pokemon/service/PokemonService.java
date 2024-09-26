@@ -35,6 +35,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class PokemonService {
+    
     private final S3Service s3Service;
 
     private final PokemonRepository pokemonRepository;
