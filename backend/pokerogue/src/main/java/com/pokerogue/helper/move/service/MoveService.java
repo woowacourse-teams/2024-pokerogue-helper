@@ -64,13 +64,13 @@ public class MoveService {
         return allMoveIds;
     }
 
-    private Move findMoveById(String id) {
-        return moveRepository.findById(id)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
-    }
-
     public MoveResponse findMove(String id) {
         Move move = findMoveById(id);
         return MoveResponse.from(move);
+    }
+
+    private Move findMoveById(String id) {
+        return moveRepository.findById(id)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }

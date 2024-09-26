@@ -39,28 +39,6 @@ public class BiomeService {
                 .toList();
     }
 
-    private List<BiomeTypeResponse> getTypesResponses(List<String> types) {
-        return types.stream()
-                .map(type -> new BiomeTypeResponse(
-                        s3Service.getPokerogueTypeImageFromS3(type),
-                        Type.findByEngName(type)
-                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND))
-                                .getKoName()))
-                .toList();
-    }
-
-    private List<BiomeTypeResponse> getTrainerTypesResponses(List<Trainer> trainers) {
-        return trainers.stream()
-                .map(Trainer::getTypes)
-                .flatMap(List::stream)
-                .map(type -> new BiomeTypeResponse(
-                        s3Service.getPokerogueTypeImageFromS3(type),
-                        Type.findByEngName(type)
-                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND))
-                                .getKoName()))
-                .toList();
-    }
-
     public BiomeDetailResponse findBiome(String id) {
         Biome biome = biomeRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
@@ -81,21 +59,6 @@ public class BiomeService {
                 .map(nativePokemon -> BiomeAllPokemonResponse.of(
                         nativePokemon,
                         getBiomePokemons(nativePokemon.getPokemonIds())))
-                .toList();
-    }
-
-    private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
-        return biomePokemons.stream()
-                .map(biomePokemon -> pokemonRepository.findById(biomePokemon)
-                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
-                )
-                .map(pokemon -> new BiomePokemonResponse(
-                        pokemon.getId(),
-                        pokemon.getKoName(),
-                        s3Service.getPokemonImageFromS3(pokemon.getImageId()),
-                        getTypesResponses(pokemon.getTypes()))
-                )
-                .distinct()
                 .toList();
     }
 
@@ -133,6 +96,43 @@ public class BiomeService {
                             getTrainerTypesResponses(nextBiome.getTrainers())
                     );
                 })
+                .toList();
+    }
+
+    private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
+        return biomePokemons.stream()
+                .map(biomePokemon -> pokemonRepository.findById(biomePokemon)
+                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
+                )
+                .map(pokemon -> new BiomePokemonResponse(
+                        pokemon.getId(),
+                        pokemon.getKoName(),
+                        s3Service.getPokemonImageFromS3(pokemon.getImageId()),
+                        getTypesResponses(pokemon.getTypes()))
+                )
+                .distinct()
+                .toList();
+    }
+
+    private List<BiomeTypeResponse> getTypesResponses(List<String> types) {
+        return types.stream()
+                .map(type -> new BiomeTypeResponse(
+                        s3Service.getPokerogueTypeImageFromS3(type),
+                        Type.findByEngName(type)
+                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND))
+                                .getKoName()))
+                .toList();
+    }
+
+    private List<BiomeTypeResponse> getTrainerTypesResponses(List<Trainer> trainers) {
+        return trainers.stream()
+                .map(Trainer::getTypes)
+                .flatMap(List::stream)
+                .map(type -> new BiomeTypeResponse(
+                        s3Service.getPokerogueTypeImageFromS3(type),
+                        Type.findByEngName(type)
+                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND))
+                                .getKoName()))
                 .toList();
     }
 }
