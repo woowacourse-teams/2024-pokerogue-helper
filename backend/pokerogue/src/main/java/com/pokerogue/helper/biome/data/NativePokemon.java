@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NativePokemon {
 
+    private static final String BOSS = "보스";
     @Field("tier")
     private String tier; // Todo: enum 사용
 
@@ -19,10 +20,10 @@ public class NativePokemon {
     private List<String> pokemonIds;
 
     public boolean isWild() {
-        return !tier.contains("보스");
+        return !tier.contains(BOSS);
     }
 
     public boolean isBoss() {
-        return tier.contains("보스");
+        return tier.contains(BOSS);
     }
 }
