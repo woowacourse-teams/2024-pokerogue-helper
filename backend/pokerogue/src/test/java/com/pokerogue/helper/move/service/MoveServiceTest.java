@@ -1,9 +1,12 @@
 package com.pokerogue.helper.move.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.pokerogue.environment.service.ServiceTest;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.dto.MoveResponse;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -39,5 +42,13 @@ class MoveServiceTest extends ServiceTest {
                 () -> assertThat(moveResponse.accuracy()).isEqualTo(100),
                 () -> assertThat(moveResponse.effect()).isEqualTo("상대의 발밑에 대지의 힘을 방출한다. 상대의 특수방어를 떨어뜨릴 때가 있다.")
         );
+    }
+
+    @Test
+    @DisplayName("id에 해당하는 기술이 없는 경우 예외를 발생시킨다")
+    void notExistMove() {
+        assertThatThrownBy(() -> moveService.findMove("test"))
+                .isInstanceOf(GlobalCustomException.class)
+                .hasMessage(ErrorMessage.MOVE_NOT_FOUND.getMessage());
     }
 }
