@@ -100,10 +100,7 @@ public class BiomeService {
     }
 
     private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
-        return biomePokemons.stream()
-                .map(biomePokemon -> pokemonRepository.findById(biomePokemon)
-                        .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND))
-                )
+        List<BiomePokemonResponse> biomePokemonResponses = pokemonRepository.findAllById(biomePokemons).stream()
                 .map(pokemon -> new BiomePokemonResponse(
                         pokemon.getId(),
                         pokemon.getKoName(),
@@ -112,6 +109,11 @@ public class BiomeService {
                 )
                 .distinct()
                 .toList();
+        if (biomePokemons.size() == biomePokemonResponses.size()) {
+            return biomePokemonResponses;
+        }
+
+        throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
     }
 
     private List<BiomeTypeResponse> getTypesResponses(List<String> types) {
