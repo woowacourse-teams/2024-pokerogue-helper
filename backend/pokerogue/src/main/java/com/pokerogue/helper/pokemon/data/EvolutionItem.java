@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 public enum EvolutionItem {
+    
     LINKING_CORD("연결의끈"),
     SUN_STONE("태양의돌"),
     MOON_STONE("달의돌"),
@@ -146,7 +147,8 @@ public enum EvolutionItem {
     DARK_MEMORY("다크메모리"),
     FAIRY_MEMORY("페어리메모리"),
     BLANK_MEMORY("빈메모리"),
-    ULTRANECROZIUM_Z("울트라네크로");
+    ULTRANECROZIUM_Z("울트라네크로"),
+    ;
 
     private final String koName;
 

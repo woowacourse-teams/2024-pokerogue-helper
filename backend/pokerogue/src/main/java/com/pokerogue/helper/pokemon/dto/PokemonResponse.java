@@ -21,9 +21,12 @@ public record PokemonResponse(
         Integer specialAttack,
         Integer specialDefense
 ) {
-    public static PokemonResponse from(Pokemon pokemon, String image, String backImage,
-                                       List<PokemonTypeResponse> pokemonTypeResponse) {
-
+    public static PokemonResponse from(
+            Pokemon pokemon,
+            String image,
+            String backImage,
+            List<PokemonTypeResponse> pokemonTypeResponse
+    ) {
         return new PokemonResponse(
                 pokemon.getId(),
                 (long) pokemon.getPokedexNumber(),
