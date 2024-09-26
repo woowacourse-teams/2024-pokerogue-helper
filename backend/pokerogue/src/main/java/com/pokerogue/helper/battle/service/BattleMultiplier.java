@@ -36,11 +36,13 @@ public final class BattleMultiplier {
         double result = Arrays.stream(others)
                 .map(BattleMultiplier::getValue)
                 .reduce(1d, (a, b) -> a * b);
+
         return BattleMultiplier.valueOf(result);
     }
 
     public BattleMultiplier multiply(BattleMultiplier other) {
         double result = this.value * other.value;
+
         return BattleMultiplier.valueOf(result);
     }
 
@@ -53,6 +55,7 @@ public final class BattleMultiplier {
             return false;
         }
         BattleMultiplier that = (BattleMultiplier) o;
+
         return Double.compare(that.value, value) == 0;
     }
 

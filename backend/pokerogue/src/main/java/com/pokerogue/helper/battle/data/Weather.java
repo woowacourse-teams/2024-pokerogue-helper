@@ -56,6 +56,7 @@ public enum Weather {
         if (this == Weather.HEAVY_RAIN) {
             return getHeavyRainAttackTypeMultiplier(attackMoveType);
         }
+
         return BattleMultiplier.DEFAULT_MULTIPLIER;
     }
 
@@ -66,6 +67,7 @@ public enum Weather {
         if (attackMoveType == Type.WATER) {
             return BattleMultiplier.WEAK_MULTIPLIER;
         }
+
         return BattleMultiplier.DEFAULT_MULTIPLIER;
     }
 
@@ -76,6 +78,7 @@ public enum Weather {
         if (attackMoveType == Type.WATER) {
             return BattleMultiplier.ZERO_MULTIPLIER;
         }
+
         return BattleMultiplier.DEFAULT_MULTIPLIER;
     }
 
@@ -86,6 +89,7 @@ public enum Weather {
         if (attackMoveType == Type.FIRE) {
             return BattleMultiplier.WEAK_MULTIPLIER;
         }
+
         return BattleMultiplier.DEFAULT_MULTIPLIER;
     }
 
@@ -96,6 +100,7 @@ public enum Weather {
         if (attackMoveType == Type.FIRE) {
             return BattleMultiplier.ZERO_MULTIPLIER;
         }
+
         return BattleMultiplier.DEFAULT_MULTIPLIER;
     }
 }

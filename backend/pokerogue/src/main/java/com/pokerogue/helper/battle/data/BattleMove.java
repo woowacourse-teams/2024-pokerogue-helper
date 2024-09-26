@@ -1,6 +1,5 @@
 package com.pokerogue.helper.battle.data;
 
-import com.pokerogue.helper.battle.data.MoveCategory;
 import com.pokerogue.helper.type.data.Type;
 
 public record BattleMove(
@@ -20,8 +19,4 @@ public record BattleMove(
         Integer generation,
         String flags
 ) {
-
-    public boolean isAttackMove() {
-        return this.category != MoveCategory.STATUS;
-    }
 }
