@@ -21,20 +21,15 @@ public record PokemonResponse(
         Integer specialAttack,
         Integer specialDefense
 ) {
-    public static PokemonResponse from(
-            Pokemon pokemon,
-            String image,
-            String backImage,
-            List<PokemonTypeResponse> pokemonTypeResponse
-    ) {
+    public static PokemonResponse from(Pokemon pokemon, List<PokemonTypeResponse> pokemonTypeResponses) {
         return new PokemonResponse(
                 pokemon.getId(),
                 (long) pokemon.getPokedexNumber(),
                 pokemon.getKoName(),
                 pokemon.getFormName(),
-                image,
-                backImage,
-                pokemonTypeResponse,
+                pokemon.getImageId(), //image front
+                pokemon.getImageId(), //back
+                pokemonTypeResponses,
                 pokemon.getGeneration(),
                 pokemon.getBaseTotal(),
                 pokemon.getHp(),

@@ -4,6 +4,7 @@ import com.pokerogue.helper.battle.BattleMove;
 import com.pokerogue.helper.battle.MoveCategory;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.pokemon.data.LevelMove;
 import com.pokerogue.helper.type.data.Type;
 
 public record MoveResponse(
@@ -18,7 +19,7 @@ public record MoveResponse(
         String categoryLogo
 ) {
 
-    public static MoveResponse from(BattleMove battleMove, Integer level, String typeImageFromS3) {
+    public static MoveResponse from(LevelMove levelMove, BattleMove battleMove) {
         MoveCategory moveCategory = battleMove.category();
         Type firstType = Type.findByName(battleMove.type().getKoName())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
@@ -26,11 +27,11 @@ public record MoveResponse(
         return new MoveResponse(
                 battleMove.id(),
                 battleMove.name(),
-                level,
+                levelMove.getLevel(),
                 battleMove.power(),
                 battleMove.accuracy(),
                 firstType.getName(),
-                typeImageFromS3,
+                firstType.getImage(),
                 moveCategory.getName(),
                 moveCategory.getImage()
         );
