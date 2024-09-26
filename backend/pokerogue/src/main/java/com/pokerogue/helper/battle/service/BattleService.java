@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class BattleService {
 
     private static final double FOG_ACCURACY_EFFECT = 0.9;
+    private static final BattleMultiplier[] EMPTY_BATTLE_MULTIPLIER_ARRAY = new BattleMultiplier[0];
 
     private final MoveRepository moveRepository;
     private final PokemonRepository pokemonRepository;
@@ -80,7 +81,7 @@ public class BattleService {
         List<BattleMultiplier> typeMatchingMultipliers = typeMultiplierProvider.getAllByTypeMatchings(moveType, types);
 
         BattleMultiplier typeMatchingMultiplier = BattleMultiplier.multiply(
-                typeMatchingMultipliers.toArray(new BattleMultiplier[0]));
+                typeMatchingMultipliers.toArray(EMPTY_BATTLE_MULTIPLIER_ARRAY));
         BattleMultiplier totalMultiplier = BattleMultiplier.multiply(weatherMultiplier, sameTypeBonusMultiplier,
                 typeMatchingMultiplier);
         if (weather == Weather.STRONG_WINDS) {
