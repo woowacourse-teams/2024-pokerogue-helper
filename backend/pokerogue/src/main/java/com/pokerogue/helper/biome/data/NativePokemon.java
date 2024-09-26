@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class NativePokemon {
 
     private static final String BOSS = "보스";
+
     @Field("tier")
     private String tier; // Todo: enum 사용
 
