@@ -35,7 +35,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class PokemonService {
-    
+
     private final S3Service s3Service;
 
     private final PokemonRepository pokemonRepository;
@@ -91,7 +91,6 @@ public class PokemonService {
 
         findByIdCache = pokemonDetailResponse.stream()
                 .collect(Collectors.toMap(PokemonDetailResponse::id, Function.identity()));
-
     }
 
     private PokemonDetailResponse toPokemonDetailResponse(Pokemon pokemon) {
