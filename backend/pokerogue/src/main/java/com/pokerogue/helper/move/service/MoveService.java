@@ -70,6 +70,7 @@ public class MoveService {
     }
 
     public MoveResponse findMove(String id) {
-        return MoveResponse.from(findMoveById(id));
+        Move move = findMoveById(id);
+        return MoveResponse.from(move);
     }
 }
