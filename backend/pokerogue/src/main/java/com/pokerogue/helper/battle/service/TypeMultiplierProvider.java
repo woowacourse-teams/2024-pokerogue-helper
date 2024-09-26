@@ -19,9 +19,9 @@ public class TypeMultiplierProvider {
 
     private final TypeMatchingRepository typeMatchingRepository;
 
-    public List<BattleMultiplier> getAllByTypeMatchings(Type attackMoveType, List<Type> rivalPokemonTypes) {
-        return rivalPokemonTypes.stream()
-                .map(toType -> findTypeMatchingByFromAndTo(attackMoveType, toType))
+    public List<BattleMultiplier> getAllByTypeMatchings(Type fromType, List<Type> toTypes) {
+        return toTypes.stream()
+                .map(toType -> findTypeMatchingByFromAndTo(fromType, toType))
                 .map(TypeMatching::getResult)
                 .map(BigDecimal::valueOf)
                 .map(BattleMultiplier::valueOf)
