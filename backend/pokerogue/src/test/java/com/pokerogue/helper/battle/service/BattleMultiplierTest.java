@@ -15,8 +15,9 @@ class BattleMultiplierTest {
     @DisplayName("배틀배수끼리 동등하다.")
     void hasSemanticEquality() {
         BigDecimal multiplierValue = BigDecimal.valueOf(0.3).add(BigDecimal.valueOf(0.3).add(BigDecimal.valueOf(0.3)));
-        BattleMultiplier multiplier = BattleMultiplier.valueOf(multiplierValue);
         BigDecimal otherMultiplierValue = BigDecimal.valueOf(0.9);
+
+        BattleMultiplier multiplier = BattleMultiplier.valueOf(multiplierValue);
         BattleMultiplier otherMultiplier = BattleMultiplier.valueOf(otherMultiplierValue);
 
         assertThat(multiplier).isEqualTo(otherMultiplier);
