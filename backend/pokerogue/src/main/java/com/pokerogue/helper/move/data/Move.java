@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@AllArgsConstructor
 @Document(collection = "move")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Move {
