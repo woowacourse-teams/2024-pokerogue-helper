@@ -223,6 +223,7 @@ public class PokemonService {
         return moves.stream()
                 .map(move -> {
                             BattleMove battleMove = battleMoveRepository.findById(move.getMoveId()).orElseThrow();
+                            
                             return new MoveResponse(
                                     battleMove.id(),
                                     battleMove.name(),
