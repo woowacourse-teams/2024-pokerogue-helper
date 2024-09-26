@@ -30,6 +30,7 @@ public enum ErrorMessage {
     FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다."),
     FILE_EXTENSION_NOT_APPLY(HttpStatus.BAD_REQUEST, "지원하지 않는 파일 형식입니다."),
     ;
+
     private final HttpStatus httpStatus;
     private final String message;
 }

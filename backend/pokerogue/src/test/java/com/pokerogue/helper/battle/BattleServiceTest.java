@@ -31,21 +31,5 @@ class BattleServiceTest extends ServiceTest {
             assertThat(moveResponses).isNotEmpty();
         });
     }
-
-//    @Test
-//    @DisplayName("배틀 예상 결과를 계산한다.")
-//    void calculateBattleResult() {
-//        String weatherId = "sunny";
-//        String myPokemonId = "charmander";
-//        String rivalPokemonId = "bulbasaur";
-//        String myMoveId = "ember";
-//
-//        BattleResultResponse battleResultResponse = battleService.calculateBattleResult(weatherId, myPokemonId,
-//                rivalPokemonId, myMoveId);
-//
-//        assertAll(() -> {
-//            assertThat(battleResultResponse.multiplier()).isEqualTo(4.5);
-//            assertThat(battleResultResponse.accuracy()).isEqualTo(100);
-//        });
-//    }
+    
 }
