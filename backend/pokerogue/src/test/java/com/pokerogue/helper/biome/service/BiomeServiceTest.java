@@ -1,9 +1,12 @@
 package com.pokerogue.helper.biome.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.pokerogue.environment.service.ServiceTest;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,4 +40,12 @@ class BiomeServiceTest extends ServiceTest {
                 () -> assertThat(biomeDetailResponse.nextBiomes()).hasSize(2)
         );
     }*/
+
+    @Test
+    @DisplayName("해당 id의 바이옴이 없는 경우 예외를 발생시킨다")
+    void notExistBiome() {
+        assertThatThrownBy(() -> biomeService.findBiome("test"))
+                .isInstanceOf(GlobalCustomException.class)
+                .hasMessage(ErrorMessage.BIOME_NOT_FOUND.getMessage());
+    }
 }
