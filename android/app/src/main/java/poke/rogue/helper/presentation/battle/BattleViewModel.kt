@@ -39,15 +39,16 @@ class BattleViewModel(
     private val _selectedState = MutableStateFlow(BattleSelectionsState.DEFAULT)
     val selectedState = _selectedState.asStateFlow()
 
-    val weatherPos: StateFlow<Int> = combine(
-        battleRepository.savedWeatherStream(),
-        weathers,
-    ) { weather, weathers ->
-        if (weather == null || weathers.isEmpty()) return@combine null
-        if (weathers.any { it.id == weather.id }.not()) return@combine null
-        weathers.indexOfFirst { it.id == weather.id }
-    }.filterNotNull()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+    val weatherPos: StateFlow<Int> =
+        combine(
+            battleRepository.savedWeatherStream(),
+            weathers,
+        ) { weather, weathers ->
+            if (weather == null || weathers.isEmpty()) return@combine null
+            if (weathers.any { it.id == weather.id }.not()) return@combine null
+            weathers.indexOfFirst { it.id == weather.id }
+        }.filterNotNull()
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 
     private val _navigateToSelection = MutableSharedFlow<SelectionNavigationData>()
     val navigateToSelection = _navigateToSelection.asSharedFlow()

@@ -40,16 +40,14 @@ class DefaultBattleRepository(
             opponentPokemonId = opponentPokemonId,
         )
 
-    override suspend fun savePokemon(pokemonId: String) =
-        localBattleDataSource.savePokemon(pokemonId)
+    override suspend fun savePokemon(pokemonId: String) = localBattleDataSource.savePokemon(pokemonId)
 
     override suspend fun savePokemonWithSkill(
         pokemonId: String,
         skillId: String,
     ) = localBattleDataSource.savePokemonWithSkill(pokemonId, skillId)
 
-    override fun savedPokemonStream(): Flow<Pokemon?> =
-        localBattleDataSource.pokemonId().map { it?.let { pokemonRepository.pokemon(it) } }
+    override fun savedPokemonStream(): Flow<Pokemon?> = localBattleDataSource.pokemonId().map { it?.let { pokemonRepository.pokemon(it) } }
 
     override fun savedPokemonWithSkillStream(): Flow<PokemonWithSkill?> =
         localBattleDataSource.pokemonWithSkill().map {
@@ -60,8 +58,7 @@ class DefaultBattleRepository(
             }
         }
 
-    override suspend fun saveWeather(weatherId: String) =
-        localBattleDataSource.saveWeather(weatherId)
+    override suspend fun saveWeather(weatherId: String) = localBattleDataSource.saveWeather(weatherId)
 
     override fun savedWeatherStream(): Flow<Weather?> =
         localBattleDataSource.weatherId().map {

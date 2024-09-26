@@ -57,9 +57,10 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
     private fun initSpinner() {
         binding.spinnerWeather.adapter = weatherAdapter
-        binding.spinnerWeather.onItemSelectedListener = itemSelectListener<WeatherUiModel> {
-            viewModel.updateWeather(it)
-        }
+        binding.spinnerWeather.onItemSelectedListener =
+            itemSelectListener<WeatherUiModel> {
+                viewModel.updateWeather(it)
+            }
     }
 
     private fun initObserver() {
