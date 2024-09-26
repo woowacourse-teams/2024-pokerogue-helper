@@ -9,7 +9,6 @@ import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +16,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
-    private static final double FOG_ACCURACY_EFFECT = 0.9;
-    private static final BattleMultiplier[] EMPTY_BATTLE_MULTIPLIER_ARRAY = new BattleMultiplier[0];
-
     private final MoveRepository moveRepository;
     private final PokemonRepository pokemonRepository;
-    private final TypeMultiplierProvider typeMultiplierProvider;
-    private final WeatherMultiplierProvider weatherMultiplierProvider;
+    private final BattleCalculator battleCalculator;
 
     public BattleResultResponse calculateBattleResult(
             String weatherId,
@@ -40,8 +35,8 @@ public class BattleService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
         Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
 
-        double finalAccuracy = calculateAccuracy(move, weather);
-        double totalMultiplier = calculateTotalMultiplier(move, weather, rivalPokemon, myPokemon);
+        double finalAccuracy = battleCalculator.calculateAccuracy(move, weather);
+        double totalMultiplier = battleCalculator.calculateTotalMultiplier(move, weather, rivalPokemon, myPokemon);
 
         return new BattleResultResponse(
                 move.getPower(),
@@ -52,44 +47,5 @@ public class BattleService {
                 moveType.getKoName(),
                 move.getMoveCategory()
         );
-    }
-
-    private double calculateAccuracy(Move move, Weather weather) {
-        if (weather == Weather.FOG) {
-            return (double) move.getAccuracy() * FOG_ACCURACY_EFFECT;
-        }
-
-        return move.getAccuracy();
-    }
-
-    private double calculateTotalMultiplier(
-            Move move,
-            Weather weather,
-            Pokemon rivalPokemon,
-            Pokemon myPokemon) {
-        if (!move.isAttackMove()) {
-            return BattleMultiplier.DEFAULT_MULTIPLIER.getValue();
-        }
-
-        Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
-        List<Type> types = rivalPokemon.getTypes()
-                .stream() // Todo
-                .map(String::toUpperCase)
-                .map(Type::valueOf)
-                .toList();
-        BattleMultiplier weatherMultiplier = weatherMultiplierProvider.getByAttackMoveType(weather, moveType);
-        BattleMultiplier sameTypeBonusMultiplier = typeMultiplierProvider.getBySameTypeAttackBonus(moveType, myPokemon);
-        List<BattleMultiplier> typeMatchingMultipliers = typeMultiplierProvider.getAllByTypeMatchings(moveType, types);
-
-        BattleMultiplier typeMatchingMultiplier = BattleMultiplier.multiply(
-                typeMatchingMultipliers.toArray(EMPTY_BATTLE_MULTIPLIER_ARRAY));
-        BattleMultiplier totalMultiplier = BattleMultiplier.multiply(weatherMultiplier, sameTypeBonusMultiplier,
-                typeMatchingMultiplier);
-        if (weather == Weather.STRONG_WINDS) {
-            BattleMultiplier strongWindMultiplier = typeMultiplierProvider.getByStrongWind(moveType, types);
-            totalMultiplier.multiply(strongWindMultiplier);
-        }
-
-        return totalMultiplier.getValue();
     }
 }
