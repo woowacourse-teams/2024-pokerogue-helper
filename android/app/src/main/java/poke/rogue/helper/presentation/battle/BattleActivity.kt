@@ -22,7 +22,7 @@ import timber.log.Timber
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModels<BattleViewModel> {
-        BattleViewModel.factory(DefaultBattleRepository.instance(this))
+        BattleViewModel.factory(DefaultBattleRepository.instance(applicationContext))
     }
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)
