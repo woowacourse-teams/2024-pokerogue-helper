@@ -41,11 +41,18 @@ public class AbilityService {
                         getAbilityTypeResponses(pokemon.getTypes())
                 ))
                 .toList();
-        if (abilityPokemonIds.size() == abilityPokemonResponses.size()) {
-            return AbilityDetailResponse.of(ability, abilityPokemonResponses);
-        }
+        validateExistAllPokemonId(abilityPokemonIds, abilityPokemonResponses);
 
-        throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
+        return AbilityDetailResponse.of(ability, abilityPokemonResponses);
+    }
+
+    private static void validateExistAllPokemonId(
+            List<String> abilityPokemonIds,
+            List<AbilityPokemonResponse> abilityPokemonResponses
+    ) {
+        if (abilityPokemonIds.size() != abilityPokemonResponses.size()) {
+            throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
+        }
     }
 
     private List<AbilityTypeResponse> getAbilityTypeResponses(List<Type> types) {
