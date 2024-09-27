@@ -35,10 +35,8 @@ public class AbilityService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<String> abilityPokemonIds = ability.getPokemonIds();
         List<AbilityPokemonResponse> abilityPokemonResponses = pokemonRepository.findAllById(abilityPokemonIds).stream()
-                .map(pokemon -> new AbilityPokemonResponse(
-                        pokemon.getId(),
-                        (long) pokemon.getPokedexNumber(),
-                        pokemon.getKoName(),
+                .map(pokemon -> AbilityPokemonResponse.of(
+                        pokemon,
                         s3Service.getPokemonImageFromS3(pokemon.getImageId()),
                         getAbilityTypeResponses(pokemon.getTypes())
                 ))
