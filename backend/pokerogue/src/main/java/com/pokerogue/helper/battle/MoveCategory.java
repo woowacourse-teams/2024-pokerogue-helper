@@ -1,5 +1,7 @@
 package com.pokerogue.helper.battle;
 
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
 import java.util.Optional;
 import lombok.Getter;
@@ -26,7 +28,7 @@ public enum MoveCategory {
 
     public static Optional<MoveCategory> findByEngName(String name) {
         return Arrays.stream(values())
-                .filter(category -> category.hasSameEngName(name))
+                .filter(category -> category.hasSameEngName(name.toLowerCase()))
                 .findAny();
     }
 
@@ -36,5 +38,10 @@ public enum MoveCategory {
 
     public String getImage() {
         return image + ".png";
+    }
+
+    public static MoveCategory convertFrom(String moveCategoryData) {
+        return findByEngName(moveCategoryData)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
     }
 }

@@ -1,113 +1,114 @@
 package com.pokerogue.helper.pokemon.data;
 
+import com.pokerogue.helper.type.data.Type;
 import java.util.List;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Document(collection = "pokemon")
 public class Pokemon {
 
     @Id
-    private final String id;
+    private String id;
 
     @Field("imageId")
-    private final String imageId;
+    private String imageId;
 
     @Field("pokedexNumber")
-    private final int pokedexNumber;
+    private int pokedexNumber;
 
     @Field("name")
-    private final String name;
+    private String name;
 
     @Field("koName")
-    private final String koName;
+    private String koName;
 
     @Field("speciesName")
-    private final String speciesName;
+    private String speciesName;
 
     @Field("canChangeForm")
-    private final boolean canChangeForm;
+    private boolean canChangeForm;
 
     @Field("formName")
-    private final String formName;
+    private String formName;
 
     @Field("baseExp")
-    private final int baseExp;
+    private int baseExp;
 
     @Field("friendship")
-    private final int friendship;
+    private int friendship;
 
     @Field("types")
-    private final List<String> types; // Todo enum
+    private List<Type> types;
 
     @Field("normalAbilityIds")
-    private final List<String> normalAbilityIds;
+    private List<String> normalAbilityIds;
 
     @Field("hiddenAbilityId")
-    private final String hiddenAbilityId;
+    private String hiddenAbilityId;
 
     @Field("passiveAbilityId")
-    private final String passiveAbilityId;
+    private String passiveAbilityId;
 
     @Field("generation")
-    private final int generation;
+    private int generation;
 
     @Field("legendary")
-    private final boolean legendary;
+    private boolean legendary;
 
     @Field("subLegendary")
-    private final boolean subLegendary;
+    private boolean subLegendary;
 
     @Field("mythical")
-    private final boolean mythical;
+    private boolean mythical;
 
     @Field("evolutions")
-    private final List<Evolution> evolutions;
+    private List<Evolution> evolutions;
 
     @Field("formChanges")
-    private final List<FormChange> formChanges;
+    private List<FormChange> formChanges;
 
     @Field("baseTotal")
-    private final int baseTotal;
+    private int baseTotal;
 
     @Field("hp")
-    private final int hp;
+    private int hp;
 
     @Field("attack")
-    private final int attack;
+    private int attack;
 
     @Field("defense")
-    private final int defense;
+    private int defense;
 
     @Field("specialAttack")
-    private final int specialAttack;
+    private int specialAttack;
 
     @Field("specialDefense")
-    private final int specialDefense;
+    private int specialDefense;
 
     @Field("speed")
-    private final int speed;
+    private int speed;
 
     @Field("height")
-    private final double height;
+    private double height;
 
     @Field("weight")
-    private final double weight;
+    private double weight;
 
     @Field("eggMoveIds")
-    private final List<String> eggMoveIds;
+    private List<String> eggMoveIds;
 
     @Field("levelMoves")
-    private final List<LevelMove> levelMoves;
+    private List<LevelMove> levelMoves;
 
     @Field("technicalMachineMoveIds")
-    private final List<String> technicalMachineMoveIds;
+    private List<String> technicalMachineMoveIds;
 
     @Field("biomeIds")
-    private final List<String> biomeIds;
+    private List<String> biomeIds;
 }

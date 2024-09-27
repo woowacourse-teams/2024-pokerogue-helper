@@ -1,5 +1,6 @@
 package com.pokerogue.helper.biome.data;
 
+import com.pokerogue.helper.type.data.Type;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class Biome {
     private String koName;
 
     @Field("types")
-    private List<String> types; // Todo: List<Type> 으로 바꾸기
+    private List<Type> types;
 
     @Field("nextBiomes")
     private List<NextBiome> nextBiomes;
@@ -55,7 +56,7 @@ public class Biome {
         Set<String> trainerTypes = new HashSet<>();
         trainers.stream()
                 .filter(trainer -> !trainer.getName().equals("없음"))
-                .forEach(trainer -> trainerTypes.addAll(trainer.getTypes()));
+                .forEach(trainer -> trainerTypes.addAll(null));
 
         return trainerTypes.stream()
                 .toList();

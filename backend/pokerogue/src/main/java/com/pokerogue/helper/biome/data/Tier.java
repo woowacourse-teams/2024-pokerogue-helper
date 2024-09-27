@@ -16,7 +16,7 @@ public enum Tier {
     BOSS("보스"),
     BOSS_RARE("레어 보스"),
     BOSS_SUPER_RARE("슈퍼 레어 보스"),
-    BOSS_ULTRA_RARE("슈퍼 울트라 레어 보스")
+    BOSS_ULTRA_RARE("슈퍼 울트라 레어 보스"),
     ;
 
     private final String name;
@@ -38,5 +38,9 @@ public enum Tier {
 
     public boolean isBossPokemon() {
         return this.name.contains("보스");
+    }
+
+    public static Tier convertFrom(String tierData) {
+        return getTierByName(tierData);
     }
 }

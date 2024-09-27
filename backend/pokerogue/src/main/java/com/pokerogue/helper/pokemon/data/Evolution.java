@@ -10,7 +10,7 @@ public final class Evolution {
     private final String from;
     private final String level;
     private final String to;
-    private final String item;
+    private final EvolutionItem item;
     private final String condition;
 
     public String from() { // Todo: 이 메소드들 지우기
@@ -26,7 +26,7 @@ public final class Evolution {
     }
 
     public String item() {
-        return item;
+        return item.getKoName();
     }
 
     public String condition() {

@@ -7,6 +7,7 @@ import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.EvolutionChain;
+import com.pokerogue.helper.pokemon.data.EvolutionItem;
 import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
 import com.pokerogue.helper.pokemon.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
@@ -232,7 +233,8 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
 
                     evolutionRepository.saveEdge(
                             inMemoryPokemon.speciesName(),
-                            new Evolution(inMemoryPokemon.speciesName(), "1", inMemoryPokemon.id(), "", inMemoryPokemon.formName())
+                            new Evolution(inMemoryPokemon.speciesName(), "1", inMemoryPokemon.id(),
+                                    EvolutionItem.BLACK_AUGURITE, inMemoryPokemon.formName())
                     );
                 }
             }
@@ -265,7 +267,7 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
         for (String from : inMemoryPokemonRepository.findAll().keySet()) {
             if (
                     evolutionRepository.findEvolutionChainById(from).isEmpty() ||
-                    evolutionRepository.findEvolutionChainById(from).get().getChain().isEmpty()
+                            evolutionRepository.findEvolutionChainById(from).get().getChain().isEmpty()
             ) {
                 evolutionRepository.saveChain(from, new EvolutionChain(List.of(List.of(from))));
             }
@@ -308,7 +310,7 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
                 regularize(from),
                 regularize(evolveConditions.get(0)),
                 regularize(evolveConditions.get(1)),
-                regularize(evolveConditions.get(2)),
+                EvolutionItem.BLACK_AUGURITE,
                 regularize(evolveConditions.get(3))
         );
     }

@@ -1,11 +1,13 @@
 package com.pokerogue.helper.biome.data;
 
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@RequiredArgsConstructor
+@Getter
+@NoArgsConstructor
 public class NativePokemon {
 
-    private final String tier; // Todo: enum 사용
-    private final List<String> pokemonIds;
+    private Tier tier;
+    private List<String> pokemonIds;
 }

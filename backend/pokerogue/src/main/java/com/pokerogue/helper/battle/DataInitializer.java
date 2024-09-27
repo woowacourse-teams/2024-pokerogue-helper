@@ -26,7 +26,7 @@ public class DataInitializer implements ApplicationRunner {
     private static final String LIST_DELIMITER = ",";
 
     private final BattleMoveRepository battleMoveRepository;
-    private final TypeMatchingRepository typeMatchingRepository;
+    private final InMemoryTypeMatchingRepository typeMatchingRepository;
 
     @Override
     public void run(ApplicationArguments args) {
@@ -75,7 +75,7 @@ public class DataInitializer implements ApplicationRunner {
     private BattleMove createMove(List<String> fields) {
         Type moveType = Type.findByName(fields.get(4))
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-        MoveCategory moveCategory = MoveCategory.findByEngName(fields.get(6).toLowerCase())
+        MoveCategory moveCategory = MoveCategory.findByEngName(fields.get(6))
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
 
         return new BattleMove(
