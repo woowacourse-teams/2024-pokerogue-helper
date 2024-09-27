@@ -1,7 +1,6 @@
 package com.pokerogue.helper.battle.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.type.data.Type;
