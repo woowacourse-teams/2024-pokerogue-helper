@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.pokerogue.environment.repository.MongoRepositoryTest;
-import com.pokerogue.helper.move.MoveRepository;
 import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.move.data.MoveFlag;
