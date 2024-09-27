@@ -46,6 +46,10 @@ class BattleViewModel(
         ) { weather, weathers ->
             if (weather == null || weathers.isEmpty()) return@combine null
             if (weathers.any { it.id == weather.id }.not()) return@combine null
+            val selectedWeather = weathers.first { it.id == weather.id }
+            // update selected weather
+            _selectedState.value = selectedState.value.copy(weather = BattleSelectionUiState.Selected(selectedWeather))
+            // return position
             weathers.indexOfFirst { it.id == weather.id }
         }.filterNotNull()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
