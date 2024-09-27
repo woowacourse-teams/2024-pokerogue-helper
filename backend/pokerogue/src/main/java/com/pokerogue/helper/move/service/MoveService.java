@@ -22,6 +22,9 @@ public class MoveService {
 
     public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
         List<Pokemon> pokemons = pokemonRepository.findByPokedexNumber(pokedexNumber);
+        if (pokemons.isEmpty()) {
+            throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
+        }
         return makeMoveResponse(pokemons.get(0));
     }
 
