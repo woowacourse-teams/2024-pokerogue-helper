@@ -24,8 +24,8 @@ public record PokemonDetailResponse(
         Double weight,
         Double height,
         EvolutionResponses evolutions,
-        List<MoveResponse> moves,
-        List<MoveResponse> eggMoveResponses,
+        List<PokemonMoveResponse> moves,
+        List<PokemonMoveResponse> eggPokemonMoveResponses,
         List<PokemonBiomeResponse> biomes
 ) {
 }

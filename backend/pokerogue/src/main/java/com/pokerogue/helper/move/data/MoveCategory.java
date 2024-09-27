@@ -1,4 +1,4 @@
-package com.pokerogue.helper.battle;
+package com.pokerogue.helper.move.data;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;

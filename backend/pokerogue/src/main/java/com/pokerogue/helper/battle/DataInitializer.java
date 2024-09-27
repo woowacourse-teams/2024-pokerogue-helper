@@ -2,6 +2,7 @@ package com.pokerogue.helper.battle;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.type.data.Type;
 import java.io.BufferedReader;
 import java.io.IOException;

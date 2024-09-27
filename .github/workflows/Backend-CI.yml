@@ -28,6 +28,7 @@ jobs:
       - name: Remove Containers
         run: |
           docker ps -aq | xargs -r docker rm -vf
+          docker builder prune
 
       - name: Set up Test MongoDB
         working-directory: ./backend/pokerogue/src/main/resources/

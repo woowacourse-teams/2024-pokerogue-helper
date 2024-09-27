@@ -1,5 +1,6 @@
 package com.pokerogue.helper.battle;
 
+import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.type.data.Type;
 
 public record BattleMove(

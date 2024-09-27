@@ -1,5 +1,7 @@
-package com.pokerogue.helper.battle;
+package com.pokerogue.helper.move.dto;
 
+import com.pokerogue.helper.move.data.Move;
+import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.type.data.Type;
 
 public record MoveResponse(
@@ -14,20 +16,20 @@ public record MoveResponse(
         String effect
 ) {
 
-    public static MoveResponse from(BattleMove battleMove) {
-        Type type = battleMove.type();
-        MoveCategory moveCategory = battleMove.category();
+    public static MoveResponse from(Move move) {
+        Type type = move.getType();
+        MoveCategory moveCategory = move.getMoveCategory();
 
         return new MoveResponse(
-                battleMove.id(),
-                battleMove.name(),
+                move.getId(),
+                move.getKoName(),
                 type.getName(),
                 type.getImage(),
                 moveCategory.getEngName(),
                 moveCategory.getImage(),
-                battleMove.power(),
-                battleMove.accuracy(),
-                battleMove.effect()
+                move.getPower(),
+                move.getAccuracy(),
+                move.getEffect()
         );
     }
 }
