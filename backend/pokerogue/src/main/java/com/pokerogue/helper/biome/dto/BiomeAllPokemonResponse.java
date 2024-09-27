@@ -6,6 +6,6 @@ import java.util.List;
 public record BiomeAllPokemonResponse(String tier, List<BiomePokemonResponse> pokemons) {
 
     public static BiomeAllPokemonResponse of(NativePokemon nativePokemon, List<BiomePokemonResponse> pokemons) {
-        return new BiomeAllPokemonResponse(nativePokemon.getTier(), pokemons);
+        return new BiomeAllPokemonResponse(nativePokemon.getTier().getName(), pokemons);
     }
 }

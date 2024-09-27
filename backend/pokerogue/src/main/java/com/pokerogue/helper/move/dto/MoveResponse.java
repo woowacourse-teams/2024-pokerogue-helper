@@ -1,7 +1,5 @@
 package com.pokerogue.helper.move.dto;
 
-import com.pokerogue.helper.global.exception.ErrorMessage;
-import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.type.data.Type;
@@ -19,10 +17,8 @@ public record MoveResponse(
 ) {
 
     public static MoveResponse from(Move move) {
-        Type type = Type.findByEngName(move.getType())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
-        MoveCategory moveCategory = MoveCategory.findByEngName(move.getMoveCategory())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
+        Type type = move.getType();
+        MoveCategory moveCategory = move.getMoveCategory();
 
         return new MoveResponse(
                 move.getId(),

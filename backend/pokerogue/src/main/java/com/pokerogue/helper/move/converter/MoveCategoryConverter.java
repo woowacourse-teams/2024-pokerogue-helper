@@ -1,6 +1,6 @@
 package com.pokerogue.helper.move.converter;
 
-import com.pokerogue.helper.battle.MoveCategory;
+import com.pokerogue.helper.move.data.MoveCategory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
 

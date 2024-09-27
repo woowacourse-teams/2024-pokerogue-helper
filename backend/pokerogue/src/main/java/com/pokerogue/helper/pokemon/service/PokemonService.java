@@ -259,9 +259,9 @@ public class PokemonService {
         return moves.stream()
                 .map(r -> moveRepository.findById(r).orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)))
                 .map(move -> PokemonMoveResponse.from(move, 1,
-                        s3Service.getPokerogueTypeImageFromS3(moveRepository.findById(move.getId())
+                        moveRepository.findById(move.getId())
                                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND))
-                                .getType())))
+                                .getType().getImage()))
                 .toList();
     }
 
@@ -271,10 +271,9 @@ public class PokemonService {
                 .mapToObj(index -> PokemonMoveResponse.from(
                         moveRepository.findById(moves.get(index)).orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND)),
                         Integer.parseInt(moves.get(index + 1)),
-                        s3Service.getPokerogueTypeImageFromS3(
                                 moveRepository.findById(moves.get(index))
                                         .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND))
-                                        .getType())
+                                        .getType().getImage()
                 ))
                 .toList();
     }
