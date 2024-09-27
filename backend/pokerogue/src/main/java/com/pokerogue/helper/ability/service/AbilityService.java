@@ -9,6 +9,7 @@ import com.pokerogue.helper.ability.dto.AbilityTypeResponse;
 import com.pokerogue.helper.ability.repository.AbilityRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
 import java.util.List;
@@ -34,21 +35,22 @@ public class AbilityService {
         Ability ability = abilityRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<String> abilityPokemonIds = ability.getPokemonIds();
-        List<AbilityPokemonResponse> abilityPokemonResponses = pokemonRepository.findAllById(abilityPokemonIds).stream()
+        List<Pokemon> pokemons = pokemonRepository.findAllById(abilityPokemonIds);
+        validateExistAllPokemonId(abilityPokemonIds, pokemons);
+        List<AbilityPokemonResponse> abilityPokemonResponses = pokemons.stream()
                 .map(pokemon -> AbilityPokemonResponse.of(
                         pokemon,
                         s3Service.getPokemonImageFromS3(pokemon.getImageId()),
                         getAbilityTypeResponses(pokemon.getTypes())
                 ))
                 .toList();
-        validateExistAllPokemonId(abilityPokemonIds, abilityPokemonResponses);
 
         return AbilityDetailResponse.of(ability, abilityPokemonResponses);
     }
 
     private static void validateExistAllPokemonId(
             List<String> abilityPokemonIds,
-            List<AbilityPokemonResponse> abilityPokemonResponses
+            List<Pokemon> abilityPokemonResponses
     ) {
         if (abilityPokemonIds.size() != abilityPokemonResponses.size()) {
             throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
