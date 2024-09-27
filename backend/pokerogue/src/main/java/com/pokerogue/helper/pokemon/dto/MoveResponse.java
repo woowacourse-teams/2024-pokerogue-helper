@@ -1,7 +1,7 @@
 package com.pokerogue.helper.pokemon.dto;
 
-import com.pokerogue.helper.battle.BattleMove;
-import com.pokerogue.helper.battle.MoveCategory;
+import com.pokerogue.helper.battle.data.BattleMove;
+import com.pokerogue.helper.battle.data.MoveCategory;
 import com.pokerogue.helper.pokemon.data.Type;
 
 public record MoveResponse(

@@ -1,5 +1,6 @@
-package com.pokerogue.helper.battle;
+package com.pokerogue.helper.battle.dto;
 
+import com.pokerogue.helper.battle.data.Weather;
 import java.util.List;
 
 public record WeatherResponse(
