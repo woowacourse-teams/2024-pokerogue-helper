@@ -40,7 +40,7 @@ public class Ability {
     @Field("isIgnorable")
     private Boolean isIgnorable;
 
-    public boolean isNotNone() {
+    public boolean isPresent() {
         return !id.equals("none");
     }
 }

@@ -25,7 +25,7 @@ public class AbilityService {
 
     public List<AbilityResponse> findAbilities() {
         return abilityRepository.findAll().stream()
-                .filter(Ability::isNotNone)
+                .filter(Ability::isPresent)
                 .map(AbilityResponse::from)
                 .toList();
     }
