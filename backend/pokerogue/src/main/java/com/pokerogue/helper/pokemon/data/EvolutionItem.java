@@ -50,4 +50,8 @@ public enum EvolutionItem {
                 .findAny()
                 .orElse(EMPTY);
     }
+
+    public static EvolutionItem convertFrom(String evolutionItemData) {
+        return findById(evolutionItemData);
+    }
 }

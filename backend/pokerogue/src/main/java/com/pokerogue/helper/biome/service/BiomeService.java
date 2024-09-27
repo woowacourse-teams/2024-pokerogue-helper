@@ -116,13 +116,12 @@ public class BiomeService {
         throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
     }
 
-    private List<BiomeTypeResponse> getTypesResponses(List<String> types) {
+    private List<BiomeTypeResponse> getTypesResponses(List<Type> types) {
         return types.stream()
                 .map(type -> new BiomeTypeResponse(
-                        s3Service.getPokerogueTypeImageFromS3(type),
-                        Type.findByEngName(type)
-                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND))
-                                .getKoName()))
+                        type.getImage(),
+                        type.getKoName())
+                )
                 .toList();
     }
 
@@ -131,10 +130,9 @@ public class BiomeService {
                 .map(Trainer::getTypes)
                 .flatMap(List::stream)
                 .map(type -> new BiomeTypeResponse(
-                        s3Service.getPokerogueTypeImageFromS3(type),
-                        Type.findByEngName(type)
-                                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND))
-                                .getKoName()))
+                        type.getImage(),
+                        type.getKoName())
+                )
                 .toList();
     }
 }

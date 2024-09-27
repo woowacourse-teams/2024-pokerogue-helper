@@ -9,7 +9,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TypeMatchingRepository {
+public class InMemoryTypeMatchingRepository {
 
     private final Map<Integer, TypeMatching> typeMatchings = new HashMap<>();
 

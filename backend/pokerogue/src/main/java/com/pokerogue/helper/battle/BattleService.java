@@ -18,7 +18,7 @@ public class BattleService {
 
     private final BattleMoveRepository moveRepository;
     private final InMemoryPokemonRepository inMemoryPokemonRepository;
-    private final TypeMatchingRepository typeMatchingRepository;
+    private final InMemoryTypeMatchingRepository typeMatchingRepository;
 
     public List<WeatherResponse> findWeathers() {
         return Arrays.stream(Weather.values())

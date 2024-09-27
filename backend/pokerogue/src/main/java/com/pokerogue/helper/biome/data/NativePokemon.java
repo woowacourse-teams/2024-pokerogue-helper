@@ -13,16 +13,16 @@ public class NativePokemon {
     private static final String BOSS = "보스";
 
     @Field("tier")
-    private String tier; // Todo: enum 사용
+    private Tier tier;
 
     @Field("pokemonIds")
     private List<String> pokemonIds;
 
     public boolean isWild() {
-        return !tier.contains(BOSS);
+        return tier.isWild();
     }
 
     public boolean isBoss() {
-        return tier.contains(BOSS);
+        return tier.isBoss();
     }
 }
