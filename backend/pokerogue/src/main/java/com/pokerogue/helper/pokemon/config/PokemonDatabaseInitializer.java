@@ -1,8 +1,5 @@
 package com.pokerogue.helper.pokemon.config;
 
-import com.pokerogue.helper.ability.data.Ability;
-import com.pokerogue.helper.ability.data.AbilityInfo;
-import com.pokerogue.helper.ability.repository.InMemoryAbilityRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Evolution;
@@ -46,7 +43,6 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
 
     private final InMemoryPokemonRepository inMemoryPokemonRepository;
     private final EvolutionRepository evolutionRepository;
-    private final InMemoryAbilityRepository inMemoryAbilityRepository;
     private final List<String> pokemonKeys = List.of(
             "id",
             "speciesId",
@@ -95,7 +91,6 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         save("data/pokemon/pokemon.txt", this::savePokemon);
         save("data/pokemon/evolution-for-pokemon-response.txt", this::saveEvolution);
-        saveAbility();
     }
 
     private void save(String file, Consumer<BufferedReader> consumer) {
@@ -343,44 +338,5 @@ public class PokemonDatabaseInitializer implements ApplicationRunner {
         }
 
         return values;
-    }
-
-    private void saveAbility() {
-        List<AbilityInfo> abilityInfos = new ArrayList<>();
-
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("data/ability/ability.txt");
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
-            while (true) {
-                String abilityInfo = bufferedReader.readLine();
-                if (abilityInfo == null) {
-                    break;
-                }
-                abilityInfos.add(new AbilityInfo(abilityInfo));
-            }
-        } catch (IOException e) {
-            log.error("error message : {}", e.getStackTrace()[0]);
-        }
-
-        abilityInfos.stream()
-                .map(abilityInfo -> new Ability(
-                        abilityInfo.getId(),
-                        abilityInfo.getName(),
-                        abilityInfo.getDescription(),
-                        getAbilityPokemon(abilityInfo.getPokemons()))
-                ).forEach(inMemoryAbilityRepository::save);
-    }
-
-    private List<InMemoryPokemon> getAbilityPokemon(List<String> pokemons) {
-        List<InMemoryPokemon> abilityInMemoryPokemons = new ArrayList<>();
-        for (int i = 0; i < pokemons.size(); i++) {
-            String pokemonId = pokemons.get(i);
-
-            InMemoryPokemon inMemoryPokemon = inMemoryPokemonRepository.findById(pokemonId)
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-
-            abilityInMemoryPokemons.add(inMemoryPokemon);
-        }
-
-        return abilityInMemoryPokemons;
     }
 }
