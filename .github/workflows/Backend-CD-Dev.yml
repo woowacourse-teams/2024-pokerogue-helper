@@ -12,7 +12,6 @@ jobs:
     uses: ./.github/workflows/Backend-CI.yml
     secrets: inherit
 
-
   build:
     needs: test
     runs-on: dev
@@ -60,10 +59,15 @@ jobs:
           else
           echo "No containers to remove."
           fi
-          
+
+          # Pull and run the MongoDB container
+          docker pull pokeroguehelper/pokerogue-helper-test-mongodb
+          docker run -d --name pokerogue-mongo-db pokeroguehelper/pokerogue-helper-test-mongodb
+
+          # Pull and run the server container
           docker pull ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}
-          
           docker run -d -p 8080:8080 --name server \
+              --link pokerogue-mongo-db:mongo \
               -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
               -e TZ=Asia/Seoul \
               -e SPRING_PROFILES_ACTIVE=dev \
