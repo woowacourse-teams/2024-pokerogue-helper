@@ -2,7 +2,7 @@ name: Backend Development Server CD
 
 on:
   push:
-    branches: [ "sample-test" ]
+    branches: [ "be/develop" ]
 
 permissions:
   contents: read
