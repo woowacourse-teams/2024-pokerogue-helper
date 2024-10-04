@@ -1,6 +1,5 @@
 package com.pokerogue.helper.pokemon.data;
 
-import com.pokerogue.helper.ability.repository.InMemoryAbilityRepository;
 import com.pokerogue.helper.pokemon.config.PokemonDatabaseInitializer;
 import com.pokerogue.helper.pokemon.repository.EvolutionRepository;
 import com.pokerogue.helper.pokemon.repository.InMemoryPokemonRepository;
@@ -19,8 +18,7 @@ class InMemoryPokemonDatabaseInitializerTest {
         InMemoryPokemonRepository inMemoryPokemonRepository = new InMemoryPokemonRepository();
         PokemonDatabaseInitializer pokemonDatabaseInitializer = new PokemonDatabaseInitializer(
                 inMemoryPokemonRepository,
-                new EvolutionRepository(),
-                new InMemoryAbilityRepository()
+                new EvolutionRepository()
         );
 
         pokemonDatabaseInitializer.run(new DefaultApplicationArguments());
@@ -36,8 +34,7 @@ class InMemoryPokemonDatabaseInitializerTest {
         InMemoryPokemonRepository inMemoryPokemonRepository = new InMemoryPokemonRepository();
         PokemonDatabaseInitializer pokemonDatabaseInitializer = new PokemonDatabaseInitializer(
                 inMemoryPokemonRepository,
-                new EvolutionRepository(),
-                new InMemoryAbilityRepository()
+                new EvolutionRepository()
         );
 
         pokemonDatabaseInitializer.run(new DefaultApplicationArguments());

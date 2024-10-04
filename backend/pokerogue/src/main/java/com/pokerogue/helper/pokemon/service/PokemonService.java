@@ -3,7 +3,7 @@ package com.pokerogue.helper.pokemon.service;
 
 import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.ability.data.Ability;
-import com.pokerogue.helper.ability.repository.InMemoryAbilityRepository;
+import com.pokerogue.helper.ability.repository.AbilityRepository;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
@@ -45,7 +45,7 @@ public class PokemonService {
     private final MoveRepository moveRepository;
     private final EvolutionRepository evolutionRepository;
     private final BiomeRepository biomeRepository;
-    private final InMemoryAbilityRepository inMemoryAbilityRepository;
+    private final AbilityRepository abilityRepository;
 
     private List<PokemonResponse> findAllCache = List.of();
     private Map<String, PokemonDetailResponse> findByIdCache = new HashMap<>();
@@ -186,16 +186,16 @@ public class PokemonService {
     private List<PokemonAbilityResponse> createAbilityResponse(InMemoryPokemon inMemoryPokemon) {
         List<PokemonAbilityResponse> ret = new ArrayList<>();
 
-        Ability passive = inMemoryAbilityRepository.findById(inMemoryPokemon.abilityPassive())
+        Ability passive = abilityRepository.findById(inMemoryPokemon.abilityPassive())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         ret.add(new PokemonAbilityResponse(
                 inMemoryPokemon.abilityPassive(), passive.getName(), passive.getDescription(),
                 true, false
         ));
 
-        Ability ability1 = inMemoryAbilityRepository.findById(inMemoryPokemon.ability1())
+        Ability ability1 = abilityRepository.findById(inMemoryPokemon.ability1())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
-        Ability ability2 = inMemoryAbilityRepository.findById(inMemoryPokemon.ability2())
+        Ability ability2 = abilityRepository.findById(inMemoryPokemon.ability2())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<PokemonAbilityResponse> defaultAbilities = Stream.of(ability1, ability2)
                 .distinct()
@@ -208,14 +208,14 @@ public class PokemonService {
         ret.addAll(defaultAbilities);
 
         if (!inMemoryPokemon.abilityHidden().isEmpty()) {
-            Ability hidden = inMemoryAbilityRepository.findById(inMemoryPokemon.abilityHidden())
+            Ability hidden = abilityRepository.findById(inMemoryPokemon.abilityHidden())
                     .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
             ret.add(new PokemonAbilityResponse(inMemoryPokemon.abilityHidden(), hidden.getName(), hidden.getDescription(),
                     false,
                     true));
 
             for (int i = 1; i < ret.size() - 1; i++) {
-                if (inMemoryAbilityRepository.findById(ret.get(i).id())
+                if (abilityRepository.findById(ret.get(i).id())
                         .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND)) == hidden
                 ) {
                     ret.remove(i);
