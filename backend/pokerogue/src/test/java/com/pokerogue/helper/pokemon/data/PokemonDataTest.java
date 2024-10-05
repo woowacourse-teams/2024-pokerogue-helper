@@ -168,8 +168,29 @@ public class PokemonDataTest extends RepositoryTest {
                 .toList()
                 .size();
 
-        System.out.println(hiddenAbilityCount);
-//        Assertions.assertThat(isPassiveExists).isTrue();
+        Assertions.assertThat(hiddenAbilityCount)
+                .isGreaterThanOrEqualTo(1)
+                .isLessThanOrEqualTo(actual.size());
     }
+
+    @DisplayName("특성의 총 개수는 2개에서 4개 사이다.")
+    @Test
+    void pokemonGeneration9() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        Assertions.assertThatCode(() -> actual.forEach(r ->
+        {
+            List<String> normalAbilityIds = r.getNormalAbilityIds();
+            if (!r.getHiddenAbilityId().equals("none")) {
+                normalAbilityIds.add(r.getHiddenAbilityId());
+            }
+            normalAbilityIds.add(r.getPassiveAbilityId());
+
+            Assertions.assertThat(normalAbilityIds.size())
+                    .isGreaterThanOrEqualTo(2)
+                    .isLessThanOrEqualTo(4);
+        })).doesNotThrowAnyException();
+    }
+
 
 }
