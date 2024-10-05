@@ -7,6 +7,7 @@ import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemon
 import com.pokerogue.environment.repository.RepositoryTest;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.List;
+import org.apache.logging.log4j.util.Strings;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Disabled;
@@ -117,7 +118,7 @@ public class PokemonDataTest extends RepositoryTest {
         })).doesNotThrowAnyException();
     }
 
-    @DisplayName("정해진 범위의 수인지 확인한다.")
+    @DisplayName("능력치가 정해진 범위의 수인지 확인한다.")
     @Test
     void pokemonGeneration6() {
         List<Pokemon> actual = pokemonRepository.findAll();
@@ -125,9 +126,8 @@ public class PokemonDataTest extends RepositoryTest {
         Assertions.assertThatCode(() -> actual.forEach(r ->
         {
             List<Object> stats = List.of(
-                    r.getHeight(),
-                    r.getWeight(),
                     r.getDefense(),
+                    r.getAttack(),
                     r.getSpecialAttack(),
                     r.getSpecialDefense(),
                     r.getWeight(),
@@ -140,6 +140,36 @@ public class PokemonDataTest extends RepositoryTest {
             );
             PokemonValidator.throwIfNumberOutOfRange(stats);
         })).doesNotThrowAnyException();
+    }
+
+    @DisplayName("패시브 특성은 항상 존재한다.")
+    @Test
+    void pokemonGeneration7() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        boolean isPassiveExists = actual.stream()
+                                          .map(Pokemon::getPassiveAbilityId)
+                                          .noneMatch(Strings::isBlank) ||
+                                  actual.stream()
+                                          .map(Pokemon::getPassiveAbilityId)
+                                          .noneMatch(r -> r.equals("none"));
+
+        Assertions.assertThat(isPassiveExists).isTrue();
+    }
+
+    @DisplayName("히든 특성은 존재할 수도 안할 수도 있다.")
+    @Test
+    void pokemonGeneration8() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        int hiddenAbilityCount = actual.stream()
+                .map(Pokemon::getHiddenAbilityId)
+                .filter(r -> r.equals("none"))
+                .toList()
+                .size();
+
+        System.out.println(hiddenAbilityCount);
+//        Assertions.assertThat(isPassiveExists).isTrue();
     }
 
 }
