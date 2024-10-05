@@ -17,4 +17,16 @@ public abstract class Validator {
             throw new IllegalArgumentException("Duplicated Id exists");
         }
     }
+
+    protected static void throwIfDelimiterMisplaced(String data, String delimiter) {
+        if (data.startsWith(delimiter) || data.endsWith(delimiter)) {
+            throw new IllegalArgumentException(data + "Delimiter misplaced");
+        }
+    }
+
+    protected static void throwIfDelimiterIsSequential(String data, String delimiter) {
+        if (data.contains(delimiter.concat(delimiter))) {
+            throw new IllegalArgumentException(data + "Delimiter sequential");
+        }
+    }
 }
