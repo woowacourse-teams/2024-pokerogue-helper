@@ -21,32 +21,38 @@ public class PokemonDataTest extends RepositoryTest {
     @DisplayName("포켓몬 데이터의 개수를 확인한다.")
     @Test
     void pokemonCount() {
-        List<Pokemon> pokemons = pokemonRepository.findAll();
+        List<Pokemon> actual = pokemonRepository.findAll();
 
-        ThrowingCallable callable = () -> validatePokemonSize(pokemons);
+        ThrowingCallable validator = () -> validatePokemonSize(actual);
 
-        Assertions.assertThatCode(callable).doesNotThrowAnyException();
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
     @DisplayName("포켓몬 데이터의 아이디 형식을 확인한다.")
+    @Disabled("-로 나오는 아이디가 존재, 파싱코드의 replace를 전체로 replace하도록 바꿔야 함")
     @Test
-    @Disabled
     void pokemonIdFormat() {
-        List<Pokemon> pokemons = pokemonRepository.findAll();
+        List<Pokemon> actual = pokemonRepository.findAll();
 
-        ThrowingCallable callable = () -> validatePokemonIdFormat(pokemons);
+        ThrowingCallable validator = () -> validatePokemonIdFormat(actual);
+
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
+    }
+
+    @DisplayName("포켓몬 데이터의 종족값은 기본 능력치의 합이다.")
+    @Disabled("""
+            ID actualTotal expectedTotal
+            charizard_gigantamax 634 644,
+            kingler_gigantamax 575 58
+            두 건의 데이터에 대해 종족값이 일치하지 않음""")
+    @Test
+    void pokemonTotalStats() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        ThrowingCallable callable = () -> PokemonValidator.validatePokemonTotalState(actual);
 
         Assertions.assertThatCode(callable).doesNotThrowAnyException();
     }
 
-    @DisplayName("포켓몬 데이터의 종족값은 ")
-    @Test
-    @Disabled
-    void pokemonIdFormat() {
-        List<Pokemon> pokemons = pokemonRepository.findAll();
 
-        ThrowingCallable callable = () -> validatePokemonIdFormat(pokemons);
-
-        Assertions.assertThatCode(callable).doesNotThrowAnyException();
-    }
 }
