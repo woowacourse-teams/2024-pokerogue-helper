@@ -4,6 +4,7 @@ import static java.lang.Character.isDigit;
 import static java.lang.Character.isLowerCase;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
@@ -12,6 +13,8 @@ class PokemonValidator extends Validator {
     private static final int POKEMON_SIZE = 1446;
     private static final int MIN_GENERATION = 1;
     private static final int MAX_GENERATION = 9;
+    private static final int MIN_NORMAL_ABILITY_COUNT = 1;
+    private static final int MAX_NORMAL_ABILITY_COUNT = 2;
     private static final String DELIMITER = "_";
     private static final IntPredicate idCharacterRules = character -> isLowerCase(character)
                                                                       || isDigit(character)
@@ -106,6 +109,24 @@ class PokemonValidator extends Validator {
 
         if (trueCount > 1) {
             throw new IllegalArgumentException("rarityNotConsistence");
+        }
+    }
+
+    public static void validateNormalAbilityCount(List<Pokemon> actual) {
+
+    }
+
+
+    static void throwIfNormalAbilityCountInvalid(List<String> normalAbilities) {
+        if (normalAbilities.isEmpty() || normalAbilities.size() > MAX_NORMAL_ABILITY_COUNT) {
+            throw new IllegalArgumentException("throwIfNormalAbilityCountInvalid");
+        }
+    }
+
+    public static void throwIfAbilityDuplicated(List<String> normalAbilityIds) {
+        HashSet<String> strings = new HashSet<>(normalAbilityIds);
+        if(strings.size() != normalAbilityIds.size()) {
+            throw new IllegalArgumentException(normalAbilityIds + "throwIfAbilityDuplicated");
         }
     }
 }

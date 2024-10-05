@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.data;
 
+import static com.pokerogue.helper.pokemon.data.PokemonValidator.throwIfNormalAbilityCountInvalid;
 import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemonIdFormat;
 import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemonSize;
 
@@ -85,6 +86,34 @@ public class PokemonDataTest extends RepositoryTest {
         ThrowingCallable validator = () -> PokemonValidator.validatePokemonRarity(actual);
 
         Assertions.assertThatCode(validator).doesNotThrowAnyException();
+    }
+
+    @DisplayName("normal ability id는 항상 1개 또는 2개이다.")
+    @Test
+    void pokemonGeneration4() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        Assertions.assertThatCode(() -> actual.forEach(r -> throwIfNormalAbilityCountInvalid(r.getNormalAbilityIds())))
+                .doesNotThrowAnyException();
+    }
+
+    @DisplayName("abilitiy id는 서로 중복될 수 없다.")
+    @Disabled("""
+            기본 특성이 히든 특성과 같은 데이터가 있어서 disable
+            +) 이상해꽃 기간타맥스가 되면 기본 특성이 달라진다
+            +) pokerouge dex와 데이터가 다른걸 보니 추가 확인이 필요
+            """)
+    @Test
+    void pokemonGeneration5() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        Assertions.assertThatCode(() -> actual.forEach(r ->
+        {
+            List<String> normalAbilityIds = r.getNormalAbilityIds();
+            normalAbilityIds.add(r.getHiddenAbilityId());
+            normalAbilityIds.add(r.getPassiveAbilityId());
+            PokemonValidator.throwIfAbilityDuplicated(r.getNormalAbilityIds());
+        })).doesNotThrowAnyException();
     }
 
 }
