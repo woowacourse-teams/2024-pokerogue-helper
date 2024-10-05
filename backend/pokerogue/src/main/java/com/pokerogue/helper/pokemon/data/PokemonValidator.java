@@ -56,7 +56,7 @@ class PokemonValidator extends Validator {
                 String.format("expected follow id rule, but id was %s", id));
     }
 
-    static void validatePokemonTotalState(List<Pokemon> pokemons) {
+    static void validatePokemonsBaseTotal(List<Pokemon> pokemons) {
         pokemons.forEach(PokemonValidator::throwIfTotalStatIncorrect);
     }
 
@@ -68,21 +68,36 @@ class PokemonValidator extends Validator {
         int specialDefense = pokemon.getSpecialDefense();
         int speed = pokemon.getSpeed();
 
-        int actualTotalStat = pokemon.getBaseTotal();
-        int expectedTotalStat = hp + attack + specialAttack + defense + specialDefense + speed;
+        int baseTotal = pokemon.getBaseTotal();
+        int expectedBaseTotal = hp + attack + specialAttack + defense + specialDefense + speed;
 
-        if (actualTotalStat != expectedTotalStat) {
-            throw new IllegalArgumentException(pokemon.getId() + " 종족값이 일치하지 않습니다.");
+        if (baseTotal == expectedBaseTotal) {
+            return;
         }
+        throw new IllegalArgumentException(pokemon.getId() + " 종족값이 일치하지 않습니다.");
     }
 
-    static void validatePokemonGeneration(List<Pokemon> pokemons) {
-        Predicate<Integer> invalidGeneration = gen -> gen < MIN_GENERATION || gen > MAX_GENERATION;
-        boolean validationFailed = pokemons.stream().map(Pokemon::getGeneration).anyMatch(invalidGeneration);
+    static void validatePokemonsGeneration(List<Pokemon> pokemons) {
+        List<Integer> generations = pokemons.stream()
+                .map(Pokemon::getGeneration)
+                .toList();
 
-        if (validationFailed) {
-            throw new IllegalArgumentException("Pokemon generation is invalid");
+        generations.forEach(generation -> {
+            Predicate<Integer> condition = gen -> gen >= MIN_GENERATION && gen <= MAX_GENERATION;
+            GlobalCustomException exception = new GlobalCustomException(
+                    ErrorMessage.POKEMON_GENERATION_MISMATCH,
+                    "expected generation not in range: " + generation
+            );
+            throwIf(generation.getClass(), generation, condition, exception);
+        });
+    }
+
+    private static <T> void throwIf(Class<?> clazz, T data, Predicate<T> predicate,
+                                    GlobalCustomException exception) {
+        if (predicate.test(data)) {
+            return;
         }
+        throw exception;
     }
 
     static void validatePokemonFormChanges(List<Pokemon> pokemons) {
