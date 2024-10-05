@@ -29,7 +29,7 @@ public class PokemonDataTest extends RepositoryTest {
         Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
-    @Disabled("파싱코드의 replace를 한 문자가 아닌 스트링의 전체를 replace하도록 바꿔야 해서 disalbed")
+    @Disabled("파싱코드의 replace를 한 문자가 아닌 스트링의 전체를 replace하도록 바꿔야 함. 잘못된 id가 있어 disalbed")
     @DisplayName("포켓몬 데이터의 아이디 형식을 확인한다.")
     @Test
     void pokemonIdFormat() {
@@ -41,11 +41,13 @@ public class PokemonDataTest extends RepositoryTest {
     }
 
     @Disabled("""
-            ID actualTotal expectedTotal
-            charizard_gigantamax 634 644,
-            kingler_gigantamax 575 58
+            디버깅 결과
+            ID / actualTotal / expectedTotal
+            charizard_gigantamax / 634 / 644,
+            kingler_gigantamax / 575 / 58
             
-            두 건의 데이터에 대해 종족값이 일치하지 않아서 disalbed""")
+            두 건의 데이터에 대해 종족값이 일치하지 않는다.
+            추가적인 논의가 필요하여 disalbed""")
     @DisplayName("포켓몬 데이터의 종족값은 기본 능력치의 합이다.")
     @Test
     void pokemonTotalStats() {
@@ -66,7 +68,7 @@ public class PokemonDataTest extends RepositoryTest {
         Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
-    @Disabled("포켓몬 변환 정보가 주어지지 않는 데이터가 존재하여 disalbed.")
+    @Disabled("폼변환이 가능하지만 정보가 주어지지 않는 데이터가 존재하여 disalbed.")
     @DisplayName("포켓몬 폼변환이 가능하면 폼변환 정보가 주어진다.")
     @Test
     void pokemonGeneration2() {
@@ -78,7 +80,7 @@ public class PokemonDataTest extends RepositoryTest {
     }
 
 
-    @DisplayName("legendary, subLegendary, mythical 셋 중 하나가 true거나 모두 false여야한다.")
+    @DisplayName("legendary, subLegendary, mythical 셋 중 하나만 true거나 모두 false여야한다.")
     @Test
     void pokemonGeneration3() {
         List<Pokemon> actual = pokemonRepository.findAll();
@@ -97,12 +99,11 @@ public class PokemonDataTest extends RepositoryTest {
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("abilitiy id는 서로 중복될 수 없다.")
     @Disabled("""
             기본 특성이 히든 특성과 같은 데이터가 있어서 disable
-            +) 이상해꽃 기간타맥스가 되면 기본 특성이 달라진다
-            +) pokerouge dex와 데이터가 다른걸 보니 추가 확인이 필요
-            """)
+                +) 이상해꽃 기간타맥스가 되면 기본 특성이 달라진다
+                +) pokerouge dex와 데이터가 다른걸 보니 추가 확인이 필요""")
+    @DisplayName("abilitiy id는 서로 중복될 수 없다.")
     @Test
     void pokemonGeneration5() {
         List<Pokemon> actual = pokemonRepository.findAll();
@@ -113,6 +114,31 @@ public class PokemonDataTest extends RepositoryTest {
             normalAbilityIds.add(r.getHiddenAbilityId());
             normalAbilityIds.add(r.getPassiveAbilityId());
             PokemonValidator.throwIfAbilityDuplicated(r.getNormalAbilityIds());
+        })).doesNotThrowAnyException();
+    }
+
+    @DisplayName("정해진 범위의 수인지 확인한다.")
+    @Test
+    void pokemonGeneration6() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        Assertions.assertThatCode(() -> actual.forEach(r ->
+        {
+            List<Object> stats = List.of(
+                    r.getHeight(),
+                    r.getWeight(),
+                    r.getDefense(),
+                    r.getSpecialAttack(),
+                    r.getSpecialDefense(),
+                    r.getWeight(),
+                    r.getHeight(),
+                    r.getFriendship(),
+                    r.getBaseExp(),
+                    r.getBaseTotal(),
+                    r.getHp(),
+                    r.getSpeed()
+            );
+            PokemonValidator.throwIfNumberOutOfRange(stats);
         })).doesNotThrowAnyException();
     }
 

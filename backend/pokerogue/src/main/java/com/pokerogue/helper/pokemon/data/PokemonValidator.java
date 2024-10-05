@@ -125,8 +125,21 @@ class PokemonValidator extends Validator {
 
     public static void throwIfAbilityDuplicated(List<String> normalAbilityIds) {
         HashSet<String> strings = new HashSet<>(normalAbilityIds);
-        if(strings.size() != normalAbilityIds.size()) {
+        if (strings.size() != normalAbilityIds.size()) {
             throw new IllegalArgumentException(normalAbilityIds + "throwIfAbilityDuplicated");
+        }
+    }
+
+    public static void throwIfNumberOutOfRange(List<Object> stats) {
+        List<Double> numbers = stats.stream()
+                .map(Object::toString)
+                .map(Double::valueOf)
+                .toList();
+
+        boolean validationFailed = numbers.stream().anyMatch(r -> r < 0 || r > 10000);
+
+        if (validationFailed) {
+            throw new IllegalArgumentException("numberOutOfRange");
         }
     }
 }
