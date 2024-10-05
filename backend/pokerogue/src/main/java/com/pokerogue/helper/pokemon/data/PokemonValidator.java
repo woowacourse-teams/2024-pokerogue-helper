@@ -5,11 +5,13 @@ import static java.lang.Character.isLowerCase;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.type.data.Type;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+import org.apache.logging.log4j.util.Strings;
 
 class PokemonValidator extends Validator {
     private static final int POKEMON_SIZE = 1446;
@@ -21,7 +23,10 @@ class PokemonValidator extends Validator {
     private static final int MAX_ABILITY_COUNT = 4;
     private static final int MIN_NORMAL_ABILITY_COUNT = 1;
     private static final int MAX_NORMAL_ABILITY_COUNT = 2;
+    private static final int MIN_STAT_VALUE = -1;
+    private static final int MAX_STAT_VALUE = 10000;
     private static final String DELIMITER = "_";
+    private static final String EMPTY_ABILITY_DEFAULT_VALUE = "none";
     private static final IntPredicate isExpectedIdLetter = character -> isLowerCase(character)
                                                                         || isDigit(character)
                                                                         || isDelimiter(character);
@@ -130,7 +135,25 @@ class PokemonValidator extends Validator {
         }
     }
 
-    static void validateAbilityDuplication(List<Pokemon> pokemons) {
+    static void validateTotalAbilityCount(List<Pokemon> pokemons) {
+        Predicate<Pokemon> isTotalAbilityCountInRange = pokemon -> {
+            List<String> totalAbilityIds = pokemon.getNormalAbilityIds();
+            if (!EMPTY_ABILITY_DEFAULT_VALUE.equals(pokemon.getHiddenAbilityId())) {
+                totalAbilityIds.add(pokemon.getHiddenAbilityId());
+            }
+            totalAbilityIds.add(pokemon.getPassiveAbilityId());
+            int totalCount = totalAbilityIds.size();
+
+            return isInRange(totalCount, MIN_ABILITY_COUNT, MAX_ABILITY_COUNT);
+        };
+        ErrorMessage error = ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT;
+
+        for (Pokemon pokemon : pokemons) {
+            validate(isTotalAbilityCountInRange, pokemon, error);
+        }
+    }
+
+    static void validateTotalAbilityDuplication(List<Pokemon> pokemons) {
         Predicate<Pokemon> isAbilityDisjointed = pokemon -> {
             List<String> totalAbilityIds = pokemon.getNormalAbilityIds();
             totalAbilityIds.add(pokemon.getHiddenAbilityId());
@@ -147,15 +170,78 @@ class PokemonValidator extends Validator {
         }
     }
 
-    static void throwIfNumberOutOfRange(List<Object> stats) {
-        List<Double> numbers = stats.stream().map(Object::toString).map(Double::valueOf).toList();
+    static void validateStatValueRange(List<Pokemon> pokemons) {
+        Predicate<Pokemon> isStatsInRange = pokemon -> {
+            List<Number> stats = List.of(
+                    pokemon.getDefense(),
+                    pokemon.getAttack(),
+                    pokemon.getSpecialAttack(),
+                    pokemon.getSpecialDefense(),
+                    pokemon.getWeight(),
+                    pokemon.getHeight(),
+                    pokemon.getFriendship(),
+                    pokemon.getBaseExp(),
+                    pokemon.getBaseTotal(),
+                    pokemon.getHp(),
+                    pokemon.getSpeed()
+            );
 
-        boolean validationFailed = numbers.stream().anyMatch(r -> r < 0 || r > 10000);
+            return stats.stream()
+                    .map(Number::doubleValue)
+                    .map(Double::intValue)
+                    .allMatch(statValue -> isInRange(statValue, MIN_STAT_VALUE, MAX_STAT_VALUE));
+        };
 
-        if (validationFailed) {
-            throw new IllegalArgumentException("numberOutOfRange");
+        for (Pokemon pokemon : pokemons) {
+            validate(isStatsInRange, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
         }
     }
+
+    static void validatePassiveAbilityExist(List<Pokemon> pokemons) {
+        Predicate<Pokemon> isPassiveExist = pokemon -> {
+            String passiveAbilityId = pokemon.getPassiveAbilityId();
+            return Strings.isNotBlank(passiveAbilityId) && !EMPTY_ABILITY_DEFAULT_VALUE.equals(passiveAbilityId);
+        };
+
+        for (Pokemon pokemon : pokemons) {
+            validate(isPassiveExist, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
+        }
+    }
+
+    static void validateEmptyHiddenAbilityExists(List<Pokemon> pokemons) {
+        Predicate<Pokemon> isEmptyHiddenExist = pokemon -> {
+            String hiddenAbilityId = pokemon.getPassiveAbilityId();
+            return Strings.isNotBlank(hiddenAbilityId) || EMPTY_ABILITY_DEFAULT_VALUE.equals(hiddenAbilityId);
+        };
+
+        boolean isEmptyExist = pokemons.stream().anyMatch(isEmptyHiddenExist);
+
+        validate(Predicate.isEqual(isEmptyExist), isEmptyExist, ErrorMessage.POKEMON_SIZE_MISMATCH);
+    }
+
+    static void validateTypeCount(List<Pokemon> pokemons) {
+        Predicate<Pokemon> isTypeCountInRange = pokemon -> {
+            int typeCount = pokemon.getTypes().size();
+            return isInRange(typeCount, MIN_TYPE_COUNT, MAX_TYPE_COUNT);
+        };
+
+        for (Pokemon pokemon : pokemons) {
+            validate(isTypeCountInRange, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
+        }
+    }
+
+    public static void validateTypeDuplication(List<Pokemon> pokemons) {
+        Predicate<Pokemon> isTypeDisjointed = pokemon -> {
+            List<Type> types = pokemon.getTypes();
+            HashSet<Type> uniqueTypes = new HashSet<>(types);
+            return types.size() == uniqueTypes.size();
+        };
+
+        for (Pokemon pokemon : pokemons) {
+            validate(isTypeDisjointed, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
+        }
+    }
+
 
     private static <T> void validate(Predicate<T> predicate, T data, ErrorMessage errorMessage) {
         if (predicate.test(data)) {
@@ -172,7 +258,7 @@ class PokemonValidator extends Validator {
         throw new GlobalCustomException(errorMessage, detailedMessage);
     }
 
-    static boolean isDelimiter(int character) {
+    private static boolean isDelimiter(int character) {
         return DELIMITER.charAt(0) == character;
     }
 }

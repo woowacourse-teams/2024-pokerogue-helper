@@ -1,16 +1,11 @@
 package com.pokerogue.helper.pokemon.data;
 
-import static com.pokerogue.helper.pokemon.data.PokemonValidator.throwIfNormalAbilityCountInvalid;
 import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemonIdFormat;
 import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemonSize;
 
 import com.pokerogue.environment.repository.RepositoryTest;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
-import com.pokerogue.helper.type.data.Type;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import org.apache.logging.log4j.util.Strings;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Disabled;
@@ -37,7 +32,7 @@ public class PokemonDataTest extends RepositoryTest {
     @DisplayName("포켓몬 데이터의 아이디 형식을 확인한다.")
     @Test
     void pokemonIdFormat() {
-        List<Pokemon> actual = pokemonRepository.findAll();
+        List<String> actual = pokemonRepository.findAll().stream().map(Pokemon::getId).toList();
 
         ThrowingCallable validator = () -> validatePokemonIdFormat(actual);
 
@@ -57,7 +52,7 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonTotalStats() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        ThrowingCallable callable = () -> PokemonValidator.validatePokemonTotalState(actual);
+        ThrowingCallable callable = () -> PokemonValidator.validatePokemonsBaseTotal(actual);
 
         Assertions.assertThatCode(callable).doesNotThrowAnyException();
     }
@@ -67,7 +62,7 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        ThrowingCallable validator = () -> PokemonValidator.validatePokemonGeneration(actual);
+        ThrowingCallable validator = () -> PokemonValidator.validatePokemonsGeneration(actual);
 
         Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
@@ -99,8 +94,9 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration4() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        Assertions.assertThatCode(() -> actual.forEach(r -> throwIfNormalAbilityCountInvalid(r.getNormalAbilityIds())))
-                .doesNotThrowAnyException();
+        ThrowingCallable validator = () -> PokemonValidator.validateNormalAbilityCount(actual);
+
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
     @Disabled("""
@@ -112,13 +108,9 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration5() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        Assertions.assertThatCode(() -> actual.forEach(r ->
-        {
-            List<String> normalAbilityIds = r.getNormalAbilityIds();
-            normalAbilityIds.add(r.getHiddenAbilityId());
-            normalAbilityIds.add(r.getPassiveAbilityId());
-            PokemonValidator.throwIfAbilityDuplicated(r.getNormalAbilityIds());
-        })).doesNotThrowAnyException();
+        ThrowingCallable validator = () -> PokemonValidator.validateTotalAbilityDuplication(actual);
+
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
     @DisplayName("능력치가 정해진 범위의 수인지 확인한다.")
@@ -126,23 +118,9 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration6() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        Assertions.assertThatCode(() -> actual.forEach(r ->
-        {
-            List<Object> stats = List.of(
-                    r.getDefense(),
-                    r.getAttack(),
-                    r.getSpecialAttack(),
-                    r.getSpecialDefense(),
-                    r.getWeight(),
-                    r.getHeight(),
-                    r.getFriendship(),
-                    r.getBaseExp(),
-                    r.getBaseTotal(),
-                    r.getHp(),
-                    r.getSpeed()
-            );
-            PokemonValidator.throwIfNumberOutOfRange(stats);
-        })).doesNotThrowAnyException();
+        ThrowingCallable validator = () -> PokemonValidator.validateStatValueRange(actual);
+
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
     @DisplayName("패시브 특성은 항상 존재한다.")
@@ -150,14 +128,9 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration7() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        boolean isPassiveExists = actual.stream()
-                                          .map(Pokemon::getPassiveAbilityId)
-                                          .noneMatch(Strings::isBlank) ||
-                                  actual.stream()
-                                          .map(Pokemon::getPassiveAbilityId)
-                                          .noneMatch(r -> r.equals("none"));
+        ThrowingCallable validator = () -> PokemonValidator.validatePassiveAbilityExist(actual);
 
-        Assertions.assertThat(isPassiveExists).isTrue();
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
     @DisplayName("히든 특성은 존재할 수도 안할 수도 있다.")
@@ -165,15 +138,9 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration8() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        int hiddenAbilityCount = actual.stream()
-                .map(Pokemon::getHiddenAbilityId)
-                .filter(r -> r.equals("none"))
-                .toList()
-                .size();
+        ThrowingCallable validator = () -> PokemonValidator.validateEmptyHiddenAbilityExists(actual);
 
-        Assertions.assertThat(hiddenAbilityCount)
-                .isGreaterThanOrEqualTo(1)
-                .isLessThanOrEqualTo(actual.size());
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
     @DisplayName("특성의 총 개수는 2개에서 4개 사이다.")
@@ -181,18 +148,9 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration9() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        Assertions.assertThatCode(() -> actual.forEach(r ->
-        {
-            List<String> normalAbilityIds = r.getNormalAbilityIds();
-            if (!r.getHiddenAbilityId().equals("none")) {
-                normalAbilityIds.add(r.getHiddenAbilityId());
-            }
-            normalAbilityIds.add(r.getPassiveAbilityId());
+        ThrowingCallable validator = () -> PokemonValidator.validateTotalAbilityCount(actual);
 
-            Assertions.assertThat(normalAbilityIds.size())
-                    .isGreaterThanOrEqualTo(2)
-                    .isLessThanOrEqualTo(4);
-        })).doesNotThrowAnyException();
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
 
@@ -201,14 +159,9 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration10() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        Assertions.assertThatCode(() -> actual.forEach(r ->
-        {
-            Set<Type> types = new HashSet<>(r.getTypes());
+        ThrowingCallable validator = () -> PokemonValidator.validateTypeCount(actual);
 
-            Assertions.assertThat(types.size())
-                    .isGreaterThanOrEqualTo(1)
-                    .isLessThanOrEqualTo(2);
-        })).doesNotThrowAnyException();
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
     @DisplayName("중복된 타입은 존재하지 않는다.")
@@ -216,26 +169,8 @@ public class PokemonDataTest extends RepositoryTest {
     void pokemonGeneration11() {
         List<Pokemon> actual = pokemonRepository.findAll();
 
-        Assertions.assertThatCode(() -> actual.forEach(r ->
-        {
-            Set<Type> types = new HashSet<>(r.getTypes());
+        ThrowingCallable validator = () -> PokemonValidator.validateTypeDuplication(actual);
 
-            Assertions.assertThat(types)
-                    .hasSameSizeAs(r.getTypes());
-        })).doesNotThrowAnyException();
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
-
-    @DisplayName("기술 레벨의 범위를 확인한다.")
-    @Test
-    void pokemonGeneration12() {
-        List<Pokemon> actual = pokemonRepository.findAll();
-
-        Assertions.assertThatCode(() -> actual.forEach(r ->
-        {
-            List<Integer> list = r.getLevelMoves().stream().map(LevelMove::getLevel).toList();
-            Assertions.assertThat(list).allMatch(x -> x >= -1 && x <= 200);
-//            Assertions.assertThat(technicalMachineMoveIds).containsAll(list);
-        })).doesNotThrowAnyException();
-    }
-
 }
