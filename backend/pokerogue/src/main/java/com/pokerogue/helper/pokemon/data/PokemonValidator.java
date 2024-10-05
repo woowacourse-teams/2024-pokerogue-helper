@@ -32,9 +32,9 @@ class PokemonValidator extends Validator {
     static void validatePokemonSize(int pokemonCount) {
         Predicate<Integer> isTotalPokemonSizeMatch = count -> count == POKEMON_SIZE;
         ErrorMessage error = ErrorMessage.POKEMON_SIZE_MISMATCH;
-        String message = String.format("포켓몬의 총 개수가 다릅니다: expected %d, but was %d", POKEMON_SIZE, pokemonCount);
+        String message = String.format("포켓몬의 총 개수가 다릅니다. 예상값: %d, 현재값: %d", POKEMON_SIZE, pokemonCount);
 
-        throwIf(isTotalPokemonSizeMatch, pokemonCount, error, message);
+        validate(isTotalPokemonSizeMatch, pokemonCount, error, message);
     }
 
     static void validatePokemonIdFormat(List<String> pokemonIds) {
@@ -50,9 +50,9 @@ class PokemonValidator extends Validator {
         String message = "아이디 규칙에 맞지 않습니다. 아이디: %s";
 
         for (String id : pokemonIds) {
-            throwIf(isExpectedLetter, id, error, String.format(message, id));
-            throwIf(isDelimiterSeparated, id, error2, String.format(message, id));
-            throwIf(isDelimiterInPlace, id, error3, String.format(message, id));
+            validate(isExpectedLetter, id, error, String.format(message, id));
+            validate(isDelimiterSeparated, id, error2, String.format(message, id));
+            validate(isDelimiterInPlace, id, error3, String.format(message, id));
         }
     }
 
@@ -71,36 +71,31 @@ class PokemonValidator extends Validator {
             return baseTotal == summation;
         };
         ErrorMessage error = ErrorMessage.POKEMON_SIZE_MISMATCH;
-        String message = "아이디가 %s인 포켓몬의 종족값이 실제 스탯의 합과 다릅니다.";
 
         for (Pokemon pokemon : pokemons) {
-            throwIf(isBaseTotalCorrect, pokemon, error, message);
+            validate(isBaseTotalCorrect, pokemon, error);
         }
     }
 
     static void validatePokemonsGeneration(List<Pokemon> pokemons) {
         Predicate<Integer> isValidGeneration = gen -> gen >= MIN_GENERATION && gen <= MAX_GENERATION;
         ErrorMessage error = ErrorMessage.POKEMON_GENERATION_MISMATCH;
-        String message = "존재할 수 없는 포켓몬 세대입니다. 포켓몬 아이디: %s, 포켓몬 세대: %d";
 
         for (Pokemon pokemon : pokemons) {
-            String pokemonId = pokemon.getId();
             int generation = pokemon.getGeneration();
-            throwIf(isValidGeneration, generation, error, String.format(message, pokemonId, generation));
+            validate(isValidGeneration, generation, error);
         }
     }
 
     static void validatePokemonFormChanges(List<Pokemon> pokemons) {
+        Predicate<Pokemon> isFormChangeable = pokemon -> !pokemon.getFormChanges().isEmpty();
+        ErrorMessage error = ErrorMessage.POKEMON_FORM_CHANGE_MISMATCH;
         List<Pokemon> formChangeablePokemons = pokemons.stream()
                 .filter(Pokemon::isCanChangeForm)
                 .toList();
-        Predicate<Pokemon> isFormChangeable = pokemon -> !pokemon.getFormChanges().isEmpty();
-        ErrorMessage error = ErrorMessage.POKEMON_FORM_CHANGE_MISMATCH;
-        String message = "아이디가 %s인 포켓몬은 폼변환이 가능하지만, 변환 가능한 포켓몬이 존재하지 않습니다.";
 
         for (Pokemon fomrChangeablePokemon : formChangeablePokemons) {
-            String id = fomrChangeablePokemon.getId();
-            throwIf(isFormChangeable, fomrChangeablePokemon, error, String.format(message, id));
+            validate(isFormChangeable, fomrChangeablePokemon, error);
         }
     }
 
@@ -116,24 +111,39 @@ class PokemonValidator extends Validator {
 
             return trueCount <= 1;
         };
-        ErrorMessage error = ErrorMessage;
-        String message = "";
+        ErrorMessage error = ErrorMessage.POKEMON_RARITY_COUNT_MISMATCH;
 
         for (Pokemon pokemon : pokemons) {
-            throwIf(isRarityCountLessOrEqualThanOne, pokemon, error, message);
+            validate(isRarityCountLessOrEqualThanOne, pokemon, error);
         }
     }
 
-    static void throwIfNormalAbilityCountInvalid(int abilityCount) {
-        if (isOutOfRange(abilityCount, MIN_NORMAL_ABILITY_COUNT, MAX_NORMAL_ABILITY_COUNT)) {
-            throw new IllegalArgumentException("throwIfNormalAbilityCountInvalid");
+    static void validateNormalAbilityCount(List<Pokemon> pokemons) {
+        Predicate<Integer> isNormalAbilityCountInRange = normalAbilityCount ->
+                isInRange(normalAbilityCount, MIN_NORMAL_ABILITY_COUNT, MAX_NORMAL_ABILITY_COUNT);
+        ErrorMessage error = ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT;
+
+        for (Pokemon pokemon : pokemons) {
+            int abilityCount = pokemon.getNormalAbilityIds().size();
+
+            validate(isNormalAbilityCountInRange, abilityCount, error);
         }
     }
 
-    static void throwIfAbilityDuplicated(List<String> normalAbilityIds) {
-        HashSet<String> strings = new HashSet<>(normalAbilityIds);
-        if (strings.size() != normalAbilityIds.size()) {
-            throw new IllegalArgumentException(normalAbilityIds + "throwIfAbilityDuplicated");
+    static void validateAbilityDuplication(List<Pokemon> pokemons) {
+        Predicate<Pokemon> isAbilityDisjointed = pokemon -> {
+            List<String> totalAbilityIds = pokemon.getNormalAbilityIds();
+            totalAbilityIds.add(pokemon.getHiddenAbilityId());
+            totalAbilityIds.add(pokemon.getPassiveAbilityId());
+
+            HashSet<String> uniqueIds = new HashSet<>(totalAbilityIds);
+
+            return totalAbilityIds.size() == uniqueIds.size();
+        };
+        ErrorMessage error = ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT;
+
+        for (Pokemon pokemon : pokemons) {
+            validate(isAbilityDisjointed, pokemon, error);
         }
     }
 
@@ -147,7 +157,15 @@ class PokemonValidator extends Validator {
         }
     }
 
-    static <T> void throwIf(Predicate<T> predicate, T data, ErrorMessage errorMessage, String detailedMessage) {
+    private static <T> void validate(Predicate<T> predicate, T data, ErrorMessage errorMessage) {
+        if (predicate.test(data)) {
+            return;
+        }
+        throw new GlobalCustomException(errorMessage, data.toString());
+    }
+
+    private static <T> void validate(Predicate<T> predicate, T data, ErrorMessage errorMessage,
+                                     String detailedMessage) {
         if (predicate.test(data)) {
             return;
         }
