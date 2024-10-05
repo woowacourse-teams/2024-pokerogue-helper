@@ -26,6 +26,7 @@ public enum ErrorMessage {
 
     PARSE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "파싱에 실패했습니다."),
     TYPE_MATCHING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "타입 상성 찾기에 실패했습니다."),
+    POKEMON_SIZE_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR, "예상된 포켓몬의 수와 실제 데이터가 일치하지 않습니다."),
 
     FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다."),
     FILE_EXTENSION_NOT_APPLY(HttpStatus.BAD_REQUEST, "지원하지 않는 파일 형식입니다."),

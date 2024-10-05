@@ -3,6 +3,8 @@ package com.pokerogue.helper.pokemon.data;
 import static java.lang.Character.isDigit;
 import static java.lang.Character.isLowerCase;
 
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +15,10 @@ class PokemonValidator extends Validator {
     private static final int POKEMON_SIZE = 1446;
     private static final int MIN_GENERATION = 1;
     private static final int MAX_GENERATION = 9;
+    private static final int MIN_TYPE_COUNT = 1;
+    private static final int MAX_TYPE_COUNT = 2;
+    private static final int MIN_ABILITY_COUNT = 2;
+    private static final int MAX_ABILITY_COUNT = 4;
     private static final int MIN_NORMAL_ABILITY_COUNT = 1;
     private static final int MAX_NORMAL_ABILITY_COUNT = 2;
     private static final String DELIMITER = "_";
@@ -24,9 +30,10 @@ class PokemonValidator extends Validator {
     }
 
     static void validatePokemonSize(int size) {
-        if (size != POKEMON_SIZE) {
-            throw new IllegalArgumentException("Pokemon size is not equal to " + POKEMON_SIZE);
+        if (size == POKEMON_SIZE) {
+            return;
         }
+        throw new GlobalCustomException(ErrorMessage.POKEMON_SIZE_MISMATCH, POKEMON_SIZE + "expected, but was " + size);
     }
 
     static void validatePokemonIdFormat(List<Pokemon> pokemons) {
@@ -34,7 +41,8 @@ class PokemonValidator extends Validator {
         List<String> ids = pokemons.stream().map(Pokemon::getId).toList();
         throwIfIdDuplicates(ids);
 
-        ids.stream().peek(PokemonValidator::throwIfCharacterNotAllowed)
+        ids.stream()
+                .peek(PokemonValidator::throwIfCharacterNotAllowed)
                 .peek(id -> throwIfDelimiterMisplaced(id, DELIMITER))
                 .forEach(id -> throwIfDelimiterIsSequential(id, DELIMITER));
     }
@@ -73,9 +81,7 @@ class PokemonValidator extends Validator {
 
     static void validatePokemonGeneration(List<Pokemon> pokemons) {
         Predicate<Integer> invalidGeneration = gen -> gen < MIN_GENERATION || gen > MAX_GENERATION;
-        boolean validationFailed = pokemons.stream()
-                .map(Pokemon::getGeneration)
-                .anyMatch(invalidGeneration);
+        boolean validationFailed = pokemons.stream().map(Pokemon::getGeneration).anyMatch(invalidGeneration);
 
         if (validationFailed) {
             throw new IllegalArgumentException("Pokemon generation is invalid");
@@ -103,9 +109,7 @@ class PokemonValidator extends Validator {
         boolean subLegendary = pokemon.isSubLegendary();
         Boolean[] values = {legendary, mythical, subLegendary};
 
-        long trueCount = Arrays.stream(values)
-                .filter(Boolean::booleanValue)
-                .count();
+        long trueCount = Arrays.stream(values).filter(Boolean::booleanValue).count();
 
         if (trueCount > 1) {
             throw new IllegalArgumentException("rarityNotConsistence");
@@ -117,24 +121,21 @@ class PokemonValidator extends Validator {
     }
 
 
-    static void throwIfNormalAbilityCountInvalid(List<String> normalAbilities) {
-        if (normalAbilities.isEmpty() || normalAbilities.size() > MAX_NORMAL_ABILITY_COUNT) {
+    static void throwIfNormalAbilityCountInvalid(int abilityCount) {
+        if (isOutOfRange(abilityCount, MIN_NORMAL_ABILITY_COUNT, MAX_NORMAL_ABILITY_COUNT)) {
             throw new IllegalArgumentException("throwIfNormalAbilityCountInvalid");
         }
     }
 
-    public static void throwIfAbilityDuplicated(List<String> normalAbilityIds) {
+    static void throwIfAbilityDuplicated(List<String> normalAbilityIds) {
         HashSet<String> strings = new HashSet<>(normalAbilityIds);
         if (strings.size() != normalAbilityIds.size()) {
             throw new IllegalArgumentException(normalAbilityIds + "throwIfAbilityDuplicated");
         }
     }
 
-    public static void throwIfNumberOutOfRange(List<Object> stats) {
-        List<Double> numbers = stats.stream()
-                .map(Object::toString)
-                .map(Double::valueOf)
-                .toList();
+    static void throwIfNumberOutOfRange(List<Object> stats) {
+        List<Double> numbers = stats.stream().map(Object::toString).map(Double::valueOf).toList();
 
         boolean validationFailed = numbers.stream().anyMatch(r -> r < 0 || r > 10000);
 
