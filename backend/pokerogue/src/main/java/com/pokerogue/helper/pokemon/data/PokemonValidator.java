@@ -5,11 +5,11 @@ import static java.lang.Character.isLowerCase;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 class PokemonValidator extends Validator {
     private static final int POKEMON_SIZE = 1446;
@@ -29,31 +29,28 @@ class PokemonValidator extends Validator {
     private PokemonValidator() {
     }
 
-    static void validatePokemonSize(int size) {
-        if (size == POKEMON_SIZE) {
-            return;
-        }
-        throw new GlobalCustomException(ErrorMessage.POKEMON_SIZE_MISMATCH,
-                String.format("expected %d, but was %d", POKEMON_SIZE, size));
+    static void validatePokemonSize(int pokemonCount) {
+        Predicate<Integer> condition = count -> count == POKEMON_SIZE;
+        String detailedMessage = String.format("expected %d, but was %d", POKEMON_SIZE, pokemonCount);
+        throwIf(condition, pokemonCount, ErrorMessage.POKEMON_SIZE_MISMATCH, detailedMessage);
     }
 
     static void validatePokemonIdFormat(List<Pokemon> pokemons) {
-        List<String> ids = pokemons.stream().map(Pokemon::getId).toList();
-        throwIfIdDuplicates(ids);
+        List<String> pokemonIds = pokemons.stream()
+                .map(Pokemon::getId)
+                .toList();
+        Predicate<String> isExpectedLetter = id -> id.codePoints().allMatch(idCharacterRules);
+        Predicate<String> isDelimiterNotSequential = id -> id.contains(DELIMITER + DELIMITER);
+        Predicate<String> isDelimiterNotInEdge = id -> id.startsWith(DELIMITER) || id.endsWith(DELIMITER);
+        String message = "illegal id was %s";
 
-        ids.stream()
-                .peek(PokemonValidator::throwIfCharacterNotAllowed)
-                .peek(id -> throwIfDelimiterMisplaced(id, DELIMITER))
-                .forEach(id -> throwIfDelimiterIsSequential(id, DELIMITER));
-    }
-
-    static void throwIfCharacterNotAllowed(String id) {
-        if (id.codePoints().allMatch(idCharacterRules)) {
-            return;
+        for (String id : pokemonIds) {
+            throwIf(isExpectedLetter, id, ErrorMessage.POKEMON_ID_UNEXPECTED_LETTER, String.format(message, id));
+            throwIf(isDelimiterNotSequential, id, ErrorMessage.POKEMON_ID_DELIMITER_IS_SEQUENTIAL,
+                    String.format(message, id));
+            throwIf(isDelimiterNotInEdge, id, ErrorMessage.POKEMON_ID_DELIMITER_PLACED_IN_EDGE,
+                    String.format(message, id));
         }
-
-        throw new GlobalCustomException(ErrorMessage.POKEMON_ID_LETTER_INVALID,
-                String.format("expected follow id rule, but id was %s", id));
     }
 
     static void validatePokemonsBaseTotal(List<Pokemon> pokemons) {
@@ -72,8 +69,10 @@ class PokemonValidator extends Validator {
         };
         String detailedMessage = "아이디가 %s인 포켓몬의 종족값이 실제 스탯의 합과 다릅니다.";
 
-        pokemons.forEach(pokemon -> throwIf(pokemon, condition, ErrorMessage.POKEMON_SIZE_MISMATCH,
-                String.format(detailedMessage, pokemon.getId())));
+        for (Pokemon pokemon : pokemons) {
+            throwIf(condition, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH,
+                    String.format(detailedMessage, pokemon.getId()));
+        }
     }
 
     static void validatePokemonsGeneration(List<Pokemon> pokemons) {
@@ -81,53 +80,43 @@ class PokemonValidator extends Validator {
         List<Integer> generations = pokemons.stream()
                 .map(Pokemon::getGeneration)
                 .toList();
+        String message = "expected generation not in range: %s";
 
-        generations.forEach(generation -> throwIf(generation, condition, ErrorMessage.POKEMON_GENERATION_MISMATCH,
-                "expected generation not in range: " + generation));
-    }
-
-    private static <T> void throwIf(T data, Predicate<T> predicate,
-                                    ErrorMessage errorMessage,
-                                    String detailedMessage
-    ) {
-        if (predicate.test(data)) {
-            return;
+        for (Integer generation : generations) {
+            throwIf(condition, generation, ErrorMessage.POKEMON_GENERATION_MISMATCH, String.format(message));
         }
-        throw new GlobalCustomException(errorMessage, detailedMessage);
     }
 
     static void validatePokemonFormChanges(List<Pokemon> pokemons) {
-        boolean validationFailed = pokemons.stream()
+        Predicate<Pokemon> condition = pokemon -> pokemon.getFormChanges().isEmpty();
+        String message = "";
+        List<Pokemon> formChangeablePokemons = pokemons.stream()
                 .filter(Pokemon::isCanChangeForm)
-                .map(Pokemon::getFormChanges)
-                .anyMatch(List::isEmpty);
+                .toList();
 
-        if (validationFailed) {
-            throw new IllegalArgumentException("Pokemon generation is invalid");
+        for (Pokemon fomrChangeablePokemon : formChangeablePokemons) {
+            throwIf(condition, fomrChangeablePokemon, ErrorMessage.POKEMON_SIZE_MISMATCH, String.format(message));
         }
     }
 
     public static void validatePokemonRarity(List<Pokemon> pokemons) {
-        pokemons.forEach(PokemonValidator::throwIfRarityNotConsistent);
-    }
+        Predicate<Pokemon> condition = pokemon -> {
+            boolean legendary = pokemon.isLegendary();
+            boolean mythical = pokemon.isMythical();
+            boolean subLegendary = pokemon.isSubLegendary();
 
-    static void throwIfRarityNotConsistent(Pokemon pokemon) {
-        boolean legendary = pokemon.isLegendary();
-        boolean mythical = pokemon.isMythical();
-        boolean subLegendary = pokemon.isSubLegendary();
-        Boolean[] values = {legendary, mythical, subLegendary};
+            long trueCount = Stream.of(legendary, mythical, subLegendary)
+                    .filter(Boolean::booleanValue)
+                    .count();
 
-        long trueCount = Arrays.stream(values).filter(Boolean::booleanValue).count();
+            return trueCount <= 1;
+        };
+        String message = "";
 
-        if (trueCount > 1) {
-            throw new IllegalArgumentException("rarityNotConsistence");
+        for (Pokemon pokemon : pokemons) {
+            throwIf(condition, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH, message);
         }
     }
-
-    public static void validateNormalAbilityCount(List<Pokemon> actual) {
-
-    }
-
 
     static void throwIfNormalAbilityCountInvalid(int abilityCount) {
         if (isOutOfRange(abilityCount, MIN_NORMAL_ABILITY_COUNT, MAX_NORMAL_ABILITY_COUNT)) {
@@ -150,6 +139,13 @@ class PokemonValidator extends Validator {
         if (validationFailed) {
             throw new IllegalArgumentException("numberOutOfRange");
         }
+    }
+
+    static <T> void throwIf(Predicate<T> predicate, T data, ErrorMessage errorMessage, String detailedMessage) {
+        if (predicate.test(data)) {
+            return;
+        }
+        throw new GlobalCustomException(errorMessage, detailedMessage);
     }
 
     static boolean isDelimiter(int character) {
