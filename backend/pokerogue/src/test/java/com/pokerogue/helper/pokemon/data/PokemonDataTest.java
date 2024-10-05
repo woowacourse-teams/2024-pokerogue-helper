@@ -211,5 +211,18 @@ public class PokemonDataTest extends RepositoryTest {
         })).doesNotThrowAnyException();
     }
 
+    @DisplayName("중복된 타입은 존재하지 않는다.")
+    @Test
+    void pokemonGeneration11() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        Assertions.assertThatCode(() -> actual.forEach(r ->
+        {
+            Set<Type> types = new HashSet<>(r.getTypes());
+
+            Assertions.assertThat(types)
+                    .hasSameSizeAs(r.getTypes());
+        })).doesNotThrowAnyException();
+    }
 
 }
