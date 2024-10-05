@@ -57,47 +57,43 @@ class PokemonValidator extends Validator {
     }
 
     static void validatePokemonsBaseTotal(List<Pokemon> pokemons) {
-        pokemons.forEach(PokemonValidator::throwIfTotalStatIncorrect);
-    }
+        Predicate<Pokemon> condition = pokemon -> {
+            int hp = pokemon.getHp();
+            int attack = pokemon.getAttack();
+            int specialAttack = pokemon.getSpecialAttack();
+            int defense = pokemon.getDefense();
+            int specialDefense = pokemon.getSpecialDefense();
+            int speed = pokemon.getSpeed();
 
-    static void throwIfTotalStatIncorrect(Pokemon pokemon) {
-        int hp = pokemon.getHp();
-        int attack = pokemon.getAttack();
-        int specialAttack = pokemon.getSpecialAttack();
-        int defense = pokemon.getDefense();
-        int specialDefense = pokemon.getSpecialDefense();
-        int speed = pokemon.getSpeed();
+            int baseTotal = pokemon.getBaseTotal();
+            int summation = hp + attack + specialAttack + defense + specialDefense + speed;
 
-        int baseTotal = pokemon.getBaseTotal();
-        int expectedBaseTotal = hp + attack + specialAttack + defense + specialDefense + speed;
+            return baseTotal == summation;
+        };
+        String detailedMessage = "아이디가 %s인 포켓몬의 종족값이 실제 스탯의 합과 다릅니다.";
 
-        if (baseTotal == expectedBaseTotal) {
-            return;
-        }
-        throw new IllegalArgumentException(pokemon.getId() + " 종족값이 일치하지 않습니다.");
+        pokemons.forEach(pokemon -> throwIf(pokemon, condition, ErrorMessage.POKEMON_SIZE_MISMATCH,
+                String.format(detailedMessage, pokemon.getId())));
     }
 
     static void validatePokemonsGeneration(List<Pokemon> pokemons) {
+        Predicate<Integer> condition = gen -> gen >= MIN_GENERATION && gen <= MAX_GENERATION;
         List<Integer> generations = pokemons.stream()
                 .map(Pokemon::getGeneration)
                 .toList();
 
-        generations.forEach(generation -> {
-            Predicate<Integer> condition = gen -> gen >= MIN_GENERATION && gen <= MAX_GENERATION;
-            GlobalCustomException exception = new GlobalCustomException(
-                    ErrorMessage.POKEMON_GENERATION_MISMATCH,
-                    "expected generation not in range: " + generation
-            );
-            throwIf(generation.getClass(), generation, condition, exception);
-        });
+        generations.forEach(generation -> throwIf(generation, condition, ErrorMessage.POKEMON_GENERATION_MISMATCH,
+                "expected generation not in range: " + generation));
     }
 
-    private static <T> void throwIf(Class<?> clazz, T data, Predicate<T> predicate,
-                                    GlobalCustomException exception) {
+    private static <T> void throwIf(T data, Predicate<T> predicate,
+                                    ErrorMessage errorMessage,
+                                    String detailedMessage
+    ) {
         if (predicate.test(data)) {
             return;
         }
-        throw exception;
+        throw new GlobalCustomException(errorMessage, detailedMessage);
     }
 
     static void validatePokemonFormChanges(List<Pokemon> pokemons) {

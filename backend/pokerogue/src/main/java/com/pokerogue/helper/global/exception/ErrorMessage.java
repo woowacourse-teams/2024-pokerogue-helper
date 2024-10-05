@@ -29,6 +29,8 @@ public enum ErrorMessage {
     POKEMON_SIZE_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR, "예상 포켓몬 수와 실제 데이터가 일치하지 않습니다."),
     POKEMON_ID_LETTER_INVALID(HttpStatus.INTERNAL_SERVER_ERROR, "아이디에 허용되지 않은 문자가 포함되어 있습니다."),
     POKEMON_GENERATION_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"적절하지 않은 포켓몬 세대입니다."),
+    POKEMON_BASE_TOTAL_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"종족값이 기본스탯의 합과 다릅니다."),
+
 
     FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다."),
     FILE_EXTENSION_NOT_APPLY(HttpStatus.BAD_REQUEST, "지원하지 않는 파일 형식입니다."),
