@@ -225,4 +225,17 @@ public class PokemonDataTest extends RepositoryTest {
         })).doesNotThrowAnyException();
     }
 
+    @DisplayName("기술 레벨의 범위를 확인한다.")
+    @Test
+    void pokemonGeneration12() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        Assertions.assertThatCode(() -> actual.forEach(r ->
+        {
+            List<Integer> list = r.getLevelMoves().stream().map(LevelMove::getLevel).toList();
+            Assertions.assertThat(list).allMatch(x -> x >= -1 && x <= 200);
+//            Assertions.assertThat(technicalMachineMoveIds).containsAll(list);
+        })).doesNotThrowAnyException();
+    }
+
 }
