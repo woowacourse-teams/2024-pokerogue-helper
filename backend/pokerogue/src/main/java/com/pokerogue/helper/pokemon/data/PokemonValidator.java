@@ -33,11 +33,11 @@ class PokemonValidator extends Validator {
         if (size == POKEMON_SIZE) {
             return;
         }
-        throw new GlobalCustomException(ErrorMessage.POKEMON_SIZE_MISMATCH, POKEMON_SIZE + "expected, but was " + size);
+        throw new GlobalCustomException(ErrorMessage.POKEMON_SIZE_MISMATCH,
+                String.format("expected %d, but was %d", POKEMON_SIZE, size));
     }
 
     static void validatePokemonIdFormat(List<Pokemon> pokemons) {
-        throwIfNull(pokemons);
         List<String> ids = pokemons.stream().map(Pokemon::getId).toList();
         throwIfIdDuplicates(ids);
 
@@ -48,15 +48,12 @@ class PokemonValidator extends Validator {
     }
 
     static void throwIfCharacterNotAllowed(String id) {
-        boolean validationFailed = !id.codePoints().allMatch(idCharacterRules);
-
-        if (validationFailed) {
-            throw new IllegalArgumentException("Invalid character '" + id + "'");
+        if (id.codePoints().allMatch(idCharacterRules)) {
+            return;
         }
-    }
 
-    static boolean isDelimiter(int character) {
-        return DELIMITER.charAt(0) == character;
+        throw new GlobalCustomException(ErrorMessage.POKEMON_ID_LETTER_INVALID,
+                String.format("expected follow id rule, but id was %s", id));
     }
 
     static void validatePokemonTotalState(List<Pokemon> pokemons) {
@@ -142,5 +139,9 @@ class PokemonValidator extends Validator {
         if (validationFailed) {
             throw new IllegalArgumentException("numberOutOfRange");
         }
+    }
+
+    static boolean isDelimiter(int character) {
+        return DELIMITER.charAt(0) == character;
     }
 }
