@@ -6,7 +6,10 @@ import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemon
 
 import com.pokerogue.environment.repository.RepositoryTest;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.type.data.Type;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.apache.logging.log4j.util.Strings;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
@@ -189,6 +192,22 @@ public class PokemonDataTest extends RepositoryTest {
             Assertions.assertThat(normalAbilityIds.size())
                     .isGreaterThanOrEqualTo(2)
                     .isLessThanOrEqualTo(4);
+        })).doesNotThrowAnyException();
+    }
+
+
+    @DisplayName("타입의 개수는 1개 혹은 2개다.")
+    @Test
+    void pokemonGeneration10() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        Assertions.assertThatCode(() -> actual.forEach(r ->
+        {
+            Set<Type> types = new HashSet<>(r.getTypes());
+
+            Assertions.assertThat(types.size())
+                    .isGreaterThanOrEqualTo(1)
+                    .isLessThanOrEqualTo(2);
         })).doesNotThrowAnyException();
     }
 
