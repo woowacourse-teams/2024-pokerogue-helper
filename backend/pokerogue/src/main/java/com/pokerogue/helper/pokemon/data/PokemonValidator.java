@@ -22,39 +22,42 @@ class PokemonValidator extends Validator {
     private static final int MIN_NORMAL_ABILITY_COUNT = 1;
     private static final int MAX_NORMAL_ABILITY_COUNT = 2;
     private static final String DELIMITER = "_";
-    private static final IntPredicate idCharacterRules = character -> isLowerCase(character)
-                                                                      || isDigit(character)
-                                                                      || isDelimiter(character);
+    private static final IntPredicate isExpectedIdLetter = character -> isLowerCase(character)
+                                                                        || isDigit(character)
+                                                                        || isDelimiter(character);
 
     private PokemonValidator() {
     }
 
     static void validatePokemonSize(int pokemonCount) {
-        Predicate<Integer> condition = count -> count == POKEMON_SIZE;
-        String detailedMessage = String.format("expected %d, but was %d", POKEMON_SIZE, pokemonCount);
-        throwIf(condition, pokemonCount, ErrorMessage.POKEMON_SIZE_MISMATCH, detailedMessage);
+        Predicate<Integer> isTotalPokemonSizeMatch = count -> count == POKEMON_SIZE;
+        ErrorMessage error = ErrorMessage.POKEMON_SIZE_MISMATCH;
+        String message = String.format("포켓몬의 총 개수가 다릅니다: expected %d, but was %d", POKEMON_SIZE, pokemonCount);
+
+        throwIf(isTotalPokemonSizeMatch, pokemonCount, error, message);
     }
 
-    static void validatePokemonIdFormat(List<Pokemon> pokemons) {
-        List<String> pokemonIds = pokemons.stream()
-                .map(Pokemon::getId)
-                .toList();
-        Predicate<String> isExpectedLetter = id -> id.codePoints().allMatch(idCharacterRules);
-        Predicate<String> isDelimiterNotSequential = id -> id.contains(DELIMITER + DELIMITER);
-        Predicate<String> isDelimiterNotInEdge = id -> id.startsWith(DELIMITER) || id.endsWith(DELIMITER);
-        String message = "illegal id was %s";
+    static void validatePokemonIdFormat(List<String> pokemonIds) {
+        Predicate<String> isExpectedLetter = id -> id.codePoints().allMatch(isExpectedIdLetter);
+        ErrorMessage error = ErrorMessage.POKEMON_ID_UNEXPECTED_LETTER;
+
+        Predicate<String> isDelimiterSeparated = id -> id.contains(DELIMITER + DELIMITER);
+        ErrorMessage error2 = ErrorMessage.POKEMON_ID_DELIMITER_IS_SEQUENTIAL;
+
+        Predicate<String> isDelimiterInPlace = id -> id.startsWith(DELIMITER) || id.endsWith(DELIMITER);
+        ErrorMessage error3 = ErrorMessage.POKEMON_ID_DELIMITER_PLACED_IN_EDGE;
+
+        String message = "아이디 규칙에 맞지 않습니다. 아이디: %s";
 
         for (String id : pokemonIds) {
-            throwIf(isExpectedLetter, id, ErrorMessage.POKEMON_ID_UNEXPECTED_LETTER, String.format(message, id));
-            throwIf(isDelimiterNotSequential, id, ErrorMessage.POKEMON_ID_DELIMITER_IS_SEQUENTIAL,
-                    String.format(message, id));
-            throwIf(isDelimiterNotInEdge, id, ErrorMessage.POKEMON_ID_DELIMITER_PLACED_IN_EDGE,
-                    String.format(message, id));
+            throwIf(isExpectedLetter, id, error, String.format(message, id));
+            throwIf(isDelimiterSeparated, id, error2, String.format(message, id));
+            throwIf(isDelimiterInPlace, id, error3, String.format(message, id));
         }
     }
 
     static void validatePokemonsBaseTotal(List<Pokemon> pokemons) {
-        Predicate<Pokemon> condition = pokemon -> {
+        Predicate<Pokemon> isBaseTotalCorrect = pokemon -> {
             int hp = pokemon.getHp();
             int attack = pokemon.getAttack();
             int specialAttack = pokemon.getSpecialAttack();
@@ -67,40 +70,42 @@ class PokemonValidator extends Validator {
 
             return baseTotal == summation;
         };
-        String detailedMessage = "아이디가 %s인 포켓몬의 종족값이 실제 스탯의 합과 다릅니다.";
+        ErrorMessage error = ErrorMessage.POKEMON_SIZE_MISMATCH;
+        String message = "아이디가 %s인 포켓몬의 종족값이 실제 스탯의 합과 다릅니다.";
 
         for (Pokemon pokemon : pokemons) {
-            throwIf(condition, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH,
-                    String.format(detailedMessage, pokemon.getId()));
+            throwIf(isBaseTotalCorrect, pokemon, error, message);
         }
     }
 
     static void validatePokemonsGeneration(List<Pokemon> pokemons) {
-        Predicate<Integer> condition = gen -> gen >= MIN_GENERATION && gen <= MAX_GENERATION;
-        List<Integer> generations = pokemons.stream()
-                .map(Pokemon::getGeneration)
-                .toList();
-        String message = "expected generation not in range: %s";
+        Predicate<Integer> isValidGeneration = gen -> gen >= MIN_GENERATION && gen <= MAX_GENERATION;
+        ErrorMessage error = ErrorMessage.POKEMON_GENERATION_MISMATCH;
+        String message = "존재할 수 없는 포켓몬 세대입니다. 포켓몬 아이디: %s, 포켓몬 세대: %d";
 
-        for (Integer generation : generations) {
-            throwIf(condition, generation, ErrorMessage.POKEMON_GENERATION_MISMATCH, String.format(message));
+        for (Pokemon pokemon : pokemons) {
+            String pokemonId = pokemon.getId();
+            int generation = pokemon.getGeneration();
+            throwIf(isValidGeneration, generation, error, String.format(message, pokemonId, generation));
         }
     }
 
     static void validatePokemonFormChanges(List<Pokemon> pokemons) {
-        Predicate<Pokemon> condition = pokemon -> pokemon.getFormChanges().isEmpty();
-        String message = "";
         List<Pokemon> formChangeablePokemons = pokemons.stream()
                 .filter(Pokemon::isCanChangeForm)
                 .toList();
+        Predicate<Pokemon> isFormChangeable = pokemon -> !pokemon.getFormChanges().isEmpty();
+        ErrorMessage error = ErrorMessage.POKEMON_FORM_CHANGE_MISMATCH;
+        String message = "아이디가 %s인 포켓몬은 폼변환이 가능하지만, 변환 가능한 포켓몬이 존재하지 않습니다.";
 
         for (Pokemon fomrChangeablePokemon : formChangeablePokemons) {
-            throwIf(condition, fomrChangeablePokemon, ErrorMessage.POKEMON_SIZE_MISMATCH, String.format(message));
+            String id = fomrChangeablePokemon.getId();
+            throwIf(isFormChangeable, fomrChangeablePokemon, error, String.format(message, id));
         }
     }
 
     public static void validatePokemonRarity(List<Pokemon> pokemons) {
-        Predicate<Pokemon> condition = pokemon -> {
+        Predicate<Pokemon> isRarityCountLessOrEqualThanOne = pokemon -> {
             boolean legendary = pokemon.isLegendary();
             boolean mythical = pokemon.isMythical();
             boolean subLegendary = pokemon.isSubLegendary();
@@ -111,10 +116,11 @@ class PokemonValidator extends Validator {
 
             return trueCount <= 1;
         };
+        ErrorMessage error = ErrorMessage;
         String message = "";
 
         for (Pokemon pokemon : pokemons) {
-            throwIf(condition, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH, message);
+            throwIf(isRarityCountLessOrEqualThanOne, pokemon, error, message);
         }
     }
 

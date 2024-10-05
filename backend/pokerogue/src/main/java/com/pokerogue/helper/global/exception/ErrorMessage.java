@@ -27,9 +27,12 @@ public enum ErrorMessage {
     PARSE_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "파싱에 실패했습니다."),
     TYPE_MATCHING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "타입 상성 찾기에 실패했습니다."),
     POKEMON_SIZE_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR, "예상 포켓몬 수와 실제 데이터가 일치하지 않습니다."),
-    POKEMON_ID_LETTER_INVALID(HttpStatus.INTERNAL_SERVER_ERROR, "아이디에 허용되지 않은 문자가 포함되어 있습니다."),
+    POKEMON_ID_UNEXPECTED_LETTER(HttpStatus.INTERNAL_SERVER_ERROR, "아이디에 허용되지 않은 문자가 포함되어 있습니다."),
+    POKEMON_ID_DELIMITER_PLACED_IN_EDGE(HttpStatus.INTERNAL_SERVER_ERROR, "아이디에 구분자가 처음이나 끝에 올 수 없습니다."),
+    POKEMON_ID_DELIMITER_IS_SEQUENTIAL(HttpStatus.INTERNAL_SERVER_ERROR, "아이디에 구분자가 연속으로 배치되어 있습니다."),
     POKEMON_GENERATION_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"적절하지 않은 포켓몬 세대입니다."),
     POKEMON_BASE_TOTAL_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"종족값이 기본스탯의 합과 다릅니다."),
+    POKEMON_FORM_CHANGE_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"폼변환이 가능하지만 변환 가능한 포켓몬이 없습니다."),
 
 
     FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다."),
