@@ -2,6 +2,7 @@ package com.pokerogue.helper.pokemon.dto;
 
 
 import com.pokerogue.helper.pokemon.data.Evolution;
+import com.pokerogue.helper.pokemon.data.Pokemon;
 
 public record EvolutionResponse(
         String id,
@@ -13,15 +14,15 @@ public record EvolutionResponse(
         String image
 ) {
 
-    public static EvolutionResponse from(Evolution evolution, int depth, String pokemonId, String imageId) {
+    public static EvolutionResponse from(Pokemon pokemon, Evolution evolution, Integer depth) {
         return new EvolutionResponse(
-                pokemonId,
-                evolution.getTo(),
+                pokemon.getId(),
+                pokemon.getKoName(),
                 evolution.getLevel(),
                 depth,
                 evolution.getItem(),
                 evolution.getCondition(),
-                imageId
+                pokemon.getImageId()
         );
     }
 }

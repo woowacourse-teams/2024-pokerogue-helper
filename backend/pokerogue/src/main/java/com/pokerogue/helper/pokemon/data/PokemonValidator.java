@@ -8,12 +8,13 @@ import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.type.data.Type;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import org.apache.logging.log4j.util.Strings;
 
-class PokemonValidator extends Validator {
+class PokemonValidator {
     private static final int POKEMON_SIZE = 1446;
     private static final int MIN_GENERATION = 1;
     private static final int MAX_GENERATION = 9;
@@ -104,7 +105,7 @@ class PokemonValidator extends Validator {
         }
     }
 
-    public static void validatePokemonRarity(List<Pokemon> pokemons) {
+    static void validatePokemonRarity(List<Pokemon> pokemons) {
         Predicate<Pokemon> isRarityCountLessOrEqualThanOne = pokemon -> {
             boolean legendary = pokemon.isLegendary();
             boolean mythical = pokemon.isMythical();
@@ -138,11 +139,12 @@ class PokemonValidator extends Validator {
     static void validateTotalAbilityCount(List<Pokemon> pokemons) {
         Predicate<Pokemon> isTotalAbilityCountInRange = pokemon -> {
             List<String> totalAbilityIds = pokemon.getNormalAbilityIds();
-            if (!EMPTY_ABILITY_DEFAULT_VALUE.equals(pokemon.getHiddenAbilityId())) {
-                totalAbilityIds.add(pokemon.getHiddenAbilityId());
-            }
+            totalAbilityIds.add(pokemon.getHiddenAbilityId());
             totalAbilityIds.add(pokemon.getPassiveAbilityId());
-            int totalCount = totalAbilityIds.size();
+            int totalCount = totalAbilityIds.stream()
+                    .filter(id -> !id.equals(EMPTY_ABILITY_DEFAULT_VALUE))
+                    .mapToInt(id -> 1)
+                    .sum();
 
             return isInRange(totalCount, MIN_ABILITY_COUNT, MAX_ABILITY_COUNT);
         };
@@ -159,7 +161,7 @@ class PokemonValidator extends Validator {
             totalAbilityIds.add(pokemon.getHiddenAbilityId());
             totalAbilityIds.add(pokemon.getPassiveAbilityId());
 
-            HashSet<String> uniqueIds = new HashSet<>(totalAbilityIds);
+            Set<String> uniqueIds = new HashSet<>(totalAbilityIds);
 
             return totalAbilityIds.size() == uniqueIds.size();
         };
@@ -230,10 +232,10 @@ class PokemonValidator extends Validator {
         }
     }
 
-    public static void validateTypeDuplication(List<Pokemon> pokemons) {
+    static void validateTypeDuplication(List<Pokemon> pokemons) {
         Predicate<Pokemon> isTypeDisjointed = pokemon -> {
             List<Type> types = pokemon.getTypes();
-            HashSet<Type> uniqueTypes = new HashSet<>(types);
+            Set<Type> uniqueTypes = new HashSet<>(types);
             return types.size() == uniqueTypes.size();
         };
 
@@ -258,7 +260,12 @@ class PokemonValidator extends Validator {
         throw new GlobalCustomException(errorMessage, detailedMessage);
     }
 
+    private static boolean isInRange(int target, int min, int max) {
+        return target >= min && target <= max;
+    }
+
     private static boolean isDelimiter(int character) {
         return DELIMITER.charAt(0) == character;
     }
+
 }

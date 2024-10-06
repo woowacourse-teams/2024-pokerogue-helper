@@ -23,7 +23,7 @@ public class PokemonValidatorTest {
                 .hasMessageContaining(ErrorMessage.POKEMON_SIZE_MISMATCH.getMessage());
     }
 
-    @DisplayName("타입의 개수가 1개 혹은 2개가 아니라면 예외가 발생한다")
+    @DisplayName("포켓몬 타입의 개수가 1개 혹은 2개가 아니라면 예외가 발생한다")
     @Test
     void pokemonTypeSize() {
         Pokemon pokemon = createNewPokemon();

@@ -1,6 +1,8 @@
 package com.pokerogue.helper.pokemon.service;
 
+import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,17 @@ class EvolutionServiceTest {
     @DisplayName("")
     @Test
     void test() {
-//        EvolutionService evolutionService = new EvolutionService();
+        EvolutionService evolutionService = new EvolutionService(pokemonRepository);
 
-//        evolutionService.getEvolutionResponses()
-//        List<PokemonTest> all = pokemonRepository.findAll();
-//
-//        PokemonTest pokemon = pokemonRepository.findById("raichu").orElse(null);
-//        List<Evolution> rootEvolutions = evolutionService.getRootEvolutions(pokemon.getEvolutions());
+        List<Pokemon> all = pokemonRepository.findAll();
+
+        for (Pokemon pokemon : all) {
+            System.out.println(evolutionService.getEvolutionResponses(pokemon));
+        }
+
+
+
+
 //        for (Evolution rootEvolution : rootEvolutions) {
 //            System.out.println(rootEvolution.getFrom());
 //        }
