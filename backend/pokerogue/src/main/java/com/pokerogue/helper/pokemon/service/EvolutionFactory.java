@@ -15,12 +15,12 @@ import lombok.Getter;
 public class EvolutionFactory {
 
     private final List<Evolution> evolutions;
-    private final Map<String, Integer> inDegrees;
+    private final Map<String, Integer> indegree;
     private final Map<String, Integer> depths;
 
     public EvolutionFactory(Pokemon pokemon) {
         evolutions = pokemon.getEvolutions();
-        inDegrees = createInDegrees(evolutions);
+        indegree = createInDegrees(evolutions);
         depths = createDepths();
     }
 
@@ -36,7 +36,7 @@ public class EvolutionFactory {
                 .collect(Collectors.groupingBy(Evolution::getFrom,
                         Collectors.mapping(Evolution::getTo, Collectors.toList())));
 
-        TreeDepthCalculator treeDepthCalculator = new TreeDepthCalculator(inDegrees, edges);
+        TreeDepthCalculator treeDepthCalculator = new TreeDepthCalculator(indegree, edges);
 
         return Collections.unmodifiableMap(treeDepthCalculator.calculateDepths());
     }

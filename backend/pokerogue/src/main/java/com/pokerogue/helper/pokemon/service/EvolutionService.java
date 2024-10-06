@@ -27,7 +27,7 @@ public class EvolutionService {
         List<Pokemon> chainedPokemons = getChainedPokemons(pokemon);
 
         List<EvolutionResponse> responses = chainedPokemons.stream()
-                .map(p -> EvolutionResponse.from(p, createEvolution(p, evolutions), depths.get(p.getId())))
+                .map(poke -> EvolutionResponse.from(poke, createEvolution(poke, evolutions), depths.get(poke.getId())))
                 .toList();
 
         return new EvolutionResponses(depths.get(pokemon.getId()), responses);
@@ -37,7 +37,7 @@ public class EvolutionService {
         Optional<Evolution> any = evolutions.stream()
                 .filter(evolution -> evolution.getTo().equals(pokemon.getId()))
                 .findAny();
-        if(any.isPresent()) {
+        if (any.isPresent()) {
             return any.get();
         }
         return evolutions.stream()

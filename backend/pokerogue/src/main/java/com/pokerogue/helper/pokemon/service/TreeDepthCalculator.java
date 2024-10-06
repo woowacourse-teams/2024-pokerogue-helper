@@ -10,23 +10,22 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TreeDepthCalculator {
-    private final Map<String, Integer> inDegrees;
+    private final Map<String, Integer> indegree;
     private final Map<String, List<String>> adjacentNodes;
 
-    public TreeDepthCalculator(Map<String, Integer> inDegrees, Map<String, List<String>> adjacentNodes) {
-        this.inDegrees = inDegrees;
+    public TreeDepthCalculator(Map<String, Integer> indegree, Map<String, List<String>> adjacentNodes) {
+        this.indegree = indegree;
         this.adjacentNodes = adjacentNodes;
     }
 
     public Map<String, Integer> calculateDepths() {
-        Map<String, Integer> depths = new HashMap<>();
-        Set<String> allNodes = inDegrees.keySet();
-        allNodes.forEach(node -> depths.put(node, 0));
-
+        Set<String> allNodes = indegree.keySet();
         Queue<String> waitingQueue = allNodes
                 .stream()
                 .filter(this::isWaitingNode)
                 .collect(Collectors.toCollection(LinkedList::new));
+        Map<String, Integer> depths = new HashMap<>();
+        allNodes.forEach(node -> depths.put(node, 0));
 
         while (!waitingQueue.isEmpty()) {
             processCurrentDepth(waitingQueue, depths);
@@ -36,36 +35,31 @@ public class TreeDepthCalculator {
     }
 
     private void processCurrentDepth(Queue<String> waitingQueue, Map<String, Integer> depths) {
-        int queueSize = waitingQueue.size();
+        String currentNode = waitingQueue.poll();
+        List<String> nextNodes = adjacentNodes.get(currentNode);
 
-        while (queueSize-- > 0) {
-            String currentNode = waitingQueue.poll();
-            List<String> nextNodes = adjacentNodes.get(currentNode);
-            if (isNextNodeNull(nextNodes)) {
-                continue;
-            }
-
-            nextNodes.stream()
-                    .peek(nextNode -> updateDepthCount(depths, currentNode, nextNode))
-                    .peek(this::updateInDegreeCount)
-                    .filter(this::isWaitingNode)
-                    .forEach(waitingQueue::add);
-        }
+        nextNodes.stream()
+                .peek(nextNode -> increaseDepthCount(depths, currentNode, nextNode))
+                .peek(this::decreaseIndegreeCount)
+                .filter(this::isWaitingNode)
+                .filter(this::isAdjacentNodeExist)
+                .forEach(waitingQueue::add);
     }
 
-    private void updateInDegreeCount(String nextNode) {
-        inDegrees.put(nextNode, inDegrees.get(nextNode) - 1);
+    private void decreaseIndegreeCount(String nextNode) {
+        indegree.put(nextNode, indegree.get(nextNode) - 1);
     }
 
-    private void updateDepthCount(Map<String, Integer> depths, String currentNode, String nextNode) {
+    private void increaseDepthCount(Map<String, Integer> depths, String currentNode, String nextNode) {
         depths.put(nextNode, depths.get(currentNode) + 1);
     }
 
     private boolean isWaitingNode(String node) {
-        return inDegrees.get(node) == 0;
+        return indegree.get(node) == 0;
     }
 
-    private boolean isNextNodeNull(List<String> edges) {
-        return Objects.isNull(edges) || edges.isEmpty();
+    private boolean isAdjacentNodeExist(String node) {
+        List<String> nextNodes = adjacentNodes.get(node);
+        return Objects.nonNull(nextNodes) && !nextNodes.isEmpty();
     }
 }
