@@ -10,12 +10,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TreeDepthCalculator {
-    private final Map<String, Integer> indegree;
     private final Map<String, List<String>> adjacentNodes;
+    private final Map<String, Integer> indegree;
 
-    public TreeDepthCalculator(Map<String, Integer> indegree, Map<String, List<String>> adjacentNodes) {
-        this.indegree = indegree;
+    public TreeDepthCalculator(Map<String, List<String>> adjacentNodes) {
         this.adjacentNodes = adjacentNodes;
+        this.indegree = createIndegree();
+    }
+
+    private Map<String, Integer> createIndegree() {
+        return adjacentNodes.values().stream()
+                .flatMap(List::stream)
+                .collect(Collectors.groupingBy(k -> k, Collectors.summingInt(v -> 1)));
     }
 
     public Map<String, Integer> calculateDepths() {
@@ -27,14 +33,18 @@ public class TreeDepthCalculator {
         Map<String, Integer> depths = new HashMap<>();
         allNodes.forEach(node -> depths.put(node, 0));
 
-        while (!waitingQueue.isEmpty()) {
-            processCurrentDepth(waitingQueue, depths);
-        }
+        processAllNodes(waitingQueue, depths);
 
         return depths;
     }
 
-    private void processCurrentDepth(Queue<String> waitingQueue, Map<String, Integer> depths) {
+    private void processAllNodes(Queue<String> waitingQueue, Map<String, Integer> depths) {
+        while (!waitingQueue.isEmpty()) {
+            processCurrentNode(waitingQueue, depths);
+        }
+    }
+
+    private void processCurrentNode(Queue<String> waitingQueue, Map<String, Integer> depths) {
         String currentNode = waitingQueue.poll();
         List<String> nextNodes = adjacentNodes.get(currentNode);
 
@@ -55,7 +65,7 @@ public class TreeDepthCalculator {
     }
 
     private boolean isWaitingNode(String node) {
-        return indegree.get(node) == 0;
+        return indegree.getOrDefault(node, 0) == 0;
     }
 
     private boolean isAdjacentNodeExist(String node) {

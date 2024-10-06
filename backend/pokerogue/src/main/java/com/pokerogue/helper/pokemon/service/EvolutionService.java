@@ -6,7 +6,6 @@ import com.pokerogue.helper.pokemon.dto.EvolutionResponse;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponses;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
@@ -20,35 +19,25 @@ public class EvolutionService {
     private final PokemonRepository pokemonRepository;
 
     public EvolutionResponses getEvolutionResponses(Pokemon pokemon) {
-        EvolutionFactory evolutionFactory = new EvolutionFactory(pokemon);
-        Map<String, Integer> depths = evolutionFactory.getDepths();
-        List<Evolution> evolutions = evolutionFactory.getEvolutions();
+        List<Evolution> evolutions = pokemon.getEvolutions();
 
-        List<Pokemon> chainedPokemons = getChainedPokemons(pokemon);
+        EvolutionContext evolutionContext = new EvolutionContext(evolutions);
+        List<Pokemon> associatedPokemons = getAssociatedPokemons(evolutions);
 
-        List<EvolutionResponse> responses = chainedPokemons.stream()
-                .map(poke -> EvolutionResponse.from(poke, createEvolution(poke, evolutions), depths.get(poke.getId())))
+        List<EvolutionResponse> responses = associatedPokemons.stream()
+                .map(poke -> createSingleResponse(poke, evolutionContext))
                 .toList();
 
-        return new EvolutionResponses(depths.get(pokemon.getId()), responses);
+        return new EvolutionResponses(evolutionContext.getDepthOf(pokemon.getId()), responses);
     }
 
-    private Evolution createEvolution(Pokemon pokemon, List<Evolution> evolutions) {
-        Optional<Evolution> any = evolutions.stream()
-                .filter(evolution -> evolution.getTo().equals(pokemon.getId()))
-                .findAny();
-        if (any.isPresent()) {
-            return any.get();
-        }
+    private EvolutionResponse createSingleResponse(Pokemon pokemon, EvolutionContext evolutionContext) {
+        return EvolutionResponse.from(pokemon, evolutionContext.findEvolution(pokemon.getId()),
+                evolutionContext.getDepthOf(pokemon.getId()));
+    }
+
+    private List<Pokemon> getAssociatedPokemons(List<Evolution> evolutions) {
         return evolutions.stream()
-                .filter(evolution -> evolution.getFrom().equals(pokemon.getId()))
-                .findAny()
-                .orElseThrow();
-    }
-
-
-    private List<Pokemon> getChainedPokemons(Pokemon pokemon) {
-        return pokemon.getEvolutions().stream()
                 .flatMap(evolution -> Stream.of(evolution.getFrom(), evolution.getTo()))
                 .distinct()
                 .map(pokemonRepository::findById)
