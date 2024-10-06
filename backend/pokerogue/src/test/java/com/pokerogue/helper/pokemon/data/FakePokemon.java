@@ -41,12 +41,6 @@ public class FakePokemon {
             "biomeIds"
     );
 
-    public static Pokemon pokemon;
-
-    static {
-        createNewPokemon();
-    }
-
     static Pokemon createNewPokemon() {
         try {
             Pokemon pokemon = new Pokemon();
@@ -57,9 +51,6 @@ public class FakePokemon {
                 declaredField.set(pokemon, getValue(fieldsName));
             }
 
-            Field declaredField = pokemon.getClass().getDeclaredField("id");
-            declaredField.setAccessible(true);
-            declaredField.set(pokemon, "pikachu");
             return pokemon;
 
         } catch (IllegalAccessException | NoSuchFieldException e) {
@@ -71,33 +62,33 @@ public class FakePokemon {
         return switch (fieldsName) {
             case "id" -> "polla";
             case "imageId" -> "mia";
-            case "pokedexNumber" -> 1;
+            case "pokedexNumber" -> 2024;
             case "name" -> "bito";
             case "koName" -> "티미룸";
             case "speciesName" -> "backend";
             case "canChangeForm" -> true;
-            case "formName" -> "g_max";
+            case "formName" -> "wooteco";
             case "baseExp" -> 50;
             case "friendship" -> 50;
-            case "types" -> List.of(Type.BUG);
-            case "normalAbilityIds" -> List.of("a", "b");
-            case "hiddenAbilityId" -> "a";
-            case "passiveAbilityId" -> "a";
-            case "generation" -> 1;
+            case "types" -> List.of(Type.UNKNOWN);
+            case "normalAbilityIds" -> List.of("super", "nova");
+            case "hiddenAbilityId" -> "nanen";
+            case "passiveAbilityId" -> "dala";
+            case "generation" -> 7;
             case "legendary" -> false;
             case "subLegendary" -> false;
-            case "mythical" -> false;
-            case "evolutions" -> List.of();
-            case "formChanges" -> List.of();
+            case "mythical" -> true;
+            case "evolutions" -> List.of("developer", "dev_ops");
+            case "formChanges" -> List.of("senior_dev", "tech_lead");
             case "baseTotal" -> 300;
-            case "hp" -> 10;
-            case "attack" -> 10;
-            case "defense" -> 10;
-            case "specialAttack" -> 10;
-            case "specialDefense" -> 10;
-            case "speed" -> 10;
-            case "height" -> 10;
-            case "weight" -> 10;
+            case "hp" -> 1;
+            case "attack" -> 1;
+            case "defense" -> 1;
+            case "specialAttack" -> 1;
+            case "specialDefense" -> 1;
+            case "speed" -> 1;
+            case "height" -> 1;
+            case "weight" -> 1;
             case "eggMoveIds" -> List.of();
             case "levelMoves" -> List.of();
             case "technicalMachineMoveIds" -> List.of();

@@ -33,6 +33,9 @@ public enum ErrorMessage {
     POKEMON_GENERATION_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"적절하지 않은 포켓몬 세대입니다."),
     POKEMON_BASE_TOTAL_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"종족값이 기본스탯의 합과 다릅니다."),
     POKEMON_FORM_CHANGE_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"폼변환이 가능하지만 변환 가능한 포켓몬이 없습니다."),
+    POKEMON_RARITY_COUNT_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR,"전설, 준전설, 미신은 셋 중 하나 이하만 선택될 수 있습니다."),
+    POKEMON_NORMAL_ABILITY_COUNT(HttpStatus.INTERNAL_SERVER_ERROR,"기본 특성은 하나 혹은 두개여야 합니다."),
+    POKEMON_ABILITY_DUPLICATION(HttpStatus.INTERNAL_SERVER_ERROR,"중복되는 특성이 존재합니다."),
 
 
     FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다."),
