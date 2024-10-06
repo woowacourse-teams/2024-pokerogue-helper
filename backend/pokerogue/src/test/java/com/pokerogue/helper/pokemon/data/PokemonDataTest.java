@@ -173,4 +173,16 @@ public class PokemonDataTest extends RepositoryTest {
 
         Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
+
+
+    @Disabled("데이터상 진화아이디와 포켓몬아이디가 불일치하여 disabled")
+    @DisplayName("진화 아이디는 모두 포켓몬 아이디에 포함된다.")
+    @Test
+    void pokemonGeneration12() {
+        List<Pokemon> actual = pokemonRepository.findAll();
+
+        ThrowingCallable validator = () -> PokemonValidator.validateEvolutionFromToIsPokemonId(actual);
+
+        Assertions.assertThatCode(validator).doesNotThrowAnyException();
+    }
 }
