@@ -20,8 +20,8 @@ public record EggMoveResponse(
 
     public static EggMoveResponse from(BattleMove battleMove) {
         MoveCategory moveCategory = battleMove.category();
-        Type firstType = Type.findByEngName(battleMove.type().getName())
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
+        Type type = Type.findByEngName(battleMove.type().getName())
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_NOT_FOUND));
 
         return new EggMoveResponse(
                 battleMove.id(),
@@ -29,8 +29,8 @@ public record EggMoveResponse(
                 1,
                 battleMove.power(),
                 battleMove.accuracy(),
-                firstType.getName(),
-                firstType.getImage(),
+                type.getName(),
+                type.getImage(),
                 moveCategory.getName(),
                 moveCategory.getImage()
         );

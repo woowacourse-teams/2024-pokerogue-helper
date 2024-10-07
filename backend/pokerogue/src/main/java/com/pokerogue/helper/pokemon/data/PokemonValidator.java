@@ -27,7 +27,7 @@ class PokemonValidator {
     private static final int MIN_STAT_VALUE = -1;
     private static final int MAX_STAT_VALUE = 10000;
     private static final String DELIMITER = "_";
-    private static final String EMPTY_ABILITY_DEFAULT_VALUE = "none";
+    private static final String EMPTY_ABILITY = "none";
     private static final IntPredicate isExpectedIdLetter = character -> isLowerCase(character)
                                                                         || isDigit(character)
                                                                         || isDelimiter(character);
@@ -37,28 +37,23 @@ class PokemonValidator {
 
     static void validatePokemonSize(int pokemonCount) {
         Predicate<Integer> isTotalPokemonSizeMatch = count -> count == POKEMON_SIZE;
-        ErrorMessage error = ErrorMessage.POKEMON_SIZE_MISMATCH;
         String message = String.format("포켓몬의 총 개수가 다릅니다. 예상값: %d, 현재값: %d", POKEMON_SIZE, pokemonCount);
 
-        validate(isTotalPokemonSizeMatch, pokemonCount, error, message);
+        validate(isTotalPokemonSizeMatch, pokemonCount, ErrorMessage.POKEMON_SIZE_MISMATCH, message);
     }
 
     static void validatePokemonIdFormat(List<String> pokemonIds) {
         Predicate<String> isExpectedLetter = id -> id.codePoints().allMatch(isExpectedIdLetter);
-        ErrorMessage error = ErrorMessage.POKEMON_ID_UNEXPECTED_LETTER;
-
         Predicate<String> isDelimiterSeparated = id -> id.contains(DELIMITER + DELIMITER);
-        ErrorMessage error2 = ErrorMessage.POKEMON_ID_DELIMITER_IS_SEQUENTIAL;
-
         Predicate<String> isDelimiterInPlace = id -> id.startsWith(DELIMITER) || id.endsWith(DELIMITER);
-        ErrorMessage error3 = ErrorMessage.POKEMON_ID_DELIMITER_PLACED_IN_EDGE;
 
-        String message = "아이디 규칙에 맞지 않습니다. 아이디: %s";
+        String message = "아이디: %s는 아이디 규칙에 맞지 않습니다.";
 
         for (String id : pokemonIds) {
-            validate(isExpectedLetter, id, error, String.format(message, id));
-            validate(isDelimiterSeparated, id, error2, String.format(message, id));
-            validate(isDelimiterInPlace, id, error3, String.format(message, id));
+            validate(isExpectedLetter, id, ErrorMessage.POKEMON_ID_UNEXPECTED_LETTER, String.format(message, id));
+            validate(isDelimiterSeparated, id, ErrorMessage.POKEMON_ID_DELIMITER_IS_SEQUENTIAL,
+                    String.format(message, id));
+            validate(isDelimiterInPlace, id, ErrorMessage.POKEMON_ID_DELIMITER_MISPLACED, String.format(message, id));
         }
     }
 
@@ -83,7 +78,7 @@ class PokemonValidator {
     }
 
     static void validatePokemonsGeneration(List<Pokemon> pokemons) {
-        Predicate<Integer> isValidGeneration = gen -> gen >= MIN_GENERATION && gen <= MAX_GENERATION;
+        Predicate<Integer> isValidGeneration = gen -> isInRange(gen, MIN_GENERATION, MAX_GENERATION);
 
         for (Pokemon pokemon : pokemons) {
             int generation = pokemon.getGeneration();
@@ -108,11 +103,11 @@ class PokemonValidator {
             boolean mythical = pokemon.isMythical();
             boolean subLegendary = pokemon.isSubLegendary();
 
-            long trueCount = Stream.of(legendary, mythical, subLegendary)
+            long rarityCount = Stream.of(legendary, mythical, subLegendary)
                     .filter(Boolean::booleanValue)
                     .count();
 
-            return trueCount <= 1;
+            return rarityCount <= 1;
         };
 
         for (Pokemon pokemon : pokemons) {
@@ -136,21 +131,22 @@ class PokemonValidator {
             List<String> totalAbilityIds = pokemon.getNormalAbilityIds();
             totalAbilityIds.add(pokemon.getHiddenAbilityId());
             totalAbilityIds.add(pokemon.getPassiveAbilityId());
-            int totalCount = totalAbilityIds.stream()
-                    .filter(id -> !id.equals(EMPTY_ABILITY_DEFAULT_VALUE))
+
+            int totalAbilityCount = totalAbilityIds.stream()
+                    .filter(id -> !id.equals(EMPTY_ABILITY))
                     .mapToInt(id -> 1)
                     .sum();
 
-            return isInRange(totalCount, MIN_ABILITY_COUNT, MAX_ABILITY_COUNT);
+            return isInRange(totalAbilityCount, MIN_ABILITY_COUNT, MAX_ABILITY_COUNT);
         };
 
         for (Pokemon pokemon : pokemons) {
-            validate(isTotalAbilityCountInRange, pokemon, ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT);
+            validate(isTotalAbilityCountInRange, pokemon, ErrorMessage.POKEMON_TOTAL_ABILITY_COUNT);
         }
     }
 
     static void validateTotalAbilityDuplication(List<Pokemon> pokemons) {
-        Predicate<Pokemon> isAbilityDisjointed = pokemon -> {
+        Predicate<Pokemon> isAbilityDisjoint = pokemon -> {
             List<String> totalAbilityIds = pokemon.getNormalAbilityIds();
             totalAbilityIds.add(pokemon.getHiddenAbilityId());
             totalAbilityIds.add(pokemon.getPassiveAbilityId());
@@ -161,7 +157,7 @@ class PokemonValidator {
         };
 
         for (Pokemon pokemon : pokemons) {
-            validate(isAbilityDisjointed, pokemon, ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT);
+            validate(isAbilityDisjoint, pokemon, ErrorMessage.POKEMON_ABILITY_DUPLICATION);
         }
     }
 
@@ -188,25 +184,25 @@ class PokemonValidator {
         };
 
         for (Pokemon pokemon : pokemons) {
-            validate(isStatsInRange, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
+            validate(isStatsInRange, pokemon, ErrorMessage.POKEMON_STAT_OUT_OF_RANGE);
         }
     }
 
     static void validatePassiveAbilityExist(List<Pokemon> pokemons) {
         Predicate<Pokemon> isPassiveExist = pokemon -> {
             String passiveAbilityId = pokemon.getPassiveAbilityId();
-            return Strings.isNotBlank(passiveAbilityId) && !EMPTY_ABILITY_DEFAULT_VALUE.equals(passiveAbilityId);
+            return Strings.isNotBlank(passiveAbilityId) && !EMPTY_ABILITY.equals(passiveAbilityId);
         };
 
         for (Pokemon pokemon : pokemons) {
-            validate(isPassiveExist, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
+            validate(isPassiveExist, pokemon, ErrorMessage.POKEMON_PASSIVE_NOT_FOUND);
         }
     }
 
     static void validateEmptyHiddenAbilityExists(List<Pokemon> pokemons) {
         Predicate<Pokemon> isEmptyHiddenExist = pokemon -> {
             String hiddenAbilityId = pokemon.getPassiveAbilityId();
-            return Strings.isNotBlank(hiddenAbilityId) || EMPTY_ABILITY_DEFAULT_VALUE.equals(hiddenAbilityId);
+            return Strings.isNotBlank(hiddenAbilityId) || EMPTY_ABILITY.equals(hiddenAbilityId);
         };
 
         boolean isEmptyExist = pokemons.stream().anyMatch(isEmptyHiddenExist);
@@ -221,7 +217,7 @@ class PokemonValidator {
         };
 
         for (Pokemon pokemon : pokemons) {
-            validate(isTypeCountInRange, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
+            validate(isTypeCountInRange, pokemon, ErrorMessage.POKEMON_TYPE_COUNT_OUT_OF_RANGE);
         }
     }
 
@@ -233,7 +229,7 @@ class PokemonValidator {
         };
 
         for (Pokemon pokemon : pokemons) {
-            validate(isTypeDisjointed, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
+            validate(isTypeDisjointed, pokemon, ErrorMessage.POKEMON_TYPE_DUPLICATION);
         }
     }
 
@@ -247,7 +243,7 @@ class PokemonValidator {
 
         boolean containsAll = new HashSet<>(pokemonIds).containsAll(evolutionIds);
 
-        validate(Predicate.isEqual(true), containsAll, ErrorMessage.POKEMON_SIZE_MISMATCH);
+        validate(Predicate.isEqual(true), containsAll, ErrorMessage.POKEMON_EVOLUTION_ID_MISMATCH);
     }
 
 

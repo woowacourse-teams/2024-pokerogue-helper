@@ -36,7 +36,7 @@ public class PokemonValidatorTest {
 
         Assertions.assertThatThrownBy(() -> PokemonValidator.validateTypeCount(pokemons))
                 .isInstanceOf(GlobalCustomException.class)
-                .hasMessageContaining(ErrorMessage.POKEMON_SIZE_MISMATCH.getMessage());
+                .hasMessageContaining(ErrorMessage.POKEMON_TYPE_COUNT_OUT_OF_RANGE.getMessage());
     }
 
 }

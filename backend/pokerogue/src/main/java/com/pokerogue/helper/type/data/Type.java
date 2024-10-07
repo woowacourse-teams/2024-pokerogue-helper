@@ -55,6 +55,6 @@ public enum Type {
 
     public static Type convertFrom(String typeData) {
         return findByEngName(typeData)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_NOT_FOUND));
     }
 }
