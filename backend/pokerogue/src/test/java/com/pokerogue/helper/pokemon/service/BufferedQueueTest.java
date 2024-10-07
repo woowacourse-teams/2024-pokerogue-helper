@@ -35,24 +35,24 @@ class BufferedQueueTest {
         Assertions.assertThat(bufferedQueue.getBufferCount()).isOne();
     }
 
-    @DisplayName("버퍼 호출 전에 저장된 값만 꺼낼 수 있다.")
+    @DisplayName("버퍼 호출시 그 전에 저장된 값만 꺼낼 수 있다.")
     @Test
-    void bufferCounting3() {
+    void beforeBufferValues() {
         BufferedQueue<Integer> bufferedQueue = new BufferedQueue<>(new LinkedList<>());
-        List<Integer> befores = new ArrayList<>();
+        List<Integer> bufferedValues = new ArrayList<>();
         bufferedQueue.add(1);
         bufferedQueue.add(10000);
         bufferedQueue.buffer();
-
         bufferedQueue.add(3);
         bufferedQueue.add(4);
         bufferedQueue.add(5);
+
         while (bufferedQueue.hasBufferedNext()) {
             Integer poll = bufferedQueue.poll();
-            befores.add(poll);
+            bufferedValues.add(poll);
         }
 
-        Assertions.assertThat(befores).hasSameElementsAs(List.of(1, 10000));
+        Assertions.assertThat(bufferedValues).hasSameElementsAs(List.of(1, 10000));
         Assertions.assertThat(bufferedQueue.size()).isEqualTo(3);
     }
 }
