@@ -5,6 +5,7 @@ import static com.pokerogue.helper.pokemon.data.FakePokemon.setField;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.type.data.Type;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +31,7 @@ public class PokemonValidatorTest {
         Pokemon pokemon2 = createNewPokemon();
 
         setField(pokemon, "types", List.of());
-        setField(pokemon2, "types", List.of(Type.ICE, Type.FIRE, Type.FAIRY));
+        setField(pokemon2, "types", List.of(Type.FIRE, Type.ICE, Type.BUG));
         List<Pokemon> pokemons = List.of(pokemon, pokemon2);
 
         Assertions.assertThatThrownBy(() -> PokemonValidator.validateTypeCount(pokemons))

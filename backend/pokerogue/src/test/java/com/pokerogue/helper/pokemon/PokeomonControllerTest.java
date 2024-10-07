@@ -2,7 +2,7 @@ package com.pokerogue.helper.pokemon;
 
 import static io.restassured.RestAssured.given;
 
-import com.pokerogue.environment.repository.RepositoryTest;
+import com.pokerogue.environment.repository.MongoRepositoryTest;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import io.restassured.RestAssured;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Disabled("디버깅용 API 테스트")
-public class PokeomonControllerTest extends RepositoryTest {
+public class PokeomonControllerTest extends MongoRepositoryTest {
 
     @Autowired
     PokemonRepository pokemonRepository;

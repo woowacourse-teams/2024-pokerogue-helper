@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.data;
 
+import com.pokerogue.helper.type.data.Type;
 import java.lang.reflect.Field;
 import java.util.List;
 

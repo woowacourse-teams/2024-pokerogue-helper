@@ -9,6 +9,7 @@ public enum ImageUrl {
     BIOME("/biome/"),
     ;
 
+    public static final String PNG = ".png";
     private final String url;
 
     ImageUrl(String url) {
@@ -16,14 +17,15 @@ public enum ImageUrl {
     }
 
     public static String getPokemonImage(String id) {
-        return BASE_URL.url + POKEMON_FRONT.url + id + ".png";
+        return BASE_URL.url + POKEMON_FRONT.url + id + PNG;
     }
 
     public static String getPokemonBackImage(String id) {
-        return BASE_URL.url + POKEMON_BACK.url + id + ".png";
+        return BASE_URL.url + POKEMON_BACK.url + id + PNG;
     }
 
     public static String getBiomeImage(String id) {
-        return BASE_URL.url + BIOME.url + id + ".png";
+        return BASE_URL.url + BIOME.url + id + PNG;
     }
+
 }
