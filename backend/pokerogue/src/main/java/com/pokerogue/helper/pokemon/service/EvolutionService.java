@@ -20,23 +20,22 @@ public class EvolutionService {
 
     public EvolutionResponses getEvolutionResponses(Pokemon pokemon) {
         List<Evolution> evolutions = pokemon.getEvolutions();
-
+        List<Pokemon> connectedPokemons = createConnectedPokemons(evolutions);
         EvolutionContext evolutionContext = new EvolutionContext(evolutions);
-        List<Pokemon> associatedPokemons = getAssociatedPokemons(evolutions);
 
-        List<EvolutionResponse> responses = associatedPokemons.stream()
-                .map(poke -> createSingleResponse(poke, evolutionContext))
+        List<EvolutionResponse> responses = connectedPokemons.stream()
+                .map(pkmn -> createEvolutionResponse(pkmn, evolutionContext))
                 .toList();
 
         return new EvolutionResponses(evolutionContext.getDepthOf(pokemon.getId()), responses);
     }
 
-    private EvolutionResponse createSingleResponse(Pokemon pokemon, EvolutionContext evolutionContext) {
-        return EvolutionResponse.from(pokemon, evolutionContext.findEvolution(pokemon.getId()),
+    private EvolutionResponse createEvolutionResponse(Pokemon pokemon, EvolutionContext evolutionContext) {
+        return EvolutionResponse.from(pokemon, evolutionContext.getEvolutionOf(pokemon.getId()),
                 evolutionContext.getDepthOf(pokemon.getId()));
     }
 
-    private List<Pokemon> getAssociatedPokemons(List<Evolution> evolutions) {
+    private List<Pokemon> createConnectedPokemons(List<Evolution> evolutions) {
         return evolutions.stream()
                 .flatMap(evolution -> Stream.of(evolution.getFrom(), evolution.getTo()))
                 .distinct()
