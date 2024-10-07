@@ -1,5 +1,7 @@
 package com.pokerogue.helper.pokemon.service;
 
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.FakeEvolution;
 import java.util.List;
@@ -9,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class EvolutionContextTest {
 
-    @DisplayName("각 노드의 깊이 정보를 가져올 수 있다.")
+    @DisplayName("각 포켓몬 진화 깊이 정보를 가져올 수 있다.")
     @Test
     void getDepthOf() {
         Evolution evolution = FakeEvolution.from("A", "B");
@@ -35,5 +37,16 @@ class EvolutionContextTest {
         Evolution expected = context.getEvolutionOf("A");
 
         Assertions.assertThat(expected).isEqualTo(actual);
+    }
+
+    @DisplayName("잘못된 포켓몬 아이디라면 예외가 발생한다.")
+    @Test
+    void getEvolutionOfException() {
+        Evolution actual = FakeEvolution.from("A", "B");
+        EvolutionContext context = new EvolutionContext(List.of(actual));
+
+        Assertions.assertThatThrownBy(()->context.getEvolutionOf("C"))
+                .isInstanceOf(GlobalCustomException.class)
+                .hasMessage(ErrorMessage.POKEMON_NOT_FOUND.getMessage());
     }
 }
