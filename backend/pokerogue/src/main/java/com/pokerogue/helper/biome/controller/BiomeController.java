@@ -25,7 +25,12 @@ public class BiomeController {
 
     @GetMapping("/api/v1/biome/{id}")
     public ApiResponse<BiomeDetailResponse> biomeDetails(@PathVariable("id") String id) {
-        log.info("---- URI : {}, Param : {}", "/api/v1/biome/{id}", id);
+        log.info(
+                "---- URI : {}, Param : {}, ThreadName : {}",
+                "/api/v1/biome/{id}",
+                id,
+                Thread.currentThread().getName()
+        );
 
         return new ApiResponse<>("바이옴 정보 불러오기에 성공했습니다.", biomeService.findBiome(id));
     }

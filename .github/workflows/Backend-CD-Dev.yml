@@ -66,5 +66,5 @@ jobs:
           docker run -d -p 8080:8080 --name server \
               -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
               -e TZ=Asia/Seoul \
-              -e SPRING_PROFILES_ACTIVE=local \
+              -e SPRING_PROFILES_ACTIVE=dev \
               ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}

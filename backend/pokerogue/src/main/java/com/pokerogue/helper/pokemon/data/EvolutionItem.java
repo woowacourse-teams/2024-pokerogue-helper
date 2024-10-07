@@ -163,4 +163,8 @@ public enum EvolutionItem {
                         .equals(id))
                 .findAny();
     }
+
+    public static EvolutionItem convertFrom(String evolutionItemData) {
+        return findById(evolutionItemData);
+    }
 }

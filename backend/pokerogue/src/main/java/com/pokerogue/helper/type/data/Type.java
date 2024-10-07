@@ -1,5 +1,7 @@
 package com.pokerogue.helper.type.data;
 
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
 import java.util.Optional;
 import lombok.Getter;
@@ -49,5 +51,10 @@ public enum Type {
         return Arrays.stream(values())
                 .filter(type -> type.name.equals(engName))
                 .findAny();
+    }
+
+    public static Type convertFrom(String typeData) {
+        return findByEngName(typeData)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
     }
 }
