@@ -218,7 +218,7 @@ class PokemonValidator {
 
         boolean isEmptyExist = pokemons.stream().anyMatch(isEmptyHiddenExist);
 
-        validate(Predicate.isEqual(isEmptyExist), isEmptyExist, ErrorMessage.POKEMON_SIZE_MISMATCH);
+        validate(Predicate.isEqual(true), isEmptyExist, ErrorMessage.POKEMON_SIZE_MISMATCH);
     }
 
     static void validateTypeCount(List<Pokemon> pokemons) {
@@ -242,6 +242,19 @@ class PokemonValidator {
         for (Pokemon pokemon : pokemons) {
             validate(isTypeDisjointed, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
         }
+    }
+
+    static void validateEvolutionFromToIsPokemonId(List<Pokemon> pokemons) {
+        List<String> pokemonIds = pokemons.stream().map(Pokemon::getId).toList();
+        List<String> evolutionIds = pokemons.stream()
+                .flatMap(pokemon -> pokemon.getEvolutions().stream())
+                .flatMap(evolution -> Stream.of(evolution.getFrom(), evolution.getTo()))
+                .distinct()
+                .toList();
+
+        boolean containsAll = new HashSet<>(pokemonIds).containsAll(evolutionIds);
+
+        validate(Predicate.isEqual(true), containsAll, ErrorMessage.POKEMON_SIZE_MISMATCH);
     }
 
 

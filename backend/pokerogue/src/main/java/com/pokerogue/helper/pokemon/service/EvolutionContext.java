@@ -37,6 +37,6 @@ public class EvolutionContext {
     }
 
     public Integer getDepthOf(String pokemonId) {
-        return depth.get(pokemonId);
+        return depth.getOrDefault(pokemonId, -1); // TODO: default value, some pokemon dont have evolutions
     }
 }
