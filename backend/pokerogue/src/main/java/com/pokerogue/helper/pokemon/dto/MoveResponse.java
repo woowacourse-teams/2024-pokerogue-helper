@@ -1,9 +1,9 @@
 package com.pokerogue.helper.pokemon.dto;
 
 import com.pokerogue.helper.battle.BattleMove;
-import com.pokerogue.helper.battle.MoveCategory;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.pokemon.data.LevelMove;
 import com.pokerogue.helper.type.data.Type;
 

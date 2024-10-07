@@ -2,10 +2,10 @@ package com.pokerogue.helper.pokemon.service;
 
 
 import com.pokerogue.helper.ability.data.Ability;
-import com.pokerogue.helper.ability.repository.InMemoryAbilityRepository;
+import com.pokerogue.helper.ability.repository.AbilityRepository;
 import com.pokerogue.helper.battle.BattleMove;
 import com.pokerogue.helper.battle.BattleMoveRepository;
-import com.pokerogue.helper.biome.repository.InMemoryBiomeRepository;
+import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.LevelMove;
@@ -31,8 +31,8 @@ public class PokemonService {
 
     private final PokemonRepository pokemonRepository;
     private final BattleMoveRepository battleMoveRepository;
-    private final InMemoryBiomeRepository inMemoryBiomeRepository;
-    private final InMemoryAbilityRepository inMemoryAbilityRepository;
+    private final BiomeRepository inMemoryBiomeRepository;
+    private final AbilityRepository abilityRepository;
     private final EvolutionService evolutionService;
 
     public PokemonDetailResponse findById(String id) {
@@ -83,7 +83,7 @@ public class PokemonService {
         abilityIds.add(pokemon.getHiddenAbilityId());
 
         List<Optional<Ability>> abilities = abilityIds.stream()
-                .map(inMemoryAbilityRepository::findById)
+                .map(abilityRepository::findById)
                 .toList();
 
         return PokemonAbilityResponse.createListFrom(abilities);

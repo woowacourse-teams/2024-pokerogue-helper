@@ -22,4 +22,8 @@ public enum ImageUrl {
     public static String getPokemonBackImage(String id) {
         return BASE_URL.url + POKEMON_BACK.url + id + ".png";
     }
+
+    public static String getBiomeImage(String id) {
+        return BASE_URL.url + BIOME.url + id + ".png";
+    }
 }

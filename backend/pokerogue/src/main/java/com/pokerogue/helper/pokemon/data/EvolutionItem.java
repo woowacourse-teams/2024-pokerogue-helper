@@ -165,6 +165,6 @@ public enum EvolutionItem {
     }
 
     public static EvolutionItem convertFrom(String evolutionItemData) {
-        return findById(evolutionItemData);
+        return findById(evolutionItemData).get();
     }
 }
