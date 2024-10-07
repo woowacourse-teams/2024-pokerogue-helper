@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.dto;
 
+import com.pokerogue.helper.pokemon.config.ImageUrl;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
@@ -27,8 +28,8 @@ public record PokemonResponse(
                 (long) pokemon.getPokedexNumber(),
                 pokemon.getKoName(),
                 pokemon.getFormName(),
-                pokemon.getImageId(), //image front
-                pokemon.getImageId(), //back
+                ImageUrl.getPokemonImage(pokemon.getImageId()), //image front
+                ImageUrl.getPokemonBackImage(pokemon.getImageId()), //back
                 pokemonTypeResponses,
                 pokemon.getGeneration(),
                 pokemon.getBaseTotal(),

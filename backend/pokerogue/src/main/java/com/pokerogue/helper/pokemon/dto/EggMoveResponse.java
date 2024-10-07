@@ -20,7 +20,7 @@ public record EggMoveResponse(
 
     public static EggMoveResponse from(BattleMove battleMove) {
         MoveCategory moveCategory = battleMove.category();
-        Type firstType = Type.findByName(battleMove.type().getKoName())
+        Type firstType = Type.findByEngName(battleMove.type().getName())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
 
         return new EggMoveResponse(

@@ -94,6 +94,8 @@ public class PokemonService {
 
         return biomes.stream()
                 .map(inMemoryBiomeRepository::findById)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .map(PokemonBiomeResponse::from)
                 .toList();
     }

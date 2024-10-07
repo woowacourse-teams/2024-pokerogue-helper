@@ -21,7 +21,7 @@ public record MoveResponse(
 
     public static MoveResponse from(LevelMove levelMove, BattleMove battleMove) {
         MoveCategory moveCategory = battleMove.category();
-        Type firstType = Type.findByName(battleMove.type().getKoName())
+        Type firstType = Type.findByEngName(battleMove.type().getName())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_MATCHING_ERROR));
 
         return new MoveResponse(
@@ -30,7 +30,7 @@ public record MoveResponse(
                 levelMove.getLevel(),
                 battleMove.power(),
                 battleMove.accuracy(),
-                firstType.getName(),
+                firstType.getName(), // TODO: API : koName or engName?
                 firstType.getImage(),
                 moveCategory.getName(),
                 moveCategory.getImage()

@@ -20,6 +20,7 @@ public class MongoConfiguration {
         MappingMongoConverter mongoConverter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
         mongoConverter.setMapKeyDotReplacement("#DOT#");
         mongoConverter.setCustomConversions(customConversions());
+
         return mongoConverter;
     }
 
