@@ -1,5 +1,7 @@
 package com.pokerogue.helper.pokemon.data;
 
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
 import java.util.Optional;
 import lombok.Getter;
@@ -165,6 +167,6 @@ public enum EvolutionItem {
     }
 
     public static EvolutionItem convertFrom(String evolutionItemData) {
-        return findById(evolutionItemData).get();
+        return findById(evolutionItemData).orElseThrow(()->new GlobalCustomException(ErrorMessage.ITEM_NOT_FOUND));
     }
 }

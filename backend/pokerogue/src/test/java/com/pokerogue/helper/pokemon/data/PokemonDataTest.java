@@ -3,7 +3,7 @@ package com.pokerogue.helper.pokemon.data;
 import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemonIdFormat;
 import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemonSize;
 
-import com.pokerogue.environment.repository.RepositoryTest;
+import com.pokerogue.environment.repository.MongoRepositoryTest;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PokemonDataTest extends RepositoryTest {
+public class PokemonDataTest extends MongoRepositoryTest {
 
     @Autowired
     private PokemonRepository pokemonRepository;
