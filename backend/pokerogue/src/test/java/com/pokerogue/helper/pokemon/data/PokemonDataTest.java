@@ -43,7 +43,7 @@ public class PokemonDataTest extends RepositoryTest {
             디버깅 결과
             ID / actualTotal / expectedTotal
             charizard_gigantamax / 634 / 644,
-            kingler_gigantamax / 575 / 58
+            kingler_gigantamax / 575 / 585
             
             두 건의 데이터에 대해 종족값이 일치하지 않는다.
             추가적인 논의가 필요하여 disalbed""")

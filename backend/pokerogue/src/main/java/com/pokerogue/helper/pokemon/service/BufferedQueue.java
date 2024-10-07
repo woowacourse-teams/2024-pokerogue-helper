@@ -4,11 +4,11 @@ import java.util.Queue;
 
 public class BufferedQueue<T> {
     private final Queue<T> value;
-    private int bufferSize;
+    private int bufferCapacity;
     private int bufferCount;
 
-    public BufferedQueue(Queue<T> waitingQueue) {
-        this.value = waitingQueue;
+    public BufferedQueue(Queue<T> queue) {
+        this.value = queue;
     }
 
     public boolean hasNext() {
@@ -17,10 +17,7 @@ public class BufferedQueue<T> {
 
     public T poll() {
         T removedValue = value.remove();
-        bufferSize = Math.max(bufferSize - 1, 0);
-        if (bufferSize == 0) {
-            bufferCount = 0;
-        }
+        bufferCapacity = Math.max(bufferCapacity - 1, 0);
         return removedValue;
     }
 
@@ -29,11 +26,11 @@ public class BufferedQueue<T> {
     }
 
     public boolean hasBufferedNext() {
-        return bufferSize > 0;
+        return bufferCapacity > 0;
     }
 
     public void buffer() {
-        bufferSize = value.size();
+        bufferCapacity = value.size();
         bufferCount++;
     }
 
@@ -41,7 +38,7 @@ public class BufferedQueue<T> {
         return bufferCount;
     }
 
-    public int size() {
+    public int getSize() {
         return value.size();
     }
 }

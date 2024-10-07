@@ -4,6 +4,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class FakePokemon {
+    private FakePokemon(){
+
+    }
 
     static List<String> fieldsNames = List.of(
             "id",
@@ -41,7 +44,7 @@ public class FakePokemon {
             "biomeIds"
     );
 
-    static Pokemon createNewPokemon() {
+    public static Pokemon createNewPokemon() {
         try {
             Pokemon pokemon = new Pokemon();
 

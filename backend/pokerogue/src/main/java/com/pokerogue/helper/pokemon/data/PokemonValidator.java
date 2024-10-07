@@ -76,32 +76,29 @@ class PokemonValidator {
 
             return baseTotal == summation;
         };
-        ErrorMessage error = ErrorMessage.POKEMON_SIZE_MISMATCH;
 
         for (Pokemon pokemon : pokemons) {
-            validate(isBaseTotalCorrect, pokemon, error);
+            validate(isBaseTotalCorrect, pokemon, ErrorMessage.POKEMON_SIZE_MISMATCH);
         }
     }
 
     static void validatePokemonsGeneration(List<Pokemon> pokemons) {
         Predicate<Integer> isValidGeneration = gen -> gen >= MIN_GENERATION && gen <= MAX_GENERATION;
-        ErrorMessage error = ErrorMessage.POKEMON_GENERATION_MISMATCH;
 
         for (Pokemon pokemon : pokemons) {
             int generation = pokemon.getGeneration();
-            validate(isValidGeneration, generation, error);
+            validate(isValidGeneration, generation, ErrorMessage.POKEMON_GENERATION_MISMATCH);
         }
     }
 
     static void validatePokemonFormChanges(List<Pokemon> pokemons) {
         Predicate<Pokemon> isFormChangeable = pokemon -> !pokemon.getFormChanges().isEmpty();
-        ErrorMessage error = ErrorMessage.POKEMON_FORM_CHANGE_MISMATCH;
         List<Pokemon> formChangeablePokemons = pokemons.stream()
                 .filter(Pokemon::isCanChangeForm)
                 .toList();
 
         for (Pokemon fomrChangeablePokemon : formChangeablePokemons) {
-            validate(isFormChangeable, fomrChangeablePokemon, error);
+            validate(isFormChangeable, fomrChangeablePokemon, ErrorMessage.POKEMON_FORM_CHANGE_MISMATCH);
         }
     }
 
@@ -117,22 +114,20 @@ class PokemonValidator {
 
             return trueCount <= 1;
         };
-        ErrorMessage error = ErrorMessage.POKEMON_RARITY_COUNT_MISMATCH;
 
         for (Pokemon pokemon : pokemons) {
-            validate(isRarityCountLessOrEqualThanOne, pokemon, error);
+            validate(isRarityCountLessOrEqualThanOne, pokemon, ErrorMessage.POKEMON_RARITY_COUNT_MISMATCH);
         }
     }
 
     static void validateNormalAbilityCount(List<Pokemon> pokemons) {
         Predicate<Integer> isNormalAbilityCountInRange = normalAbilityCount ->
                 isInRange(normalAbilityCount, MIN_NORMAL_ABILITY_COUNT, MAX_NORMAL_ABILITY_COUNT);
-        ErrorMessage error = ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT;
 
         for (Pokemon pokemon : pokemons) {
             int abilityCount = pokemon.getNormalAbilityIds().size();
 
-            validate(isNormalAbilityCountInRange, abilityCount, error);
+            validate(isNormalAbilityCountInRange, abilityCount, ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT);
         }
     }
 
@@ -148,10 +143,9 @@ class PokemonValidator {
 
             return isInRange(totalCount, MIN_ABILITY_COUNT, MAX_ABILITY_COUNT);
         };
-        ErrorMessage error = ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT;
 
         for (Pokemon pokemon : pokemons) {
-            validate(isTotalAbilityCountInRange, pokemon, error);
+            validate(isTotalAbilityCountInRange, pokemon, ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT);
         }
     }
 
@@ -165,10 +159,9 @@ class PokemonValidator {
 
             return totalAbilityIds.size() == uniqueIds.size();
         };
-        ErrorMessage error = ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT;
 
         for (Pokemon pokemon : pokemons) {
-            validate(isAbilityDisjointed, pokemon, error);
+            validate(isAbilityDisjointed, pokemon, ErrorMessage.POKEMON_NORMAL_ABILITY_COUNT);
         }
     }
 

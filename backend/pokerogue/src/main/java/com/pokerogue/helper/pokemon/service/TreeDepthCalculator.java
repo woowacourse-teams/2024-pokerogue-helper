@@ -25,21 +25,21 @@ public class TreeDepthCalculator {
 
     public Map<String, Integer> calculateDepths() {
         Map<String, Integer> depths = new HashMap<>();
-        BufferedQueue<String> waitingQueue = createWaitingQueue(depths);
+        BufferedQueue<String> bufferedQueue = createBufferedQueue(depths);
 
-        topologicalSort(waitingQueue, depths);
+        calculateDepthByTopologicalSort(bufferedQueue, depths);
 
         return depths;
     }
 
-    private BufferedQueue<String> createWaitingQueue(Map<String, Integer> depths) {
+    private BufferedQueue<String> createBufferedQueue(Map<String, Integer> depths) {
         List<String> allNodes = getAllNodes();
         allNodes.forEach(node -> indegree.putIfAbsent(node, 0));
         allNodes.forEach(node -> adjacentNodes.putIfAbsent(node, new ArrayList<>()));
         allNodes.forEach(node -> depths.putIfAbsent(node, 0));
 
         return new BufferedQueue<>(allNodes.stream()
-                .filter(this::isWaitingNode)
+                .filter(this::isIndegreeZero)
                 .collect(Collectors.toCollection(LinkedList::new)));
     }
 
@@ -49,25 +49,29 @@ public class TreeDepthCalculator {
                 .toList();
     }
 
-    private void topologicalSort(BufferedQueue<String> waitingQueue, Map<String, Integer> depths) {
-        while (waitingQueue.hasNext()) {
-            waitingQueue.capture();
-            flushNodes(waitingQueue, depths);
+    private void calculateDepthByTopologicalSort(BufferedQueue<String> bufferedQueue, Map<String, Integer> depths) {
+        while (bufferedQueue.hasNext()) {
+            bufferedQueue.buffer();
+            flushNodes(bufferedQueue, depths);
         }
     }
 
-    private void flushNodes(BufferedQueue<String> waitingQueue, Map<String, Integer> depths) {
-        while (waitingQueue.hasBufferedNext()) {
-            String currentNode = waitingQueue.poll();
+    private void flushNodes(BufferedQueue<String> bufferedQueue, Map<String, Integer> depths) {
+        while (bufferedQueue.hasBufferedNext()) {
+            String currentNode = bufferedQueue.poll();
             List<String> nextNodes = adjacentNodes.get(currentNode);
 
             nextNodes.stream()
-                    .peek(nextNode -> depths.put(nextNode, waitingQueue.getCaptureCount()))
+                    .peek(nextNode -> updateDepthCount(nextNode, depths, bufferedQueue))
                     .peek(this::decreaseIndegreeCount)
-                    .filter(this::isWaitingNode)
+                    .filter(this::isIndegreeZero)
                     .filter(this::isAdjacentNodeExist)
-                    .forEach(waitingQueue::add);
+                    .forEach(bufferedQueue::add);
         }
+    }
+
+    private void updateDepthCount(String nextNode, Map<String, Integer> depths, BufferedQueue<String> bufferedQueue) {
+        depths.put(nextNode, bufferedQueue.getBufferCount());
     }
 
     private void decreaseIndegreeCount(String nextNode) {
@@ -75,7 +79,7 @@ public class TreeDepthCalculator {
     }
 
 
-    private boolean isWaitingNode(String node) {
+    private boolean isIndegreeZero(String node) {
         return indegree.get(node) == 0;
     }
 

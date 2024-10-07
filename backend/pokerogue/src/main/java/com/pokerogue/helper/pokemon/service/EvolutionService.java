@@ -40,7 +40,7 @@ public class EvolutionService {
                 .flatMap(evolution -> Stream.of(evolution.getFrom(), evolution.getTo()))
                 .distinct()
                 .map(pokemonRepository::findById)
-                .filter(Optional::isPresent) // TODO: data is inconsistent, delete filter
+                .filter(Optional::isPresent) // TODO: data is inconsistent, isPresent is change to throw
                 .map(Optional::get)
                 .toList();
     }

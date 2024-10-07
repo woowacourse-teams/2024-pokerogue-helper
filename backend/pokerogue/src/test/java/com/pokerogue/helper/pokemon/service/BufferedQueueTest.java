@@ -53,6 +53,6 @@ class BufferedQueueTest {
         }
 
         Assertions.assertThat(bufferedValues).hasSameElementsAs(List.of(1, 10000));
-        Assertions.assertThat(bufferedQueue.size()).isEqualTo(3);
+        Assertions.assertThat(bufferedQueue.getSize()).isEqualTo(3);
     }
 }

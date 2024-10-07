@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 
 public class EvolutionContext {
-
     private final List<Evolution> evolutions;
     private final Map<String, List<String>> edges;
     private final Map<String, Integer> depth;
@@ -37,6 +36,6 @@ public class EvolutionContext {
     }
 
     public Integer getDepthOf(String pokemonId) {
-        return depth.getOrDefault(pokemonId, -1); // TODO: default value, some pokemon dont have evolutions
+        return depth.getOrDefault(pokemonId, -1); // TODO: 진화체인 없으면 depth -1을 반환..? 얘기 해보기
     }
 }
