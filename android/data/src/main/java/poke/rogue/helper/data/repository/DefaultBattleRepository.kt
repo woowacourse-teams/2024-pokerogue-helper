@@ -16,7 +16,7 @@ class DefaultBattleRepository(
     private val remoteBattleDataSource: RemoteBattleDataSource,
     private val pokemonRepository: DexRepository,
 ) : BattleRepository {
-    private val cachedSkills: MutableMap<Long, List<BattleSkill>> = hashMapOf()
+    private val cachedSkills: MutableMap<Long, List<BattleSkill>> = mutableMapOf()
 
     override suspend fun weathers(): List<Weather> = remoteBattleDataSource.weathers()
 
