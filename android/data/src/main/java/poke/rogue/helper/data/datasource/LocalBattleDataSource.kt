@@ -19,9 +19,15 @@ class LocalBattleDataSource(private val battleDataStore: BattleDataStore) {
         battleDataStore.savePokemon(pokemonId)
     }
 
-    fun pokemonWithSkill(): Flow<PokemonWithSkillIds?> = battleDataStore.pokemonWithSkillId().map { it?.toData() }
+    suspend fun saveWeather(weatherId: String) {
+        battleDataStore.saveWeather(weatherId)
+    }
 
-    fun pokemonId(): Flow<String?> = battleDataStore.pokemonId()
+    fun weatherIdStream(): Flow<String?> = battleDataStore.weatherId()
+
+    fun pokemonWithSkillStream(): Flow<PokemonWithSkillIds?> = battleDataStore.pokemonWithSkillId().map { it?.toData() }
+
+    fun pokemonIdStream(): Flow<String?> = battleDataStore.pokemonId()
 
     companion object {
         private var instance: LocalBattleDataSource? = null

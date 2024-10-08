@@ -1,4 +1,3 @@
-
 package poke.rogue.helper.local.datastore
 
 import android.content.Context
@@ -31,6 +30,17 @@ class BattleDataStore(private val context: Context) {
         }
     }
 
+    suspend fun saveWeather(weatherId: String) {
+        context.dataStore.edit {
+            it[WEATHER_SELECTION_KEY] = weatherId
+        }
+    }
+
+    fun weatherId(): Flow<String?> =
+        context.dataStore.data.map { preferences ->
+            preferences[WEATHER_SELECTION_KEY]
+        }
+
     fun pokemonWithSkillId(): Flow<SavedPokemonWithSkill?> =
         context.dataStore.data.map { preference ->
             val pokemonId = preference[PAIR_POKEMON_SELECTION_KEY]
@@ -49,6 +59,7 @@ class BattleDataStore(private val context: Context) {
 
     private companion object {
         const val BATTLE_PREFERENCE_NAME = "battle"
+        val WEATHER_SELECTION_KEY = stringPreferencesKey("weather_selection")
         val PAIR_POKEMON_SELECTION_KEY = stringPreferencesKey("pair_pokemon_selection")
         val PAIR_SKILL_SELECTION_KEY = stringPreferencesKey("pair_skill_selection")
         val SINGLE_POKEMON_SELECTION_KEY = stringPreferencesKey("single_pokemon_selection")
