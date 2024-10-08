@@ -47,7 +47,10 @@ class DefaultBattleRepository(
         skillId: String,
     ) = localBattleDataSource.savePokemonWithSkill(pokemonId, skillId)
 
-    override fun savedPokemonStream(): Flow<Pokemon?> = localBattleDataSource.pokemonIdStream().map { it?.let { pokemonRepository.pokemon(it) } }
+    override fun savedPokemonStream(): Flow<Pokemon?> =
+        localBattleDataSource.pokemonIdStream().map {
+            it?.let { pokemonRepository.pokemon(it) }
+        }
 
     override fun savedPokemonWithSkillStream(): Flow<PokemonWithSkill?> =
         localBattleDataSource.pokemonWithSkillStream().map {
