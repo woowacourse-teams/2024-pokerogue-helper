@@ -24,7 +24,7 @@ public class EvolutionService {
         EvolutionContext evolutionContext = new EvolutionContext(evolutions);
 
         List<EvolutionResponse> responses = connectedPokemons.stream()
-                .map(pkmn -> createEvolutionResponse(pkmn, evolutionContext))
+                .map(connectedPokemon -> createEvolutionResponse(connectedPokemon, evolutionContext))
                 .toList();
 
         return new EvolutionResponses(evolutionContext.getDepthOf(pokemon.getId()), responses);

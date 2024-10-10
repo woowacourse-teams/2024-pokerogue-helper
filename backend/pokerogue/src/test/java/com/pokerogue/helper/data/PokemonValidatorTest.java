@@ -1,10 +1,8 @@
-package com.pokerogue.helper.pokemon.data;
-
-import static com.pokerogue.helper.pokemon.data.FakePokemon.createNewPokemon;
-import static com.pokerogue.helper.pokemon.data.FakePokemon.setField;
+package com.pokerogue.helper.data;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.type.data.Type;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -27,11 +25,12 @@ public class PokemonValidatorTest {
     @DisplayName("포켓몬 타입의 개수가 1개 혹은 2개가 아니라면 예외가 발생한다")
     @Test
     void pokemonTypeSize() {
-        Pokemon pokemon = createNewPokemon();
-        Pokemon pokemon2 = createNewPokemon();
+        Pokemon pokemon = new Pokemon();
+        Pokemon pokemon2 = new Pokemon();
 
-        setField(pokemon, "types", List.of());
-        setField(pokemon2, "types", List.of(Type.FIRE, Type.ICE, Type.BUG));
+        pokemon.setTypes(List.of());
+        pokemon2.setTypes(List.of(Type.FIRE, Type.ICE, Type.BUG));
+
         List<Pokemon> pokemons = List.of(pokemon, pokemon2);
 
         Assertions.assertThatThrownBy(() -> PokemonValidator.validateTypeCount(pokemons))

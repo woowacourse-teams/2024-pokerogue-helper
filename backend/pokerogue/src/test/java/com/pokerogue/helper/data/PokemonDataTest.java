@@ -1,9 +1,10 @@
-package com.pokerogue.helper.pokemon.data;
+package com.pokerogue.helper.data;
 
-import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemonIdFormat;
-import static com.pokerogue.helper.pokemon.data.PokemonValidator.validatePokemonSize;
+import static com.pokerogue.helper.data.PokemonValidator.validatePokemonIdFormat;
+import static com.pokerogue.helper.data.PokemonValidator.validatePokemonSize;
 
 import com.pokerogue.environment.repository.MongoRepositoryTest;
+import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.List;
 import org.assertj.core.api.Assertions;

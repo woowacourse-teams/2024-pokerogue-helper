@@ -17,13 +17,16 @@ public class EvolutionContext {
 
     public EvolutionContext(List<Evolution> evolutions) {
         this.evolutions = evolutions;
-        edges = createEdges(evolutions);
-        depth = new TreeDepthCalculator(edges).calculateDepths();
+        this.edges = createEdges(evolutions);
+        this.depth = new TreeDepthCalculator(edges).calculateDepths();
     }
 
     private Map<String, List<String>> createEdges(List<Evolution> evolutions) {
-        return evolutions.stream().collect(Collectors.groupingBy(Evolution::getFrom,
-                Collectors.mapping(Evolution::getTo, Collectors.toList())));
+        return evolutions.stream()
+                .collect(Collectors.groupingBy(
+                        Evolution::getFrom,
+                        Collectors.mapping(Evolution::getTo, Collectors.toList()))
+                );
     }
 
     public Evolution getEvolutionOf(String pokemonId) {

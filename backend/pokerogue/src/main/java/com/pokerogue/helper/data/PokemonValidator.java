@@ -1,10 +1,11 @@
-package com.pokerogue.helper.pokemon.data;
+package com.pokerogue.helper.data;
 
 import static java.lang.Character.isDigit;
 import static java.lang.Character.isLowerCase;
 
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
+import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.type.data.Type;
 import java.util.HashSet;
 import java.util.List;

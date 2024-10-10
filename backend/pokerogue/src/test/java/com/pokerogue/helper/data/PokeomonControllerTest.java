@@ -1,4 +1,4 @@
-package com.pokerogue.helper.pokemon;
+package com.pokerogue.helper.data;
 
 import static io.restassured.RestAssured.given;
 

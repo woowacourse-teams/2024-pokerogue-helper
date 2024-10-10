@@ -1,10 +1,11 @@
 package com.pokerogue.helper.pokemon.service;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,31 +21,39 @@ public class TreeDepthCalculator {
     private Map<String, Integer> createIndegree() {
         return adjacentNodes.values().stream()
                 .flatMap(List::stream)
-                .collect(Collectors.groupingBy(node -> node, Collectors.summingInt(cnt -> 1)));
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(cnt -> 1)));
     }
 
     public Map<String, Integer> calculateDepths() {
         Map<String, Integer> depths = new HashMap<>();
-        BufferedQueue<String> bufferedQueue = createBufferedQueue(depths);
+        loadDefaults(depths);
+        BufferedQueue<String> bufferedQueue = createBufferedQueue();
 
         calculateDepthByTopologicalSort(bufferedQueue, depths);
 
         return depths;
     }
 
-    private BufferedQueue<String> createBufferedQueue(Map<String, Integer> depths) {
+    private void loadDefaults(Map<String, Integer> depths) {
         List<String> allNodes = getAllNodes();
-        allNodes.forEach(node -> indegree.putIfAbsent(node, 0));
-        allNodes.forEach(node -> adjacentNodes.putIfAbsent(node, new ArrayList<>()));
-        allNodes.forEach(node -> depths.putIfAbsent(node, 0));
+        allNodes.stream()
+                .peek(node -> indegree.putIfAbsent(node, 0))
+                .peek(node -> depths.putIfAbsent(node, 0))
+                .forEach(node -> adjacentNodes.putIfAbsent(node, new ArrayList<>()));
+    }
+
+    private BufferedQueue<String> createBufferedQueue() {
+        List<String> allNodes = getAllNodes();
 
         return new BufferedQueue<>(allNodes.stream()
                 .filter(this::isIndegreeZero)
-                .collect(Collectors.toCollection(LinkedList::new)));
+                .collect(Collectors.toCollection(ArrayDeque::new)));
     }
 
     private List<String> getAllNodes() {
-        return Stream.concat(adjacentNodes.keySet().stream(), adjacentNodes.values().stream().flatMap(List::stream))
+        return Stream.concat(
+                        adjacentNodes.keySet().stream(),
+                        adjacentNodes.values().stream().flatMap(List::stream))
                 .distinct()
                 .toList();
     }
