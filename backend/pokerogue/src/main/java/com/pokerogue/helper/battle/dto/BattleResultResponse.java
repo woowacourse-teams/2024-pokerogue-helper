@@ -7,6 +7,7 @@ public record BattleResultResponse(
         String moveName,
         String moveDescription,
         String moveType,
-        String moveCategory
+        String moveCategory,
+        boolean isPreemptive
 ) {
 }

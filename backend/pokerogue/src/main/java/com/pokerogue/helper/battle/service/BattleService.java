@@ -37,6 +37,7 @@ public class BattleService {
 
         double finalAccuracy = battleCalculator.calculateAccuracy(move, weather);
         double totalMultiplier = battleCalculator.calculateTotalMultiplier(move, weather, rivalPokemon, myPokemon);
+        boolean isPreemptive = battleCalculator.decidePreemptiveAttack(rivalPokemon, myPokemon);
 
         return new BattleResultResponse(
                 move.getPower(),
@@ -45,7 +46,8 @@ public class BattleService {
                 move.getName(),
                 move.getEffect(),
                 moveType.getKoName(),
-                move.getMoveCategory()
+                move.getMoveCategory(),
+                isPreemptive
         );
     }
 }

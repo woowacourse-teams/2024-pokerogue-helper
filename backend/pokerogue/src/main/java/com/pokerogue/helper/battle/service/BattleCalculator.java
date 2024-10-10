@@ -71,4 +71,8 @@ public class BattleCalculator {
         BattleMultiplier strongWindMultiplier = typeMultiplierProvider.getByStrongWind(moveType, rivalPokemonTypes);
         return BattleMultiplier.multiply(totalMultiplier, strongWindMultiplier);
     }
+
+    public boolean decidePreemptiveAttack(Pokemon rivalPokemon, Pokemon myPokemon) {
+        return myPokemon.isFasterThan(rivalPokemon);
+    }
 }

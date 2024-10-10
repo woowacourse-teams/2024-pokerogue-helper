@@ -119,4 +119,8 @@ public class Pokemon {
         return this.types.stream()
                 .anyMatch(name::equals);
     }
+
+    public boolean isFasterThan(Pokemon other) {
+        return this.speed > other.speed;
+    }
 }
