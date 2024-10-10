@@ -78,11 +78,11 @@ public class BattleService {
         List<Type> types = new ArrayList<>();
         if (!rivalInMemoryPokemon.firstType().isEmpty()) {
             types.add(Type.findByEngName(rivalInMemoryPokemon.firstType())
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)));
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_NOT_FOUND)));
         }
         if (!rivalInMemoryPokemon.secondType().isEmpty()) {
             types.add(Type.findByEngName(rivalInMemoryPokemon.secondType())
-                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND)));
+                    .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_NOT_FOUND)));
         }
         double typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, types);
         double sameTypeBonusMultiplier = getSameTypeAttackBonusMultiplier(moveType, myInMemoryPokemon);

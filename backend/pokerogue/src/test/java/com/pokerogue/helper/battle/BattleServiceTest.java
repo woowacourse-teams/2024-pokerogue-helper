@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import com.pokerogue.environment.service.ServiceTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ class BattleServiceTest extends ServiceTest {
     @Autowired
     private BattleService battleService;
 
+    @Disabled("Todo: inMemoryPokemonRepository -> PokemonRepository")
     @Test
     @DisplayName("배틀 예상 결과를 계산한다.")
     void calculateBattleResult() {

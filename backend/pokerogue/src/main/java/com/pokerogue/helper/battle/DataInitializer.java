@@ -75,7 +75,7 @@ public class DataInitializer implements ApplicationRunner {
 
     private BattleMove createMove(List<String> fields) {
         Type moveType = Type.findByName(fields.get(4))
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_NOT_FOUND));
         MoveCategory moveCategory = MoveCategory.findByEngName(fields.get(6))
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
 
@@ -100,9 +100,9 @@ public class DataInitializer implements ApplicationRunner {
 
     private TypeMatching createTypeMatching(List<String> fields) {
         Type fromType = Type.findByEngName(fields.get(0))
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_NOT_FOUND));
         Type toType = Type.findByEngName(fields.get(1))
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_TYPE_NOT_FOUND));
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TYPE_NOT_FOUND));
         double result = convertToDouble(fields.get(2));
 
         return new TypeMatching(fromType, toType, result);

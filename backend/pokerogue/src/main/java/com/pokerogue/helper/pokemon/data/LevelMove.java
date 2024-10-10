@@ -1,12 +1,17 @@
 package com.pokerogue.helper.pokemon.data;
 
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LevelMove {
 
-    private final int level;
-    private final String moveId;
+    @Field("level")
+    private int level;
+
+    @Field("moveId")
+    private String moveId;
 }
