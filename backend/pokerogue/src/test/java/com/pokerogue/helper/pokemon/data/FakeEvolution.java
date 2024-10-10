@@ -2,6 +2,7 @@ package com.pokerogue.helper.pokemon.data;
 
 
 public class FakeEvolution extends Evolution {
+
     private String from;
     private Integer level;
     private String to;

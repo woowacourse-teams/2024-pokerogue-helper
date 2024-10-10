@@ -9,7 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class EvolutionContextTest {
+public class EvolutionContextTest {
 
     @DisplayName("각 포켓몬 진화 깊이 정보를 가져올 수 있다.")
     @Test

@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 
 
 public class EvolutionContext {
+
     private final List<Evolution> evolutions;
     private final Map<String, List<String>> edges;
     private final Map<String, Integer> depth;

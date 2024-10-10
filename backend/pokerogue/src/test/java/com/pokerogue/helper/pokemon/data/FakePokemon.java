@@ -5,8 +5,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class FakePokemon {
-    private FakePokemon(){
 
+    private FakePokemon(){
     }
 
     static List<String> fieldsNames = List.of(

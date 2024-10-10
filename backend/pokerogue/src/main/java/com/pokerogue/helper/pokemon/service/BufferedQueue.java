@@ -3,6 +3,7 @@ package com.pokerogue.helper.pokemon.service;
 import java.util.Queue;
 
 public class BufferedQueue<T> {
+
     private final Queue<T> value;
     private int bufferCapacity;
     private int bufferCount;

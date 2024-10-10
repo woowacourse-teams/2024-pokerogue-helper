@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.util.Strings;
 
 class PokemonValidator {
+
     private static final int POKEMON_SIZE = 1446;
     private static final int MIN_GENERATION = 1;
     private static final int MAX_GENERATION = 9;
