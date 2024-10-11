@@ -43,32 +43,48 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout_pokemon_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/black"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:title="@string/dex_title_name"
+                app:collapsedTitleTextColor="@color/poke_white"
+                app:expandedTitleTextColor="@color/white"
+                app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed">
 
-                <ImageView
-                    android:id="@+id/iv_pokemon_detail_pokemon"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:importantForAccessibility="no"
-                    app:layout_collapseMode="none"
-                    tools:src="@tools:sample/avatars" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="parallax">
+
+                    <ImageView
+                        android:id="@+id/iv_pokemon_detail_pokemon"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:paddingHorizontal="40dp"
+                        android:paddingTop="40dp"
+                        app:layout_constraintDimensionRatio="1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.66"
+                        tools:ignore="ContentDescription"
+                        tools:src="@tools:sample/avatars" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar_pokemon_detail"
                     style="@style/CustomToolbarStyle"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/black"
                     app:layout_collapseMode="pin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:subtitleTextColor="@color/white"
+                    android:background="@color/poke_black"
                     app:title="@string/pokemon_list_title_name"
-                    app:titleTextColor="@color/white">
+                    app:titleTextColor="@color/poke_white">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -77,14 +93,18 @@
                         android:importantForAccessibility="no"
                         android:onClick="@{() -> eventHandler.navigateToHome()}"
                         android:src="@drawable/icon_home" />
+
+                    <LinearLayout
+                        android:id="@+id/layout_pokemon_detail_pokemon_types"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="vertical"
+                        android:layout_gravity="end|center_vertical"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
+                        tools:layout_height="50dp"
+                        tools:layout_width="100dp" />
                 </com.google.android.material.appbar.MaterialToolbar>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    tools:text="헤헤헤헤헿" />
-
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

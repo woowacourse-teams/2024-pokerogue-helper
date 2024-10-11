@@ -45,7 +45,7 @@ class PokemonDetailActivity :
     }
 
     private val biomeAdapter: BiomeAdapter by lazy { BiomeAdapter(vm2) }
-//    private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
+    private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
 //    private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
 
     override val toolbar: Toolbar
@@ -74,7 +74,7 @@ class PokemonDetailActivity :
             )
         }
         biomeAdapter.submitList(
-            List<BiomeUiModel> (200) { i ->
+            List<BiomeUiModel>(200) { i ->
                 BiomeUiModel(
                     id = "1",
                     name = "Forest $i",
@@ -86,11 +86,11 @@ class PokemonDetailActivity :
             }
         )
 
-//        pokemonTypesAdapter =
-//            PokemonTypesAdapter(
-//                context = this,
-//                viewGroup = binding.layoutPokemonDetailPokemonTypes,
-//            )
+        pokemonTypesAdapter =
+            PokemonTypesAdapter(
+                context = this,
+                viewGroup = binding.layoutPokemonDetailPokemonTypes,
+            )
 
 //        pokemonDetailPagerAdapter = PokemonDetailPagerAdapter(this)
 //        binding.pagerPokemonDetail.apply {
@@ -164,19 +164,18 @@ class PokemonDetailActivity :
                 pokemonDetail.pokemon.imageUrl,
             )
 
-//            tvPokemonDetailPokemonName.text =
-//                stringOf(
-//                    R.string.pokemon_list_poke_name_format,
-//                    pokemonDetail.pokemon.name,
-//                    pokemonDetail.pokemon.dexNumber,
-//                )
+            collapsingToolbarLayoutPokemonDetail.title = stringOf(
+                R.string.pokemon_list_poke_name_format,
+                pokemonDetail.pokemon.name,
+                pokemonDetail.pokemon.dexNumber,
+            )
         }
 
-//        pokemonTypesAdapter.addTypes(
-//            types = pokemonDetail.pokemon.types,
-//            config = typesUiConfig,
-//            spacingBetweenTypes = 0.dp,
-//        )
+        pokemonTypesAdapter.addTypes(
+            types = pokemonDetail.pokemon.types,
+            config = typesUiConfig,
+            spacingBetweenTypes = 0.dp,
+        )
     }
 
     companion object {
