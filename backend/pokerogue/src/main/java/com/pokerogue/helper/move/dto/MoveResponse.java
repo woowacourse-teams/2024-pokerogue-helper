@@ -1,4 +1,3 @@
-
 package com.pokerogue.helper.move.dto;
 
 import com.pokerogue.helper.move.data.Move;
