@@ -18,7 +18,7 @@ class TypeTest {
     void convertFrom_WhenNotExist(String inputType) {
         assertThatThrownBy(() -> Type.convertFrom(inputType))
                 .isInstanceOf(GlobalCustomException.class)
-                .hasMessage(ErrorMessage.POKEMON_TYPE_NOT_FOUND.getMessage());
+                .hasMessage(ErrorMessage.TYPE_NOT_FOUND.getMessage());
     }
 
     @Test
