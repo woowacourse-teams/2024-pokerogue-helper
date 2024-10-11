@@ -16,7 +16,7 @@ public record PokemonMoveResponse(
         String categoryLogo
 ) {
 
-    public static PokemonMoveResponse from(Move move, Integer level, String typeImageFromS3) {
+    public static PokemonMoveResponse from(Move move, Integer level) {
         MoveCategory moveCategory = move.getMoveCategory();
         Type moveType = move.getType();
 
@@ -27,7 +27,7 @@ public record PokemonMoveResponse(
                 move.getPower(),
                 move.getAccuracy(),
                 moveType.getName(),
-                typeImageFromS3,
+                moveType.getImage(),
                 moveCategory.getName(),
                 moveCategory.getImage()
         );

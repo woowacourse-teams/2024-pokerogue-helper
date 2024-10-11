@@ -61,4 +61,8 @@ public class Move {
 
     @Field("pokemonIds")
     private List<String> pokemonIds;
+
+    public boolean isAttackMove() {
+        return this.moveCategory != MoveCategory.STATUS;
+    }
 }

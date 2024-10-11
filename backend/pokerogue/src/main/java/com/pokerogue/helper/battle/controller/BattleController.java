@@ -1,5 +1,9 @@
-package com.pokerogue.helper.battle;
+package com.pokerogue.helper.battle.controller;
 
+import com.pokerogue.helper.battle.dto.BattleResultResponse;
+import com.pokerogue.helper.battle.dto.WeatherResponse;
+import com.pokerogue.helper.battle.service.BattleService;
+import com.pokerogue.helper.battle.service.WeatherService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class BattleController {
 
+    private final WeatherService weatherService;
     private final BattleService battleService;
 
     @GetMapping("/api/v1/weathers")
     public ApiResponse<List<WeatherResponse>> weatherList() {
-        return new ApiResponse<>("날씨 리스트 불러오기에 성공했습니다.", battleService.findWeathers());
+        return new ApiResponse<>("날씨 리스트 불러오기에 성공했습니다.", weatherService.findWeathers());
     }
 
     @GetMapping("/api/v1/battle")

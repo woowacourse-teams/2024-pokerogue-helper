@@ -2,6 +2,7 @@ package com.pokerogue.helper.pokemon.data;
 
 import com.pokerogue.helper.type.data.Type;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
+@AllArgsConstructor
 @Setter
 @ToString
 @NoArgsConstructor
@@ -115,4 +117,13 @@ public class Pokemon {
 
     @Field("biomeIds")
     private List<String> biomeIds;
+
+    public boolean hasSameType(Type type) {
+        return this.types.stream()
+                .anyMatch(myType -> myType == type);
+    }
+
+    public boolean isFasterThan(Pokemon other) {
+        return this.speed > other.speed;
+    }
 }
