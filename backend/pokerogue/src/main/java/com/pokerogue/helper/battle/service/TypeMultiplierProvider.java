@@ -1,11 +1,11 @@
 package com.pokerogue.helper.battle.service;
 
-import com.pokerogue.helper.battle.data.TypeMatching;
-import com.pokerogue.helper.battle.repository.TypeMatchingRepository;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Pokemon;
+import com.pokerogue.helper.type.collection.TypeMatching;
 import com.pokerogue.helper.type.data.Type;
+import com.pokerogue.helper.type.repository.TypeMatchingRepository;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

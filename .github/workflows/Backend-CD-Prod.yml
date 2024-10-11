@@ -17,7 +17,7 @@ jobs:
 
   build:
     needs: test
-    runs-on: cd
+    runs-on: [cd, app-a]
     steps:
 
       - name: Checkout
@@ -50,7 +50,7 @@ jobs:
   
   deploy:
     needs: build
-    runs-on: cd
+    runs-on: [cd, app-a]
     steps:
 
       - name: Change permission

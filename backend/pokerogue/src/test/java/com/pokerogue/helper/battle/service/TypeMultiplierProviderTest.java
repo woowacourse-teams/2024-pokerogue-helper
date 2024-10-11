@@ -24,11 +24,7 @@ class TypeMultiplierProviderTest extends ServiceTest {
     @DisplayName("타입 상성에 따른 배틀 결과 배수를 구한다.")
     void getByTypeMatching() {
         Pokemon rivalPokemon = pokemonRepository.findById("squirtle").get();
-        List<Type> rivalPokemonTypes = rivalPokemon.getTypes()
-                .stream()
-                .map(String::toUpperCase) // Todo
-                .map(Type::valueOf)
-                .toList();
+        List<Type> rivalPokemonTypes = rivalPokemon.getTypes();
         Type attackMoveType = Type.FIRE;
 
         List<BattleMultiplier> multipliers = typeMultiplierProvider.getAllByTypeMatchings(attackMoveType,
@@ -45,6 +41,8 @@ class TypeMultiplierProviderTest extends ServiceTest {
 
         BattleMultiplier multiplier = typeMultiplierProvider.getBySameTypeAttackBonus(attackMoveType, rivalPokemon);
 
+        System.out.println("actual: " + multiplier.getDoubleValue());
+        System.out.println("expected: " + BattleMultiplier.STRONG_MULTIPLIER.getDoubleValue());
         assertThat(multiplier).isEqualTo(BattleMultiplier.STRONG_MULTIPLIER);
     }
 
@@ -52,11 +50,7 @@ class TypeMultiplierProviderTest extends ServiceTest {
     @DisplayName("강한 바람이 불 때 비행타입 라이벌 포켓몬의 약점을 가려주는 배수를 구한다.")
     void getByStrongWind() {
         Pokemon rivalPokemon = pokemonRepository.findById("pidgey").get();
-        List<Type> rivalPokemonTypes = rivalPokemon.getTypes()
-                .stream()
-                .map(String::toUpperCase) // Todo
-                .map(Type::valueOf)
-                .toList();
+        List<Type> rivalPokemonTypes = rivalPokemon.getTypes();
         Type attackMoveType = Type.ELECTRIC;
 
         BattleMultiplier multiplier = typeMultiplierProvider.getByStrongWind(attackMoveType, rivalPokemonTypes);

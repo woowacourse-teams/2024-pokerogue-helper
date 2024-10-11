@@ -16,7 +16,7 @@ public enum Tier {
     BOSS("보스"),
     BOSS_RARE("레어 보스"),
     BOSS_SUPER_RARE("슈퍼 레어 보스"),
-    BOSS_ULTRA_RARE("슈퍼 울트라 레어 보스")
+    BOSS_ULTRA_RARE("슈퍼 울트라 레어 보스"),
     ;
 
     private final String name;
@@ -25,18 +25,22 @@ public enum Tier {
         this.name = name;
     }
 
-    public static Tier getTierByName(String name) {
+    public boolean isWild() {
+        return !name.contains("보스");
+    }
+
+    public boolean isBoss() {
+        return name.contains("보스");
+    }
+
+    public static Tier convertFrom(String tierData) {
+        return getTierByName(tierData);
+    }
+
+    private static Tier getTierByName(String name) {
         return Arrays.stream(values())
                 .filter(tier -> tier.name.equals(name))
                 .findFirst()
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TIER_NOT_FOUND));
-    }
-
-    public boolean isWildPokemon() {
-        return !this.name.contains("보스");
-    }
-
-    public boolean isBossPokemon() {
-        return this.name.contains("보스");
     }
 }

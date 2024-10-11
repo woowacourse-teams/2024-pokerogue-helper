@@ -1,11 +1,14 @@
 package com.pokerogue.helper.pokemon.data;
 
+import com.pokerogue.helper.global.exception.ErrorMessage;
+import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
+import java.util.Optional;
 import lombok.Getter;
 
 @Getter
 public enum EvolutionItem {
-    EMPTY(""),
+    
     LINKING_CORD("연결의끈"),
     SUN_STONE("태양의돌"),
     MOON_STONE("달의돌"),
@@ -31,9 +34,122 @@ public enum EvolutionItem {
     MALICIOUS_ARMOR("저주받은갑옷"),
     MASTERPIECE_TEACUP("걸작찻잔"),
     METAL_ALLOY("복합금속"),
-    SCROLL_OF_DARKNESS("악의족자"),
-    SCROLL_OF_WATERS("물의족자"),
+    SCROLL_OF_DARKNESS("악의 족자"),
+    SCROLL_OF_WATERS("물의 족자"),
     SYRUPY_APPLE("꿀맛사과"),
+    ABOMASITE("눈설왕나이트"),
+    ABSOLITE("앱솔나이트"),
+    AERODACTYLITE("프테라나이트"),
+    AGGRONITE("보스로라나이트"),
+    ALAKAZITE("후딘나이트"),
+    ALTARIANITE("파비코리나이트"),
+    AMPHAROSITE("전룡나이트"),
+    AUDINITE("다부니나이트"),
+    BANETTITE("다크펫나이트"),
+    BEEDRILLITE("독침붕나이트"),
+    BLASTOISINITE("거북왕나이트"),
+    BLAZIKENITE("번치코나이트"),
+    CAMERUPTITE("폭타나이트"),
+    CHARIZARDITE_X("리자몽나이트 X"),
+    CHARIZARDITE_Y("리자몽나이트 Y"),
+    DIANCITE("디안시나이트"),
+    GALLADITE("엘레이드나이트"),
+    GARCHOMPITE("한카리아스나이트"),
+    GARDEVOIRITE("가디안나이트"),
+    GENGARITE("팬텀나이트"),
+    GLALITITE("얼음귀신나이트"),
+    GYARADOSITE("갸라도스나이트"),
+    HERACRONITE("헤라크로스나이트"),
+    HOUNDOOMINITE("헬가나이트"),
+    KANGASKHANITE("캥카나이트"),
+    LATIASITE("라티아스나이트"),
+    LATIOSITE("라티오스나이트"),
+    LOPUNNITE("이어롭나이트"),
+    LUCARIONITE("루카리오나이트"),
+    MANECTITE("썬더볼트나이트"),
+    MAWILITE("입치트나이트"),
+    MEDICHAMITE("요가램나이트"),
+    METAGROSSITE("메타그로스나이트"),
+    MEWTWONITE_X("뮤츠나이트 X"),
+    MEWTWONITE_Y("뮤츠나이트 Y"),
+    PIDGEOTITE("피죤투나이트"),
+    PINSIRITE("쁘사이저나이트"),
+    RAYQUAZITE("레쿠쟈나이트"),
+    SABLENITE("깜까미나이트"),
+    SALAMENCITE("보만다나이트"),
+    SCEPTILITE("나무킹나이트"),
+    SCIZORITE("핫삼나이트"),
+    SHARPEDONITE("샤크니아나이트"),
+    SLOWBRONITE("야도란나이트"),
+    STEELIXITE("강철톤나이트"),
+    SWAMPERTITE("대짱이나이트"),
+    TYRANITARITE("마기라스나이트"),
+    VENUSAURITE("이상해꽃나이트"),
+    BLUE_ORB("쪽빛구슬"),
+    RED_ORB("주홍구슬"),
+    SHARP_METEORITE("뾰족한운석"),
+    HARD_METEORITE("단단한운석"),
+    SMOOTH_METEORITE("부드러운운석"),
+    ADAMANT_CRYSTAL("큰금강옥"),
+    LUSTROUS_GLOBE("큰백옥"),
+    GRISEOUS_CORE("큰백금옥"),
+    REVEAL_GLASS("비추는거울"),
+    GRACIDEA("그라시데아꽃"),
+    MAX_MUSHROOMS("다이버섯"),
+    DARK_STONE("다크스톤"),
+    LIGHT_STONE("라이트스톤"),
+    PRISON_BOTTLE("굴레의항아리"),
+    N_LUNARIZER("네크로플러스루나"),
+    N_SOLARIZER("네크로플러스솔"),
+    RUSTED_SWORD("녹슨검"),
+    RUSTED_SHIELD("녹슨방패"),
+    ICY_REINS_OF_UNITY("차가운유대의고삐"),
+    SHADOW_REINS_OF_UNITY("검은유대의고삐"),
+    WELLSPRING_MASK("우물의가면"),
+    HEARTHFLAME_MASK("화덕의가면"),
+    CORNERSTONE_MASK("주춧돌의가면"),
+    SHOCK_DRIVE("번개카세트"),
+    BURN_DRIVE("블레이즈카세트"),
+    CHILL_DRIVE("프리즈카세트"),
+    DOUSE_DRIVE("아쿠아카세트"),
+    FIST_PLATE("주먹플레이트"),
+    SKY_PLATE("푸른하늘플레이트"),
+    TOXIC_PLATE("맹독플레이트"),
+    EARTH_PLATE("대지플레이트"),
+    STONE_PLATE("암석플레이트"),
+    INSECT_PLATE("비단벌레플레이트"),
+    SPOOKY_PLATE("원령플레이트"),
+    IRON_PLATE("강철플레이트"),
+    FLAME_PLATE("불구슬플레이트"),
+    SPLASH_PLATE("물방울플레이트"),
+    MEADOW_PLATE("초록플레이트"),
+    ZAP_PLATE("우뢰플레이트"),
+    MIND_PLATE("이상한플레이트"),
+    ICICLE_PLATE("고드름플레이트"),
+    DRACO_PLATE("용의플레이트"),
+    DREAD_PLATE("공포플레이트"),
+    PIXIE_PLATE("정령플레이트"),
+    BLANK_PLATE("순백플레이트"),
+    LEGEND_PLATE("레전드플레이트"),
+    FIGHTING_MEMORY("파이팅메모리"),
+    FLYING_MEMORY("플라잉메모리"),
+    POISON_MEMORY("포이즌메모리"),
+    GROUND_MEMORY("그라운드메모리"),
+    ROCK_MEMORY("록메모리"),
+    BUG_MEMORY("버그메모리"),
+    GHOST_MEMORY("고스트메모리"),
+    STEEL_MEMORY("스틸메모리"),
+    FIRE_MEMORY("파이어메모리"),
+    WATER_MEMORY("워터메모리"),
+    GRASS_MEMORY("그래스메모리"),
+    ELECTRIC_MEMORY("일렉트릭메모리"),
+    PSYCHIC_MEMORY("사이킥메모리"),
+    ICE_MEMORY("아이스메모리"),
+    DRAGON_MEMORY("드래곤메모리"),
+    DARK_MEMORY("다크메모리"),
+    FAIRY_MEMORY("페어리메모리"),
+    BLANK_MEMORY("빈메모리"),
+    ULTRANECROZIUM_Z("울트라네크로"),
     ;
 
     private final String koName;
@@ -42,12 +158,15 @@ public enum EvolutionItem {
         this.koName = koName;
     }
 
-    public static EvolutionItem findById(String id) {
+    public static Optional<EvolutionItem> findById(String id) {
         return Arrays.stream(values())
                 .filter(value -> value.name()
                         .toLowerCase()
                         .equals(id))
-                .findAny()
-                .orElse(EMPTY);
+                .findAny();
+    }
+
+    public static EvolutionItem convertFrom(String evolutionItemData) {
+        return findById(evolutionItemData).orElseThrow(()->new GlobalCustomException(ErrorMessage.ITEM_NOT_FOUND));
     }
 }

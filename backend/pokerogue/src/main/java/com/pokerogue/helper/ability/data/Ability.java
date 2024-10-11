@@ -1,14 +1,16 @@
 package com.pokerogue.helper.ability.data;
 
-import com.pokerogue.helper.pokemon.data.InMemoryPokemon;
 import java.util.List;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @Document(collection = "ability")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Ability {
 
     @Id
@@ -30,7 +32,7 @@ public class Ability {
     private int generation;
 
     @Field("pokemonIds")
-    private List<Integer> pokemonIds;
+    private List<String> pokemonIds;
 
     @Field("isBypassFaint")
     private Boolean isBypassFaint;
@@ -38,13 +40,7 @@ public class Ability {
     @Field("isIgnorable")
     private Boolean isIgnorable;
 
-    // Todo: 지우기
-    private List<InMemoryPokemon> inMemoryPokemons;
-
-    public Ability(String id, String name, String description, List<InMemoryPokemon> inMemoryPokemons) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.inMemoryPokemons = inMemoryPokemons;
+    public boolean isPresent() {
+        return !id.equals("none");
     }
 }

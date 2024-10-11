@@ -1,37 +1,28 @@
 package com.pokerogue.helper.pokemon.data;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
-public final class Evolution {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Evolution {
 
+    @Field("from")
     private String from;
-    private String level;
+
+    @Field("level")
+    private Integer level;
+
+    @Field("to")
     private String to;
+
+    @Field("item")
     private String item;
+
+    @Field("condition")
     private String condition;
-
-    public String from() { // Todo: 이 메소드들 지우기
-        return from;
-    }
-
-    public String level() {
-        return level;
-    }
-
-    public String to() {
-        return to;
-    }
-
-    public String item() {
-        return item;
-    }
-
-    public String condition() {
-        return condition;
-    }
 }

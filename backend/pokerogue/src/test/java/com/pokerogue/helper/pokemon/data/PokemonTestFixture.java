@@ -1,12 +1,13 @@
 package com.pokerogue.helper.pokemon.data;
 
+import com.pokerogue.helper.type.data.Type;
 import java.util.Arrays;
 import java.util.List;
 
 public class PokemonTestFixture {
     public static List<Evolution> BULBASAUR_EVOLUTIONS = Arrays.asList(
-            new Evolution("bulbasaur", "16", "ivysaur", null, null),
-            new Evolution("ivysaur", "32", "venusaur", null, null)
+            new Evolution("bulbasaur", 16, "ivysaur", null, null),
+            new Evolution("ivysaur", 32, "venusaur", null, null)
     );
 
     public static List<LevelMove> BULBASAUR_LEVEL_MOVES = Arrays.asList(
@@ -38,7 +39,7 @@ public class PokemonTestFixture {
             "", // formName
             64, // baseExp
             50, // friendship
-            Arrays.asList("grass", "poison"), // types
+            Arrays.asList(Type.GRASS, Type.POISON), // types
             Arrays.asList("overgrow"), // normalAbilityIds
             "chlorophyll", // hiddenAbilityId
             "grassy_surge", // passiveAbilityId
@@ -73,8 +74,8 @@ public class PokemonTestFixture {
     );
 
     public static List<Evolution> CHARMANDER_EVOLUTIONS = List.of(
-            new Evolution("charmander", "16", "charmeleon", null, null),
-            new Evolution("charmeleon", "36", "charizard", null, null)
+            new Evolution("charmander", 16, "charmeleon", null, null),
+            new Evolution("charmeleon", 36, "charizard", null, null)
     );
 
     public static List<LevelMove> CHARMANDER_LEVEL_MOVES = List.of(
@@ -103,7 +104,7 @@ public class PokemonTestFixture {
             "", // formName
             62, // baseExp
             50, // friendship
-            List.of("fire"), // types
+            List.of(Type.FIRE), // types
             List.of("blaze"), // normalAbilityIds
             "solar_power", // hiddenAbilityId
             "beast_boost", // passiveAbilityId

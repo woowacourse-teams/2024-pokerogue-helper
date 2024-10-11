@@ -5,12 +5,16 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @AllArgsConstructor
+@Setter
+@ToString
 @NoArgsConstructor
 @Document(collection = "pokemon")
 public class Pokemon {
@@ -46,7 +50,7 @@ public class Pokemon {
     private int friendship;
 
     @Field("types")
-    private List<String> types; // Todo enum
+    private List<Type> types;
 
     @Field("normalAbilityIds")
     private List<String> normalAbilityIds;
@@ -115,9 +119,8 @@ public class Pokemon {
     private List<String> biomeIds;
 
     public boolean hasSameType(Type type) {
-        String name = type.getName();
         return this.types.stream()
-                .anyMatch(name::equals);
+                .anyMatch(myType -> myType == type);
     }
 
     public boolean isFasterThan(Pokemon other) {

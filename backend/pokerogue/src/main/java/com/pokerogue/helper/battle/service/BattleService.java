@@ -8,7 +8,6 @@ import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
-import com.pokerogue.helper.type.data.Type;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,21 +32,11 @@ public class BattleService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         Move move = moveRepository.findById(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
-        Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
 
         double finalAccuracy = battleCalculator.calculateAccuracy(move, weather);
         double totalMultiplier = battleCalculator.calculateTotalMultiplier(move, weather, rivalPokemon, myPokemon);
         boolean isPreemptive = battleCalculator.decidePreemptiveAttack(rivalPokemon, myPokemon);
 
-        return new BattleResultResponse(
-                move.getPower(),
-                totalMultiplier,
-                finalAccuracy,
-                move.getName(),
-                move.getEffect(),
-                moveType.getKoName(),
-                move.getMoveCategory(),
-                isPreemptive
-        );
+        return BattleResultResponse.from(move, totalMultiplier, finalAccuracy, isPreemptive);
     }
 }

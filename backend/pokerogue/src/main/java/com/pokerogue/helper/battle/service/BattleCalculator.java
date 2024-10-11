@@ -35,12 +35,8 @@ public class BattleCalculator {
             return BattleMultiplier.DEFAULT_MULTIPLIER.getDoubleValue();
         }
 
-        Type moveType = Type.valueOf(move.getType().toUpperCase()); // Todo
-        List<Type> rivalPokemonTypes = rivalPokemon.getTypes()
-                .stream() // Todo
-                .map(String::toUpperCase)
-                .map(Type::valueOf)
-                .toList();
+        Type moveType = move.getType();
+        List<Type> rivalPokemonTypes = rivalPokemon.getTypes();
         BattleMultiplier weatherMultiplier = getWeatherMultiplier(weather, moveType);
         BattleMultiplier sameTypeBonusMultiplier = getSameTypeBonusMultiplier(moveType, myPokemon);
         BattleMultiplier typeMatchingMultiplier = getTypeMatchingMultiplier(moveType, rivalPokemonTypes);
@@ -63,11 +59,13 @@ public class BattleCalculator {
     }
 
     private BattleMultiplier getTypeMatchingMultiplier(Type moveType, List<Type> rivalPokemonTypes) {
-        List<BattleMultiplier> typeMatchingMultipliers = typeMultiplierProvider.getAllByTypeMatchings(moveType, rivalPokemonTypes);
+        List<BattleMultiplier> typeMatchingMultipliers = typeMultiplierProvider.getAllByTypeMatchings(moveType,
+                rivalPokemonTypes);
         return BattleMultiplier.multiply(typeMatchingMultipliers.toArray(EMPTY_BATTLE_MULTIPLIER_ARRAY));
     }
 
-    private BattleMultiplier applyStrongWindMultiplier(BattleMultiplier totalMultiplier, Type moveType, List<Type> rivalPokemonTypes) {
+    private BattleMultiplier applyStrongWindMultiplier(BattleMultiplier totalMultiplier, Type moveType,
+                                                       List<Type> rivalPokemonTypes) {
         BattleMultiplier strongWindMultiplier = typeMultiplierProvider.getByStrongWind(moveType, rivalPokemonTypes);
         return BattleMultiplier.multiply(totalMultiplier, strongWindMultiplier);
     }

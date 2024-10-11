@@ -1,7 +1,8 @@
 package com.pokerogue.helper.move.data;
 
-import com.pokerogue.helper.battle.data.MoveCategory;
+import com.pokerogue.helper.type.data.Type;
 import java.util.List;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 @Document(collection = "move")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Move {
 
     @Id
@@ -25,13 +26,13 @@ public class Move {
     private String koName;
 
     @Field("type")
-    private String type; // Todo enum 사용
+    private Type type;
 
     @Field("moveCategory")
-    private String moveCategory; // Todo
+    private MoveCategory moveCategory;
 
     @Field("moveTarget")
-    private String moveTarget; // Todo enum 만들기
+    private MoveTarget moveTarget;
 
     @Field("power")
     private int power;
@@ -58,12 +59,12 @@ public class Move {
     private String released;
 
     @Field("flags")
-    private List<String> flags; // Todo enum 사용
+    private List<MoveFlag> flags;
 
     @Field("pokemonIds")
     private List<String> pokemonIds;
 
     public boolean isAttackMove() {
-        return MoveCategory.valueOf(this.moveCategory.toUpperCase()) != MoveCategory.STATUS; // Todo
+        return this.moveCategory != MoveCategory.STATUS;
     }
 }
