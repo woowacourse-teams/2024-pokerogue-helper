@@ -50,16 +50,17 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
         updateManager = UpdateManager(applicationContext)
         updateManager.registerInstallStateUpdateListener()
 
-        val appUpdateLauncher = registerForActivityResult(
-            ActivityResultContracts.StartIntentSenderForResult()
-        ) { result ->
-            // logger도 달아야겠죠??
-            if (result.resultCode == RESULT_OK) {
-                Timber.i("Update completed successfully")
-            } else {
-                Timber.e("Update failed, result code: ${result.resultCode}")
+        val appUpdateLauncher =
+            registerForActivityResult(
+                ActivityResultContracts.StartIntentSenderForResult(),
+            ) { result ->
+                // logger도 달아야겠죠??
+                if (result.resultCode == RESULT_OK) {
+                    Timber.i("Update completed successfully")
+                } else {
+                    Timber.e("Update failed, result code: ${result.resultCode}")
+                }
             }
-        }
         updateManager.checkForAppUpdates(appUpdateLauncher)
     }
 

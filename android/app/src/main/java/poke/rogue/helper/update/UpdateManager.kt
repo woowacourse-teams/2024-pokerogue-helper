@@ -13,36 +13,34 @@ import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import timber.log.Timber
 
-
 class UpdateManager(
-    private val context: Context
+    private val context: Context,
 ) {
     private val appUpdateManager: AppUpdateManager = AppUpdateManagerFactory.create(context)
     private val updateType = AppUpdateType.FLEXIBLE
 
-    private val installStateUpdateListener = InstallStateUpdatedListener { state ->
-        when (state.installStatus()) {
-            InstallStatus.INSTALLING -> Timber.i("Update is downloading")
+    private val installStateUpdateListener =
+        InstallStateUpdatedListener { state ->
+            when (state.installStatus()) {
+                InstallStatus.INSTALLING -> Timber.i("Update is downloading")
 
-            InstallStatus.DOWNLOADED -> {
-                Timber.i("Update installed successfully")
-                appUpdateManager.completeUpdate()
+                InstallStatus.DOWNLOADED -> {
+                    Timber.i("Update installed successfully")
+                    appUpdateManager.completeUpdate()
+                }
+
+                InstallStatus.CANCELED -> Timber.e("Update was cancelled")
             }
-
-            InstallStatus.CANCELED -> Timber.e("Update was cancelled")
         }
-    }
 
-    fun checkForAppUpdates(
-        appUpdateLauncher: ActivityResultLauncher<IntentSenderRequest>
-    ) {
+    fun checkForAppUpdates(appUpdateLauncher: ActivityResultLauncher<IntentSenderRequest>) {
         appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
             if (checkForAppUpdate(info)) {
                 val updateOptions = AppUpdateOptions.newBuilder(updateType).build()
                 appUpdateManager.startUpdateFlowForResult(
                     info,
                     appUpdateLauncher,
-                    updateOptions
+                    updateOptions,
                 )
             }
         }
@@ -53,7 +51,6 @@ class UpdateManager(
         val isUpdateAllowed = info.isUpdateTypeAllowed(updateType)
         return isUpdateAvailable && isUpdateAllowed
     }
-
 
     fun registerInstallStateUpdateListener() {
         appUpdateManager.registerListener(installStateUpdateListener)
