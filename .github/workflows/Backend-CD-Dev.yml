@@ -12,7 +12,6 @@ jobs:
     uses: ./.github/workflows/Backend-CI.yml
     secrets: inherit
 
-
   build:
     needs: test
     runs-on: dev
@@ -57,13 +56,17 @@ jobs:
           
           if [ "$(docker ps -qa)" ]; then
           docker rm -f $(docker ps -qa)
+          docker builder prune
           else
           echo "No containers to remove."
           fi
-          
+
+          docker pull ${{ secrets.DOCKER_DEV_MONGO_IMAGE }}
+          docker run -d --name pokerogue-mongo-db ${{ secrets.DOCKER_DEV_MONGO_IMAGE }}
+
           docker pull ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}
-          
           docker run -d -p 8080:8080 --name server \
+              --link pokerogue-mongo-db \
               -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
               -e TZ=Asia/Seoul \
               -e SPRING_PROFILES_ACTIVE=dev \
