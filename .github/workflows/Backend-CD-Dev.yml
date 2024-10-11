@@ -55,10 +55,10 @@ jobs:
           sudo chmod 666 /var/run/docker.sock
           
           if [ "$(docker ps -qa)" ]; then
-            docker rm -f $(docker ps -qa)
-            docker builder prune
+          docker rm -f $(docker ps -qa)
+          docker builder prune
           else
-            echo "No containers to remove."
+          echo "No containers to remove."
           fi
 
           docker pull ${{ secrets.DOCKER_DEV_MONGO_IMAGE }}
