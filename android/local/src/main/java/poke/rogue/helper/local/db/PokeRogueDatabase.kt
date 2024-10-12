@@ -17,7 +17,7 @@ abstract class PokeRogueDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 
     companion object {
-        private const val DATABASE_NAME = "pokemon_helper.db"
+        const val DATABASE_NAME = "pokemon_helper.db"
 
         @Volatile
         private var instance: PokeRogueDatabase? = null

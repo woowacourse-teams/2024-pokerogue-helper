@@ -1,27 +1,23 @@
 package poke.rogue.helper.local.dao
 
-import androidx.room.Room
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
-import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.jupiter.api.DisplayName
-import poke.rogue.helper.local.db.PokeRogueDatabase
+import org.koin.test.KoinTest
+import org.koin.test.get
+import poke.rogue.helper.local.di.testLocalModule
 import poke.rogue.helper.local.entity.pokemonEntity
-import poke.rogue.helper.local.utils.testContext
+import poke.rogue.helper.local.utils.KoinAndroidUnitTestRule
 
-class PokemonDaoTest {
-    private lateinit var dao: PokemonDao
+class PokemonDaoTest : KoinTest {
+    private val dao get() = get<PokemonDao>()
 
-    @Before
-    fun setUp() {
-        val db =
-            Room.inMemoryDatabaseBuilder(
-                testContext,
-                PokeRogueDatabase::class.java,
-            ).build()
-        dao = db.pokemonDao()
-    }
+    @get:Rule
+    val koinTestRule = KoinAndroidUnitTestRule(
+        testLocalModule
+    )
 
     @Test
     @DisplayName("포켓몬 저장 후 불러오기")
