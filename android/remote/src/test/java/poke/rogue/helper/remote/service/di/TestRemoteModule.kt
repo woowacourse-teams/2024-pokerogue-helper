@@ -13,26 +13,27 @@ import poke.rogue.helper.remote.service.AbilityService
 import retrofit2.Retrofit
 import retrofit2.create
 
-val testRemoteModule = module {
-    includes(retrofitModule)
+val testRemoteModule
+    get() = module {
+        includes(retrofitModule)
 
-    single<OkHttpClient>(named("test")) {
-        OkHttpClient
-            .Builder()
-            .addInterceptor(get<HttpLoggingInterceptor>())
-            .build()
-    }
+        single<OkHttpClient>(named("test")) {
+            OkHttpClient
+                .Builder()
+                .addInterceptor(get<HttpLoggingInterceptor>())
+                .build()
+        }
 
-    single<Retrofit>(named("test")) { (path: HttpUrl) ->
-        Retrofit.Builder()
-            .client(get<OkHttpClient>(named("test")))
-            .baseUrl(path)
-            .addCallAdapterFactory(get<PokeCallAdapterFactory>())
-            .addConverterFactory(get<PokeConverterFactory>())
-            .build()
-    }
+        single<Retrofit>(named("test")) { (path: HttpUrl) ->
+            Retrofit.Builder()
+                .client(get<OkHttpClient>(named("test")))
+                .baseUrl(path)
+                .addCallAdapterFactory(get<PokeCallAdapterFactory>())
+                .addConverterFactory(get<PokeConverterFactory>())
+                .build()
+        }
 
-    single<AbilityService> { (path: HttpUrl) ->
-        get<Retrofit>(named("test")) { parametersOf(path) }.create()
+        single<AbilityService> { (path: HttpUrl) ->
+            get<Retrofit>(named("test")) { parametersOf(path) }.create()
+        }
     }
-}

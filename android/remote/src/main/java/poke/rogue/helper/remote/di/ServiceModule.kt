@@ -8,9 +8,10 @@ import poke.rogue.helper.remote.service.PokeDexService
 import retrofit2.Retrofit
 import retrofit2.create
 
-internal val serviceModule = module {
-    single<AbilityService> { get<Retrofit>().create() }
-    single<BattleService> { get<Retrofit>().create() }
-    single<BiomeService> { get<Retrofit>().create() }
-    single<PokeDexService> { get<Retrofit>().create() }
-}
+internal val serviceModule
+    get() = module {
+        single<AbilityService> { get<Retrofit>().create() }
+        single<BattleService> { get<Retrofit>().create() }
+        single<BiomeService> { get<Retrofit>().create() }
+        single<PokeDexService> { get<Retrofit>().create() }
+    }

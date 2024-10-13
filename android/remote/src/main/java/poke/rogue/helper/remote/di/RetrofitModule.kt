@@ -18,7 +18,8 @@ import java.util.concurrent.TimeUnit
 
 private const val LOCAL_HOST_BASE_URL = "http://10.0.2.2:8080"
 
-internal val retrofitModule = module {
+internal val retrofitModule
+    get() = module {
 
     single<Json> {
         if (BuildConfig.DEBUG) {
