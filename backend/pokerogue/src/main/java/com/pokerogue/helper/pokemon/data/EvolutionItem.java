@@ -150,6 +150,7 @@ public enum EvolutionItem {
     FAIRY_MEMORY("페어리메모리"),
     BLANK_MEMORY("빈메모리"),
     ULTRANECROZIUM_Z("울트라네크로"),
+    EMPTY("없음")
     ;
 
     private final String koName;
