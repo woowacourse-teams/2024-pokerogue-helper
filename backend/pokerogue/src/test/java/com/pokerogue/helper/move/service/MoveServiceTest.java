@@ -73,9 +73,16 @@ class MoveServiceTest extends ServiceTest {
                 () -> assertThat(moveDetailResponse.typeLogo()).contains("type/ground"),
                 () -> assertThat(moveDetailResponse.categoryEngName()).isEqualTo("special"),
                 () -> assertThat(moveDetailResponse.categoryLogo()).contains("move-category/special.png"),
+                () -> assertThat(moveDetailResponse.moveTarget()).isEqualTo("near_other"),
                 () -> assertThat(moveDetailResponse.power()).isEqualTo(90),
                 () -> assertThat(moveDetailResponse.accuracy()).isEqualTo(100),
+                () -> assertThat(moveDetailResponse.powerPoint()).isEqualTo(10),
                 () -> assertThat(moveDetailResponse.effect()).isEqualTo("상대의 발밑에 대지의 힘을 방출한다. 상대의 특수방어를 떨어뜨릴 때가 있다."),
+                () -> assertThat(moveDetailResponse.effectChance()).isEqualTo(10),
+                () -> assertThat(moveDetailResponse.priority()).isEqualTo(0),
+                () -> assertThat(moveDetailResponse.generation()).isEqualTo(4),
+                () -> assertThat(moveDetailResponse.released()).isNull(),
+                () -> assertThat(moveDetailResponse.flags()).isEmpty(),
                 () -> assertThat(moveDetailResponse.pokemonIdsWithLevelMove()).hasSize(71),
                 () -> assertThat(moveDetailResponse.pokemonIdsWithEggMove()).hasSize(113)
         );
