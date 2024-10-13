@@ -6,29 +6,24 @@ import android.os.Bundle
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetail2Binding
-import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.biome.BiomeAdapter
 import poke.rogue.helper.presentation.biome.BiomeViewModel
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.biome.model.BiomeUiModel
-import poke.rogue.helper.presentation.biome.model.toUi
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
-import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
-import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 import poke.rogue.helper.presentation.util.view.setImage
 
 // TODO: 다시 activity_pokemon_detail 로 바꾸어야 해.
@@ -79,11 +74,13 @@ class PokemonDetailActivity :
                     id = "1",
                     name = "Forest $i",
                     imageUrl = "https://www.pngegg.com/en/search?q=pokemon",
-                    types = listOf(
-                        TypeUiModel.BUG, TypeUiModel.GROUND
-                    ),
+                    types =
+                        listOf(
+                            TypeUiModel.BUG,
+                            TypeUiModel.GROUND,
+                        ),
                 )
-            }
+            },
         )
 
         pokemonTypesAdapter =
@@ -164,11 +161,12 @@ class PokemonDetailActivity :
                 pokemonDetail.pokemon.imageUrl,
             )
 
-            collapsingToolbarLayoutPokemonDetail.title = stringOf(
-                R.string.pokemon_list_poke_name_format,
-                pokemonDetail.pokemon.name,
-                pokemonDetail.pokemon.dexNumber,
-            )
+            collapsingToolbarLayoutPokemonDetail.title =
+                stringOf(
+                    R.string.pokemon_list_poke_name_format,
+                    pokemonDetail.pokemon.name,
+                    pokemonDetail.pokemon.dexNumber,
+                )
         }
 
         pokemonTypesAdapter.addTypes(
