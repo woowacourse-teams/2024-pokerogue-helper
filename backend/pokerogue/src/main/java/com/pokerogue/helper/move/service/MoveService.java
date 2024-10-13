@@ -63,14 +63,8 @@ public class MoveService {
         return MoveResponse.from(move);
     }
 
-    private Move findMoveById(String id) {
-        return moveRepository.findById(id)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
-    }
-
     public MoveDetailResponse findMove(String id) {
-        Move move = moveRepository.findById(id)
-                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
+        Move move = findMoveById(id);
         List<String> eggMoveIdsContains = pokemonRepository.findByEggMoveIdsContains(move.getId()).stream()
                 .map(Pokemon::getId)
                 .toList();
@@ -79,5 +73,10 @@ public class MoveService {
                 .toList();
 
         return MoveDetailResponse.from(move, levelMoveIdsContains, eggMoveIdsContains);
+    }
+
+    private Move findMoveById(String id) {
+        return moveRepository.findById(id)
+                .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }
