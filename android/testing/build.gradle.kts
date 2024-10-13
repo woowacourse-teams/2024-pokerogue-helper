@@ -49,6 +49,16 @@ dependencies {
     implementation(libs.kotlin)
     implementation(libs.timber)
     implementation(libs.mockk)
+    // koin
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    testImplementation(libs.koin.test.junit5)
+    // JUnit test api
     api(libs.bundles.unit.test)
     api(libs.kotlin.test)
+    // robolectric api
+    api(libs.bundles.robolectric.test)
+    // koin api
+    api(libs.koin.test.junit5)
+    api(libs.koin.android.test)
 }
