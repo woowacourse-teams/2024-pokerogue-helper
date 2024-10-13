@@ -39,32 +39,34 @@ public class BiomeService {
                 .toList();
     }
 
-    public BiomeDetailResponse findBiome(String id) {
+    public BiomeDetailResponse findBiome(String id, String bossPokemonOrder, String wildPokemonOrder) {
         Biome biome = biomeRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
 
         return BiomeDetailResponse.of(
                 biome,
                 s3Service.getBiomeImageFromS3(biome.getId()),
-                getWildPokemons(biome.getNativePokemons()),
-                getBossPokemons(biome.getNativePokemons()),
+                getWildPokemons(biome.getNativePokemons(), wildPokemonOrder),
+                getBossPokemons(biome.getNativePokemons(), bossPokemonOrder),
                 getTrainerPokemons(biome),
                 getNextBiomes(biome)
         );
     }
 
-    private List<BiomeAllPokemonResponse> getWildPokemons(List<NativePokemon> nativePokemons) {
+    private List<BiomeAllPokemonResponse> getWildPokemons(List<NativePokemon> nativePokemons, String wildPokemonOrder) {
         return nativePokemons.stream()
                 .filter(NativePokemon::isWild)
+                .sorted(NativePokemonComparator.of(wildPokemonOrder))
                 .map(nativePokemon -> BiomeAllPokemonResponse.of(
                         nativePokemon,
                         getBiomePokemons(nativePokemon.getPokemonIds())))
                 .toList();
     }
 
-    private List<BiomeAllPokemonResponse> getBossPokemons(List<NativePokemon> nativePokemons) {
+    private List<BiomeAllPokemonResponse> getBossPokemons(List<NativePokemon> nativePokemons, String bossPokemonOrder) {
         return nativePokemons.stream()
                 .filter(NativePokemon::isBoss)
+                .sorted(NativePokemonComparator.of(bossPokemonOrder))
                 .map(nativePokemon -> BiomeAllPokemonResponse.of(
                         nativePokemon,
                         getBiomePokemons(nativePokemon.getPokemonIds())))
