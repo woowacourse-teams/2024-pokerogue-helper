@@ -18,6 +18,11 @@ public class MoveController {
 
     private final MoveService moveService;
 
+    @GetMapping("/api/v1/moves1")
+    public ApiResponse<List<MoveResponse>> moveList() {
+        return new ApiResponse<>("기술 리스트 불러오기에 성공했습니다.", moveService.findMoves());
+    }
+
     @GetMapping("/api/v1/moves")
     public ApiResponse<List<MoveResponse>> moveListByPokedexNumber(@RequestParam("pokedex-number") Integer pokedexNumber) {
         log.info(

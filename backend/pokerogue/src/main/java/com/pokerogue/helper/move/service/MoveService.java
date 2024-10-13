@@ -20,6 +20,12 @@ public class MoveService {
     private final PokemonRepository pokemonRepository;
     private final MoveRepository moveRepository;
 
+    public List<MoveResponse> findMoves() {
+        return moveRepository.findAll().stream()
+                .map(MoveResponse::from)
+                .toList();
+    }
+
     public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
         List<Pokemon> pokemons = pokemonRepository.findByPokedexNumber(pokedexNumber);
         if (pokemons.isEmpty()) {
