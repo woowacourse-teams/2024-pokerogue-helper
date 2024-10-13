@@ -67,8 +67,8 @@ kotlin-gradleplugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 # koin
-koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin"}
-koin-core = { module = "io.insert-koin:koin-core"}
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core" }
 koin-test-junit5 = { module = "io.insert-koin:koin-test-junit5" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-android-test = { module = "io.insert-koin:koin-android-test" }
@@ -102,10 +102,10 @@ androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "andro
 android-test-fragment = { module = "androidx.fragment:fragment-testing", version.ref = "androidx-test-fragment" }
 androidx-test-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "android-test-esspreso-contrib" }
 androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso-core" }
-androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test-core" }
+androidx-test-core = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test-core" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidx-test" }
-androidx-test-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-junit" }
+androidx-test-extention-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-junit" }
 junit5-android-test-core = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "android-junit5-core" }
 junit5-android-test-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "android-junit5-core" }
 android-mockk = { module = "io.mockk:mockk-android", version.ref = "mockk" }
@@ -154,7 +154,8 @@ firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.
 firebase = ["firebase-analytics", "firebase-crashlytics"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 unit-test = ["kotlin-coroutines-test", "junit5", "kotest-runner-junit5", "mockk"]
+robolectric-test = ["robolectric", "androidx-test-core", "androidx-test-extention-ktx"]
 android-test = [
-    "androidx-test-core", "androidx-test-espresso-contrib", "androidx-test-espresso", "androidx-test-junit", "androidx-test-junit-ktx", "androidx-test-rules", "androidx-test-runner", "android-test-fragment",
+    "androidx-test-core", "androidx-test-espresso-contrib", "androidx-test-espresso", "androidx-test-junit", "androidx-test-extention-ktx", "androidx-test-rules", "androidx-test-runner", "android-test-fragment",
     "junit5", "kotest-runner-junit5", "android-mockk", "junit5-android-test-core"
 ]
