@@ -7,8 +7,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
-import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
@@ -25,7 +23,6 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel by viewModels<HomeViewModel>()
-    private val logger: AnalyticsLogger = analyticsLogger()
 
     override val toolbar: Toolbar
         get() = binding.toolbarHome

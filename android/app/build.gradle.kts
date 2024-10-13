@@ -111,6 +111,8 @@ android {
     }
     testOptions {
         animationsDisabled = true
+        // ref: https://github.com/robolectric/robolectric/pull/4736
+        unitTests.isIncludeAndroidResources = true
         managedDevices {
             val deviceApis = (27..34)
             localDevices {
@@ -163,7 +165,12 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.bundles.firebase)
+    // koin
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.android)
+    androidTestImplementation(libs.koin.android.test)
     // android test
     androidTestImplementation(libs.bundles.android.test)
+    testRuntimeOnly(libs.junit.vintage.engine)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
 }

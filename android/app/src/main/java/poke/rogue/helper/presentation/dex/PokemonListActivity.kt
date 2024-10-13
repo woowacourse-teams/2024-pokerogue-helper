@@ -2,12 +2,11 @@ package poke.rogue.helper.presentation.dex
 
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonListBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -27,11 +26,7 @@ import poke.rogue.helper.ui.layout.PaddingValues
 
 class PokemonListActivity :
     ErrorHandleActivity<ActivityPokemonListBinding>(R.layout.activity_pokemon_list) {
-    private val viewModel by viewModels<PokemonListViewModel> {
-        PokemonListViewModel.factory(
-            DefaultDexRepository.instance(),
-        )
-    }
+    private val viewModel by viewModel<PokemonListViewModel>()
     override val errorViewModel: ErrorHandleViewModel
         get() = viewModel
 
@@ -75,10 +70,10 @@ class PokemonListActivity :
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
                         label =
-                            stringOf(
-                                R.string.dex_filter_chip,
-                                if (uiState.isFiltered) uiState.filterCount.toString() else "",
-                            ),
+                        stringOf(
+                            R.string.dex_filter_chip,
+                            if (uiState.isFiltered) uiState.filterCount.toString() else "",
+                        ),
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
