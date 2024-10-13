@@ -14,7 +14,7 @@ import poke.rogue.helper.data.repository.DefaultTypeRepository
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.data.repository.TypeRepository
 
-val repositoryModule
+internal val repositoryModule
     get() =
         module {
             singleOf(::DefaultBattleRepository).bind<BattleRepository>()
