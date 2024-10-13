@@ -14,21 +14,23 @@ import poke.rogue.helper.testing.data.repository.FakeBiomeRepository
 import poke.rogue.helper.testing.data.repository.FakeDexRepository
 import poke.rogue.helper.testing.data.repository.FakeTypeRepository
 
-
 val testingModule
-    get() = module {
-        includes(fakeRepositoryModule, fakeAnalyticsModule)
-    }
+    get() =
+        module {
+            includes(fakeRepositoryModule, fakeAnalyticsModule)
+        }
 
 private val fakeRepositoryModule
-    get() = module {
-        singleOf(::FakeAbilityRepository).bind<AbilityRepository>()
-        singleOf(::FakeDexRepository).bind<DexRepository>()
-        singleOf(::FakeBiomeRepository).bind<BiomeRepository>()
-        singleOf(::FakeTypeRepository).bind<TypeRepository>()
-    }
+    get() =
+        module {
+            singleOf(::FakeAbilityRepository).bind<AbilityRepository>()
+            singleOf(::FakeDexRepository).bind<DexRepository>()
+            singleOf(::FakeBiomeRepository).bind<BiomeRepository>()
+            singleOf(::FakeTypeRepository).bind<TypeRepository>()
+        }
 
 private val fakeAnalyticsModule
-    get() = module {
-        singleOf(::TestAnalyticsLogger).bind<AnalyticsLogger>()
-    }
+    get() =
+        module {
+            singleOf(::TestAnalyticsLogger).bind<AnalyticsLogger>()
+        }

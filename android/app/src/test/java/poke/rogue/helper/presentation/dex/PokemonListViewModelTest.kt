@@ -7,8 +7,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.extension.RegisterExtension
-import org.koin.core.logger.Level
-import org.koin.core.logger.PrintLogger
 import org.koin.test.KoinTest
 import org.koin.test.get
 import org.koin.test.junit5.KoinTestExtension
@@ -24,9 +22,10 @@ import poke.rogue.helper.testing.data.repository.FakeDexRepository
 class PokemonListViewModelTest : KoinTest {
     @JvmField
     @RegisterExtension
-    val koinTestExtension = KoinTestExtension.create {
-        modules(testViewModelModule)
-    }
+    val koinTestExtension =
+        KoinTestExtension.create {
+            modules(testViewModelModule)
+        }
 
     private val viewModel: PokemonListViewModel
         get() = get<PokemonListViewModel>()

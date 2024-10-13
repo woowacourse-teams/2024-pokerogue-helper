@@ -17,9 +17,10 @@ class FakeTypeRepositoryTest : KoinTest {
 
     @JvmField
     @RegisterExtension
-    val koinExtension = KoinTestExtension.create {
-        modules(testingModule)
-    }
+    val koinExtension =
+        KoinTestExtension.create {
+            modules(testingModule)
+        }
 
     @Test
     fun `유효하지 않은 내 Type ID값으로 조회하면, 예외가 발생한다`() =

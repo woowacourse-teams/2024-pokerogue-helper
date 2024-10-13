@@ -11,9 +11,8 @@ import org.koin.core.context.stopKoin
 import org.koin.core.module.Module
 
 class KoinAndroidUnitTestRule(
-    private val modules: List<Module>
+    private val modules: List<Module>,
 ) : TestWatcher() {
-
     constructor(vararg modules: Module) : this(modules.toList())
 
     override fun starting(description: Description) {

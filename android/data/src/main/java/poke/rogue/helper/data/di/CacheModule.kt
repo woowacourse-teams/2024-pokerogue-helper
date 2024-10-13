@@ -7,6 +7,7 @@ import poke.rogue.helper.data.cache.GlideImageCacher
 import poke.rogue.helper.data.cache.ImageCacher
 
 internal val cacheModule
-    get() = module {
-        singleOf(::GlideImageCacher).bind<ImageCacher>()
-    }
+    get() =
+        module {
+            singleOf(::GlideImageCacher).bind<ImageCacher>()
+        }

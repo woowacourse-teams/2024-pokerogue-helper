@@ -19,9 +19,10 @@ class PokemonListActivityTest {
     val scenario get() = activityRule.scenario
 
     @get:Rule
-    val koinTestRule = KoinAndroidUnitTestRule(
-        testViewModelModule
-    )
+    val koinTestRule =
+        KoinAndroidUnitTestRule(
+            testViewModelModule,
+        )
 
     @Test
     fun `Activity 실행 테스트`() {

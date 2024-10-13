@@ -6,13 +6,14 @@ import poke.rogue.helper.local.db.PokeRogueDatabase
 import poke.rogue.helper.local.utils.testContext
 
 val testLocalModule
-    get() = module {
-        includes(daoModule)
+    get() =
+        module {
+            includes(daoModule)
 
-        single<PokeRogueDatabase> {
-            Room.inMemoryDatabaseBuilder(
-                testContext,
-                PokeRogueDatabase::class.java,
-            ).build()
+            single<PokeRogueDatabase> {
+                Room.inMemoryDatabaseBuilder(
+                    testContext,
+                    PokeRogueDatabase::class.java,
+                ).build()
+            }
         }
-    }

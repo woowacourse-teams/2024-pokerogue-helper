@@ -15,9 +15,10 @@ class PokemonDaoTest : KoinTest {
     private val dao get() = get<PokemonDao>()
 
     @get:Rule
-    val koinTestRule = KoinAndroidUnitTestRule(
-        testLocalModule
-    )
+    val koinTestRule =
+        KoinAndroidUnitTestRule(
+            testLocalModule,
+        )
 
     @Test
     @DisplayName("포켓몬 저장 후 불러오기")

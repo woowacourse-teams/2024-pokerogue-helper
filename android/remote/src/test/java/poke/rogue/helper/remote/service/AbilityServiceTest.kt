@@ -33,7 +33,6 @@ class AbilityServiceTest : KoinTest {
     private val service: AbilityService
         get() = get { parametersOf(mockWebServer.url("")) }
 
-
     @BeforeEach
     fun setUp() {
         mockWebServer = MockWebServer()
@@ -41,75 +40,81 @@ class AbilityServiceTest : KoinTest {
 
     @JvmField
     @RegisterExtension
-    val koinTestExtension = KoinTestExtension.create {
-        mockWebServer = MockWebServer()
-        modules(testRemoteModule)
-    }
-
-    @Test
-    fun `포켓몬의 모든 특성들을 가져온다`() = runTest {
-        // given
-        val fakeResponse = successResponse("abilities2")
-        mockWebServer.enqueue(fakeResponse)
-
-        // when
-        val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
-
-        // then
-        actual.shouldBeSuccess()
-    }
-
-    @Test
-    fun `id 에 해당하는 특성을 가져온다`() = runTest {
-        // given
-        val fakeResponse = successResponse("ability2")
-        mockWebServer.enqueue(fakeResponse)
-        // when
-        val actual: ApiResponse<AbilityDetailResponse2> = service.ability("water_absorb")
-
-        // then
-        actual.shouldBeSuccess()
-    }
-
-    @Test
-    fun `HttpException 발생`() = runTest {
-        // given
-        val fakeResponse = httpErrorResponse(404)
-        mockWebServer.enqueue(fakeResponse)
-        // when
-        val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
-        // then
-        assertSoftly {
-            actual.shouldBeHttpException()
-            shouldThrow<IOException> { actual.getOrThrow() }
+    val koinTestExtension =
+        KoinTestExtension.create {
+            mockWebServer = MockWebServer()
+            modules(testRemoteModule)
         }
-    }
 
     @Test
-    fun `NetworkException - ConnectException 발생`() = runTest {
-        // given
-        val fakeResponse = MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START)
-        mockWebServer.enqueue(fakeResponse)
-        // when
-        val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
-        // then
-        assertSoftly {
-            actual.shouldBeNetworkException()
-            shouldThrow<ConnectException> { actual.getOrThrow() }
+    fun `포켓몬의 모든 특성들을 가져온다`() =
+        runTest {
+            // given
+            val fakeResponse = successResponse("abilities2")
+            mockWebServer.enqueue(fakeResponse)
+
+            // when
+            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
+
+            // then
+            actual.shouldBeSuccess()
         }
-    }
 
     @Test
-    fun `UnKnownException - 직렬화 예외 발생`() = runTest {
-        // given
-        val fakeResponse = MockResponse()
-        mockWebServer.enqueue(fakeResponse)
-        // when
-        val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
-        // then
-        assertSoftly {
-            actual.shouldBeUnknownError()
-            shouldThrow<SerializationException> { actual.getOrThrow() }
+    fun `id 에 해당하는 특성을 가져온다`() =
+        runTest {
+            // given
+            val fakeResponse = successResponse("ability2")
+            mockWebServer.enqueue(fakeResponse)
+            // when
+            val actual: ApiResponse<AbilityDetailResponse2> = service.ability("water_absorb")
+
+            // then
+            actual.shouldBeSuccess()
         }
-    }
+
+    @Test
+    fun `HttpException 발생`() =
+        runTest {
+            // given
+            val fakeResponse = httpErrorResponse(404)
+            mockWebServer.enqueue(fakeResponse)
+            // when
+            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
+            // then
+            assertSoftly {
+                actual.shouldBeHttpException()
+                shouldThrow<IOException> { actual.getOrThrow() }
+            }
+        }
+
+    @Test
+    fun `NetworkException - ConnectException 발생`() =
+        runTest {
+            // given
+            val fakeResponse = MockResponse().setSocketPolicy(SocketPolicy.DISCONNECT_AT_START)
+            mockWebServer.enqueue(fakeResponse)
+            // when
+            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
+            // then
+            assertSoftly {
+                actual.shouldBeNetworkException()
+                shouldThrow<ConnectException> { actual.getOrThrow() }
+            }
+        }
+
+    @Test
+    fun `UnKnownException - 직렬화 예외 발생`() =
+        runTest {
+            // given
+            val fakeResponse = MockResponse()
+            mockWebServer.enqueue(fakeResponse)
+            // when
+            val actual: ApiResponse<List<AbilityResponse>> = service.abilities()
+            // then
+            assertSoftly {
+                actual.shouldBeUnknownError()
+                shouldThrow<SerializationException> { actual.getOrThrow() }
+            }
+        }
 }

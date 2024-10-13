@@ -6,13 +6,14 @@ import poke.rogue.helper.local.di.localModule
 import poke.rogue.helper.remote.di.remoteModule
 
 val dataModule
-    get() = module {
-        includes(
-            localModule,
-            remoteModule,
-            dataSourceModule,
-            repositoryModule,
-            analyticsModule,
-            cacheModule
-        )
-    }
+    get() =
+        module {
+            includes(
+                localModule,
+                remoteModule,
+                dataSourceModule,
+                repositoryModule,
+                analyticsModule,
+                cacheModule,
+            )
+        }

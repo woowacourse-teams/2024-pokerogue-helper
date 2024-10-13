@@ -5,6 +5,7 @@ import org.koin.dsl.module
 import poke.rogue.helper.presentation.dex.PokemonListViewModel
 
 val viewModelModule
-    get() = module {
-        viewModelOf(::PokemonListViewModel)
-    }
+    get() =
+        module {
+            viewModelOf(::PokemonListViewModel)
+        }

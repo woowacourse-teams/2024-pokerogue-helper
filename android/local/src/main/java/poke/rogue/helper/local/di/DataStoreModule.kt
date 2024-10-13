@@ -5,6 +5,7 @@ import org.koin.dsl.module
 import poke.rogue.helper.local.datastore.BattleDataStore
 
 internal val dataStoreModule
-    get() = module {
-    singleOf(::BattleDataStore)
-}
+    get() =
+        module {
+            singleOf(::BattleDataStore)
+        }

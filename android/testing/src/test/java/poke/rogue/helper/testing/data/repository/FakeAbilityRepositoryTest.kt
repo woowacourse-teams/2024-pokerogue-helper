@@ -19,10 +19,11 @@ class FakeAbilityRepositoryTest : KoinTest {
 
     @JvmField
     @RegisterExtension
-    val koinExtension = KoinTestExtension.create {
-        modules(testingModule)
-        logger(PrintLogger(Level.DEBUG))
-    }
+    val koinExtension =
+        KoinTestExtension.create {
+            modules(testingModule)
+            logger(PrintLogger(Level.DEBUG))
+        }
 
     @Test
     fun `모든 특성 정보를 불러온다`() =

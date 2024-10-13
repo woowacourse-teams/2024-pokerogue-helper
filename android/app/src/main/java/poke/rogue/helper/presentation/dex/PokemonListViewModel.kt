@@ -63,12 +63,12 @@ class PokemonListViewModel(
                 combine(pokeSort, pokeFilter) { sort, filter ->
                     PokemonListUiState(
                         pokemons =
-                        queriedPokemons(
-                            query = query,
-                            types = filter.selectedTypes,
-                            generation = filter.selectedGeneration,
-                            sort = sort,
-                        ),
+                            queriedPokemons(
+                                query = query,
+                                types = filter.selectedTypes,
+                                generation = filter.selectedGeneration,
+                                sort = sort,
+                            ),
                         sort = sort,
                         filteredTypes = filter.selectedTypes,
                         filteredGeneration = filter.selectedGeneration,

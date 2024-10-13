@@ -15,10 +15,11 @@ import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.data.repository.TypeRepository
 
 val repositoryModule
-    get() = module {
-    singleOf(::DefaultBattleRepository).bind<BattleRepository>()
-    singleOf(::DefaultAbilityRepository).bind<AbilityRepository>()
-    singleOf(::DefaultDexRepository).bind<DexRepository>()
-    singleOf(::DefaultBiomeRepository).bind<BiomeRepository>()
-    singleOf(::DefaultTypeRepository).bind<TypeRepository>()
-}
+    get() =
+        module {
+            singleOf(::DefaultBattleRepository).bind<BattleRepository>()
+            singleOf(::DefaultAbilityRepository).bind<AbilityRepository>()
+            singleOf(::DefaultDexRepository).bind<DexRepository>()
+            singleOf(::DefaultBiomeRepository).bind<BiomeRepository>()
+            singleOf(::DefaultTypeRepository).bind<TypeRepository>()
+        }

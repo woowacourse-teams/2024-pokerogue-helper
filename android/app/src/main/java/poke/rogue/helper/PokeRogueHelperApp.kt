@@ -5,7 +5,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
-import poke.rogue.helper.analytics.AnalyticsInitializer
 import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.di.appModule
 import timber.log.Timber

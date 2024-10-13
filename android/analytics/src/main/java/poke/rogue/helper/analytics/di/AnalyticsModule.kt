@@ -6,7 +6,8 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 
 val analyticsModule
-    get() = module {
-        AnalyticsInitializer.init()
-        single<AnalyticsLogger> { analyticsLogger() }
-    }
+    get() =
+        module {
+            AnalyticsInitializer.init()
+            single<AnalyticsLogger> { analyticsLogger() }
+        }

@@ -17,9 +17,10 @@ class FakeBiomeRepositoryTest : KoinTest {
 
     @JvmField
     @RegisterExtension
-    val koinExtension = KoinTestExtension.create {
-        modules(testingModule)
-    }
+    val koinExtension =
+        KoinTestExtension.create {
+            modules(testingModule)
+        }
 
     @Test
     fun `모든 바이옴 리스트의 정보를 불러오면, 사이즈가 4이다`() =

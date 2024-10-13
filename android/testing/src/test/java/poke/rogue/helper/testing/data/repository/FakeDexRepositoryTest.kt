@@ -3,7 +3,6 @@ package poke.rogue.helper.testing.data.repository
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 import org.koin.test.KoinTest
@@ -13,7 +12,6 @@ import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonGeneration
 import poke.rogue.helper.data.model.PokemonSort
 import poke.rogue.helper.data.model.Type
-import poke.rogue.helper.data.repository.BiomeRepository
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.stringmatcher.has
 import poke.rogue.helper.testing.di.testingModule
@@ -24,9 +22,10 @@ class FakeDexRepositoryTest : KoinTest {
 
     @JvmField
     @RegisterExtension
-    val koinExtension = KoinTestExtension.create {
-        modules(testingModule)
-    }
+    val koinExtension =
+        KoinTestExtension.create {
+            modules(testingModule)
+        }
 
     @Test
     fun `기본적으로 도감 번호순, 모든 세대의 포켓몬을 가져온다`() =

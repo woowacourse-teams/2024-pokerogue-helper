@@ -9,9 +9,10 @@ import retrofit2.Retrofit
 import retrofit2.create
 
 internal val serviceModule
-    get() = module {
-        single<AbilityService> { get<Retrofit>().create() }
-        single<BattleService> { get<Retrofit>().create() }
-        single<BiomeService> { get<Retrofit>().create() }
-        single<PokeDexService> { get<Retrofit>().create() }
-    }
+    get() =
+        module {
+            single<AbilityService> { get<Retrofit>().create() }
+            single<BattleService> { get<Retrofit>().create() }
+            single<BiomeService> { get<Retrofit>().create() }
+            single<PokeDexService> { get<Retrofit>().create() }
+        }
