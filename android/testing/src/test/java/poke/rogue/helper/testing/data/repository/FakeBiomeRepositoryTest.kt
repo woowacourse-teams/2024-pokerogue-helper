@@ -2,17 +2,23 @@ package poke.rogue.helper.testing.data.repository
 
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.test.KoinTest
+import org.koin.test.get
+import org.koin.test.junit5.KoinTestExtension
 import poke.rogue.helper.data.repository.BiomeRepository
+import poke.rogue.helper.testing.di.testingModule
 
-class FakeBiomeRepositoryTest {
-    private lateinit var repository: BiomeRepository
+class FakeBiomeRepositoryTest : KoinTest {
+    private val repository: BiomeRepository
+        get() = get()
 
-    @BeforeEach
-    fun setUp() {
-        repository = FakeBiomeRepository()
+    @JvmField
+    @RegisterExtension
+    val koinExtension = KoinTestExtension.create {
+        modules(testingModule)
     }
 
     @Test

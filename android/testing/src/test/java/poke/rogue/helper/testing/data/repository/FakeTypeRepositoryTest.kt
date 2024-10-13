@@ -1,17 +1,24 @@
 package poke.rogue.helper.testing.data.repository
 
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.test.KoinTest
+import org.koin.test.get
+import org.koin.test.junit5.KoinTestExtension
 import poke.rogue.helper.data.model.Type
+import poke.rogue.helper.data.repository.TypeRepository
+import poke.rogue.helper.testing.di.testingModule
 
-class FakeTypeRepositoryTest {
-    private lateinit var repository: FakeTypeRepository
+class FakeTypeRepositoryTest : KoinTest {
+    private val repository: TypeRepository
+        get() = get()
 
-    @BeforeEach
-    fun setUp() {
-        repository = FakeTypeRepository()
+    @JvmField
+    @RegisterExtension
+    val koinExtension = KoinTestExtension.create {
+        modules(testingModule)
     }
 
     @Test

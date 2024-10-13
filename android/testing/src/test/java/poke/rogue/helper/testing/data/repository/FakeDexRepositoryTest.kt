@@ -5,18 +5,27 @@ import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.test.KoinTest
+import org.koin.test.get
+import org.koin.test.junit5.KoinTestExtension
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonGeneration
 import poke.rogue.helper.data.model.PokemonSort
 import poke.rogue.helper.data.model.Type
+import poke.rogue.helper.data.repository.BiomeRepository
+import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.stringmatcher.has
+import poke.rogue.helper.testing.di.testingModule
 
-class FakeDexRepositoryTest {
-    private lateinit var repository: FakeDexRepository
+class FakeDexRepositoryTest : KoinTest {
+    private val repository: DexRepository
+        get() = get()
 
-    @BeforeEach
-    fun setUp() {
-        repository = FakeDexRepository()
+    @JvmField
+    @RegisterExtension
+    val koinExtension = KoinTestExtension.create {
+        modules(testingModule)
     }
 
     @Test

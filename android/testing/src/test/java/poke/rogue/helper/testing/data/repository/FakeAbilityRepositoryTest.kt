@@ -3,16 +3,25 @@ package poke.rogue.helper.testing.data.repository
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.core.logger.Level
+import org.koin.core.logger.PrintLogger
+import org.koin.test.KoinTest
+import org.koin.test.get
+import org.koin.test.junit5.KoinTestExtension
 import poke.rogue.helper.data.repository.AbilityRepository
+import poke.rogue.helper.testing.di.testingModule
 
-class FakeAbilityRepositoryTest {
-    private lateinit var repository: AbilityRepository
+class FakeAbilityRepositoryTest : KoinTest {
+    private val repository: AbilityRepository
+        get() = get()
 
-    @BeforeEach
-    fun setUp() {
-        repository = FakeAbilityRepository()
+    @JvmField
+    @RegisterExtension
+    val koinExtension = KoinTestExtension.create {
+        modules(testingModule)
+        logger(PrintLogger(Level.DEBUG))
     }
 
     @Test
