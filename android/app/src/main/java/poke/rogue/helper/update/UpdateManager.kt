@@ -64,11 +64,11 @@ class UpdateManager(
         return isUpdateAvailable && isUpdateAllowed
     }
 
-    fun registerInstallStateUpdateListener() {
+    private fun registerInstallStateUpdateListener() {
         appUpdateManager.registerListener(installStateUpdateListener)
     }
 
-    fun unregisterInstallStateUpdateListener() {
+    private fun unregisterInstallStateUpdateListener() {
         appUpdateManager.unregisterListener(installStateUpdateListener)
     }
 }
