@@ -200,7 +200,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.bundles.firebase)
-    implementation(libs.app.update)
     implementation(libs.app.update.ktx)
     // android test
     androidTestImplementation(libs.bundles.android.test)

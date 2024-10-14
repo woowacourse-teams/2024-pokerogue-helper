@@ -90,7 +90,6 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics" }
-app-update = { module = "com.google.android.play:app-update", version.ref = "app-update" }
 app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "app-update" }
 # android test
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
