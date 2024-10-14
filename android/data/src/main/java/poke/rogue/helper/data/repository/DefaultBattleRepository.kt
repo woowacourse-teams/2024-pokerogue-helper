@@ -40,27 +40,35 @@ class DefaultBattleRepository(
             opponentPokemonId = opponentPokemonId,
         )
 
-    override suspend fun savePokemon(pokemonId: String) {
-        localBattleDataSource.savePokemon(pokemonId)
-    }
+    override suspend fun savePokemon(pokemonId: String) = localBattleDataSource.savePokemon(pokemonId)
 
     override suspend fun savePokemonWithSkill(
         pokemonId: String,
         skillId: String,
-    ) {
-        localBattleDataSource.savePokemonWithSkill(pokemonId, skillId)
-    }
+    ) = localBattleDataSource.savePokemonWithSkill(pokemonId, skillId)
 
-    override suspend fun savedPokemon(): Flow<Pokemon?> =
-        localBattleDataSource.pokemonId().map { it?.let { pokemonRepository.pokemon(it) } }
+    override fun savedPokemonStream(): Flow<Pokemon?> =
+        localBattleDataSource.pokemonIdStream().map {
+            it?.let { pokemonRepository.pokemon(it) }
+        }
 
-    override suspend fun savedPokemonWithSkill(): Flow<PokemonWithSkill?> =
-        localBattleDataSource.pokemonWithSkill().map {
+    override fun savedPokemonWithSkillStream(): Flow<PokemonWithSkill?> =
+        localBattleDataSource.pokemonWithSkillStream().map {
             it?.let { pokemonWithSkill ->
                 val pokemon = pokemonRepository.pokemon(pokemonWithSkill.pokemonId)
                 val skill = skill(pokemon.dexNumber, pokemonWithSkill.skillId)
                 PokemonWithSkill(pokemon, skill)
             }
+        }
+
+    override suspend fun saveWeather(weatherId: String) = localBattleDataSource.saveWeather(weatherId)
+
+    override fun savedWeatherStream(): Flow<Weather?> =
+        localBattleDataSource.weatherIdStream().map {
+            if (it == null) {
+                return@map null
+            }
+            weathers().find { weather -> weather.id == it }
         }
 
     private suspend fun skill(

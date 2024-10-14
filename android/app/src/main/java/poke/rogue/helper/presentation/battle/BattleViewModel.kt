@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -36,6 +38,21 @@ class BattleViewModel(
 
     private val _selectedState = MutableStateFlow(BattleSelectionsState.DEFAULT)
     val selectedState = _selectedState.asStateFlow()
+
+    val weatherPos: StateFlow<Int> =
+        combine(
+            battleRepository.savedWeatherStream(),
+            weathers,
+        ) { weather, weathers ->
+            if (weather == null || weathers.isEmpty()) return@combine null
+            if (weathers.any { it.id == weather.id }.not()) return@combine null
+            val selectedWeather = weathers.first { it.id == weather.id }
+            // update selected weather
+            _selectedState.value = selectedState.value.copy(weather = BattleSelectionUiState.Selected(selectedWeather))
+            // return position
+            weathers.indexOfFirst { it.id == weather.id }
+        }.filterNotNull()
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 
     private val _navigateToSelection = MutableSharedFlow<SelectionNavigationData>()
     val navigateToSelection = _navigateToSelection.asSharedFlow()
@@ -91,12 +108,12 @@ class BattleViewModel(
     private fun initSavedSelection() {
         viewModelScope.launch {
             launch {
-                battleRepository.savedPokemon().first()?.let {
+                battleRepository.savedPokemonStream().first()?.let {
                     updateOpponentPokemon(it.toSelectionUi())
                 }
             }
             launch {
-                battleRepository.savedPokemonWithSkill().first()?.let { (pokemon, skill) ->
+                battleRepository.savedPokemonWithSkillStream().first()?.let { (pokemon, skill) ->
                     updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
                 }
             }
@@ -107,6 +124,7 @@ class BattleViewModel(
         viewModelScope.launch {
             val selectedWeather = BattleSelectionUiState.Selected(newWeather)
             _selectedState.value = selectedState.value.copy(weather = selectedWeather)
+            battleRepository.saveWeather(newWeather.id)
         }
     }
 
