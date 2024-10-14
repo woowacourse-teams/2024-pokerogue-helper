@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Getter
-@Document(collection = "ability")
+@Document(collection = "item")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item {
 
