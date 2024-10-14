@@ -1,4 +1,4 @@
-package com.pokerogue.helper.item.service;
+package com.pokerogue.helper.item.dto;
 
 import com.pokerogue.helper.item.data.Item;
 
