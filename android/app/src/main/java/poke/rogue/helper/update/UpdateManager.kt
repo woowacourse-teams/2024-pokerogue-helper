@@ -20,6 +20,7 @@ class UpdateManager(
 ) : DefaultLifecycleObserver {
     private val appUpdateManager: AppUpdateManager = AppUpdateManagerFactory.create(context)
     private val updateType = AppUpdateType.FLEXIBLE
+    private val sharedPreferences = context.getSharedPreferences(UPDATE_TIME, Context.MODE_PRIVATE)
 
     private val installStateUpdateListener =
         InstallStateUpdatedListener { state ->
@@ -46,22 +47,33 @@ class UpdateManager(
     }
 
     fun checkForAppUpdates(appUpdateLauncher: ActivityResultLauncher<IntentSenderRequest>) {
+        if (!isTimeToShowUpdateDialog()) {
+            return
+        }
+
         appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
-            if (checkForAppUpdate(info)) {
+            if (shouldAppUpdate(info)) {
                 val updateOptions = AppUpdateOptions.newBuilder(updateType).build()
                 appUpdateManager.startUpdateFlowForResult(
                     info,
                     appUpdateLauncher,
                     updateOptions,
                 )
+                sharedPreferences.edit().putLong(KEY_DIALOG, System.currentTimeMillis()).apply()
             }
         }
     }
 
-    private fun checkForAppUpdate(info: AppUpdateInfo): Boolean {
+    private fun shouldAppUpdate(info: AppUpdateInfo): Boolean {
         val isUpdateAvailable = info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
         val isUpdateAllowed = info.isUpdateTypeAllowed(updateType)
         return isUpdateAvailable && isUpdateAllowed
+    }
+
+    private fun isTimeToShowUpdateDialog(): Boolean {
+        val lastDialogTime = sharedPreferences.getLong(KEY_DIALOG, 0L)
+        val currentTime = System.currentTimeMillis()
+        return currentTime - lastDialogTime > UPDATE_DIALOG_INTERVAL
     }
 
     private fun registerInstallStateUpdateListener() {
@@ -70,5 +82,11 @@ class UpdateManager(
 
     private fun unregisterInstallStateUpdateListener() {
         appUpdateManager.unregisterListener(installStateUpdateListener)
+    }
+
+    companion object {
+        private const val UPDATE_TIME = "update_time"
+        private const val KEY_DIALOG = "LAST_UPDATE_DIALOG"
+        const val UPDATE_DIALOG_INTERVAL = 24 * 60 * 60 * 1000
     }
 }
