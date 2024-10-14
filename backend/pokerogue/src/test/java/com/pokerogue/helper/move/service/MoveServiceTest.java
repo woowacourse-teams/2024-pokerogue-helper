@@ -84,7 +84,7 @@ class MoveServiceTest extends ServiceTest {
                 () -> assertThat(moveDetailResponse.released()).isEqualTo(""),
                 () -> assertThat(moveDetailResponse.flags()).isEmpty(),
                 () -> assertThat(moveDetailResponse.pokemonIdsWithLevelMove()).hasSize(71),
-                () -> assertThat(moveDetailResponse.pokemonIdsWithEggMove()).hasSize(113)
+                () -> assertThat(moveDetailResponse.pokemonIdsWithEggMove()).hasSize(120)
         );
     }
 }
