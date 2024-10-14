@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
@@ -23,45 +22,18 @@ import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
-import poke.rogue.helper.update.UpdateManager
-import timber.log.Timber
 
 class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel by viewModels<HomeViewModel>()
     private val logger: AnalyticsLogger = analyticsLogger()
-    private lateinit var updateManager: UpdateManager
 
     override val toolbar: Toolbar
         get() = binding.toolbarHome
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initUpdateManager()
         initViews()
         initObservers()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        updateManager.unregisterInstallStateUpdateListener()
-    }
-
-    private fun initUpdateManager() {
-        updateManager = UpdateManager(applicationContext)
-        updateManager.registerInstallStateUpdateListener()
-
-        val appUpdateLauncher =
-            registerForActivityResult(
-                ActivityResultContracts.StartIntentSenderForResult(),
-            ) { result ->
-                // logger도 달아야겠죠??
-                if (result.resultCode == RESULT_OK) {
-                    Timber.i("Update completed successfully")
-                } else {
-                    Timber.e("Update failed, result code: ${result.resultCode}")
-                }
-            }
-        updateManager.checkForAppUpdates(appUpdateLauncher)
     }
 
     private fun initViews() =
