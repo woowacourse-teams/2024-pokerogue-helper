@@ -3,6 +3,8 @@ package poke.rogue.helper.update
 import android.content.Context
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -15,7 +17,7 @@ import timber.log.Timber
 
 class UpdateManager(
     private val context: Context,
-) {
+) : DefaultLifecycleObserver {
     private val appUpdateManager: AppUpdateManager = AppUpdateManagerFactory.create(context)
     private val updateType = AppUpdateType.FLEXIBLE
 
@@ -32,6 +34,16 @@ class UpdateManager(
                 InstallStatus.CANCELED -> Timber.e("Update was cancelled")
             }
         }
+
+    override fun onCreate(owner: LifecycleOwner) {
+        super.onCreate(owner)
+        registerInstallStateUpdateListener()
+    }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+        super.onDestroy(owner)
+        unregisterInstallStateUpdateListener()
+    }
 
     fun checkForAppUpdates(appUpdateLauncher: ActivityResultLauncher<IntentSenderRequest>) {
         appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
