@@ -23,7 +23,6 @@ class PokemonIntroActivity() :
         get() = viewModel
     override val toolbar: Toolbar? = null
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)

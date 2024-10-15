@@ -87,7 +87,6 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
             .show()
     }
 
-
     private fun initObservers() {
         repeatOnStarted {
             viewModel.navigationEvent.collect { state ->
