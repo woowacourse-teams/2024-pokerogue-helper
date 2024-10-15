@@ -180,7 +180,7 @@ class PokemonDetailActivity :
         private const val POKEMON_ID = "pokemonId"
         val TAG: String = PokemonDetailActivity::class.java.simpleName
 
-        private val typesUiConfig =
+        val typesUiConfig =
             TypeChip.PokemonTypeViewConfiguration(
                 width = LayoutParams.WRAP_CONTENT,
                 nameSize = 16.dp,
