@@ -7,6 +7,8 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import poke.rogue.helper.R
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
@@ -49,7 +51,7 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
         }
 
     private fun initUpdateManager() {
-        updateManager = UpdateManager(applicationContext)
+        updateManager = UpdateManager(applicationContext) { showUpdateComplete() }
         lifecycle.addObserver(updateManager)
 
         val appUpdateLauncher =
@@ -65,6 +67,15 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
             }
         updateManager.checkForAppUpdates(appUpdateLauncher)
     }
+
+    private fun showUpdateComplete() {
+        Snackbar.make(binding.root, R.string.update_snackBar_title, Snackbar.LENGTH_INDEFINITE)
+            .setAction(R.string.update_snackBar_action_text) {
+                updateManager.completeUpdate()
+            }
+            .show()
+    }
+
 
     private fun initObservers() {
         repeatOnStarted {

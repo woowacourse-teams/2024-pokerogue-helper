@@ -17,6 +17,7 @@ import timber.log.Timber
 
 class UpdateManager(
     private val context: Context,
+    private val onDownloadComplete: () -> Unit,
 ) : DefaultLifecycleObserver {
     private val appUpdateManager: AppUpdateManager = AppUpdateManagerFactory.create(context)
     private val updateType = AppUpdateType.FLEXIBLE
@@ -28,8 +29,7 @@ class UpdateManager(
                 InstallStatus.INSTALLING -> Timber.i("Update is downloading")
 
                 InstallStatus.DOWNLOADED -> {
-                    Timber.i("Update installed successfully")
-                    appUpdateManager.completeUpdate()
+                    onDownloadComplete()
                 }
 
                 InstallStatus.CANCELED -> Timber.e("Update was cancelled")
@@ -74,6 +74,10 @@ class UpdateManager(
         val lastDialogTime = sharedPreferences.getLong(KEY_DIALOG, 0L)
         val currentTime = System.currentTimeMillis()
         return currentTime - lastDialogTime > UPDATE_DIALOG_INTERVAL
+    }
+
+    fun completeUpdate() {
+        appUpdateManager.completeUpdate()
     }
 
     private fun registerInstallStateUpdateListener() {
