@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.data.repository.DefaultDexRepository
@@ -20,6 +21,7 @@ import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
@@ -33,15 +35,8 @@ class PokemonDetailActivity :
         PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }
 
-    private val vm2 by viewModels<BiomeViewModel> {
-        BiomeViewModel.factory(
-            DefaultBiomeRepository.instance(),
-        )
-    }
-
-    private val biomeAdapter: BiomeAdapter by lazy { BiomeAdapter(vm2) }
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
-//    private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
+    private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
 
     override val toolbar: Toolbar
         get() = binding.toolbarPokemonDetail
@@ -58,46 +53,21 @@ class PokemonDetailActivity :
     }
 
     private fun initAdapter() {
-        binding.rvPokemonDetail.apply {
-            adapter = biomeAdapter
-            addItemDecoration(
-                GridSpacingItemDecoration(
-                    2,
-                    9.dp,
-                    false,
-                ),
-            )
-        }
-        biomeAdapter.submitList(
-            List<BiomeUiModel>(200) { i ->
-                BiomeUiModel(
-                    id = "1",
-                    name = "Forest $i",
-                    imageUrl = "https://www.pngegg.com/en/search?q=pokemon",
-                    types =
-                        listOf(
-                            TypeUiModel.BUG,
-                            TypeUiModel.GROUND,
-                        ),
-                )
-            },
-        )
-
         pokemonTypesAdapter =
             PokemonTypesAdapter(
                 context = this,
                 viewGroup = binding.layoutPokemonDetailPokemonTypes,
             )
 
-//        pokemonDetailPagerAdapter = PokemonDetailPagerAdapter(this)
-//        binding.pagerPokemonDetail.apply {
-//            adapter = pokemonDetailPagerAdapter
-//        }
+        pokemonDetailPagerAdapter = PokemonDetailPagerAdapter(this)
+        binding.pagerPokemonDetail.apply {
+            adapter = pokemonDetailPagerAdapter
+        }
 
-//        val tabTitles = stringArrayOf(R.array.pokemon_detail_tab_titles)
-//        TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
-//            tab.text = tabTitles[position]
-//        }.attach()
+        val tabTitles = stringArrayOf(R.array.pokemon_detail_tab_titles)
+        TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
+            tab.text = tabTitles[position]
+        }.attach()
     }
 
     private fun initObservers() {

@@ -20,7 +20,14 @@
         <activity
             android:name=".presentation.splash.PokemonIntroActivity"
             android:exported="true"
-            android:theme="@style/Theme.PokeRogueHelper.Splash"></activity>
+            android:theme="@style/Theme.PokeRogueHelper.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".presentation.battle.selection.BattleSelectionActivity"
             android:exported="false"
@@ -68,11 +75,7 @@
         <activity
             android:name=".presentation.dex.detail.PokemonDetail2Activity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>
