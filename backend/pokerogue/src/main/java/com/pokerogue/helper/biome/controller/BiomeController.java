@@ -1,11 +1,9 @@
 package com.pokerogue.helper.biome.controller;
 
-import static com.pokerogue.helper.biome.service.NativePokemonComparator.ASCENDING;
-import static com.pokerogue.helper.biome.service.NativePokemonComparator.DESCENDING;
-
 import com.pokerogue.helper.biome.dto.BiomeDetailResponse;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
 import com.pokerogue.helper.biome.service.BiomeService;
+import com.pokerogue.helper.global.constant.SortingCriteria;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +27,8 @@ public class BiomeController {
 
     @GetMapping("/api/v1/biome/{id}")
     public ApiResponse<BiomeDetailResponse> biomeDetails(@PathVariable("id") String id,
-                                                         @RequestParam(value = "boss", defaultValue = DESCENDING) String bossPokemonOrder,
-                                                         @RequestParam(value = "wild", defaultValue = ASCENDING) String wildPokemonOrder) {
+                                                         @RequestParam(value = "boss", defaultValue = "desc") SortingCriteria bossPokemonOrder,
+                                                         @RequestParam(value = "wild", defaultValue = "asc") SortingCriteria wildPokemonOrder) {
         log.info(
                 "---- URI : {}, Param : {}, ThreadName : {}",
                 "/api/v1/biome/{id}",
