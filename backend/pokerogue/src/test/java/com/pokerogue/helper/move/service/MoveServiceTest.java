@@ -30,7 +30,7 @@ class MoveServiceTest extends ServiceTest {
     @Test
     @DisplayName("배틀 서비스에서 사용할 단일 기술 정보를 불러온다")
     void findMoveByBattle() {
-        MoveResponse moveResponse = moveService.findMoveByBattle("earth_power");
+        MoveResponse moveResponse = moveService.findMoveInBattle("earth_power");
 
         assertAll(
                 () -> assertThat(moveResponse.id()).isEqualTo("earth_power"),
@@ -48,7 +48,7 @@ class MoveServiceTest extends ServiceTest {
     @Test
     @DisplayName("id에 해당하는 기술이 없는 경우 예외를 발생시킨다")
     void notExistMove() {
-        assertThatThrownBy(() -> moveService.findMoveByBattle("test"))
+        assertThatThrownBy(() -> moveService.findMoveInBattle("test"))
                 .isInstanceOf(GlobalCustomException.class)
                 .hasMessage(ErrorMessage.MOVE_NOT_FOUND.getMessage());
     }

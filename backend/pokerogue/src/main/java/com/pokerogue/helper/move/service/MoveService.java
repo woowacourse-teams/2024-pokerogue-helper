@@ -58,7 +58,7 @@ public class MoveService {
         return allMoveIds;
     }
 
-    public MoveResponse findMoveByBattle(String id) {
+    public MoveResponse findMoveInBattle(String id) {
         Move move = findMoveById(id);
         return MoveResponse.from(move);
     }
