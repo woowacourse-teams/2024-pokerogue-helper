@@ -37,7 +37,7 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toData
 
 class PokemonListViewModel(
-    private val pokemonListRepository: DexRepository,
+    private val pokemonRepository: DexRepository,
     logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), PokemonListNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
@@ -104,7 +104,7 @@ class PokemonListViewModel(
             val filteredTypes = types.map { PokemonFilter.ByType(it.toData()) }
             val filteredGenerations =
                 listOfNotNull(generation.toDataOrNull()).map { PokemonFilter.ByGeneration(it) }
-            pokemonListRepository.filteredPokemons(
+            pokemonRepository.filteredPokemons(
                 query,
                 sort.toData(),
                 filteredTypes + filteredGenerations,

@@ -58,6 +58,10 @@ dependencies {
     implementation(libs.kotlin.serialization.json)
     // third-party
     implementation(libs.timber)
+    // koin
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    testImplementation(libs.koin.test.junit5)
     // retrofit & okhttp
     implementation(libs.bundles.retrofit)
     implementation(platform(libs.okhttp.bom))
