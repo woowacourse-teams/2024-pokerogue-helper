@@ -10,6 +10,7 @@ public enum MoveFlag {
     MAKES_CONTACT("makes_contact"),
     IGNORE_PROTECT("ignore_protect"),
     IGNORE_VIRTUAL("ignore_virtual"),
+    IGNORE_SUBSTITUTE("ignore_substitute"),
     SOUND_BASED("sound_based"),
     HIDE_USER("hide_user"),
     HIDE_TARGET("hide_target"),
