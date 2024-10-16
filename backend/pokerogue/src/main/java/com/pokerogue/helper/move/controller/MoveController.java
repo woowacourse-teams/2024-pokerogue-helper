@@ -1,5 +1,6 @@
 package com.pokerogue.helper.move.controller;
 
+import com.pokerogue.helper.move.dto.MoveDetailResponse;
 import com.pokerogue.helper.move.dto.MoveResponse;
 import com.pokerogue.helper.move.service.MoveService;
 import com.pokerogue.helper.util.dto.ApiResponse;
@@ -18,6 +19,11 @@ public class MoveController {
 
     private final MoveService moveService;
 
+    @GetMapping("/api/v1/move/dex")
+    public ApiResponse<List<MoveResponse>> moveList() {
+        return new ApiResponse<>("기술 리스트 불러오기에 성공했습니다.", moveService.findMoves());
+    }
+
     @GetMapping("/api/v1/moves")
     public ApiResponse<List<MoveResponse>> moveListByPokedexNumber(@RequestParam("pokedex-number") Integer pokedexNumber) {
         log.info(
@@ -31,7 +37,7 @@ public class MoveController {
     }
 
     @GetMapping("/api/v1/move/{id}")
-    public ApiResponse<MoveResponse> moveDetails(@PathVariable String id) {
+    public ApiResponse<MoveResponse> moveDetailsInBattle(@PathVariable String id) {
         log.info(
                 "---- URI : {}, Param : {}, ThreadName : {}",
                 "/api/v1/move/{id}",
@@ -39,6 +45,18 @@ public class MoveController {
                 Thread.currentThread().getName()
         );
 
-        return new ApiResponse<>("포켓몬의 기술 불러오기에 성공했습니다.", moveService.findMove(id));
+        return new ApiResponse<>("기술 정보 불러오기에 성공했습니다.", moveService.findMoveInBattle(id));
+    }
+
+    @GetMapping("/api/v1/move/dex/{id}")
+    public ApiResponse<MoveDetailResponse> moveDetails(@PathVariable String id) {
+        log.info(
+                "---- URI : {}, Param : {}, ThreadName : {}",
+                "/api/v1/move/dex/{id}",
+                id,
+                Thread.currentThread().getName()
+        );
+
+        return new ApiResponse<>("기술 정보 불러오기에 성공했습니다.", moveService.findMove(id));
     }
 }
