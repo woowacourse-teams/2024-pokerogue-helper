@@ -14,8 +14,8 @@ import timber.log.Timber
 class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding>(R.layout.fragment_pokemon_evolution) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModels()
 
-    private val outerEvolutionAdapter by lazy {
-        OuterEvolutionAdapter(activityViewModel).also { Timber.d("outerEvolutionAdapter lazy initialized") }
+    private val evolutionStageAdapter by lazy {
+        EvolutionStageAdapter(activityViewModel).also { Timber.d("outerEvolutionAdapter lazy initialized") }
     }
 
     override fun onViewCreated(
@@ -30,7 +30,7 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
     private fun initAdapter() {
         binding.apply {
-            rvPokemonDetailEvolutions.adapter = outerEvolutionAdapter
+            rvPokemonDetailEvolutions.adapter = evolutionStageAdapter
         }
     }
 
@@ -43,8 +43,8 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
                         binding.evolutions = uiState.evolutions
 
                         uiState.evolutions.apply {
-                            outerEvolutionAdapter.submitList(
-                                this.evolutions()
+                            evolutionStageAdapter.submitList(
+                                this.evolutions(),
                             )
                         }
                     }

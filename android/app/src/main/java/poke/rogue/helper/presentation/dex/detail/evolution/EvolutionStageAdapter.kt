@@ -7,16 +7,16 @@ import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 import timber.log.Timber
 
-class OuterEvolutionAdapter(
+class EvolutionStageAdapter(
     private val navigateHandler: PokemonDetailNavigateHandler,
-) : ListAdapter<EvolutionsUiModel, OuterEvolutionViewHolder>(comparator) {
+) : ListAdapter<EvolutionsUiModel, EvolutionStageViewHolder>(comparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): OuterEvolutionViewHolder = OuterEvolutionViewHolder.inflated(parent, navigateHandler)
+    ): EvolutionStageViewHolder = EvolutionStageViewHolder.inflated(parent, navigateHandler)
 
     override fun onBindViewHolder(
-        holder: OuterEvolutionViewHolder,
+        holder: EvolutionStageViewHolder,
         position: Int,
     ) {
         Timber.d("holder: $holder")

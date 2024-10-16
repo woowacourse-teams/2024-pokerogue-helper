@@ -37,12 +37,12 @@ class PokemonTypesAdapter(private val context: Context, private val viewGroup: V
             viewGroup.addView(typeChip)
         }
     }
+}
 
-    private fun MarginLayoutParams.setMargins(
-        topMargin: Int = 0.dp,
-        bottomMargin: Int = 0.dp,
-        horizontalMargin: Int,
-    ) {
-        setMargins(horizontalMargin, topMargin, horizontalMargin, bottomMargin)
-    }
+private fun MarginLayoutParams.setMargins(
+    topMargin: Int = 0.dp,
+    bottomMargin: Int = 0.dp,
+    horizontalMargin: Int,
+) {
+    setMargins(horizontalMargin, topMargin, horizontalMargin, bottomMargin)
 }

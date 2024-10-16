@@ -8,7 +8,7 @@ import poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler
 import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import timber.log.Timber
 
-class OuterEvolutionViewHolder(
+class EvolutionStageViewHolder(
     private val binding: ViewGroupPokemonEvolutionBinding,
     private val navigateHandler: PokemonDetailNavigateHandler,
 ) : ViewHolder(binding.root) {
@@ -24,7 +24,7 @@ class OuterEvolutionViewHolder(
         fun inflated(
             parent: ViewGroup,
             navigateHandler: PokemonDetailNavigateHandler,
-        ) = OuterEvolutionViewHolder(
+        ) = EvolutionStageViewHolder(
             binding =
                 ViewGroupPokemonEvolutionBinding.inflate(
                     LayoutInflater.from(parent.context),
