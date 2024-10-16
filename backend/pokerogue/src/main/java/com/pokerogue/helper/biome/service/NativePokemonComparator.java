@@ -20,6 +20,7 @@ public class NativePokemonComparator implements Comparator<NativePokemon> {
         if (criteria.equals(ASCENDING)) {
             return ASCENDING_COMPARATOR;
         }
+
         return DESCENDING_COMPARATOR;
     }
 
