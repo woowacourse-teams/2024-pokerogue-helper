@@ -16,25 +16,6 @@
         android:layout_height="match_parent"
         tools:context="poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:descendantFocusability="blocksDescendants"
-            android:fillViewport="true"
-            android:scrollbars="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/pager_pokemon_detail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        </androidx.core.widget.NestedScrollView>
-
-
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar_pokemon_detail"
             android:layout_width="match_parent"
@@ -119,6 +100,12 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager_pokemon_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
