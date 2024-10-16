@@ -1,22 +1,24 @@
 package com.pokerogue.helper.biome.service;
 
+import static com.pokerogue.helper.global.constant.SortingCriteria.ASCENDING;
+import static com.pokerogue.helper.global.constant.SortingCriteria.DESCENDING;
+
 import com.pokerogue.helper.biome.data.NativePokemon;
+import com.pokerogue.helper.global.constant.SortingCriteria;
 import java.util.Comparator;
 
 public class NativePokemonComparator implements Comparator<NativePokemon> {
 
-    public static final String ASCENDING = "asc";
-    public static final String DESCENDING = "desc";
     private static final NativePokemonComparator ASCENDING_COMPARATOR = new NativePokemonComparator(ASCENDING);
     private static final NativePokemonComparator DESCENDING_COMPARATOR = new NativePokemonComparator(DESCENDING);
 
-    private final String criteria;
+    private final SortingCriteria criteria;
 
-    private NativePokemonComparator(String criteria) {
+    private NativePokemonComparator(SortingCriteria criteria) {
         this.criteria = criteria;
     }
 
-    public static NativePokemonComparator of(String criteria) {
+    public static NativePokemonComparator of(SortingCriteria criteria) {
         if (criteria.equals(ASCENDING)) {
             return ASCENDING_COMPARATOR;
         }

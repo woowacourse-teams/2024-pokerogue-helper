@@ -12,6 +12,7 @@ import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
 import com.pokerogue.helper.biome.dto.NextBiomeResponse;
 import com.pokerogue.helper.biome.dto.TrainerPokemonResponse;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
+import com.pokerogue.helper.global.constant.SortingCriteria;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
@@ -39,7 +40,7 @@ public class BiomeService {
                 .toList();
     }
 
-    public BiomeDetailResponse findBiome(String id, String bossPokemonOrder, String wildPokemonOrder) {
+    public BiomeDetailResponse findBiome(String id, SortingCriteria bossPokemonOrder, SortingCriteria wildPokemonOrder) {
         Biome biome = biomeRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
 
@@ -53,7 +54,7 @@ public class BiomeService {
         );
     }
 
-    private List<BiomeAllPokemonResponse> getWildPokemons(List<NativePokemon> nativePokemons, String wildPokemonOrder) {
+    private List<BiomeAllPokemonResponse> getWildPokemons(List<NativePokemon> nativePokemons, SortingCriteria wildPokemonOrder) {
         return nativePokemons.stream()
                 .filter(NativePokemon::isWild)
                 .sorted(NativePokemonComparator.of(wildPokemonOrder))
@@ -63,7 +64,7 @@ public class BiomeService {
                 .toList();
     }
 
-    private List<BiomeAllPokemonResponse> getBossPokemons(List<NativePokemon> nativePokemons, String bossPokemonOrder) {
+    private List<BiomeAllPokemonResponse> getBossPokemons(List<NativePokemon> nativePokemons, SortingCriteria bossPokemonOrder) {
         return nativePokemons.stream()
                 .filter(NativePokemon::isBoss)
                 .sorted(NativePokemonComparator.of(bossPokemonOrder))

@@ -1,7 +1,7 @@
 package com.pokerogue.helper.biome.service;
 
-import static com.pokerogue.helper.biome.service.NativePokemonComparator.ASCENDING;
-import static com.pokerogue.helper.biome.service.NativePokemonComparator.DESCENDING;
+import static com.pokerogue.helper.global.constant.SortingCriteria.ASCENDING;
+import static com.pokerogue.helper.global.constant.SortingCriteria.DESCENDING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -10,6 +10,7 @@ import com.pokerogue.environment.service.ServiceTest;
 import com.pokerogue.helper.biome.dto.BiomeAllPokemonResponse;
 import com.pokerogue.helper.biome.dto.BiomeDetailResponse;
 import com.pokerogue.helper.biome.dto.BiomeResponse;
+import com.pokerogue.helper.global.constant.SortingCriteria;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.List;
@@ -56,8 +57,8 @@ class BiomeServiceTest extends ServiceTest {
     @Test
     @DisplayName("바이옴 포켓몬의 티어를 희귀도 순으로 정렬한다.")
     void sortBiomeNativePokemons() {
-        String bossPokemonOrder = DESCENDING;
-        String wildPokemonOrder = ASCENDING;
+        SortingCriteria bossPokemonOrder = DESCENDING;
+        SortingCriteria wildPokemonOrder = ASCENDING;
 
         BiomeDetailResponse biomeDetailResponse = biomeService.findBiome("fairy_cave", bossPokemonOrder,
                 wildPokemonOrder);

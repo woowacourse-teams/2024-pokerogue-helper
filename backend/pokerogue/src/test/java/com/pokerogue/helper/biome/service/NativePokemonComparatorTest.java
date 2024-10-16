@@ -1,7 +1,7 @@
 package com.pokerogue.helper.biome.service;
 
-import static com.pokerogue.helper.biome.service.NativePokemonComparator.ASCENDING;
-import static com.pokerogue.helper.biome.service.NativePokemonComparator.DESCENDING;
+import static com.pokerogue.helper.global.constant.SortingCriteria.ASCENDING;
+import static com.pokerogue.helper.global.constant.SortingCriteria.DESCENDING;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.pokerogue.helper.biome.data.NativePokemon;
