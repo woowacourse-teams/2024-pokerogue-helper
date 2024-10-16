@@ -48,7 +48,7 @@ class NestedScrollableHost : FrameLayout {
         val direction = -delta.sign.toInt()
         return when (orientation) {
             0 -> child?.canScrollHorizontally(direction) ?: false
-            1 -> false
+            1 -> child?.canScrollVertically(direction) ?: false
             else -> throw IllegalArgumentException()
         }
     }
@@ -61,6 +61,7 @@ class NestedScrollableHost : FrameLayout {
     private fun handleInterceptTouchEvent(e: MotionEvent) {
         val orientation = parentViewPager?.orientation ?: return
 
+        // Early return if child can't scroll in same direction as parent
         if (!canChildScroll(orientation, -1f) && !canChildScroll(orientation, 1f)) {
             return
         }
@@ -74,20 +75,21 @@ class NestedScrollableHost : FrameLayout {
             val dy = e.y - initialY
             val isVpHorizontal = orientation == ORIENTATION_HORIZONTAL
 
-            // 스크롤이 일어나는 방향을 기준으로 터치 슬롭을 비교 assuming ViewPager2 touch-slop is 2x touch-slop of child
-            val scaledDx = dx.absoluteValue * if (isVpHorizontal) 0.5f else 1f
-            val scaledDy = dy.absoluteValue * if (isVpHorizontal) 1f else 0.5f
+            // assuming ViewPager2 touch-slop is 2x touch-slop of child
+            val scaledDx = dx.absoluteValue * if (isVpHorizontal) .5f else 1f
+            val scaledDy = dy.absoluteValue * if (isVpHorizontal) 1f else .5f
 
-            // 터치 슬롭을 넘어서면 스크롤 처리 시작
             if (scaledDx > touchSlop || scaledDy > touchSlop) {
                 if (isVpHorizontal == (scaledDy > scaledDx)) {
-                    // 수직 스크롤이면 부모에게 이벤트를 전달
+                    // Gesture is perpendicular, allow all parents to intercept
                     parent.requestDisallowInterceptTouchEvent(false)
                 } else {
-                    // 수평 스크롤이면 자식이 스크롤할 수 있는지 확인 후 처리
+                    // Gesture is parallel, query child if movement in that direction is possible
                     if (canChildScroll(orientation, if (isVpHorizontal) dx else dy)) {
+                        // Child can scroll, disallow all parents to intercept
                         parent.requestDisallowInterceptTouchEvent(true)
                     } else {
+                        // Child cannot scroll, allow all parents to intercept
                         parent.requestDisallowInterceptTouchEvent(false)
                     }
                 }

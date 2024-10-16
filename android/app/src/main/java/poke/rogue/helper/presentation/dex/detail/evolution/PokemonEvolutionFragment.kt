@@ -14,10 +14,6 @@ import timber.log.Timber
 class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding>(R.layout.fragment_pokemon_evolution) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModels()
 
-    //    private val evolutionDepth0Adapter by lazy { EvolutionAdapter(activityViewModel) }
-//    private val evolutionDepth1Adapter by lazy { EvolutionAdapter(activityViewModel) }
-//    private val evolutionDepth2Adapter by lazy { EvolutionAdapter(activityViewModel) }
-//    private val evolutionDepth3Adapter by lazy { EvolutionAdapter(activityViewModel) }
     private val outerEvolutionAdapter by lazy {
         OuterEvolutionAdapter(activityViewModel).also { Timber.d("outerEvolutionAdapter lazy initialized") }
     }
@@ -35,10 +31,6 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
     private fun initAdapter() {
         binding.apply {
             rvPokemonDetailEvolutions.adapter = outerEvolutionAdapter
-//            rvPokemonEvolutionDepth0.recyclerView.adapter = evolutionDepth0Adapter
-//            rvPokemonEvolutionDepth1.recyclerView.adapter = evolutionDepth1Adapter
-//            rvPokemonEvolutionDepth2.recyclerView.adapter = evolutionDepth2Adapter
-//            rvPokemonEvolutionDepth3.recyclerView.adapter = evolutionDepth3Adapter
         }
     }
 
@@ -59,10 +51,6 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
                                     evolutionsUiModel(depth = 3),
                                 ),
                             )
-//                            evolutions(depth = 0).let(evolutionDepth1Adapter::submitList)
-//                            evolutions(depth = 1).let(evolutionDepth1Adapter::submitList)
-//                            evolutions(depth = 2).let(evolutionDepth2Adapter::submitList)
-//                            evolutions(depth = 3).let(evolutionDepth3Adapter::submitList)
                         }
                     }
                 }

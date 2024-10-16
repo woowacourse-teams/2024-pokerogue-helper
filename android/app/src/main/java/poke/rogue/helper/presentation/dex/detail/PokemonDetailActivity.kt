@@ -20,7 +20,7 @@ import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
-import poke.rogue.helper.presentation.util.view.setImage
+import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
@@ -120,8 +120,9 @@ class PokemonDetailActivity :
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
-            ivPokemonDetailPokemon.setImage(
+            ivPokemonDetailPokemon.loadImageWithProgress(
                 pokemonDetail.pokemon.imageUrl,
+                progressIndicatorPokemonDetail,
             )
 
             collapsingToolbarLayoutPokemonDetail.title =
@@ -143,7 +144,7 @@ class PokemonDetailActivity :
         private const val POKEMON_ID = "pokemonId"
         val TAG: String = PokemonDetailActivity::class.java.simpleName
 
-        val typesUiConfig =
+        private val typesUiConfig =
             TypeChip.PokemonTypeViewConfiguration(
                 width = LayoutParams.WRAP_CONTENT,
                 nameSize = 16.dp,
