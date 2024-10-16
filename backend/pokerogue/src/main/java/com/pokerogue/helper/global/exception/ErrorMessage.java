@@ -41,9 +41,7 @@ public enum ErrorMessage {
     POKEMON_TYPE_DUPLICATION(HttpStatus.INTERNAL_SERVER_ERROR,"포켓몬의 타입은 중복될 수 없습니다."),
     POKEMON_EVOLUTION_ID_MISMATCH(HttpStatus.INTERNAL_SERVER_ERROR, "포켓몬과 진화 포켓몬 아이디가 서로 일치하지 않습니다"),
 
-
-
-
+    INVALID_SORTING_CRITERIA(HttpStatus.BAD_REQUEST, "지원되지 않는 정렬 기준입니다."),
     FILE_ACCESS_FAILED(HttpStatus.BAD_REQUEST, "파일 정보 접근에 실패했습니다."),
     FILE_EXTENSION_NOT_APPLY(HttpStatus.BAD_REQUEST, "지원하지 않는 파일 형식입니다."),
     ;
