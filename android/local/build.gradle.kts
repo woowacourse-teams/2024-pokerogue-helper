@@ -55,6 +55,11 @@ dependencies {
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
     implementation(libs.datastore.preferences)
+    // koin
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    testImplementation(libs.koin.test.junit5)
+    androidTestImplementation(libs.koin.android.test)
     // unit test
     testImplementation(libs.bundles.unit.test)
     testImplementation(libs.kotlin.test)
