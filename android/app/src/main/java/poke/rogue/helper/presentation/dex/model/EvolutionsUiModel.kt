@@ -23,9 +23,10 @@ data class EvolutionsUiModel(
 ) {
     constructor(vararg evolutions: SingleEvolutionUiModel) : this(evolutions.toList())
 
-    fun evolutions(depth: Int): List<SingleEvolutionUiModel> = evolutions.filter { it.depth == depth }
+    fun evolutions(): List<EvolutionsUiModel> =
+        listOf(evolutions(0), evolutions(1), evolutions(2), evolutions(3))
 
-    fun evolutionsUiModel(depth: Int): EvolutionsUiModel =
+    private fun evolutions(depth: Int): EvolutionsUiModel =
         EvolutionsUiModel(
             evolutions.filter {
                 it.depth == depth
@@ -38,38 +39,38 @@ data class EvolutionsUiModel(
         val DUMMY_PICAKCHU_EVOLUTION =
             EvolutionsUiModel(
                 evolutions =
-                    listOf(
-                        DUMMY_PICHU,
-                        DUMMY_PIKACHU,
-                        DUMMY_RAICHU,
-                        DUMMY_ALOLA_RAICHU,
-                        DUMMY_GIGA_PIKACHU,
-                    ),
+                listOf(
+                    DUMMY_PICHU,
+                    DUMMY_PIKACHU,
+                    DUMMY_RAICHU,
+                    DUMMY_ALOLA_RAICHU,
+                    DUMMY_GIGA_PIKACHU,
+                ),
             )
 
         val DUMMY_PSYDUCK_EVOLUTION =
             EvolutionsUiModel(
                 evolutions =
-                    listOf(
-                        DUMMY_PSYDUCK,
-                        DUMMY_GOLDUCK,
-                    ),
+                listOf(
+                    DUMMY_PSYDUCK,
+                    DUMMY_GOLDUCK,
+                ),
             )
 
         val DUMMY_EVE_EVOLUTION =
             EvolutionsUiModel(
                 evolutions =
-                    listOf(
-                        DUMMY_EEVEE,
-                        DUMMY_SYLYEON,
-                        DUMMY_ESPEON,
-                        DUMMY_UMBREON,
-                        DUMMY_VAPOREON,
-                        DUMMY_JOLTEON,
-                        DUMMY_FLAREON,
-                        DUMMY_LEAFEON,
-                        DUMMY_GLACEON,
-                    ),
+                listOf(
+                    DUMMY_EEVEE,
+                    DUMMY_SYLYEON,
+                    DUMMY_ESPEON,
+                    DUMMY_UMBREON,
+                    DUMMY_VAPOREON,
+                    DUMMY_JOLTEON,
+                    DUMMY_FLAREON,
+                    DUMMY_LEAFEON,
+                    DUMMY_GLACEON,
+                ),
             )
     }
 }

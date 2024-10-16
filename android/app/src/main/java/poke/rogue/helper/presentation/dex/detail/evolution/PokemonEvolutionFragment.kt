@@ -44,12 +44,7 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 
                         uiState.evolutions.apply {
                             outerEvolutionAdapter.submitList(
-                                listOf(
-                                    evolutionsUiModel(depth = 0),
-                                    evolutionsUiModel(depth = 1),
-                                    evolutionsUiModel(depth = 2),
-                                    evolutionsUiModel(depth = 3),
-                                ),
+                                this.evolutions()
                             )
                         }
                     }
