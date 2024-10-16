@@ -10,12 +10,12 @@ import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonTypesAdapter(
-    private val context: Context, private val viewGroup: ViewGroup,
+    private val context: Context,
+    private val viewGroup: ViewGroup,
     private val types: List<TypeUiModel> = emptyList(),
     private val config: TypeChip.PokemonTypeViewConfiguration = typesUiConfig,
     private val spacingBetweenTypes: Int = 0.dp,
 ) {
-
     init {
         viewGroup.removeAllViews()
 
@@ -69,7 +69,6 @@ class PokemonTypesAdapter(
     }
 }
 
-
 private fun MarginLayoutParams.setMargins(
     topMargin: Int = 0.dp,
     bottomMargin: Int = 0.dp,
@@ -77,7 +76,6 @@ private fun MarginLayoutParams.setMargins(
 ) {
     setMargins(horizontalMargin, topMargin, horizontalMargin, bottomMargin)
 }
-
 
 private val typesUiConfig =
     TypeChip.PokemonTypeViewConfiguration(

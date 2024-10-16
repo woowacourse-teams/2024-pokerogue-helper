@@ -1,9 +1,7 @@
 package poke.rogue.helper.presentation.dex.detail.evolution
 
-import android.view.MotionEvent
 import android.view.View.GONE
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintSet.Motion
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.R

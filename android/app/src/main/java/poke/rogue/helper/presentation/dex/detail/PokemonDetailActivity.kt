@@ -6,32 +6,24 @@ import android.os.Bundle
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.children
 import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.data.repository.DefaultDexRepository
-import poke.rogue.helper.databinding.ActivityPokemonDetail2Binding
+import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
-import poke.rogue.helper.presentation.biome.BiomeAdapter
-import poke.rogue.helper.presentation.biome.BiomeViewModel
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
-import poke.rogue.helper.presentation.biome.model.BiomeUiModel
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
-import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
-import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 
-// TODO: 다시 activity_pokemon_detail 로 바꾸어야 해.
 class PokemonDetailActivity :
-    ToolbarActivity<ActivityPokemonDetail2Binding>(R.layout.activity_pokemon_detail2) {
+    ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModels<PokemonDetailViewModel> {
         PokemonDetailViewModel.factory(DefaultDexRepository.instance())
     }

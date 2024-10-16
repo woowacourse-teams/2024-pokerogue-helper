@@ -21,12 +21,16 @@ class OuterEvolutionViewHolder(
     }
 
     companion object {
-        fun inflated(parent: ViewGroup, navigateHandler: PokemonDetailNavigateHandler) = OuterEvolutionViewHolder(
-            binding = ViewGroupPokemonEvolutionBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false,
-            ),
+        fun inflated(
+            parent: ViewGroup,
+            navigateHandler: PokemonDetailNavigateHandler,
+        ) = OuterEvolutionViewHolder(
+            binding =
+                ViewGroupPokemonEvolutionBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false,
+                ),
             navigateHandler = navigateHandler,
         )
     }

@@ -71,13 +71,6 @@
         <activity
             android:name=".presentation.biome.guide.BiomeGuideActivity"
             android:exported="false" />
-
-        <activity
-            android:name=".presentation.dex.detail.PokemonDetail2Activity"
-            android:exported="true">
-
-        </activity>
-
     </application>
 
 </manifest>

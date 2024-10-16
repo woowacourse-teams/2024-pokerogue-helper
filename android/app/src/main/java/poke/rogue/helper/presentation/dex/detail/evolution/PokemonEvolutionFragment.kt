@@ -18,7 +18,9 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 //    private val evolutionDepth1Adapter by lazy { EvolutionAdapter(activityViewModel) }
 //    private val evolutionDepth2Adapter by lazy { EvolutionAdapter(activityViewModel) }
 //    private val evolutionDepth3Adapter by lazy { EvolutionAdapter(activityViewModel) }
-    private val outerEvolutionAdapter by lazy { OuterEvolutionAdapter(activityViewModel).also { Timber.d("outerEvolutionAdapter lazy initialized") } }
+    private val outerEvolutionAdapter by lazy {
+        OuterEvolutionAdapter(activityViewModel).also { Timber.d("outerEvolutionAdapter lazy initialized") }
+    }
 
     override fun onViewCreated(
         view: View,
@@ -37,7 +39,6 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
 //            rvPokemonEvolutionDepth1.recyclerView.adapter = evolutionDepth1Adapter
 //            rvPokemonEvolutionDepth2.recyclerView.adapter = evolutionDepth2Adapter
 //            rvPokemonEvolutionDepth3.recyclerView.adapter = evolutionDepth3Adapter
-
         }
     }
 
@@ -56,7 +57,7 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
                                     evolutionsUiModel(depth = 1),
                                     evolutionsUiModel(depth = 2),
                                     evolutionsUiModel(depth = 3),
-                                )
+                                ),
                             )
 //                            evolutions(depth = 0).let(evolutionDepth1Adapter::submitList)
 //                            evolutions(depth = 1).let(evolutionDepth1Adapter::submitList)

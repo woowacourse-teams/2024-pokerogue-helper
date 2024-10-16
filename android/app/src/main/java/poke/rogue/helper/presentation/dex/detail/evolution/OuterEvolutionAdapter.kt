@@ -10,19 +10,24 @@ import timber.log.Timber
 class OuterEvolutionAdapter(
     private val navigateHandler: PokemonDetailNavigateHandler,
 ) : ListAdapter<EvolutionsUiModel, OuterEvolutionViewHolder>(comparator) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OuterEvolutionViewHolder =
-        OuterEvolutionViewHolder.inflated(parent, navigateHandler)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): OuterEvolutionViewHolder = OuterEvolutionViewHolder.inflated(parent, navigateHandler)
 
-    override fun onBindViewHolder(holder: OuterEvolutionViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: OuterEvolutionViewHolder,
+        position: Int,
+    ) {
         Timber.d("holder: $holder")
         holder.bind(getItem(position))
     }
 
     companion object {
-        val comparator = ItemDiffCallback<EvolutionsUiModel>(
-            onItemsTheSame = { oldItem, newItem -> oldItem.evolutions == newItem.evolutions },
-            onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
-        )
+        val comparator =
+            ItemDiffCallback<EvolutionsUiModel>(
+                onItemsTheSame = { oldItem, newItem -> oldItem.evolutions == newItem.evolutions },
+                onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
+            )
     }
-
 }
