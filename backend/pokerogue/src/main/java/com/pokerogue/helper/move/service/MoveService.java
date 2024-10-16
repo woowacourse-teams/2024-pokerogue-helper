@@ -65,14 +65,14 @@ public class MoveService {
 
     public MoveDetailResponse findMove(String id) {
         Move move = findMoveById(id);
-        List<String> eggMoveIdsContains = pokemonRepository.findByEggMoveIdsContains(move.getId()).stream()
+        List<String> eggMovePokemonIds = pokemonRepository.findByEggMoveIdsContains(move.getId()).stream()
                 .map(Pokemon::getId)
                 .toList();
-        List<String> levelMoveIdsContains = pokemonRepository.findByLevelMovesMoveId(move.getId()).stream()
+        List<String> levelMovePokemonIds = pokemonRepository.findByLevelMovesMoveId(move.getId()).stream()
                 .map(Pokemon::getId)
                 .toList();
 
-        return MoveDetailResponse.from(move, levelMoveIdsContains, eggMoveIdsContains);
+        return MoveDetailResponse.from(move, levelMovePokemonIds, eggMovePokemonIds);
     }
 
     private Move findMoveById(String id) {
