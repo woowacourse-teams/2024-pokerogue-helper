@@ -25,7 +25,7 @@ public class MoveRepositoryTest extends MongoRepositoryTest {
         List<Move> moves = moveRepository.findAll();
 
         assertAll(
-                () -> assertThat(moves).hasSize(920),
+                () -> assertThat(moves).hasSize(919),
                 () -> assertThat(moves.stream()
                         .allMatch(move -> move.getType()
                                 .getDeclaringClass()

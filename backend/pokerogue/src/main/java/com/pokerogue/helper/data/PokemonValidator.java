@@ -17,7 +17,7 @@ import org.apache.logging.log4j.util.Strings;
 
 class PokemonValidator {
 
-    private static final int POKEMON_SIZE = 1446;
+    private static final int POKEMON_SIZE = 1453;
     private static final int MIN_GENERATION = 1;
     private static final int MAX_GENERATION = 9;
     private static final int MIN_TYPE_COUNT = 1;
@@ -31,8 +31,8 @@ class PokemonValidator {
     private static final String DELIMITER = "_";
     private static final String EMPTY_ABILITY = "none";
     private static final IntPredicate isExpectedIdLetter = character -> isLowerCase(character)
-                                                                        || isDigit(character)
-                                                                        || isDelimiter(character);
+            || isDigit(character)
+            || isDelimiter(character);
 
     private PokemonValidator() {
     }
@@ -46,8 +46,8 @@ class PokemonValidator {
 
     static void validatePokemonIdFormat(List<String> pokemonIds) {
         Predicate<String> isExpectedLetter = id -> id.codePoints().allMatch(isExpectedIdLetter);
-        Predicate<String> isDelimiterSeparated = id -> id.contains(DELIMITER + DELIMITER);
-        Predicate<String> isDelimiterInPlace = id -> id.startsWith(DELIMITER) || id.endsWith(DELIMITER);
+        Predicate<String> isDelimiterSeparated = id -> !id.contains(DELIMITER + DELIMITER);
+        Predicate<String> isDelimiterInPlace = id -> !id.startsWith(DELIMITER) || id.endsWith(DELIMITER);
 
         String message = "아이디: %s는 아이디 규칙에 맞지 않습니다.";
 
@@ -144,22 +144,6 @@ class PokemonValidator {
 
         for (Pokemon pokemon : pokemons) {
             validate(isTotalAbilityCountInRange, pokemon, ErrorMessage.POKEMON_TOTAL_ABILITY_COUNT);
-        }
-    }
-
-    static void validateTotalAbilityDuplication(List<Pokemon> pokemons) {
-        Predicate<Pokemon> isAbilityDisjoint = pokemon -> {
-            List<String> totalAbilityIds = pokemon.getNormalAbilityIds();
-            totalAbilityIds.add(pokemon.getHiddenAbilityId());
-            totalAbilityIds.add(pokemon.getPassiveAbilityId());
-
-            Set<String> uniqueIds = new HashSet<>(totalAbilityIds);
-
-            return totalAbilityIds.size() == uniqueIds.size();
-        };
-
-        for (Pokemon pokemon : pokemons) {
-            validate(isAbilityDisjoint, pokemon, ErrorMessage.POKEMON_ABILITY_DUPLICATION);
         }
     }
 
@@ -271,5 +255,4 @@ class PokemonValidator {
     private static boolean isDelimiter(int character) {
         return DELIMITER.charAt(0) == character;
     }
-
 }

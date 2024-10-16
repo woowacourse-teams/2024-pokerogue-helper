@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PokemonTestFixture {
+
     public static List<Evolution> BULBASAUR_EVOLUTIONS = Arrays.asList(
             new Evolution("bulbasaur", 16, "ivysaur", null, null),
             new Evolution("ivysaur", 32, "venusaur", null, null)
@@ -66,7 +67,8 @@ public class PokemonTestFixture {
                     "snore", "curse", "protect", "sludge_bomb", "mud_slap", "outrage", "giga_drain", "endure",
                     "charm", "false_swipe", "swagger", "attract", "sleep_talk", "return", "frustration", "safeguard",
                     "synthesis", "hidden_power", "sunny_day", "rock_smash", "facade", "nature_power", "helping_hand",
-                    "knock_off", "weather_ball", "bullet_seed", "magical_leaf", "worry_seed", "seed_bomb", "energy_ball",
+                    "knock_off", "weather_ball", "bullet_seed", "magical_leaf", "worry_seed", "seed_bomb",
+                    "energy_ball",
                     "leaf_storm", "power_whip", "grass_knot", "venoshock", "acid_spray", "round", "echoed_voice",
                     "grass_pledge", "work_up", "grassy_terrain", "confide", "grassy_glide", "tera_blast", "trailblaze"
             ), // technicalMachineMoveIds
@@ -126,14 +128,22 @@ public class PokemonTestFixture {
             List.of("dragon_dance", "bitter_blade", "earth_power", "oblivion_wing"), // eggMoveIds
             CHARMANDER_LEVEL_MOVES, // levelMoves
             List.of(
-                    "mega_punch", "fire_punch", "thunder_punch", "swords_dance", "cut", "mega_kick", "body_slam", "take_down", "double_edge",
-                    "roar", "flamethrower", "counter", "strength", "fire_spin", "dig", "toxic", "double_team", "reflect", "fire_blast",
-                    "swift", "rest", "rock_slide", "substitute", "snore", "curse", "protect", "scary_face", "mud_slap", "outrage",
-                    "endure", "false_swipe", "swagger", "attract", "sleep_talk", "return", "frustration", "iron_tail", "metal_claw",
-                    "hidden_power", "sunny_day", "crunch", "rock_smash", "beat_up", "heat_wave", "will_o_wisp", "facade", "focus_punch",
-                    "helping_hand", "brick_break", "weather_ball", "air_cutter", "overheat", "rock_tomb", "aerial_ace", "dragon_claw",
-                    "dragon_dance", "fling", "flare_blitz", "dragon_pulse", "focus_blast", "shadow_claw", "fire_fang", "hone_claws",
-                    "flame_charge", "round", "echoed_voice", "incinerate", "acrobatics", "fire_pledge", "dragon_tail", "work_up",
+                    "mega_punch", "fire_punch", "thunder_punch", "swords_dance", "cut", "mega_kick", "body_slam",
+                    "take_down", "double_edge",
+                    "roar", "flamethrower", "counter", "strength", "fire_spin", "dig", "toxic", "double_team",
+                    "reflect", "fire_blast",
+                    "swift", "rest", "rock_slide", "substitute", "snore", "curse", "protect", "scary_face", "mud_slap",
+                    "outrage",
+                    "endure", "false_swipe", "swagger", "attract", "sleep_talk", "return", "frustration", "iron_tail",
+                    "metal_claw",
+                    "hidden_power", "sunny_day", "crunch", "rock_smash", "beat_up", "heat_wave", "will_o_wisp",
+                    "facade", "focus_punch",
+                    "helping_hand", "brick_break", "weather_ball", "air_cutter", "overheat", "rock_tomb", "aerial_ace",
+                    "dragon_claw",
+                    "dragon_dance", "fling", "flare_blitz", "dragon_pulse", "focus_blast", "shadow_claw", "fire_fang",
+                    "hone_claws",
+                    "flame_charge", "round", "echoed_voice", "incinerate", "acrobatics", "fire_pledge", "dragon_tail",
+                    "work_up",
                     "confide", "power_up_punch", "breaking_swipe", "tera_blast", "temper_flare"
             ), // technicalMachineMoveIds
             List.of("volcano") // biomeIds
