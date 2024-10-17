@@ -39,6 +39,7 @@ datastore = "1.0.0"
 google-services = "4.4.2"
 firebase = "33.1.2"
 firebase-crashlytics = "3.0.2"
+app-update = "2.1.0"
 
 # Android-Test
 android-junit5-plugin = "1.10.0.0"
@@ -97,6 +98,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics" }
+app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "app-update" }
 # android test
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
 android-test-fragment = { module = "androidx.fragment:fragment-testing", version.ref = "androidx-test-fragment" }

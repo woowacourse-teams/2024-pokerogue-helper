@@ -4,9 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import poke.rogue.helper.R
+import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.databinding.ActivityHomeBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
@@ -20,9 +24,11 @@ import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.update.UpdateManager
 
 class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel by viewModels<HomeViewModel>()
+    private lateinit var updateManager: UpdateManager
 
     override val toolbar: Toolbar
         get() = binding.toolbarHome
@@ -30,6 +36,7 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
+        initUpdateManager()
         initObservers()
     }
 
@@ -39,6 +46,43 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             actionHandler = viewModel
         }
+
+    private fun initUpdateManager() {
+        updateManager = UpdateManager(applicationContext) { showUpdateComplete() }
+        lifecycle.addObserver(updateManager)
+
+        val appUpdateLauncher =
+            registerForActivityResult(
+                ActivityResultContracts.StartIntentSenderForResult(),
+            ) { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        logger.logClickEvent(UPDATE_AGREE)
+                        toast(R.string.update_result_ok)
+                    }
+
+                    RESULT_CANCELED -> {
+                        logger.logClickEvent(UPDATE_DISAGREE)
+                    }
+
+                    RESULT_IN_APP_UPDATE_FAILED -> {
+                        logger.logEvent(
+                            AnalyticsEvent(type = UPDATE_ERROR),
+                        )
+                        toast(R.string.update_result_failed)
+                    }
+                }
+            }
+        updateManager.checkForAppUpdates(appUpdateLauncher)
+    }
+
+    private fun showUpdateComplete() {
+        Snackbar.make(binding.root, R.string.update_snackBar_title, Snackbar.LENGTH_INDEFINITE)
+            .setAction(R.string.update_snackBar_action_text) {
+                updateManager.completeUpdate()
+            }
+            .show()
+    }
 
     private fun initObservers() {
         repeatOnStarted {
@@ -104,6 +148,9 @@ class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home
         private const val NAVIGATE_TO_BIOME = "Nav_Biome"
         private const val NAVIGATE_TO_ITEM = "Nav_Item"
         private const val NAVIGATE_TO_BATTLE = "Nav_Battle"
+        private const val UPDATE_AGREE = "Update_Agree"
+        private const val UPDATE_DISAGREE = "Update_Disagree"
+        private const val UPDATE_ERROR = "Update_Error"
 
         fun intent(context: Context): Intent {
             return Intent(context, HomeActivity::class.java)

@@ -165,6 +165,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.bundles.firebase)
+    implementation(libs.app.update.ktx)
     // Koin
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
