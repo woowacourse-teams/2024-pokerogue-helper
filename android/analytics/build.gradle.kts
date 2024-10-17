@@ -49,4 +49,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
 }

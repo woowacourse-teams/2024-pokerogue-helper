@@ -3,8 +3,6 @@ package poke.rogue.helper.presentation.battle
 import WeatherSpinnerAdapter
 import android.app.Activity
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
@@ -15,14 +13,16 @@ import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
+import poke.rogue.helper.presentation.battle.view.itemSelectListener
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.setImage
+import timber.log.Timber
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModels<BattleViewModel> {
-        BattleViewModel.factory(DefaultBattleRepository.instance(this))
+        BattleViewModel.factory(DefaultBattleRepository.instance(applicationContext))
     }
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)
@@ -58,19 +58,8 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     private fun initSpinner() {
         binding.spinnerWeather.adapter = weatherAdapter
         binding.spinnerWeather.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>,
-                    view: View?,
-                    position: Int,
-                    id: Long,
-                ) {
-                    val selectedWeather = parent.getItemAtPosition(position) as WeatherUiModel
-                    viewModel.updateWeather(selectedWeather)
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
+            itemSelectListener<WeatherUiModel> {
+                viewModel.updateWeather(it)
             }
     }
 
@@ -79,6 +68,13 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
             viewModel.weathers.collect {
                 weatherAdapter.updateWeathers(it)
             }
+        }
+        repeatOnStarted {
+            viewModel.weatherPos
+                .collect {
+                    Timber.tag("weatherPos").d("weatherPos: $it")
+                    binding.spinnerWeather.setSelection(it)
+                }
         }
 
         repeatOnStarted {

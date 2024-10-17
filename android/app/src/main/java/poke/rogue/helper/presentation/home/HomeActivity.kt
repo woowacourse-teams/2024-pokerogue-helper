@@ -30,7 +30,6 @@ import poke.rogue.helper.update.UpdateManager
 
 class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private val viewModel by viewModels<HomeViewModel>()
-    private val logger: AnalyticsLogger = analyticsLogger()
     private lateinit var updateManager: UpdateManager
 
     override val toolbar: Toolbar

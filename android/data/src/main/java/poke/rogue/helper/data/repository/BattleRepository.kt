@@ -26,7 +26,11 @@ interface BattleRepository {
         skillId: String,
     )
 
-    suspend fun savedPokemon(): Flow<Pokemon?>
+    suspend fun saveWeather(weatherId: String)
 
-    suspend fun savedPokemonWithSkill(): Flow<PokemonWithSkill?>
+    fun savedWeatherStream(): Flow<Weather?>
+
+    fun savedPokemonStream(): Flow<Pokemon?>
+
+    fun savedPokemonWithSkillStream(): Flow<PokemonWithSkill?>
 }

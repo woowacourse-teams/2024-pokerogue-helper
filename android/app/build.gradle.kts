@@ -111,59 +111,24 @@ android {
     }
     testOptions {
         animationsDisabled = true
+        // ref: https://github.com/robolectric/robolectric/pull/4736
+        unitTests.isIncludeAndroidResources = true
         managedDevices {
+            val deviceApis = (27..34)
             localDevices {
-                create("pixel4api27") {
-                    device = "Pixel 4"
-                    apiLevel = 27
-                    systemImageSource = "aosp"
-                }
-                create("pixel4api28") {
-                    device = "Pixel 4"
-                    apiLevel = 28
-                    systemImageSource = "aosp"
-                }
-                create("pixel4api29") {
-                    device = "Pixel 4"
-                    apiLevel = 29
-                    systemImageSource = "aosp"
-                }
-                create("pixel4api30") {
-                    device = "Pixel 4"
-                    apiLevel = 30
-                    systemImageSource = "aosp"
-                }
-                create("pixel4api31") {
-                    device = "Pixel 4"
-                    apiLevel = 31
-                    systemImageSource = "aosp"
-                }
-                create("pixel4api32") {
-                    device = "Pixel 4"
-                    apiLevel = 32
-                    systemImageSource = "aosp"
-                }
-                create("pixel4api33") {
-                    device = "Pixel 4"
-                    apiLevel = 33
-                    systemImageSource = "aosp"
-                }
-                create("pixel4api34") {
-                    device = "Pixel 4"
-                    apiLevel = 34
-                    systemImageSource = "aosp"
+                deviceApis.forEach { api ->
+                    create("pixel4api$api") {
+                        device = "Pixel 4"
+                        apiLevel = api
+                        systemImageSource = "aosp"
+                    }
                 }
             }
             groups {
                 create("phones") {
-                    targetDevices.add(devices["pixel4api27"])
-                    targetDevices.add(devices["pixel4api28"])
-                    targetDevices.add(devices["pixel4api29"])
-                    targetDevices.add(devices["pixel4api30"])
-                    targetDevices.add(devices["pixel4api31"])
-                    targetDevices.add(devices["pixel4api32"])
-                    targetDevices.add(devices["pixel4api33"])
-                    targetDevices.add(devices["pixel4api34"])
+                    deviceApis.forEach { api ->
+                        targetDevices.add(devices["pixel4api$api"])
+                    }
                 }
             }
         }
@@ -201,7 +166,12 @@ dependencies {
     implementation(libs.firebase.crashlytics.buildtools)
     implementation(libs.bundles.firebase)
     implementation(libs.app.update.ktx)
+    // Koin
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.android)
+    androidTestImplementation(libs.koin.android.test)
     // android test
     androidTestImplementation(libs.bundles.android.test)
+    testRuntimeOnly(libs.junit.vintage.engine)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
 }
