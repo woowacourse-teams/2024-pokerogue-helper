@@ -52,6 +52,19 @@
                         tools:ignore="ContentDescription"
                         tools:src="@tools:sample/avatars" />
 
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:id="@+id/progress_indicator_pokemon_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        app:indicatorColor="@color/poke_grey_20"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
+                        app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
+                        app:layout_constraintStart_toStartOf="@id/iv_pokemon_detail_pokemon"
+                        app:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_pokemon"
+                        tools:visibility="visible" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.appbar.MaterialToolbar
@@ -66,19 +79,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:title="@string/pokemon_list_title_name"
                     app:titleTextColor="@color/poke_white">
-
-                    <com.google.android.material.progressindicator.CircularProgressIndicator
-                        android:id="@+id/progress_indicator_pokemon_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:indeterminate="true"
-                        android:visibility="gone"
-                        app:indicatorColor="@color/poke_grey_20"
-                        app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
-                        app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
-                        app:layout_constraintStart_toStartOf="@id/iv_pokemon_detail_pokemon"
-                        app:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_pokemon"
-                        tools:visibility="visible" />
 
                     <ImageView
                         android:layout_width="wrap_content"
