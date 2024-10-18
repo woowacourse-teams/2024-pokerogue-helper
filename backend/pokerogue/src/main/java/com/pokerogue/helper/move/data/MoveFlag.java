@@ -28,7 +28,7 @@ public enum MoveFlag {
     IGNORE_ABILITIES("ignore_abilities"),
     CHECK_ALL_HITS("check_all_hits"),
     IGNORE_SUBSTITUTE("ignore_substitute"),
-    REDIRECT_COUNTER("redirect_counter")
+    REDIRECT_COUNTER("redirect_counter"),
     ;
 
     private final String id;
