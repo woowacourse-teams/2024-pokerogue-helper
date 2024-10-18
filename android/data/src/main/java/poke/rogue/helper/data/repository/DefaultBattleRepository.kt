@@ -79,17 +79,24 @@ class DefaultBattleRepository(
             it.id == skillId
         } ?: error("아이디에 해당하는 스킬이 존재하지 않습니다. id: $skillId")
 
+    override suspend fun pokemon(pokemonId: String): Pokemon = pokemonRepository.pokemon(pokemonId)
+
+    override suspend fun pokemonWithRandomSkill(pokemonId: String): PokemonWithSkill {
+        val pokemon = pokemonRepository.pokemon(pokemonId)
+        val skill = availableSkills(pokemon.dexNumber).firstOrNull() ?: error("배정 가능한 스킬이 존재 하지 않습니다. - dexNumber : ${pokemon.dexNumber}")
+        return PokemonWithSkill(pokemon, skill)
+    }
+
     companion object {
         private var instance: BattleRepository? = null
 
-        fun instance(context: Context): BattleRepository {
-            return instance ?: DefaultBattleRepository(
+        fun instance(context: Context): BattleRepository =
+            instance ?: DefaultBattleRepository(
                 LocalBattleDataSource.instance(context),
                 RemoteBattleDataSource.instance(),
                 DefaultDexRepository.instance(),
             ).also {
                 instance = it
             }
-        }
     }
 }

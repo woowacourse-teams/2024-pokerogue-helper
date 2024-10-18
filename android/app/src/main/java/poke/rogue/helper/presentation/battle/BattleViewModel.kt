@@ -32,7 +32,10 @@ import poke.rogue.helper.presentation.battle.model.toUi
 class BattleViewModel(
     private val battleRepository: BattleRepository,
     private val logger: AnalyticsLogger = analyticsLogger(),
-) : ErrorHandleViewModel(logger), BattleNavigationHandler {
+    pokemonId: String? = null,
+    isMySelection: Boolean? = null,
+) : ErrorHandleViewModel(logger),
+    BattleNavigationHandler {
     private val _weathers = MutableStateFlow(emptyList<WeatherUiModel>())
     val weathers = _weathers.asStateFlow()
 
@@ -48,7 +51,8 @@ class BattleViewModel(
             if (weathers.any { it.id == weather.id }.not()) return@combine null
             val selectedWeather = weathers.first { it.id == weather.id }
             // update selected weather
-            _selectedState.value = selectedState.value.copy(weather = BattleSelectionUiState.Selected(selectedWeather))
+            _selectedState.value =
+                selectedState.value.copy(weather = BattleSelectionUiState.Selected(selectedWeather))
             // return position
             weathers.indexOfFirst { it.id == weather.id }
         }.filterNotNull()
@@ -58,26 +62,28 @@ class BattleViewModel(
     val navigateToSelection = _navigateToSelection.asSharedFlow()
 
     val battleResult: StateFlow<BattleResultUiState> =
-        selectedState.map {
-            if (it.allSelected) {
-                val result = fetchBattlePredictionResult()
-                BattleResultUiState.Success(result)
-            } else {
-                BattleResultUiState.Idle
-            }
-        }.stateIn(
-            viewModelScope + errorHandler,
-            SharingStarted.WhileSubscribed(5000),
-            BattleResultUiState.Idle,
-        )
+        selectedState
+            .map {
+                if (it.allSelected) {
+                    val result = fetchBattlePredictionResult()
+                    BattleResultUiState.Success(result)
+                } else {
+                    BattleResultUiState.Idle
+                }
+            }.stateIn(
+                viewModelScope + errorHandler,
+                SharingStarted.WhileSubscribed(5000),
+                BattleResultUiState.Idle,
+            )
 
     val isBattleFetchSuccessful =
-        battleResult.map { it.isSuccess() }
+        battleResult
+            .map { it.isSuccess() }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
     init {
         initWeathers()
-        initSavedSelection()
+        handlePokemonSelection(pokemonId, isMySelection)
     }
 
     private suspend fun fetchBattlePredictionResult(): BattlePredictionUiModel {
@@ -89,12 +95,13 @@ class BattleViewModel(
             val opponentPokemonId =
                 requireNotNull(opponentPokemon.selectedData()?.id) { "상대 포켓몬은 null일 수 없습니다." }
 
-            return battleRepository.calculatedBattlePrediction(
-                weatherId = weatherId,
-                myPokemonId = myPokemonId,
-                mySkillId = mySkillId,
-                opponentPokemonId = opponentPokemonId,
-            ).toUi()
+            return battleRepository
+                .calculatedBattlePrediction(
+                    weatherId = weatherId,
+                    myPokemonId = myPokemonId,
+                    mySkillId = mySkillId,
+                    opponentPokemonId = opponentPokemonId,
+                ).toUi()
         }
     }
 
@@ -105,18 +112,57 @@ class BattleViewModel(
         }
     }
 
-    private fun initSavedSelection() {
+    private fun handlePokemonSelection(
+        pokemonId: String?,
+        isMySelection: Boolean?,
+    ) {
+        when {
+            pokemonId == null -> {
+                fetchSavedMyPokemon()
+                fetchSavedOpponentPokemon()
+            }
+
+            isMySelection == true -> {
+                selectMyPokemon(pokemonId)
+                fetchSavedOpponentPokemon()
+            }
+
+            isMySelection == false -> {
+                fetchSavedMyPokemon()
+                selectOpponentPokemon(pokemonId)
+            }
+
+            else -> error("선택 타입 정보를 알 수 없습니다.")
+        }
+    }
+
+    private fun fetchSavedMyPokemon() {
         viewModelScope.launch {
-            launch {
-                battleRepository.savedPokemonStream().first()?.let {
-                    updateOpponentPokemon(it.toSelectionUi())
-                }
+            battleRepository.savedPokemonWithSkillStream().first()?.let { (pokemon, skill) ->
+                updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
             }
-            launch {
-                battleRepository.savedPokemonWithSkillStream().first()?.let { (pokemon, skill) ->
-                    updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
-                }
+        }
+    }
+
+    private fun fetchSavedOpponentPokemon() {
+        viewModelScope.launch {
+            battleRepository.savedPokemonStream().first()?.let {
+                updateOpponentPokemon(it.toSelectionUi())
             }
+        }
+    }
+
+    private fun selectMyPokemon(pokemonId: String) {
+        viewModelScope.launch {
+            val (pokemon, skill) = battleRepository.pokemonWithRandomSkill(pokemonId)
+            updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
+        }
+    }
+
+    private fun selectOpponentPokemon(pokemonId: String) {
+        viewModelScope.launch {
+            val pokemon = battleRepository.pokemon(pokemonId)
+            updateOpponentPokemon(pokemon.toSelectionUi())
         }
     }
 
@@ -191,15 +237,14 @@ class BattleViewModel(
     private fun previousSelection(
         hasSkillSelection: Boolean,
         previousPokemonSelection: PokemonSelectionUiModel,
-    ): SelectionData {
-        return if (hasSkillSelection) {
+    ): SelectionData =
+        if (hasSkillSelection) {
             val skill =
                 requireNotNull(selectedState.value.skill.selectedData()) { "스킬이 선택되어야 합니다." }
             SelectionData.WithSkill(previousPokemonSelection, skill)
         } else {
             SelectionData.WithoutSkill(previousPokemonSelection)
         }
-    }
 
     companion object {
         fun factory(battleRepository: BattleRepository): ViewModelProvider.Factory =

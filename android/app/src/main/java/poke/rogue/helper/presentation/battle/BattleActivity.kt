@@ -2,6 +2,8 @@ package poke.rogue.helper.presentation.battle
 
 import WeatherSpinnerAdapter
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -127,5 +129,20 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                 }
             }
         }
+    }
+
+    companion object {
+        private const val POKEMON_ID = "pokemonId"
+        private const val IS_MY_SELECTION = "isMySelection"
+
+        fun intent(
+            context: Context,
+            pokemonId: String,
+            isMine: Boolean,
+        ): Intent =
+            Intent(context, BattleActivity::class.java).apply {
+                putExtra(POKEMON_ID, pokemonId)
+                putExtra(IS_MY_SELECTION, isMine)
+            }
     }
 }

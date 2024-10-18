@@ -33,4 +33,8 @@ interface BattleRepository {
     fun savedPokemonStream(): Flow<Pokemon?>
 
     fun savedPokemonWithSkillStream(): Flow<PokemonWithSkill?>
+
+    suspend fun pokemon(pokemonId: String): Pokemon
+
+    suspend fun pokemonWithRandomSkill(pokemonId: String): PokemonWithSkill
 }
