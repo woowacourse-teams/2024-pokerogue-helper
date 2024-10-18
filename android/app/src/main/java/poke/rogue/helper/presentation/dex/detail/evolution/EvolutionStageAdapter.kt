@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler
 import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
-import timber.log.Timber
 
 class EvolutionStageAdapter(
     private val navigateHandler: PokemonDetailNavigateHandler,
@@ -19,7 +18,6 @@ class EvolutionStageAdapter(
         holder: EvolutionStageViewHolder,
         position: Int,
     ) {
-        Timber.d("holder: $holder")
         holder.bind(getItem(position))
     }
 
