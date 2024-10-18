@@ -19,13 +19,19 @@ import poke.rogue.helper.presentation.battle.view.itemSelectListener
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.serializable
 import poke.rogue.helper.presentation.util.view.setImage
 import timber.log.Timber
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModels<BattleViewModel> {
-        BattleViewModel.factory(DefaultBattleRepository.instance(applicationContext))
+        BattleViewModel.factory(
+            intent.getStringExtra(POKEMON_ID),
+            intent.serializable(SELECTION_TYPE),
+            DefaultBattleRepository.instance(applicationContext),
+        )
     }
+
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)
     }
@@ -133,7 +139,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
     companion object {
         private const val POKEMON_ID = "pokemonId"
-        private const val IS_MY_SELECTION = "isMySelection"
+        private const val SELECTION_TYPE = "selectionType"
 
         fun intent(
             context: Context,
@@ -142,7 +148,8 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         ): Intent =
             Intent(context, BattleActivity::class.java).apply {
                 putExtra(POKEMON_ID, pokemonId)
-                putExtra(IS_MY_SELECTION, isMine)
+                val selectionType = if (isMine) SelectionType.MINE else SelectionType.OPPONENT
+                putExtra(SELECTION_TYPE, selectionType)
             }
     }
 }

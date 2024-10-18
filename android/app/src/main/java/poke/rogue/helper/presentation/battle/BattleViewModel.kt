@@ -33,7 +33,7 @@ class BattleViewModel(
     private val battleRepository: BattleRepository,
     private val logger: AnalyticsLogger = analyticsLogger(),
     pokemonId: String? = null,
-    isMySelection: Boolean? = null,
+    selectionType: SelectionType? = null,
 ) : ErrorHandleViewModel(logger),
     BattleNavigationHandler {
     private val _weathers = MutableStateFlow(emptyList<WeatherUiModel>())
@@ -83,7 +83,7 @@ class BattleViewModel(
 
     init {
         initWeathers()
-        handlePokemonSelection(pokemonId, isMySelection)
+        handlePokemonSelection(pokemonId, selectionType)
     }
 
     private suspend fun fetchBattlePredictionResult(): BattlePredictionUiModel {
@@ -114,7 +114,7 @@ class BattleViewModel(
 
     private fun handlePokemonSelection(
         pokemonId: String?,
-        isMySelection: Boolean?,
+        selectionType: SelectionType?,
     ) {
         when {
             pokemonId == null -> {
@@ -122,12 +122,12 @@ class BattleViewModel(
                 fetchSavedOpponentPokemon()
             }
 
-            isMySelection == true -> {
+            selectionType == SelectionType.MINE -> {
                 selectMyPokemon(pokemonId)
                 fetchSavedOpponentPokemon()
             }
 
-            isMySelection == false -> {
+            selectionType == SelectionType.OPPONENT -> {
                 fetchSavedMyPokemon()
                 selectOpponentPokemon(pokemonId)
             }
@@ -247,8 +247,18 @@ class BattleViewModel(
         }
 
     companion object {
-        fun factory(battleRepository: BattleRepository): ViewModelProvider.Factory =
-            BaseViewModelFactory { BattleViewModel(battleRepository) }
+        fun factory(
+            pokemonId: String?,
+            selectionType: SelectionType?,
+            battleRepository: BattleRepository,
+        ): ViewModelProvider.Factory =
+            BaseViewModelFactory {
+                BattleViewModel(
+                    battleRepository = battleRepository,
+                    pokemonId = pokemonId,
+                    selectionType = selectionType,
+                )
+            }
     }
 }
 
