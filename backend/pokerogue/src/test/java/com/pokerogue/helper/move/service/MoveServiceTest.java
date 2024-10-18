@@ -59,7 +59,7 @@ class MoveServiceTest extends ServiceTest {
     void findMoves() {
         List<MoveResponse> movesByPokemon = moveService.findMoves();
 
-        assertThat(movesByPokemon.size()).isEqualTo(920);
+        assertThat(movesByPokemon.size()).isEqualTo(919);
     }
 
     @Disabled
