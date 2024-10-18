@@ -3,6 +3,7 @@ package com.pokerogue.helper.move.service;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
+import com.pokerogue.helper.move.dto.MoveDetailResponse;
 import com.pokerogue.helper.move.dto.MoveResponse;
 import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.LevelMove;
@@ -19,6 +20,12 @@ public class MoveService {
 
     private final PokemonRepository pokemonRepository;
     private final MoveRepository moveRepository;
+
+    public List<MoveResponse> findMoves() {
+        return moveRepository.findAll().stream()
+                .map(MoveResponse::from)
+                .toList();
+    }
 
     public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
         List<Pokemon> pokemons = pokemonRepository.findByPokedexNumber(pokedexNumber);
@@ -51,9 +58,21 @@ public class MoveService {
         return allMoveIds;
     }
 
-    public MoveResponse findMove(String id) {
+    public MoveResponse findMoveInBattle(String id) {
         Move move = findMoveById(id);
         return MoveResponse.from(move);
+    }
+
+    public MoveDetailResponse findMove(String id) {
+        Move move = findMoveById(id);
+        List<String> eggMovePokemonIds = pokemonRepository.findByEggMoveIdsContains(move.getId()).stream()
+                .map(Pokemon::getId)
+                .toList();
+        List<String> levelMovePokemonIds = pokemonRepository.findByLevelMovesMoveId(move.getId()).stream()
+                .map(Pokemon::getId)
+                .toList();
+
+        return MoveDetailResponse.from(move, levelMovePokemonIds, eggMovePokemonIds);
     }
 
     private Move findMoveById(String id) {
