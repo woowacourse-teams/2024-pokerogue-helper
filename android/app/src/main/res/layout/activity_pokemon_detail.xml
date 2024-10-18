@@ -29,7 +29,7 @@
                 app:collapsedTitleTextColor="@color/poke_white"
                 app:contentScrim="@color/poke_black"
                 app:expandedTitleTextColor="@color/white"
-                app:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="@string/dex_title_name"
                 app:titleCollapseMode="scale">
 
@@ -117,7 +117,6 @@
             android:id="@+id/pager_pokemon_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
