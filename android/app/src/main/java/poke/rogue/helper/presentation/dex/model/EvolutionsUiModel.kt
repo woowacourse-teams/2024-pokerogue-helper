@@ -23,7 +23,14 @@ data class EvolutionsUiModel(
 ) {
     constructor(vararg evolutions: SingleEvolutionUiModel) : this(evolutions.toList())
 
-    fun evolutions(depth: Int) = evolutions.filter { it.depth == depth }
+    fun evolutions(): List<EvolutionsUiModel> = listOf(evolutions(0), evolutions(1), evolutions(2), evolutions(3))
+
+    private fun evolutions(depth: Int): EvolutionsUiModel =
+        EvolutionsUiModel(
+            evolutions.filter {
+                it.depth == depth
+            },
+        )
 
     fun hasEvolutionChain(): Boolean = evolutions.size > 1
 

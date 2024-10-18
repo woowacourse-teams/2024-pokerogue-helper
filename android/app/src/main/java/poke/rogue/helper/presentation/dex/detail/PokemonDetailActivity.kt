@@ -125,7 +125,7 @@ class PokemonDetailActivity :
                 progressIndicatorPokemonDetail,
             )
 
-            tvPokemonDetailPokemonName.text =
+            collapsingToolbarLayoutPokemonDetail.title =
                 stringOf(
                     R.string.pokemon_list_poke_name_format,
                     pokemonDetail.pokemon.name,
