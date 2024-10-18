@@ -10,9 +10,11 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-public class ConverterConfig {
+@EnableMongoRepositories(basePackages = {"com.pokerogue"})
+public class DataMongoDbConfig {
 
     @Bean
     public MongoCustomConversions customConversions() {
