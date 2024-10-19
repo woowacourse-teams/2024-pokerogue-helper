@@ -7,7 +7,7 @@ import poke.rogue.helper.databinding.ItemPokemonDetailToBattlePopUpBinding
 
 class BattlePopUpViewHolder(
     private val binding: ItemPokemonDetailToBattlePopUpBinding,
-    private val battlePopUpHandler: BattlePopUpHandler
+    private val battlePopUpHandler: BattlePopUpHandler,
 ) {
     private val itemView: View = binding.root
 
@@ -21,14 +21,18 @@ class BattlePopUpViewHolder(
     }
 
     companion object {
-        fun inflated(parent: ViewGroup, battlePopUpHandler: BattlePopUpHandler): BattlePopUpViewHolder =
+        fun inflated(
+            parent: ViewGroup,
+            battlePopUpHandler: BattlePopUpHandler,
+        ): BattlePopUpViewHolder =
             BattlePopUpViewHolder(
-                binding = ItemPokemonDetailToBattlePopUpBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                ),
-                battlePopUpHandler = battlePopUpHandler
+                binding =
+                    ItemPokemonDetailToBattlePopUpBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false,
+                    ),
+                battlePopUpHandler = battlePopUpHandler,
             )
     }
 }

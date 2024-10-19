@@ -37,7 +37,7 @@ class PokemonDetailActivity :
     private val battlePopupAdapter: PokemonDetailBattlePopupAdapter by lazy {
         PokemonDetailBattlePopupAdapter(
             items = BattlePopUpUiModel.items,
-            battlePopUpHandler = viewModel
+            battlePopUpHandler = viewModel,
         )
     }
 
@@ -81,8 +81,8 @@ class PokemonDetailActivity :
             setBackgroundDrawable(
                 ContextCompat.getDrawable(
                     binding.root.context,
-                    android.R.color.transparent
-                )
+                    android.R.color.transparent,
+                ),
             )
 
             setAdapter(battlePopupAdapter)
@@ -158,7 +158,7 @@ class PokemonDetailActivity :
     // TODO: 예니 여기서 하면 될 Battle Activity 로 이동하면 될 것 같아요
     private fun observeNavigateToBattleEvent() {
         repeatOnStarted {
-            viewModel.navigateToBattleEvent.collect { battleEvent ->
+            viewModel.navigateToPokemonDetailToBattleEvent.collect { battleEvent ->
                 when (battleEvent.battlePopUp) {
                     is MyPokemon -> {
                         Timber.d("내 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")

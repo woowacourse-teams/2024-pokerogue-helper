@@ -9,19 +9,19 @@ sealed class BattlePopUpUiModel(
     @DrawableRes val icon: Int,
 ) {
     companion object {
-        val items = listOf(
-            MyPokemon(
-                R.string.pokemon_detail_to_battle_with_enemy_pop_up_descriptions,
-                R.drawable.ic_pokemon_battle_enemy
-            ),
-            EnemyPokemon(
-                R.string.pokemon_detail_to_battle_with_mine_pop_up_descriptions,
-                R.drawable.ic_pokemon_battle_mine
-            ),
-        )
+        val items =
+            listOf(
+                MyPokemon(
+                    R.string.pokemon_detail_to_battle_with_enemy_pop_up_descriptions,
+                    R.drawable.ic_pokemon_battle_enemy,
+                ),
+                EnemyPokemon(
+                    R.string.pokemon_detail_to_battle_with_mine_pop_up_descriptions,
+                    R.drawable.ic_pokemon_battle_mine,
+                ),
+            )
     }
 }
-
 
 class MyPokemon(description: Int, icon: Int) : BattlePopUpUiModel(description, icon)
 

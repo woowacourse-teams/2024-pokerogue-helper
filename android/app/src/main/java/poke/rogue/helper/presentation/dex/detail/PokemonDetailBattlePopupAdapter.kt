@@ -10,10 +10,16 @@ class PokemonDetailBattlePopupAdapter(
 ) :
     BaseAdapter() {
     override fun getCount(): Int = items.size
+
     override fun getItem(position: Int): Any = items[position]
+
     override fun getItemId(position: Int): Long = position.toLong()
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup,
+    ): View {
         if (convertView != null) {
             return convertView
         }
