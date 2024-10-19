@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -17,6 +19,7 @@ import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.dex.logPokemonDetailToBattle
 
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
@@ -79,13 +82,26 @@ class PokemonDetailViewModel(
 
     override fun navigateToBattle(battlePopUpUiModel: BattlePopUpUiModel) {
         viewModelScope.launch {
+            val successState =
+                uiState
+                    .filterIsInstance<PokemonDetailUiState.Success>()
+                    .first()
+
             _navigateToPokemonDetailToBattleEvent.emit(
                 PokemonDetailToBattleEvent(
                     battlePopUp = battlePopUpUiModel,
-                    // TODO: flow 사용해서 success 인 uiState
-                    pokemon = (uiState as PokemonDetailUiState.Success).pokemon,
+                    pokemon = successState.pokemon,
                 ),
             )
+
+            launch {
+                analyticsLogger().logPokemonDetailToBattle(
+                    PokemonDetailToBattleEvent(
+                        battlePopUp = battlePopUpUiModel,
+                        pokemon = successState.pokemon,
+                    ),
+                )
+            }
         }
     }
 
