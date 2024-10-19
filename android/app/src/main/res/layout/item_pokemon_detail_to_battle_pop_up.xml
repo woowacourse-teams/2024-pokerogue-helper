@@ -7,7 +7,7 @@
 
         <variable
             name="popup"
-            type="poke.rogue.helper.presentation.dex.detail.PopUp" />
+            type="poke.rogue.helper.presentation.dex.detail.BattlePopUpUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_red_20_fill_20_rect"
             android:padding="12dp"
-            android:text="@{popup.content}"
+            android:text="@{popup.description}"
             app:layout_constraintBottom_toBottomOf="@id/iv_pop_up"
             app:layout_constraintEnd_toStartOf="@id/tv_guide_pop_up"
             app:layout_constraintTop_toTopOf="@id/iv_pop_up"
