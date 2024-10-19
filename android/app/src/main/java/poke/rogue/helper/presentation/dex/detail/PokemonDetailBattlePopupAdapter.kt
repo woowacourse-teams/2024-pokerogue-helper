@@ -4,7 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 
-class PokemonDetailBattlePopupAdapter(private val items: List<BattlePopUpUiModel> = BattlePopUpUiModel.items) :
+class PokemonDetailBattlePopupAdapter(
+    private val items: List<BattlePopUpUiModel> = BattlePopUpUiModel.items,
+    private val battlePopUpHandler: BattlePopUpHandler,
+) :
     BaseAdapter() {
     override fun getCount(): Int = items.size
     override fun getItem(position: Int): Any = items[position]
@@ -15,7 +18,7 @@ class PokemonDetailBattlePopupAdapter(private val items: List<BattlePopUpUiModel
             return convertView
         }
 
-        val holder = BattlePopUpViewHolder.inflated(parent)
+        val holder = BattlePopUpViewHolder.inflated(parent, battlePopUpHandler)
         return holder.bind(items[position])
     }
 }
