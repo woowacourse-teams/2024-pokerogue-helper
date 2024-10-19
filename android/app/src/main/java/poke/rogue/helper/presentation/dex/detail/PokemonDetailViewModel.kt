@@ -17,13 +17,14 @@ import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-        PokemonDetailNavigateHandler {
+    PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 
@@ -42,6 +43,9 @@ class PokemonDetailViewModel(
 
     private val _navigateToPokemonDetailEvent = MutableSharedFlow<String>()
     val navigateToPokemonDetailEvent = _navigateToPokemonDetailEvent.asSharedFlow()
+
+    private val _navigateToBattleEvent = MutableSharedFlow<BattleEvent>()
+    val navigateToBattleEvent = _navigateToBattleEvent.asSharedFlow()
 
     fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
@@ -74,8 +78,23 @@ class PokemonDetailViewModel(
         }
     }
 
+    override fun navigateToBattle(battlePopUpUiModel: BattlePopUpUiModel) {
+        viewModelScope.launch {
+            _navigateToBattleEvent.emit(BattleEvent(
+                battlePopUp = battlePopUpUiModel,
+                pokemon = (uiState as PokemonDetailUiState.Success).pokemon // TODO: flow 사용해서 success 인 uiState
+            ))
+        }
+    }
+
     companion object {
         fun factory(dexRepository: DexRepository): ViewModelProvider.Factory =
             BaseViewModelFactory { PokemonDetailViewModel(dexRepository) }
     }
 }
+
+
+data class BattleEvent(
+    val battlePopUp: BattlePopUpUiModel,
+    val pokemon: PokemonUiModel,
+)

@@ -120,12 +120,12 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fab_pokemon_detail_battle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:layout_margin="16dp"
-            android:background="@android:color/transparent"
+            android:layout_margin="@dimen/floating_button_margin"
+            android:backgroundTint="@color/poke_red_20"
             android:contentDescription="@string/battle_title_name"
             android:src="@drawable/icon_home_battle"
             app:tint="@null" />

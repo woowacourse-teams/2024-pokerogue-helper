@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
@@ -21,6 +23,7 @@ import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
+import timber.log.Timber
 
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
@@ -30,6 +33,13 @@ class PokemonDetailActivity :
 
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
+
+    private val battlePopupAdapter: PokemonDetailBattlePopupAdapter by lazy {
+        PokemonDetailBattlePopupAdapter(
+            items = BattlePopUpUiModel.items,
+            battlePopUpHandler = viewModel
+        )
+    }
 
     override val toolbar: Toolbar
         get() = binding.toolbarPokemonDetail
@@ -43,6 +53,7 @@ class PokemonDetailActivity :
 
         initAdapter()
         initObservers()
+        initFloatingActionButton()
     }
 
     private fun initAdapter() {
@@ -63,12 +74,38 @@ class PokemonDetailActivity :
         }.attach()
     }
 
+    private fun initFloatingActionButton() {
+        val listPopupWindow = ListPopupWindow(binding.root.context)
+
+        listPopupWindow.apply {
+            setBackgroundDrawable(
+                ContextCompat.getDrawable(
+                    binding.root.context,
+                    android.R.color.transparent
+                )
+            )
+
+            setAdapter(battlePopupAdapter)
+            anchorView = binding.fabPokemonDetailBattle
+
+            width = ListPopupWindow.MATCH_PARENT
+            height = ListPopupWindow.WRAP_CONTENT
+
+            isModal = true
+        }
+
+        binding.fabPokemonDetailBattle.setOnClickListener {
+            listPopupWindow.show()
+        }
+    }
+
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigateToHomeEvent()
         observeNavigateToAbilityDetailEvent()
         observeNavigateToBiomeDetailEvent()
         observeNavigateToPokemonDetailEvent()
+        observeNavigateToBattleEvent()
     }
 
     private fun observePokemonDetailUi() {
@@ -114,6 +151,25 @@ class PokemonDetailActivity :
         repeatOnStarted {
             viewModel.navigateToPokemonDetailEvent.collect { pokemonId ->
                 startActivity(intent(this, pokemonId))
+            }
+        }
+    }
+
+    // TODO: 예니 여기서 하면 될 Battle Activity 로 이동하면 될 것 같아요
+    private fun observeNavigateToBattleEvent() {
+        repeatOnStarted {
+            viewModel.navigateToBattleEvent.collect { battleEvent ->
+                when (battleEvent.battlePopUp) {
+                    is MyPokemon -> {
+                        Timber.d("내 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
+                        // TODO()
+                    }
+
+                    is EnemyPokemon -> {
+                        Timber.d("상대 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
+                        // TODO()
+                    }
+                }
             }
         }
     }
