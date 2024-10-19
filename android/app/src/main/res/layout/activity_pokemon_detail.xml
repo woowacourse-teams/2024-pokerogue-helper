@@ -9,6 +9,10 @@
             name="eventHandler"
             type="poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler" />
 
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -105,6 +109,7 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout_pokemon_detail"
                 style="@style/TabLayoutStyle"
+                visible="@{!vm.isLoading}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/tab_border_background"
@@ -115,6 +120,7 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager_pokemon_detail"
+            visible="@{!vm.isLoading}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />

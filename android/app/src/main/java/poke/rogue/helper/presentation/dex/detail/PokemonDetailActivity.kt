@@ -50,6 +50,7 @@ class PokemonDetailActivity :
 
         binding.eventHandler = viewModel
         binding.lifecycleOwner = this
+        binding.vm = viewModel
 
         initAdapter()
         initObservers()
