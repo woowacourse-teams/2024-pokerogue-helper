@@ -119,6 +119,17 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/battle_title_name"
+            android:src="@drawable/icon_home_battle"
+            app:tint="@null" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
