@@ -12,6 +12,7 @@ import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.battle.BattleActivity
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.logClickEvent
@@ -61,7 +62,7 @@ class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.la
                     is BiomeDetailUiEvent.NavigateToNextBiomeDetail -> {
                         val biomeId = event.biomeId
                         startActivity<BiomeDetailActivity> {
-                            putExtras(BiomeDetailActivity.intent(this@BiomeDetailActivity, biomeId))
+                            putExtras(intent(this@BiomeDetailActivity, biomeId))
                             analyticsLogger().logClickEvent(NAVIGATE_TO_NEXT_BIOME_DETAIL)
                         }
                     }
@@ -69,6 +70,13 @@ class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.la
                         val pokemonId = event.pokemonId
                         startActivity<PokemonDetailActivity> {
                             putExtras(PokemonDetailActivity.intent(this@BiomeDetailActivity, pokemonId))
+                        }
+                    }
+
+                    is BiomeDetailUiEvent.NavigateToBattle -> {
+                        val pokemonId = event.pokemonId
+                        startActivity<BattleActivity> {
+                            putExtras(BattleActivity.intent(this@BiomeDetailActivity, pokemonId, isMine = false))
                         }
                     }
                 }

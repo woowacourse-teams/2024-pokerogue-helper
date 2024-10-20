@@ -53,6 +53,8 @@
             android:id="@+id/switch_navigation_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="@{vm.isInBattleNavigationMode}"
+            android:onCheckedChanged="@{(buttonView, isChecked) -> vm.changeNavigationMode(isChecked)}"
             android:thumb="@drawable/shape_toggle_thumb"
             app:layout_constraintBottom_toTopOf="@id/tablayout_biome_detail"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
