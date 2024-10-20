@@ -155,14 +155,16 @@ class BattleViewModel(
     private fun selectMyPokemon(pokemonId: String) {
         viewModelScope.launch {
             val (pokemon, skill) = battleRepository.pokemonWithRandomSkill(pokemonId)
-            updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
+            val selectionData = SelectionData.WithSkill(pokemon.toSelectionUi(), skill.toUi())
+            updatePokemonSelection(selectionData)
         }
     }
 
     private fun selectOpponentPokemon(pokemonId: String) {
         viewModelScope.launch {
             val pokemon = battleRepository.pokemon(pokemonId)
-            updateOpponentPokemon(pokemon.toSelectionUi())
+            val selectionData = SelectionData.WithoutSkill(pokemon.toSelectionUi())
+            updatePokemonSelection(selectionData)
         }
     }
 
