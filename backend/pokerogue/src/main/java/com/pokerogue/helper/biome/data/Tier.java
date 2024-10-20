@@ -8,21 +8,23 @@ import lombok.Getter;
 @Getter
 public enum Tier {
 
-    COMMON("보통"),
-    UNCOMMON("드묾"),
-    RARE("레어"),
-    SUPER_RARE("슈퍼 레어"),
-    ULTRA_RARE("울트라 레어"),
-    BOSS("보스"),
-    BOSS_RARE("레어 보스"),
-    BOSS_SUPER_RARE("슈퍼 레어 보스"),
-    BOSS_ULTRA_RARE("슈퍼 울트라 레어 보스"),
+    COMMON("보통", 1),
+    UNCOMMON("드묾", 2),
+    RARE("레어", 3),
+    SUPER_RARE("슈퍼 레어", 4),
+    ULTRA_RARE("울트라 레어", 5),
+    BOSS("보스", 6),
+    BOSS_RARE("레어 보스", 7),
+    BOSS_SUPER_RARE("슈퍼 레어 보스", 8),
+    BOSS_ULTRA_RARE("슈퍼 울트라 레어 보스", 9),
     ;
 
     private final String name;
+    private final int rarity;
 
-    Tier(String name) {
+    Tier(String name, int rarity) {
         this.name = name;
+        this.rarity = rarity;
     }
 
     public boolean isWild() {
