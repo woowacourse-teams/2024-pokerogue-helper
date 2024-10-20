@@ -45,8 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_guide_pop_up"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@null"
-            tools:src="@drawable/ic_pokemon_battle_mine" />
+            tools:src="@drawable/icon_home_battle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
