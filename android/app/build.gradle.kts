@@ -18,7 +18,10 @@ val properties =
 
 android {
     namespace = libs.versions.applicationId.get()
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk =
+        libs.versions.compileSdk
+            .get()
+            .toInt()
     signingConfigs {
         getByName("debug") {
             keyAlias = "androiddebugkey"
@@ -35,10 +38,19 @@ android {
     }
     defaultConfig {
         applicationId = libs.versions.applicationId.get()
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
+        minSdk =
+            libs.versions.minSdk
+                .get()
+                .toInt()
+        targetSdk =
+            libs.versions.targetSdk
+                .get()
+                .toInt()
         versionName = libs.versions.appVersion.get()
-        versionCode = libs.versions.versionCode.get().toInt()
+        versionCode =
+            libs.versions.versionCode
+                .get()
+                .toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["runnerBuilder"] =
             "de.mannodermaus.junit5.AndroidJUnit5Builder"
@@ -174,4 +186,6 @@ dependencies {
     androidTestImplementation(libs.bundles.android.test)
     testRuntimeOnly(libs.junit.vintage.engine)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
+
+    implementation(libs.balloon)
 }
