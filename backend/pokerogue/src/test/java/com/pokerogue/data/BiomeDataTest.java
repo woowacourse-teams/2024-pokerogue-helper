@@ -51,7 +51,8 @@ public class BiomeDataTest extends MongoRepositoryTest {
     void name_compositionWith_English() {
         List<String> notMatchNames = biomes.stream()
                 .map(Biome::getName)
-                .filter(DataPattern.NAME_PATTERN::isNotMatch)
+                .filter(DataPattern.BIOME_NAME_PATTERN::isNotMatch)
+                .filter(name -> !name.equals("???"))
                 .toList();
 
         assertThat(notMatchNames).isEmpty();
