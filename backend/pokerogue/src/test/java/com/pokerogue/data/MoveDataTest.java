@@ -95,7 +95,7 @@ public class MoveDataTest extends MongoRepositoryTest {
     }
 
     @Test
-    @DisplayName("Move의 MoveFlag는 모두 Move Flag Enumd이다")
+    @DisplayName("Move의 MoveFlag는 모두 Move Flag Enum 이다")
     void moveFlag_validateIsMoveFlagEnum() {
         assertThat(moves.stream()
                 .flatMap(move -> move.getFlags().stream())

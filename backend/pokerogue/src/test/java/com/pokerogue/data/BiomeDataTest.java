@@ -48,7 +48,7 @@ public class BiomeDataTest extends MongoRepositoryTest {
 
     @Test
     @DisplayName("Biome의 name은 영어 문자로 이루어져 있다.")
-    void name_compositionWhit_English() {
+    void name_compositionWith_English() {
         List<String> notMatchNames = biomes.stream()
                 .map(Biome::getName)
                 .filter(DataPattern.NAME_PATTERN::isNotMatch)
