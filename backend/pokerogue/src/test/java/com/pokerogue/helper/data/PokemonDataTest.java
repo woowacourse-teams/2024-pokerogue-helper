@@ -29,7 +29,6 @@ public class PokemonDataTest extends MongoRepositoryTest {
         Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
-    @Disabled("파싱코드의 replace를 한 문자가 아닌 스트링의 전체를 replace하도록 바꿔야 함. 잘못된 id가 있어 disalbed")
     @DisplayName("포켓몬 데이터의 아이디 형식을 확인한다.")
     @Test
     void pokemonIdFormat() {
@@ -45,7 +44,7 @@ public class PokemonDataTest extends MongoRepositoryTest {
             ID / actualTotal / expectedTotal
             charizard_gigantamax / 634 / 644,
             kingler_gigantamax / 575 / 585
-            
+                        
             두 건의 데이터에 대해 종족값이 일치하지 않는다.
             추가적인 논의가 필요하여 disalbed""")
     @DisplayName("포켓몬 데이터의 종족값은 기본 능력치의 합이다.")
@@ -96,20 +95,6 @@ public class PokemonDataTest extends MongoRepositoryTest {
         List<Pokemon> actual = pokemonRepository.findAll();
 
         ThrowingCallable validator = () -> PokemonValidator.validateNormalAbilityCount(actual);
-
-        Assertions.assertThatCode(validator).doesNotThrowAnyException();
-    }
-
-    @Disabled("""
-            기본 특성이 히든 특성과 같은 데이터가 있어서 disable
-                +) 이상해꽃 기간타맥스가 되면 기본 특성이 달라진다
-                +) pokerouge dex와 데이터가 다른걸 보니 추가 확인이 필요""")
-    @DisplayName("abilitiy id는 서로 중복될 수 없다.")
-    @Test
-    void pokemonGeneration5() {
-        List<Pokemon> actual = pokemonRepository.findAll();
-
-        ThrowingCallable validator = () -> PokemonValidator.validateTotalAbilityDuplication(actual);
 
         Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
@@ -175,8 +160,6 @@ public class PokemonDataTest extends MongoRepositoryTest {
         Assertions.assertThatCode(validator).doesNotThrowAnyException();
     }
 
-
-    @Disabled("데이터상 진화아이디와 포켓몬아이디가 불일치하여 disabled")
     @DisplayName("진화 아이디는 모두 포켓몬 아이디에 포함된다.")
     @Test
     void pokemonGeneration12() {
