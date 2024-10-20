@@ -62,19 +62,18 @@ class BattleViewModel(
     val navigateToSelection = _navigateToSelection.asSharedFlow()
 
     val battleResult: StateFlow<BattleResultUiState> =
-        selectedState
-            .map {
-                if (it.allSelected) {
-                    val result = fetchBattlePredictionResult()
-                    BattleResultUiState.Success(result)
-                } else {
-                    BattleResultUiState.Idle
-                }
-            }.stateIn(
-                viewModelScope + errorHandler,
-                SharingStarted.WhileSubscribed(5000),
-                BattleResultUiState.Idle,
-            )
+        selectedState.map {
+            if (it.allSelected) {
+                val result = fetchBattlePredictionResult()
+                BattleResultUiState.Success(result)
+            } else {
+                BattleResultUiState.Idle
+            }
+        }.stateIn(
+            viewModelScope + errorHandler,
+            SharingStarted.WhileSubscribed(5000),
+            BattleResultUiState.Idle,
+        )
 
     val isBattleFetchSuccessful =
         battleResult
@@ -95,13 +94,12 @@ class BattleViewModel(
             val opponentPokemonId =
                 requireNotNull(opponentPokemon.selectedData()?.id) { "상대 포켓몬은 null일 수 없습니다." }
 
-            return battleRepository
-                .calculatedBattlePrediction(
-                    weatherId = weatherId,
-                    myPokemonId = myPokemonId,
-                    mySkillId = mySkillId,
-                    opponentPokemonId = opponentPokemonId,
-                ).toUi()
+            return battleRepository.calculatedBattlePrediction(
+                weatherId = weatherId,
+                myPokemonId = myPokemonId,
+                mySkillId = mySkillId,
+                opponentPokemonId = opponentPokemonId,
+            ).toUi()
         }
     }
 

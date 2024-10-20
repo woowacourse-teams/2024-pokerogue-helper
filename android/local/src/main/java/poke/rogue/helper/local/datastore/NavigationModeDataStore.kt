@@ -9,9 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.mapNotNull
 
-class NavigationModeDataStore(
-    private val context: Context,
-) {
+class NavigationModeDataStore(private val context: Context) {
     private val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = NAVIGATION_MODE_PREFERENCE_NAME)
 
     suspend fun saveNavigationMode(isBattleNavigationMode: Boolean) {

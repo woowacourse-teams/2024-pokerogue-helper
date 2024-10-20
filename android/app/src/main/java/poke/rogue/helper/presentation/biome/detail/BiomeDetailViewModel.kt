@@ -57,14 +57,13 @@ class BiomeDetailViewModel(
     val uiEvent = _uiEvent.asEventFlow()
 
     val isLoading: StateFlow<Boolean> =
-        uiState
-            .map {
-                it == BiomeDetailUiState.Default
-            }.stateIn(
-                viewModelScope + errorHandler,
-                SharingStarted.WhileSubscribed(5000),
-                true,
-            )
+        uiState.map {
+            it == BiomeDetailUiState.Default
+        }.stateIn(
+            viewModelScope + errorHandler,
+            SharingStarted.WhileSubscribed(5000),
+            true,
+        )
 
     init {
         viewModelScope.launch {
@@ -118,17 +117,11 @@ class BiomeDetailViewModel(
 }
 
 sealed interface BiomeDetailUiEvent {
-    data class NavigateToNextBiomeDetail(
-        val biomeId: String,
-    ) : BiomeDetailUiEvent
+    data class NavigateToNextBiomeDetail(val biomeId: String) : BiomeDetailUiEvent
 
-    data class NavigateToPokemonDetail(
-        val pokemonId: String,
-    ) : BiomeDetailUiEvent
+    data class NavigateToPokemonDetail(val pokemonId: String) : BiomeDetailUiEvent
 
-    data class NavigateToBattle(
-        val pokemonId: String,
-    ) : BiomeDetailUiEvent
+    data class NavigateToBattle(val pokemonId: String) : BiomeDetailUiEvent
 }
 
 interface BiomeDetailHandler {
