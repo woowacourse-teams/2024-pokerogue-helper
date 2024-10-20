@@ -19,11 +19,18 @@ class LocalDexDataSource(
             logger.logError(it, "LocalDexDataSource - pokemons() 에서 발생")
         }.getOrThrow()
 
-    suspend fun savePokemons(pokemons: List<Pokemon>) =
+    suspend fun savePokemons(pokemons: List<Pokemon>): Unit =
         runCatching {
             pokemonDao.savePokemons(pokemons.map { it.toEntity() })
         }.onFailure {
             logger.logError(it, "LocalDexDataSource - savePokemons() 에서 발생")
+        }.getOrThrow()
+
+    suspend fun clear(): Unit =
+        runCatching {
+            pokemonDao.clear()
+        }.onFailure {
+            logger.logError(it, "LocalDexDataSource - clearPokemons() 에서 발생")
         }.getOrThrow()
 
     companion object {
