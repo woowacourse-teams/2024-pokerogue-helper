@@ -17,8 +17,7 @@ import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
-class BiomeDetailActivity :
-    ErrorHandleActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {
+class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {
     private lateinit var pagerAdapter: BiomeDetailPagerAdapter
     private val viewModel: BiomeDetailViewModel by viewModels {
         BiomeDetailViewModel.factory(

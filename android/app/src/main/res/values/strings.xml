@@ -98,6 +98,7 @@
         <item>야생</item>
         <item>다음 바이옴</item>
     </string-array>
+    <string name="biome_navigation_mode_setting">배틀 모드 설정</string>
 
     <!--    biome detail gym -->
     <string name="biome_detail_gym">등장하는 체육관 관장이 없어요</string>
