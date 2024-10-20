@@ -37,6 +37,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
+            android:id="@+id/tv_navigation_mode"
             style="@style/TextAppearance.Poke.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
