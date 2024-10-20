@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
@@ -65,6 +66,15 @@ class BiomeDetailViewModel(
                 true,
             )
 
+    init {
+        viewModelScope.launch {
+            biomeRepository
+                .isBattleNavigationModeStream()
+                .firstOrNull()
+                ?.let { _isInBattleNavigationMode.value = it }
+        }
+    }
+
     fun init(id: String) {
         if (id.isBlank()) return handlePokemonError(IllegalArgumentException("biomeId is blank"))
         biomeId.value = id
@@ -72,6 +82,9 @@ class BiomeDetailViewModel(
 
     fun changeNavigationMode(isBattleNavigationMode: Boolean) {
         _isInBattleNavigationMode.value = isBattleNavigationMode
+        viewModelScope.launch {
+            biomeRepository.saveNavigationMode(isBattleNavigationMode)
+        }
     }
 
     override fun navigateToBiomeDetail(id: String) {

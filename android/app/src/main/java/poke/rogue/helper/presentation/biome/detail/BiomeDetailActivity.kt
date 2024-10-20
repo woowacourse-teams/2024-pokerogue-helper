@@ -22,7 +22,7 @@ class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.la
     private lateinit var pagerAdapter: BiomeDetailPagerAdapter
     private val viewModel: BiomeDetailViewModel by viewModels {
         BiomeDetailViewModel.factory(
-            DefaultBiomeRepository.instance(),
+            DefaultBiomeRepository.instance(applicationContext),
             analyticsLogger(),
         )
     }
