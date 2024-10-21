@@ -253,14 +253,14 @@ class BattleViewModel(
             pokemonId: String?,
             selectionType: SelectionType?,
             battleRepository: BattleRepository,
-            pokemonRepository: DexRepository
+            pokemonRepository: DexRepository,
         ): ViewModelProvider.Factory =
             BaseViewModelFactory {
                 BattleViewModel(
                     battleRepository = battleRepository,
                     pokemonId = pokemonId,
                     selectionType = selectionType,
-                    pokemonRepository = pokemonRepository
+                    pokemonRepository = pokemonRepository,
                 )
             }
     }
