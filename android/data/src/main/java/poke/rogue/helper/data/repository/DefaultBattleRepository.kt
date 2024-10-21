@@ -80,7 +80,8 @@ class DefaultBattleRepository(
 
     override suspend fun pokemonWithSkill(pokemonId: String): PokemonWithSkill {
         val pokemon = pokemonRepository.pokemon(pokemonId)
-        val skill = availableSkills(pokemon.dexNumber).firstOrNull()
+        val skill =
+            availableSkills(pokemon.dexNumber).firstOrNull()
                 ?: error("배정 가능한 스킬이 존재 하지 않습니다. - dexNumber : ${pokemon.dexNumber}")
         return PokemonWithSkill(pokemon, skill)
     }
