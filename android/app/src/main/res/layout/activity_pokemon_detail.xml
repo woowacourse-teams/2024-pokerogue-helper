@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/floating_button_margin"
-            android:backgroundTint="@color/poke_red_20"
+            android:backgroundTint="@color/poke_grey_65"
             android:contentDescription="@string/battle_title_name"
             android:src="@drawable/icon_home_battle"
             app:tint="@null" />

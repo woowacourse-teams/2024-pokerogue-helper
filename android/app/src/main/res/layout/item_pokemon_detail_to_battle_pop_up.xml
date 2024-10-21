@@ -16,37 +16,30 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
 
-        <TextView
-            android:id="@+id/tv_guide_pop_up"
-            onSingleClick="@{() -> battlePopUpHandler.navigateToBattle(battlePopUp)}"
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/efab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_red_20_fill_20_rect"
-            android:padding="12dp"
-            android:text="@{battlePopUp.description}"
-            app:layout_constraintBottom_toBottomOf="@id/iv_pop_up"
-            app:layout_constraintEnd_toStartOf="@id/tv_guide_pop_up"
-            app:layout_constraintTop_toTopOf="@id/iv_pop_up"
-            tools:text="내 포켓몬으로 배틀" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/iv_pop_up"
-            imageRes="@{battlePopUp.icon}"
-            android:onClick="@{() -> battlePopUpHandler.navigateToBattle(battlePopUp)}"
-            android:layout_width="@dimen/floating_button_normal_size"
-            android:layout_height="@dimen/floating_button_normal_size"
             android:layout_marginHorizontal="@dimen/floating_button_margin"
             android:layout_marginBottom="@dimen/floating_button_margin"
-            android:backgroundTint="@color/poke_red_20"
-            android:scaleType="fitXY"
+            android:backgroundTint="@color/poke_grey_65"
+            android:minHeight="36dp"
+            android:onClick="@{() -> battlePopUpHandler.navigateToBattle(battlePopUp)}"
+            android:text="@{battlePopUp.description}"
+            app:iconGravity="end"
+            app:iconTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_guide_pop_up"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/icon_home_battle" />
+            app:strokeColor="@color/poke_white"
+            app:strokeWidth="1dp"
+            tools:icon="@drawable/icon_home_battle"
+            tools:text="내 포켓몬으로 배틀" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+

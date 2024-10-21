@@ -15,6 +15,8 @@ class BattlePopUpViewHolder(
         with(binding) {
             battlePopUp = item
             battlePopUpHandler = this@BattlePopUpViewHolder.battlePopUpHandler
+            efab.icon = itemView.context.getDrawable(item.icon)
+            executePendingBindings()
         }
 
         return itemView

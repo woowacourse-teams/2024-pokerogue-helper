@@ -13,11 +13,11 @@ sealed class BattlePopUpUiModel(
             listOf(
                 EnemyPokemon(
                     R.string.pokemon_detail_to_battle_with_enemy_pop_up_descriptions,
-                    R.drawable.icon_home_battle,
+                    R.drawable.ic_pokemon_battle_enemy,
                 ),
                 MyPokemon(
                     R.string.pokemon_detail_to_battle_with_mine_pop_up_descriptions,
-                    R.drawable.icon_home_battle,
+                    R.drawable.ic_pokemon_battle_mine,
                 ),
             )
     }
