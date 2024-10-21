@@ -7,6 +7,9 @@ public class DatabaseVersionResponse {
 
     private int currentVersion;
 
+    private DatabaseVersionResponse() {
+    }
+
     public DatabaseVersionResponse(DatabaseVersion databaseVersion) {
         this.currentVersion = databaseVersion.getVersion();
     }
