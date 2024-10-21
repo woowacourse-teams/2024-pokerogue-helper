@@ -49,16 +49,16 @@ class BattleViewModel(
             battleRepository.weatherStream(),
             weathers,
         ) { weather, weathers ->
-            if (weather == null || weathers.isEmpty()) return@combine null
-            if (weathers.any { it.id == weather.id }.not()) return@combine null
-            val selectedWeather = weathers.first { it.id == weather.id }
-            // update selected weather
+            if (weathers.isEmpty()) return@combine null
+            val selectedWeather =
+                weather?.toUi()?.let { uiWeather -> weathers.find { it.id == uiWeather.id } }
+                    ?: weathers.first()
+
             _selectedState.value =
                 selectedState.value.copy(weather = BattleSelectionUiState.Selected(selectedWeather))
-            // return position
-            weathers.indexOfFirst { it.id == weather.id }
-        }.filterNotNull()
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+
+            weathers.indexOfFirst { it.id == selectedWeather.id }
+        }.filterNotNull().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 
     private val _navigateToSelection = MutableSharedFlow<SelectionNavigationData>()
     val navigateToSelection = _navigateToSelection.asSharedFlow()
