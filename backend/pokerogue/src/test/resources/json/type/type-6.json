@@ -1,0 +1,311 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "ground",
+        "url": "https://pokeapi.co/api/v2/type/5/"
+      },
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      },
+      {
+        "name": "water",
+        "url": "https://pokeapi.co/api/v2/type/11/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "flying",
+        "url": "https://pokeapi.co/api/v2/type/3/"
+      },
+      {
+        "name": "bug",
+        "url": "https://pokeapi.co/api/v2/type/7/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      },
+      {
+        "name": "ice",
+        "url": "https://pokeapi.co/api/v2/type/15/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "normal",
+        "url": "https://pokeapi.co/api/v2/type/1/"
+      },
+      {
+        "name": "flying",
+        "url": "https://pokeapi.co/api/v2/type/3/"
+      },
+      {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "ground",
+        "url": "https://pokeapi.co/api/v2/type/5/"
+      },
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      }
+    ],
+    "no_damage_from": [],
+    "no_damage_to": []
+  },
+  "game_indices": [
+    {
+      "game_index": 5,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 5,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 5,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 5,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 5,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 5,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 6,
+  "move_damage_class": {
+    "name": "physical",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/2/"
+  },
+  "moves": [
+    {
+      "name": "rock-throw",
+      "url": "https://pokeapi.co/api/v2/move/88/"
+    },
+    {
+      "name": "rock-slide",
+      "url": "https://pokeapi.co/api/v2/move/157/"
+    },
+    {
+      "name": "sandstorm",
+      "url": "https://pokeapi.co/api/v2/move/201/"
+    },
+    {
+      "name": "rollout",
+      "url": "https://pokeapi.co/api/v2/move/205/"
+    },
+    {
+      "name": "ancient-power",
+      "url": "https://pokeapi.co/api/v2/move/246/"
+    },
+    {
+      "name": "rock-tomb",
+      "url": "https://pokeapi.co/api/v2/move/317/"
+    },
+    {
+      "name": "rock-blast",
+      "url": "https://pokeapi.co/api/v2/move/350/"
+    },
+    {
+      "name": "rock-polish",
+      "url": "https://pokeapi.co/api/v2/move/397/"
+    },
+    {
+      "name": "power-gem",
+      "url": "https://pokeapi.co/api/v2/move/408/"
+    },
+    {
+      "name": "rock-wrecker",
+      "url": "https://pokeapi.co/api/v2/move/439/"
+    },
+    {
+      "name": "stone-edge",
+      "url": "https://pokeapi.co/api/v2/move/444/"
+    },
+    {
+      "name": "stealth-rock",
+      "url": "https://pokeapi.co/api/v2/move/446/"
+    },
+    {
+      "name": "head-smash",
+      "url": "https://pokeapi.co/api/v2/move/457/"
+    },
+    {
+      "name": "wide-guard",
+      "url": "https://pokeapi.co/api/v2/move/469/"
+    },
+    {
+      "name": "smack-down",
+      "url": "https://pokeapi.co/api/v2/move/479/"
+    },
+    {
+      "name": "diamond-storm",
+      "url": "https://pokeapi.co/api/v2/move/591/"
+    },
+    {
+      "name": "continental-crush--physical",
+      "url": "https://pokeapi.co/api/v2/move/632/"
+    },
+    {
+      "name": "continental-crush--special",
+      "url": "https://pokeapi.co/api/v2/move/633/"
+    },
+    {
+      "name": "accelerock",
+      "url": "https://pokeapi.co/api/v2/move/709/"
+    },
+    {
+      "name": "splintered-stormshards",
+      "url": "https://pokeapi.co/api/v2/move/727/"
+    },
+    {
+      "name": "tar-shot",
+      "url": "https://pokeapi.co/api/v2/move/749/"
+    },
+    {
+      "name": "max-rockfall",
+      "url": "https://pokeapi.co/api/v2/move/770/"
+    },
+    {
+      "name": "meteor-beam",
+      "url": "https://pokeapi.co/api/v2/move/800/"
+    },
+    {
+      "name": "stone-axe",
+      "url": "https://pokeapi.co/api/v2/move/830/"
+    },
+    {
+      "name": "salt-cure",
+      "url": "https://pokeapi.co/api/v2/move/864/"
+    },
+    {
+      "name": "mighty-cleave",
+      "url": "https://pokeapi.co/api/v2/move/910/"
+    }
+  ],
+  "name": "rock",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "いわ"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "바위"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "岩石"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Roche"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Gestein"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Roca"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Roccia"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Rock"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "いわ"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "岩石"
+    }
+  ],
+  "past_damage_relations": []
+}

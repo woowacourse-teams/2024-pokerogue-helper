@@ -1,0 +1,320 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      },
+      {
+        "name": "electric",
+        "url": "https://pokeapi.co/api/v2/type/13/"
+      },
+      {
+        "name": "ice",
+        "url": "https://pokeapi.co/api/v2/type/15/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "bug",
+        "url": "https://pokeapi.co/api/v2/type/7/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "bug",
+        "url": "https://pokeapi.co/api/v2/type/7/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      },
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      },
+      {
+        "name": "electric",
+        "url": "https://pokeapi.co/api/v2/type/13/"
+      }
+    ],
+    "no_damage_from": [
+      {
+        "name": "ground",
+        "url": "https://pokeapi.co/api/v2/type/5/"
+      }
+    ],
+    "no_damage_to": []
+  },
+  "game_indices": [
+    {
+      "game_index": 2,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 2,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 2,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 2,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 2,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 2,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 3,
+  "move_damage_class": {
+    "name": "physical",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/2/"
+  },
+  "moves": [
+    {
+      "name": "gust",
+      "url": "https://pokeapi.co/api/v2/move/16/"
+    },
+    {
+      "name": "wing-attack",
+      "url": "https://pokeapi.co/api/v2/move/17/"
+    },
+    {
+      "name": "fly",
+      "url": "https://pokeapi.co/api/v2/move/19/"
+    },
+    {
+      "name": "peck",
+      "url": "https://pokeapi.co/api/v2/move/64/"
+    },
+    {
+      "name": "drill-peck",
+      "url": "https://pokeapi.co/api/v2/move/65/"
+    },
+    {
+      "name": "mirror-move",
+      "url": "https://pokeapi.co/api/v2/move/119/"
+    },
+    {
+      "name": "sky-attack",
+      "url": "https://pokeapi.co/api/v2/move/143/"
+    },
+    {
+      "name": "aeroblast",
+      "url": "https://pokeapi.co/api/v2/move/177/"
+    },
+    {
+      "name": "feather-dance",
+      "url": "https://pokeapi.co/api/v2/move/297/"
+    },
+    {
+      "name": "air-cutter",
+      "url": "https://pokeapi.co/api/v2/move/314/"
+    },
+    {
+      "name": "aerial-ace",
+      "url": "https://pokeapi.co/api/v2/move/332/"
+    },
+    {
+      "name": "bounce",
+      "url": "https://pokeapi.co/api/v2/move/340/"
+    },
+    {
+      "name": "roost",
+      "url": "https://pokeapi.co/api/v2/move/355/"
+    },
+    {
+      "name": "pluck",
+      "url": "https://pokeapi.co/api/v2/move/365/"
+    },
+    {
+      "name": "tailwind",
+      "url": "https://pokeapi.co/api/v2/move/366/"
+    },
+    {
+      "name": "air-slash",
+      "url": "https://pokeapi.co/api/v2/move/403/"
+    },
+    {
+      "name": "brave-bird",
+      "url": "https://pokeapi.co/api/v2/move/413/"
+    },
+    {
+      "name": "defog",
+      "url": "https://pokeapi.co/api/v2/move/432/"
+    },
+    {
+      "name": "chatter",
+      "url": "https://pokeapi.co/api/v2/move/448/"
+    },
+    {
+      "name": "sky-drop",
+      "url": "https://pokeapi.co/api/v2/move/507/"
+    },
+    {
+      "name": "acrobatics",
+      "url": "https://pokeapi.co/api/v2/move/512/"
+    },
+    {
+      "name": "hurricane",
+      "url": "https://pokeapi.co/api/v2/move/542/"
+    },
+    {
+      "name": "oblivion-wing",
+      "url": "https://pokeapi.co/api/v2/move/613/"
+    },
+    {
+      "name": "dragon-ascent",
+      "url": "https://pokeapi.co/api/v2/move/620/"
+    },
+    {
+      "name": "supersonic-skystrike--physical",
+      "url": "https://pokeapi.co/api/v2/move/626/"
+    },
+    {
+      "name": "supersonic-skystrike--special",
+      "url": "https://pokeapi.co/api/v2/move/627/"
+    },
+    {
+      "name": "beak-blast",
+      "url": "https://pokeapi.co/api/v2/move/690/"
+    },
+    {
+      "name": "floaty-fall",
+      "url": "https://pokeapi.co/api/v2/move/731/"
+    },
+    {
+      "name": "max-airstream",
+      "url": "https://pokeapi.co/api/v2/move/766/"
+    },
+    {
+      "name": "dual-wingbeat",
+      "url": "https://pokeapi.co/api/v2/move/814/"
+    },
+    {
+      "name": "bleakwind-storm",
+      "url": "https://pokeapi.co/api/v2/move/846/"
+    }
+  ],
+  "name": "flying",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "ひこう"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "비행"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "飛行"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Vol"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Flug"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Volador"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Volante"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Flying"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "ひこう"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "飞行"
+    }
+  ],
+  "past_damage_relations": []
+}

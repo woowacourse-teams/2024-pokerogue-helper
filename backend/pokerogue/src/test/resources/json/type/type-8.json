@@ -1,0 +1,437 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "ghost",
+        "url": "https://pokeapi.co/api/v2/type/8/"
+      },
+      {
+        "name": "dark",
+        "url": "https://pokeapi.co/api/v2/type/17/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "ghost",
+        "url": "https://pokeapi.co/api/v2/type/8/"
+      },
+      {
+        "name": "psychic",
+        "url": "https://pokeapi.co/api/v2/type/14/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      },
+      {
+        "name": "bug",
+        "url": "https://pokeapi.co/api/v2/type/7/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "dark",
+        "url": "https://pokeapi.co/api/v2/type/17/"
+      }
+    ],
+    "no_damage_from": [
+      {
+        "name": "normal",
+        "url": "https://pokeapi.co/api/v2/type/1/"
+      },
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      }
+    ],
+    "no_damage_to": [
+      {
+        "name": "normal",
+        "url": "https://pokeapi.co/api/v2/type/1/"
+      }
+    ]
+  },
+  "game_indices": [
+    {
+      "game_index": 8,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 8,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 7,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 7,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 7,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 7,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 8,
+  "move_damage_class": {
+    "name": "physical",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/2/"
+  },
+  "moves": [
+    {
+      "name": "night-shade",
+      "url": "https://pokeapi.co/api/v2/move/101/"
+    },
+    {
+      "name": "confuse-ray",
+      "url": "https://pokeapi.co/api/v2/move/109/"
+    },
+    {
+      "name": "lick",
+      "url": "https://pokeapi.co/api/v2/move/122/"
+    },
+    {
+      "name": "nightmare",
+      "url": "https://pokeapi.co/api/v2/move/171/"
+    },
+    {
+      "name": "curse",
+      "url": "https://pokeapi.co/api/v2/move/174/"
+    },
+    {
+      "name": "spite",
+      "url": "https://pokeapi.co/api/v2/move/180/"
+    },
+    {
+      "name": "destiny-bond",
+      "url": "https://pokeapi.co/api/v2/move/194/"
+    },
+    {
+      "name": "shadow-ball",
+      "url": "https://pokeapi.co/api/v2/move/247/"
+    },
+    {
+      "name": "grudge",
+      "url": "https://pokeapi.co/api/v2/move/288/"
+    },
+    {
+      "name": "astonish",
+      "url": "https://pokeapi.co/api/v2/move/310/"
+    },
+    {
+      "name": "shadow-punch",
+      "url": "https://pokeapi.co/api/v2/move/325/"
+    },
+    {
+      "name": "shadow-claw",
+      "url": "https://pokeapi.co/api/v2/move/421/"
+    },
+    {
+      "name": "shadow-sneak",
+      "url": "https://pokeapi.co/api/v2/move/425/"
+    },
+    {
+      "name": "ominous-wind",
+      "url": "https://pokeapi.co/api/v2/move/466/"
+    },
+    {
+      "name": "shadow-force",
+      "url": "https://pokeapi.co/api/v2/move/467/"
+    },
+    {
+      "name": "hex",
+      "url": "https://pokeapi.co/api/v2/move/506/"
+    },
+    {
+      "name": "phantom-force",
+      "url": "https://pokeapi.co/api/v2/move/566/"
+    },
+    {
+      "name": "trick-or-treat",
+      "url": "https://pokeapi.co/api/v2/move/567/"
+    },
+    {
+      "name": "never-ending-nightmare--physical",
+      "url": "https://pokeapi.co/api/v2/move/636/"
+    },
+    {
+      "name": "never-ending-nightmare--special",
+      "url": "https://pokeapi.co/api/v2/move/637/"
+    },
+    {
+      "name": "spirit-shackle",
+      "url": "https://pokeapi.co/api/v2/move/662/"
+    },
+    {
+      "name": "sinister-arrow-raid",
+      "url": "https://pokeapi.co/api/v2/move/695/"
+    },
+    {
+      "name": "soul-stealing-7-star-strike",
+      "url": "https://pokeapi.co/api/v2/move/699/"
+    },
+    {
+      "name": "shadow-bone",
+      "url": "https://pokeapi.co/api/v2/move/708/"
+    },
+    {
+      "name": "spectral-thief",
+      "url": "https://pokeapi.co/api/v2/move/712/"
+    },
+    {
+      "name": "moongeist-beam",
+      "url": "https://pokeapi.co/api/v2/move/714/"
+    },
+    {
+      "name": "menacing-moonraze-maelstrom",
+      "url": "https://pokeapi.co/api/v2/move/725/"
+    },
+    {
+      "name": "max-phantasm",
+      "url": "https://pokeapi.co/api/v2/move/762/"
+    },
+    {
+      "name": "poltergeist",
+      "url": "https://pokeapi.co/api/v2/move/809/"
+    },
+    {
+      "name": "astral-barrage",
+      "url": "https://pokeapi.co/api/v2/move/825/"
+    },
+    {
+      "name": "bitter-malice",
+      "url": "https://pokeapi.co/api/v2/move/841/"
+    },
+    {
+      "name": "infernal-parade",
+      "url": "https://pokeapi.co/api/v2/move/844/"
+    },
+    {
+      "name": "last-respects",
+      "url": "https://pokeapi.co/api/v2/move/854/"
+    },
+    {
+      "name": "rage-fist",
+      "url": "https://pokeapi.co/api/v2/move/889/"
+    }
+  ],
+  "name": "ghost",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "ゴースト"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "고스트"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "幽靈"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Spectre"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Geist"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Fantasma"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Spettro"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Ghost"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "ゴースト"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "幽灵"
+    }
+  ],
+  "past_damage_relations": [
+    {
+      "damage_relations": {
+        "double_damage_from": [
+          {
+            "name": "ghost",
+            "url": "https://pokeapi.co/api/v2/type/8/"
+          }
+        ],
+        "double_damage_to": [
+          {
+            "name": "ghost",
+            "url": "https://pokeapi.co/api/v2/type/8/"
+          }
+        ],
+        "half_damage_from": [
+          {
+            "name": "poison",
+            "url": "https://pokeapi.co/api/v2/type/4/"
+          },
+          {
+            "name": "bug",
+            "url": "https://pokeapi.co/api/v2/type/7/"
+          }
+        ],
+        "half_damage_to": [],
+        "no_damage_from": [
+          {
+            "name": "normal",
+            "url": "https://pokeapi.co/api/v2/type/1/"
+          },
+          {
+            "name": "fighting",
+            "url": "https://pokeapi.co/api/v2/type/2/"
+          }
+        ],
+        "no_damage_to": [
+          {
+            "name": "normal",
+            "url": "https://pokeapi.co/api/v2/type/1/"
+          },
+          {
+            "name": "psychic",
+            "url": "https://pokeapi.co/api/v2/type/14/"
+          }
+        ]
+      },
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "damage_relations": {
+        "double_damage_from": [
+          {
+            "name": "ghost",
+            "url": "https://pokeapi.co/api/v2/type/8/"
+          },
+          {
+            "name": "dark",
+            "url": "https://pokeapi.co/api/v2/type/17/"
+          }
+        ],
+        "double_damage_to": [
+          {
+            "name": "ghost",
+            "url": "https://pokeapi.co/api/v2/type/8/"
+          },
+          {
+            "name": "psychic",
+            "url": "https://pokeapi.co/api/v2/type/14/"
+          }
+        ],
+        "half_damage_from": [
+          {
+            "name": "poison",
+            "url": "https://pokeapi.co/api/v2/type/4/"
+          },
+          {
+            "name": "bug",
+            "url": "https://pokeapi.co/api/v2/type/7/"
+          }
+        ],
+        "half_damage_to": [
+          {
+            "name": "dark",
+            "url": "https://pokeapi.co/api/v2/type/17/"
+          },
+          {
+            "name": "steel",
+            "url": "https://pokeapi.co/api/v2/type/9/"
+          }
+        ],
+        "no_damage_from": [
+          {
+            "name": "normal",
+            "url": "https://pokeapi.co/api/v2/type/1/"
+          },
+          {
+            "name": "fighting",
+            "url": "https://pokeapi.co/api/v2/type/2/"
+          }
+        ],
+        "no_damage_to": [
+          {
+            "name": "normal",
+            "url": "https://pokeapi.co/api/v2/type/1/"
+          }
+        ]
+      },
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+[submodule "backend/pokerogue/src/main/resources"]
+	path = backend/pokerogue/src/main/resources
+	url = https://github.com/team-timmyroom/be-config

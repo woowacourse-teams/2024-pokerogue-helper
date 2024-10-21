@@ -1,0 +1,847 @@
+{
+  "base_happiness": 70,
+  "capture_rate": 75,
+  "color": {
+    "name": "red",
+    "url": "https://pokeapi.co/api/v2/pokemon-color/8/"
+  },
+  "egg_groups": [
+    {
+      "name": "bug",
+      "url": "https://pokeapi.co/api/v2/egg-group/3/"
+    }
+  ],
+  "evolution_chain": {
+    "url": "https://pokeapi.co/api/v2/evolution-chain/95/"
+  },
+  "evolves_from_species": null,
+  "flavor_text_entries": [
+    {
+      "flavor_text": "If it flaps its\nwings really fast,\nit can generate\fshock waves that\nwill shatter win­\ndows in the area.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "gold",
+        "url": "https://pokeapi.co/api/v2/version/4/"
+      }
+    },
+    {
+      "flavor_text": "Its large eyes can\nscan 360 degrees.\nIt looks in all\fdirections to seek\nout insects as its\nprey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "silver",
+        "url": "https://pokeapi.co/api/v2/version/5/"
+      }
+    },
+    {
+      "flavor_text": "It can see in all\ndirections without\nmoving its big\feyes, helping it\nspot attackers and\nfood right away.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "crystal",
+        "url": "https://pokeapi.co/api/v2/version/6/"
+      }
+    },
+    {
+      "flavor_text": "YANMA is capable of seeing 360 degrees\nwithout having to move its eyes.\nIt is a great flier that is adept at\fmaking sudden stops and turning midair.\nThis POKéMON uses its flying ability to\nquickly chase down targeted prey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "ruby",
+        "url": "https://pokeapi.co/api/v2/version/7/"
+      }
+    },
+    {
+      "flavor_text": "YANMA is capable of seeing 360 degrees\nwithout having to move its eyes.\nIt is a great flier that is adept at\fmaking sudden stops and turning midair.\nThis POKéMON uses its flying ability to\nquickly chase down targeted prey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "sapphire",
+        "url": "https://pokeapi.co/api/v2/version/8/"
+      }
+    },
+    {
+      "flavor_text": "It can see 360 degrees without moving\nits eyes. It is a great flier capable of\nmaking sudden stops and turning midair to\nquickly chase down targeted prey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "emerald",
+        "url": "https://pokeapi.co/api/v2/version/9/"
+      }
+    },
+    {
+      "flavor_text": "Its large eyes can scan 360 degrees.\nIt looks in all directions to seek out\ninsects as its prey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "firered",
+        "url": "https://pokeapi.co/api/v2/version/10/"
+      }
+    },
+    {
+      "flavor_text": "If it flaps its wings really fast, it can\ngenerate shock waves that will shatter\nwindows in the area.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "leafgreen",
+        "url": "https://pokeapi.co/api/v2/version/11/"
+      }
+    },
+    {
+      "flavor_text": "Its eyes can see 360 degrees\nwithout moving its head. It won’t\nmiss prey--even those behind it.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "diamond",
+        "url": "https://pokeapi.co/api/v2/version/12/"
+      }
+    },
+    {
+      "flavor_text": "Its eyes can see 360 degrees\nwithout moving its head. It won’t\nmiss prey--even those behind it.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "pearl",
+        "url": "https://pokeapi.co/api/v2/version/13/"
+      }
+    },
+    {
+      "flavor_text": "It can hover in one spot by\nflapping its wings at high speed. It\nflits about to guard its territory.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "platinum",
+        "url": "https://pokeapi.co/api/v2/version/14/"
+      }
+    },
+    {
+      "flavor_text": "If it flaps its wings really fast,\nit can generate shock waves that\nwill shatter windows in the area.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "heartgold",
+        "url": "https://pokeapi.co/api/v2/version/15/"
+      }
+    },
+    {
+      "flavor_text": "Its large eyes can scan 360 degrees.\nIt looks in all directions to seek\nout insects as its prey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "soulsilver",
+        "url": "https://pokeapi.co/api/v2/version/16/"
+      }
+    },
+    {
+      "flavor_text": "La vitesse de ses ailes lui permet\nun vol stationnaire. Il surveille\nainsi tout son territoire.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "black",
+        "url": "https://pokeapi.co/api/v2/version/17/"
+      }
+    },
+    {
+      "flavor_text": "It can hover in one spot by\nflapping its wings at high speed. It\nflits about to guard its territory.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "black",
+        "url": "https://pokeapi.co/api/v2/version/17/"
+      }
+    },
+    {
+      "flavor_text": "La vitesse de ses ailes lui permet\nun vol stationnaire. Il surveille\nainsi tout son territoire.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "white",
+        "url": "https://pokeapi.co/api/v2/version/18/"
+      }
+    },
+    {
+      "flavor_text": "It can hover in one spot by\nflapping its wings at high speed. It\nflits about to guard its territory.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "white",
+        "url": "https://pokeapi.co/api/v2/version/18/"
+      }
+    },
+    {
+      "flavor_text": "By flapping its wings at high speed,\nit can fly freely through the air.\nEven sudden stops are no problem.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "black-2",
+        "url": "https://pokeapi.co/api/v2/version/21/"
+      }
+    },
+    {
+      "flavor_text": "By flapping its wings at high speed,\nit can fly freely through the air.\nEven sudden stops are no problem.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "white-2",
+        "url": "https://pokeapi.co/api/v2/version/22/"
+      }
+    },
+    {
+      "flavor_text": "かおを　うごかさずに　３６０ど\nすべてを　みわたす　めを　もつので\nまうしろの　えものも　みのがさない。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "얼굴을 움직이지 않고 360도 전부\n볼 수 있는 눈을 가지고 있어서\n바로 뒤의 먹이도 놓치지 않는다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Il voit à 360° sans avoir à tourner la tête. Il ne loupe\njamais une proie, même dans son dos.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Mit seinen Augen hat es einen Blickwinkel von\n360 Grad. Es sieht sogar Beute, die sich hinter ihm\nbefindet.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Su campo visual es de 360° sin girar la cabeza.\nDetecta hasta las presas que están a su espalda.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Ha un campo visivo a 360 gradi senza muovere la\ntesta. Riesce a vedere persino le prede alle sue spalle.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Its eyes can see 360 degrees without moving its\nhead. It won’t miss prey--even those behind it.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "顔を　動かさずに　３６０度\nすべてを　見渡す　目を　持つので\n真後ろの　獲物も　見逃さない。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "こうそくで　ハネを　はばたかせると\nしょうげきは　が　はっせいして\nまわりの　まどガラスが　われていく。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "고속으로 날개를 치면\n충격파가 발생해서\n주변의 유리창이 깨진다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "En battant des ailes très vite, il peut générer une\nviolente onde de choc qui peut briser les fenêtres.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Schlägt es schnell mit den Flügeln, erzeugt es\nSchockwellen, durch die sogar Fenster zerbersten.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Si aletea muy rápido, genera ondas expansivas\ncapaces de hacer añicos todas las ventanas próximas.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Se agita le ali ad altissima velocità può generare onde\nche distruggono i vetri delle finestre nella zona.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "If it flaps its wings really fast, it can generate shock\nwaves that will shatter windows in the area.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "高速で　羽を　羽ばたかせると\n衝撃波が　発生して\nまわりの　窓ガラスが　割れていく。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "めだまを　うごかさずに　３６０ど　みわたせる。\nきゅうブレーキや　ほうこうてんかんが　とくい。\nねらった　えものを　すばやく　おいつめていく。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "눈알을 움직이지 않고 360도를 볼 수 있다.\n급브레이크나 방향 전환이 특기다.\n노린 먹이를 빠르게 몰아넣는다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Yanma a un champ de vision de 360 degrés sans avoir besoin\nde bouger les yeux. Il vole incroyablement bien et peut faire\ndes figures acrobatiques. Ce Pokémon descend en piqué\nsur ses proies.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Yanma hat einen Blickwinkel von 360 Grad, ohne die Augen\nbewegen zu müssen. Es ist ein großartiger Flieger und geübt\ndarin, plötzlich anzuhalten oder Wendemanöver vorzunehmen.\nSo kann es sich blitzschnell auf Beute stürzen.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Yanma tiene un ángulo de visión de 360° sin mover los ojos.\nEs un gran volador, experto en hacer repentinas paradas y\ncambios de dirección en el aire. Aprovecha la habilidad que\ntiene de volar para lanzarse sobre su presa.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Yanma è dotato di un campo visivo a 360 gradi senza bisogno\ndi muovere gli occhi. Grazie alle grandi ali riesce a fermarsi\nimprovvisamente e virare a mezz’aria. Sfrutta la sua abilità\nin volo per abbattere la preda al suolo.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Yanma is capable of seeing 360 degrees without having to\nmove its eyes. It is a great flier that is adept at making sudden\nstops and turning midair. This Pokémon uses its flying ability to\nquickly chase down targeted prey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "目玉を　動かさずに　３６０度　見渡せる。\n急ブレーキや　方向転換が　得意。\nねらった　獲物を　素早く　追いつめていく。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "めだまを　うごかさずに　３６０ど　みわたせる。\nきゅうブレーキや　ほうこうてんかんが　とくい。\nねらった　えものを　すばやく　おいつめていく。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "눈알을 움직이지 않고 360도를 볼 수 있다.\n급브레이크나 방향 전환이 특기다.\n노린 먹이를 빠르게 몰아넣는다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Yanma a un champ de vision de 360 degrés sans avoir besoin\nde bouger les yeux. Il vole incroyablement bien et peut faire\ndes figures acrobatiques. Ce Pokémon descend en piqué\nsur ses proies.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Yanma hat einen Blickwinkel von 360 Grad, ohne die Augen\nbewegen zu müssen. Es ist ein großartiger Flieger und geübt\ndarin, plötzlich anzuhalten oder Wendemanöver hinzulegen.\nSo kann es sich blitzschnell auf Beute stürzen.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Yanma tiene un ángulo de visión de 360° sin mover los ojos.\nEs un gran volador, experto en hacer repentinas paradas y\ncambios de dirección en el aire. Aprovecha la habilidad que\ntiene de volar para lanzarse sobre su presa.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Yanma è dotato di un campo visivo a 360 gradi senza bisogno\ndi muovere gli occhi. Grazie alle grandi ali riesce a fermarsi\nimprovvisamente e virare a mezz’aria. Sfrutta la sua abilità\nin volo per abbattere la preda al suolo.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Yanma is capable of seeing 360 degrees without having to\nmove its eyes. It is a great flier that is adept at making sudden\nstops and turning midair. This Pokémon uses its flying ability\nto quickly chase down targeted prey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "目玉を　動かさずに　３６０度　見渡せる。\n急ブレーキや　方向転換が　得意。\nねらった　獲物を　素早く　追いつめていく。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Its frail wings are so thin that one can see clear through them.\nHowever, during flight these wings exhibit the power to churn\nair with force enough to launch a house skyward.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "legends-arceus",
+        "url": "https://pokeapi.co/api/v2/version/39/"
+      }
+    }
+  ],
+  "form_descriptions": [],
+  "forms_switchable": false,
+  "gender_rate": 4,
+  "genera": [
+    {
+      "genus": "うすばねポケモン",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      }
+    },
+    {
+      "genus": "얇은날개포켓몬",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      }
+    },
+    {
+      "genus": "薄翼寶可夢",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      }
+    },
+    {
+      "genus": "Pokémon Translaile",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      }
+    },
+    {
+      "genus": "Libelle",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      }
+    },
+    {
+      "genus": "Pokémon Ala Clara",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      }
+    },
+    {
+      "genus": "Pokémon Alachiara",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      }
+    },
+    {
+      "genus": "Clear Wing Pokémon",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    },
+    {
+      "genus": "うすばねポケモン",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      }
+    },
+    {
+      "genus": "薄翼宝可梦",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-ii",
+    "url": "https://pokeapi.co/api/v2/generation/2/"
+  },
+  "growth_rate": {
+    "name": "medium",
+    "url": "https://pokeapi.co/api/v2/growth-rate/2/"
+  },
+  "habitat": {
+    "name": "forest",
+    "url": "https://pokeapi.co/api/v2/pokemon-habitat/2/"
+  },
+  "has_gender_differences": false,
+  "hatch_counter": 20,
+  "id": 193,
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": false,
+  "name": "yanma",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "ヤンヤンマ"
+    },
+    {
+      "language": {
+        "name": "roomaji",
+        "url": "https://pokeapi.co/api/v2/language/2/"
+      },
+      "name": "Yanyanma"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "왕자리"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "蜻蜻蜓"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Yanma"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Yanma"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Yanma"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Yanma"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Yanma"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "ヤンヤンマ"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "蜻蜻蜓"
+    }
+  ],
+  "order": 223,
+  "pal_park_encounters": [
+    {
+      "area": {
+        "name": "field",
+        "url": "https://pokeapi.co/api/v2/pal-park-area/2/"
+      },
+      "base_score": 80,
+      "rate": 10
+    }
+  ],
+  "pokedex_numbers": [
+    {
+      "entry_number": 193,
+      "pokedex": {
+        "name": "national",
+        "url": "https://pokeapi.co/api/v2/pokedex/1/"
+      }
+    },
+    {
+      "entry_number": 101,
+      "pokedex": {
+        "name": "original-johto",
+        "url": "https://pokeapi.co/api/v2/pokedex/3/"
+      }
+    },
+    {
+      "entry_number": 183,
+      "pokedex": {
+        "name": "extended-sinnoh",
+        "url": "https://pokeapi.co/api/v2/pokedex/6/"
+      }
+    },
+    {
+      "entry_number": 101,
+      "pokedex": {
+        "name": "updated-johto",
+        "url": "https://pokeapi.co/api/v2/pokedex/7/"
+      }
+    },
+    {
+      "entry_number": 286,
+      "pokedex": {
+        "name": "updated-unova",
+        "url": "https://pokeapi.co/api/v2/pokedex/9/"
+      }
+    },
+    {
+      "entry_number": 87,
+      "pokedex": {
+        "name": "kalos-coastal",
+        "url": "https://pokeapi.co/api/v2/pokedex/13/"
+      }
+    },
+    {
+      "entry_number": 105,
+      "pokedex": {
+        "name": "hisui",
+        "url": "https://pokeapi.co/api/v2/pokedex/30/"
+      }
+    },
+    {
+      "entry_number": 3,
+      "pokedex": {
+        "name": "kitakami",
+        "url": "https://pokeapi.co/api/v2/pokedex/32/"
+      }
+    }
+  ],
+  "shape": {
+    "name": "bug-wings",
+    "url": "https://pokeapi.co/api/v2/pokemon-shape/13/"
+  },
+  "varieties": [
+    {
+      "is_default": true,
+      "pokemon": {
+        "name": "yanma",
+        "url": "https://pokeapi.co/api/v2/pokemon/193/"
+      }
+    }
+  ]
+}

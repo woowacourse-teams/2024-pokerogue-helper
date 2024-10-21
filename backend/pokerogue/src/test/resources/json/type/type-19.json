@@ -1,0 +1,93 @@
+{
+  "damage_relations": {
+    "double_damage_from": [],
+    "double_damage_to": [],
+    "half_damage_from": [],
+    "half_damage_to": [],
+    "no_damage_from": [],
+    "no_damage_to": []
+  },
+  "game_indices": [],
+  "generation": {
+    "name": "generation-ix",
+    "url": "https://pokeapi.co/api/v2/generation/9/"
+  },
+  "id": 19,
+  "move_damage_class": null,
+  "moves": [],
+  "name": "stellar",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "ステラ"
+    },
+    {
+      "language": {
+        "name": "roomaji",
+        "url": "https://pokeapi.co/api/v2/language/2/"
+      },
+      "name": " Stella"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": " 스텔라"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "星晶"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Stellaire"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Stellar"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Astral"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Astrale"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Stellar"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "ステラ"
+    }
+  ],
+  "past_damage_relations": [],
+  "pokemon": []
+}

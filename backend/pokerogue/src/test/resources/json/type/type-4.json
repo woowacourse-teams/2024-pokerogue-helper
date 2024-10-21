@@ -1,0 +1,411 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "ground",
+        "url": "https://pokeapi.co/api/v2/type/5/"
+      },
+      {
+        "name": "psychic",
+        "url": "https://pokeapi.co/api/v2/type/14/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      },
+      {
+        "name": "fairy",
+        "url": "https://pokeapi.co/api/v2/type/18/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      },
+      {
+        "name": "bug",
+        "url": "https://pokeapi.co/api/v2/type/7/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      },
+      {
+        "name": "fairy",
+        "url": "https://pokeapi.co/api/v2/type/18/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      },
+      {
+        "name": "ground",
+        "url": "https://pokeapi.co/api/v2/type/5/"
+      },
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      },
+      {
+        "name": "ghost",
+        "url": "https://pokeapi.co/api/v2/type/8/"
+      }
+    ],
+    "no_damage_from": [],
+    "no_damage_to": [
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      }
+    ]
+  },
+  "game_indices": [
+    {
+      "game_index": 3,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 3,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 3,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 3,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 3,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 3,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 4,
+  "move_damage_class": {
+    "name": "physical",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/2/"
+  },
+  "moves": [
+    {
+      "name": "poison-sting",
+      "url": "https://pokeapi.co/api/v2/move/40/"
+    },
+    {
+      "name": "acid",
+      "url": "https://pokeapi.co/api/v2/move/51/"
+    },
+    {
+      "name": "poison-powder",
+      "url": "https://pokeapi.co/api/v2/move/77/"
+    },
+    {
+      "name": "toxic",
+      "url": "https://pokeapi.co/api/v2/move/92/"
+    },
+    {
+      "name": "smog",
+      "url": "https://pokeapi.co/api/v2/move/123/"
+    },
+    {
+      "name": "sludge",
+      "url": "https://pokeapi.co/api/v2/move/124/"
+    },
+    {
+      "name": "poison-gas",
+      "url": "https://pokeapi.co/api/v2/move/139/"
+    },
+    {
+      "name": "acid-armor",
+      "url": "https://pokeapi.co/api/v2/move/151/"
+    },
+    {
+      "name": "sludge-bomb",
+      "url": "https://pokeapi.co/api/v2/move/188/"
+    },
+    {
+      "name": "poison-fang",
+      "url": "https://pokeapi.co/api/v2/move/305/"
+    },
+    {
+      "name": "poison-tail",
+      "url": "https://pokeapi.co/api/v2/move/342/"
+    },
+    {
+      "name": "gastro-acid",
+      "url": "https://pokeapi.co/api/v2/move/380/"
+    },
+    {
+      "name": "toxic-spikes",
+      "url": "https://pokeapi.co/api/v2/move/390/"
+    },
+    {
+      "name": "poison-jab",
+      "url": "https://pokeapi.co/api/v2/move/398/"
+    },
+    {
+      "name": "cross-poison",
+      "url": "https://pokeapi.co/api/v2/move/440/"
+    },
+    {
+      "name": "gunk-shot",
+      "url": "https://pokeapi.co/api/v2/move/441/"
+    },
+    {
+      "name": "venoshock",
+      "url": "https://pokeapi.co/api/v2/move/474/"
+    },
+    {
+      "name": "sludge-wave",
+      "url": "https://pokeapi.co/api/v2/move/482/"
+    },
+    {
+      "name": "coil",
+      "url": "https://pokeapi.co/api/v2/move/489/"
+    },
+    {
+      "name": "acid-spray",
+      "url": "https://pokeapi.co/api/v2/move/491/"
+    },
+    {
+      "name": "clear-smog",
+      "url": "https://pokeapi.co/api/v2/move/499/"
+    },
+    {
+      "name": "belch",
+      "url": "https://pokeapi.co/api/v2/move/562/"
+    },
+    {
+      "name": "venom-drench",
+      "url": "https://pokeapi.co/api/v2/move/599/"
+    },
+    {
+      "name": "acid-downpour--physical",
+      "url": "https://pokeapi.co/api/v2/move/628/"
+    },
+    {
+      "name": "acid-downpour--special",
+      "url": "https://pokeapi.co/api/v2/move/629/"
+    },
+    {
+      "name": "baneful-bunker",
+      "url": "https://pokeapi.co/api/v2/move/661/"
+    },
+    {
+      "name": "toxic-thread",
+      "url": "https://pokeapi.co/api/v2/move/672/"
+    },
+    {
+      "name": "purify",
+      "url": "https://pokeapi.co/api/v2/move/685/"
+    },
+    {
+      "name": "max-ooze",
+      "url": "https://pokeapi.co/api/v2/move/764/"
+    },
+    {
+      "name": "shell-side-arm",
+      "url": "https://pokeapi.co/api/v2/move/801/"
+    },
+    {
+      "name": "corrosive-gas",
+      "url": "https://pokeapi.co/api/v2/move/810/"
+    },
+    {
+      "name": "dire-claw",
+      "url": "https://pokeapi.co/api/v2/move/827/"
+    },
+    {
+      "name": "barb-barrage",
+      "url": "https://pokeapi.co/api/v2/move/839/"
+    },
+    {
+      "name": "mortal-spin",
+      "url": "https://pokeapi.co/api/v2/move/866/"
+    },
+    {
+      "name": "noxious-torque",
+      "url": "https://pokeapi.co/api/v2/move/898/"
+    },
+    {
+      "name": "malignant-chain",
+      "url": "https://pokeapi.co/api/v2/move/919/"
+    }
+  ],
+  "name": "poison",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "どく"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "독"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "毒"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Poison"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Gift"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Veneno"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Veleno"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Poison"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "どく"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "毒"
+    }
+  ],
+  "past_damage_relations": [
+    {
+      "damage_relations": {
+        "double_damage_from": [
+          {
+            "name": "ground",
+            "url": "https://pokeapi.co/api/v2/type/5/"
+          },
+          {
+            "name": "psychic",
+            "url": "https://pokeapi.co/api/v2/type/14/"
+          },
+          {
+            "name": "bug",
+            "url": "https://pokeapi.co/api/v2/type/7/"
+          }
+        ],
+        "double_damage_to": [
+          {
+            "name": "grass",
+            "url": "https://pokeapi.co/api/v2/type/12/"
+          },
+          {
+            "name": "bug",
+            "url": "https://pokeapi.co/api/v2/type/7/"
+          }
+        ],
+        "half_damage_from": [
+          {
+            "name": "fighting",
+            "url": "https://pokeapi.co/api/v2/type/2/"
+          },
+          {
+            "name": "poison",
+            "url": "https://pokeapi.co/api/v2/type/4/"
+          },
+          {
+            "name": "grass",
+            "url": "https://pokeapi.co/api/v2/type/12/"
+          }
+        ],
+        "half_damage_to": [
+          {
+            "name": "poison",
+            "url": "https://pokeapi.co/api/v2/type/4/"
+          },
+          {
+            "name": "ground",
+            "url": "https://pokeapi.co/api/v2/type/5/"
+          },
+          {
+            "name": "rock",
+            "url": "https://pokeapi.co/api/v2/type/6/"
+          },
+          {
+            "name": "ghost",
+            "url": "https://pokeapi.co/api/v2/type/8/"
+          }
+        ],
+        "no_damage_from": [],
+        "no_damage_to": []
+      },
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    }
+  ]
+}

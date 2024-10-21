@@ -1,0 +1,4 @@
+FROM crazymax/fail2ban
+RUN rm -rf /etc/fail2ban/paths-common.conf
+COPY ./fail2ban/jail.local /etc/fail2ban
+COPY ./fail2ban/paths-common.conf /etc/fail2ban

@@ -44,7 +44,6 @@ application.yml
 
 ### HTTP 관련
 *.http
-**/resources/**
 
 ### DS Store
 .DS_Store

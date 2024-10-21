@@ -1,0 +1,386 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      },
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "flying",
+        "url": "https://pokeapi.co/api/v2/type/3/"
+      },
+      {
+        "name": "ground",
+        "url": "https://pokeapi.co/api/v2/type/5/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      },
+      {
+        "name": "dragon",
+        "url": "https://pokeapi.co/api/v2/type/16/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "ice",
+        "url": "https://pokeapi.co/api/v2/type/15/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      },
+      {
+        "name": "water",
+        "url": "https://pokeapi.co/api/v2/type/11/"
+      },
+      {
+        "name": "ice",
+        "url": "https://pokeapi.co/api/v2/type/15/"
+      }
+    ],
+    "no_damage_from": [],
+    "no_damage_to": []
+  },
+  "game_indices": [
+    {
+      "game_index": 25,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 25,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 15,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 15,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 14,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 14,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 15,
+  "move_damage_class": {
+    "name": "special",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/3/"
+  },
+  "moves": [
+    {
+      "name": "ice-punch",
+      "url": "https://pokeapi.co/api/v2/move/8/"
+    },
+    {
+      "name": "mist",
+      "url": "https://pokeapi.co/api/v2/move/54/"
+    },
+    {
+      "name": "ice-beam",
+      "url": "https://pokeapi.co/api/v2/move/58/"
+    },
+    {
+      "name": "blizzard",
+      "url": "https://pokeapi.co/api/v2/move/59/"
+    },
+    {
+      "name": "aurora-beam",
+      "url": "https://pokeapi.co/api/v2/move/62/"
+    },
+    {
+      "name": "haze",
+      "url": "https://pokeapi.co/api/v2/move/114/"
+    },
+    {
+      "name": "powder-snow",
+      "url": "https://pokeapi.co/api/v2/move/181/"
+    },
+    {
+      "name": "icy-wind",
+      "url": "https://pokeapi.co/api/v2/move/196/"
+    },
+    {
+      "name": "hail",
+      "url": "https://pokeapi.co/api/v2/move/258/"
+    },
+    {
+      "name": "ice-ball",
+      "url": "https://pokeapi.co/api/v2/move/301/"
+    },
+    {
+      "name": "sheer-cold",
+      "url": "https://pokeapi.co/api/v2/move/329/"
+    },
+    {
+      "name": "icicle-spear",
+      "url": "https://pokeapi.co/api/v2/move/333/"
+    },
+    {
+      "name": "avalanche",
+      "url": "https://pokeapi.co/api/v2/move/419/"
+    },
+    {
+      "name": "ice-shard",
+      "url": "https://pokeapi.co/api/v2/move/420/"
+    },
+    {
+      "name": "ice-fang",
+      "url": "https://pokeapi.co/api/v2/move/423/"
+    },
+    {
+      "name": "frost-breath",
+      "url": "https://pokeapi.co/api/v2/move/524/"
+    },
+    {
+      "name": "glaciate",
+      "url": "https://pokeapi.co/api/v2/move/549/"
+    },
+    {
+      "name": "freeze-shock",
+      "url": "https://pokeapi.co/api/v2/move/553/"
+    },
+    {
+      "name": "ice-burn",
+      "url": "https://pokeapi.co/api/v2/move/554/"
+    },
+    {
+      "name": "icicle-crash",
+      "url": "https://pokeapi.co/api/v2/move/556/"
+    },
+    {
+      "name": "freeze-dry",
+      "url": "https://pokeapi.co/api/v2/move/573/"
+    },
+    {
+      "name": "subzero-slammer--physical",
+      "url": "https://pokeapi.co/api/v2/move/650/"
+    },
+    {
+      "name": "subzero-slammer--special",
+      "url": "https://pokeapi.co/api/v2/move/651/"
+    },
+    {
+      "name": "ice-hammer",
+      "url": "https://pokeapi.co/api/v2/move/665/"
+    },
+    {
+      "name": "aurora-veil",
+      "url": "https://pokeapi.co/api/v2/move/694/"
+    },
+    {
+      "name": "freezy-frost",
+      "url": "https://pokeapi.co/api/v2/move/739/"
+    },
+    {
+      "name": "max-hailstorm",
+      "url": "https://pokeapi.co/api/v2/move/763/"
+    },
+    {
+      "name": "triple-axel",
+      "url": "https://pokeapi.co/api/v2/move/813/"
+    },
+    {
+      "name": "glacial-lance",
+      "url": "https://pokeapi.co/api/v2/move/824/"
+    },
+    {
+      "name": "mountain-gale",
+      "url": "https://pokeapi.co/api/v2/move/836/"
+    },
+    {
+      "name": "ice-spinner",
+      "url": "https://pokeapi.co/api/v2/move/861/"
+    },
+    {
+      "name": "chilly-reception",
+      "url": "https://pokeapi.co/api/v2/move/881/"
+    },
+    {
+      "name": "snowscape",
+      "url": "https://pokeapi.co/api/v2/move/883/"
+    }
+  ],
+  "name": "ice",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "こおり"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "얼음"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "冰"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Glace"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Eis"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Hielo"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Ghiaccio"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Ice"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "こおり"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "冰"
+    }
+  ],
+  "past_damage_relations": [
+    {
+      "damage_relations": {
+        "double_damage_from": [
+          {
+            "name": "fighting",
+            "url": "https://pokeapi.co/api/v2/type/2/"
+          },
+          {
+            "name": "rock",
+            "url": "https://pokeapi.co/api/v2/type/6/"
+          },
+          {
+            "name": "fire",
+            "url": "https://pokeapi.co/api/v2/type/10/"
+          }
+        ],
+        "double_damage_to": [
+          {
+            "name": "flying",
+            "url": "https://pokeapi.co/api/v2/type/3/"
+          },
+          {
+            "name": "ground",
+            "url": "https://pokeapi.co/api/v2/type/5/"
+          },
+          {
+            "name": "grass",
+            "url": "https://pokeapi.co/api/v2/type/12/"
+          },
+          {
+            "name": "dragon",
+            "url": "https://pokeapi.co/api/v2/type/16/"
+          }
+        ],
+        "half_damage_from": [
+          {
+            "name": "ice",
+            "url": "https://pokeapi.co/api/v2/type/15/"
+          }
+        ],
+        "half_damage_to": [
+          {
+            "name": "water",
+            "url": "https://pokeapi.co/api/v2/type/11/"
+          },
+          {
+            "name": "ice",
+            "url": "https://pokeapi.co/api/v2/type/15/"
+          }
+        ],
+        "no_damage_from": [],
+        "no_damage_to": []
+      },
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    }
+  ]
+}

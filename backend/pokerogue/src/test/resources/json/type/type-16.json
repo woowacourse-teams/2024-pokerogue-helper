@@ -1,0 +1,308 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "ice",
+        "url": "https://pokeapi.co/api/v2/type/15/"
+      },
+      {
+        "name": "dragon",
+        "url": "https://pokeapi.co/api/v2/type/16/"
+      },
+      {
+        "name": "fairy",
+        "url": "https://pokeapi.co/api/v2/type/18/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "dragon",
+        "url": "https://pokeapi.co/api/v2/type/16/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      },
+      {
+        "name": "water",
+        "url": "https://pokeapi.co/api/v2/type/11/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      },
+      {
+        "name": "electric",
+        "url": "https://pokeapi.co/api/v2/type/13/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      }
+    ],
+    "no_damage_from": [],
+    "no_damage_to": [
+      {
+        "name": "fairy",
+        "url": "https://pokeapi.co/api/v2/type/18/"
+      }
+    ]
+  },
+  "game_indices": [
+    {
+      "game_index": 26,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 26,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 16,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 16,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 15,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 15,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 16,
+  "move_damage_class": {
+    "name": "special",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/3/"
+  },
+  "moves": [
+    {
+      "name": "dragon-rage",
+      "url": "https://pokeapi.co/api/v2/move/82/"
+    },
+    {
+      "name": "outrage",
+      "url": "https://pokeapi.co/api/v2/move/200/"
+    },
+    {
+      "name": "dragon-breath",
+      "url": "https://pokeapi.co/api/v2/move/225/"
+    },
+    {
+      "name": "twister",
+      "url": "https://pokeapi.co/api/v2/move/239/"
+    },
+    {
+      "name": "dragon-claw",
+      "url": "https://pokeapi.co/api/v2/move/337/"
+    },
+    {
+      "name": "dragon-dance",
+      "url": "https://pokeapi.co/api/v2/move/349/"
+    },
+    {
+      "name": "dragon-pulse",
+      "url": "https://pokeapi.co/api/v2/move/406/"
+    },
+    {
+      "name": "dragon-rush",
+      "url": "https://pokeapi.co/api/v2/move/407/"
+    },
+    {
+      "name": "draco-meteor",
+      "url": "https://pokeapi.co/api/v2/move/434/"
+    },
+    {
+      "name": "roar-of-time",
+      "url": "https://pokeapi.co/api/v2/move/459/"
+    },
+    {
+      "name": "spacial-rend",
+      "url": "https://pokeapi.co/api/v2/move/460/"
+    },
+    {
+      "name": "dragon-tail",
+      "url": "https://pokeapi.co/api/v2/move/525/"
+    },
+    {
+      "name": "dual-chop",
+      "url": "https://pokeapi.co/api/v2/move/530/"
+    },
+    {
+      "name": "devastating-drake--physical",
+      "url": "https://pokeapi.co/api/v2/move/652/"
+    },
+    {
+      "name": "devastating-drake--special",
+      "url": "https://pokeapi.co/api/v2/move/653/"
+    },
+    {
+      "name": "core-enforcer",
+      "url": "https://pokeapi.co/api/v2/move/687/"
+    },
+    {
+      "name": "clanging-scales",
+      "url": "https://pokeapi.co/api/v2/move/691/"
+    },
+    {
+      "name": "dragon-hammer",
+      "url": "https://pokeapi.co/api/v2/move/692/"
+    },
+    {
+      "name": "clangorous-soulblaze",
+      "url": "https://pokeapi.co/api/v2/move/728/"
+    },
+    {
+      "name": "dynamax-cannon",
+      "url": "https://pokeapi.co/api/v2/move/744/"
+    },
+    {
+      "name": "dragon-darts",
+      "url": "https://pokeapi.co/api/v2/move/751/"
+    },
+    {
+      "name": "max-wyrmwind",
+      "url": "https://pokeapi.co/api/v2/move/768/"
+    },
+    {
+      "name": "clangorous-soul",
+      "url": "https://pokeapi.co/api/v2/move/775/"
+    },
+    {
+      "name": "breaking-swipe",
+      "url": "https://pokeapi.co/api/v2/move/784/"
+    },
+    {
+      "name": "eternabeam",
+      "url": "https://pokeapi.co/api/v2/move/795/"
+    },
+    {
+      "name": "scale-shot",
+      "url": "https://pokeapi.co/api/v2/move/799/"
+    },
+    {
+      "name": "dragon-energy",
+      "url": "https://pokeapi.co/api/v2/move/820/"
+    },
+    {
+      "name": "order-up",
+      "url": "https://pokeapi.co/api/v2/move/856/"
+    },
+    {
+      "name": "glaive-rush",
+      "url": "https://pokeapi.co/api/v2/move/862/"
+    },
+    {
+      "name": "fickle-beam",
+      "url": "https://pokeapi.co/api/v2/move/907/"
+    },
+    {
+      "name": "dragon-cheer",
+      "url": "https://pokeapi.co/api/v2/move/913/"
+    }
+  ],
+  "name": "dragon",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "ドラゴン"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "드래곤"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "龍"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Dragon"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Drache"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Dragón"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Drago"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Dragon"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "ドラゴン"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "龙"
+    }
+  ],
+  "past_damage_relations": []
+}
