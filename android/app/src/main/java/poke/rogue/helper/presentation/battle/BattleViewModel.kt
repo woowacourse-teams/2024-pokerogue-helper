@@ -18,6 +18,7 @@ import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.BattleRepository
+import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.BattlePredictionUiModel
@@ -31,6 +32,7 @@ import poke.rogue.helper.presentation.battle.model.toUi
 
 class BattleViewModel(
     private val battleRepository: BattleRepository,
+    private val pokemonRepository: DexRepository,
     private val logger: AnalyticsLogger = analyticsLogger(),
     pokemonId: String? = null,
     selectionType: SelectionType? = null,
@@ -44,7 +46,7 @@ class BattleViewModel(
 
     val weatherPos: StateFlow<Int> =
         combine(
-            battleRepository.savedWeatherStream(),
+            battleRepository.weatherStream(),
             weathers,
         ) { weather, weathers ->
             if (weather == null || weathers.isEmpty()) return@combine null
@@ -116,17 +118,17 @@ class BattleViewModel(
     ) {
         when {
             pokemonId == null -> {
-                fetchSavedMyPokemon()
-                fetchSavedOpponentPokemon()
+                loadSavedMyPokemon()
+                loadSavedOpponentPokemon()
             }
 
             selectionType == SelectionType.MINE -> {
                 selectMyPokemon(pokemonId)
-                fetchSavedOpponentPokemon()
+                loadSavedOpponentPokemon()
             }
 
             selectionType == SelectionType.OPPONENT -> {
-                fetchSavedMyPokemon()
+                loadSavedMyPokemon()
                 selectOpponentPokemon(pokemonId)
             }
 
@@ -134,17 +136,17 @@ class BattleViewModel(
         }
     }
 
-    private fun fetchSavedMyPokemon() {
+    private fun loadSavedMyPokemon() {
         viewModelScope.launch {
-            battleRepository.savedPokemonWithSkillStream().first()?.let { (pokemon, skill) ->
+            battleRepository.pokemonWithSkillStream().first()?.let { (pokemon, skill) ->
                 updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
             }
         }
     }
 
-    private fun fetchSavedOpponentPokemon() {
+    private fun loadSavedOpponentPokemon() {
         viewModelScope.launch {
-            battleRepository.savedPokemonStream().first()?.let {
+            battleRepository.pokemonStream().first()?.let {
                 updateOpponentPokemon(it.toSelectionUi())
             }
         }
@@ -152,7 +154,7 @@ class BattleViewModel(
 
     private fun selectMyPokemon(pokemonId: String) {
         viewModelScope.launch {
-            val (pokemon, skill) = battleRepository.pokemonWithRandomSkill(pokemonId)
+            val (pokemon, skill) = battleRepository.pokemonWithSkill(pokemonId)
             val selectionData = SelectionData.WithSkill(pokemon.toSelectionUi(), skill.toUi())
             updatePokemonSelection(selectionData)
         }
@@ -160,7 +162,7 @@ class BattleViewModel(
 
     private fun selectOpponentPokemon(pokemonId: String) {
         viewModelScope.launch {
-            val pokemon = battleRepository.pokemon(pokemonId)
+            val pokemon = pokemonRepository.pokemon(pokemonId)
             val selectionData = SelectionData.WithoutSkill(pokemon.toSelectionUi())
             updatePokemonSelection(selectionData)
         }
@@ -180,7 +182,7 @@ class BattleViewModel(
                 val (selectedPokemon, selectedSkill) = selection
                 updateMyPokemon(selectedPokemon, selectedSkill)
                 viewModelScope.launch {
-                    battleRepository.savePokemonWithSkill(selectedPokemon.id, selectedSkill.id)
+                    battleRepository.saveBattleSelection(selectedPokemon.id, selectedSkill.id)
                 }
                 logger.logPokemonSkillSelection(selection)
             }
@@ -189,7 +191,7 @@ class BattleViewModel(
                 val selectedPokemon = selection.selectedPokemon
                 updateOpponentPokemon(selectedPokemon)
                 viewModelScope.launch {
-                    battleRepository.savePokemon(selectedPokemon.id)
+                    battleRepository.saveBattleSelection(selectedPokemon.id)
                 }
                 logger.logBattlePokemonSelection(selection)
             }
@@ -251,12 +253,14 @@ class BattleViewModel(
             pokemonId: String?,
             selectionType: SelectionType?,
             battleRepository: BattleRepository,
+            pokemonRepository: DexRepository
         ): ViewModelProvider.Factory =
             BaseViewModelFactory {
                 BattleViewModel(
                     battleRepository = battleRepository,
                     pokemonId = pokemonId,
                     selectionType = selectionType,
+                    pokemonRepository = pokemonRepository
                 )
             }
     }

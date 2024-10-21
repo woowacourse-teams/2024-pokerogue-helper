@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultBattleRepository
+import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityBattleBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.SelectionData
@@ -29,6 +30,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
             intent.getStringExtra(POKEMON_ID),
             intent.serializable(SELECTION_TYPE),
             DefaultBattleRepository.instance(applicationContext),
+            DefaultDexRepository.instance(),
         )
     }
 
