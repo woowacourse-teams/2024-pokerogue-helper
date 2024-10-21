@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  home screen  -->
+    <dimen name="home_cv_width">150dp</dimen>
+    <dimen name="home_cv_height">150dp</dimen>
+    <dimen name="home_iv_width">60dp</dimen>
+    <dimen name="home_iv_height">60dp</dimen>
+    <dimen name="home_iv_margin_top">24dp</dimen>
+    <dimen name="home_tv_margin_bottom">25dp</dimen>
+    <dimen name="home_tv_size">15sp</dimen>
+
+
+</resources>
