@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="biome"
+            type="poke.rogue.helper.presentation.biome.model.BiomeUiModel" />
+
+        <variable
+            name="uiEventHandler"
+            type="poke.rogue.helper.presentation.biome.BiomeUiEventHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        onSingleClick="@{()->uiEventHandler.navigateToDetail(biome.id)}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_pokemon_corner_radius"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_biome_name"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{biome.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="화산" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/fl_biome_type_icons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:flexDirection="row"
+            app:layout_constraintBottom_toBottomOf="@id/tv_biome_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_biome_name" />
+
+        <ImageView
+            android:id="@+id/iv_biome"
+            imageUrl="@{biome.imageUrl}"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_biome_name"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
