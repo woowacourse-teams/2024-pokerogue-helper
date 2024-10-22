@@ -1,11 +1,16 @@
 pluginManagement {
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
         gradlePluginPortal()
     }
 }
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -16,11 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PokeRogueHelper"
 include(":app")
-include(":data")
-include(":remote")
-include(":local")
-include(":testing")
-include(":analytics")
-// libraries
-include(":stringmatcher")
  

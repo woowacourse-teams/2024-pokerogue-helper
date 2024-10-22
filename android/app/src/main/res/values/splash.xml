@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="Theme.PokeRogueHelper.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/splash_background</item>
-        <item name="windowSplashScreenAnimatedIcon">@color/splash_logo_background</item>
-        <item name="postSplashScreenTheme">@style/Theme.PokeRogueHelper</item>
-    </style>
-</resources>

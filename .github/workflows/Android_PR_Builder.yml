@@ -3,8 +3,6 @@ name: Android PR Builder
 on:
   pull_request:
     branches: [ an/develop ]
-  push:
-    branches: [ an/develop ]
 
 jobs:
   build:
@@ -12,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
       - name: Gradle cache
         uses: actions/cache@v3
@@ -30,63 +28,45 @@ jobs:
           distribution: 'temurin'
           java-version: 17
 
-      - name: Create Google-Services.json
-        env:
-          GOOGLE_SERVICES_ALPHA: ${{ secrets.GOOGLE_SERVICES_ALPHA }}
-          GOOGLE_SERVICES_BETA: ${{ secrets.GOOGLE_SERVICES_BETA }}
-          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
-        run: |
-          touch ./app/src/debug/google-services.json
-          touch ./app/src/alpha/google-services.json
-          touch ./app/src/beta/google-services.json
-          mkdir ./app/src/release
-          touch ./app/src/release/google-services.json
-          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/debug/google-services.json
-          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
-          echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
-          echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
-        working-directory: android
-
-
+      #    - name: Create Google-Services.json
+      #      env:
+      #        GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+      #      run: |
+      #        touch ./app/google-services.json
+      #        echo $GOOGLE_SERVICES >> ./app/google-services.json
+      #        cat ./app/google-services.json
+      #
       - name: Create Local Properties
         run: touch local.properties
-        working-directory: android
 
-      - name: Access Local Properties
-        env:
-          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
-        #          POKE_RELEASE_URL: ${{ secrets.HOST_RELEASE_URI }}
-        #          KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
-        #          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-        #          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        #          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        #          STORE_FILE: ${{ secrets.STORE_FILE }}
-        run: |
-          echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
-        #          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
-        #          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
-        #          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
-        #          echo STORE_FILE= $STORE_FILE >> local.properties
-        working-directory: android
+#      - name: Access Local Properties
+#        env:
+#          FUNCH_DEBUG_BASE_URL: ${{ secrets.FUNCH_DEBUG_BASE_URL }}
+#          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+#          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+#          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+#          STORE_FILE: ${{ secrets.STORE_FILE }}
+#        run: |
+#          echo FUNCH_DEBUG_BASE_URL=\"FUNCH_DEBUG_BASE_URL\" >> local.properties
+#          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
+#          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
+#          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
+#          echo STORE_FILE= $STORE_FILE >> local.properties
 
-      #      - name: Create Key Store
-      #        env:
-      #          KEY_STORE_BASE_64: ${{secrets.KEY_STORE_BASE_64}}
-      #        run: |
-      #          echo "$KEY_STORE_BASE_64" | base64 -d > ./funch_key_store.jks
+#      - name: Create Key Store
+#        env:
+#          KEY_STORE_BASE_64: ${{secrets.KEY_STORE_BASE_64}}
+#        run: |
+#          echo "$KEY_STORE_BASE_64" | base64 -d > ./funch_key_store.jks
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-        working-directory: android
 
       - name: Lint Check
         run: ./gradlew ktlintCheck
-        working-directory: android
 
-      - name: run debug unit test
-        run: ./gradlew testDebugUnitTest
-        working-directory: android
+      - name: run rest
+        run: ./gradlew test
 
-      - name: Build debug APK
-        run: ./gradlew assembleDebug
-        working-directory: android
+      - name: Build with Gradle
+        run: ./gradlew build

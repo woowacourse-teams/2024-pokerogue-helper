@@ -1,13 +1,2 @@
 
 .idea/
-.DS_Store
-
-android/keystore/keystore_poke
-
-android/app/release/output-metadata.json
-
-android/app/release/baselineProfiles/
-
-android/keystore/encryption_public_key.pem
-
-android/keystore/pepk.jar
