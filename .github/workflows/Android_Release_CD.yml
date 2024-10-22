@@ -90,17 +90,16 @@ jobs:
           path: android/app/build/outputs/apk/release/
           if-no-files-found: error
 
-      - name: Extract Version Name
+      - name: Extract Version Name from Branch
         shell: bash
-        env:
-          title: ${{ inputs.title }}
         run: |
-          version=$(echo '${{ github.event.pull_request.title }}' | grep -oP '\d+\.\d+\.\d+')
+          branch_name=$(echo "${{ github.ref_name }}" | sed 's:.*/::')
+          version=$(echo "$branch_name" | grep -oP '\d+\.\d+\.\d+')
           if [ -z "$version" ]; then
-          echo "No version found in the title."
-          echo "version=none" >> $GITHUB_ENV
+            echo "No version found in branch name."
+            echo "version=none" >> $GITHUB_ENV
           else
-          echo "version=v$version" >> $GITHUB_ENV
+            echo "version=v$version" >> $GITHUB_ENV
           fi
 
       - name: Create Github Release

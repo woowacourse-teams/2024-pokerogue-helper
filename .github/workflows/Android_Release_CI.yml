@@ -3,10 +3,9 @@ name: Android PR Builder
 on:
   push:
     branches: [ "an/release*" ]
-
 jobs:
   build:
-    name: CD Release Builder
+    name: CI Release Builder
     runs-on: ubuntu-latest
 
     steps:
