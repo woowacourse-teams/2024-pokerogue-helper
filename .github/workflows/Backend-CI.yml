@@ -2,7 +2,7 @@ name: Backend CI
 
 on:
   pull_request:
-    branches: [ "be/develop" ]
+    branches: [ "be/develop", "be/release" ]
   workflow_call:
 
 permissions:
