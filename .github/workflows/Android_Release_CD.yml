@@ -2,7 +2,8 @@ name: Android PR Builder
 
 on:
   push:
-    branches: [ "an/release*" ]
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -90,17 +91,17 @@ jobs:
           path: android/app/build/outputs/apk/release/
           if-no-files-found: error
 
-      - name: Extract Version Name from Branch
-        shell: bash
-        run: |
-          branch_name=$(echo "${{ github.ref_name }}" | sed 's:.*/::')
-          version=$(echo "$branch_name" | grep -oP '\d+\.\d+\.\d+')
-          if [ -z "$version" ]; then
-            echo "No version found in branch name."
-            echo "version=none" >> $GITHUB_ENV
-          else
-            echo "version=v$version" >> $GITHUB_ENV
-          fi
+#      - name: Extract Version Name from Branch
+#        shell: bash
+#        run: |
+#          branch_name=$(echo "${{ github.ref_name }}" | sed 's:.*/::')
+#          version=$(echo "$branch_name" | grep -oP '\d+\.\d+\.\d+')
+#          if [ -z "$version" ]; then
+#            echo "No version found in branch name."
+#            echo "version=none" >> $GITHUB_ENV
+#          else
+#            echo "version=v$version" >> $GITHUB_ENV
+#          fi
 
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
