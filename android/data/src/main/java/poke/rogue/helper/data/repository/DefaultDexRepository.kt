@@ -34,23 +34,34 @@ class DefaultDexRepository(
     private var cachedPokemons: List<Pokemon> = emptyList()
 
     override suspend fun warmUp() {
-        val shouldUpdateDatabase = shouldUpdateDatabaseVersion()
-        val emptyDiskCache = localPokemonDataSource.pokemons().isEmpty()
+        val localVersion = localVersionDataSource.databaseVersionStream().firstOrNull()
+        val remoteVersion = remoteVersionService.databaseVersion()
+        val shouldUpdateDatabase = shouldUpdateDatabaseVersion(localVersion, remoteVersion)
 
-        if (shouldUpdateDatabase || emptyDiskCache) {
+        if (shouldUpdateDatabase) {
+            localVersionDataSource.saveDatabaseVersion(remoteVersion)
             val pokemons = remotePokemonDataSource.pokemons2()
-            cachePokemonData(pokemons)
+            cachePokemons(pokemons)
+            return
         }
+
+        val emptyDiskCache = localPokemonDataSource.pokemons().isEmpty()
+        if (emptyDiskCache) {
+            cachedPokemons = remotePokemonDataSource.pokemons2()
+            return
+        }
+
         cachedPokemons = localPokemonDataSource.pokemons()
     }
 
-    private suspend fun shouldUpdateDatabaseVersion(): Boolean {
-        val localVersion = localVersionDataSource.databaseVersion().firstOrNull()
-        val remoteVersion = remoteVersionService.databaseVersion()
+    private fun shouldUpdateDatabaseVersion(
+        localVersion: Int?,
+        remoteVersion: Int,
+    ): Boolean {
         return (localVersion ?: 0) < remoteVersion
     }
 
-    private suspend fun cachePokemonData(pokemons: List<Pokemon>) =
+    private suspend fun cachePokemons(pokemons: List<Pokemon>) =
         coroutineScope {
             val urls = pokemons.take(PLELOAD_POKEMON_COUNT).map { it.imageUrl }
             launch {
@@ -60,6 +71,8 @@ class DefaultDexRepository(
                 localPokemonDataSource.clear()
                 localPokemonDataSource.savePokemons(pokemons)
             }
+        }.also {
+            cachedPokemons = pokemons
         }
 
     override suspend fun pokemons(): List<Pokemon> {
