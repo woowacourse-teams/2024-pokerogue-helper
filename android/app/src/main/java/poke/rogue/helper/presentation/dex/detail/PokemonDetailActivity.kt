@@ -3,9 +3,6 @@ package poke.rogue.helper.presentation.dex.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
@@ -34,11 +31,10 @@ class PokemonDetailActivity :
 
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
+    private lateinit var floatingButtonHandler: FloatingButtonHandler
 
     override val toolbar: Toolbar
         get() = binding.toolbarPokemonDetail
-
-    private var shown: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +43,13 @@ class PokemonDetailActivity :
         binding.eventHandler = viewModel
         binding.lifecycleOwner = this
         binding.vm = viewModel
+
+        floatingButtonHandler = FloatingButtonHandler(
+            this,
+            binding.fabPokemonDetailBattle,
+            binding.efabPokemonDetailBattleWithMine,
+            binding.efabPokemonDetailBattleWithOpponent
+        )
 
         initAdapter()
         initObservers()
@@ -71,36 +74,6 @@ class PokemonDetailActivity :
         }.attach()
     }
 
-    private fun initFloatingActionButton() {
-        val rotateOpen: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_open)
-        val rotateClose: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_close)
-        val fromBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.from_bottom)
-        val toBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.to_bottom)
-
-        with(binding) {
-            fabPokemonDetailBattle.setOnClickListener {
-                if (!shown) {
-                    efabPokemonDetailBattleWithMine.visibility = View.VISIBLE
-                    efabPokemonDetailBattleWithOpponent.visibility = View.VISIBLE
-
-                    fabPokemonDetailBattle.startAnimation(rotateOpen)
-                    efabPokemonDetailBattleWithMine.startAnimation(fromBottom)
-                    efabPokemonDetailBattleWithOpponent.startAnimation(fromBottom)
-
-                    shown = !shown
-                } else {
-                    efabPokemonDetailBattleWithMine.visibility = View.INVISIBLE
-                    efabPokemonDetailBattleWithOpponent.visibility = View.INVISIBLE
-
-                    efabPokemonDetailBattleWithOpponent.startAnimation(toBottom)
-                    efabPokemonDetailBattleWithMine.startAnimation(toBottom)
-                    fabPokemonDetailBattle.startAnimation(rotateClose)
-                    shown = !shown
-                }
-            }
-        }
-    }
-
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigateToHomeEvent()
@@ -108,6 +81,12 @@ class PokemonDetailActivity :
         observeNavigateToBiomeDetailEvent()
         observeNavigateToPokemonDetailEvent()
         observeNavigateToBattleEvent()
+    }
+
+    private fun initFloatingActionButton() {
+        binding.fabPokemonDetailBattle.setOnClickListener {
+            floatingButtonHandler.toggleFab()
+        }
     }
 
     private fun observePokemonDetailUi() {
