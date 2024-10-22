@@ -88,10 +88,25 @@ jobs:
           name: release-artifacts
           path: android/app/build/outputs/apk/release/
           if-no-files-found: error
+          
+      - name: Extract Version Name
+        shell: bash
+        env:
+          title: ${{ inputs.title }}
+        run: |
+          version=$(echo '${{ github.event.pull_request.title }}' | grep -oP '\d+\.\d+\.\d+')
+          if [ -z "$version" ]; then
+          echo "No version found in the title."
+          echo "version=none" >> $GITHUB_ENV
+          else
+          echo "version=v$version" >> $GITHUB_ENV
+          fi
 
       - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ env.version }}
+          release_name: ${{ env.version }}
           generate_release_notes: true
           files: |
-            android/app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/apk/release/app-release.apk
