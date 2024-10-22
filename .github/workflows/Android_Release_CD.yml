@@ -45,6 +45,7 @@ jobs:
           echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
           echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
           echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
+          cat ./app/src/debug/google-services.json
         working-directory: android
 
       - name: Create Local Properties
@@ -69,7 +70,9 @@ jobs:
         env:
           KEY_STORE: ${{secrets.RELEASE_KEY_STORE}}
         run: |
+          touch ./keystore/poke_key.jks
           echo "$KEY_STORE" | base64 -d > ./keystore/poke_key.jks
+        working-directory: android
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
