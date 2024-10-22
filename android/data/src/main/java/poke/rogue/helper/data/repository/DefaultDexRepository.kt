@@ -4,6 +4,7 @@ import android.content.Context
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import org.koin.mp.KoinPlatform.getKoin
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.cache.GlideImageCacher
@@ -19,8 +20,6 @@ import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.model.PokemonSort
 import poke.rogue.helper.data.utils.logPokemonDetail
-import poke.rogue.helper.local.datastore.VersionDataStore
-import poke.rogue.helper.remote.injector.ServiceModule
 import poke.rogue.helper.stringmatcher.has
 
 class DefaultDexRepository(
@@ -144,8 +143,8 @@ class DefaultDexRepository(
                     GlideImageCacher.instance(),
                     DefaultBiomeRepository.instance(),
                     analyticsLogger(),
-                    LocalVersionDataSource(VersionDataStore(context)),
-                    RemoteVersionDataSource(ServiceModule.versionService(), analyticsLogger()),
+                    getKoin().get(),
+                    getKoin().get(),
                 )
         }
 
