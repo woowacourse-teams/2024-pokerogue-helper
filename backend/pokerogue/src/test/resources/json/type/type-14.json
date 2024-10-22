@@ -1,0 +1,548 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "bug",
+        "url": "https://pokeapi.co/api/v2/type/7/"
+      },
+      {
+        "name": "ghost",
+        "url": "https://pokeapi.co/api/v2/type/8/"
+      },
+      {
+        "name": "dark",
+        "url": "https://pokeapi.co/api/v2/type/17/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "poison",
+        "url": "https://pokeapi.co/api/v2/type/4/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "fighting",
+        "url": "https://pokeapi.co/api/v2/type/2/"
+      },
+      {
+        "name": "psychic",
+        "url": "https://pokeapi.co/api/v2/type/14/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      },
+      {
+        "name": "psychic",
+        "url": "https://pokeapi.co/api/v2/type/14/"
+      }
+    ],
+    "no_damage_from": [],
+    "no_damage_to": [
+      {
+        "name": "dark",
+        "url": "https://pokeapi.co/api/v2/type/17/"
+      }
+    ]
+  },
+  "game_indices": [
+    {
+      "game_index": 24,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 24,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 14,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 14,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 13,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 13,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 14,
+  "move_damage_class": {
+    "name": "special",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/3/"
+  },
+  "moves": [
+    {
+      "name": "psybeam",
+      "url": "https://pokeapi.co/api/v2/move/60/"
+    },
+    {
+      "name": "confusion",
+      "url": "https://pokeapi.co/api/v2/move/93/"
+    },
+    {
+      "name": "psychic",
+      "url": "https://pokeapi.co/api/v2/move/94/"
+    },
+    {
+      "name": "hypnosis",
+      "url": "https://pokeapi.co/api/v2/move/95/"
+    },
+    {
+      "name": "meditate",
+      "url": "https://pokeapi.co/api/v2/move/96/"
+    },
+    {
+      "name": "agility",
+      "url": "https://pokeapi.co/api/v2/move/97/"
+    },
+    {
+      "name": "teleport",
+      "url": "https://pokeapi.co/api/v2/move/100/"
+    },
+    {
+      "name": "barrier",
+      "url": "https://pokeapi.co/api/v2/move/112/"
+    },
+    {
+      "name": "light-screen",
+      "url": "https://pokeapi.co/api/v2/move/113/"
+    },
+    {
+      "name": "reflect",
+      "url": "https://pokeapi.co/api/v2/move/115/"
+    },
+    {
+      "name": "amnesia",
+      "url": "https://pokeapi.co/api/v2/move/133/"
+    },
+    {
+      "name": "kinesis",
+      "url": "https://pokeapi.co/api/v2/move/134/"
+    },
+    {
+      "name": "dream-eater",
+      "url": "https://pokeapi.co/api/v2/move/138/"
+    },
+    {
+      "name": "psywave",
+      "url": "https://pokeapi.co/api/v2/move/149/"
+    },
+    {
+      "name": "rest",
+      "url": "https://pokeapi.co/api/v2/move/156/"
+    },
+    {
+      "name": "mirror-coat",
+      "url": "https://pokeapi.co/api/v2/move/243/"
+    },
+    {
+      "name": "future-sight",
+      "url": "https://pokeapi.co/api/v2/move/248/"
+    },
+    {
+      "name": "trick",
+      "url": "https://pokeapi.co/api/v2/move/271/"
+    },
+    {
+      "name": "role-play",
+      "url": "https://pokeapi.co/api/v2/move/272/"
+    },
+    {
+      "name": "magic-coat",
+      "url": "https://pokeapi.co/api/v2/move/277/"
+    },
+    {
+      "name": "skill-swap",
+      "url": "https://pokeapi.co/api/v2/move/285/"
+    },
+    {
+      "name": "imprison",
+      "url": "https://pokeapi.co/api/v2/move/286/"
+    },
+    {
+      "name": "luster-purge",
+      "url": "https://pokeapi.co/api/v2/move/295/"
+    },
+    {
+      "name": "mist-ball",
+      "url": "https://pokeapi.co/api/v2/move/296/"
+    },
+    {
+      "name": "cosmic-power",
+      "url": "https://pokeapi.co/api/v2/move/322/"
+    },
+    {
+      "name": "extrasensory",
+      "url": "https://pokeapi.co/api/v2/move/326/"
+    },
+    {
+      "name": "calm-mind",
+      "url": "https://pokeapi.co/api/v2/move/347/"
+    },
+    {
+      "name": "psycho-boost",
+      "url": "https://pokeapi.co/api/v2/move/354/"
+    },
+    {
+      "name": "gravity",
+      "url": "https://pokeapi.co/api/v2/move/356/"
+    },
+    {
+      "name": "miracle-eye",
+      "url": "https://pokeapi.co/api/v2/move/357/"
+    },
+    {
+      "name": "healing-wish",
+      "url": "https://pokeapi.co/api/v2/move/361/"
+    },
+    {
+      "name": "psycho-shift",
+      "url": "https://pokeapi.co/api/v2/move/375/"
+    },
+    {
+      "name": "heal-block",
+      "url": "https://pokeapi.co/api/v2/move/377/"
+    },
+    {
+      "name": "power-trick",
+      "url": "https://pokeapi.co/api/v2/move/379/"
+    },
+    {
+      "name": "power-swap",
+      "url": "https://pokeapi.co/api/v2/move/384/"
+    },
+    {
+      "name": "guard-swap",
+      "url": "https://pokeapi.co/api/v2/move/385/"
+    },
+    {
+      "name": "heart-swap",
+      "url": "https://pokeapi.co/api/v2/move/391/"
+    },
+    {
+      "name": "psycho-cut",
+      "url": "https://pokeapi.co/api/v2/move/427/"
+    },
+    {
+      "name": "zen-headbutt",
+      "url": "https://pokeapi.co/api/v2/move/428/"
+    },
+    {
+      "name": "trick-room",
+      "url": "https://pokeapi.co/api/v2/move/433/"
+    },
+    {
+      "name": "lunar-dance",
+      "url": "https://pokeapi.co/api/v2/move/461/"
+    },
+    {
+      "name": "guard-split",
+      "url": "https://pokeapi.co/api/v2/move/470/"
+    },
+    {
+      "name": "power-split",
+      "url": "https://pokeapi.co/api/v2/move/471/"
+    },
+    {
+      "name": "wonder-room",
+      "url": "https://pokeapi.co/api/v2/move/472/"
+    },
+    {
+      "name": "psyshock",
+      "url": "https://pokeapi.co/api/v2/move/473/"
+    },
+    {
+      "name": "telekinesis",
+      "url": "https://pokeapi.co/api/v2/move/477/"
+    },
+    {
+      "name": "magic-room",
+      "url": "https://pokeapi.co/api/v2/move/478/"
+    },
+    {
+      "name": "synchronoise",
+      "url": "https://pokeapi.co/api/v2/move/485/"
+    },
+    {
+      "name": "stored-power",
+      "url": "https://pokeapi.co/api/v2/move/500/"
+    },
+    {
+      "name": "ally-switch",
+      "url": "https://pokeapi.co/api/v2/move/502/"
+    },
+    {
+      "name": "heal-pulse",
+      "url": "https://pokeapi.co/api/v2/move/505/"
+    },
+    {
+      "name": "heart-stamp",
+      "url": "https://pokeapi.co/api/v2/move/531/"
+    },
+    {
+      "name": "psystrike",
+      "url": "https://pokeapi.co/api/v2/move/540/"
+    },
+    {
+      "name": "hyperspace-hole",
+      "url": "https://pokeapi.co/api/v2/move/593/"
+    },
+    {
+      "name": "shattered-psyche--physical",
+      "url": "https://pokeapi.co/api/v2/move/648/"
+    },
+    {
+      "name": "shattered-psyche--special",
+      "url": "https://pokeapi.co/api/v2/move/649/"
+    },
+    {
+      "name": "psychic-terrain",
+      "url": "https://pokeapi.co/api/v2/move/678/"
+    },
+    {
+      "name": "speed-swap",
+      "url": "https://pokeapi.co/api/v2/move/683/"
+    },
+    {
+      "name": "instruct",
+      "url": "https://pokeapi.co/api/v2/move/689/"
+    },
+    {
+      "name": "genesis-supernova",
+      "url": "https://pokeapi.co/api/v2/move/703/"
+    },
+    {
+      "name": "psychic-fangs",
+      "url": "https://pokeapi.co/api/v2/move/706/"
+    },
+    {
+      "name": "prismatic-laser",
+      "url": "https://pokeapi.co/api/v2/move/711/"
+    },
+    {
+      "name": "photon-geyser",
+      "url": "https://pokeapi.co/api/v2/move/722/"
+    },
+    {
+      "name": "light-that-burns-the-sky",
+      "url": "https://pokeapi.co/api/v2/move/723/"
+    },
+    {
+      "name": "glitzy-glow",
+      "url": "https://pokeapi.co/api/v2/move/736/"
+    },
+    {
+      "name": "magic-powder",
+      "url": "https://pokeapi.co/api/v2/move/750/"
+    },
+    {
+      "name": "max-mindstorm",
+      "url": "https://pokeapi.co/api/v2/move/769/"
+    },
+    {
+      "name": "expanding-force",
+      "url": "https://pokeapi.co/api/v2/move/797/"
+    },
+    {
+      "name": "freezing-glare",
+      "url": "https://pokeapi.co/api/v2/move/821/"
+    },
+    {
+      "name": "eerie-spell",
+      "url": "https://pokeapi.co/api/v2/move/826/"
+    },
+    {
+      "name": "psyshield-bash",
+      "url": "https://pokeapi.co/api/v2/move/828/"
+    },
+    {
+      "name": "mystical-power",
+      "url": "https://pokeapi.co/api/v2/move/832/"
+    },
+    {
+      "name": "esper-wing",
+      "url": "https://pokeapi.co/api/v2/move/840/"
+    },
+    {
+      "name": "lunar-blessing",
+      "url": "https://pokeapi.co/api/v2/move/849/"
+    },
+    {
+      "name": "take-heart",
+      "url": "https://pokeapi.co/api/v2/move/850/"
+    },
+    {
+      "name": "lumina-crash",
+      "url": "https://pokeapi.co/api/v2/move/855/"
+    },
+    {
+      "name": "psyblade",
+      "url": "https://pokeapi.co/api/v2/move/875/"
+    },
+    {
+      "name": "twin-beam",
+      "url": "https://pokeapi.co/api/v2/move/888/"
+    },
+    {
+      "name": "psychic-noise",
+      "url": "https://pokeapi.co/api/v2/move/917/"
+    }
+  ],
+  "name": "psychic",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "エスパー"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "에스퍼"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "超能力"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Psy"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Psycho"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Psíquico"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Psico"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Psychic"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "エスパー"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "超能力"
+    }
+  ],
+  "past_damage_relations": [
+    {
+      "damage_relations": {
+        "double_damage_from": [
+          {
+            "name": "bug",
+            "url": "https://pokeapi.co/api/v2/type/7/"
+          }
+        ],
+        "double_damage_to": [
+          {
+            "name": "fighting",
+            "url": "https://pokeapi.co/api/v2/type/2/"
+          },
+          {
+            "name": "poison",
+            "url": "https://pokeapi.co/api/v2/type/4/"
+          }
+        ],
+        "half_damage_from": [
+          {
+            "name": "fighting",
+            "url": "https://pokeapi.co/api/v2/type/2/"
+          },
+          {
+            "name": "psychic",
+            "url": "https://pokeapi.co/api/v2/type/14/"
+          }
+        ],
+        "half_damage_to": [
+          {
+            "name": "psychic",
+            "url": "https://pokeapi.co/api/v2/type/14/"
+          }
+        ],
+        "no_damage_from": [
+          {
+            "name": "ghost",
+            "url": "https://pokeapi.co/api/v2/type/8/"
+          }
+        ],
+        "no_damage_to": []
+      },
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    }
+  ]
+}
