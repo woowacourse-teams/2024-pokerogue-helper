@@ -39,6 +39,8 @@ dependencies {
 
     // Data MongoDB
     implementation  'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.mongodb:mongodb-driver-sync:5.0.0' // MongoDB Java 드라이버
+    implementation 'io.netty:netty-all:4.1.68.Final' // Netty 라이브러리
 
     // spring test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
