@@ -29,12 +29,13 @@
 
             <TextView
                 android:id="@+id/tv_ability_title"
-                android:layout_width="102dp"
-                android:layout_height="67dp"
+                android:layout_width="@dimen/ability_tv_title_width"
+                android:layout_height="@dimen/ability_tv_title_height"
                 android:background="@drawable/bg_ability_title"
                 android:gravity="center"
                 android:text="@{ability.title}"
                 android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                android:textSize="@dimen/ability_tv_title_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,6 +50,7 @@
                 android:maxLines="@{ability.shortening ? 1 : Integer.MAX_VALUE}"
                 android:text="@{ability.description}"
                 android:textAppearance="@style/TextAppearance.Poke.Description"
+                android:textSize="@dimen/ability_tv_description_size"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_ability_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_ability_title"
