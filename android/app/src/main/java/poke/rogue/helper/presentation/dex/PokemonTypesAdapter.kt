@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.view.dp
