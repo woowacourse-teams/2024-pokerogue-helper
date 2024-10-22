@@ -48,7 +48,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:columnCount="5"
-                    android:padding="20dp"
+                    android:padding="@dimen/home_gridLayout_padding"
                     android:rowCount="1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="4"
@@ -78,8 +78,8 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_land_type"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
                                 android:src="@drawable/img_home_type" />
 
                             <TextView
@@ -89,7 +89,8 @@
                                 android:paddingTop="12dp"
                                 android:text="@string/home_menu_type"
                                 android:textAlignment="center"
-                                android:textAppearance="@style/TextAppearance.Poke.TitleBold" />
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -115,8 +116,8 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_land_dex"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
                                 android:src="@drawable/img_home_dex" />
 
                             <TextView
@@ -126,7 +127,8 @@
                                 android:paddingTop="12dp"
                                 android:text="@string/home_menu_pokemon_detail"
                                 android:textAlignment="center"
-                                android:textAppearance="@style/TextAppearance.Poke.TitleBold" />
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -152,8 +154,8 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_land_ability"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
                                 android:src="@drawable/img_home_ability" />
 
                             <TextView
@@ -163,7 +165,8 @@
                                 android:paddingTop="12dp"
                                 android:text="@string/home_menu_ability"
                                 android:textAlignment="center"
-                                android:textAppearance="@style/TextAppearance.Poke.TitleBold" />
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -189,8 +192,8 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_land_biome"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
                                 android:src="@drawable/icon_home_biome" />
 
                             <TextView
@@ -200,7 +203,8 @@
                                 android:paddingTop="12dp"
                                 android:text="@string/home_menu_biome"
                                 android:textAlignment="center"
-                                android:textAppearance="@style/TextAppearance.Poke.TitleBold" />
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -226,8 +230,8 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_land_battle"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
                                 android:src="@drawable/icon_home_battle" />
 
                             <TextView
@@ -237,7 +241,8 @@
                                 android:paddingTop="12dp"
                                 android:text="@string/home_menu_battle"
                                 android:textAlignment="center"
-                                android:textAppearance="@style/TextAppearance.Poke.TitleBold" />
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </GridLayout>

@@ -8,6 +8,7 @@
     <dimen name="home_iv_margin_top">24dp</dimen>
     <dimen name="home_tv_margin_bottom">25dp</dimen>
     <dimen name="home_tv_size">15sp</dimen>
+    <dimen name="home_gridLayout_padding">20dp</dimen>
 
 
 </resources>
