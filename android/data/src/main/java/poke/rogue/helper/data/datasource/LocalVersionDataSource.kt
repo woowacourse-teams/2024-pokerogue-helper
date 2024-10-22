@@ -5,7 +5,7 @@ import poke.rogue.helper.local.datastore.VersionDataStore
 class LocalVersionDataSource(
     private val versionDataStore: VersionDataStore,
 ) {
-    fun databaseVersion() = versionDataStore.databaseVersion()
+    fun databaseVersionStream() = versionDataStore.databaseVersionStream()
 
     suspend fun saveDatabaseVersion(version: Int) = versionDataStore.saveDatabaseVersion(version)
 }

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.map
 class VersionDataStore(private val context: Context) {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_BASE_NAME)
 
-    fun databaseVersion(): Flow<Int?> =
+    fun databaseVersionStream(): Flow<Int?> =
         context.dataStore.data.map { preferences ->
             preferences[DATABASE_VERSION_KEY]
         }
