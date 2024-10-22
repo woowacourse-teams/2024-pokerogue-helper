@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  home screen  -->
+    <dimen name="home_cv_width">250dp</dimen>
+    <dimen name="home_cv_height">250dp</dimen>
+    <dimen name="home_iv_width">100dp</dimen>
+    <dimen name="home_iv_height">100dp</dimen>
+    <dimen name="home_iv_margin_top">42dp</dimen>
+    <dimen name="home_tv_margin_bottom">42dp</dimen>
+    <dimen name="home_tv_size">24sp</dimen>
+    <dimen name="home_gridLayout_padding">100dp</dimen>
+
+    <!-- ability screen -->
+    <dimen name="ability_tv_title_width">153dp</dimen>
+    <dimen name="ability_tv_title_height">100dp</dimen>
+    <dimen name="ability_tv_title_size">20sp</dimen>
+    <dimen name="ability_tv_description_size">20sp</dimen>
+
+</resources>
