@@ -11,7 +11,7 @@ class FloatingButtonHandler(
     context: Context,
     private val fab: View,
     private val withMyPokemon: View,
-    private val withOpponentPokemon: View
+    private val withOpponentPokemon: View,
 ) {
     private val rotateOpen: Animation = AnimationUtils.loadAnimation(context, R.anim.rotate_open)
     private val rotateClose: Animation = AnimationUtils.loadAnimation(context, R.anim.rotate_close)

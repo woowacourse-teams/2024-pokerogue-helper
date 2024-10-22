@@ -25,7 +25,7 @@ class PokemonDetailViewModel(
     private val logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-    PokemonDetailNavigateHandler {
+        PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 
@@ -95,9 +95,10 @@ class PokemonDetailViewModel(
         }
     }
 
-    private suspend fun pokemonUiModel() = uiState
-        .filterIsInstance<PokemonDetailUiState.Success>()
-        .first().pokemon
+    private suspend fun pokemonUiModel() =
+        uiState
+            .filterIsInstance<PokemonDetailUiState.Success>()
+            .first().pokemon
 
     companion object {
         fun factory(dexRepository: DexRepository): ViewModelProvider.Factory =

@@ -44,12 +44,13 @@ class PokemonDetailActivity :
         binding.lifecycleOwner = this
         binding.vm = viewModel
 
-        floatingButtonHandler = FloatingButtonHandler(
-            this,
-            binding.fabPokemonDetailBattle,
-            binding.efabPokemonDetailBattleWithMine,
-            binding.efabPokemonDetailBattleWithOpponent
-        )
+        floatingButtonHandler =
+            FloatingButtonHandler(
+                this,
+                binding.fabPokemonDetailBattle,
+                binding.efabPokemonDetailBattleWithMine,
+                binding.efabPokemonDetailBattleWithOpponent,
+            )
 
         initAdapter()
         initObservers()
@@ -150,7 +151,6 @@ class PokemonDetailActivity :
                         // TODO()
                     }
                 }
-
             }
         }
     }

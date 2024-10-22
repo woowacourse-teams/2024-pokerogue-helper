@@ -3,7 +3,5 @@
     <dimen name="progress_bar_corner_radius">8dp</dimen>
 
     <dimen name="floating_button_margin">12dp</dimen>
-    <dimen name="floating_button_padding">8dp</dimen>
-    <dimen name="floating_button_normal_size">56dp</dimen>
 
 </resources>
