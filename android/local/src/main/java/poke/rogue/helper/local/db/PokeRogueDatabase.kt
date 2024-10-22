@@ -31,5 +31,13 @@ abstract class PokeRogueDatabase : RoomDatabase() {
                 ).build().also { instance = it }
             }
         }
+
+        fun dropDatabase(context: Context) {
+            synchronized(this) {
+                instance?.close()
+                instance = null
+                context.deleteDatabase(DATABASE_NAME)
+            }
+        }
     }
 }
