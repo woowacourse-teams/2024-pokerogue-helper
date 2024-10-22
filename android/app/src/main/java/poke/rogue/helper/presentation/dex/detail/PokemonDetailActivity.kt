@@ -8,10 +8,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
-import androidx.appcompat.widget.ListPopupWindow
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.google.android.material.tabs.TabLayoutMediator
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultDexRepository
@@ -38,13 +35,6 @@ class PokemonDetailActivity :
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
 
-    private val battlePopupAdapter: PokemonDetailBattlePopupAdapter by lazy {
-        PokemonDetailBattlePopupAdapter(
-            items = BattlePopUpUiModel.items,
-            battlePopUpHandler = viewModel,
-        )
-    }
-
     override val toolbar: Toolbar
         get() = binding.toolbarPokemonDetail
 
@@ -60,7 +50,7 @@ class PokemonDetailActivity :
 
         initAdapter()
         initObservers()
-        initFloatingActionButton2()
+        initFloatingActionButton()
     }
 
     private fun initAdapter() {
@@ -81,8 +71,7 @@ class PokemonDetailActivity :
         }.attach()
     }
 
-    private fun initFloatingActionButton2() {
-
+    private fun initFloatingActionButton() {
         val rotateOpen: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_open)
         val rotateClose: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_close)
         val fromBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.from_bottom)
@@ -108,11 +97,8 @@ class PokemonDetailActivity :
                     fabPokemonDetailBattle.startAnimation(rotateClose)
                     shown = !shown
                 }
-
-
             }
         }
-
     }
 
     private fun initObservers() {

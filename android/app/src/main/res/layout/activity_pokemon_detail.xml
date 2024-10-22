@@ -13,6 +13,10 @@
             name="vm"
             type="poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel" />
 
+        <variable
+            name="battleNavigationActivated"
+            type="Boolean" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

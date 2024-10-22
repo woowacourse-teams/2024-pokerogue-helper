@@ -49,6 +49,9 @@ class PokemonDetailViewModel(
     private val _navigateToPokemonDetailToBattleEvent = MutableSharedFlow<PokemonDetailToBattleEvent>()
     val navigateToPokemonDetailToBattleEvent = _navigateToPokemonDetailToBattleEvent.asSharedFlow()
 
+    private val _battleNavigationActivated: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val battleNavigationActivated = _battleNavigationActivated.asStateFlow()
+
     fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch {
