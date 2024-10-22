@@ -18,6 +18,8 @@ interface PokemonDao {
 
     companion object {
         fun instance(context: Context): PokemonDao {
+            // TODO 삭제될 블록
+            PokeRogueDatabase.dropDatabase(context)
             return PokeRogueDatabase.instance(context).pokemonDao()
         }
     }
