@@ -2,13 +2,11 @@ name: Android PR Builder
 
 on:
   pull_request:
-    branches: [ an/develop ]
-  push:
-    branches: [ an/develop ]
+    branches: [ main ]
 
 jobs:
   build:
-    name: PR Checker
+    name: CD Release Builder
     runs-on: ubuntu-latest
 
     steps:
@@ -45,8 +43,8 @@ jobs:
           echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
           echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
           echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
+          cat ./app/src/debug/google-services.json
         working-directory: android
-
 
       - name: Create Local Properties
         run: touch local.properties
@@ -55,38 +53,37 @@ jobs:
       - name: Access Local Properties
         env:
           POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
-        #          POKE_RELEASE_URL: ${{ secrets.HOST_RELEASE_URI }}
-        #          KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
-        #          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
-        #          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        #          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-        #          STORE_FILE: ${{ secrets.STORE_FILE }}
+          #          POKE_DEV_BASE_URL: ${{ secrets.HOST_RELEASE_URI }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         run: |
           echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
-        #          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
-        #          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
-        #          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
-        #          echo STORE_FILE= $STORE_FILE >> local.properties
+          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
+          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
+          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
         working-directory: android
 
-      #      - name: Create Key Store
-      #        env:
-      #          KEY_STORE_BASE_64: ${{secrets.KEY_STORE_BASE_64}}
-      #        run: |
-      #          echo "$KEY_STORE_BASE_64" | base64 -d > ./funch_key_store.jks
+      - name: Create RELEASE Key Store
+        env:
+          KEY_STORE: ${{secrets.RELEASE_KEY_STORE}}
+        run: |
+          touch ./keystore/poke_key.jks
+          echo "$KEY_STORE" | base64 -d > ./keystore/poke_key.jks
+        working-directory: android
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
         working-directory: android
 
-      - name: Lint Check
+      - name: KT Lint
         run: ./gradlew ktlintCheck
         working-directory: android
 
-      - name: run debug unit test
-        run: ./gradlew testDebugUnitTest
+      - name: Unit Test Release
+        run: ./gradlew testReleaseUnitTest
         working-directory: android
 
-      - name: Build debug APK
-        run: ./gradlew assembleDebug
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
         working-directory: android

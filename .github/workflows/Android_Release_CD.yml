@@ -1,8 +1,6 @@
 name: Android PR Builder
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
     branches: [ main ]
 
@@ -88,7 +86,7 @@ jobs:
           name: release-artifacts
           path: android/app/build/outputs/apk/release/
           if-no-files-found: error
-          
+
       - name: Extract Version Name
         shell: bash
         env:
