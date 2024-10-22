@@ -143,7 +143,6 @@ class PokemonDetailActivity :
                 when (battleEvent) {
                     is NavigateToBattleEvent.WithMyPokemon -> {
                         Timber.d("내 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
-                        // TODO()
                     }
 
                     is NavigateToBattleEvent.WithOpponentPokemon -> {

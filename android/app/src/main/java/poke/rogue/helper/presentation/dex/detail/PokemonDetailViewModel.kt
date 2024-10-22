@@ -16,12 +16,13 @@ import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
+import poke.rogue.helper.presentation.dex.logPokemonDetailToBattle
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
 import poke.rogue.helper.presentation.util.event.asEventFlow
 
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
-    logger: AnalyticsLogger = analyticsLogger(),
+    private val logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
     PokemonDetailNavigateHandler {
@@ -80,15 +81,17 @@ class PokemonDetailViewModel(
 
     override fun navigateToBattleWithMine() {
         viewModelScope.launch {
-            val pokemon = pokemonUiModel()
-            _navigateToBattleEvent.emit(NavigateToBattleEvent.WithMyPokemon(pokemon))
+            val navigation = NavigateToBattleEvent.WithMyPokemon(pokemonUiModel())
+            _navigateToBattleEvent.emit(navigation)
+            logger.logPokemonDetailToBattle(navigation)
         }
     }
 
     override fun navigateToBattleWithOpponent() {
         viewModelScope.launch {
-            val pokemon = pokemonUiModel()
-            _navigateToBattleEvent.emit(NavigateToBattleEvent.WithOpponentPokemon(pokemon))
+            val navigation = NavigateToBattleEvent.WithOpponentPokemon(pokemonUiModel())
+            _navigateToBattleEvent.emit(navigation)
+            logger.logPokemonDetailToBattle(navigation)
         }
     }
 

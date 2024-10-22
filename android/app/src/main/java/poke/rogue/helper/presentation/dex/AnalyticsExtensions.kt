@@ -2,6 +2,7 @@ package poke.rogue.helper.presentation.dex
 
 import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.presentation.dex.detail.NavigateToBattleEvent
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
 
@@ -37,25 +38,26 @@ private fun PokeFilterUiModel.toParams(): List<AnalyticsEvent.Param> {
     } + AnalyticsEvent.Param(key = "generation", value = selectedGeneration.name)
 }
 
-//fun AnalyticsLogger.logPokemonDetailToBattle(event: PokemonDetailToBattleEvent) {
-//    val eventType = "pokemon_detail_to_battle_directly"
-//    logEvent(
-//        AnalyticsEvent(
-//            type = eventType,
-//            extras = event.toParams(),
-//        ),
-//    )
-//}
-//
-//private fun PokemonDetailToBattleEvent.toParams(): List<AnalyticsEvent.Param> {
-//    val battleRoleValue =
-//        when (battlePopUp) {
-//            is MyPokemon -> "MyPokemon"
-//            is EnemyPokemon -> "EnemyPokemon"
-//        }
-//    return listOf(
-//        AnalyticsEvent.Param(key = "battle_role", value = battleRoleValue),
-//        AnalyticsEvent.Param(key = "pokemon_id", value = pokemon.id),
-//        AnalyticsEvent.Param(key = "pokemon_name", value = pokemon.name),
-//    )
-//}
+fun AnalyticsLogger.logPokemonDetailToBattle(event: NavigateToBattleEvent) {
+    val eventType = "pokemon_detail_to_battle_directly"
+    logEvent(
+        AnalyticsEvent(
+            type = eventType,
+            extras = event.toParams(),
+        ),
+    )
+}
+
+private fun NavigateToBattleEvent.toParams(): List<AnalyticsEvent.Param> {
+    val (battleRoleValue, pokemon) =
+        when (this) {
+            is NavigateToBattleEvent.WithMyPokemon -> Pair("MyPokemon", pokemon)
+            is NavigateToBattleEvent.WithOpponentPokemon -> Pair("EnemyPokemon", pokemon)
+        }
+
+    return listOf(
+        AnalyticsEvent.Param(key = "battle_role", value = battleRoleValue),
+        AnalyticsEvent.Param(key = "pokemon_id", value = pokemon.id),
+        AnalyticsEvent.Param(key = "pokemon_name", value = pokemon.name),
+    )
+}
