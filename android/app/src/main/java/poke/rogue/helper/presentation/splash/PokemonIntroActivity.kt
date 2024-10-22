@@ -14,13 +14,14 @@ import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
-class PokemonIntroActivity() :
+class PokemonIntroActivity :
     ErrorHandleActivity<ActivityPokemonIntroBinding>(R.layout.activity_pokemon_intro) {
     private val viewModel by viewModels<PokemonIntroViewModel> {
         PokemonIntroViewModel.factory(DefaultDexRepository.instance(), analyticsLogger())
     }
     override val errorViewModel: ErrorHandleViewModel
         get() = viewModel
+
     override val toolbar: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class PokemonIntroActivity() :
         super.onCreate(savedInstanceState)
         repeatOnStarted {
             viewModel.navigationToHomeEvent.collect {
-                finish()
+                finishAffinity()
                 startActivity<HomeActivity>()
             }
         }
