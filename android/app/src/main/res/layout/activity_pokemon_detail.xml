@@ -13,10 +13,6 @@
             name="vm"
             type="poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel" />
 
-        <variable
-            name="battleNavigationActivated"
-            type="Boolean" />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -148,7 +144,7 @@
                 app:tint="@null" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/efab_pokemon_detail_battle_with_opponent"
+                android:id="@+id/efab_pokemon_detail_battle_with_mine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/floating_button_margin"
@@ -157,6 +153,7 @@
                 android:text="@string/pokemon_detail_to_battle_with_mine_pop_up_descriptions"
                 android:visibility="invisible"
                 app:icon="@drawable/ic_pokemon_battle_mine"
+                onSingleClick="@{() -> eventHandler.navigateToBattleWithMine()}"
                 app:iconGravity="end"
                 app:iconTint="@null"
                 app:layout_constraintBottom_toTopOf="@id/fab_pokemon_detail_battle"
@@ -167,7 +164,7 @@
                 tools:visibility="visible" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/efab_pokemon_detail_battle_with_mine"
+                android:id="@+id/efab_pokemon_detail_battle_with_opponent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/floating_button_margin"
@@ -178,7 +175,8 @@
                 app:icon="@drawable/ic_pokemon_battle_enemy"
                 app:iconGravity="end"
                 app:iconTint="@null"
-                app:layout_constraintBottom_toTopOf="@id/efab_pokemon_detail_battle_with_opponent"
+                onSingleClick="@{() -> eventHandler.navigateToBattleWithOpponent()}"
+                app:layout_constraintBottom_toTopOf="@id/efab_pokemon_detail_battle_with_mine"
                 app:layout_constraintEnd_toEndOf="@id/fab_pokemon_detail_battle"
                 app:strokeColor="@color/poke_white"
                 app:strokeWidth="1dp"

@@ -1,6 +1,6 @@
 package poke.rogue.helper.presentation.dex.detail
 
-interface PokemonDetailNavigateHandler : BattlePopUpHandler {
+interface PokemonDetailNavigateHandler {
     fun navigateToAbilityDetail(abilityId: String)
 
     fun navigateToBiomeDetail(biomeId: String)
@@ -9,5 +9,7 @@ interface PokemonDetailNavigateHandler : BattlePopUpHandler {
 
     fun navigateToPokemonDetail(pokemonId: String)
 
-    override fun navigateToBattle(battlePopUpUiModel: BattlePopUpUiModel)
+    fun navigateToBattleWithMine()
+
+    fun navigateToBattleWithOpponent()
 }

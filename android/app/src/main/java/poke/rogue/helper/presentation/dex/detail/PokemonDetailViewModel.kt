@@ -19,14 +19,13 @@ import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.dex.logPokemonDetailToBattle
 
 class PokemonDetailViewModel(
     private val dexRepository: DexRepository,
     logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-        PokemonDetailNavigateHandler {
+    PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 
@@ -46,11 +45,8 @@ class PokemonDetailViewModel(
     private val _navigateToPokemonDetailEvent = MutableSharedFlow<String>()
     val navigateToPokemonDetailEvent = _navigateToPokemonDetailEvent.asSharedFlow()
 
-    private val _navigateToPokemonDetailToBattleEvent = MutableSharedFlow<PokemonDetailToBattleEvent>()
-    val navigateToPokemonDetailToBattleEvent = _navigateToPokemonDetailToBattleEvent.asSharedFlow()
-
-    private val _battleNavigationActivated: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val battleNavigationActivated = _battleNavigationActivated.asStateFlow()
+    private val _navigateToBattleEvent = MutableSharedFlow<NavigateToBattleEvent>()
+    val navigateToBattleEvent = _navigateToBattleEvent.asSharedFlow()
 
     fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
@@ -83,30 +79,23 @@ class PokemonDetailViewModel(
         }
     }
 
-    override fun navigateToBattle(battlePopUpUiModel: BattlePopUpUiModel) {
+    override fun navigateToBattleWithMine() {
         viewModelScope.launch {
-            val successState =
-                uiState
-                    .filterIsInstance<PokemonDetailUiState.Success>()
-                    .first()
-
-            _navigateToPokemonDetailToBattleEvent.emit(
-                PokemonDetailToBattleEvent(
-                    battlePopUp = battlePopUpUiModel,
-                    pokemon = successState.pokemon,
-                ),
-            )
-
-            launch {
-                analyticsLogger().logPokemonDetailToBattle(
-                    PokemonDetailToBattleEvent(
-                        battlePopUp = battlePopUpUiModel,
-                        pokemon = successState.pokemon,
-                    ),
-                )
-            }
+            val pokemon = pokemonUiModel()
+            _navigateToBattleEvent.emit(NavigateToBattleEvent.WithMyPokemon(pokemon))
         }
     }
+
+    override fun navigateToBattleWithOpponent() {
+        viewModelScope.launch {
+            val pokemon = pokemonUiModel()
+            _navigateToBattleEvent.emit(NavigateToBattleEvent.WithOpponentPokemon(pokemon))
+        }
+    }
+
+    private suspend fun pokemonUiModel() = uiState
+        .filterIsInstance<PokemonDetailUiState.Success>()
+        .first().pokemon
 
     companion object {
         fun factory(dexRepository: DexRepository): ViewModelProvider.Factory =

@@ -139,18 +139,19 @@ class PokemonDetailActivity :
     // TODO: 예니 여기서 하면 될 Battle Activity 로 이동하면 될 것 같아요
     private fun observeNavigateToBattleEvent() {
         repeatOnStarted {
-            viewModel.navigateToPokemonDetailToBattleEvent.collect { battleEvent ->
-                when (battleEvent.battlePopUp) {
-                    is MyPokemon -> {
+            viewModel.navigateToBattleEvent.collect { battleEvent ->
+                when (battleEvent) {
+                    is NavigateToBattleEvent.WithMyPokemon -> {
                         Timber.d("내 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
                         // TODO()
                     }
 
-                    is EnemyPokemon -> {
+                    is NavigateToBattleEvent.WithOpponentPokemon -> {
                         Timber.d("상대 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
                         // TODO()
                     }
                 }
+
             }
         }
     }
