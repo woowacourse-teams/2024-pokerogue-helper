@@ -1,8 +1,8 @@
 name: Android PR Builder
 
 on:
-  pull_request:
-    branches: [ main ]
+  push:
+    branches: [ "an/release*" ]
 
 jobs:
   build:

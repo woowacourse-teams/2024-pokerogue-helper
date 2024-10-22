@@ -2,7 +2,7 @@ name: Android PR Builder
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "an/release*" ]
 
 jobs:
   build:
@@ -11,6 +11,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: show github pull request
+        run: echo ${{ github.event.pull_request.title }}
 
       - name: Gradle cache
         uses: actions/cache@v3
