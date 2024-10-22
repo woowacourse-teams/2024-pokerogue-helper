@@ -1,8 +1,10 @@
-name: Backend CD
+name: Backend Production Server CD
 
 on:
   push:
-    branches: [ "be/develop" ]
+    branches: [ "be/release" ]
+    tags:
+      - 'v*'
 
 permissions:
   contents: read
@@ -15,7 +17,7 @@ jobs:
 
   build:
     needs: test
-    runs-on: cd
+    runs-on: [cd, app-b]
     steps:
 
       - name: Checkout
@@ -23,10 +25,6 @@ jobs:
         with:
           token: ${{ secrets.ACTION_TOKEN }}
           submodules: true
-
-      - name: Copy docker-compose.yml to home directory
-        working-directory: ./backend/pokerogue/src/main/resources
-        run: sudo cp ./docker-compose-prod.yml /home/ubuntu/docker-compose.yml
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -44,15 +42,11 @@ jobs:
 
           docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
           docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
-          
-          docker build -t ${{ secrets.DOCKER_NGINX_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-nginx ./backend/pokerogue/docker
-          
-          docker build -t ${{ secrets.DOCKER_FAIL2BAN_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-fail2ban ./backend/pokerogue/docker
   
-  
+
   deploy:
     needs: build
-    runs-on: cd
+    runs-on: [cd, app-b]
     steps:
 
       - name: Change permission
@@ -63,17 +57,17 @@ jobs:
         run: |
           cd /home/ubuntu
           
-          sudo mkdir -p log/nginx && sudo touch log/nginx/error.log && sudo touch log/nginx/access.log
-          
           sudo chmod 666 /var/run/docker.sock
           
-          if [ "$(docker ps -qa)" ]; then
-          docker rm -f $(docker ps -qa)
+          if [ "$(docker ps -qa -f name=server)" ]; then
+          docker rm -f server
           else
-          echo "No containers to remove."
+          echo "No container named 'server' to remove."
           fi
           
           docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
           
-          docker-compose -f docker-compose.yml up -d
-          docker image prune -f
+          docker run -d -p 80:8080 --name server \
+              -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
+              -e TZ=Asia/Seoul \
+              ${{ secrets.DOCKER_SERVER_IMAGE }}
