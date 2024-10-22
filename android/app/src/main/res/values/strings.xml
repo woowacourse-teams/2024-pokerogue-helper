@@ -1,3 +1,125 @@
 <resources>
-    <string name="app_name">PokeRogueHelper</string>
+    <string name="app_name">PokéRogue Helper</string>
+    <!-- type -->
+    <string name="type_title_name">상성 보기</string>
+    <string name="type_my_type_title">내 타입</string>
+    <string name="type_opponent_type_title">상대 타입</string>
+    <string name="type_result_title">상성 결과</string>
+    <string name="type_result_sub_title">* 1배는 표시되지 않습니다.</string>
+    <string name="type_item_result_subject_mine">&#160;이(가)</string>
+    <string name="type_item_result_subject_opponent">&#160;에게</string>
+    <string name="type_item_result_tail">&#160;타입</string>
+    <string name="type_result_strong">강한</string>
+    <string name="type_result_weak">약한</string>
+    <string name="type_result_ineffective">무효한</string>
+    <string name="type_result_normal">대등한</string>
+
+    <!-- home -->
+    <string name="toolbar_pokerogue">포켓로그 바로가기</string>
+    <string name="toolbar_feedback">피드백 보내기</string>
+    <string name="home_pokerogue_url">https://pokerogue.net/</string>
+    <string name="home_pokerogue_tip_url">https://namu.wiki/w/Pok%C3%A9Rogue</string>
+    <string name="home_pokeroque_surey_url">https://docs.google.com/forms/d/e/1FAIpQLScd-Kp5zCzrcWKO6eXR7Ujgm0TscGrwuCPNCX1na0enhtVZaw/viewform</string>
+    <string name="home_menu_type">상성 보기</string>
+    <string name="home_menu_pokemon_detail">포켓몬 도감</string>
+    <string name="home_menu_ability">특성 도감</string>
+    <string name="home_menu_tip">꿀팁</string>
+    <string name="home_menu_battle">배틀 구도</string>
+    <string name="home_menu_biome">바이옴 도감</string>
+    <string name="home_menu_item">아이템 도감</string>
+
+    <!--    pokemon list-->
+    <string name="pokemon_list_title_name">포켓몬 도감</string>
+    <string name="pokemon_list_stat_format">%03d/%03d</string>
+    <string name="pokemon_list_poke_name_format">%s #%d</string>
+    <string name="pokemon_list_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
+    <string name="pokemon_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
+    <string name="pokemon_list_loading_guide">Loading…</string>
+    <string name="pokemon_list_empty_guide">해당하는 포켓몬이 없어요</string>
+    <!--    dex-->
+    <string name="dex_title_name">포켓몬 도감</string>
+    <string name="dex_stat_format">%03d/%03d</string>
+    <string name="dex_poke_name_format">%s #%d</string>
+    <string name="dex_list_search_pokemon_hint">포켓몬 이름으로 검색하세요.</string>
+    <string name="dex_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
+    <string name="dex_list_loading_guide">Loading…</string>
+    <string name="dex_list_empty_guide">해당하는 포켓몬이 없어요</string>
+    <string name="dex_filter_chip">필터 %s</string>
+    <string name="dex_filter_all_generations">모든 세대</string>
+    <string name="dex_filter_generation_format">%d세대</string>
+    <string name="dex_pokemon_sort_title">포켓몬 정렬</string>
+
+    <!--    pokemon detail-->
+    <string name="dex_detail_pokemon_stats_title">기본 스탯</string>
+
+    <string-array name="pokemon_detail_tab_titles">
+        <item>능력치</item>
+        <item>진화 정보</item>
+        <item>기술 정보</item>
+        <item>정보</item>
+    </string-array>
+
+    <!--    pokemon detail skills-->
+    <string name="pokemon_detail_skill_level">레벨</string>
+    <string name="pokemon_detail_skill_name">기술명</string>
+    <string name="pokemon_detail_skill_power">위력</string>
+    <string name="pokemon_detail_skill_accuracy">명중률</string>
+    <string name="pokemon_detail_skill_type">타입</string>
+    <string name="pokemon_detail_skill_category">분류</string>
+
+    <string name="pokemon_detail_egg_skill_title">알 기술</string>
+    <string name="pokemon_detail_self_learn_skill_title">자력으로 배우는 기술</string>
+
+    <!--    pokemon detail information-->
+    <string name="pokemon_detail_information_weight">체중</string>
+    <string name="pokemon_detail_information_height">키</string>
+
+    <!--    pokemon detail evolution-->
+    <string name="pokemon_detail_evolution_no_evolution_chain">진화 체인이 없는 포켓몬입니다.</string>
+    <string name="pokemon_detail_evolution_level">레벨 %d</string>
+
+    <!-- ability -->
+    <string name="ability_title_name">특성 도감</string>
+    <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
+    <string name="ability_detail_error_abilityId">잘못된 abilityId값(-1) 입니다.</string>
+    <string name="ability_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
+
+    <!--    biome -->
+    <string name="biome_title_name">바이옴 도감</string>
+    <string-array name="biome_tab_titles">
+        <item>체육관</item>
+        <item>보스</item>
+        <item>야생</item>
+        <item>다음 바이옴</item>
+    </string-array>
+
+    <!--    item -->
+    <string name="item_title_name">아이템 도감</string>
+
+    <!--    battle -->
+    <string name="battle_title_name">배틀 구도</string>
+    <string name="battle_result_title">계산 결과</string>
+    <string name="battle_calculated_power_title">계산된 위력</string>
+    <string name="battle_power_title">기술 위력</string>
+    <string name="battle_multiplier_title">배수</string>
+    <string name="battle_accuracy_title">명중 확률 : %s</string>
+    <string name="battle_mine_pokemon_selection">내 포켓몬을 선택해주세요!</string>
+    <string name="battle_opponent_pokemon_selection">상대 포켓몬을 선택해주세요!</string>
+    <string name="battle_move_selection">기술을 선택해주세요!</string>
+    <string name="battle_selection_complete_btn">선택 완료</string>
+    <string name="battle_selection_search_skill_hint">기술을 검색하세요</string>
+    <string name="battle_selection_pokemon_hint">포켓몬을 검색하세요</string>
+    <string name="battle_selection_title">포켓몬을 선택하세요</string>
+    <string name="battle_selection_next_btn">다음</string>
+    <string name="battle_selection_previous_btn">이전</string>
+    <string name="battle_result_multiplier">*</string>
+    <string name="battle_result_equal">=</string>
+
+    <!--    error-->
+    <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>
+    <string name="network_error_img_desc">네트워크 에러 이미지</string>
+    <string name="network_error_title">인터넷에 연결되어 있지 않아요!</string>
+    <string name="network_error_desc">인터넷 연결이 불안정해요.\nWi-Fi를 다시 한 번 확인해 주세요!!</string>
+    <string name="network_error_retry">다시 시도하기</string>
+    <string name="network_error_toast">인터넷 연결 후 다시 시도해 주세요.</string>
 </resources>
