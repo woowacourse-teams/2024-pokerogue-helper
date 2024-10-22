@@ -23,7 +23,9 @@ public class MongoConfig {
         // TransportSettings를 사용하여 Netty 설정 적용
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
-                .transportSettings(TransportSettings.nettyBuilder().build())
+                .transportSettings(TransportSettings.nettyBuilder()
+                        .allocator(io.netty.buffer.UnpooledByteBufAllocator.DEFAULT)
+                        .build())
                 .build();
 
         return MongoClients.create(settings);
