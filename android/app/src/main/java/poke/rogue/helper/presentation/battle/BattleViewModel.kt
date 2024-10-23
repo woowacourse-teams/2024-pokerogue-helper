@@ -78,8 +78,7 @@ class BattleViewModel(
         )
 
     val isBattleFetchSuccessful =
-        battleResult
-            .map { it.isSuccess() }
+        battleResult.map { it.isSuccess() }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
     init {
