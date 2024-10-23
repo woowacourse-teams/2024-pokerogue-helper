@@ -102,6 +102,7 @@ app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.re
 # android test
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
 android-test-fragment = { module = "androidx.fragment:fragment-testing", version.ref = "androidx-test-fragment" }
+android-test-fragment-manifest = { module = "androidx.fragment:fragment-testing-manifest", version.ref = "androidx-test-fragment" }
 androidx-test-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "android-test-esspreso-contrib" }
 androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso-core" }
 androidx-test-core = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core" }
@@ -158,6 +159,6 @@ retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 unit-test = ["kotlin-coroutines-test", "junit5", "kotest-runner-junit5", "mockk"]
 robolectric-test = ["robolectric", "androidx-test-core", "androidx-test-extention-ktx"]
 android-test = [
-    "androidx-test-core", "androidx-test-espresso-contrib", "androidx-test-espresso", "androidx-test-junit", "androidx-test-extention-ktx", "androidx-test-rules", "androidx-test-runner", "android-test-fragment",
+    "androidx-test-core", "androidx-test-espresso-contrib", "androidx-test-espresso", "androidx-test-junit", "androidx-test-extention-ktx", "androidx-test-rules", "androidx-test-runner", "android-test-fragment", "android-test-fragment-manifest",
     "junit5", "kotest-runner-junit5", "android-mockk", "junit5-android-test-core"
 ]
