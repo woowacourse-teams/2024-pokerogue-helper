@@ -56,3 +56,5 @@ jobs:
       - name: Port forwarding end
         run: |
           sudo sysctl -w net.ipv4.ip_forward=0
+          iptables -t nat -D PREROUTING -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_B_PRIVATE_IP }}:80
+          sudo iptables -t nat -L -n -v
