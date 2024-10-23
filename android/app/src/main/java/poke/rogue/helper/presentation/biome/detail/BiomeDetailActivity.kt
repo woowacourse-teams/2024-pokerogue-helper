@@ -86,13 +86,14 @@ class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.la
                         val biomeId = event.biomeId
                         startActivity<BiomeDetailActivity> {
                             putExtras(intent(this@BiomeDetailActivity, biomeId))
-                            analyticsLogger().logClickEvent(NAVIGATE_TO_NEXT_BIOME_DETAIL)
+                            logger.logClickEvent(NAVIGATE_TO_NEXT_BIOME_DETAIL)
                         }
                     }
                     is BiomeDetailUiEvent.NavigateToPokemonDetail -> {
                         val pokemonId = event.pokemonId
                         startActivity<PokemonDetailActivity> {
                             putExtras(PokemonDetailActivity.intent(this@BiomeDetailActivity, pokemonId))
+                            logger.logClickEvent(NAVIGATE_TO_POKEMON_DETAIL)
                         }
                     }
 
@@ -100,6 +101,7 @@ class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.la
                         val pokemonId = event.pokemonId
                         startActivity<BattleActivity> {
                             putExtras(BattleActivity.intent(this@BiomeDetailActivity, pokemonId, isMine = false))
+                            logger.logClickEvent(NAVIGATE_TO_BATTLE)
                         }
                     }
                 }
@@ -116,6 +118,8 @@ class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.la
     companion object {
         private const val BIOME_ID = "biomeId"
         private const val NAVIGATE_TO_NEXT_BIOME_DETAIL = "Nav_Next_Biome_Detail"
+        private const val NAVIGATE_TO_POKEMON_DETAIL = "Nav_Pokemon_Detail"
+        private const val NAVIGATE_TO_BATTLE = "Nav_Battle"
 
         fun intent(
             context: Context,
