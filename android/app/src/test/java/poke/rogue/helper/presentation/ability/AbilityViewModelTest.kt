@@ -17,7 +17,6 @@ import poke.rogue.helper.presentation.di.testViewModelModule
 import poke.rogue.helper.testing.CoroutinesTestExtension
 import poke.rogue.helper.testing.data.repository.FakeAbilityRepository
 
-
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
 class AbilityViewModelTest : KoinTest {

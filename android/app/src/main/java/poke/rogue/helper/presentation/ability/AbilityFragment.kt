@@ -67,9 +67,9 @@ class AbilityFragment : ErrorHandleFragment<FragmentAbilityBinding>(R.layout.fra
                     replace<AbilityDetailFragment>(
                         containerId,
                         args =
-                        AbilityDetailFragment.bundleOf(
-                            abilityId,
-                        ),
+                            AbilityDetailFragment.bundleOf(
+                                abilityId,
+                            ),
                     )
                     addToBackStack(TAG)
                 }

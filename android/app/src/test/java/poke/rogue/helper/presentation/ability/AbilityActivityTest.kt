@@ -23,7 +23,6 @@ class AbilityActivityTest {
             testViewModelModule,
         )
 
-
     @Test
     fun `Activity 실행 테스트`() {
         activityScenario.onActivity { activity ->
