@@ -1,10 +1,7 @@
-name: Backend Production Server CD
+name: Backend Production Server CD B
 
 on:
-  push:
-    branches: [ "be/release" ]
-    tags:
-      - 'v*'
+  workflow_call:
 
 permissions:
   contents: read
@@ -13,7 +10,6 @@ jobs:
   test:
     uses: ./.github/workflows/Backend-CI.yml
     secrets: inherit
-
 
   build:
     needs: test
@@ -42,7 +38,6 @@ jobs:
 
           docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
           docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
-  
 
   deploy:
     needs: build
@@ -71,3 +66,18 @@ jobs:
               -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
               -e TZ=Asia/Seoul \
               ${{ secrets.DOCKER_SERVER_IMAGE }}
+
+      - name: Wait for service to start
+        run: |
+          echo "Waiting for the service to start..."
+          sleep 10
+
+      - name: Check service availability
+        run: |
+          HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" http://localhost:8080/actuator/health)
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "Service is up and running"
+          else
+            echo "Service is not responding. HTTP Status: $HTTP_STATUS"
+            exit 1
+          fi
