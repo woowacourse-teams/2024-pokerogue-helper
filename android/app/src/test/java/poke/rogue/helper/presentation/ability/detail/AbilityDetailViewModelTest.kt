@@ -7,25 +7,27 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import poke.rogue.helper.data.repository.AbilityRepository
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.test.KoinTest
+import org.koin.test.get
+import org.koin.test.junit5.KoinTestExtension
 import poke.rogue.helper.presentation.ability.model.toUi
+import poke.rogue.helper.presentation.di.testViewModelModule
 import poke.rogue.helper.testing.CoroutinesTestExtension
-import poke.rogue.helper.testing.data.repository.FakeAbilityRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
-class AbilityDetailViewModelTest {
-    private lateinit var repository: AbilityRepository
-    private lateinit var viewModel: AbilityDetailViewModel
-
-    @BeforeEach
-    fun setUp() {
-        repository = FakeAbilityRepository()
-        viewModel = AbilityDetailViewModel(repository)
-    }
+class AbilityDetailViewModelTest : KoinTest {
+    @JvmField
+    @RegisterExtension
+    val koinTestExtension =
+        KoinTestExtension.create {
+            modules(testViewModelModule)
+        }
+    private val viewModel: AbilityDetailViewModel
+        get() = get<AbilityDetailViewModel>()
 
     @Test
     fun `특성 id값으로 특성 상세 정보를 불러온다`() =

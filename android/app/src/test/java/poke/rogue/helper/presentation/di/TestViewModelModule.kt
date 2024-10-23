@@ -4,6 +4,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import poke.rogue.helper.presentation.dex.PokemonListViewModel
 import poke.rogue.helper.presentation.ability.AbilityViewModel
+import poke.rogue.helper.presentation.ability.detail.AbilityDetailViewModel
 import poke.rogue.helper.testing.di.testingModule
 
 val testViewModelModule =
@@ -12,4 +13,5 @@ val testViewModelModule =
 
         singleOf(::PokemonListViewModel)
         singleOf(::AbilityViewModel)
+        singleOf(::AbilityDetailViewModel)
     }
