@@ -166,12 +166,20 @@ class PokemonDetailActivity :
                 progressIndicatorPokemonDetail,
             )
 
-            collapsingToolbarLayoutPokemonDetail.title =
+            collapsingToolbarLayoutPokemonDetail?.title =
                 stringOf(
                     R.string.pokemon_list_poke_name_format,
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
+
+            tvPokemonDetailPokemonName?.text =
+                stringOf(
+                    R.string.pokemon_list_poke_name_format,
+                    pokemonDetail.pokemon.name,
+                    pokemonDetail.pokemon.dexNumber,
+                )
+//            tv_pokemon_detail_pokemon_name
         }
 
         pokemonTypesAdapter.addTypes(
