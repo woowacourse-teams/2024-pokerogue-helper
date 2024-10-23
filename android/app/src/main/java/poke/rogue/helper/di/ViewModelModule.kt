@@ -12,6 +12,7 @@ import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.battle.selection.pokemon.PokemonSelectionViewModel
 import poke.rogue.helper.presentation.battle.selection.skill.SkillSelectionViewModel
 import poke.rogue.helper.presentation.dex.PokemonListViewModel
+import poke.rogue.helper.presentation.type.TypeViewModel
 
 val viewModelModule
     get() =
@@ -47,4 +48,5 @@ val viewModelModule
                     get(),
                 )
             }
+            viewModelOf(::TypeViewModel)
         }

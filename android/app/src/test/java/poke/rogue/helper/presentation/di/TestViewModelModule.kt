@@ -11,6 +11,7 @@ import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.battle.selection.pokemon.PokemonSelectionViewModel
 import poke.rogue.helper.presentation.battle.selection.skill.SkillSelectionViewModel
 import poke.rogue.helper.presentation.dex.PokemonListViewModel
+import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.testing.di.testingModule
 
 val testViewModelModule =
@@ -18,6 +19,7 @@ val testViewModelModule =
         includes(testingModule)
 
         singleOf(::PokemonListViewModel)
+        singleOf(::TypeViewModel)
         single { (pokemonId: String?, selectionType: SelectionType?) ->
             BattleViewModel(
                 get(),
