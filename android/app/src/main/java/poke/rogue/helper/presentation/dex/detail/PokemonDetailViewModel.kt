@@ -23,7 +23,7 @@ class PokemonDetailViewModel(
     private val logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-    PokemonDetailNavigateHandler {
+        PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 

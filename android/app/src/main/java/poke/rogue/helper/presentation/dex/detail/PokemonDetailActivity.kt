@@ -27,7 +27,6 @@ import timber.log.Timber
 
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
-
     private val viewModel by viewModel<PokemonDetailViewModel>()
     override val toolbar: Toolbar
         get() = binding.toolbarPokemonDetail

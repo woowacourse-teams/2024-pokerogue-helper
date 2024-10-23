@@ -14,7 +14,6 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class PokemonIntroActivity() :
     ErrorHandleActivity<ActivityPokemonIntroBinding>(R.layout.activity_pokemon_intro) {
-
     private val viewModel by viewModel<PokemonIntroViewModel>()
     override val errorViewModel: ErrorHandleViewModel
         get() = viewModel
