@@ -15,7 +15,6 @@ import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
 import poke.rogue.helper.presentation.util.event.asEventFlow
-import timber.log.Timber
 
 class PokemonIntroViewModel(
     private val pokemonRepository: DexRepository,
