@@ -13,12 +13,12 @@ class PokeRogueHelperApp : Application() {
     override fun onCreate() {
         super.onCreate()
         initTimber()
-        DefaultDexRepository.init(this) // TODO : Koin 마이그레이션 다 끝나면 삭제!!
         startKoin {
             androidLogger(level = Level.DEBUG)
             androidContext(applicationContext)
             modules(appModule)
         }
+        DefaultDexRepository.init(this) // TODO : Koin 마이그레이션 다 끝나면 삭제!!
     }
 
     private fun initTimber() {
