@@ -41,6 +41,7 @@ jobs:
       - name: Check service availability
         run: |
           HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" http://localhost:80/actuator/health)
+
           if [ "$HTTP_STATUS" -eq 200 ]; then
             echo "Service is up and running"
           else
