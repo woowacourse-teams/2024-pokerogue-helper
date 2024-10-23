@@ -53,8 +53,4 @@ class PokemonInformationFragment :
         biomesAdapter.submitList(pokemonDetail.biomes)
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.root.requestLayout()
-    }
 }

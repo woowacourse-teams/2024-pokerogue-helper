@@ -44,11 +44,6 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.root.requestLayout()
-    }
-
     private fun initAdapter() {
         binding.apply {
             rvPokemonAbilities.adapter = abilityAdapter

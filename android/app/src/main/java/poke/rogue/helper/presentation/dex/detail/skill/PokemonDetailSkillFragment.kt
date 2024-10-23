@@ -30,10 +30,6 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
         initObservers()
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.root.requestLayout()
-    }
 
     private fun initAdapter() {
         binding.rvPokemonDetailSkills.apply {

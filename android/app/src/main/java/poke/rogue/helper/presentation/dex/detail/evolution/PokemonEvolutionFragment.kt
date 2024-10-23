@@ -52,8 +52,4 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.root.requestLayout()
-    }
 }
