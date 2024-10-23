@@ -1,13 +1,11 @@
 package poke.rogue.helper.data.repository
 
-import android.content.Context
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import org.koin.mp.KoinPlatform.getKoin
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
-import poke.rogue.helper.data.cache.GlideImageCacher
 import poke.rogue.helper.data.cache.ImageCacher
 import poke.rogue.helper.data.datasource.LocalDexDataSource
 import poke.rogue.helper.data.datasource.LocalVersionDataSource
@@ -147,17 +145,16 @@ class DefaultDexRepository(
         private var instance: DexRepository? = null
         const val PLELOAD_POKEMON_COUNT = 24
 
-        fun init(context: Context) {
-            GlideImageCacher.init(context)
+        fun init() {
             instance =
                 DefaultDexRepository(
-                    RemoteDexDataSource.instance(),
-                    LocalDexDataSource.instance(context),
-                    GlideImageCacher.instance(),
-                    DefaultBiomeRepository.instance(),
-                    analyticsLogger(),
-                    getKoin().get(),
-                    getKoin().get(),
+                    remotePokemonDataSource = getKoin().get(),
+                    localPokemonDataSource = getKoin().get(),
+                    imageCacher = getKoin().get(),
+                    biomeRepository = DefaultBiomeRepository.instance(),
+                    analyticsLogger = analyticsLogger(),
+                    localVersionDataSource = getKoin().get(),
+                    remoteVersionService = getKoin().get(),
                 )
         }
 

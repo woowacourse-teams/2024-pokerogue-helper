@@ -1,8 +1,6 @@
 package poke.rogue.helper.data.datasource
 
-import android.content.Context
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.toData
 import poke.rogue.helper.data.model.toEntity
@@ -32,17 +30,4 @@ class LocalDexDataSource(
         }.onFailure {
             logger.logError(it, "LocalDexDataSource - clearPokemons() 에서 발생")
         }.getOrThrow()
-
-    companion object {
-        private var instance: LocalDexDataSource? = null
-
-        fun instance(context: Context): LocalDexDataSource {
-            return instance ?: LocalDexDataSource(
-                PokemonDao.instance(context),
-                analyticsLogger(),
-            ).also {
-                instance = it
-            }
-        }
-    }
 }

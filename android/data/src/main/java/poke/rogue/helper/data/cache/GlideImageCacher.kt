@@ -1,6 +1,5 @@
 package poke.rogue.helper.data.cache
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import com.bumptech.glide.Glide
@@ -70,23 +69,5 @@ class GlideImageCacher(private val context: Context) : ImageCacher {
 
     override suspend fun clear() {
         Glide.get(context).clearMemory()
-    }
-
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        private var instance: GlideImageCacher? = null
-
-        fun init(context: Context) {
-            require(instance == null) {
-                "GlideImageCacher is already initialized"
-            }
-            instance = GlideImageCacher(context)
-        }
-
-        fun instance(): GlideImageCacher {
-            return requireNotNull(instance) {
-                "GlideImageCacher is not initialized"
-            }
-        }
     }
 }
