@@ -7,43 +7,9 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    uses: ./.github/workflows/Backend-CI.yml
-    secrets: inherit
-
-  build:
-    needs: test
-    runs-on: [cd, app-b]
-    steps:
-
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.ACTION_TOKEN }}
-          submodules: true
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Build with Gradle
-        run: ./gradlew bootJar
-        working-directory: ./backend/pokerogue
-
-      - name: Docker build and push
-        run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-          docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
-          docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
-
   deploy:
-    needs: build
     runs-on: [cd, app-b]
     steps:
-
       - name: Change permission
         run: |
           sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/2024-pokerogue-helper
