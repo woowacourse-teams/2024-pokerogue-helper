@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.dex
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -24,7 +23,6 @@ import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.PokeException
 import poke.rogue.helper.data.model.PokemonFilter
 import poke.rogue.helper.data.repository.DexRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.filter.PokeGenerationUiModel
@@ -143,13 +141,6 @@ class PokemonListViewModel(
             pokeSort.value = sort
         }
         analyticsLogger().logPokemonSort(sort)
-    }
-
-    companion object {
-        fun factory(pokemonListRepository: DexRepository): ViewModelProvider.Factory =
-            BaseViewModelFactory {
-                PokemonListViewModel(pokemonListRepository)
-            }
     }
 }
 
