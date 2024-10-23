@@ -17,7 +17,7 @@ import com.pokerogue.helper.pokemon.dto.PokemonBiomeResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonDetailResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonMoveResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
-import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonInMemoryRepository;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
@@ -29,21 +29,21 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PokemonService {
 
-    private final PokemonRepository pokemonRepository;
     private final MoveRepository moveRepository;
     private final BiomeRepository biomeRepository;
     private final AbilityRepository abilityRepository;
     private final EvolutionService evolutionService;
+    private final PokemonInMemoryRepository pokemonInMemoryRepository;
 
     public PokemonDetailResponse findById(String id) {
-        Pokemon pokemon = pokemonRepository.findById(id)
+        Pokemon pokemon = pokemonInMemoryRepository.findById(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
         return createPokemonDetailResponse(pokemon);
     }
 
     public List<PokemonResponse> findAll() {
-        List<Pokemon> pokemons = pokemonRepository.findAll();
+        List<Pokemon> pokemons = pokemonInMemoryRepository.findAll();
 
         return pokemons.stream()
                 .map(pokemon -> PokemonResponse.from(pokemon, createTypeResponse(pokemon)))
