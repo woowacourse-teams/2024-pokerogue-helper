@@ -3,6 +3,7 @@ name: Android PR Builder
 on:
   pull_request:
     branches: [ an/develop ]
+  workflow_call:
 
 defaults:
   run:
