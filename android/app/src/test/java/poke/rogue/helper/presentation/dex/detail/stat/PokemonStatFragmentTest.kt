@@ -37,7 +37,7 @@ class PokemonStatFragmentTest {
     }
 
     @Test
-    fun `프래그먼트 구성 변경 시에도 `() {
+    fun `프래그먼트 구성 변경 시에도 같은 뷰모델 인스턴스`() {
         // given
         val scenario =
             launchFragmentInContainer<PokemonStatFragment>(
