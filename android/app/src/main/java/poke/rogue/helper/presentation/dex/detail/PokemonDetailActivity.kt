@@ -53,6 +53,17 @@ class PokemonDetailActivity :
         initFloatingButtonsHandler()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(IS_EXPANDED, isExpanded)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        isExpanded = savedInstanceState.getBoolean(IS_EXPANDED)
+        super.onRestoreInstanceState(savedInstanceState)
+        updateFloatingButtonsState()
+    }
+
     private fun initAdapter() {
         pokemonTypesAdapter =
             PokemonTypesAdapter(
@@ -179,16 +190,13 @@ class PokemonDetailActivity :
         val fromBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.from_bottom)
         val toBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.to_bottom)
 
+        updateFloatingButtonsState()
         with(binding) {
             if (!isExpanded) {
-                efabPokemonDetailBattleWithMine.visibility = View.VISIBLE
-                efabPokemonDetailBattleWithOpponent.visibility = View.VISIBLE
                 fabPokemonDetailBattle.startAnimation(rotateOpen)
                 efabPokemonDetailBattleWithMine.startAnimation(fromBottom)
                 efabPokemonDetailBattleWithOpponent.startAnimation(fromBottom)
             } else {
-                efabPokemonDetailBattleWithMine.visibility = View.INVISIBLE
-                efabPokemonDetailBattleWithOpponent.visibility = View.INVISIBLE
                 fabPokemonDetailBattle.startAnimation(rotateClose)
                 efabPokemonDetailBattleWithMine.startAnimation(toBottom)
                 efabPokemonDetailBattleWithOpponent.startAnimation(toBottom)
@@ -198,8 +206,23 @@ class PokemonDetailActivity :
         isExpanded = !isExpanded
     }
 
+    private fun updateFloatingButtonsState() {
+        with(binding) {
+            if (isExpanded) {
+                efabPokemonDetailBattleWithMine.visibility = View.VISIBLE
+                efabPokemonDetailBattleWithOpponent.visibility = View.VISIBLE
+            } else {
+                efabPokemonDetailBattleWithMine.visibility = View.INVISIBLE
+                efabPokemonDetailBattleWithOpponent.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+
     companion object {
         private const val POKEMON_ID = "pokemonId"
+        private const val IS_EXPANDED = "isExpanded"
+
         val TAG: String = PokemonDetailActivity::class.java.simpleName
 
         private val typesUiConfig =
