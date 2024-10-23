@@ -18,7 +18,7 @@ jobs:
   Distribution_To_Discord:
     name: Alpha APK to Discord
     runs-on: ubuntu-latest
-    needs: [ CIAndroidDevelop ]
+    needs: [ CI_Android_Develop ]
     steps:
       - uses: actions/checkout@v4
       - name: Gradle cache
