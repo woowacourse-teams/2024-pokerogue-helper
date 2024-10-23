@@ -20,12 +20,12 @@ import poke.rogue.helper.testing.CoroutinesTestExtension
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
 class HomeViewModelTest : KoinTest {
-
     @JvmField
     @RegisterExtension
-    val koinTestExtension = KoinTestExtension.create {
-        modules(testViewModelModule)
-    }
+    val koinTestExtension =
+        KoinTestExtension.create {
+            modules(testViewModelModule)
+        }
 
     private val viewModel: HomeViewModel
         get() = get<HomeViewModel>()
@@ -38,42 +38,47 @@ class HomeViewModelTest : KoinTest {
     }
 
     @Test
-    fun `포켓몬 도감 화면으로 이동한다`() = runTest {
-        viewModel.navigateToDex()
+    fun `포켓몬 도감 화면으로 이동한다`() =
+        runTest {
+            viewModel.navigateToDex()
 
-        val event = viewModel.navigationEvent.first()
-        event shouldBe HomeNavigateEvent.ToDex
-    }
-
-    @Test
-    fun `포켓몬 배틀 화면으로 이동한다`() = runTest {
-        viewModel.navigateToBattle()
-
-        val event = viewModel.navigationEvent.first()
-        event shouldBe HomeNavigateEvent.ToBattle
-    }
+            val event = viewModel.navigationEvent.first()
+            event shouldBe HomeNavigateEvent.ToDex
+        }
 
     @Test
-    fun `특성 화면으로 이동한다`() = runTest {
-        viewModel.navigateToAbility()
+    fun `포켓몬 배틀 화면으로 이동한다`() =
+        runTest {
+            viewModel.navigateToBattle()
 
-        val event = viewModel.navigationEvent.first()
-        event shouldBe HomeNavigateEvent.ToAbility
-    }
-
-    @Test
-    fun `포켓로그 화면으로 이동한다`() = runTest {
-        viewModel.navigateToPokeRogue()
-
-        val event = viewModel.navigationEvent.first()
-        event shouldBe HomeNavigateEvent.ToLogo
-    }
+            val event = viewModel.navigationEvent.first()
+            event shouldBe HomeNavigateEvent.ToBattle
+        }
 
     @Test
-    fun `바이옴 화면으로 이동한다`() = runTest {
-        viewModel.navigateToBiome()
+    fun `특성 화면으로 이동한다`() =
+        runTest {
+            viewModel.navigateToAbility()
 
-        val event = viewModel.navigationEvent.first()
-        event shouldBe HomeNavigateEvent.ToBiome
-    }
+            val event = viewModel.navigationEvent.first()
+            event shouldBe HomeNavigateEvent.ToAbility
+        }
+
+    @Test
+    fun `포켓로그 화면으로 이동한다`() =
+        runTest {
+            viewModel.navigateToPokeRogue()
+
+            val event = viewModel.navigationEvent.first()
+            event shouldBe HomeNavigateEvent.ToLogo
+        }
+
+    @Test
+    fun `바이옴 화면으로 이동한다`() =
+        runTest {
+            viewModel.navigateToBiome()
+
+            val event = viewModel.navigationEvent.first()
+            event shouldBe HomeNavigateEvent.ToBiome
+        }
 }
