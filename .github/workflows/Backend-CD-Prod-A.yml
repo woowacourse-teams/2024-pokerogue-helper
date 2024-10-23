@@ -14,6 +14,11 @@ jobs:
         run: |
           sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/2024-pokerogue-helper
 
+      - name: Port forwarding begin
+        run: |
+          sudo sysctl -w net.ipv4.ip_forward=1
+          sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_B_PRIVATE_IP }}:80
+
       - name: Deploy
         run: |
           cd /home/ubuntu
@@ -47,3 +52,7 @@ jobs:
             echo "Service is not responding. HTTP Status: $HTTP_STATUS"
             exit 1
           fi
+
+      - name: Port forwarding end
+        run: |
+          sudo sysctl -w net.ipv4.ip_forward=0
