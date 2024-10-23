@@ -20,9 +20,14 @@ import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,9 +48,16 @@ public class PokemonService {
     }
 
     public List<PokemonResponse> findAll() {
+        List<Pokemon> pokemons1 = new ArrayList<>();
+        for (int i = 0; i < 1453 / 50 + 1; i += 1) {
+            Pageable pageable = PageRequest.of(i, 50);
+            Page<Pokemon> all = pokemonRepository.findAll(pageable);
+            all.stream()
+                    .forEach(pokemons1::add);
+        }
         List<Pokemon> pokemons = pokemonRepository.findAll();
 
-        return pokemons.stream()
+        return pokemons1.stream()
                 .map(pokemon -> PokemonResponse.from(pokemon, createTypeResponse(pokemon)))
                 .toList();
     }
