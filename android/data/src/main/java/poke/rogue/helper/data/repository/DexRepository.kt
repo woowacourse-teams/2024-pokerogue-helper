@@ -17,4 +17,6 @@ interface DexRepository {
     ): List<Pokemon>
 
     suspend fun pokemonDetail(id: String): PokemonDetail
+
+    suspend fun pokemon(id: String): Pokemon
 }

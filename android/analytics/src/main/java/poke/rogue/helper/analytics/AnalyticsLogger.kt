@@ -1,9 +1,9 @@
 package poke.rogue.helper.analytics
 
-private const val DEBUG_MODE = "debug"
-private const val ALPHA_MODE = "alpha"
-private const val BETA_MODE = "beta"
-private const val RELEASE_MODE = "release"
+internal const val DEBUG_MODE = "debug"
+internal const val ALPHA_MODE = "alpha"
+internal const val BETA_MODE = "beta"
+internal const val RELEASE_MODE = "release"
 
 /** Analytics API surface */
 interface AnalyticsLogger {

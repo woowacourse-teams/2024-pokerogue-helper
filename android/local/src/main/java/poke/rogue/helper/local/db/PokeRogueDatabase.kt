@@ -10,14 +10,14 @@ import poke.rogue.helper.local.entity.PokemonEntity
 
 @Database(
     entities = [PokemonEntity::class],
-    version = 1,
+    version = 2,
 )
 @androidx.room.TypeConverters(PokemonTypeConverters::class)
 abstract class PokeRogueDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 
     companion object {
-        private const val DATABASE_NAME = "pokemon_helper.db"
+        const val DATABASE_NAME = "pokemon_helper.db"
 
         @Volatile
         private var instance: PokeRogueDatabase? = null
@@ -28,7 +28,9 @@ abstract class PokeRogueDatabase : RoomDatabase() {
                     context,
                     PokeRogueDatabase::class.java,
                     DATABASE_NAME,
-                ).build().also { instance = it }
+                )
+                    .fallbackToDestructiveMigration()
+                    .build().also { instance = it }
             }
         }
 

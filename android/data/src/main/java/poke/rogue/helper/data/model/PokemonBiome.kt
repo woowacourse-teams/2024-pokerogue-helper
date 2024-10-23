@@ -6,24 +6,28 @@ data class PokemonBiome(
     val id: String,
     val name: String,
     val imageUrl: String,
+    val pokemonType: List<Type> = emptyList(),
 ) {
     companion object {
         val DUMMYS: List<PokemonBiome> =
             listOf(
                 PokemonBiome(
-                    "1",
-                    "평야",
-                    "https://pokeroguedex.com/biomes/plains.png",
+                    id = "1",
+                    name = "평야",
+                    imageUrl = "https://pokeroguedex.com/biomes/plains.png",
+                    pokemonType = listOf(Type.GRASS, Type.BUG),
                 ),
                 PokemonBiome(
-                    "2",
-                    "높은 풀숲",
-                    "https://pokeroguedex.com/biomes/tall-grass.png",
+                    id = "2",
+                    name = "높은 풀숲",
+                    imageUrl = "https://pokeroguedex.com/biomes/tall-grass.png",
+                    pokemonType = listOf(Type.GRASS, Type.BUG, Type.FLYING),
                 ),
                 PokemonBiome(
-                    "3",
-                    "동굴",
-                    "https://pokeroguedex.com/biomes/cave.png",
+                    id = "3",
+                    name = "동굴",
+                    imageUrl = "https://pokeroguedex.com/biomes/cave.png",
+                    pokemonType = listOf(Type.GROUND, Type.ROCK),
                 ),
             )
     }

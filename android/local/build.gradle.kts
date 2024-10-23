@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -46,12 +47,19 @@ android {
 
 dependencies {
     implementation(libs.kotlin.coroutines.android)
+    implementation(libs.kotlin.serialization.json)
     // third-party
     implementation(libs.timber)
     // room
     implementation(libs.room)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
+    implementation(libs.datastore.preferences)
+    // koin
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    testImplementation(libs.koin.test.junit5)
+    androidTestImplementation(libs.koin.android.test)
     // unit test
     testImplementation(libs.bundles.unit.test)
     testImplementation(libs.kotlin.test)

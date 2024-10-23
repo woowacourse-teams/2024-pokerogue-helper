@@ -18,3 +18,5 @@ jobs:
 
       - name: auto-add-labels ✨
         uses: ./.github/actions/add_labels
+        with:
+          title: ${{ github.event.pull_request.title }}

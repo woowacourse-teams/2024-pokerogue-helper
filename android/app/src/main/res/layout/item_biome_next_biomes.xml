@@ -8,17 +8,18 @@
         <variable
             name="nextBiome"
             type="poke.rogue.helper.presentation.biome.model.NextBiomeUiModel" />
+
         <variable
             name="handler"
             type="poke.rogue.helper.presentation.biome.detail.BiomeDetailHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        onSingleClick="@{view -> handler.navigateToBiomeDetail(nextBiome.biome.id)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_pokemon_corner_radius"
-        android:paddingHorizontal="30dp"
-        onSingleClick="@{view -> handler.navigateToBiomeDetail(nextBiome.biome.id)}"
+        android:paddingHorizontal="50dp"
         android:paddingVertical="15dp">
 
         <TextView
@@ -26,9 +27,8 @@
             style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
             android:text="@{nextBiome.biome.name}"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_biome"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="화산" />
 
@@ -46,9 +46,8 @@
             style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:text="@{Double.toString(nextBiome.probability) + '%'}"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{String.format(@string/biome_detail_next_biome_probability, nextBiome.probability)}"
+            app:layout_constraintEnd_toEndOf="@id/iv_biome"
             app:layout_constraintTop_toTopOf="@id/tv_biome_name"
             tools:text="33%" />
 

@@ -8,9 +8,9 @@ import android.view.MenuItem
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.ViewDataBinding
+import org.koin.android.ext.android.inject
 import poke.rogue.helper.R
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.presentation.base.BindingActivity
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
@@ -20,7 +20,7 @@ abstract class ToolbarActivity<T : ViewDataBinding>(
     @LayoutRes layoutRes: Int,
 ) : BindingActivity<T>(layoutRes) {
     protected abstract val toolbar: Toolbar?
-    private val logger: AnalyticsLogger = analyticsLogger()
+    protected val logger by inject<AnalyticsLogger>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

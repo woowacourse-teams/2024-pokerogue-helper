@@ -82,7 +82,3 @@ jobs:
       - name: Unit Test Release
         run: ./gradlew testReleaseUnitTest
         working-directory: android
-
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
-        working-directory: android
