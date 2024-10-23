@@ -9,10 +9,6 @@
             name="eventHandler"
             type="poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler" />
 
-        <variable
-            name="vm"
-            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel" />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -109,7 +105,6 @@
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout_pokemon_detail"
                 style="@style/TabLayoutStyle"
-                visible="@{!vm.isLoading}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/tab_border_background"
@@ -120,71 +115,9 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager_pokemon_detail"
-            visible="@{!vm.isLoading}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_pokemon_detail_battle"
-                style="@style/ThemeOverlay.Material3.FloatingActionButton.Primary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/floating_button_margin"
-                android:backgroundTint="@color/poke_grey_65"
-                android:contentDescription="@string/battle_title_name"
-                android:src="@drawable/icon_home_battle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:tint="@null" />
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/efab_pokemon_detail_battle_with_mine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/floating_button_margin"
-                android:backgroundTint="@color/poke_grey_65"
-                android:minHeight="36dp"
-                android:text="@string/pokemon_detail_to_battle_with_mine_pop_up_descriptions"
-                android:visibility="invisible"
-                app:icon="@drawable/ic_pokemon_battle_mine"
-                onSingleClick="@{() -> eventHandler.navigateToBattleWithMine()}"
-                app:iconGravity="end"
-                app:iconTint="@null"
-                app:layout_constraintBottom_toTopOf="@id/fab_pokemon_detail_battle"
-                app:layout_constraintEnd_toEndOf="@id/fab_pokemon_detail_battle"
-                app:strokeColor="@color/poke_white"
-                app:strokeWidth="1dp"
-                tools:text="내 포켓몬으로"
-                tools:visibility="visible" />
-
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/efab_pokemon_detail_battle_with_opponent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/floating_button_margin"
-                android:backgroundTint="@color/poke_grey_65"
-                android:minHeight="36dp"
-                android:text="@string/pokemon_detail_to_battle_with_enemy_pop_up_descriptions"
-                android:visibility="invisible"
-                app:icon="@drawable/ic_pokemon_battle_enemy"
-                app:iconGravity="end"
-                app:iconTint="@null"
-                onSingleClick="@{() -> eventHandler.navigateToBattleWithOpponent()}"
-                app:layout_constraintBottom_toTopOf="@id/efab_pokemon_detail_battle_with_mine"
-                app:layout_constraintEnd_toEndOf="@id/fab_pokemon_detail_battle"
-                app:strokeColor="@color/poke_white"
-                app:strokeWidth="1dp"
-                tools:text="상대 포켓몬으로"
-                tools:visibility="visible" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

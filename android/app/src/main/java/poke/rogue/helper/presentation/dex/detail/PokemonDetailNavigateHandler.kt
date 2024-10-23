@@ -8,8 +8,4 @@ interface PokemonDetailNavigateHandler {
     fun navigateToHome()
 
     fun navigateToPokemonDetail(pokemonId: String)
-
-    fun navigateToBattleWithMine()
-
-    fun navigateToBattleWithOpponent()
 }
