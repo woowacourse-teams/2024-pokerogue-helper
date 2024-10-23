@@ -3,6 +3,9 @@ package poke.rogue.helper.presentation.dex.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
@@ -21,6 +24,7 @@ import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
+import timber.log.Timber
 
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
@@ -31,6 +35,8 @@ class PokemonDetailActivity :
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
 
+    private var isExpanded = false
+
     override val toolbar: Toolbar
         get() = binding.toolbarPokemonDetail
 
@@ -40,9 +46,22 @@ class PokemonDetailActivity :
 
         binding.eventHandler = viewModel
         binding.lifecycleOwner = this
+        binding.vm = viewModel
 
         initAdapter()
         initObservers()
+        initFloatingButtonsHandler()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(IS_EXPANDED, isExpanded)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        isExpanded = savedInstanceState.getBoolean(IS_EXPANDED)
+        super.onRestoreInstanceState(savedInstanceState)
+        updateFloatingButtonsState()
     }
 
     private fun initAdapter() {
@@ -69,6 +88,13 @@ class PokemonDetailActivity :
         observeNavigateToAbilityDetailEvent()
         observeNavigateToBiomeDetailEvent()
         observeNavigateToPokemonDetailEvent()
+        observeNavigateToBattleEvent()
+    }
+
+    private fun initFloatingButtonsHandler() {
+        binding.fabPokemonDetailBattle.setOnClickListener {
+            toggleFloatingButtons()
+        }
     }
 
     private fun observePokemonDetailUi() {
@@ -118,6 +144,24 @@ class PokemonDetailActivity :
         }
     }
 
+    // TODO: 예니 여기서 하면 될 Battle Activity 로 이동하면 될 것 같아요
+    private fun observeNavigateToBattleEvent() {
+        repeatOnStarted {
+            viewModel.navigateToBattleEvent.collect { battleEvent ->
+                when (battleEvent) {
+                    is NavigateToBattleEvent.WithMyPokemon -> {
+                        Timber.d("내 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
+                    }
+
+                    is NavigateToBattleEvent.WithOpponentPokemon -> {
+                        Timber.d("상대 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
+                        // TODO()
+                    }
+                }
+            }
+        }
+    }
+
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
             ivPokemonDetailPokemon.loadImageWithProgress(
@@ -140,8 +184,44 @@ class PokemonDetailActivity :
         )
     }
 
+    private fun toggleFloatingButtons() {
+        val rotateOpen: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_open)
+        val rotateClose: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_close)
+        val fromBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.from_bottom)
+        val toBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.to_bottom)
+
+        updateFloatingButtonsState()
+        with(binding) {
+            if (!isExpanded) {
+                fabPokemonDetailBattle.startAnimation(rotateOpen)
+                efabPokemonDetailBattleWithMine.startAnimation(fromBottom)
+                efabPokemonDetailBattleWithOpponent.startAnimation(fromBottom)
+            } else {
+                fabPokemonDetailBattle.startAnimation(rotateClose)
+                efabPokemonDetailBattleWithMine.startAnimation(toBottom)
+                efabPokemonDetailBattleWithOpponent.startAnimation(toBottom)
+            }
+        }
+
+        isExpanded = !isExpanded
+    }
+
+    private fun updateFloatingButtonsState() {
+        with(binding) {
+            if (isExpanded) {
+                efabPokemonDetailBattleWithMine.visibility = View.VISIBLE
+                efabPokemonDetailBattleWithOpponent.visibility = View.VISIBLE
+            } else {
+                efabPokemonDetailBattleWithMine.visibility = View.INVISIBLE
+                efabPokemonDetailBattleWithOpponent.visibility = View.INVISIBLE
+            }
+        }
+    }
+
     companion object {
         private const val POKEMON_ID = "pokemonId"
+        private const val IS_EXPANDED = "isExpanded"
+
         val TAG: String = PokemonDetailActivity::class.java.simpleName
 
         private val typesUiConfig =
