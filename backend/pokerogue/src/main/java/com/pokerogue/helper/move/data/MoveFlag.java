@@ -3,7 +3,9 @@ package com.pokerogue.helper.move.data;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
+import lombok.Getter;
 
+@Getter
 public enum MoveFlag {
 
     NONE("none"),
@@ -26,6 +28,7 @@ public enum MoveFlag {
     TRIAGE_MOVE("triage_move"),
     IGNORE_ABILITIES("ignore_abilities"),
     CHECK_ALL_HITS("check_all_hits"),
+    IGNORE_SUBSTITUTE("ignore_substitute"),
     REDIRECT_COUNTER("redirect_counter"),
     ;
 
