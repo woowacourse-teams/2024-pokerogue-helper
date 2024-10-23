@@ -51,5 +51,4 @@ class PokemonEvolutionFragment : BindingFragment<FragmentPokemonEvolutionBinding
             }
         }
     }
-
 }

@@ -52,5 +52,4 @@ class PokemonInformationFragment :
         }
         biomesAdapter.submitList(pokemonDetail.biomes)
     }
-
 }

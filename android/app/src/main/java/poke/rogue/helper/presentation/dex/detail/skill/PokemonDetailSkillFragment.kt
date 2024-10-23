@@ -30,7 +30,6 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
         initObservers()
     }
 
-
     private fun initAdapter() {
         binding.rvPokemonDetailSkills.apply {
             adapter = skillsAdapter

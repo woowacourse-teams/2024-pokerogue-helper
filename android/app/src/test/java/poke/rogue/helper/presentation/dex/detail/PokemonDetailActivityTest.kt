@@ -36,9 +36,9 @@ class PokemonDetailActivityTest {
     @Test
     fun `액티비티가 구성 변경되어도 같은 뷰모델 인스턴스 사용`() {
         // given
-        var previewVm: PokemonDetailViewModel? = null
+        var previewViewModel: PokemonDetailViewModel? = null
         scenario.onActivity { activity ->
-            previewVm = activity.getViewModel()
+            previewViewModel = activity.getViewModel()
         }
 
         // when
@@ -46,25 +46,7 @@ class PokemonDetailActivityTest {
 
         // then
         scenario.onActivity {
-            it.getViewModel<PokemonDetailViewModel>() shouldBe previewVm
+            it.getViewModel<PokemonDetailViewModel>() shouldBe previewViewModel
         }
     }
-
-//    @Test
-//    fun `어떤 포켓몬이 될가요`() = runTest{
-//        scenario.onActivity { activity ->
-//            val vm = activity.getViewModel<PokemonDetailViewModel>()
-//            val binding = activity.binding
-//
-//            val ui = vm.uiState.first()
-//
-//            val pokemonName = vm.uiState.filterIsInstance<PokemonDetailUiState.Success>().map {
-//                it.pokemon.name
-//            }
-//            binding.toolbarPokemonDetail.title shouldBe "이상해씨"
-//
-//        }
-//    }
-
 }
-
