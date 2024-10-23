@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.dex.detail
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +13,6 @@ import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.dex.logPokemonDetailToBattle
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
@@ -25,7 +23,7 @@ class PokemonDetailViewModel(
     private val logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-        PokemonDetailNavigateHandler {
+    PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 
@@ -99,9 +97,4 @@ class PokemonDetailViewModel(
         uiState
             .filterIsInstance<PokemonDetailUiState.Success>()
             .first().pokemon
-
-    companion object {
-        fun factory(dexRepository: DexRepository): ViewModelProvider.Factory =
-            BaseViewModelFactory { PokemonDetailViewModel(dexRepository) }
-    }
 }
