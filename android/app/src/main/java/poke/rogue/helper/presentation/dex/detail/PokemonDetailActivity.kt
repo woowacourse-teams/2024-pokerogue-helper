@@ -3,6 +3,9 @@ package poke.rogue.helper.presentation.dex.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout.LayoutParams
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
@@ -31,7 +34,8 @@ class PokemonDetailActivity :
 
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
-    private lateinit var floatingButtonHandler: FloatingButtonHandler
+
+    private var isExpanded = false
 
     override val toolbar: Toolbar
         get() = binding.toolbarPokemonDetail
@@ -44,17 +48,9 @@ class PokemonDetailActivity :
         binding.lifecycleOwner = this
         binding.vm = viewModel
 
-        floatingButtonHandler =
-            FloatingButtonHandler(
-                this,
-                binding.fabPokemonDetailBattle,
-                binding.efabPokemonDetailBattleWithMine,
-                binding.efabPokemonDetailBattleWithOpponent,
-            )
-
         initAdapter()
         initObservers()
-        initFloatingActionButton()
+        initFloatingButtonsHandler()
     }
 
     private fun initAdapter() {
@@ -84,9 +80,9 @@ class PokemonDetailActivity :
         observeNavigateToBattleEvent()
     }
 
-    private fun initFloatingActionButton() {
+    private fun initFloatingButtonsHandler() {
         binding.fabPokemonDetailBattle.setOnClickListener {
-            floatingButtonHandler.toggleFab()
+            toggleFloatingButtons()
         }
     }
 
@@ -175,6 +171,31 @@ class PokemonDetailActivity :
             config = typesUiConfig,
             spacingBetweenTypes = 0.dp,
         )
+    }
+
+    private fun toggleFloatingButtons() {
+        val rotateOpen: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_open)
+        val rotateClose: Animation = AnimationUtils.loadAnimation(this, R.anim.rotate_close)
+        val fromBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.from_bottom)
+        val toBottom: Animation = AnimationUtils.loadAnimation(this, R.anim.to_bottom)
+
+        with(binding) {
+            if (!isExpanded) {
+                efabPokemonDetailBattleWithMine.visibility = View.VISIBLE
+                efabPokemonDetailBattleWithOpponent.visibility = View.VISIBLE
+                fabPokemonDetailBattle.startAnimation(rotateOpen)
+                efabPokemonDetailBattleWithMine.startAnimation(fromBottom)
+                efabPokemonDetailBattleWithOpponent.startAnimation(fromBottom)
+            } else {
+                efabPokemonDetailBattleWithMine.visibility = View.INVISIBLE
+                efabPokemonDetailBattleWithOpponent.visibility = View.INVISIBLE
+                fabPokemonDetailBattle.startAnimation(rotateClose)
+                efabPokemonDetailBattleWithMine.startAnimation(toBottom)
+                efabPokemonDetailBattleWithOpponent.startAnimation(toBottom)
+            }
+        }
+
+        isExpanded = !isExpanded
     }
 
     companion object {
