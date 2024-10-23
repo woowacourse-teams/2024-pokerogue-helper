@@ -30,7 +30,6 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
             intent.serializable(SELECTION_TYPE),
         )
     }
-
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)
     }

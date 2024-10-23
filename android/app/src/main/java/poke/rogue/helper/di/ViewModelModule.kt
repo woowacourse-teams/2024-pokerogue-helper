@@ -19,34 +19,16 @@ val viewModelModule
         module {
             viewModelOf(::PokemonListViewModel)
             viewModel<BattleViewModel> { (pokemonId: String?, selectionType: SelectionType?) ->
-                BattleViewModel(
-                    get(),
-                    get(),
-                    get(),
-                    pokemonId,
-                    selectionType,
-                )
+                BattleViewModel(get(), get(), get(), pokemonId, selectionType)
             }
             viewModel<BattleSelectionViewModel> { (selectionMode: SelectionMode, previousSelection: SelectionData) ->
-                BattleSelectionViewModel(
-                    selectionMode,
-                    previousSelection,
-                    get(),
-                )
+                BattleSelectionViewModel(selectionMode, previousSelection, get())
             }
             viewModel { (previousSelection: PokemonSelectionUiModel?) ->
-                PokemonSelectionViewModel(
-                    get(),
-                    previousSelection,
-                    get(),
-                )
+                PokemonSelectionViewModel(get(), previousSelection, get())
             }
             viewModel { (previousSelection: SelectionData.WithSkill?) ->
-                SkillSelectionViewModel(
-                    get(),
-                    previousSelection,
-                    get(),
-                )
+                SkillSelectionViewModel(get(), previousSelection, get())
             }
             viewModelOf(::TypeViewModel)
         }
