@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.FragmentPokemonSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -19,13 +19,11 @@ import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setOnSearchAction
 
-class PokemonSelectionFragment : ErrorHandleFragment<FragmentPokemonSelectionBinding>(R.layout.fragment_pokemon_selection) {
+class PokemonSelectionFragment :
+    ErrorHandleFragment<FragmentPokemonSelectionBinding>(R.layout.fragment_pokemon_selection) {
     private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
-    private val viewModel: PokemonSelectionViewModel by viewModels<PokemonSelectionViewModel> {
-        PokemonSelectionViewModel.factory(
-            DefaultDexRepository.instance(),
-            sharedViewModel.previousSelection.selectedPokemon(),
-        )
+    private val viewModel: PokemonSelectionViewModel by viewModel<PokemonSelectionViewModel> {
+        parametersOf(sharedViewModel.previousSelection.selectedPokemon())
     }
     private val pokemonAdapter: PokemonSelectionAdapter by lazy {
         PokemonSelectionAdapter(viewModel)

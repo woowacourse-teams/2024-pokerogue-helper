@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultBattleRepository
 import poke.rogue.helper.databinding.FragmentSkillSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -22,11 +22,8 @@ import poke.rogue.helper.presentation.util.view.setOnSearchAction
 class SkillSelectionFragment :
     ErrorHandleFragment<FragmentSkillSelectionBinding>(R.layout.fragment_skill_selection) {
     private val sharedViewModel: BattleSelectionViewModel by activityViewModels()
-    private val viewModel: SkillSelectionViewModel by viewModels<SkillSelectionViewModel> {
-        SkillSelectionViewModel.factory(
-            DefaultBattleRepository.instance(requireContext().applicationContext),
-            sharedViewModel.previousSelection as? SelectionData.WithSkill,
-        )
+    private val viewModel: SkillSelectionViewModel by viewModel<SkillSelectionViewModel> {
+        parametersOf(sharedViewModel.previousSelection as? SelectionData.WithSkill)
     }
     private val skillAdapter: SkillSelectionAdapter by lazy {
         SkillSelectionAdapter(viewModel)
