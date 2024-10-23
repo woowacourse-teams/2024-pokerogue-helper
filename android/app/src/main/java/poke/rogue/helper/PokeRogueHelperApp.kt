@@ -1,18 +1,24 @@
 package poke.rogue.helper
 
 import android.app.Application
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import poke.rogue.helper.data.repository.DefaultDexRepository
+import poke.rogue.helper.di.appModule
 import timber.log.Timber
 
 class PokeRogueHelperApp : Application() {
     override fun onCreate() {
         super.onCreate()
         initTimber()
-        initFirebase()
-        DefaultDexRepository.init(this)
+        startKoin {
+            androidLogger(level = Level.DEBUG)
+            androidContext(applicationContext)
+            modules(appModule)
+        }
+        DefaultDexRepository.init(this) // TODO : Koin 마이그레이션 다 끝나면 삭제!!
     }
 
     private fun initTimber() {
@@ -25,33 +31,5 @@ class PokeRogueHelperApp : Application() {
                 },
             )
         }
-    }
-
-    private fun initFirebase() {
-        when (BuildConfig.BUILD_TYPE) {
-            DEBUG_MODE -> {
-                Firebase.analytics.setAnalyticsCollectionEnabled(false)
-                Firebase.crashlytics.setCrashlyticsCollectionEnabled(false)
-            }
-
-            ALPHA_MODE -> {
-                Firebase.analytics.setAnalyticsCollectionEnabled(false)
-                Firebase.crashlytics.setCrashlyticsCollectionEnabled(true)
-            }
-
-            BETA_MODE, RELEASE_MODE -> {
-                Firebase.analytics.setAnalyticsCollectionEnabled(true)
-                Firebase.crashlytics.setCrashlyticsCollectionEnabled(true)
-            }
-
-            else -> error("Unknown build type")
-        }
-    }
-
-    companion object {
-        private const val DEBUG_MODE = "debug"
-        private const val ALPHA_MODE = "alpha"
-        private const val BETA_MODE = "beta"
-        private const val RELEASE_MODE = "release"
     }
 }

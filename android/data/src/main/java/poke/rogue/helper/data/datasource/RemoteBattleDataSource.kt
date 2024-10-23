@@ -30,7 +30,6 @@ class RemoteBattleDataSource(
             }
             .getOrThrow()
             .map { it.toData() }
-            .filter { it.power > 0 }
 
     suspend fun calculatedBattlePrediction(
         weatherId: String,

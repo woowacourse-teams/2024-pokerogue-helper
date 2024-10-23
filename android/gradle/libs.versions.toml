@@ -1,10 +1,12 @@
 [versions]
 applicationId = "poke.rogue.helper"
 compileSdk = "34"
+koin = "4.0.0"
 minSdk = "26"
+robolectric = "4.13"
 targetSdk = "34"
-appVersion = "1.0.3"
-versionCode = "10003"
+appVersion = "1.1.0"
+versionCode = "101000"
 agp = "8.3.2"
 
 # kotlin
@@ -31,11 +33,13 @@ coil = "2.6.0"
 glide = "4.14.2"
 ktlint = "12.1.0"
 splash-screen = "1.0.1"
+datastore = "1.0.0"
 
 # Google & Firebase
 google-services = "4.4.2"
 firebase = "33.1.2"
 firebase-crashlytics = "3.0.2"
+app-update = "2.1.0"
 
 # Android-Test
 android-junit5-plugin = "1.10.0.0"
@@ -63,6 +67,12 @@ kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref =
 kotlin-gradleplugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
+# koin
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core" }
+koin-test-junit5 = { module = "io.insert-koin:koin-test-junit5" }
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-android-test = { module = "io.insert-koin:koin-android-test" }
 # coroutines
 kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
@@ -81,21 +91,23 @@ room = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 # Google & Firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics" }
+app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "app-update" }
 # android test
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-test-junit" }
 android-test-fragment = { module = "androidx.fragment:fragment-testing", version.ref = "androidx-test-fragment" }
 androidx-test-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "android-test-esspreso-contrib" }
 androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso-core" }
-androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test-core" }
+androidx-test-core = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test-core" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidx-test" }
-androidx-test-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-junit" }
+androidx-test-extention-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidx-test-junit" }
 junit5-android-test-core = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "android-junit5-core" }
 junit5-android-test-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "android-junit5-core" }
 android-mockk = { module = "io.mockk:mockk-android", version.ref = "mockk" }
@@ -104,7 +116,9 @@ android-mockk = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 junit5 = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit5-jupiter" }
+junit-vintage-engine = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "junit5-jupiter" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest-runner-junit5" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-webserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "okhttp" }
 
@@ -142,7 +156,8 @@ firebase-crashlytics-plugin = { id = "com.google.firebase.crashlytics", version.
 firebase = ["firebase-analytics", "firebase-crashlytics"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 unit-test = ["kotlin-coroutines-test", "junit5", "kotest-runner-junit5", "mockk"]
+robolectric-test = ["robolectric", "androidx-test-core", "androidx-test-extention-ktx"]
 android-test = [
-    "androidx-test-core", "androidx-test-espresso-contrib", "androidx-test-espresso", "androidx-test-junit", "androidx-test-junit-ktx", "androidx-test-rules", "androidx-test-runner", "android-test-fragment",
+    "androidx-test-core", "androidx-test-espresso-contrib", "androidx-test-espresso", "androidx-test-junit", "androidx-test-extention-ktx", "androidx-test-rules", "androidx-test-runner", "android-test-fragment",
     "junit5", "kotest-runner-junit5", "android-mockk", "junit5-android-test-core"
 ]

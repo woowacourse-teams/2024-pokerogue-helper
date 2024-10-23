@@ -71,8 +71,12 @@
     <string name="pokemon_detail_self_learn_skill_title">자력으로 배우는 기술</string>
 
     <!--    pokemon detail information-->
-    <string name="pokemon_detail_information_weight">체중</string>
-    <string name="pokemon_detail_information_height">키</string>
+    <string name="pokemon_detail_information_weight_title">체중</string>
+    <string name="pokemon_detail_information_height_title">키</string>
+    <string name="pokemon_detail_biome_title">바이옴</string>
+    <string name="pokemon_detail_information_weight">%.1f  kg</string>
+    <string name="pokemon_detail_information_height">%.1f  m</string>
+
 
     <!--    pokemon detail evolution-->
     <string name="pokemon_detail_evolution_no_evolution_chain">진화 체인이 없는 포켓몬입니다.</string>
@@ -86,12 +90,23 @@
 
     <!--    biome -->
     <string name="biome_title_name">바이옴 도감</string>
+    <string name="biome_guide_url">https://wiki.pokerogue.net/ko:biomes:biomes</string>
+    <string name="biome_search_hint">바이옴 이름으로 검색하세요.</string>
     <string-array name="biome_tab_titles">
         <item>체육관</item>
         <item>보스</item>
         <item>야생</item>
         <item>다음 바이옴</item>
     </string-array>
+
+    <!--    biome detail gym -->
+    <string name="biome_detail_gym">등장하는 체육관 관장이 없어요</string>
+
+    <!--    biome detail boss -->
+    <string name="biome_detail_boss">등장하는 보스 포켓몬이 없어요</string>
+
+    <!--    biome detail next biome -->
+    <string name="biome_detail_next_biome_probability">%.1f%%</string>
 
     <!--    item -->
     <string name="item_title_name">아이템 도감</string>
@@ -122,4 +137,10 @@
     <string name="network_error_desc">인터넷 연결이 불안정해요.\nWi-Fi를 다시 한 번 확인해 주세요!!</string>
     <string name="network_error_retry">다시 시도하기</string>
     <string name="network_error_toast">인터넷 연결 후 다시 시도해 주세요.</string>
+
+    <!--   update-->
+    <string name="update_snackBar_title">업데이트가 완료되었습니다.</string>
+    <string name="update_snackBar_action_text">재시작</string>
+    <string name="update_result_ok">다운로드를 시작합니다.</string>
+    <string name="update_result_failed">다운로드에 실패했습니다.</string>
 </resources>

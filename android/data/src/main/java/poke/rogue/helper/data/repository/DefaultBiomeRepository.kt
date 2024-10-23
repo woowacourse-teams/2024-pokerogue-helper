@@ -1,14 +1,18 @@
 package poke.rogue.helper.data.repository
 
+import poke.rogue.helper.analytics.AnalyticsLogger
+import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.datasource.RemoteBiomeDataSource
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.BiomeDetail
+import poke.rogue.helper.data.utils.logBiomeDetail
+import poke.rogue.helper.stringmatcher.has
 
 class DefaultBiomeRepository(
     private val remoteBiomeDataSource: RemoteBiomeDataSource,
+    private val analyticsLogger: AnalyticsLogger,
 ) : BiomeRepository {
     private var cachedBiomes: List<Biome> = emptyList()
-    private var cachedBiomesDetails: MutableMap<String, BiomeDetail> = mutableMapOf()
 
     override suspend fun biomes(): List<Biome> {
         if (cachedBiomes.isEmpty()) {
@@ -17,13 +21,16 @@ class DefaultBiomeRepository(
         return cachedBiomes
     }
 
-    override suspend fun biomeDetail(id: String): BiomeDetail {
-        val cached = cachedBiomesDetails[id]
-        if (cached != null) {
-            return cached
+    override suspend fun biomes(query: String): List<Biome> {
+        if (query.isBlank()) {
+            return biomes()
         }
+        return biomes().filter { it.name.has(query) }
+    }
+
+    override suspend fun biomeDetail(id: String): BiomeDetail {
         return remoteBiomeDataSource.biomeDetail(id).also {
-            cachedBiomesDetails[id] = it
+            analyticsLogger.logBiomeDetail(id, it.name)
         }
     }
 
@@ -32,7 +39,10 @@ class DefaultBiomeRepository(
 
         fun instance(): DefaultBiomeRepository {
             return instance
-                ?: DefaultBiomeRepository(RemoteBiomeDataSource.instance()).also {
+                ?: DefaultBiomeRepository(
+                    RemoteBiomeDataSource.instance(),
+                    analyticsLogger(),
+                ).also {
                     instance = it
                 }
         }

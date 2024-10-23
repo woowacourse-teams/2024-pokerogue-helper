@@ -30,5 +30,6 @@ fun pokemonEntity(
         specialAttack = specialAttack,
         specialDefense = specialDefense,
         speed = speed,
+        backImageUrl = imageUrl,
         formName = formName,
     )

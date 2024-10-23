@@ -23,7 +23,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/biome_title_name" />
+            app:title="@string/biome_title_name">
+
+            <ImageView
+                android:id="@+id/iv_biome_guide"
+                onSingleClick="@{() -> vm.navigateToGuide()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:padding="12dp"
+                android:src="@drawable/ic_biome_map" />
+
+            <androidx.appcompat.widget.SearchView
+                app:onQueryTextChange="@{vm}"
+                style="@style/CustomSearchViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:theme="@style/CustomSearchViewTheme"
+                app:queryHint="@string/biome_search_hint" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_biome_list"

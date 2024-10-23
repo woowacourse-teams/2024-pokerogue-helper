@@ -11,17 +11,23 @@ import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.model.SelectionData
+import poke.rogue.helper.presentation.battle.model.SelectionMode
+import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
+import poke.rogue.helper.presentation.util.serializable
 import poke.rogue.helper.presentation.util.view.setImage
 
 class BattleSelectionActivity :
     ErrorHandleActivity<ActivityBattleSelectionBinding>(R.layout.activity_battle_selection) {
     private val viewModel by viewModels<BattleSelectionViewModel> {
-        BattleSelectionViewModel.factory(previousSelection)
+        BattleSelectionViewModel.factory(selectionMode, previousSelection)
     }
     private val previousSelection by lazy {
-        intent.parcelable<SelectionData>(KEY_PREVIOUS_SELECTION) ?: throw IllegalArgumentException("잘못된 선택 데이터")
+        intent.parcelable<SelectionData>(KEY_PREVIOUS_SELECTION) ?: error("잘못된 선택 데이터")
+    }
+    private val selectionMode by lazy {
+        intent.serializable<SelectionMode>(KEY_SELECTION_MODE) ?: error("잘못된 선택 데이터")
     }
     private val selectionPagerAdapter: BattleSelectionPagerAdapter by lazy {
         BattleSelectionPagerAdapter(this)
@@ -36,21 +42,31 @@ class BattleSelectionActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
+        initListener()
         initObserver()
     }
 
     private fun initViews() {
         binding.lifecycleOwner = this
         binding.vm = viewModel
-        binding.pagerBattleSelection.adapter = selectionPagerAdapter
-        binding.pagerBattleSelection.isUserInputEnabled = false
+
+        with(binding.pagerBattleSelection) {
+            adapter = selectionPagerAdapter
+            isUserInputEnabled = false
+        }
+    }
+
+    private fun initListener() {
+        binding.root.setOnClickListener {
+            hideKeyboard()
+        }
     }
 
     private fun initObserver() {
         repeatOnStarted {
             viewModel.selectedPokemon.collect { selectionState ->
                 if (selectionState is BattleSelectionUiState.Selected) {
-                    val selected = selectionState.selected
+                    val selected = selectionState.content
                     binding.ivPokemon.setImage(selected.frontImageUrl)
                     binding.toolbarBattleSelection.title = selected.name
                 }
@@ -77,14 +93,17 @@ class BattleSelectionActivity :
     }
 
     companion object {
+        private const val KEY_SELECTION_MODE = "selectionMode"
         private const val KEY_PREVIOUS_SELECTION = "previousSelection"
         const val KEY_SELECTION_RESULT = "selectionResult"
 
         fun intent(
             context: Context,
+            selectionMode: SelectionMode,
             previousSelection: SelectionData,
         ): Intent =
             Intent(context, BattleSelectionActivity::class.java).apply {
+                putExtra(KEY_SELECTION_MODE, selectionMode)
                 putExtra(KEY_PREVIOUS_SELECTION, previousSelection)
             }
     }

@@ -1,7 +1,10 @@
 package poke.rogue.helper.data.repository
 
+import kotlinx.coroutines.flow.Flow
 import poke.rogue.helper.data.model.BattlePrediction
 import poke.rogue.helper.data.model.BattleSkill
+import poke.rogue.helper.data.model.Pokemon
+import poke.rogue.helper.data.model.PokemonWithSkill
 import poke.rogue.helper.data.model.Weather
 
 interface BattleRepository {
@@ -15,4 +18,19 @@ interface BattleRepository {
         mySkillId: String,
         opponentPokemonId: String,
     ): BattlePrediction
+
+    suspend fun savePokemon(pokemonId: String)
+
+    suspend fun savePokemonWithSkill(
+        pokemonId: String,
+        skillId: String,
+    )
+
+    suspend fun saveWeather(weatherId: String)
+
+    fun savedWeatherStream(): Flow<Weather?>
+
+    fun savedPokemonStream(): Flow<Pokemon?>
+
+    fun savedPokemonWithSkillStream(): Flow<PokemonWithSkill?>
 }

@@ -15,11 +15,14 @@ class BiomeWildViewHolder(
     RecyclerView.ViewHolder(binding.root) {
     private val pokemonAdapter: BiomPokemonAdapter by lazy { BiomPokemonAdapter(onClickPokemon) }
 
+    init {
+        val decoration = GridSpacingItemDecoration(3, 18.dp, false)
+        binding.rvBiomeWildPokemon.addItemDecoration(decoration)
+    }
+
     fun bind(wildPokemon: BiomePokemonUiModel) {
         binding.biomePokemon = wildPokemon
 
-        val decoration = GridSpacingItemDecoration(3, 18.dp, false)
-        binding.rvBiomeWildPokemon.addItemDecoration(decoration)
         wildPokemon.pokemons.let(pokemonAdapter::submitList)
         binding.rvBiomeWildPokemon.adapter = pokemonAdapter
     }

@@ -3,8 +3,21 @@ name: Android PR Builder
 on:
   push:
     branches: [ "an/release*" ]
+  workflow_call:
+
 jobs:
-  build:
+  ktlintCheck:
+    name: ktLint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run ktLint Check
+        uses: ./.github/actions/ktlint_check
+        with:
+          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
+
+  testReleaseUnitTest:
     name: CI Release Builder
     runs-on: ubuntu-latest
 
@@ -75,14 +88,6 @@ jobs:
         run: chmod +x gradlew
         working-directory: android
 
-      - name: KT Lint
-        run: ./gradlew ktlintCheck
-        working-directory: android
-
       - name: Unit Test Release
         run: ./gradlew testReleaseUnitTest
-        working-directory: android
-
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
         working-directory: android

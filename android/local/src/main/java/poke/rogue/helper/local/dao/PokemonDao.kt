@@ -16,10 +16,11 @@ interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePokemons(pokemons: List<PokemonEntity>)
 
+    @Query("DELETE FROM Pokemon")
+    suspend fun clear()
+
     companion object {
         fun instance(context: Context): PokemonDao {
-            // TODO 삭제될 블록
-            PokeRogueDatabase.dropDatabase(context)
             return PokeRogueDatabase.instance(context).pokemonDao()
         }
     }

@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
+import org.koin.mp.KoinPlatform.getKoin
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
@@ -28,8 +29,10 @@ class PokemonIntroViewModel(
             .onEach {
                 try {
                     coroutineScope {
+                        launch { delay(MIN_SPLASH_TIME) }
                         launch { pokemonRepository.warmUp() }
-                        launch { delay(1000) }
+                        // TODO Koin 일괄적으로 적용 시 삭제 예정
+                        launch { getKoin().get<DexRepository>().warmUp() }
                     }
                 } catch (e: Exception) {
                     handlePokemonError(e)
@@ -41,6 +44,8 @@ class PokemonIntroViewModel(
     }
 
     companion object {
+        private const val MIN_SPLASH_TIME = 1000L
+
         fun factory(
             pokemonRepository: DexRepository,
             logger: AnalyticsLogger,
