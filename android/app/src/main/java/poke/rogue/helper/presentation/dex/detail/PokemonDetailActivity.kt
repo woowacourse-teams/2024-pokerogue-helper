@@ -7,11 +7,10 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout.LayoutParams
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
@@ -28,17 +27,16 @@ import timber.log.Timber
 
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
-    private val viewModel by viewModels<PokemonDetailViewModel> {
-        PokemonDetailViewModel.factory(DefaultDexRepository.instance())
-    }
+
+    private val viewModel by viewModel<PokemonDetailViewModel>()
+    override val toolbar: Toolbar
+        get() = binding.toolbarPokemonDetail
 
     private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
+
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
 
     private var isExpanded = false
-
-    override val toolbar: Toolbar
-        get() = binding.toolbarPokemonDetail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
