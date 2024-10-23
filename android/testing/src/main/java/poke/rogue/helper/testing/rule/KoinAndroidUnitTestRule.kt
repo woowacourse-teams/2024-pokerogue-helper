@@ -27,6 +27,6 @@ class KoinAndroidUnitTestRule(
     }
 
     override fun finished(description: Description) {
-        stopKoin()
+        loadKoinModules(modules)
     }
 }
