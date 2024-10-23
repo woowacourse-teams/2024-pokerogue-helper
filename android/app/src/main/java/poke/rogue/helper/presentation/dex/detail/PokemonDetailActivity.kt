@@ -218,7 +218,6 @@ class PokemonDetailActivity :
         }
     }
 
-
     companion object {
         private const val POKEMON_ID = "pokemonId"
         private const val IS_EXPANDED = "isExpanded"
