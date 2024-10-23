@@ -19,7 +19,6 @@ public class MongoConfig {
     public MongoClient mongoClient() {
         String uri = mongoUri; // MongoDB URI를 여기에 입력
         ConnectionString connectionString = new ConnectionString(uri);
-
         // TransportSettings를 사용하여 Netty 설정 적용
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
