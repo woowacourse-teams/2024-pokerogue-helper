@@ -4,10 +4,6 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import poke.rogue.helper.presentation.battle.BattleViewModel
-import poke.rogue.helper.presentation.battle.SelectionType
-import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
-import poke.rogue.helper.presentation.battle.model.SelectionData
-import poke.rogue.helper.presentation.battle.model.SelectionMode
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.battle.selection.pokemon.PokemonSelectionViewModel
 import poke.rogue.helper.presentation.battle.selection.skill.SkillSelectionViewModel
@@ -18,17 +14,17 @@ val viewModelModule
     get() =
         module {
             viewModelOf(::PokemonListViewModel)
-            viewModel<BattleViewModel> { (pokemonId: String?, selectionType: SelectionType?) ->
-                BattleViewModel(get(), get(), get(), pokemonId, selectionType)
+            viewModel<BattleViewModel> { params ->
+                BattleViewModel(get(), get(), get(), params.getOrNull(), params.getOrNull())
             }
-            viewModel<BattleSelectionViewModel> { (selectionMode: SelectionMode, previousSelection: SelectionData) ->
-                BattleSelectionViewModel(selectionMode, previousSelection, get())
+            viewModel<BattleSelectionViewModel> { params ->
+                BattleSelectionViewModel(params.get(), params.get(), get())
             }
-            viewModel { (previousSelection: PokemonSelectionUiModel?) ->
-                PokemonSelectionViewModel(get(), previousSelection, get())
+            viewModel { params ->
+                PokemonSelectionViewModel(get(), params.getOrNull(), get())
             }
-            viewModel { (previousSelection: SelectionData.WithSkill?) ->
-                SkillSelectionViewModel(get(), previousSelection, get())
+            viewModel { params ->
+                SkillSelectionViewModel(get(), params.getOrNull(), get())
             }
             viewModelOf(::TypeViewModel)
         }

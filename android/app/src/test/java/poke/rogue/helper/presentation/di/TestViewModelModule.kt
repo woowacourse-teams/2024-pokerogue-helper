@@ -1,6 +1,8 @@
 package poke.rogue.helper.presentation.di
 
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import poke.rogue.helper.presentation.battle.BattleViewModel
 import poke.rogue.helper.presentation.battle.SelectionType
@@ -19,35 +21,17 @@ val testViewModelModule =
         includes(testingModule)
 
         singleOf(::PokemonListViewModel)
-        singleOf(::TypeViewModel)
-        single { (pokemonId: String?, selectionType: SelectionType?) ->
-            BattleViewModel(
-                get(),
-                get(),
-                get(),
-                pokemonId,
-                selectionType,
-            )
+        viewModelOf(::TypeViewModel)
+        viewModel<BattleViewModel> { params ->
+            BattleViewModel(get(), get(), get(), params.getOrNull(), params.getOrNull())
         }
-        single { (selectionMode: SelectionMode, previousSelection: SelectionData) ->
-            BattleSelectionViewModel(
-                selectionMode,
-                previousSelection,
-                get(),
-            )
+        viewModel<BattleSelectionViewModel> { params ->
+            BattleSelectionViewModel(params.get(), params.get(), get())
         }
-        single { (previousSelection: PokemonSelectionUiModel?) ->
-            PokemonSelectionViewModel(
-                get(),
-                previousSelection,
-                get(),
-            )
+        viewModel { params ->
+            PokemonSelectionViewModel(get(), params.getOrNull(), get())
         }
-        single { (previousSelection: SelectionData.WithSkill?) ->
-            SkillSelectionViewModel(
-                get(),
-                previousSelection,
-                get(),
-            )
+        viewModel { params ->
+            SkillSelectionViewModel(get(), params.getOrNull(), get())
         }
     }
