@@ -5,8 +5,8 @@ koin = "4.0.0"
 minSdk = "26"
 robolectric = "4.13"
 targetSdk = "34"
-appVersion = "1.0.1"
-versionCode = "10001"
+appVersion = "1.0.3"
+versionCode = "10003"
 agp = "8.3.2"
 
 # kotlin
