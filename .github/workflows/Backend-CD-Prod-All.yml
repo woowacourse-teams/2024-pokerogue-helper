@@ -42,10 +42,10 @@ jobs:
           docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
 
   prod_a:
+    needs: build
     name: Backend Production Server CD A
     uses: ./.github/workflows/Backend-CD-Prod-A.yml
     secrets: inherit
-
   prod_b:
     needs: prod_a
     name: Backend Production Server CD B
