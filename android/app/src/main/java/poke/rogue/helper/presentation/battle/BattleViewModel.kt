@@ -246,23 +246,6 @@ class BattleViewModel(
         } else {
             SelectionData.WithoutSkill(previousPokemonSelection)
         }
-
-    companion object {
-        fun factory(
-            pokemonId: String?,
-            selectionType: SelectionType?,
-            battleRepository: BattleRepository,
-            pokemonRepository: DexRepository,
-        ): ViewModelProvider.Factory =
-            BaseViewModelFactory {
-                BattleViewModel(
-                    battleRepository = battleRepository,
-                    pokemonId = pokemonId,
-                    selectionType = selectionType,
-                    pokemonRepository = pokemonRepository,
-                )
-            }
-    }
 }
 
 data class SelectionNavigationData(

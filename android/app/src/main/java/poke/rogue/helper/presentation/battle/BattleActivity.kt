@@ -8,6 +8,8 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultBattleRepository
 import poke.rogue.helper.data.repository.DefaultDexRepository
@@ -25,12 +27,10 @@ import poke.rogue.helper.presentation.util.view.setImage
 import timber.log.Timber
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
-    private val viewModel by viewModels<BattleViewModel> {
-        BattleViewModel.factory(
+    private val viewModel by viewModel<BattleViewModel> {
+        parametersOf(
             intent.getStringExtra(POKEMON_ID),
             intent.serializable(SELECTION_TYPE),
-            DefaultBattleRepository.instance(applicationContext),
-            DefaultDexRepository.instance(),
         )
     }
 
