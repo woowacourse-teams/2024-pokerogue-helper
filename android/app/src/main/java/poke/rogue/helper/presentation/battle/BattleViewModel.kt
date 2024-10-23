@@ -44,13 +44,15 @@ class BattleViewModel(
             battleRepository.savedWeatherStream(),
             weathers,
         ) { weather, weathers ->
-            if (weather == null || weathers.isEmpty()) return@combine null
-            if (weathers.any { it.id == weather.id }.not()) return@combine null
-            val selectedWeather = weathers.first { it.id == weather.id }
-            // update selected weather
-            _selectedState.value = selectedState.value.copy(weather = BattleSelectionUiState.Selected(selectedWeather))
-            // return position
-            weathers.indexOfFirst { it.id == weather.id }
+            if (weathers.isEmpty()) return@combine null
+            val weatherId = weather?.id ?: weathers.first().id
+            if (weathers.any { it.id == weatherId }.not()) return@combine null
+            val selectedWeather = weathers.first { it.id == weatherId }
+
+            _selectedState.value =
+                selectedState.value.copy(weather = BattleSelectionUiState.Selected(selectedWeather))
+
+            weathers.indexOfFirst { it.id == weatherId }
         }.filterNotNull()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 

@@ -2,13 +2,17 @@ package poke.rogue.helper.data.repository
 
 import android.content.Context
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import org.koin.mp.KoinPlatform.getKoin
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.cache.GlideImageCacher
 import poke.rogue.helper.data.cache.ImageCacher
 import poke.rogue.helper.data.datasource.LocalDexDataSource
+import poke.rogue.helper.data.datasource.LocalVersionDataSource
 import poke.rogue.helper.data.datasource.RemoteDexDataSource
+import poke.rogue.helper.data.datasource.RemoteVersionDataSource
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.Pokemon
 import poke.rogue.helper.data.model.PokemonBiome
@@ -24,26 +28,51 @@ class DefaultDexRepository(
     private val imageCacher: ImageCacher,
     private val biomeRepository: BiomeRepository,
     private val analyticsLogger: AnalyticsLogger,
+    private val localVersionDataSource: LocalVersionDataSource,
+    private val remoteVersionService: RemoteVersionDataSource,
 ) : DexRepository {
     private var cachedPokemons: List<Pokemon> = emptyList()
 
     override suspend fun warmUp() {
-        if (localPokemonDataSource.pokemons().isEmpty()) {
+        val localVersion = localVersionDataSource.databaseVersionStream().firstOrNull()
+        val remoteVersion = remoteVersionService.databaseVersion()
+        val shouldUpdateDatabase = shouldUpdateDatabaseVersion(localVersion, remoteVersion)
+
+        if (shouldUpdateDatabase) {
+            localVersionDataSource.saveDatabaseVersion(remoteVersion)
             val pokemons = remotePokemonDataSource.pokemons2()
-            cachePokemonData(pokemons)
+            cachePokemons(pokemons)
+            return
         }
+
+        val emptyDiskCache = localPokemonDataSource.pokemons().isEmpty()
+        if (emptyDiskCache) {
+            cachedPokemons = remotePokemonDataSource.pokemons2()
+            return
+        }
+
         cachedPokemons = localPokemonDataSource.pokemons()
     }
 
-    private suspend fun cachePokemonData(pokemons: List<Pokemon>) =
+    private fun shouldUpdateDatabaseVersion(
+        localVersion: Int?,
+        remoteVersion: Int,
+    ): Boolean {
+        return (localVersion ?: 0) < remoteVersion
+    }
+
+    private suspend fun cachePokemons(pokemons: List<Pokemon>) =
         coroutineScope {
             val urls = pokemons.take(PLELOAD_POKEMON_COUNT).map { it.imageUrl }
             launch {
                 imageCacher.cacheImages(urls)
             }
             launch {
+                localPokemonDataSource.clear()
                 localPokemonDataSource.savePokemons(pokemons)
             }
+        }.also {
+            cachedPokemons = pokemons
         }
 
     override suspend fun pokemons(): List<Pokemon> {
@@ -127,6 +156,8 @@ class DefaultDexRepository(
                     GlideImageCacher.instance(),
                     DefaultBiomeRepository.instance(),
                     analyticsLogger(),
+                    getKoin().get(),
+                    getKoin().get(),
                 )
         }
 
