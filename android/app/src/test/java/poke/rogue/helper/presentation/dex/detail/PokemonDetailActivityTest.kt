@@ -49,4 +49,22 @@ class PokemonDetailActivityTest {
             it.getViewModel<PokemonDetailViewModel>() shouldBe previewVm
         }
     }
+
+//    @Test
+//    fun `어떤 포켓몬이 될가요`() = runTest{
+//        scenario.onActivity { activity ->
+//            val vm = activity.getViewModel<PokemonDetailViewModel>()
+//            val binding = activity.binding
+//
+//            val ui = vm.uiState.first()
+//
+//            val pokemonName = vm.uiState.filterIsInstance<PokemonDetailUiState.Success>().map {
+//                it.pokemon.name
+//            }
+//            binding.toolbarPokemonDetail.title shouldBe "이상해씨"
+//
+//        }
+//    }
+
 }
+
