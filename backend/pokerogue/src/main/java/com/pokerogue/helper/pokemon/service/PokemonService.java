@@ -20,6 +20,8 @@ import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonInMemoryRepository;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -78,7 +80,7 @@ public class PokemonService {
     }
 
     private List<PokemonAbilityResponse> createAbilityResponse(Pokemon pokemon) {
-        List<String> abilityIds = pokemon.getNormalAbilityIds();
+        List<String> abilityIds = new ArrayList<>(pokemon.getNormalAbilityIds());
         abilityIds.add(pokemon.getPassiveAbilityId());
         abilityIds.add(pokemon.getHiddenAbilityId());
 
