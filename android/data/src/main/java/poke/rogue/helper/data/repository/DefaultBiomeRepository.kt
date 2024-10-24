@@ -43,6 +43,7 @@ class DefaultBiomeRepository(
 
     override fun isBattleNavigationModeStream(): Flow<Boolean> = localNavigationDataSource.isBattleNavigationModeStream()
 
+    // todo koin 적용 끝나면 이 부분도 삭제
     companion object {
         private var instance: DefaultBiomeRepository? = null
 
