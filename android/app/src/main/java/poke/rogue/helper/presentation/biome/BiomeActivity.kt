@@ -22,7 +22,7 @@ import poke.rogue.helper.presentation.util.view.dp
 class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activity_biome) {
     private val viewModel by viewModels<BiomeViewModel> {
         BiomeViewModel.factory(
-            DefaultBiomeRepository.instance(),
+            DefaultBiomeRepository.instance(applicationContext),
         )
     }
     override val errorViewModel: ErrorHandleViewModel

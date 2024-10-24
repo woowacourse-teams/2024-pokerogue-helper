@@ -40,19 +40,19 @@ class DefaultBattleRepository(
             opponentPokemonId = opponentPokemonId,
         )
 
-    override suspend fun savePokemon(pokemonId: String) = localBattleDataSource.savePokemon(pokemonId)
+    override suspend fun saveBattleSelection(pokemonId: String) = localBattleDataSource.savePokemon(pokemonId)
 
-    override suspend fun savePokemonWithSkill(
+    override suspend fun saveBattleSelection(
         pokemonId: String,
         skillId: String,
     ) = localBattleDataSource.savePokemonWithSkill(pokemonId, skillId)
 
-    override fun savedPokemonStream(): Flow<Pokemon?> =
+    override fun pokemonStream(): Flow<Pokemon?> =
         localBattleDataSource.pokemonIdStream().map {
             it?.let { pokemonRepository.pokemon(it) }
         }
 
-    override fun savedPokemonWithSkillStream(): Flow<PokemonWithSkill?> =
+    override fun pokemonWithSkillStream(): Flow<PokemonWithSkill?> =
         localBattleDataSource.pokemonWithSkillStream().map {
             it?.let { pokemonWithSkill ->
                 val pokemon = pokemonRepository.pokemon(pokemonWithSkill.pokemonId)
@@ -63,7 +63,7 @@ class DefaultBattleRepository(
 
     override suspend fun saveWeather(weatherId: String) = localBattleDataSource.saveWeather(weatherId)
 
-    override fun savedWeatherStream(): Flow<Weather?> =
+    override fun weatherStream(): Flow<Weather?> =
         localBattleDataSource.weatherIdStream().map {
             if (it == null) {
                 return@map null
@@ -75,21 +75,27 @@ class DefaultBattleRepository(
         dexNumber: Long,
         skillId: String,
     ): BattleSkill =
-        availableSkills(dexNumber).find {
-            it.id == skillId
-        } ?: error("아이디에 해당하는 스킬이 존재하지 않습니다. id: $skillId")
+        availableSkills(dexNumber).find { it.id == skillId }
+            ?: error("아이디에 해당하는 스킬이 존재하지 않습니다. id: $skillId")
+
+    override suspend fun pokemonWithSkill(pokemonId: String): PokemonWithSkill {
+        val pokemon = pokemonRepository.pokemon(pokemonId)
+        val skill =
+            availableSkills(pokemon.dexNumber).firstOrNull()
+                ?: error("배정 가능한 스킬이 존재 하지 않습니다. - dexNumber : ${pokemon.dexNumber}")
+        return PokemonWithSkill(pokemon, skill)
+    }
 
     companion object {
         private var instance: BattleRepository? = null
 
-        fun instance(context: Context): BattleRepository {
-            return instance ?: DefaultBattleRepository(
+        fun instance(context: Context): BattleRepository =
+            instance ?: DefaultBattleRepository(
                 LocalBattleDataSource.instance(context),
                 RemoteBattleDataSource.instance(),
                 DefaultDexRepository.instance(),
             ).also {
                 instance = it
             }
-        }
     }
 }

@@ -15,16 +15,17 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
+import poke.rogue.helper.presentation.battle.BattleActivity
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
-import timber.log.Timber
 
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
@@ -75,7 +76,10 @@ class PokemonDetailActivity :
         }
 
         val tabTitles = stringArrayOf(R.array.pokemon_detail_tab_titles)
-        TabLayoutMediator(binding.tabLayoutPokemonDetail, binding.pagerPokemonDetail) { tab, position ->
+        TabLayoutMediator(
+            binding.tabLayoutPokemonDetail,
+            binding.pagerPokemonDetail,
+        ) { tab, position ->
             tab.text = tabTitles[position]
         }.attach()
     }
@@ -142,23 +146,35 @@ class PokemonDetailActivity :
         }
     }
 
-    // TODO: 예니 여기서 하면 될 Battle Activity 로 이동하면 될 것 같아요
     private fun observeNavigateToBattleEvent() {
         repeatOnStarted {
             viewModel.navigateToBattleEvent.collect { battleEvent ->
-                when (battleEvent) {
-                    is NavigateToBattleEvent.WithMyPokemon -> {
-                        Timber.d("내 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
-                    }
-
-                    is NavigateToBattleEvent.WithOpponentPokemon -> {
-                        Timber.d("상대 포켓몬으로 배틀 액티비티로 이동 pokemon: ${battleEvent.pokemon}")
-                        // TODO()
-                    }
+                val intent = battleIntent(battleEvent)
+                startActivity<BattleActivity> {
+                    putExtras(intent)
                 }
             }
         }
     }
+
+    private fun battleIntent(battleEvent: NavigateToBattleEvent): Intent =
+        when (battleEvent) {
+            is NavigateToBattleEvent.WithMyPokemon -> {
+                BattleActivity.intent(
+                    this@PokemonDetailActivity,
+                    pokemonId = battleEvent.pokemon.id,
+                    isMine = true,
+                )
+            }
+
+            is NavigateToBattleEvent.WithOpponentPokemon -> {
+                BattleActivity.intent(
+                    this@PokemonDetailActivity,
+                    pokemonId = battleEvent.pokemon.id,
+                    isMine = false,
+                )
+            }
+        }
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
