@@ -58,8 +58,8 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_home_dex"
                         onSingleClick="@{() -> actionHandler.navigateToDex()}"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="@dimen/home_cv_width"
+                        android:layout_height="@dimen/home_cv_height"
                         android:layout_row="0"
                         android:layout_rowWeight="0"
                         android:layout_column="0"
@@ -76,9 +76,9 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_dex"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginTop="24dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:layout_marginTop="@dimen/home_iv_margin_top"
                                 android:src="@drawable/img_home_dex"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -88,10 +88,11 @@
                                 android:id="@+id/tv_home_dex"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="25dp"
+                                android:layout_marginBottom="@dimen/home_tv_margin_bottom"
                                 android:text="@string/home_menu_pokemon_detail"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
@@ -102,8 +103,8 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_home_battle"
                         onSingleClick="@{() -> actionHandler.navigateToBattle()}"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="@dimen/home_cv_width"
+                        android:layout_height="@dimen/home_cv_height"
                         android:layout_row="0"
                         android:layout_rowWeight="1"
                         android:layout_column="1"
@@ -119,9 +120,9 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_battle"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginTop="24dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_width"
+                                android:layout_marginTop="@dimen/home_iv_margin_top"
                                 android:src="@drawable/icon_home_battle"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -131,10 +132,11 @@
                                 android:id="@+id/tv_home_battle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="25dp"
+                                android:layout_marginBottom="@dimen/home_tv_margin_bottom"
                                 android:text="@string/home_menu_battle"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
@@ -145,8 +147,8 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_home_type"
                         onSingleClick="@{() -> actionHandler.navigateToType()}"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="@dimen/home_cv_width"
+                        android:layout_height="@dimen/home_cv_height"
                         android:layout_row="1"
                         android:layout_rowWeight="1"
                         android:layout_column="0"
@@ -162,9 +164,9 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_type"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginTop="24dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:layout_marginTop="@dimen/home_iv_margin_top"
                                 android:src="@drawable/img_home_type"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -174,10 +176,11 @@
                                 android:id="@+id/tv_home_type"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="25dp"
+                                android:layout_marginBottom="@dimen/home_tv_margin_bottom"
                                 android:text="@string/home_menu_type"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
@@ -190,8 +193,8 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_home_biome"
                         onSingleClick="@{() -> actionHandler.navigateToBiome()}"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="@dimen/home_cv_width"
+                        android:layout_height="@dimen/home_cv_height"
                         android:layout_row="1"
                         android:layout_rowWeight="1"
                         android:layout_column="1"
@@ -207,9 +210,9 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_biome"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginTop="24dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:layout_marginTop="@dimen/home_iv_margin_top"
                                 android:src="@drawable/icon_home_biome"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -219,10 +222,11 @@
                                 android:id="@+id/tv_home_biome"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="25dp"
+                                android:layout_marginBottom="@dimen/home_tv_margin_bottom"
                                 android:text="@string/home_menu_biome"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
@@ -232,8 +236,8 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_home_ability"
                         onSingleClick="@{() -> actionHandler.navigateToAbility()}"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
+                        android:layout_width="@dimen/home_cv_width"
+                        android:layout_height="@dimen/home_cv_height"
                         android:layout_row="2"
                         android:layout_rowWeight="1"
                         android:layout_column="0"
@@ -249,9 +253,9 @@
 
                             <ImageView
                                 android:id="@+id/iv_home_ability"
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:layout_marginTop="24dp"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:layout_marginTop="@dimen/home_iv_margin_top"
                                 android:src="@drawable/img_home_ability"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -261,10 +265,11 @@
                                 android:id="@+id/tv_home_ability"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="25dp"
+                                android:layout_marginBottom="@dimen/home_tv_margin_bottom"
                                 android:text="@string/home_menu_ability"
                                 android:textAlignment="center"
                                 android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
@@ -273,94 +278,6 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <!--                    <androidx.cardview.widget.CardView-->
-                    <!--                        android:id="@+id/cv_home_item"-->
-                    <!--                        onSingleClick="@{() -> actionHandler.navigateToItem()}"-->
-                    <!--                        android:layout_width="0dp"-->
-                    <!--                        android:layout_height="0dp"-->
-                    <!--                        android:layout_row="2"-->
-                    <!--                        android:layout_rowWeight="1"-->
-                    <!--                        android:layout_column="1"-->
-                    <!--                        android:layout_columnWeight="1"-->
-                    <!--                        android:layout_gravity="fill"-->
-                    <!--                        android:layout_margin="6dp"-->
-                    <!--                        android:backgroundTint="@color/poke_grey_80"-->
-                    <!--                        app:cardCornerRadius="16dp">-->
-
-
-                    <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
-                    <!--                            android:layout_width="match_parent"-->
-                    <!--                            android:layout_height="match_parent">-->
-
-                    <!--                            <ImageView-->
-                    <!--                                android:id="@+id/iv_home_item"-->
-                    <!--                                android:layout_width="60dp"-->
-                    <!--                                android:layout_height="60dp"-->
-                    <!--                                android:layout_marginTop="24dp"-->
-                    <!--                                android:src="@drawable/icon_home_item"-->
-                    <!--                                app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                                app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                                app:layout_constraintTop_toTopOf="parent" />-->
-
-                    <!--                            <TextView-->
-                    <!--                                android:id="@+id/tv_home_item"-->
-                    <!--                                android:layout_width="wrap_content"-->
-                    <!--                                android:layout_height="wrap_content"-->
-                    <!--                                android:layout_marginBottom="25dp"-->
-                    <!--                                android:text="@string/home_menu_item"-->
-                    <!--                                android:textAlignment="center"-->
-                    <!--                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"-->
-                    <!--                                app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                                app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                                app:layout_constraintStart_toStartOf="parent" />-->
-                    <!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-                    <!--                    </androidx.cardview.widget.CardView>-->
-
-                    <!--                    <androidx.cardview.widget.CardView-->
-                    <!--                        android:id="@+id/cv_home_tip"-->
-                    <!--                        onSingleClick="@{() -> actionHandler.navigateToTip()}"-->
-                    <!--                        android:layout_width="150dp"-->
-                    <!--                        android:layout_height="150dp"-->
-                    <!--                        android:layout_row="3"-->
-                    <!--                        android:layout_rowWeight="0"-->
-                    <!--                        android:layout_column="0"-->
-                    <!--                        android:layout_columnWeight="1"-->
-                    <!--                        android:layout_gravity="fill"-->
-                    <!--                        android:layout_margin="6dp"-->
-                    <!--                        android:backgroundTint="@color/poke_grey_80"-->
-                    <!--                        app:cardCornerRadius="16dp">-->
-
-
-                    <!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
-                    <!--                            android:layout_width="match_parent"-->
-                    <!--                            android:layout_height="match_parent">-->
-
-                    <!--                            <ImageView-->
-                    <!--                                android:id="@+id/iv_home_tip"-->
-                    <!--                                android:layout_width="60dp"-->
-                    <!--                                android:layout_height="60dp"-->
-                    <!--                                android:layout_marginTop="24dp"-->
-                    <!--                                android:src="@drawable/img_home_tip"-->
-                    <!--                                app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                                app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                                app:layout_constraintTop_toTopOf="parent" />-->
-
-                    <!--                            <TextView-->
-                    <!--                                android:id="@+id/tv_home_tip"-->
-                    <!--                                android:layout_width="wrap_content"-->
-                    <!--                                android:layout_height="wrap_content"-->
-                    <!--                                android:layout_marginBottom="25dp"-->
-                    <!--                                android:paddingTop="12dp"-->
-                    <!--                                android:text="@string/home_menu_tip"-->
-                    <!--                                android:textAlignment="center"-->
-                    <!--                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"-->
-                    <!--                                app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                                app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                                app:layout_constraintStart_toStartOf="parent" />-->
-                    <!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-                    <!--                    </androidx.cardview.widget.CardView>-->
                 </GridLayout>
 
                 <androidx.constraintlayout.widget.Guideline

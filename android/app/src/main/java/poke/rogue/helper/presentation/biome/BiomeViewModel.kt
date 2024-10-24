@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.biome
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -19,7 +18,6 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.repository.BiomeRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 
 class BiomeViewModel(
@@ -67,12 +65,5 @@ class BiomeViewModel(
         viewModelScope.launch {
             _navigateToGuideEvent.emit(Unit)
         }
-    }
-
-    companion object {
-        fun factory(biomeRepository: BiomeRepository): ViewModelProvider.Factory =
-            BaseViewModelFactory {
-                BiomeViewModel(biomeRepository)
-            }
     }
 }

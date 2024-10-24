@@ -175,4 +175,8 @@ dependencies {
     debugImplementation(libs.bundles.android.test)
     testRuntimeOnly(libs.junit.vintage.engine)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
+    testImplementation(libs.android.test.fragment)
+    debugImplementation(libs.android.test.fragment.manifest)
+
+    implementation(libs.balloon)
 }

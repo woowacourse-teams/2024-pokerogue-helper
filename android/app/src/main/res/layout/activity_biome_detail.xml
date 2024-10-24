@@ -26,7 +26,6 @@
             app:title="@{vm.uiState.name}" />
 
         <ImageView
-            android:layout_marginTop="20dp"
             android:id="@+id/iv_biome_detail_image"
             imageUrl="@{vm.uiState.imageUrl}"
             android:layout_width="0dp"
@@ -36,14 +35,45 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar_biome_detail"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <TextView
+            android:id="@+id/tv_navigation_mode"
+            style="@style/TextAppearance.Poke.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@string/biome_navigation_mode_setting"
+            android:textSize="@dimen/biome_navigation_mode_tv_size"
+            app:drawableStartCompat="@drawable/icon_info"
+            app:layout_constraintBottom_toBottomOf="@id/switch_navigation_mode"
+            app:layout_constraintEnd_toStartOf="@id/switch_navigation_mode"
+            app:layout_constraintTop_toTopOf="@id/switch_navigation_mode" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_navigation_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:checked="@{vm.isInBattleNavigationMode}"
+            android:onCheckedChanged="@{(buttonView, isChecked) -> vm.changeNavigationMode(isChecked)}"
+            android:thumb="@drawable/shape_toggle_thumb"
+            app:layout_constraintBottom_toTopOf="@id/tablayout_biome_detail"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/iv_biome_detail_image"
+            app:thumbTint="@null"
+            app:track="@drawable/selector_toggle_btn"
+            app:trackTint="@null" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout_biome_detail"
             style="@style/TabLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:background="@drawable/bg_tab_background"
             android:paddingVertical="5dp"
-            app:layout_constraintTop_toTopOf="@id/gl_top"
+            app:layout_constraintTop_toBottomOf="@id/switch_navigation_mode"
             app:tabIndicatorFullWidth="false" />
 
         <androidx.viewpager2.widget.ViewPager2
@@ -73,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.37" />
+            app:layout_constraintGuide_percent="0.4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
