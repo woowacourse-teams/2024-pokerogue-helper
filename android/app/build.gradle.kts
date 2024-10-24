@@ -174,4 +174,6 @@ dependencies {
     androidTestImplementation(libs.bundles.android.test)
     testRuntimeOnly(libs.junit.vintage.engine)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
+
+    implementation(libs.balloon)
 }
