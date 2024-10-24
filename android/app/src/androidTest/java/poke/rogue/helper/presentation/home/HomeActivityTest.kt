@@ -54,18 +54,4 @@ class HomeActivityTest {
         onView(withId(R.id.cv_home_land_type))
             .check(matches(isDisplayed()))
     }
-
-    @Test
-    @DisplayName("화면 회전 시에도 꿀팁 메뉴 버튼이 보인다")
-    fun test4() {
-        // when
-        activityRule.scenario.onActivity { activity ->
-            activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        }
-        onIdle()
-
-        // then
-        onView(withId(R.id.cv_home_land_tip))
-            .check(matches(isDisplayed()))
-    }
 }

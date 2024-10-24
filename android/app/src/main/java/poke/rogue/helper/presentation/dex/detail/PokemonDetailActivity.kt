@@ -182,13 +182,28 @@ class PokemonDetailActivity :
                 progressIndicatorPokemonDetail,
             )
 
-            collapsingToolbarLayoutPokemonDetail.title =
+            collapsingToolbarLayoutPokemonDetail?.title =
+                stringOf(
+                    R.string.pokemon_list_poke_name_format,
+                    pokemonDetail.pokemon.name,
+                    pokemonDetail.pokemon.dexNumber,
+                )
+
+            tvPokemonDetailPokemonName?.text =
                 stringOf(
                     R.string.pokemon_list_poke_name_format,
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
         }
+
+        val typesUiConfig =
+            TypeChip.PokemonTypeViewConfiguration(
+                width = LayoutParams.WRAP_CONTENT,
+                nameSize = resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_types_name_size),
+                iconSize = resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_types_icon_size),
+                hasBackGround = false,
+            )
 
         pokemonTypesAdapter.addTypes(
             types = pokemonDetail.pokemon.types,
@@ -236,14 +251,6 @@ class PokemonDetailActivity :
         private const val IS_EXPANDED = "isExpanded"
 
         val TAG: String = PokemonDetailActivity::class.java.simpleName
-
-        private val typesUiConfig =
-            TypeChip.PokemonTypeViewConfiguration(
-                width = LayoutParams.WRAP_CONTENT,
-                nameSize = 16.dp,
-                iconSize = 20.dp,
-                hasBackGround = false,
-            )
 
         fun intent(
             context: Context,

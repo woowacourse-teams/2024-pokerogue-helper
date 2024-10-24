@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.dex
 import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
@@ -21,9 +20,9 @@ class PokemonTypesAdapter(private val context: Context, private val viewGroup: V
             val typeChip =
                 TypeChip(context).apply {
                     layoutParams =
-                        LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LayoutParams(
+                            LayoutParams.WRAP_CONTENT,
+                            LayoutParams.WRAP_CONTENT,
                             1f,
                         ).apply {
                             setMargins(horizontalMargin = spacingBetweenTypes)

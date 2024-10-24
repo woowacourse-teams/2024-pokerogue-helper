@@ -16,10 +16,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         onSingleClick="@{()->uiEventHandler.navigateToDetail(biome.id)}"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_pokemon_corner_radius"
-        android:padding="10dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/tv_biome_name"
@@ -30,12 +30,13 @@
             android:textSize="@dimen/biome_item_tv_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpUsage"
             tools:text="화산" />
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/fl_biome_type_icons"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:flexDirection="row"
             app:layout_constraintBottom_toBottomOf="@id/tv_biome_name"
             app:layout_constraintEnd_toEndOf="parent"

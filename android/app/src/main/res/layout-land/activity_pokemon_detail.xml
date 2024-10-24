@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="eventHandler"
+            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler" />
+
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_pokemon_detail"
+            android:layout_width="@dimen/stroke_width_small"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/pokemon_detail_floating_button_margin"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@id/layout_pokemon_detail_information"
+            app:layout_constraintGuide_percent="0.3"
+            app:layout_constraintStart_toEndOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_pokemon_detail" />
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_pokemon_detail"
+            style="@style/CustomToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/pokemon_list_title_name"
+            app:titleTextColor="@color/poke_white">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:importantForAccessibility="no"
+                android:onClick="@{() -> eventHandler.navigateToHome()}"
+                android:src="@drawable/icon_home" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <ImageView
+            android:id="@+id/iv_pokemon_detail_pokemon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/pokemon_detail_pokemon_image_horizontal_margin_start"
+            android:paddingVertical="@dimen/pokemon_detail_pokemon_image_padding_bottom"
+            android:paddingStart="@dimen/pokemon_detail_pokemon_image_padding_start"
+            app:layout_constraintBottom_toTopOf="@id/layout_pokemon_detail_pokemon_types"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/divider_pokemon_detail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_pokemon_detail"
+            tools:ignore="ContentDescription,RtlSymmetry"
+            tools:src="@tools:sample/avatars" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress_indicator_pokemon_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="@color/poke_grey_20"
+            app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintStart_toStartOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_pokemon"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_pokemon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/pokemon_detail_pokemon_name_margin"
+            android:textSize="@dimen/pokemon_detail_pokemon_name_size"
+            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_pokemon"
+            tools:text="이상해씨 #1" />
+
+        <LinearLayout
+            android:id="@+id/layout_pokemon_detail_pokemon_types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/pokemon_detail_margins_between_pokemon_name_types_"
+            android:background="@android:color/transparent"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_pokemon_name"
+            tools:layout_height="50dp"
+            tools:layout_width="100dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_pokemon_detail_information"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/pokemon_detail_margins_between_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/divider_pokemon_detail"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_pokemon_detail">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout_pokemon_detail"
+                style="@style/TabLayoutStyle"
+                visible="@{!vm.isLoading}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_border_background"
+                app:layout_constraintBottom_toTopOf="@id/pager_pokemon_detail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabBackground="@color/poke_black"
+                app:tabGravity="fill" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pager_pokemon_detail"
+                visible="@{!vm.isLoading}"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tab_layout_pokemon_detail" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_pokemon_detail_battle"
+            style="@style/ThemeOverlay.Material3.FloatingActionButton.Primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/pokemon_detail_floating_button_margin"
+            android:backgroundTint="@color/poke_grey_65"
+            android:contentDescription="@string/battle_title_name"
+            android:src="@drawable/icon_home_battle"
+            app:fabCustomSize="@dimen/pokemon_detail_fragment_bottom_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="@dimen/pokemon_detail_extended_floating_button_max_image_size"
+            app:tint="@null" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/efab_pokemon_detail_battle_with_mine"
+            onSingleClick="@{() -> eventHandler.navigateToBattleWithMine()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/pokemon_detail_extended_floating_button_margin"
+            android:layout_marginBottom="@dimen/pokemon_detail_extended_floating_button_first_bottom_margin"
+            android:backgroundTint="@color/poke_grey_65"
+            android:text="@string/pokemon_detail_to_battle_with_mine_pop_up_descriptions"
+            android:visibility="invisible"
+            app:icon="@drawable/ic_pokemon_battle_mine"
+            app:iconGravity="end"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toTopOf="@id/fab_pokemon_detail_battle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:strokeColor="@color/poke_white"
+            app:strokeWidth="@dimen/stroke_width_small"
+            tools:text="내 포켓몬으로"
+            tools:visibility="visible" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/efab_pokemon_detail_battle_with_opponent"
+            onSingleClick="@{() -> eventHandler.navigateToBattleWithOpponent()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/pokemon_detail_extended_floating_button_margin"
+            android:layout_marginBottom="@dimen/pokemon_detail_extended_floating_button_first_bottom_margin"
+            android:backgroundTint="@color/poke_grey_65"
+            android:text="@string/pokemon_detail_to_battle_with_enemy_pop_up_descriptions"
+            android:visibility="invisible"
+            app:icon="@drawable/ic_pokemon_battle_enemy"
+            app:iconGravity="end"
+            app:iconTint="@null"
+            app:layout_constraintBottom_toTopOf="@id/efab_pokemon_detail_battle_with_mine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:strokeColor="@color/poke_white"
+            app:strokeWidth="@dimen/stroke_width_small"
+            tools:text="상대 포켓몬으로"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

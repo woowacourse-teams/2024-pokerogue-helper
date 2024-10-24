@@ -21,6 +21,7 @@
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="false"
             android:orientation="vertical"
+            android:paddingBottom="@dimen/pokemon_detail_fragment_bottom_padding"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/view_group_pokemon_evolution" />
 
