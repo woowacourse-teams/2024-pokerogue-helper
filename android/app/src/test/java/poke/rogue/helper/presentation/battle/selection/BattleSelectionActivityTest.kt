@@ -18,11 +18,12 @@ import poke.rogue.helper.testing.rule.KoinAndroidUnitTestRule
 @RunWith(AndroidJUnit4::class)
 @Config(application = TestApplication::class)
 class BattleSelectionActivityTest {
-    private val intent = BattleSelectionActivity.intent(
-        ApplicationProvider.getApplicationContext(),
-        SelectionMode.POKEMON_AND_SKILL,
-        SelectionData.NoSelection,
-    )
+    private val intent =
+        BattleSelectionActivity.intent(
+            ApplicationProvider.getApplicationContext(),
+            SelectionMode.POKEMON_AND_SKILL,
+            SelectionData.NoSelection,
+        )
 
     @get:Rule
     val activityRule = activityScenarioRule<BattleSelectionActivity>(intent)
