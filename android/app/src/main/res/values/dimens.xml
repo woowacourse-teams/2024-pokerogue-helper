@@ -14,4 +14,7 @@
     <dimen name="biome_item_tv_size">16sp</dimen>
     <dimen name="biome_item_iv_width">200dp</dimen>
     <dimen name="biome_item_iv_height">100dp</dimen>
+
+    <!-- tablayout -->
+    <dimen name="tablayout_text_size">12sp</dimen>
 </resources>
