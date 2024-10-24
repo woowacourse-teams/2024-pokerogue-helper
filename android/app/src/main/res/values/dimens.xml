@@ -50,6 +50,7 @@
 
     <!--    floating action button-->
     <dimen name="pokemon_detail_floating_button_size">72dp</dimen>
+    <dimen name="pokemon_detail_fragment_bottom_padding">80dp</dimen>
     <dimen name="pokemon_detail_floating_button_margin">28dp</dimen>
 
     <!--    extended floating button-->

@@ -275,7 +275,7 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/pokemon_detail_floating_button_size"
+                android:paddingBottom="@dimen/pokemon_detail_fragment_bottom_padding"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

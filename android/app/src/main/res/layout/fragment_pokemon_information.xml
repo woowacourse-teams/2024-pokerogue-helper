@@ -125,7 +125,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/pokemon_detail_item_pokemon_biome_spacing"
-                android:paddingBottom="@dimen/pokemon_detail_floating_button_size"
+                android:paddingBottom="@dimen/pokemon_detail_fragment_bottom_padding"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/cl_pokemon_detail_information_weight_height"

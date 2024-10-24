@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/pokemon_detail_floating_button_size"
+            android:paddingBottom="@dimen/pokemon_detail_fragment_bottom_padding"
             tools:context=".presentation.dex.detail.stat.PokemonStatFragment">
 
             <poke.rogue.helper.presentation.util.view.NestedScrollableHost

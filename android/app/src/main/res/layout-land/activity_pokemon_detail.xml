@@ -148,7 +148,7 @@
             android:backgroundTint="@color/poke_grey_65"
             android:contentDescription="@string/battle_title_name"
             android:src="@drawable/icon_home_battle"
-            app:fabCustomSize="@dimen/pokemon_detail_floating_button_size"
+            app:fabCustomSize="@dimen/pokemon_detail_fragment_bottom_padding"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="@dimen/pokemon_detail_extended_floating_button_max_image_size"
