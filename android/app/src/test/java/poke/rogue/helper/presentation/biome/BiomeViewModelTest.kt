@@ -7,29 +7,34 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.test.KoinTest
+import org.koin.test.get
+import org.koin.test.junit5.KoinTestExtension
 import poke.rogue.helper.data.repository.BiomeRepository
+import poke.rogue.helper.presentation.di.testViewModelModule
 import poke.rogue.helper.testing.CoroutinesTestExtension
-import poke.rogue.helper.testing.data.repository.FakeBiomeRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
-class BiomeViewModelTest {
-    private lateinit var repository: BiomeRepository
-    private lateinit var viewModel: BiomeViewModel
+class BiomeViewModelTest : KoinTest {
+    @JvmField
+    @RegisterExtension
+    val koinTestExtension =
+        KoinTestExtension.create {
+            modules(testViewModelModule)
+        }
 
-    @BeforeEach
-    fun setUp() {
-        repository = FakeBiomeRepository()
-    }
+    private val viewModel: BiomeViewModel
+        get() = get<BiomeViewModel>()
 
     @Test
     fun `뷰모델이 생성될 때,모든 바이옴 정보를 불러온다`() =
         runTest {
             // given,when
-            viewModel = BiomeViewModel(repository)
+            val repository = getKoin().get<BiomeRepository>()
             val biomes = viewModel.biomes.first { it is BiomeUiState.Success }
             val actualBiomes = (biomes as BiomeUiState.Success).data
 
@@ -43,7 +48,6 @@ class BiomeViewModelTest {
         runTest {
             // given
             Dispatchers.setMain(StandardTestDispatcher())
-            viewModel = BiomeViewModel(repository)
             val biomeId = "grass"
 
             // when
@@ -59,7 +63,6 @@ class BiomeViewModelTest {
         runTest {
             // given
             Dispatchers.setMain(StandardTestDispatcher())
-            viewModel = BiomeViewModel(repository)
 
             // when
             viewModel.navigateToGuide()
@@ -72,6 +75,9 @@ class BiomeViewModelTest {
     @Test
     fun `올바른 바이옴 이름을 검색했을 때, 해당하는 바이옴을 반환한다`() =
         runTest {
+            // given
+            val repository = getKoin().get<BiomeRepository>()
+
             // when
             val biome = repository.biomes("악지")
 
@@ -84,6 +90,9 @@ class BiomeViewModelTest {
     @Test
     fun `잘못된 바이옴 이름을 검색했을 때, 빈 리스트를 반환한다`() =
         runTest {
+            // given
+            val repository = getKoin().get<BiomeRepository>()
+
             // when
             val biome = repository.biomes("잘못된 이름")
 
