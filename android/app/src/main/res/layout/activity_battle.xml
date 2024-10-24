@@ -91,6 +91,7 @@
 
         <TextView
             android:id="@+id/tv_opponent_pokemon"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.POKEMON_ONLY)}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -123,6 +124,7 @@
 
         <TextView
             android:id="@+id/tv_mine_pokemon"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.POKEMON_AND_SKILL)}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

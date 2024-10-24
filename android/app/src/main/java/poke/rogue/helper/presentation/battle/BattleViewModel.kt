@@ -18,6 +18,7 @@ import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.BattleRepository
+import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.BattlePredictionUiModel
@@ -31,8 +32,12 @@ import poke.rogue.helper.presentation.battle.model.toUi
 
 class BattleViewModel(
     private val battleRepository: BattleRepository,
+    private val pokemonRepository: DexRepository,
     private val logger: AnalyticsLogger = analyticsLogger(),
-) : ErrorHandleViewModel(logger), BattleNavigationHandler {
+    pokemonId: String? = null,
+    selectionType: SelectionType? = null,
+) : ErrorHandleViewModel(logger),
+    BattleNavigationHandler {
     private val _weathers = MutableStateFlow(emptyList<WeatherUiModel>())
     val weathers = _weathers.asStateFlow()
 
@@ -41,20 +46,19 @@ class BattleViewModel(
 
     val weatherPos: StateFlow<Int> =
         combine(
-            battleRepository.savedWeatherStream(),
+            battleRepository.weatherStream(),
             weathers,
         ) { weather, weathers ->
             if (weathers.isEmpty()) return@combine null
-            val weatherId = weather?.id ?: weathers.first().id
-            if (weathers.any { it.id == weatherId }.not()) return@combine null
-            val selectedWeather = weathers.first { it.id == weatherId }
+            val selectedWeather =
+                weather?.toUi()?.let { uiWeather -> weathers.find { it.id == uiWeather.id } }
+                    ?: weathers.first()
 
             _selectedState.value =
                 selectedState.value.copy(weather = BattleSelectionUiState.Selected(selectedWeather))
 
-            weathers.indexOfFirst { it.id == weatherId }
-        }.filterNotNull()
-            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+            weathers.indexOfFirst { it.id == selectedWeather.id }
+        }.filterNotNull().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 
     private val _navigateToSelection = MutableSharedFlow<SelectionNavigationData>()
     val navigateToSelection = _navigateToSelection.asSharedFlow()
@@ -79,7 +83,7 @@ class BattleViewModel(
 
     init {
         initWeathers()
-        initSavedSelection()
+        handlePokemonSelection(pokemonId, selectionType)
     }
 
     private suspend fun fetchBattlePredictionResult(): BattlePredictionUiModel {
@@ -107,18 +111,59 @@ class BattleViewModel(
         }
     }
 
-    private fun initSavedSelection() {
+    private fun handlePokemonSelection(
+        pokemonId: String?,
+        selectionType: SelectionType?,
+    ) {
+        when {
+            pokemonId == null -> {
+                loadSavedMyPokemon()
+                loadSavedOpponentPokemon()
+            }
+
+            selectionType == SelectionType.MINE -> {
+                selectMyPokemon(pokemonId)
+                loadSavedOpponentPokemon()
+            }
+
+            selectionType == SelectionType.OPPONENT -> {
+                loadSavedMyPokemon()
+                selectOpponentPokemon(pokemonId)
+            }
+
+            else -> error("선택 타입 정보를 알 수 없습니다.")
+        }
+    }
+
+    private fun loadSavedMyPokemon() {
         viewModelScope.launch {
-            launch {
-                battleRepository.savedPokemonStream().first()?.let {
-                    updateOpponentPokemon(it.toSelectionUi())
-                }
+            battleRepository.pokemonWithSkillStream().first()?.let { (pokemon, skill) ->
+                updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
             }
-            launch {
-                battleRepository.savedPokemonWithSkillStream().first()?.let { (pokemon, skill) ->
-                    updateMyPokemon(pokemon.toSelectionUi(), skill.toUi())
-                }
+        }
+    }
+
+    private fun loadSavedOpponentPokemon() {
+        viewModelScope.launch {
+            battleRepository.pokemonStream().first()?.let {
+                updateOpponentPokemon(it.toSelectionUi())
             }
+        }
+    }
+
+    private fun selectMyPokemon(pokemonId: String) {
+        viewModelScope.launch {
+            val (pokemon, skill) = battleRepository.pokemonWithSkill(pokemonId)
+            val selectionData = SelectionData.WithSkill(pokemon.toSelectionUi(), skill.toUi())
+            updatePokemonSelection(selectionData)
+        }
+    }
+
+    private fun selectOpponentPokemon(pokemonId: String) {
+        viewModelScope.launch {
+            val pokemon = pokemonRepository.pokemon(pokemonId)
+            val selectionData = SelectionData.WithoutSkill(pokemon.toSelectionUi())
+            updatePokemonSelection(selectionData)
         }
     }
 
@@ -136,7 +181,7 @@ class BattleViewModel(
                 val (selectedPokemon, selectedSkill) = selection
                 updateMyPokemon(selectedPokemon, selectedSkill)
                 viewModelScope.launch {
-                    battleRepository.savePokemonWithSkill(selectedPokemon.id, selectedSkill.id)
+                    battleRepository.saveBattleSelection(selectedPokemon.id, selectedSkill.id)
                 }
                 logger.logPokemonSkillSelection(selection)
             }
@@ -145,7 +190,7 @@ class BattleViewModel(
                 val selectedPokemon = selection.selectedPokemon
                 updateOpponentPokemon(selectedPokemon)
                 viewModelScope.launch {
-                    battleRepository.savePokemon(selectedPokemon.id)
+                    battleRepository.saveBattleSelection(selectedPokemon.id)
                 }
                 logger.logBattlePokemonSelection(selection)
             }
@@ -193,19 +238,30 @@ class BattleViewModel(
     private fun previousSelection(
         hasSkillSelection: Boolean,
         previousPokemonSelection: PokemonSelectionUiModel,
-    ): SelectionData {
-        return if (hasSkillSelection) {
+    ): SelectionData =
+        if (hasSkillSelection) {
             val skill =
                 requireNotNull(selectedState.value.skill.selectedData()) { "스킬이 선택되어야 합니다." }
             SelectionData.WithSkill(previousPokemonSelection, skill)
         } else {
             SelectionData.WithoutSkill(previousPokemonSelection)
         }
-    }
 
     companion object {
-        fun factory(battleRepository: BattleRepository): ViewModelProvider.Factory =
-            BaseViewModelFactory { BattleViewModel(battleRepository) }
+        fun factory(
+            pokemonId: String?,
+            selectionType: SelectionType?,
+            battleRepository: BattleRepository,
+            pokemonRepository: DexRepository,
+        ): ViewModelProvider.Factory =
+            BaseViewModelFactory {
+                BattleViewModel(
+                    battleRepository = battleRepository,
+                    pokemonId = pokemonId,
+                    selectionType = selectionType,
+                    pokemonRepository = pokemonRepository,
+                )
+            }
     }
 }
 
