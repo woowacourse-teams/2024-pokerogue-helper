@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.battle.selection.skill
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -18,7 +17,6 @@ import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.BattleRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel
@@ -79,7 +77,8 @@ class SkillSelectionViewModel(
         previousPokemonDexNumber = pokemonDexNumber
         viewModelScope.launch(errorHandler) {
             _skills.value = emptyList()
-            val availableSkills = battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
+            val availableSkills =
+                battleRepository.availableSkills(pokemonDexNumber).map { it.toUi() }
             _skills.value = availableSkills.initialized()
         }
     }
@@ -98,12 +97,5 @@ class SkillSelectionViewModel(
         viewModelScope.launch {
             searchQuery.emit(name)
         }
-    }
-
-    companion object {
-        fun factory(
-            battleRepository: BattleRepository,
-            previousSelection: SelectionData.WithSkill?,
-        ): ViewModelProvider.Factory = BaseViewModelFactory { SkillSelectionViewModel(battleRepository, previousSelection) }
     }
 }
