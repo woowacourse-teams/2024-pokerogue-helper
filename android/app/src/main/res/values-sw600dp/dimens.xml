@@ -10,6 +10,11 @@
     <dimen name="home_tv_size">24sp</dimen>
     <dimen name="home_gridLayout_padding">100dp</dimen>
 
+    <!-- ability screen -->
+    <dimen name="ability_tv_title_width">153dp</dimen>
+    <dimen name="ability_tv_title_height">100dp</dimen>
+    <dimen name="ability_tv_title_size">20sp</dimen>
+    <dimen name="ability_tv_description_size">20sp</dimen>
     <!-- biome screen -->
     <dimen name="biome_item_tv_size">20sp</dimen>
     <dimen name="biome_item_iv_width">300dp</dimen>

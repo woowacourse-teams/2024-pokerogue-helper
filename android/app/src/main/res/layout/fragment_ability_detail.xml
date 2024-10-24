@@ -62,7 +62,7 @@
             tools:listitem="@layout/item_ability_detail_pokemon" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dex_loading"
+            android:id="@+id/ability_detail_loading"
             visible="@{vm.isEmpty()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
