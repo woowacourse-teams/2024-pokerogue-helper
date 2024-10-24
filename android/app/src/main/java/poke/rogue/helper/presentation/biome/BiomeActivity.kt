@@ -1,12 +1,10 @@
 package poke.rogue.helper.presentation.biome
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel

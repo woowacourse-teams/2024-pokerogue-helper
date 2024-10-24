@@ -90,8 +90,8 @@ class BiomeDetailActivity :
                             putExtras(
                                 PokemonDetailActivity.intent(
                                     this@BiomeDetailActivity,
-                                    pokemonId
-                                )
+                                    pokemonId,
+                                ),
                             )
                             logger.logClickEvent(NAVIGATE_TO_POKEMON_DETAIL)
                         }
@@ -104,8 +104,8 @@ class BiomeDetailActivity :
                                 BattleActivity.intent(
                                     this@BiomeDetailActivity,
                                     pokemonId,
-                                    isMine = false
-                                )
+                                    isMine = false,
+                                ),
                             )
                             logger.logClickEvent(NAVIGATE_TO_BATTLE)
                         }
