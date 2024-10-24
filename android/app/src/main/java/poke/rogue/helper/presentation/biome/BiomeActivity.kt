@@ -1,9 +1,11 @@
 package poke.rogue.helper.presentation.biome
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeBinding
@@ -54,10 +56,13 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
 
     private fun initAdapter() {
         binding.rvBiomeList.apply {
+            val spanCount =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 3 else 2
             adapter = biomeAdapter
+            layoutManager = GridLayoutManager(context, spanCount)
             addItemDecoration(
                 GridSpacingItemDecoration(
-                    2,
+                    spanCount,
                     9.dp,
                     false,
                 ),
