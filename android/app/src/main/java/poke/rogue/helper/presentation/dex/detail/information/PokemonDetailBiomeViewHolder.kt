@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemPokemonDetailInformationBiomeBinding
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler
 import poke.rogue.helper.presentation.dex.model.PokemonBiomeUiModel
-import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonDetailBiomeViewHolder(
     private val binding: ItemPokemonDetailInformationBiomeBinding,
@@ -24,13 +23,7 @@ class PokemonDetailBiomeViewHolder(
             )
         biomeTypesAdapter.addTypes(
             types = biome.types,
-            spacingBetweenTypes = TYPES_SPACING,
-            iconSize = TYPE_ICON_SIZE,
         )
     }
 
-    companion object {
-        private val TYPES_SPACING = 5.dp
-        private val TYPE_ICON_SIZE = 18.dp
-    }
 }

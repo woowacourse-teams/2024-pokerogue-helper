@@ -1,10 +1,8 @@
 package poke.rogue.helper.presentation.dex.detail
 
-import android.R.dimen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -47,9 +45,6 @@ class PokemonDetailActivity :
         binding.eventHandler = viewModel
         binding.lifecycleOwner = this
         binding.vm = viewModel
-
-        val nameSize = resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_types_name_size)
-
 
         initAdapter()
         initObservers()
@@ -256,14 +251,6 @@ class PokemonDetailActivity :
         private const val IS_EXPANDED = "isExpanded"
 
         val TAG: String = PokemonDetailActivity::class.java.simpleName
-
-        private val typesUiConfig =
-            TypeChip.PokemonTypeViewConfiguration(
-                width = LayoutParams.WRAP_CONTENT,
-                nameSize = 16.dp,
-                iconSize = 20.dp,
-                hasBackGround = false,
-            )
 
         fun intent(
             context: Context,

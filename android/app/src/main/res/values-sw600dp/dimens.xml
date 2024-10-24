@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--common-->
+    <dimen name="text_size_header_large">32sp</dimen>
+
     <!--  home screen  -->
     <dimen name="home_cv_width">250dp</dimen>
     <dimen name="home_cv_height">250dp</dimen>
@@ -10,12 +13,12 @@
     <dimen name="home_tv_size">24sp</dimen>
     <dimen name="home_gridLayout_padding">100dp</dimen>
 
+    <!--pokemon detail-->
     <dimen name="pokemon_detail_pokemon_name_size">32sp</dimen>
     <dimen name="pokemon_detail_pokemon_types_name_size">24sp</dimen>
     <dimen name="pokemon_detail_pokemon_types_icon_size">28sp</dimen>
 
-    <dimen name="text_size_header_large">32sp</dimen>
-
+    <!--    pokemon stat-->
     <dimen name="pokemon_stat_text_size">28dp</dimen>
     <dimen name="pokemon_stat_key_text_width">156dp</dimen>
     <dimen name="pokemon_stat_value_text_width">96dp</dimen>
@@ -36,5 +39,17 @@
     <!--    pokemon skills-->
     <dimen name="item_pokemon_skills_text_size">24dp</dimen>
 
+    <!--    pokemon information-->
+    <dimen name="pokemon_detail_information_text_size">24dp</dimen>
+
+    <dimen name="pokemon_detail_item_pokemon_biome_text_size">24dp</dimen>
+    <dimen name="pokemon_detail_item_pokemon_biome_type_icon_size">28dp</dimen>
+    <dimen name="pokemon_detail_item_pokemon_biome_type_icon_spacing">12dp</dimen>
+
+    <dimen name="pokemon_detail_item_pokemon_biome_image_width">400dp</dimen>
+    <dimen name="pokemon_detail_item_pokemon_biome_image_height">200dp</dimen>
+
+    <integer name="pokemon_detail_item_pokemon_biome_span_count">3</integer>
+    <dimen name="pokemon_detail_item_pokemon_biome_spacing">18dp</dimen>
 
 </resources>

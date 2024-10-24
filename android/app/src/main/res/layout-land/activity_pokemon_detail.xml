@@ -37,8 +37,6 @@
             style="@style/CustomToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:backgroundTint="@android:color/transparent"
-            app:layout_collapseMode="pin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,9 +57,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/pokemon_detail_pokemon_image_horizontal_margin_start"
-            android:layout_marginBottom="@dimen/pokemon_detail_floating_button_margin"
+            android:paddingVertical="@dimen/pokemon_detail_pokemon_image_padding_bottom"
             android:paddingStart="@dimen/pokemon_detail_pokemon_image_padding_start"
-            android:paddingBottom="@dimen/pokemon_detail_pokemon_image_padding_bottom"
             app:layout_constraintBottom_toTopOf="@id/layout_pokemon_detail_pokemon_types"
             app:layout_constraintEnd_toStartOf="@id/divider_pokemon_detail"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,8 +86,8 @@
             android:layout_marginHorizontal="@dimen/pokemon_detail_pokemon_name_margin"
             android:paddingTop="@dimen/pokemon_detail_pokemon_name_margin"
             android:textSize="@dimen/pokemon_detail_pokemon_name_size"
-            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
             app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
             tools:text="이상해씨 #1" />
 
         <LinearLayout
