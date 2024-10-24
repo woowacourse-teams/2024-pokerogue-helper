@@ -59,6 +59,9 @@
         <item>정보</item>
     </string-array>
 
+    <string name="pokemon_detail_to_battle_with_enemy_pop_up_descriptions">상대 포켓몬으로</string>
+    <string name="pokemon_detail_to_battle_with_mine_pop_up_descriptions">내 포켓몬으로</string>
+
     <!--    pokemon detail skills-->
     <string name="pokemon_detail_skill_level">레벨</string>
     <string name="pokemon_detail_skill_name">기술명</string>
@@ -98,6 +101,8 @@
         <item>야생</item>
         <item>다음 바이옴</item>
     </string-array>
+    <string name="biome_navigation_mode_setting">배틀 모드 설정</string>
+    <string name="biome_navigation_mode_info">"포켓몬 클릭 시 기본적으로 상세 페이지로 이동합니다.\n 배틀 페이지로 가려면 배틀 모드를 설정해주세요!"</string>
 
     <!--    biome detail gym -->
     <string name="biome_detail_gym">등장하는 체육관 관장이 없어요</string>

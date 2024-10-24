@@ -1,12 +1,13 @@
 [versions]
 applicationId = "poke.rogue.helper"
+balloon = "1.6.8"
 compileSdk = "34"
 koin = "4.0.0"
 minSdk = "26"
 robolectric = "4.13"
 targetSdk = "34"
-appVersion = "1.0.3"
-versionCode = "10003"
+appVersion = "1.1.0"
+versionCode = "101000"
 agp = "8.3.2"
 
 # kotlin
@@ -63,6 +64,7 @@ firebaseCrashlyticsBuildtools = "3.0.2"
 agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 
 # kotlin
+balloon = { module = "com.github.skydoves:balloon", version.ref = "balloon" }
 kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 kotlin-gradleplugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }

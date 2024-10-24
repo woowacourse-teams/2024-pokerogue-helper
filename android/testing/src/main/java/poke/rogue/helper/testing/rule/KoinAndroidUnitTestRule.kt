@@ -7,6 +7,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.getKoinApplicationOrNull
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
+import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.Module
 
 class KoinAndroidUnitTestRule(
@@ -26,6 +27,6 @@ class KoinAndroidUnitTestRule(
     }
 
     override fun finished(description: Description) {
-        loadKoinModules(modules)
+        unloadKoinModules(modules)
     }
 }

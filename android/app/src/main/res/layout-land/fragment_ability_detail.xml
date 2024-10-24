@@ -36,13 +36,13 @@
 
             <TextView
                 android:id="@+id/tv_ability_title"
-                android:layout_width="102dp"
-                android:layout_height="67dp"
+                android:layout_width="@dimen/ability_tv_title_width"
+                android:layout_height="@dimen/ability_tv_title_height"
                 android:background="@drawable/bg_ability_title"
-                android:backgroundTint="@color/poke_grey_80"
                 android:gravity="center"
                 android:text="@{abilityUiModel.title}"
                 android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                android:textSize="@dimen/ability_tv_title_size"
                 tools:text="악취" />
 
             <TextView
@@ -53,6 +53,7 @@
                 android:gravity="center"
                 android:text="@{abilityUiModel.description}"
                 android:textAppearance="@style/TextAppearance.Poke.Description"
+                android:textSize="@dimen/ability_tv_description_size"
                 tools:text="특성을 대충 작성한 글입니다~~~~~~~~~~~~~~~~~~~~~~~" />
         </LinearLayout>
 
@@ -83,5 +84,38 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="45dp" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ability_detail_loading"
+            visible="@{vm.isEmpty()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_network_error"
+                app:layout_constraintBottom_toTopOf="@id/tv_empty"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_empty"
+                style="@style/TextAppearance.Poke.TitleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="해당하는 포켓몬이 없습니다"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -3,8 +3,8 @@ package poke.rogue.helper.presentation.type
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
@@ -15,9 +15,7 @@ import poke.rogue.helper.presentation.type.selection.TypeSelectionBottomSheetFra
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
 class TypeActivity : ToolbarActivity<ActivityTypeBinding>(R.layout.activity_type) {
-    private val viewModel: TypeViewModel by viewModels {
-        TypeViewModel.factory()
-    }
+    private val viewModel by viewModel<TypeViewModel>()
     private val typeResultAdapter by lazy { TypeResultAdapter() }
 
     override val toolbar: Toolbar
@@ -94,8 +92,6 @@ class TypeActivity : ToolbarActivity<ActivityTypeBinding>(R.layout.activity_type
     }
 
     companion object {
-        fun intent(context: Context): Intent {
-            return Intent(context, TypeActivity::class.java)
-        }
+        fun intent(context: Context): Intent = Intent(context, TypeActivity::class.java)
     }
 }

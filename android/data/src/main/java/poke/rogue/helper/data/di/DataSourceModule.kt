@@ -4,6 +4,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import poke.rogue.helper.data.datasource.LocalBattleDataSource
 import poke.rogue.helper.data.datasource.LocalDexDataSource
+import poke.rogue.helper.data.datasource.LocalNavigationDataSource
 import poke.rogue.helper.data.datasource.LocalTypeDataSource
 import poke.rogue.helper.data.datasource.LocalVersionDataSource
 import poke.rogue.helper.data.datasource.RemoteAbilityDataSource
@@ -18,6 +19,7 @@ internal val dataSourceModule
             singleOf(::LocalBattleDataSource)
             singleOf(::LocalDexDataSource)
             singleOf(::LocalTypeDataSource)
+            singleOf(::LocalNavigationDataSource)
             singleOf(::LocalVersionDataSource)
 
             singleOf(::RemoteBattleDataSource)
