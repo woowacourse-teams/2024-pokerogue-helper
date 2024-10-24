@@ -97,6 +97,7 @@
             android:layout_marginEnd="8dp"
             android:gravity="end"
             android:text="@string/battle_opponent_pokemon_selection"
+            android:textAlignment="viewEnd"
             app:layout_constraintBottom_toBottomOf="@id/flexbox_opponent_types"
             app:layout_constraintEnd_toStartOf="@id/flexbox_opponent_types"
             app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -114,6 +115,7 @@
             app:layout_constraintTop_toTopOf="@id/iv_opponent_pokemon" />
 
         <ImageView
+            android:id="@+id/iv_opponent_arena"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="-16dp"
@@ -121,6 +123,18 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_opponent_pokemon"
             app:layout_constraintEnd_toEndOf="@id/iv_opponent_pokemon"
             app:layout_constraintStart_toStartOf="@id/iv_opponent_pokemon" />
+
+        <ImageButton
+            android:id="@+id/btn_opponent_pokemon_detail"
+            visible="@{vm.selectedState.isOpponentPokemonSelected}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-12dp"
+            android:background="@drawable/bg_battle_navigation_button"
+            android:padding="4dp"
+            android:src="@drawable/icon_book"
+            app:layout_constraintEnd_toEndOf="@id/iv_opponent_arena"
+            app:layout_constraintTop_toBottomOf="@id/iv_opponent_arena" />
 
         <ImageView
             android:id="@+id/iv_opponent_pokemon"
@@ -164,6 +178,18 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_mine_pokemon"
             app:layout_constraintEnd_toEndOf="@id/iv_mine_pokemon"
             app:layout_constraintStart_toStartOf="@id/iv_mine_pokemon" />
+
+        <ImageButton
+            android:id="@+id/btn_mine_pokemon_detail"
+            visible="@{vm.selectedState.isMinePokemonSelected}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-12dp"
+            android:background="@drawable/bg_battle_navigation_button"
+            android:padding="4dp"
+            android:src="@drawable/icon_book"
+            app:layout_constraintEnd_toEndOf="@id/iv_mine_arena"
+            app:layout_constraintTop_toBottomOf="@id/iv_mine_arena" />
 
         <ImageView
             android:id="@+id/iv_mine_pokemon"
@@ -313,9 +339,10 @@
             android:text="@string/battle_accuracy_title"
             app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
             app:layout_constraintEnd_toEndOf="@id/tv_calculated_power_content"
-            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@id/tv_calculated_power_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_calculated_power_content" />
+            app:layout_constraintTop_toBottomOf="@id/tv_calculated_power_content"
+            app:layout_constraintVertical_chainStyle="packed" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
