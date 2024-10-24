@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="poke.rogue.helper.presentation.battle.model.SelectionMode" />
+
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.battle.BattleViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.battle.BattleActivity">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_battle"
+            style="@style/CustomToolbarStyle"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:contentInsetStartWithNavigation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/battle_title_name" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="?attr/actionBarSize" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.68" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="20dp" />
+
+        <Spinner
+            android:id="@+id/spinner_weather"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_spinner"
+            android:padding="0dp"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@id/tv_weather_description"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/gl_top"
+            tools:listitem="@layout/item_spinner_weather" />
+
+        <TextView
+            android:id="@+id/tv_weather_description"
+            style="@style/TextAppearance.Poke.CaptionLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="end"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@id/spinner_weather"
+            app:layout_constraintStart_toStartOf="@id/spinner_weather"
+            app:layout_constraintTop_toBottomOf="@id/spinner_weather" />
+
+        <TextView
+            android:id="@+id/tv_opponent_pokemon"
+            style="@style/TextAppearance.Poke.TitleBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:text="@string/battle_opponent_pokemon_selection"
+            android:textAlignment="viewEnd"
+            app:layout_constraintBottom_toBottomOf="@id/flexbox_opponent_types"
+            app:layout_constraintEnd_toStartOf="@id/flexbox_opponent_types"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="@id/flexbox_opponent_types" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexbox_opponent_types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            app:flexDirection="row"
+            app:layout_constraintEnd_toStartOf="@id/iv_opponent_pokemon"
+            app:layout_constraintStart_toEndOf="@id/tv_opponent_pokemon"
+            app:layout_constraintTop_toTopOf="@id/iv_opponent_pokemon" />
+
+        <ImageView
+            android:id="@+id/iv_opponent_arena"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-16dp"
+            android:src="@drawable/icon_arena"
+            app:layout_constraintBottom_toBottomOf="@id/iv_opponent_pokemon"
+            app:layout_constraintEnd_toEndOf="@id/iv_opponent_pokemon"
+            app:layout_constraintStart_toStartOf="@id/iv_opponent_pokemon" />
+
+        <ImageButton
+            android:id="@+id/btn_opponent_pokemon_detail"
+            visible="@{vm.selectedState.isOpponentPokemonSelected}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-12dp"
+            android:background="@drawable/bg_battle_navigation_button"
+            android:padding="4dp"
+            android:src="@drawable/icon_book"
+            app:layout_constraintEnd_toEndOf="@id/iv_opponent_arena"
+            app:layout_constraintTop_toBottomOf="@id/iv_opponent_arena" />
+
+        <ImageView
+            android:id="@+id/iv_opponent_pokemon"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.POKEMON_ONLY)}"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/icon_pokemon_selection_op"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/tv_weather_description" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexbox_mine_types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:flexDirection="row"
+            app:layout_constraintBottom_toTopOf="@id/tv_skill_title"
+            app:layout_constraintStart_toStartOf="@id/tv_skill_title" />
+
+        <TextView
+            android:id="@+id/tv_mine_pokemon"
+            style="@style/TextAppearance.Poke.TitleBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="start"
+            android:text="@string/battle_mine_pokemon_selection"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_skill_title"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toEndOf="@id/flexbox_mine_types" />
+
+        <ImageView
+            android:id="@+id/iv_mine_arena"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-16dp"
+            android:src="@drawable/icon_arena"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mine_pokemon"
+            app:layout_constraintEnd_toEndOf="@id/iv_mine_pokemon"
+            app:layout_constraintStart_toStartOf="@id/iv_mine_pokemon" />
+
+        <ImageButton
+            android:id="@+id/btn_mine_pokemon_detail"
+            visible="@{vm.selectedState.isMinePokemonSelected}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-12dp"
+            android:background="@drawable/bg_battle_navigation_button"
+            android:padding="4dp"
+            android:src="@drawable/icon_book"
+            app:layout_constraintEnd_toEndOf="@id/iv_mine_arena"
+            app:layout_constraintTop_toBottomOf="@id/iv_mine_arena" />
+
+        <ImageView
+            android:id="@+id/iv_mine_pokemon"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.POKEMON_AND_SKILL)}"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-24dp"
+            android:layout_marginBottom="12dp"
+            android:src="@drawable/icon_pokemon_selection_mine"
+            app:layout_constraintBottom_toTopOf="@id/gl_divider"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/iv_opponent_pokemon" />
+
+        <TextView
+            android:id="@+id/tv_skill_title"
+            onSingleClick="@{() -> vm.navigateToSelection(SelectionMode.SKILL_FIRST)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_battle_default"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="8dp"
+            android:text="@string/battle_move_selection"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/icon_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mine_arena"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toEndOf="@id/iv_mine_arena" />
+
+        <TextView
+            android:id="@+id/tv_result_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/battle_result_title"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/gl_divider" />
+
+        <TextView
+            android:id="@+id/tv_power_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/battle_power_title"
+            app:layout_constraintEnd_toStartOf="@id/tv_multiplier"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_result_title" />
+
+        <TextView
+            android:id="@+id/tv_power_content"
+            style="@style/HighlightTextStyle"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_power_title"
+            app:layout_constraintStart_toStartOf="@id/tv_power_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_power_title"
+            tools:text="30" />
+
+        <TextView
+            android:id="@+id/tv_multiplier"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/battle_result_multiplier"
+            app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
+            app:layout_constraintEnd_toStartOf="@id/tv_multiplier_title"
+            app:layout_constraintStart_toEndOf="@id/tv_power_title"
+            app:layout_constraintTop_toTopOf="@id/tv_power_title" />
+
+        <TextView
+            android:id="@+id/tv_multiplier_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/battle_multiplier_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
+            app:layout_constraintEnd_toStartOf="@id/tv_equal"
+            app:layout_constraintStart_toEndOf="@id/tv_multiplier"
+            app:layout_constraintTop_toTopOf="@id/tv_power_title" />
+
+        <TextView
+            android:id="@+id/tv_multiplier_content"
+            style="@style/HighlightTextStyle"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_multiplier_title"
+            app:layout_constraintStart_toStartOf="@id/tv_multiplier_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_multiplier_title"
+            tools:text="30" />
+
+        <TextView
+            android:id="@+id/tv_equal"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/battle_result_equal"
+            app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
+            app:layout_constraintEnd_toStartOf="@id/tv_calculated_power_title"
+            app:layout_constraintStart_toEndOf="@id/tv_multiplier_title"
+            app:layout_constraintTop_toTopOf="@id/tv_power_title" />
+
+        <TextView
+            android:id="@+id/tv_calculated_power_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/battle_calculated_power_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_power_title"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toEndOf="@id/tv_equal"
+            app:layout_constraintTop_toTopOf="@id/tv_power_title" />
+
+        <TextView
+            android:id="@+id/tv_calculated_power_content"
+            style="@style/HighlightTextStyle"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_calculated_power_title"
+            app:layout_constraintStart_toStartOf="@id/tv_calculated_power_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_calculated_power_title"
+            tools:text="30" />
+
+        <TextView
+            android:id="@+id/tv_accuracy_content"
+            style="@style/TextAppearance.Poke.CaptionLarge"
+            visible="@{vm.isBattleFetchSuccessful}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/battle_accuracy_title"
+            app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
+            app:layout_constraintEnd_toEndOf="@id/tv_calculated_power_content"
+            app:layout_constraintStart_toStartOf="@id/tv_calculated_power_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_calculated_power_content"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
