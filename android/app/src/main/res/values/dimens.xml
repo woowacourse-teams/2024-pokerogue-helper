@@ -10,5 +10,10 @@
     <dimen name="home_tv_size">15sp</dimen>
     <dimen name="home_gridLayout_padding">20dp</dimen>
 
+    <!-- ability screen -->
+    <dimen name="ability_tv_title_width">102dp</dimen>
+    <dimen name="ability_tv_title_height">67dp</dimen>
+    <dimen name="ability_tv_title_size">15sp</dimen>
+    <dimen name="ability_tv_description_size">15sp</dimen>
 
 </resources>
