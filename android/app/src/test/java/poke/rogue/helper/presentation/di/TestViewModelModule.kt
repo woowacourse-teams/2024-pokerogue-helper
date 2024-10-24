@@ -4,11 +4,14 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
+import poke.rogue.helper.presentation.ability.AbilityViewModel
+import poke.rogue.helper.presentation.ability.detail.AbilityDetailViewModel
 import poke.rogue.helper.presentation.battle.BattleViewModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionViewModel
 import poke.rogue.helper.presentation.battle.selection.pokemon.PokemonSelectionViewModel
 import poke.rogue.helper.presentation.battle.selection.skill.SkillSelectionViewModel
 import poke.rogue.helper.presentation.dex.PokemonListViewModel
+import poke.rogue.helper.presentation.home.HomeViewModel
 import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.testing.di.testingModule
 
@@ -17,6 +20,9 @@ val testViewModelModule =
         includes(testingModule)
 
         singleOf(::PokemonListViewModel)
+        singleOf(::HomeViewModel)
+        singleOf(::AbilityViewModel)
+        singleOf(::AbilityDetailViewModel)
         viewModelOf(::TypeViewModel)
         viewModel<BattleViewModel> { params ->
             BattleViewModel(get(), get(), get(), params.getOrNull(), params.getOrNull())
