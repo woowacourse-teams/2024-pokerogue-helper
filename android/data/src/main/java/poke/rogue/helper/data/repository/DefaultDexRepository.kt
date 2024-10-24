@@ -1,5 +1,6 @@
 package poke.rogue.helper.data.repository
 
+import android.content.Context
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
@@ -142,13 +143,13 @@ class DefaultDexRepository(
         private var instance: DexRepository? = null
         const val PLELOAD_POKEMON_COUNT = 24
 
-        fun init() {
+        fun init(context: Context) {
             instance =
                 DefaultDexRepository(
                     remotePokemonDataSource = getKoin().get(),
                     localPokemonDataSource = getKoin().get(),
                     imageCacher = getKoin().get(),
-                    biomeRepository = DefaultBiomeRepository.instance(),
+                    biomeRepository = DefaultBiomeRepository.instance(context),
                     analyticsLogger = analyticsLogger(),
                     localVersionDataSource = getKoin().get(),
                     remoteVersionService = getKoin().get(),

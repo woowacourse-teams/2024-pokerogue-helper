@@ -18,13 +18,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="@dimen/pokemon_detail_floating_button_size"
             tools:context=".presentation.dex.detail.stat.PokemonStatFragment">
 
             <poke.rogue.helper.presentation.util.view.NestedScrollableHost
                 android:id="@+id/scrollable_host_pokemon_abilities"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/pokemon_detail_margins_between_layout"
+                android:layout_marginTop="@dimen/pokemon_detail_stat_margins_between_layout"
                 app:layout_constraintBottom_toTopOf="@id/layout_pokemon_stats_stats"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +38,7 @@
                     android:foregroundGravity="center"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
-                    android:padding="10dp"
+                    android:padding="@dimen/pokemon_detail_stat_ability_padding"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_ability_title" />
@@ -48,10 +49,10 @@
                 android:id="@+id/layout_pokemon_stats_stats"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="@dimen/pokemon_detail_margins_between_layout"
+                android:layout_margin="@dimen/pokemon_detail_stat_margins_between_layout"
                 android:background="@drawable/shape_grey_80_fill_20_rect"
-                android:paddingBottom="20dp"
+                android:paddingBottom="@dimen/pokemon_detail_stat_margins_between_layout"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/scrollable_host_pokemon_abilities">
@@ -60,11 +61,10 @@
                     android:id="@+id/tv_title_stats"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/pokemon_detail_margins_between_layout"
-                    android:layout_marginBottom="@dimen/pokemon_detail_margins_between_item"
+                    android:layout_marginVertical="@dimen/pokemon_detail_stat_margins_between_layout"
                     android:fontFamily="@font/pretendard_semibold"
                     android:text="@string/dex_detail_pokemon_stats_title"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_header_large"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -73,8 +73,8 @@
                     android:id="@+id/rv_pokemon_stats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="@dimen/pokemon_detail_stat_margins_between_layout"
+                    android:layout_marginTop="@dimen/pokemon_detail_stat_margins_between_layout"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/tv_title_stats"

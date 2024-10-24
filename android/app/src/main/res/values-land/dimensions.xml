@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--pokemon detail-->
+    <dimen name="pokemon_detail_pokemon_image_horizontal_margin_start">28dp</dimen>
+    <dimen name="pokemon_detail_pokemon_image_horizontal_margin_bottom">28dp</dimen>
+    <dimen name="pokemon_detail_pokemon_image_padding_start">16dp</dimen>
+    <dimen name="pokemon_detail_pokemon_image_padding_bottom">20dp</dimen>
+
+
+    <dimen name="pokemon_detail_pokemon_name_margin">28dp</dimen>
+    <dimen name="pokemon_detail_pokemon_name_size">16sp</dimen>
+
+    <dimen name="pokemon_detail_margins_between_layout">28dp</dimen>
+
+
+</resources>
