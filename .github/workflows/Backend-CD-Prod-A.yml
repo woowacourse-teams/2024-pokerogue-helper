@@ -17,7 +17,9 @@ jobs:
       - name: Port forwarding begin
         run: |
           sudo sysctl -w net.ipv4.ip_forward=1
-          sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_B_PRIVATE_IP }}:80
+          sudo iptables -t nat -I PREROUTING 1 -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_B_PRIVATE_IP }}:80
+          sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_A_PRIVATE_IP }}
+          sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
       - name: Deploy
         run: |
@@ -35,7 +37,7 @@ jobs:
           
           docker run -d -p 80:8080 --name server \
               -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
-              -e TZ=Asia/Seoul \
+              -e TZ=Asia/Seoul 
               ${{ secrets.DOCKER_SERVER_IMAGE }}
 
       - name: Wait for service to start
@@ -55,6 +57,6 @@ jobs:
 
       - name: Port forwarding end
         run: |
-          sudo sysctl -w net.ipv4.ip_forward=0
-          sudo iptables -t nat -D PREROUTING -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_A_PRIVATE_IP }}:80
-          sudo iptables -t nat -L -n -v
+          sudo iptables -t nat -D PREROUTING 1
+          sudo iptables -t nat -D POSTROUTING 1
+          sudo iptables -D INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
