@@ -5,9 +5,8 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import androidx.fragment.app.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
 import poke.rogue.helper.presentation.base.error.ErrorEvent
@@ -21,11 +20,7 @@ import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class AbilityFragment : ErrorHandleFragment<FragmentAbilityBinding>(R.layout.fragment_ability) {
-    private val viewModel by viewModels<AbilityViewModel> {
-        AbilityViewModel.factory(
-            DefaultAbilityRepository.instance(),
-        )
-    }
+    private val viewModel by viewModel<AbilityViewModel>()
     override val errorViewModel: ErrorHandleViewModel
         get() = viewModel
 

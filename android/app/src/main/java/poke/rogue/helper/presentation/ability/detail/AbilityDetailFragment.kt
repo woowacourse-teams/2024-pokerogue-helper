@@ -3,9 +3,8 @@ package poke.rogue.helper.presentation.ability.detail
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultAbilityRepository
 import poke.rogue.helper.databinding.FragmentAbilityDetailBinding
 import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.error.ErrorEvent
@@ -21,11 +20,7 @@ import poke.rogue.helper.presentation.util.view.dp
 
 class AbilityDetailFragment :
     ToolbarFragment<FragmentAbilityDetailBinding>(R.layout.fragment_ability_detail) {
-    private val viewModel by viewModels<AbilityDetailViewModel> {
-        AbilityDetailViewModel.factory(
-            DefaultAbilityRepository.instance(),
-        )
-    }
+    private val viewModel by viewModel<AbilityDetailViewModel>()
 
     private val adapter: AbilityDetailAdapter by lazy { AbilityDetailAdapter(viewModel) }
 

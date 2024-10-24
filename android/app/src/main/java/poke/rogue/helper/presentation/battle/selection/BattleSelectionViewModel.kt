@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.battle.selection
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +13,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.BattleSelectionUiState
 import poke.rogue.helper.presentation.battle.isSelected
@@ -84,17 +82,17 @@ class BattleSelectionViewModel(
         }
     }
 
-    private fun initialStep(selectionMode: SelectionMode): SelectionStep {
-        return when {
+    private fun initialStep(selectionMode: SelectionMode): SelectionStep =
+        when {
             selectionMode == SelectionMode.SKILL_FIRST && previousSelection != SelectionData.NoSelection -> {
-                val selected = requireNotNull(previousSelection.selectedPokemon()) { "포켓몬이 선택되지 않았습니다." }
+                val selected =
+                    requireNotNull(previousSelection.selectedPokemon()) { "포켓몬이 선택되지 않았습니다." }
                 updateDexNumberForSkills(selected.dexNumber)
                 SelectionStep.SKILL_SELECTION
             }
 
             else -> SelectionStep.POKEMON_SELECTION
         }
-    }
 
     fun selectPokemon(pokemon: PokemonSelectionUiModel) {
         _selectedPokemon.value = BattleSelectionUiState.Selected(pokemon)
@@ -148,12 +146,5 @@ class BattleSelectionViewModel(
         if (prevPage != null) {
             _currentStep.value = prevPage
         }
-    }
-
-    companion object {
-        fun factory(
-            selectionMode: SelectionMode,
-            previousSelection: SelectionData,
-        ): ViewModelProvider.Factory = BaseViewModelFactory { BattleSelectionViewModel(selectionMode, previousSelection) }
     }
 }

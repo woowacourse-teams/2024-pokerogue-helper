@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.battle
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +18,6 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.BattleRepository
 import poke.rogue.helper.data.repository.DexRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.BattlePredictionUiModel
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
@@ -36,8 +34,7 @@ class BattleViewModel(
     private val logger: AnalyticsLogger = analyticsLogger(),
     pokemonId: String? = null,
     selectionType: SelectionType? = null,
-) : ErrorHandleViewModel(logger),
-    BattleNavigationHandler {
+) : ErrorHandleViewModel(logger), BattleNavigationHandler {
     private val _weathers = MutableStateFlow(emptyList<WeatherUiModel>())
     val weathers = _weathers.asStateFlow()
 
@@ -60,8 +57,8 @@ class BattleViewModel(
             weathers.indexOfFirst { it.id == selectedWeather.id }
         }.filterNotNull().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 
-    private val _navigateToSelection = MutableSharedFlow<SelectionNavigationData>()
-    val navigateToSelection = _navigateToSelection.asSharedFlow()
+    private val _navigationEvent = MutableSharedFlow<BattleNavigationEvent>()
+    val navigationEvent = _navigationEvent.asSharedFlow()
 
     val battleResult: StateFlow<BattleResultUiState> =
         selectedState.map {
@@ -230,8 +227,8 @@ class BattleViewModel(
                     previousSelection(hasSkillSelection, selectedPokemon)
                 }
 
-            val navigationData = SelectionNavigationData(selectionMode, data)
-            _navigateToSelection.emit(navigationData)
+            val navigationData = NavigateToSelection(selectionMode, data)
+            _navigationEvent.emit(navigationData)
         }
     }
 
@@ -247,25 +244,18 @@ class BattleViewModel(
             SelectionData.WithoutSkill(previousPokemonSelection)
         }
 
-    companion object {
-        fun factory(
-            pokemonId: String?,
-            selectionType: SelectionType?,
-            battleRepository: BattleRepository,
-            pokemonRepository: DexRepository,
-        ): ViewModelProvider.Factory =
-            BaseViewModelFactory {
-                BattleViewModel(
-                    battleRepository = battleRepository,
-                    pokemonId = pokemonId,
-                    selectionType = selectionType,
-                    pokemonRepository = pokemonRepository,
-                )
-            }
+    override fun navigationToDetail(pokemonId: String) {
+        viewModelScope.launch {
+            _navigationEvent.emit(NavigateToDetail(pokemonId))
+        }
     }
 }
 
-data class SelectionNavigationData(
+sealed interface BattleNavigationEvent
+
+data class NavigateToSelection(
     val selectionMode: SelectionMode,
     val previousSelectionData: SelectionData,
-)
+) : BattleNavigationEvent
+
+data class NavigateToDetail(val pokemonId: String) : BattleNavigationEvent

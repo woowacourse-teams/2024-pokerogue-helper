@@ -3,8 +3,9 @@ package poke.rogue.helper.presentation.battle.selection
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityBattleSelectionBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
@@ -20,8 +21,8 @@ import poke.rogue.helper.presentation.util.view.setImage
 
 class BattleSelectionActivity :
     ErrorHandleActivity<ActivityBattleSelectionBinding>(R.layout.activity_battle_selection) {
-    private val viewModel by viewModels<BattleSelectionViewModel> {
-        BattleSelectionViewModel.factory(selectionMode, previousSelection)
+    private val viewModel by viewModel<BattleSelectionViewModel> {
+        parametersOf(selectionMode, previousSelection)
     }
     private val previousSelection by lazy {
         intent.parcelable<SelectionData>(KEY_PREVIOUS_SELECTION) ?: error("잘못된 선택 데이터")
@@ -93,8 +94,8 @@ class BattleSelectionActivity :
     }
 
     companion object {
-        private const val KEY_SELECTION_MODE = "selectionMode"
-        private const val KEY_PREVIOUS_SELECTION = "previousSelection"
+        const val KEY_SELECTION_MODE = "selectionMode"
+        const val KEY_PREVIOUS_SELECTION = "previousSelection"
         const val KEY_SELECTION_RESULT = "selectionResult"
 
         fun intent(

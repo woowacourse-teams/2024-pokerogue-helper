@@ -6,34 +6,36 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultBattleRepository
-import poke.rogue.helper.data.repository.DefaultDexRepository
 import poke.rogue.helper.databinding.ActivityBattleBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
+import poke.rogue.helper.presentation.battle.selection.pokemon.addPokemonTypes
 import poke.rogue.helper.presentation.battle.view.itemSelectListener
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.util.context.colorOf
+import poke.rogue.helper.presentation.util.context.startActivity
+import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.serializable
+import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
+import poke.rogue.helper.presentation.util.view.setOnSingleClickListener
 import timber.log.Timber
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
-    private val viewModel by viewModels<BattleViewModel> {
-        BattleViewModel.factory(
+    private val viewModel by viewModel<BattleViewModel> {
+        parametersOf(
             intent.getStringExtra(POKEMON_ID),
             intent.serializable(SELECTION_TYPE),
-            DefaultBattleRepository.instance(applicationContext),
-            DefaultDexRepository.instance(),
         )
     }
-
     private val weatherAdapter by lazy {
         WeatherSpinnerAdapter(this)
     }
@@ -93,6 +95,13 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                     val selected = it.minePokemon.content
                     binding.ivMinePokemon.setImage(selected.backImageUrl)
                     binding.tvMinePokemon.text = selected.name
+                    binding.flexboxMineTypes.addPokemonTypes(
+                        types = selected.types,
+                        spacingBetweenTypes = 4.dp,
+                    )
+                    binding.btnMinePokemonDetail.setOnSingleClickListener {
+                        viewModel.navigationToDetail(selected.id)
+                    }
                 }
 
                 if (it.skill is BattleSelectionUiState.Selected) {
@@ -103,6 +112,13 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                     val selected = it.opponentPokemon.content
                     binding.ivOpponentPokemon.setImage(selected.frontImageUrl)
                     binding.tvOpponentPokemon.text = selected.name
+                    binding.flexboxOpponentTypes.addPokemonTypes(
+                        types = selected.types,
+                        spacingBetweenTypes = 4.dp,
+                    )
+                    binding.btnOpponentPokemonDetail.setOnSingleClickListener {
+                        viewModel.navigationToDetail(selected.id)
+                    }
                 }
 
                 if (it.weather is BattleSelectionUiState.Selected) {
@@ -113,14 +129,11 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         }
 
         repeatOnStarted {
-            viewModel.navigateToSelection.collect { (selectionMode, previousSelection) ->
-                val intent =
-                    BattleSelectionActivity.intent(
-                        this@BattleActivity,
-                        selectionMode,
-                        previousSelection,
-                    )
-                activityResultLauncher.launch(intent)
+            viewModel.navigationEvent.collect { event ->
+                when (event) {
+                    is NavigateToSelection -> navigateToSelection(event)
+                    is NavigateToDetail -> navigateToDetail(event)
+                }
             }
         }
 
@@ -133,9 +146,31 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                     binding.tvMultiplierContent.setTextColor(colorOf(result.colorRes))
                     binding.tvCalculatedPowerContent.text = result.calculatedResult
                     binding.tvAccuracyContent.text =
-                        getString(R.string.battle_accuracy_title, result.accuracy)
+                        stringOf(R.string.battle_accuracy_title, result.accuracy)
                 }
             }
+        }
+    }
+
+    private fun navigateToSelection(event: NavigateToSelection) {
+        val (selectionMode, previousSelection) = event
+        val intent =
+            BattleSelectionActivity.intent(
+                this@BattleActivity,
+                selectionMode,
+                previousSelection,
+            )
+        activityResultLauncher.launch(intent)
+    }
+
+    private fun navigateToDetail(event: NavigateToDetail) {
+        startActivity<PokemonDetailActivity> {
+            putExtras(
+                PokemonDetailActivity.intent(
+                    this@BattleActivity,
+                    event.pokemonId,
+                ),
+            )
         }
     }
 
