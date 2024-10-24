@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-12dp"
             android:background="@drawable/bg_battle_navigation_button"
-            android:padding="4dp"
+            android:padding="8dp"
             android:src="@drawable/icon_book"
             app:layout_constraintEnd_toEndOf="@id/iv_opponent_arena"
             app:layout_constraintTop_toBottomOf="@id/iv_opponent_arena" />
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-12dp"
             android:background="@drawable/bg_battle_navigation_button"
-            android:padding="4dp"
+            android:padding="8dp"
             android:src="@drawable/icon_book"
             app:layout_constraintEnd_toEndOf="@id/iv_mine_arena"
             app:layout_constraintTop_toBottomOf="@id/iv_mine_arena" />
