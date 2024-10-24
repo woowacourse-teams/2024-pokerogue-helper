@@ -1,6 +1,7 @@
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.kotest.matchers.nulls.shouldNotBeNull
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -20,6 +21,7 @@ class AbilityFragmentTest {
             testViewModelModule,
         )
 
+    @Ignore("Issue: launchFragmentInContainer")
     @Test
     fun `Fragment 실행 테스트`() {
         val scenario =
