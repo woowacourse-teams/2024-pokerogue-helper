@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.battle.selection.pokemon
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -18,7 +17,6 @@ import kotlinx.coroutines.launch
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
 import poke.rogue.helper.presentation.battle.model.toSelectionUi
@@ -81,12 +79,5 @@ class PokemonSelectionViewModel(
         viewModelScope.launch {
             searchQuery.emit(name)
         }
-    }
-
-    companion object {
-        fun factory(
-            dexRepository: DexRepository,
-            previousSelection: PokemonSelectionUiModel?,
-        ): ViewModelProvider.Factory = BaseViewModelFactory { PokemonSelectionViewModel(dexRepository, previousSelection) }
     }
 }
