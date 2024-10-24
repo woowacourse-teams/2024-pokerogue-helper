@@ -24,12 +24,14 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_ability_title"
         android:gravity="center"
-        android:paddingHorizontal="32dp"
-        android:paddingVertical="24dp"
+        android:paddingHorizontal="@dimen/pokemon_detail_ability_text_padding_horizontal"
+        android:paddingVertical="@dimen/pokemon_detail_ability_text_padding_vertical"
+        android:textSize="@dimen/pokemon_detail_ability_text_size"
         android:text="@{ability.name}"
         android:textAppearance="@style/TextAppearance.Poke.TitleBold"
         android:textColor="@color/poke_white"
-        tools:text="악취" />
+        tools:text="악취"
+        tools:ignore="SpUsage" />
 
 
 </layout>

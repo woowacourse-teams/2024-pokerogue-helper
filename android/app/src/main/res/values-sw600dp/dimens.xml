@@ -14,7 +14,27 @@
     <dimen name="pokemon_detail_pokemon_types_name_size">24sp</dimen>
     <dimen name="pokemon_detail_pokemon_types_icon_size">28sp</dimen>
 
+    <dimen name="text_size_header_large">32sp</dimen>
 
-    <dimen name="pokemon_stat_text_size">24dp</dimen>
+    <dimen name="pokemon_stat_text_size">28dp</dimen>
+    <dimen name="pokemon_stat_key_text_width">156dp</dimen>
+    <dimen name="pokemon_stat_value_text_width">96dp</dimen>
+    <dimen name="pokemon_stat_text_spacer">36dp</dimen>
+    <dimen name="pokemon_detail_ability_text_size">24dp</dimen>
+
+    <dimen name="pokemon_detail_ability_text_padding_horizontal">52dp</dimen>
+    <dimen name="pokemon_detail_ability_text_padding_vertical">40dp</dimen>
+
+    <dimen name="pokemon_detail_margins_between_pokemon_name_types_">12dp</dimen>
+    <dimen name="pokemon_stat_progress_bar_padding_horizontal">16dp</dimen>
+
+    <!--    pokemon evolution-->
+    <dimen name="pokemon_detail_evolution_image_size">160dp</dimen>
+    <dimen name="pokemon_detail_evolution_image_padding">12dp</dimen>
+    <dimen name="item_pokemon_evolution_text_size">24dp</dimen>
+
+    <!--    pokemon skills-->
+    <dimen name="item_pokemon_skills_text_size">24dp</dimen>
+
 
 </resources>

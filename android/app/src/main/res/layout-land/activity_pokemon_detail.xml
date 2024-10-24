@@ -86,17 +86,18 @@
             android:id="@+id/tv_pokemon_detail_pokemon_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/pokemon_detail_pokemon_name_margin"
+            android:layout_marginHorizontal="@dimen/pokemon_detail_pokemon_name_margin"
+            android:paddingTop="@dimen/pokemon_detail_pokemon_name_margin"
             android:textSize="@dimen/pokemon_detail_pokemon_name_size"
             app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
-            app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
             tools:text="이상해씨 #1" />
 
         <LinearLayout
             android:id="@+id/layout_pokemon_detail_pokemon_types"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/pokemon_detail_margins_between_layout"
+            android:layout_marginVertical="@dimen/pokemon_detail_margins_between_pokemon_name_types_"
             android:background="@android:color/transparent"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"

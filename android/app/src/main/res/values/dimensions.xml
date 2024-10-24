@@ -1,43 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--common-->
-    <dimen name="stroke_width_small">1dp</dimen>
-    <dimen name="progress_bar_corner_radius">8dp</dimen>
-    <dimen name="text_size_header_large">20sp</dimen>
-
-
-    <!--pokemon detail-->
-    <dimen name="pokemon_detail_pokemon_image_horizontal_padding_horizontal">40dp</dimen>
-    <dimen name="pokemon_detail_pokemon_image_horizontal_padding_top">20dp</dimen>
-    <dimen name="pokemon_detail_pokemon_image_horizontal_margin_start">28dp</dimen>
-    <dimen name="pokemon_detail_pokemon_image_horizontal_margin_bottom">28dp</dimen>
-    <dimen name="pokemon_detail_pokemon_image_padding_start">16dp</dimen>
-    <dimen name="pokemon_detail_pokemon_image_padding_bottom">20dp</dimen>
-    <dimen name="pokemon_detail_pokemon_name_margin">28dp</dimen>
-    <dimen name="pokemon_detail_pokemon_name_size">16sp</dimen>
-
-    <dimen name="pokemon_detail_stat_ability_padding">4dp</dimen>
-
-
-    <dimen name="pokemon_detail_margins_between_layout">16dp</dimen>
-    <dimen name="pokemon_detail_margins_between_item">12dp</dimen>
-
-
-    <!--    floating action button-->
-    <dimen name="pokemon_detail_floating_button_size">72dp</dimen>
-    <dimen name="pokemon_detail_floating_button_margin">28dp</dimen>
-
-
-    <!--    extended floating button-->
-    <dimen name="pokemon_detail_extended_floating_button_icon_size">32dp</dimen>
-    <dimen name="pokemon_detail_extended_floating_button_max_image_size">32dp</dimen>
-    <dimen name="pokemon_detail_extended_floating_button_margin">8dp</dimen>
-    <dimen name="pokemon_detail_extended_floating_button_first_bottom_margin">20dp</dimen>
-    <dimen name="pokemon_detail_stat_margins_between_layout">8dp</dimen>
-
-    <!--    pokemon evolution-->
-    <dimen name="pokemon_detail_evolution_image_size">100dp</dimen>
-    <dimen name="pokemon_detail_evolution_image_padding">12dp</dimen>
 
 
 </resources>
