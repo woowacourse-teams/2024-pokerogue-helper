@@ -15,6 +15,9 @@
     <dimen name="biome_item_iv_width">200dp</dimen>
     <dimen name="biome_item_iv_height">100dp</dimen>
     <dimen name="biome_navigation_mode_tv_size">11sp</dimen>
+    <dimen name="biome_gym_item_iv_width">50dp</dimen>
+    <dimen name="biome_gym_item_iv_height">100dp</dimen>
+    <dimen name="biome_gym_item_tv_size">16sp</dimen>
 
     <!-- tablayout -->
     <dimen name="tablayout_text_size">12sp</dimen>
