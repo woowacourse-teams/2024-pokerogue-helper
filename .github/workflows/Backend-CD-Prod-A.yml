@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo sysctl -w net.ipv4.ip_forward=1
           sudo iptables -t nat -I PREROUTING 1 -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_B_PRIVATE_IP }}:80
-          sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_A_PRIVATE_IP }}
+          sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_A_PRIVATE_IP }}jb
           sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
       - name: Deploy
@@ -42,23 +42,32 @@ jobs:
               -e TZ=Asia/Seoul \
               ${{ secrets.DOCKER_SERVER_IMAGE }}
 
-      - name: Wait for service to start
-        run: |
-          echo "Waiting for the service to start..."
-          sleep 30
-
       - name: Check service availability
         run: |
-          HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" http://localhost:80/actuator/health)
-          if [ "$HTTP_STATUS" -eq 200 ]; then
-            echo "Service is up and running"
-          else
-            echo "Service is not responding. HTTP Status: $HTTP_STATUS"
-            exit 1
-          fi
+          SUCCESS=false
+
+          for i in {1..10}; do
+            HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" http://localhost:80/actuator/health)
+            if [ "$HTTP_STATUS" -eq 200 ]; then
+              echo "Service is up and running"
+              SUCCESS=true
+              break
+            else
+              echo "Attempt $i: Service is not responding. HTTP Status: $HTTP_STATUS"
+              sleep 3
+            fi
+          done
 
       - name: Port forwarding end
         run: |
           sudo iptables -t nat -D PREROUTING 1
           sudo iptables -t nat -D POSTROUTING 1
           sudo iptables -D INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+          sudo iptables -L -v -t nat
+
+      - name: Exit if fails
+        run: |
+          if [ "$SUCCESS" = false ]; then
+            echo "Service did not respond successfully after $ATTEMPTS attempts"
+            sudo exit 1
+          fi
