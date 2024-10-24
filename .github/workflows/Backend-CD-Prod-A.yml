@@ -33,6 +33,8 @@ jobs:
           echo "No container named 'server' to remove."
           fi
           
+          sudo docker system prune -f
+          
           docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
           
           docker run -d -p 80:8080 --name server \
