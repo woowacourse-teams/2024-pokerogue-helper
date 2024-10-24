@@ -10,8 +10,9 @@
 
     <dimen name="pokemon_detail_pokemon_name_margin">28dp</dimen>
     <dimen name="pokemon_detail_pokemon_name_size">16sp</dimen>
-
     <dimen name="pokemon_detail_margins_between_layout">28dp</dimen>
+
+
 
 
 </resources>

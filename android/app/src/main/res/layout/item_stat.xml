@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_semibold"
             android:text="@{stat.name}"
-            android:textSize="12dp"
+            android:textSize="@dimen/pokemon_stat_text_size"
             tools:ignore="SpUsage"
             tools:text="HPD" />
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_semibold"
             android:text="@{String.valueOf(stat.amount)}"
-            android:textSize="12dp"
+            android:textSize="@dimen/pokemon_stat_text_size"
             tools:ignore="SpUsage"
             tools:text="100" />
 

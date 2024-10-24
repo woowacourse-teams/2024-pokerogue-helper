@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.dex.detail
 
+import android.R.dimen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -46,6 +47,9 @@ class PokemonDetailActivity :
         binding.eventHandler = viewModel
         binding.lifecycleOwner = this
         binding.vm = viewModel
+
+        val nameSize = resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_types_name_size)
+
 
         initAdapter()
         initObservers()
@@ -197,6 +201,14 @@ class PokemonDetailActivity :
                     pokemonDetail.pokemon.dexNumber,
                 )
         }
+
+        val typesUiConfig =
+            TypeChip.PokemonTypeViewConfiguration(
+                width = LayoutParams.WRAP_CONTENT,
+                nameSize = resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_types_name_size),
+                iconSize = resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_types_icon_size),
+                hasBackGround = false,
+            )
 
         pokemonTypesAdapter.addTypes(
             types = pokemonDetail.pokemon.types,

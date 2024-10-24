@@ -114,7 +114,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/tab_border_background"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:tabBackground="@color/poke_black" />
+                app:tabBackground="@color/poke_black"
+                app:tabGravity="fill" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

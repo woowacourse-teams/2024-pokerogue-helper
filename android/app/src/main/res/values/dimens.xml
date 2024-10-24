@@ -10,5 +10,10 @@
     <dimen name="home_tv_size">15sp</dimen>
     <dimen name="home_gridLayout_padding">20dp</dimen>
 
+    <dimen name="pokemon_detail_pokemon_types_name_size">16sp</dimen>
+    <dimen name="pokemon_detail_pokemon_types_icon_size">20dp</dimen>
+
+    <dimen name="pokemon_stat_text_size">12dp</dimen>
+
 
 </resources>
