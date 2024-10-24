@@ -55,11 +55,12 @@
         <ImageView
             android:id="@+id/iv_pokemon_detail_pokemon"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/pokemon_detail_pokemon_image_horizontal_margin_start"
             android:paddingVertical="@dimen/pokemon_detail_pokemon_image_padding_bottom"
             android:paddingStart="@dimen/pokemon_detail_pokemon_image_padding_start"
             app:layout_constraintBottom_toTopOf="@id/layout_pokemon_detail_pokemon_types"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@id/divider_pokemon_detail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_pokemon_detail"
@@ -84,10 +85,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/pokemon_detail_pokemon_name_margin"
-            android:paddingTop="@dimen/pokemon_detail_pokemon_name_margin"
             android:textSize="@dimen/pokemon_detail_pokemon_name_size"
-            app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
             app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_pokemon"
             tools:text="이상해씨 #1" />
 
         <LinearLayout

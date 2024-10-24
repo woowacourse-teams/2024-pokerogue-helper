@@ -48,11 +48,11 @@
                         android:layout_height="0dp"
                         android:paddingHorizontal="@dimen/pokemon_detail_pokemon_image_horizontal_padding_horizontal"
                         android:paddingTop="@dimen/pokemon_detail_pokemon_image_horizontal_padding_top"
-                        app:layout_constraintDimensionRatio="@fraction/pokemon_detail_pokemon_image_dimension_ratio"
+                        app:layout_constraintDimensionRatio="1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="@fraction/pokemon_detail_pokemon_image_width_ratio"
+                        app:layout_constraintWidth_percent="0.66"
                         tools:ignore="ContentDescription"
                         tools:src="@tools:sample/avatars" />
 
