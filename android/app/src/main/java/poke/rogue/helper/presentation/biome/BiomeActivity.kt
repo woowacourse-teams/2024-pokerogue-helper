@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
 import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeBinding
@@ -20,11 +21,7 @@ import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activity_biome) {
-    private val viewModel by viewModels<BiomeViewModel> {
-        BiomeViewModel.factory(
-            DefaultBiomeRepository.instance(applicationContext),
-        )
-    }
+    private val viewModel by viewModel<BiomeViewModel>()
     override val errorViewModel: ErrorHandleViewModel
         get() = viewModel
     private val biomeAdapter: BiomeAdapter by lazy { BiomeAdapter(viewModel) }
