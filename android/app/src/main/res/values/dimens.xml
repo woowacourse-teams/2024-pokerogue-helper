@@ -10,6 +10,19 @@
     <dimen name="home_tv_size">15sp</dimen>
     <dimen name="home_gridLayout_padding">20dp</dimen>
 
+    <!-- ability screen -->
+    <dimen name="ability_tv_title_width">102dp</dimen>
+    <dimen name="ability_tv_title_height">67dp</dimen>
+    <dimen name="ability_tv_title_size">15sp</dimen>
+    <dimen name="ability_tv_description_size">15sp</dimen>
+    <!-- biome screen -->
+    <dimen name="biome_item_tv_size">16sp</dimen>
+    <dimen name="biome_item_iv_width">200dp</dimen>
+    <dimen name="biome_item_iv_height">100dp</dimen>
+    <dimen name="biome_navigation_mode_tv_size">11sp</dimen>
+    <dimen name="biome_gym_item_iv_width">50dp</dimen>
+    <dimen name="biome_gym_item_iv_height">100dp</dimen>
+    <dimen name="biome_gym_item_tv_size">16sp</dimen>
     <dimen name="pokemon_detail_pokemon_types_name_size">12sp</dimen>
     <dimen name="pokemon_detail_pokemon_types_icon_size">16dp</dimen>
 
@@ -77,6 +90,11 @@
 
     <integer name="pokemon_detail_item_pokemon_biome_span_count">2</integer>
     <dimen name="pokemon_detail_item_pokemon_biome_spacing">8dp</dimen>
+
+
+    <!-- tablayout -->
+    <dimen name="tablayout_text_size">12sp</dimen>
+
 
 
 </resources>

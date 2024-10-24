@@ -17,7 +17,7 @@ kotlinx-coroutines = "1.7.3"
 
 # Android
 core-ktx = "1.13.1"
-fragment = "1.8.1"
+fragment = "1.8.4"
 appcompat = "1.7.0"
 activity = "1.9.0"
 lifecycle = "2.8.3"
@@ -161,6 +161,6 @@ retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 unit-test = ["kotlin-coroutines-test", "junit5", "kotest-runner-junit5", "mockk"]
 robolectric-test = ["robolectric", "androidx-test-core", "androidx-test-extention-ktx"]
 android-test = [
-    "androidx-test-core", "androidx-test-espresso-contrib", "androidx-test-espresso", "androidx-test-junit", "androidx-test-extention-ktx", "androidx-test-rules", "androidx-test-runner", "android-test-fragment", "android-test-fragment-manifest",
-    "junit5", "kotest-runner-junit5", "android-mockk", "junit5-android-test-core"
+    "androidx-test-core", "androidx-test-espresso-contrib", "androidx-test-espresso", "androidx-test-junit", "androidx-test-extention-ktx", "androidx-test-rules", "androidx-test-runner", "android-test-fragment",
+    "junit5", "kotest-runner-junit5", "android-mockk", "junit5-android-test-core", "android-test-fragment-manifest"
 ]

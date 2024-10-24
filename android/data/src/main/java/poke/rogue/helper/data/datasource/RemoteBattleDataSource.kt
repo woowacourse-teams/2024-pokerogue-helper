@@ -1,14 +1,12 @@
 package poke.rogue.helper.data.datasource
 
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.exception.getOrThrow
 import poke.rogue.helper.data.exception.onFailure
 import poke.rogue.helper.data.model.BattlePrediction
 import poke.rogue.helper.data.model.BattleSkill
 import poke.rogue.helper.data.model.Weather
 import poke.rogue.helper.data.model.toData
-import poke.rogue.helper.remote.injector.ServiceModule
 import poke.rogue.helper.remote.service.BattleService
 
 class RemoteBattleDataSource(
@@ -48,16 +46,4 @@ class RemoteBattleDataSource(
                 "battleService - calculatedBattlePrediction($weatherId, $myPokemonId, $mySkillId, $opponentPokemonId) 에서 발생",
             )
         }.getOrThrow().toData()
-
-    companion object {
-        private var instance: RemoteBattleDataSource? = null
-
-        fun instance(): RemoteBattleDataSource {
-            return instance
-                ?: RemoteBattleDataSource(
-                    ServiceModule.battleService(),
-                    analyticsLogger(),
-                ).also { instance = it }
-        }
-    }
 }

@@ -5,10 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
 import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.databinding.ActivityHomeBinding
@@ -27,7 +27,7 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.update.UpdateManager
 
 class HomeActivity : ToolbarActivity<ActivityHomeBinding>(R.layout.activity_home) {
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel by viewModel<HomeViewModel>()
     private lateinit var updateManager: UpdateManager
 
     override val toolbar: Toolbar
