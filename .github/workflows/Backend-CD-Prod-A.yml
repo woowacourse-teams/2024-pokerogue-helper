@@ -47,16 +47,17 @@ jobs:
           SUCCESS=false
 
           for i in {1..10}; do
-            HTTP_STATUS=$(curl -o /dev/null -s -w -f "%{http_code}" http://localhost:80/actuator/health)
+            HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" http://localhost:80/actuator/health) || { 
+              echo "Attempt $i: curl command failed. Retrying...";
+              sleep 3;
+              continue;
+            }
           
             if [ $? -eq 0 ] && [ "$HTTP_STATUS" -eq 200 ]; then
               echo "Service is up and running"
               SUCCESS=true
               break
             fi
-          
-            echo "Attempt $i: Service is not responding..."
-            sleep 3
           done
 
       - name: Port forwarding end
