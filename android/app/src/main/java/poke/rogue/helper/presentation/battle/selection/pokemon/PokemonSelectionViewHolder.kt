@@ -17,8 +17,7 @@ class PokemonSelectionViewHolder(
         binding.isSelected = isSelected
         binding.selectionHandler = selectionHandler
 
-        val typeAdapter = BattlePokemonTypesAdapter(context = binding.root.context, binding.flexboxTypes)
-        typeAdapter.addTypes(
+        binding.flexboxTypes.addPokemonTypes(
             types = pokemonSelectionUiModel.types,
             spacingBetweenTypes = 8.dp,
             iconSize = 18.dp,

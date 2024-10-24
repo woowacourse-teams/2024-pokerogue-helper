@@ -16,11 +16,13 @@ import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
+import poke.rogue.helper.presentation.battle.selection.pokemon.addPokemonTypes
 import poke.rogue.helper.presentation.battle.view.itemSelectListener
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.serializable
+import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 import timber.log.Timber
 
@@ -93,6 +95,10 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                     val selected = it.minePokemon.content
                     binding.ivMinePokemon.setImage(selected.backImageUrl)
                     binding.tvMinePokemon.text = selected.name
+                    binding.flexboxMineTypes.addPokemonTypes(
+                        types = selected.types,
+                        spacingBetweenTypes = 4.dp,
+                    )
                 }
 
                 if (it.skill is BattleSelectionUiState.Selected) {
@@ -103,6 +109,10 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                     val selected = it.opponentPokemon.content
                     binding.ivOpponentPokemon.setImage(selected.frontImageUrl)
                     binding.tvOpponentPokemon.text = selected.name
+                    binding.flexboxOpponentTypes.addPokemonTypes(
+                        types = selected.types,
+                        spacingBetweenTypes = 4.dp,
+                    )
                 }
 
                 if (it.weather is BattleSelectionUiState.Selected) {
