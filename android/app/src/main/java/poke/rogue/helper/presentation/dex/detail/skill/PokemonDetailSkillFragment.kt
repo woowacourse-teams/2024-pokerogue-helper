@@ -2,9 +2,9 @@ package poke.rogue.helper.presentation.dex.detail.skill
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.android.material.divider.MaterialDividerItemDecoration.VERTICAL
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonSkillsBinding
 import poke.rogue.helper.presentation.base.BindingFragment
@@ -16,7 +16,7 @@ import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>(R.layout.fragment_pokemon_skills) {
-    private val activityViewModel: PokemonDetailViewModel by activityViewModels()
+    private val activityViewModel: PokemonDetailViewModel by activityViewModel<PokemonDetailViewModel>()
 
     private val eggSkillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
     private val skillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
@@ -28,11 +28,6 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         initObservers()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.root.requestLayout()
     }
 
     private fun initAdapter() {

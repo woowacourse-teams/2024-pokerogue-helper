@@ -172,6 +172,7 @@ dependencies {
     androidTestImplementation(libs.koin.android.test)
     // android test
     androidTestImplementation(libs.bundles.android.test)
+    debugImplementation(libs.bundles.android.test)
     testRuntimeOnly(libs.junit.vintage.engine)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
     testImplementation(libs.android.test.fragment)

@@ -1,6 +1,5 @@
 package poke.rogue.helper.data.repository
 
-import android.content.Context
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import poke.rogue.helper.data.datasource.LocalBattleDataSource
@@ -84,18 +83,5 @@ class DefaultBattleRepository(
             availableSkills(pokemon.dexNumber).firstOrNull()
                 ?: error("배정 가능한 스킬이 존재 하지 않습니다. - dexNumber : ${pokemon.dexNumber}")
         return PokemonWithSkill(pokemon, skill)
-    }
-
-    companion object {
-        private var instance: BattleRepository? = null
-
-        fun instance(context: Context): BattleRepository =
-            instance ?: DefaultBattleRepository(
-                LocalBattleDataSource.instance(context),
-                RemoteBattleDataSource.instance(),
-                DefaultDexRepository.instance(),
-            ).also {
-                instance = it
-            }
     }
 }

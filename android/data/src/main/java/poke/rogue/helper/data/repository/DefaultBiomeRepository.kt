@@ -1,9 +1,7 @@
 package poke.rogue.helper.data.repository
 
-import android.content.Context
 import kotlinx.coroutines.flow.Flow
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.datasource.LocalNavigationDataSource
 import poke.rogue.helper.data.datasource.RemoteBiomeDataSource
 import poke.rogue.helper.data.model.Biome
@@ -42,19 +40,4 @@ class DefaultBiomeRepository(
     }
 
     override fun isBattleNavigationModeStream(): Flow<Boolean> = localNavigationDataSource.isBattleNavigationModeStream()
-
-    // todo koin 적용 끝나면 이 부분도 삭제
-    companion object {
-        private var instance: DefaultBiomeRepository? = null
-
-        fun instance(context: Context): DefaultBiomeRepository =
-            instance
-                ?: DefaultBiomeRepository(
-                    RemoteBiomeDataSource.instance(),
-                    analyticsLogger(),
-                    LocalNavigationDataSource.instance(context),
-                ).also {
-                    instance = it
-                }
-    }
 }

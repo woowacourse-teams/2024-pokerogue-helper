@@ -8,7 +8,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
-import androidx.fragment.app.activityViewModels
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentPokemonStatBinding
 import poke.rogue.helper.presentation.base.BindingFragment
@@ -20,7 +20,7 @@ import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout.fragment_pokemon_stat) {
-    private val activityViewModel: PokemonDetailViewModel by activityViewModels()
+    private val activityViewModel: PokemonDetailViewModel by activityViewModel()
 
     private val abilityAdapter by lazy { AbilityTitleAdapter(activityViewModel) }
     private val pokemonStatAdapter by lazy { PokemonStatAdapter() }
@@ -42,11 +42,6 @@ class PokemonStatFragment : BindingFragment<FragmentPokemonStatBinding>(R.layout
                 }
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.root.requestLayout()
     }
 
     private fun initAdapter() {
