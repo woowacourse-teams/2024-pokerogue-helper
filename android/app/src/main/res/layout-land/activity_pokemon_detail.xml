@@ -58,15 +58,15 @@
             android:id="@+id/iv_pokemon_detail_pokemon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/floating_button_margin"
+            android:layout_marginStart="@dimen/floating_button_margin"
             android:layout_marginBottom="@dimen/floating_button_margin"
-            android:paddingHorizontal="16dp"
+            android:paddingStart="16dp"
             android:paddingBottom="20dp"
             app:layout_constraintBottom_toTopOf="@id/layout_pokemon_detail_pokemon_types"
             app:layout_constraintEnd_toStartOf="@id/divider_pokemon_detail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_pokemon_detail"
-            tools:ignore="ContentDescription"
+            tools:ignore="ContentDescription,RtlSymmetry"
             tools:src="@tools:sample/avatars" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -101,7 +101,6 @@
             android:layout_marginVertical="@dimen/floating_button_margin"
             android:background="@android:color/transparent"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
             app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_pokemon_name"
             tools:layout_height="50dp"

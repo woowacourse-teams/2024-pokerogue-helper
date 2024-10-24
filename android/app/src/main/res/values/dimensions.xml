@@ -4,4 +4,7 @@
 
     <dimen name="floating_button_margin">12dp</dimen>
 
+    <dimen name="pokemon_detail_margins_between_layout">16dp</dimen>
+    <dimen name="pokemon_detail_margins_between_item">12dp</dimen>
+
 </resources>
