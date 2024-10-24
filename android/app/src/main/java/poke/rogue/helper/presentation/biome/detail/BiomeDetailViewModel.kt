@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.data.repository.BiomeRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.dex.PokemonListNavigateHandler
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
@@ -106,13 +105,6 @@ class BiomeDetailViewModel(
 
     companion object {
         private const val IDLE_ID = "IDLE"
-
-        fun factory(
-            biomeRepository: BiomeRepository,
-            analytics: AnalyticsLogger,
-        ) = BaseViewModelFactory {
-            BiomeDetailViewModel(biomeRepository, analytics)
-        }
     }
 }
 

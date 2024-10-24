@@ -3,16 +3,14 @@ package poke.rogue.helper.presentation.biome.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.skydoves.balloon.ArrowPositionRules
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.createBalloon
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
-import poke.rogue.helper.analytics.analyticsLogger
-import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -23,14 +21,10 @@ import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.logClickEvent
 import poke.rogue.helper.presentation.util.repeatOnStarted
 
-class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {
+class BiomeDetailActivity :
+    ErrorHandleActivity<ActivityBiomeDetailBinding>(R.layout.activity_biome_detail) {
     private lateinit var pagerAdapter: BiomeDetailPagerAdapter
-    private val viewModel: BiomeDetailViewModel by viewModels {
-        BiomeDetailViewModel.factory(
-            DefaultBiomeRepository.instance(applicationContext),
-            analyticsLogger(),
-        )
-    }
+    private val viewModel by viewModel<BiomeDetailViewModel>()
     override val errorViewModel: ErrorHandleViewModel
         get() = viewModel
     override val toolbar: Toolbar
@@ -89,10 +83,16 @@ class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.la
                             logger.logClickEvent(NAVIGATE_TO_NEXT_BIOME_DETAIL)
                         }
                     }
+
                     is BiomeDetailUiEvent.NavigateToPokemonDetail -> {
                         val pokemonId = event.pokemonId
                         startActivity<PokemonDetailActivity> {
-                            putExtras(PokemonDetailActivity.intent(this@BiomeDetailActivity, pokemonId))
+                            putExtras(
+                                PokemonDetailActivity.intent(
+                                    this@BiomeDetailActivity,
+                                    pokemonId
+                                )
+                            )
                             logger.logClickEvent(NAVIGATE_TO_POKEMON_DETAIL)
                         }
                     }
@@ -100,7 +100,13 @@ class BiomeDetailActivity : ErrorHandleActivity<ActivityBiomeDetailBinding>(R.la
                     is BiomeDetailUiEvent.NavigateToBattle -> {
                         val pokemonId = event.pokemonId
                         startActivity<BattleActivity> {
-                            putExtras(BattleActivity.intent(this@BiomeDetailActivity, pokemonId, isMine = false))
+                            putExtras(
+                                BattleActivity.intent(
+                                    this@BiomeDetailActivity,
+                                    pokemonId,
+                                    isMine = false
+                                )
+                            )
                             logger.logClickEvent(NAVIGATE_TO_BATTLE)
                         }
                     }
