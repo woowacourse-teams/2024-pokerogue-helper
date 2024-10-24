@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.battle
 
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +18,6 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.BattleRepository
 import poke.rogue.helper.data.repository.DexRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.model.BattlePredictionUiModel
 import poke.rogue.helper.presentation.battle.model.PokemonSelectionUiModel
@@ -250,23 +248,6 @@ class BattleViewModel(
         viewModelScope.launch {
             _navigationEvent.emit(NavigateToDetail(pokemonId))
         }
-    }
-
-    companion object {
-        fun factory(
-            pokemonId: String?,
-            selectionType: SelectionType?,
-            battleRepository: BattleRepository,
-            pokemonRepository: DexRepository,
-        ): ViewModelProvider.Factory =
-            BaseViewModelFactory {
-                BattleViewModel(
-                    battleRepository = battleRepository,
-                    pokemonId = pokemonId,
-                    selectionType = selectionType,
-                    pokemonRepository = pokemonRepository,
-                )
-            }
     }
 }
 
