@@ -1,13 +1,9 @@
 package poke.rogue.helper.data.repository
 
-import android.content.Context
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import org.koin.mp.KoinPlatform.getKoin
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
-import poke.rogue.helper.data.cache.GlideImageCacher
 import poke.rogue.helper.data.cache.ImageCacher
 import poke.rogue.helper.data.datasource.LocalDexDataSource
 import poke.rogue.helper.data.datasource.LocalVersionDataSource
@@ -141,27 +137,7 @@ class DefaultDexRepository(
             }.sortedWith(sort)
 
     companion object {
-        private var instance: DexRepository? = null
         const val PLELOAD_POKEMON_COUNT = 24
-
-//        fun init(context: Context) {
-//            GlideImageCacher.init(context)
-//            instance =
-//                DefaultDexRepository(
-//                    RemoteDexDataSource.instance(),
-//                    LocalDexDataSource.instance(context),
-//                    GlideImageCacher.instance(),
-//                    DefaultBiomeRepository.instance(context),
-//                    analyticsLogger(),
-//                    getKoin().get(),
-//                    getKoin().get(),
-//                )
-//        }
-
-        fun instance(): DexRepository =
-            requireNotNull(instance) {
-                "DexRepository is not initialized"
-            }
     }
 }
 

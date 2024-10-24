@@ -12,10 +12,10 @@ import poke.rogue.helper.presentation.battle.selection.skill.SkillSelectionViewM
 import poke.rogue.helper.presentation.biome.BiomeViewModel
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailViewModel
 import poke.rogue.helper.presentation.dex.PokemonListViewModel
-import poke.rogue.helper.presentation.home.HomeViewModel
-import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
+import poke.rogue.helper.presentation.home.HomeViewModel
 import poke.rogue.helper.presentation.splash.PokemonIntroViewModel
+import poke.rogue.helper.presentation.type.TypeViewModel
 
 val viewModelModule
     get() =
