@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--common-->
+    <dimen name="stroke_width_small">1dp</dimen>
     <dimen name="progress_bar_corner_radius">8dp</dimen>
 
-    <dimen name="floating_button_margin">12dp</dimen>
+
+    <!--pokemon detail-->
+    <dimen name="pokemon_detail_pokemon_image_horizontal_padding_horizontal">40dp</dimen>
+    <dimen name="pokemon_detail_pokemon_image_horizontal_padding_top">20dp</dimen>
 
     <dimen name="pokemon_detail_margins_between_layout">16dp</dimen>
     <dimen name="pokemon_detail_margins_between_item">12dp</dimen>
+
+    <!--    floating action button-->
+    <dimen name="pokemon_detail_floating_button_size">72dp</dimen>
+    <dimen name="pokemon_detail_floating_button_margin">28dp</dimen>
+
+    <!--    extended floating button-->
+    <dimen name="pokemon_detail_extended_floating_button_icon_size">32dp</dimen>
+    <dimen name="pokemon_detail_extended_floating_button_max_image_size">32dp</dimen>
+    <dimen name="pokemon_detail_extended_floating_button_margin">8dp</dimen>
+    <dimen name="pokemon_detail_extended_floating_button_first_bottom_margin">20dp</dimen>
+
+
+
+
 
 </resources>
