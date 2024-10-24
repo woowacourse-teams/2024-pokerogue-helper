@@ -4,8 +4,8 @@ permissions:
   contents: read
 
 on:
-  push:
-    branches: [ "be/release-test" ]
+  merge_group:
+    branches: [ "be/release" ]
     tags:
       - 'v*'
 
