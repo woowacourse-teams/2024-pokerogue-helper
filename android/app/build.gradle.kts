@@ -29,7 +29,7 @@ android {
         create("release") {
             keyAlias = properties.getProperty("KEY_ALIAS")
             keyPassword = properties.getProperty("KEY_PASSWORD")
-            storeFile = file("${project.rootDir.absolutePath}/keystore/poke_key.jks")
+            storeFile = file("${project.rootDir.absolutePath}/keystore/poke_key.keystore")
             storePassword = properties.getProperty("STORE_PASSWORD")
         }
     }
