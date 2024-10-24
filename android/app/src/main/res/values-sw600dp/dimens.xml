@@ -10,5 +10,8 @@
     <dimen name="home_tv_size">24sp</dimen>
     <dimen name="home_gridLayout_padding">100dp</dimen>
 
-
+    <!-- biome screen -->
+    <dimen name="biome_item_tv_size">20sp</dimen>
+    <dimen name="biome_item_iv_width">300dp</dimen>
+    <dimen name="biome_item_iv_height">150dp</dimen>
 </resources>
