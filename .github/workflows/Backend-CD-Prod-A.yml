@@ -39,7 +39,7 @@ jobs:
           
           docker run -d -p 80:8080 --name server \
               -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
-              -e TZ=Asia/Seoul \
+              -e TZ=Asia/Seoul 
               ${{ secrets.DOCKER_SERVER_IMAGE }}
 
       - name: Wait for service to start
