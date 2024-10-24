@@ -19,13 +19,13 @@
         onSingleClick="@{()->onClickPokemon.navigateToPokemonDetail(evolution.pokemonId)}"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp">
+        android:padding="@dimen/pokemon_detail_evolution_image_padding">
 
         <ImageView
             android:id="@+id/iv_pokemon_detail_evolution"
             imageUrl="@{evolution.imageUrl}"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/pokemon_detail_evolution_image_size"
+            android:layout_height="@dimen/pokemon_detail_evolution_image_size"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_pokemon_name"
             app:layout_constraintEnd_toEndOf="@id/tv_pokemon_detail_evolution_pokemon_name"

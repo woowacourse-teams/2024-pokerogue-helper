@@ -33,10 +33,11 @@
     <dimen name="pokemon_detail_extended_floating_button_max_image_size">32dp</dimen>
     <dimen name="pokemon_detail_extended_floating_button_margin">8dp</dimen>
     <dimen name="pokemon_detail_extended_floating_button_first_bottom_margin">20dp</dimen>
-
-
     <dimen name="pokemon_detail_stat_margins_between_layout">8dp</dimen>
 
+    <!--    pokemon evolution-->
+    <dimen name="pokemon_detail_evolution_image_size">100dp</dimen>
+    <dimen name="pokemon_detail_evolution_image_padding">12dp</dimen>
 
 
 </resources>
