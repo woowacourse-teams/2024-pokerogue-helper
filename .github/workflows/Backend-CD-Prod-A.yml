@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo sysctl -w net.ipv4.ip_forward=1
           sudo iptables -t nat -I PREROUTING 1 -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_B_PRIVATE_IP }}:80
-          sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_A_PRIVATE_IP }}jb
+          sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_A_PRIVATE_IP }}
           sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
       - name: Deploy
@@ -47,15 +47,16 @@ jobs:
           SUCCESS=false
 
           for i in {1..10}; do
-            HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" http://localhost:80/actuator/health)
-            if [ "$HTTP_STATUS" -eq 200 ]; then
+            HTTP_STATUS=$(curl -o /dev/null -s -w -f "%{http_code}" http://localhost:80/actuator/health)
+          
+            if [ $? -eq 0 ] && [ "$HTTP_STATUS" -eq 200 ]; then
               echo "Service is up and running"
               SUCCESS=true
               break
-            else
-              echo "Attempt $i: Service is not responding. HTTP Status: $HTTP_STATUS"
-              sleep 3
             fi
+          
+            echo "Attempt $i: Service is not responding..."
+            sleep 3
           done
 
       - name: Port forwarding end
@@ -68,6 +69,6 @@ jobs:
       - name: Exit if fails
         run: |
           if [ "$SUCCESS" = false ]; then
-            echo "Service did not respond successfully after $ATTEMPTS attempts"
+            echo "Service did not respond successfully after $ATTEMPTS attempts, stopping github actions.."
             sudo exit 1
           fi
