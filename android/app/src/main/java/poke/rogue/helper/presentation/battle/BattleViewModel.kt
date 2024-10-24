@@ -36,8 +36,7 @@ class BattleViewModel(
     private val logger: AnalyticsLogger = analyticsLogger(),
     pokemonId: String? = null,
     selectionType: SelectionType? = null,
-) : ErrorHandleViewModel(logger),
-    BattleNavigationHandler {
+) : ErrorHandleViewModel(logger), BattleNavigationHandler {
     private val _weathers = MutableStateFlow(emptyList<WeatherUiModel>())
     val weathers = _weathers.asStateFlow()
 
@@ -60,8 +59,8 @@ class BattleViewModel(
             weathers.indexOfFirst { it.id == selectedWeather.id }
         }.filterNotNull().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
 
-    private val _navigateToSelection = MutableSharedFlow<SelectionNavigationData>()
-    val navigateToSelection = _navigateToSelection.asSharedFlow()
+    private val _navigationEvent = MutableSharedFlow<BattleNavigationEvent>()
+    val navigationEvent = _navigationEvent.asSharedFlow()
 
     val battleResult: StateFlow<BattleResultUiState> =
         selectedState.map {
@@ -230,8 +229,8 @@ class BattleViewModel(
                     previousSelection(hasSkillSelection, selectedPokemon)
                 }
 
-            val navigationData = SelectionNavigationData(selectionMode, data)
-            _navigateToSelection.emit(navigationData)
+            val navigationData = NavigateToSelection(selectionMode, data)
+            _navigationEvent.emit(navigationData)
         }
     }
 
@@ -246,6 +245,12 @@ class BattleViewModel(
         } else {
             SelectionData.WithoutSkill(previousPokemonSelection)
         }
+
+    override fun navigationToDetail(pokemonId: String) {
+        viewModelScope.launch {
+            _navigationEvent.emit(NavigateToDetail(pokemonId))
+        }
+    }
 
     companion object {
         fun factory(
@@ -265,7 +270,11 @@ class BattleViewModel(
     }
 }
 
-data class SelectionNavigationData(
+sealed interface BattleNavigationEvent
+
+data class NavigateToSelection(
     val selectionMode: SelectionMode,
     val previousSelectionData: SelectionData,
-)
+) : BattleNavigationEvent
+
+data class NavigateToDetail(val pokemonId: String) : BattleNavigationEvent
