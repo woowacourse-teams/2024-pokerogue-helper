@@ -18,7 +18,7 @@ jobs:
         run: |
           sudo sysctl -w net.ipv4.ip_forward=1
           sudo iptables -t nat -I PREROUTING 1 -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_B_PRIVATE_IP }}:80
-          sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_A_PRIVATE_IP }}jb
+          sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_A_PRIVATE_IP }}
           sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
       - name: Deploy
