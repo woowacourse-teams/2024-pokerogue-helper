@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.biome.detail.BiomeDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_biome_detail"
+            style="@style/CustomToolbarStyle"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:contentInsetStartWithNavigation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{vm.uiState.name}" />
+
+        <ImageView
+            android:id="@+id/iv_biome_detail_image"
+            imageUrl="@{vm.uiState.imageUrl}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@{vm.uiState.name}"
+            android:textAppearance="@style/TextAppearance.Poke.TitleLargeBold"
+            app:layout_constraintBottom_toTopOf="@id/iv_biome_detail_image"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start" />
+
+        <TextView
+            android:id="@+id/tv_navigation_mode"
+            style="@style/TextAppearance.Poke.Caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="@string/biome_navigation_mode_setting"
+            app:drawableStartCompat="@drawable/icon_info"
+            app:layout_constraintBottom_toBottomOf="@id/switch_navigation_mode"
+            app:layout_constraintEnd_toStartOf="@id/switch_navigation_mode"
+            app:layout_constraintTop_toTopOf="@id/switch_navigation_mode" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_navigation_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:checked="@{vm.isInBattleNavigationMode}"
+            android:onCheckedChanged="@{(buttonView, isChecked) -> vm.changeNavigationMode(isChecked)}"
+            android:thumb="@drawable/shape_toggle_thumb"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/iv_biome_detail_image"
+            app:thumbTint="@null"
+            app:track="@drawable/selector_toggle_btn"
+            app:trackTint="@null" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout_biome_detail"
+            style="@style/TabLayoutStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_tab_background"
+            android:paddingVertical="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_biome_detail"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorFullWidth="false" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_biome"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tablayout_biome_detail"
+            app:layout_constraintTop_toBottomOf="@id/tablayout_biome_detail" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
