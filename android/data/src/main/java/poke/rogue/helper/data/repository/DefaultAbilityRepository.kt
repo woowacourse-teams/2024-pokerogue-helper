@@ -33,17 +33,4 @@ class DefaultAbilityRepository(
         remoteAbilityDataSource.abilityDetail(id).also {
             analyticsLogger.logAbilityDetail(id, it.title)
         }
-
-    companion object {
-        private var instance: AbilityRepository? = null
-
-        fun instance(): AbilityRepository {
-            return instance ?: DefaultAbilityRepository(
-                RemoteAbilityDataSource.instance(),
-                analyticsLogger(),
-            ).also {
-                instance = it
-            }
-        }
-    }
 }

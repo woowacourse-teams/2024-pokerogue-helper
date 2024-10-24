@@ -48,10 +48,16 @@
     </style>
 
     <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabGravity">fill</item>
         <item name="tabMode">fixed</item>
         <item name="tabSelectedTextColor">@color/poke_white</item>
         <item name="tabBackground">@color/tablayout_background</item>
         <item name="tabIndicatorColor">@color/poke_electric</item>
+        <item name="tabTextAppearance">@style/CustomTabTextAppearance</item>
+    </style>
+
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/tablayout_text_size</item>
     </style>
 
     <style name="HighlightTextStyle">
