@@ -1,12 +1,9 @@
 name: Android PR Builder
 
 on:
-  pull_request:
-    branches: [ an/develop ]
-
-defaults:
-  run:
-    working-directory: ./android
+  push:
+    branches: [ "an/release*" ]
+  workflow_call:
 
 jobs:
   ktlintCheck:
@@ -20,11 +17,13 @@ jobs:
         with:
           POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
 
-  testAlphaUnitTest:
-    name: Test Alpha Unit Test
+  testReleaseUnitTest:
+    name: CI Release Builder
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Gradle cache
         uses: actions/cache@v3
         with:
@@ -56,18 +55,39 @@ jobs:
           echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
           echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
           echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
+          cat ./app/src/debug/google-services.json
+        working-directory: android
 
       - name: Create Local Properties
         run: touch local.properties
+        working-directory: android
 
       - name: Access Local Properties
         env:
           POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
+          #          POKE_DEV_BASE_URL: ${{ secrets.HOST_RELEASE_URI }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         run: |
           echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
+          echo STORE_PASSWORD= $STORE_PASSWORD >> local.properties
+          echo KEY_PASSWORD= $KEY_PASSWORD >> local.properties
+          echo KEY_ALIAS= $KEY_ALIAS >> local.properties
+        working-directory: android
+
+      - name: Create RELEASE Key Store
+        env:
+          KEY_STORE: ${{secrets.RELEASE_KEY_STORE}}
+        run: |
+          touch ./keystore/poke_key.jks
+          echo "$KEY_STORE" | base64 -d > ./keystore/poke_key.jks
+        working-directory: android
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+        working-directory: android
 
-      - name: run alpha unit test
-        run: ./gradlew testAlphaUnitTest
+      - name: Unit Test Release
+        run: ./gradlew testReleaseUnitTest
+        working-directory: android

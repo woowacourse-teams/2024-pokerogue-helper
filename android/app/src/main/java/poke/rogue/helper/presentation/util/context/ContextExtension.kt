@@ -64,7 +64,7 @@ fun Context.stringOf(
 
 fun Context.stringArrayOf(
     @ArrayRes resId: Int,
-) = resources.getStringArray(resId)
+): Array<String> = resources.getStringArray(resId)
 
 fun Context.colorOf(
     @ColorRes resId: Int,
