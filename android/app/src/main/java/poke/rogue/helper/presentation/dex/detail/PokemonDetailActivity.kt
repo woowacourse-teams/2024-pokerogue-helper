@@ -3,6 +3,7 @@ package poke.rogue.helper.presentation.dex.detail
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -179,7 +180,6 @@ class PokemonDetailActivity :
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
-//            tv_pokemon_detail_pokemon_name
         }
 
         pokemonTypesAdapter.addTypes(

@@ -57,10 +57,11 @@
         <ImageView
             android:id="@+id/iv_pokemon_detail_pokemon"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/floating_button_margin"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/floating_button_margin"
-            android:padding="24dp"
+            android:layout_marginBottom="@dimen/floating_button_margin"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="20dp"
             app:layout_constraintBottom_toTopOf="@id/layout_pokemon_detail_pokemon_types"
             app:layout_constraintEnd_toStartOf="@id/divider_pokemon_detail"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,21 +86,24 @@
             android:id="@+id/tv_pokemon_detail_pokemon_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/layout_pokemon_detail_pokemon_types"
-            app:layout_constraintStart_toStartOf="@id/iv_pokemon_detail_pokemon"
+            android:layout_marginStart="@dimen/floating_button_margin"
+            android:layout_marginEnd="@dimen/floating_button_margin"
+            android:layout_marginBottom="@dimen/floating_button_margin"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
             app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_pokemon"
-            app:layout_constraintTop_toTopOf="@id/layout_pokemon_detail_pokemon_types"
             tools:text="이상해씨 #1" />
 
         <LinearLayout
             android:id="@+id/layout_pokemon_detail_pokemon_types"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/floating_button_margin"
             android:background="@android:color/transparent"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/iv_pokemon_detail_pokemon"
-            app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_pokemon_name"
             tools:layout_height="50dp"
             tools:layout_width="100dp" />
 
