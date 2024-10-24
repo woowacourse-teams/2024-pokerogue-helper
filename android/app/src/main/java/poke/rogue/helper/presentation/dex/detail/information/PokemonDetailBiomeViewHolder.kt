@@ -25,5 +25,4 @@ class PokemonDetailBiomeViewHolder(
             types = biome.types,
         )
     }
-
 }

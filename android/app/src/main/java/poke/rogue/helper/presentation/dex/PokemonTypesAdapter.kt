@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.dex
 import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.view.TypeChip
