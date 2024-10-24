@@ -46,32 +46,34 @@ class FakeBattleRepository : BattleRepository {
         )
 
     companion object {
-        val DUMMY_POKEMON = Pokemon(
-            id = "1",
-            dexNumber = 1,
-            name = "이상해씨",
-            imageUrl = "",
-            backImageUrl = "",
-            types = listOf(Type.GRASS, Type.POISON),
-            generation = PokemonGeneration.ONE,
-            baseStat = 318,
-            hp = 45,
-            attack = 49,
-            defense = 49,
-            specialAttack = 65,
-            specialDefense = 65,
-            speed = 45,
-        )
+        val DUMMY_POKEMON =
+            Pokemon(
+                id = "1",
+                dexNumber = 1,
+                name = "이상해씨",
+                imageUrl = "",
+                backImageUrl = "",
+                types = listOf(Type.GRASS, Type.POISON),
+                generation = PokemonGeneration.ONE,
+                baseStat = 318,
+                hp = 45,
+                attack = 49,
+                defense = 49,
+                specialAttack = 65,
+                specialDefense = 65,
+                speed = 45,
+            )
 
-        val DUMMY_SKILL = BattleSkill(
-            id = "4",
-            name = "Solar Beam",
-            type = Type.GRASS,
-            categoryLogo = "",
-            power = 120,
-            accuracy = 100,
-            effect = "",
-        )
+        val DUMMY_SKILL =
+            BattleSkill(
+                id = "4",
+                name = "Solar Beam",
+                type = Type.GRASS,
+                categoryLogo = "",
+                power = 120,
+                accuracy = 100,
+                effect = "",
+            )
 
         val DUMMY_BATTLE_RESULT = BattlePrediction(0, 0.0, 0.0, 0.0)
     }
