@@ -12,6 +12,7 @@ public enum MoveFlag {
     MAKES_CONTACT("makes_contact"),
     IGNORE_PROTECT("ignore_protect"),
     IGNORE_VIRTUAL("ignore_virtual"),
+    IGNORE_SUBSTITUTE("ignore_substitute"),
     SOUND_BASED("sound_based"),
     HIDE_USER("hide_user"),
     HIDE_TARGET("hide_target"),
@@ -27,7 +28,6 @@ public enum MoveFlag {
     TRIAGE_MOVE("triage_move"),
     IGNORE_ABILITIES("ignore_abilities"),
     CHECK_ALL_HITS("check_all_hits"),
-    IGNORE_SUBSTITUTE("ignore_substitute"),
     REDIRECT_COUNTER("redirect_counter"),
     ;
 
