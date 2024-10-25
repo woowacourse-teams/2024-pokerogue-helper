@@ -1,57 +1,25 @@
-name: Backend Production Server CD
+name: Backend Production Server CD B
 
 on:
-  push:
-    branches: [ "be/release" ]
-    tags:
-      - 'v*'
+  workflow_call:
 
 permissions:
   contents: read
 
 jobs:
-  test:
-    uses: ./.github/workflows/Backend-CI.yml
-    secrets: inherit
-
-
-  build:
-    needs: test
-    runs-on: [cd, app-b]
-    steps:
-
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.ACTION_TOKEN }}
-          submodules: true
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      - name: Build with Gradle
-        run: ./gradlew bootJar
-        working-directory: ./backend/pokerogue
-
-      - name: Docker build and push
-        run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-          docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
-          docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
-  
-
   deploy:
-    needs: build
-    runs-on: [cd, app-b]
+    runs-on: [ cd, app-b ]
     steps:
-
       - name: Change permission
         run: |
           sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/2024-pokerogue-helper
+
+      - name: Port forwarding begin
+        run: |
+          sudo sysctl -w net.ipv4.ip_forward=1
+          sudo iptables -t nat -I PREROUTING 1 -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_A_PRIVATE_IP }}:80
+          sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_B_PRIVATE_IP }}
+          sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 
       - name: Deploy
         run: |
@@ -65,9 +33,43 @@ jobs:
           echo "No container named 'server' to remove."
           fi
           
+          sudo docker system prune -f
+          
           docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
           
           docker run -d -p 80:8080 --name server \
               -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
               -e TZ=Asia/Seoul \
               ${{ secrets.DOCKER_SERVER_IMAGE }}
+
+      - name: Check service availability
+        run: |
+          SUCCESS=false
+
+          for i in {1..10}; do
+            HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" http://localhost:80/actuator/health) || { 
+              echo "Attempt $i: curl command failed. Retrying...";
+              sleep 3;
+              continue;
+            }
+          
+            if [ $? -eq 0 ] && [ "$HTTP_STATUS" -eq 200 ]; then
+              echo "Service is up and running"
+              SUCCESS=true
+              break
+            fi
+          done
+
+      - name: Port forwarding end
+        run: |
+          sudo iptables -t nat -D PREROUTING 1
+          sudo iptables -t nat -D POSTROUTING 1
+          sudo iptables -D INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+          sudo iptables -L -v -t nat
+
+      - name: Exit if fails
+        run: |
+          if [ "$SUCCESS" = false ]; then
+            echo "Service did not respond successfully after 10 attempts, stopping github actions.."
+            sudo exit 1
+          fi
