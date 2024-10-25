@@ -14,14 +14,15 @@ public record NextBiomeResponse(
 
     public static NextBiomeResponse of(
             Biome biome,
+            String biomeImage,
             String percent,
             List<BiomeTypeResponse> pokemonTypeResponses,
             List<BiomeTypeResponse> trainerTypeResponses
     ) {
         return new NextBiomeResponse(
                 biome.getId(),
-                biome.getName(),
-                biome.getImage(),
+                biome.getKoName(),
+                biomeImage,
                 percent,
                 pokemonTypeResponses,
                 trainerTypeResponses

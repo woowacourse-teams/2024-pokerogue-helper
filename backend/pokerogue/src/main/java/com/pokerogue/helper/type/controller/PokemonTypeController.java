@@ -1,7 +1,7 @@
 package com.pokerogue.helper.type.controller;
 
+import com.pokerogue.helper.type.dto.PokemonTypeMatchingResponse;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
-import com.pokerogue.helper.type.dto.PokemonMatchingAndTypeResponse;
 import com.pokerogue.helper.type.service.PokemonTypeService;
 import com.pokerogue.helper.util.dto.ApiResponse;
 import java.util.List;
@@ -21,7 +21,7 @@ public class PokemonTypeController {
     }
 
     @GetMapping("/api/v1/types/matching")
-    public ApiResponse<PokemonMatchingAndTypeResponse> matchingAndTypeList() {
+    public ApiResponse<PokemonTypeMatchingResponse> matchingAndTypeList() {
         return new ApiResponse<>("타입 상성 리스트 불러오기에 성공했습니다.", pokemonTypeService.findMatchingAndTypes());
     }
 }

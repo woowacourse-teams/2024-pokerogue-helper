@@ -1,0 +1,66 @@
+name: Backend Infrastructure Modification
+
+on:
+  push:
+    tags:
+      - 'be-infra*'
+
+permissions:
+  contents: read
+
+jobs:
+
+  build:
+    runs-on: cd
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ACTION_TOKEN }}
+          submodules: true
+
+      - name: Copy docker-compose.yml to home directory
+        working-directory: ./backend/pokerogue/src/main/resources
+        run: sudo cp ./docker-compose-prod.yml /home/ubuntu/docker-compose.yml
+
+      - name: Docker build and push
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          
+          docker build -t ${{ secrets.DOCKER_NGINX_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-nginx ./backend/pokerogue/docker
+          
+          docker build -t ${{ secrets.DOCKER_FAIL2BAN_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile-fail2ban ./backend/pokerogue/docker
+  
+
+  run:
+    needs: build
+    runs-on: cd
+    steps:
+
+      - name: Change permission
+        run: |
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/2024-pokerogue-helper
+
+      - name: Run Docker Containers
+        run: |
+          cd /home/ubuntu
+          
+          sudo mkdir -p log/nginx && sudo touch log/nginx/error.log && sudo touch log/nginx/access.log
+          
+          sudo chmod 666 /var/run/docker.sock
+          
+          if [ "$(docker ps -qa -f name=fail2ban)" ]; then
+          docker rm -f fail2ban
+          else
+          echo "No container named 'fail2ban' to remove."
+          fi
+          
+          if [ "$(docker ps -qa -f name=nginx)" ]; then
+          docker rm -f nginx
+          else
+          echo "No container named 'nginx' to remove."
+          fi
+          
+          docker-compose -f docker-compose.yml up -d fail2ban nginx
+          docker image prune -f

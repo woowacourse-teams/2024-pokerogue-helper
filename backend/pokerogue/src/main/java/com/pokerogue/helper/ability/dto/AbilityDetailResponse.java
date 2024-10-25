@@ -10,6 +10,6 @@ public record AbilityDetailResponse(
 ) {
 
     public static AbilityDetailResponse of(Ability ability, List<AbilityPokemonResponse> pokemons) {
-        return new AbilityDetailResponse(ability.getName(), ability.getDescription(), pokemons);
+        return new AbilityDetailResponse(ability.getKoName(), ability.getDescription(), pokemons);
     }
 }

@@ -25,7 +25,12 @@ public class AbilityController {
 
     @GetMapping("/api/v1/ability2/{id}")
     public ApiResponse<AbilityDetailResponse> abilityDetails(@PathVariable("id") String id) {
-        log.info("---- URI : {}, Param : {}", "/api/v1/ability/{id}", id);
+        log.info(
+                "---- URI : {}, Param : {}, ThreadName : {}",
+                "/api/v1/ability/{id}",
+                id,
+                Thread.currentThread().getName()
+        );
 
         return new ApiResponse<>("특성 정보 불러오기에 성공했습니다.", abilityService.findAbilityDetails(id));
     }
