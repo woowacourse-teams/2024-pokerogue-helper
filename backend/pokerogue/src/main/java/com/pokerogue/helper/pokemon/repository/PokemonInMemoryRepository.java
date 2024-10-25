@@ -5,6 +5,8 @@ import static java.util.stream.Collectors.toMap;
 
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import jakarta.annotation.PostConstruct;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -36,6 +38,7 @@ public class PokemonInMemoryRepository {
     public List<Pokemon> findAll() {
         return pokemons.values()
                 .stream()
+                .sorted(Comparator.comparingInt(Pokemon::getPokedexNumber))
                 .toList();
     }
 
