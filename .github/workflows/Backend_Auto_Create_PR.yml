@@ -1,7 +1,7 @@
 name: Create PR from Branch
 
 on:
-  create:
+  push:
     branches:
       - 'be/*'
 
