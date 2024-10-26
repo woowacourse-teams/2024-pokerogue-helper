@@ -1,0 +1,70 @@
+name: Create PR from Branch
+
+on:
+  push:
+    branches:
+      - 'be/*'
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Get Issue Number
+        id: get_issue
+        run: |
+          echo "BRANCH_NAME=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          ISSUE_NUMBER=$(echo "${BRANCH_NAME}" | grep -oP '#\K\d+')
+          echo "ISSUE_NUMBER=${ISSUE_NUMBER}" >> $GITHUB_ENV
+
+      - name: Get Issue Details
+        id: get_issue_details
+        run: |
+          ISSUE_DATA=$(gh issue view "${ISSUE_NUMBER}" --json title,body,assignees,labels --jq '{title: .title, body: .body, assignees: .assignees[].login, labels: .labels[].name}')
+          echo "ISSUE_DATA=${ISSUE_DATA}" >> $GITHUB_ENV
+
+      - name: Check for Existing PR
+        id: check_pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BASE_BRANCH="be/develop"
+          HEAD_BRANCH="${{ env.BRANCH_NAME }}"
+          EXISTING_PR=$(gh pr list --state open --base "${BASE_BRANCH}" --head "${HEAD_BRANCH}" --json number --jq '.[0].number')
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "An existing PR #${EXISTING_PR} already exists for this issue and branch. Exiting..."
+            exit 0
+          fi
+
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ASSIGNEES=$(echo "${ISSUE_DATA}" | jq -r '.assignees | join(", ")')
+          LABELS=$(echo "${ISSUE_DATA}" | jq -r '.labels | join(", ")')
+
+          TEAM_MEMBERS=("unifolio0" "jongmee" "dwax1324" "jinchiim")
+          
+          IFS=', ' read -r -a ASSIGNEE_ARRAY <<< "${ASSIGNEES}"
+
+          REVIEWERS=()
+          for MEMBER in "${TEAM_MEMBERS[@]}"; do
+            if [[ ! " ${ASSIGNEE_ARRAY[@]} " =~ " ${MEMBER} " ]]; then
+              REVIEWERS+=("${MEMBER}")
+            fi
+          done
+
+          REVIEWER_LIST=$(IFS=', '; echo "${REVIEWERS[*]}")
+
+          ISSUE_TITLE=$(echo "${ISSUE_DATA}" | jq -r '.title')
+          ISSUE_BODY=$(echo "${ISSUE_DATA}" | jq -r '.body')
+
+          TASK_ITEMS=$(echo "${ISSUE_BODY}" | grep -oP '(?<=✨ Task\n---\n)([\s\S]*?)(?=\n✨ Time)')
+
+          PR_BODY="## 🍄 PR 확인 사항\n\nPR이 다음 요구 사항을 충족하는지 확인하세요. :\n\n\- [ ] API 명세서가 업데이트 혹은 작성이 되어 있나요?\n\n## 현재 작업은 어떤 이슈를 해결한 것인지 설명해주세요.\n> Issue Number: #${ISSUE_NUMBER}\n\n\- 이슈에 있는 태스크 들을 붙여넣어주세요.\n${TASK_ITEMS}\n\n## 기존 코드에서 변경된 점이 있다면 설명해주세요. (추가 X)\n\n\- [ ] 있음\n\- [ ] 없음\n"
+          
+          gh pr create --base "${BASE_BRANCH}" --head "${HEAD_BRANCH}" --title "${ISSUE_TITLE}" --body "${PR_BODY}" --assignee "${ASSIGNEES}" --reviewer "${REVIEWER_LIST}" --label "${LABELS}"
+          
