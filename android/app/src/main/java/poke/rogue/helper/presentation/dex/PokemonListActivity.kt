@@ -111,15 +111,14 @@ class PokemonListActivity :
                 startActivity(PokemonDetailActivity.intent(this, pokemonId))
             }
         }
-        val fm: FragmentManager = supportFragmentManager
 
-        fm.setFragmentResultListener(FILTER_RESULT_KEY, this) { key, bundle ->
+        supportFragmentManager.setFragmentResultListener(FILTER_RESULT_KEY, this) { key, bundle ->
             val filterArgs: PokeFilterUiModel =
                 PokemonFilterBottomSheetFragment.argsFrom(bundle)
                     ?: return@setFragmentResultListener
             viewModel.filterPokemon(filterArgs)
         }
-        fm.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
+        supportFragmentManager.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
             val sortArgs: PokemonSortUiModel =
                 PokemonSortBottomSheetFragment.argsFrom(bundle)
                     ?: return@setFragmentResultListener
