@@ -12,6 +12,7 @@ internal val dataBaseModule
                     get(),
                     PokeRogueDatabase::class.java,
                     PokeRogueDatabase.DATABASE_NAME,
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
             }
         }
