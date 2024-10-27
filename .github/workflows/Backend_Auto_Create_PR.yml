@@ -49,8 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ASSIGNEES=$(echo "${ISSUE_DATA}" | jq -r '.assignees | join(", ")')
-          LABELS=$(echo "${ISSUE_DATA}" | jq -r '.labels | join(", ")')
+          ASSIGNEES=$(echo "${ISSUE_DATA}" | jq -r '.assignees | join(",")')
+          LABELS=$(echo "${ISSUE_DATA}" | jq -r '.labels | join(",")')
           TEAM_MEMBERS=("unifolio0" "jongmee" "dwax1324" "jinchiim")
           IFS=', ' read -r -a ASSIGNEE_ARRAY <<< "${ASSIGNEES}"
           REVIEWERS=()
