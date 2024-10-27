@@ -114,6 +114,7 @@ androidx-test-extention-ktx = { group = "androidx.test.ext", name = "junit-ktx",
 junit5-android-test-core = { module = "de.mannodermaus.junit5:android-test-core", version.ref = "android-junit5-core" }
 junit5-android-test-runner = { module = "de.mannodermaus.junit5:android-test-runner", version.ref = "android-junit5-core" }
 android-mockk = { module = "io.mockk:mockk-android", version.ref = "mockk" }
+room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 
 # unit test
 kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
@@ -150,6 +151,7 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+room = { id = "androidx.room", version.ref = "room" }
 
 # google & firebase
 google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
