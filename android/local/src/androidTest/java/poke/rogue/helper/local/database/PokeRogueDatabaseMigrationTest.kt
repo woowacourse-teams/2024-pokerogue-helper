@@ -25,45 +25,48 @@ import java.io.IOException
  */
 class PokeRogueDatabaseMigrationTest {
     @get:Rule
-    val helper = MigrationTestHelper(
-        InstrumentationRegistry.getInstrumentation(),
-        PokeRogueDatabase::class.java
-    )
+    val helper =
+        MigrationTestHelper(
+            InstrumentationRegistry.getInstrumentation(),
+            PokeRogueDatabase::class.java,
+        )
 
     @Test
     @Throws(IOException::class)
     @DisplayName("버전 1에서 버전 2로 마이그레이션 데이터 무결성 테스트 - backImageUrl 추가")
-    fun test_migration1To2() = helper.migrationTestCase(
-        tableName = PokemonEntity.TABLE_NAME,
-        from = 1,
-        to = 2,
-        onBeforeMigration = {
-            val contentValue = contentValuesOf(
-                "id" to 1,
-                "dexNumber" to 25,
-                "formName" to "Normal",
-                "name" to "Pikachu",
-                "imageUrl" to "url_to_image",
-                "types" to "Electric",
-                "generation" to 1,
-                "baseStat" to 320,
-                "hp" to 35,
-                "attack" to 55,
-                "defense" to 40,
-                "specialAttack" to 50,
-                "specialDefense" to 50,
-                "speed" to 90,
-            )
-            insert(PokemonEntity.TABLE_NAME, SQLiteDatabase.CONFLICT_REPLACE, contentValue)
-        },
-        onAfterMigration = {
-            moveToFirst() shouldBe true
-            val backImageUrlIndex = getColumnIndex("backImageUrl")
-            val backImageUrl = getString(backImageUrlIndex)
-            backImageUrl.shouldBeEmpty()
-            moveToNext() shouldBe false
-        },
-    )
+    fun test_migration1To2() =
+        helper.migrationTestCase(
+            tableName = PokemonEntity.TABLE_NAME,
+            from = 1,
+            to = 2,
+            onBeforeMigration = {
+                val contentValue =
+                    contentValuesOf(
+                        "id" to 1,
+                        "dexNumber" to 25,
+                        "formName" to "Normal",
+                        "name" to "Pikachu",
+                        "imageUrl" to "url_to_image",
+                        "types" to "Electric",
+                        "generation" to 1,
+                        "baseStat" to 320,
+                        "hp" to 35,
+                        "attack" to 55,
+                        "defense" to 40,
+                        "specialAttack" to 50,
+                        "specialDefense" to 50,
+                        "speed" to 90,
+                    )
+                insert(PokemonEntity.TABLE_NAME, SQLiteDatabase.CONFLICT_REPLACE, contentValue)
+            },
+            onAfterMigration = {
+                moveToFirst() shouldBe true
+                val backImageUrlIndex = getColumnIndex("backImageUrl")
+                val backImageUrl = getString(backImageUrlIndex)
+                backImageUrl.shouldBeEmpty()
+                moveToNext() shouldBe false
+            },
+        )
 
     @Test
     @DisplayName("모든 database 버전 마이그레이션 테스트")
@@ -80,10 +83,9 @@ class PokeRogueDatabaseMigrationTest {
         Room.databaseBuilder(
             testContext,
             PokeRogueDatabase::class.java,
-            "TEST_DB"
+            "TEST_DB",
         ).build().apply {
             openHelper.writableDatabase.close()
         }
     }
 }
-

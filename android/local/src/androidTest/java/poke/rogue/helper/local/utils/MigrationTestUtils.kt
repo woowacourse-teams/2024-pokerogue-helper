@@ -26,12 +26,13 @@ fun MigrationTestHelper.migrationTestCase(
     }
 
     // When
-    val newDb = runMigrationsAndValidate(
-        testDbName,
-        to,
-        true,
-        *migrations,
-    )
+    val newDb =
+        runMigrationsAndValidate(
+            testDbName,
+            to,
+            true,
+            *migrations,
+        )
 
     // Then
     newDb.query("SELECT * FROM $tableName").apply {

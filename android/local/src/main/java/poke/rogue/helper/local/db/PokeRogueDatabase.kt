@@ -11,8 +11,8 @@ import poke.rogue.helper.local.entity.PokemonEntity
     entities = [PokemonEntity::class],
     version = 2,
     autoMigrations = [
-        AutoMigration(from = 1, to = 2)
-    ]
+        AutoMigration(from = 1, to = 2),
+    ],
 )
 @androidx.room.TypeConverters(PokemonTypeConverters::class)
 abstract class PokeRogueDatabase : RoomDatabase() {
