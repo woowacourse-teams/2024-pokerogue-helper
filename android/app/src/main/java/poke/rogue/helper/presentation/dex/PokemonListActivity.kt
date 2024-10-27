@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.dex
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
@@ -65,15 +64,17 @@ class PokemonListActivity :
     private fun initObservers() {
         repeatOnStarted {
             viewModel.uiState.collect { uiState ->
-                pokemonAdapter.submitList(uiState.pokemons)
+                pokemonAdapter.submitList(uiState.pokemons) {
+                    binding.rvPokemonList.scrollToPosition(0)
+                }
 
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
                         label =
-                            stringOf(
-                                R.string.dex_filter_chip,
-                                if (uiState.isFiltered) uiState.filterCount.toString() else "",
-                            ),
+                        stringOf(
+                            R.string.dex_filter_chip,
+                            if (uiState.isFiltered) uiState.filterCount.toString() else "",
+                        ),
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
