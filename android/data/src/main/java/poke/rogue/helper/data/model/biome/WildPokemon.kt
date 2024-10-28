@@ -13,4 +13,5 @@ fun WildPokemonResponse.toData(): WildPokemon =
         pokemons = pokemons.toData(),
     )
 
-fun List<WildPokemonResponse>.toData(): List<WildPokemon> = map(WildPokemonResponse::toData)
+fun List<WildPokemonResponse>.toData(): List<WildPokemon> =
+    filter { it.pokemons.isNotEmpty() }.map (WildPokemonResponse::toData)
