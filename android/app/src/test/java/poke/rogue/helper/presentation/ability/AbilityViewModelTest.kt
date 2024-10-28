@@ -5,26 +5,29 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import poke.rogue.helper.data.repository.AbilityRepository
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.test.KoinTest
+import org.koin.test.get
+import org.koin.test.junit5.KoinTestExtension
 import poke.rogue.helper.presentation.ability.model.AbilityUiModel
 import poke.rogue.helper.presentation.ability.model.toUi
+import poke.rogue.helper.presentation.di.testViewModelModule
 import poke.rogue.helper.testing.CoroutinesTestExtension
 import poke.rogue.helper.testing.data.repository.FakeAbilityRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
-class AbilityViewModelTest {
-    private lateinit var repository: AbilityRepository
-    private lateinit var viewModel: AbilityViewModel
-
-    @BeforeEach
-    fun setUp() {
-        repository = FakeAbilityRepository()
-        viewModel = AbilityViewModel(repository)
-    }
+class AbilityViewModelTest : KoinTest {
+    @JvmField
+    @RegisterExtension
+    val koinTestExtension =
+        KoinTestExtension.create {
+            modules(testViewModelModule)
+        }
+    private val viewModel: AbilityViewModel
+        get() = get<AbilityViewModel>()
 
     @Test
     fun `모든 특성을 불러온다`() =
@@ -34,24 +37,8 @@ class AbilityViewModelTest {
 
             // then
             val abilities = (uiState as AbilityUiState.Success<List<AbilityUiModel>>).data
-            abilities shouldBe repository.abilities().map { it.toUi() }
+            abilities shouldBe FakeAbilityRepository().abilities().map { it.toUi() }
         }
-
-//    @Test
-//    fun `특성 이름으로 검색한다`() =
-//        runTest {
-//            // given
-//            val query = "불"
-//
-//            // when
-//            val queriedAbilities = viewModel.uiState.first { it is AbilityUiState.Success }
-//            viewModel.queryName(query)
-//
-//            // then
-//            val abilities = (queriedAbilities as AbilityUiState.Success<List<AbilityUiModel>>).data
-//            val actual = abilities.map { it.id }
-//            actual shouldBe listOf("14", "17", "24")
-//        }
 
     @Test
     fun `특성 id값으로 특성 상세 화면으로 이동한다`() =

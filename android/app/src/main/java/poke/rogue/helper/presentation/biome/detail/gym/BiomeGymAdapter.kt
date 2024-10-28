@@ -35,7 +35,7 @@ class BiomeGymAdapter(
     companion object {
         val gymPokemonComparator =
             ItemDiffCallback<BiomePokemonUiModel>(
-                onItemsTheSame = { oldItem, newItem -> oldItem == newItem },
+                onItemsTheSame = { oldItem, newItem -> oldItem.grade == newItem.grade },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
     }

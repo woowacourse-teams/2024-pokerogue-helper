@@ -4,43 +4,41 @@ import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.extension.RegisterExtension
+import org.koin.core.component.get
+import org.koin.test.KoinTest
+import org.koin.test.junit5.KoinTestExtension
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.PokemonBiome
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.PokemonSkill
-import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
+import poke.rogue.helper.presentation.di.testViewModelModule
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
-import poke.rogue.helper.testing.data.repository.FakeDexRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(CoroutinesTestExtension::class)
-class PokemonDetailViewModelTest {
-    private lateinit var dexRepository: DexRepository
-    private lateinit var viewModel: PokemonDetailViewModel
+class PokemonDetailViewModelTest : KoinTest {
+    @JvmField
+    @RegisterExtension
+    val koinTestExtension =
+        KoinTestExtension.create {
+            modules(testViewModelModule)
+        }
 
-    @BeforeEach
-    fun setUp() {
-        dexRepository = FakeDexRepository()
-    }
+    private val viewModel: PokemonDetailViewModel
+        get() = get<PokemonDetailViewModel>()
 
     @Test
     fun `포켓몬 상세 데이터를 불러올 때 처음은 로딩 상태이다`() =
         runTest {
-            // given
-            viewModel =
-                PokemonDetailViewModel(
-                    dexRepository,
-                )
-
             // when
             val expectedPokemonDetailUiState = viewModel.uiState
 
@@ -51,12 +49,6 @@ class PokemonDetailViewModelTest {
     @Test
     fun `포켓몬 상세 데이터를 불러온다`() =
         runTest {
-            // given
-            viewModel =
-                PokemonDetailViewModel(
-                    dexRepository,
-                )
-
             // when
             viewModel.updatePokemonDetail(pokemonId = "1")
 

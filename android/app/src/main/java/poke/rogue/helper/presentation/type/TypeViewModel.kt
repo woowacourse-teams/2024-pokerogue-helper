@@ -11,10 +11,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import poke.rogue.helper.data.datasource.LocalTypeDataSource
-import poke.rogue.helper.data.repository.DefaultTypeRepository
 import poke.rogue.helper.data.repository.TypeRepository
-import poke.rogue.helper.presentation.base.BaseViewModelFactory
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModelComparator
 import poke.rogue.helper.presentation.type.model.SelectorType
@@ -53,9 +50,10 @@ class TypeViewModel(
             }.sortedWith(MatchedTypesUiModelComparator)
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), emptyList())
 
-    private fun matchedTypesAgainstOpponents(opponents: List<TypeSelectionUiState.Selected>): List<MatchedTypesUiModel> {
-        return opponents.flatMap { matchedTypesAgainstOpponent(it) }
-    }
+    private fun matchedTypesAgainstOpponents(opponents: List<TypeSelectionUiState.Selected>): List<MatchedTypesUiModel> =
+        opponents.flatMap {
+            matchedTypesAgainstOpponent(it)
+        }
 
     private fun matchedTypesAgainstOpponent(opponent: TypeSelectionUiState.Selected): List<MatchedTypesUiModel> {
         val selectedTypeId = opponent.selectedType.id
@@ -126,9 +124,5 @@ class TypeViewModel(
                 opponentType1 = TypeSelectionUiState.Empty,
                 opponentType2 = TypeSelectionUiState.Empty,
             )
-    }
-
-    companion object {
-        fun factory() = BaseViewModelFactory { TypeViewModel(DefaultTypeRepository(LocalTypeDataSource())) }
     }
 }

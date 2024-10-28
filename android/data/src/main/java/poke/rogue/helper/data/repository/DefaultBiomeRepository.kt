@@ -1,7 +1,8 @@
 package poke.rogue.helper.data.repository
 
+import kotlinx.coroutines.flow.Flow
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
+import poke.rogue.helper.data.datasource.LocalNavigationDataSource
 import poke.rogue.helper.data.datasource.RemoteBiomeDataSource
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.BiomeDetail
@@ -11,6 +12,7 @@ import poke.rogue.helper.stringmatcher.has
 class DefaultBiomeRepository(
     private val remoteBiomeDataSource: RemoteBiomeDataSource,
     private val analyticsLogger: AnalyticsLogger,
+    private val localNavigationDataSource: LocalNavigationDataSource,
 ) : BiomeRepository {
     private var cachedBiomes: List<Biome> = emptyList()
 
@@ -28,23 +30,14 @@ class DefaultBiomeRepository(
         return biomes().filter { it.name.has(query) }
     }
 
-    override suspend fun biomeDetail(id: String): BiomeDetail {
-        return remoteBiomeDataSource.biomeDetail(id).also {
+    override suspend fun biomeDetail(id: String): BiomeDetail =
+        remoteBiomeDataSource.biomeDetail(id).also {
             analyticsLogger.logBiomeDetail(id, it.name)
         }
+
+    override suspend fun saveNavigationMode(isBattleNavigationMode: Boolean) {
+        localNavigationDataSource.saveNavigationMode(isBattleNavigationMode)
     }
 
-    companion object {
-        private var instance: DefaultBiomeRepository? = null
-
-        fun instance(): DefaultBiomeRepository {
-            return instance
-                ?: DefaultBiomeRepository(
-                    RemoteBiomeDataSource.instance(),
-                    analyticsLogger(),
-                ).also {
-                    instance = it
-                }
-        }
-    }
+    override fun isBattleNavigationModeStream(): Flow<Boolean> = localNavigationDataSource.isBattleNavigationModeStream()
 }

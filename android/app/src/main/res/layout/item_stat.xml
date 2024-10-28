@@ -16,32 +16,32 @@
         android:foregroundGravity="center"
         android:gravity="start"
         android:orientation="horizontal"
-        android:paddingHorizontal="6dp"
+        android:paddingHorizontal="4dp"
         android:paddingVertical="4dp">
 
         <TextView
             android:id="@+id/tv_type_name"
             style="@style/TextAppearance.Poke.CaptionLargeBold"
-            android:layout_width="50dp"
+            android:layout_width="@dimen/pokemon_stat_key_text_width"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_semibold"
             android:text="@{stat.name}"
-            android:textSize="12dp"
+            android:textSize="@dimen/pokemon_stat_text_size"
             tools:ignore="SpUsage"
             tools:text="HPD" />
 
         <Space
-            android:layout_width="10dp"
+            android:layout_width="12dp"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tv_stat_amount"
             style="@style/TextAppearance.Poke.CaptionLargeBold"
-            android:layout_width="30dp"
+            android:layout_width="@dimen/pokemon_stat_value_text_width"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_semibold"
             android:text="@{String.valueOf(stat.amount)}"
-            android:textSize="12dp"
+            android:textSize="@dimen/pokemon_stat_text_size"
             tools:ignore="SpUsage"
             tools:text="100" />
 
@@ -50,7 +50,8 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             progressColor="@{stat.color}"
             android:layout_width="match_parent"
-            android:layout_height="15dp"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="4dp"
             android:max="100"
             android:progress="@{stat.progress}"
             tools:progress="70"

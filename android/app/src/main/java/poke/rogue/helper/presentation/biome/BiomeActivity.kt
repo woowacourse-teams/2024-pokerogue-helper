@@ -1,11 +1,12 @@
 package poke.rogue.helper.presentation.biome
 
+import android.content.res.Configuration
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
-import poke.rogue.helper.data.repository.DefaultBiomeRepository
 import poke.rogue.helper.databinding.ActivityBiomeBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -20,11 +21,7 @@ import poke.rogue.helper.presentation.util.view.GridSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
 class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activity_biome) {
-    private val viewModel by viewModels<BiomeViewModel> {
-        BiomeViewModel.factory(
-            DefaultBiomeRepository.instance(),
-        )
-    }
+    private val viewModel by viewModel<BiomeViewModel>()
     override val errorViewModel: ErrorHandleViewModel
         get() = viewModel
     private val biomeAdapter: BiomeAdapter by lazy { BiomeAdapter(viewModel) }
@@ -54,10 +51,13 @@ class BiomeActivity : ErrorHandleActivity<ActivityBiomeBinding>(R.layout.activit
 
     private fun initAdapter() {
         binding.rvBiomeList.apply {
+            val spanCount =
+                if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) 3 else 2
             adapter = biomeAdapter
+            layoutManager = GridLayoutManager(context, spanCount)
             addItemDecoration(
                 GridSpacingItemDecoration(
-                    2,
+                    spanCount,
                     9.dp,
                     false,
                 ),

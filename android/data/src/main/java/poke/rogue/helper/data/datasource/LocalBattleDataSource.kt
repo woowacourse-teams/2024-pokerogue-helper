@@ -1,6 +1,5 @@
 package poke.rogue.helper.data.datasource
 
-import android.content.Context
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import poke.rogue.helper.data.model.PokemonWithSkillIds
@@ -28,16 +27,4 @@ class LocalBattleDataSource(private val battleDataStore: BattleDataStore) {
     fun pokemonWithSkillStream(): Flow<PokemonWithSkillIds?> = battleDataStore.pokemonWithSkillId().map { it?.toData() }
 
     fun pokemonIdStream(): Flow<String?> = battleDataStore.pokemonId()
-
-    companion object {
-        private var instance: LocalBattleDataSource? = null
-
-        fun instance(context: Context): LocalBattleDataSource {
-            return instance ?: LocalBattleDataSource(
-                BattleDataStore(context),
-            ).also {
-                instance = it
-            }
-        }
-    }
 }

@@ -1,13 +1,9 @@
 package poke.rogue.helper.data.repository
 
-import android.content.Context
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import org.koin.mp.KoinPlatform.getKoin
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.analytics.analyticsLogger
-import poke.rogue.helper.data.cache.GlideImageCacher
 import poke.rogue.helper.data.cache.ImageCacher
 import poke.rogue.helper.data.datasource.LocalDexDataSource
 import poke.rogue.helper.data.datasource.LocalVersionDataSource
@@ -86,13 +82,12 @@ class DefaultDexRepository(
         name: String,
         sort: PokemonSort,
         filters: List<PokemonFilter>,
-    ): List<Pokemon> {
-        return if (name.isBlank()) {
+    ): List<Pokemon> =
+        if (name.isBlank()) {
             pokemons()
         } else {
             pokemons().filter { it.name.has(name) }
         }.toFilteredPokemons(sort, filters)
-    }
 
     override suspend fun pokemonDetail(id: String): PokemonDetail {
         val allBiomes = biomeRepository.biomes()
@@ -130,8 +125,8 @@ class DefaultDexRepository(
     private fun List<Pokemon>.toFilteredPokemons(
         sort: PokemonSort,
         pokemonFilters: List<PokemonFilter>,
-    ): List<Pokemon> {
-        return this
+    ): List<Pokemon> =
+        this
             .filter { pokemon ->
                 pokemonFilters.all { pokemonFilter ->
                     when (pokemonFilter) {
@@ -139,33 +134,10 @@ class DefaultDexRepository(
                         is PokemonFilter.ByGeneration -> pokemon.generation == pokemonFilter.generation
                     }
                 }
-            }
-            .sortedWith(sort)
-    }
+            }.sortedWith(sort)
 
     companion object {
-        private var instance: DexRepository? = null
         const val PLELOAD_POKEMON_COUNT = 24
-
-        fun init(context: Context) {
-            GlideImageCacher.init(context)
-            instance =
-                DefaultDexRepository(
-                    RemoteDexDataSource.instance(),
-                    LocalDexDataSource.instance(context),
-                    GlideImageCacher.instance(),
-                    DefaultBiomeRepository.instance(),
-                    analyticsLogger(),
-                    getKoin().get(),
-                    getKoin().get(),
-                )
-        }
-
-        fun instance(): DexRepository {
-            return requireNotNull(instance) {
-                "DexRepository is not initialized"
-            }
-        }
     }
 }
 

@@ -1,5 +1,7 @@
 package poke.rogue.helper.testing.data.repository
 
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.BiomeDetail
 import poke.rogue.helper.data.model.NextBiome
@@ -14,11 +16,15 @@ import poke.rogue.helper.stringmatcher.has
 class FakeBiomeRepository : BiomeRepository {
     override suspend fun biomes(): List<Biome> = BIOMES
 
-    override suspend fun biomes(query: String): List<Biome> {
-        return BIOMES.filter { biome -> biome.name.has(query) }
-    }
+    override suspend fun biomes(query: String): List<Biome> = BIOMES.filter { biome -> biome.name.has(query) }
 
     override suspend fun biomeDetail(id: String): BiomeDetail = BIOME_DETAIL[id] ?: throw IllegalArgumentException("Invalid biome ID")
+
+    override suspend fun saveNavigationMode(isBattleNavigationMode: Boolean) {
+        isBattleNavigationModeFlow.value = isBattleNavigationMode
+    }
+
+    override fun isBattleNavigationModeStream(): Flow<Boolean> = isBattleNavigationModeFlow
 
     companion object {
         val BIOMES: List<Biome> =
@@ -118,5 +124,7 @@ class FakeBiomeRepository : BiomeRepository {
                             ),
                     ),
             )
+
+        private val isBattleNavigationModeFlow = MutableStateFlow(false)
     }
 }

@@ -14,6 +14,12 @@ data class BattleSelectionsState(
         get() =
             listOf(minePokemon, skill, opponentPokemon, weather).all { it.isSelected() }
 
+    val isMinePokemonSelected: Boolean
+        get() = minePokemon.isSelected()
+
+    val isOpponentPokemonSelected: Boolean
+        get() = opponentPokemon.isSelected()
+
     companion object {
         val DEFAULT =
             BattleSelectionsState(
