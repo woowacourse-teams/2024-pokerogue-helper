@@ -1,6 +1,9 @@
 package com.pokerogue.helper.pokemon.dto;
 
 
+import com.pokerogue.helper.pokemon.data.Evolution;
+import com.pokerogue.helper.pokemon.data.Pokemon;
+
 public record EvolutionResponse(
         String id,
         String name,
@@ -11,4 +14,15 @@ public record EvolutionResponse(
         String image
 ) {
 
+    public static EvolutionResponse from(Pokemon pokemon, Evolution evolution, Integer depth) {
+        return new EvolutionResponse(
+                pokemon.getId(),
+                pokemon.getKoName(),
+                evolution.getLevel(),
+                depth,
+                evolution.getItem(),
+                evolution.getCondition(),
+                pokemon.getImageId()
+        );
+    }
 }

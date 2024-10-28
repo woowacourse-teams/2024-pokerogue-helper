@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.dto;
 
+import com.pokerogue.helper.pokemon.config.ImageUrl;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 import java.util.List;
@@ -21,24 +22,23 @@ public record PokemonResponse(
         Integer specialAttack,
         Integer specialDefense
 ) {
-    public static PokemonResponse from(Pokemon pokemon, String image, String backImage, List<PokemonTypeResponse> pokemonTypeResponse) {
-
+    public static PokemonResponse from(Pokemon pokemon, List<PokemonTypeResponse> pokemonTypeResponses) {
         return new PokemonResponse(
-                pokemon.id(),
-                Long.parseLong(pokemon.speciesId()),
-                pokemon.koName(),
-                pokemon.formName(),
-                image,
-                backImage,
-                pokemonTypeResponse,
-                pokemon.generation(),
-                pokemon.baseTotal(),
-                pokemon.hp(),
-                pokemon.attack(),
-                pokemon.defense(),
-                pokemon.specialAttack(),
-                pokemon.specialDefense(),
-                pokemon.speed()
+                pokemon.getId(),
+                (long) pokemon.getPokedexNumber(),
+                pokemon.getKoName(),
+                pokemon.getFormName(),
+                ImageUrl.getPokemonImage(pokemon.getImageId()), //image front
+                ImageUrl.getPokemonBackImage(pokemon.getImageId()), //back
+                pokemonTypeResponses,
+                pokemon.getGeneration(),
+                pokemon.getBaseTotal(),
+                pokemon.getHp(),
+                pokemon.getAttack(),
+                pokemon.getDefense(),
+                pokemon.getSpecialAttack(),
+                pokemon.getSpecialDefense(),
+                pokemon.getSpeed()
         );
     }
 }

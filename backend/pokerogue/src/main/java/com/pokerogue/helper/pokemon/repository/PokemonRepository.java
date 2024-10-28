@@ -1,26 +1,14 @@
 package com.pokerogue.helper.pokemon.repository;
 
-
 import com.pokerogue.helper.pokemon.data.Pokemon;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-import java.util.TreeMap;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Repository
-public class PokemonRepository {
-    private final Map<String, Pokemon> data = new TreeMap<>();
+public interface PokemonRepository extends MongoRepository<Pokemon, String> {
 
-    public Map<String, Pokemon> findAll() {
-        return Collections.unmodifiableMap(data);
-    }
+    List<Pokemon> findByPokedexNumber(int pokedexNumber);
 
-    public Optional<Pokemon> findById(String id) {
-        return Optional.ofNullable(data.get(id));
-    }
+    List<Pokemon> findByEggMoveIdsContains(String eggMoveIds);
 
-    public void save(String key, Pokemon pokemon) {
-        data.put(key, pokemon);
-    }
+    List<Pokemon> findByLevelMovesMoveId(String moveId);
 }

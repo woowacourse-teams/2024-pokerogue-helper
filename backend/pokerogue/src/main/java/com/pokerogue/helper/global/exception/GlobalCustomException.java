@@ -14,4 +14,9 @@ public class GlobalCustomException extends RuntimeException {
         super(errorMessage.getMessage());
         this.httpStatus = errorMessage.getHttpStatus();
     }
+
+    public GlobalCustomException(ErrorMessage errorMessage, String message) {
+        super(errorMessage.getMessage() + message);
+        this.httpStatus = errorMessage.getHttpStatus();
+    }
 }

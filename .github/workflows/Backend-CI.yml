@@ -2,7 +2,7 @@ name: Backend CI
 
 on:
   pull_request:
-    branches: [ "be/develop", "be/release" ]
+    branches: [ "be/develop" ]
   workflow_call:
 
 permissions:
@@ -29,6 +29,7 @@ jobs:
         run: |
           docker ps -aq | xargs -r docker rm -vf
           docker system prune -a -f
+
       - name: Set up Test MongoDB
         working-directory: ./backend/pokerogue/src/main/resources/
         run: docker-compose -f docker-compose-ci.yml up -d
@@ -45,6 +46,7 @@ jobs:
               sleep 5
             fi
           done
+
       - name: Run Test
         working-directory: ./backend/pokerogue
         run: ./gradlew clean test

@@ -1,12 +1,12 @@
 package com.pokerogue.helper.type.service;
 
 
-import com.pokerogue.helper.type.domain.PokemonType;
-import com.pokerogue.helper.type.dto.PokemonMatchingAndTypeResponse;
-import com.pokerogue.helper.type.dto.PokemonMatchingResponse;
+import com.pokerogue.helper.type.collection.TypeMatching;
+import com.pokerogue.helper.type.data.Type;
+import com.pokerogue.helper.type.dto.PokemonTypeMatchingResponse;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
-import com.pokerogue.helper.type.repository.PokemonTypeMatchingRepository;
-import com.pokerogue.helper.type.repository.PokemonTypeRepository;
+import com.pokerogue.helper.type.dto.TypeMatchingResponse;
+import com.pokerogue.helper.type.repository.TypeMatchingRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,23 +15,22 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PokemonTypeService {
 
-    private final PokemonTypeRepository pokemonTypeRepository;
-    private final PokemonTypeMatchingRepository pokemonTypeMatchingRepository;
+    private final TypeMatchingRepository typeMatchingRepository;
 
     public List<PokemonTypeResponse> findTypes() {
-        List<PokemonType> pokemonTypes = pokemonTypeRepository.findAll();
+        List<Type> types = List.of(Type.values());
 
-        return pokemonTypes.stream()
+        return types.stream()
                 .map(PokemonTypeResponse::from)
                 .toList();
     }
 
-    public PokemonMatchingAndTypeResponse findMatchingAndTypes() {
-        List<PokemonMatchingResponse> matching = pokemonTypeMatchingRepository.findAll().stream()
-                .map(PokemonMatchingResponse::from)
+    public PokemonTypeMatchingResponse findMatchingAndTypes() {
+        List<TypeMatching> typeMatchings = typeMatchingRepository.findAll();
+        List<TypeMatchingResponse> typeMatchingResponses = typeMatchings.stream()
+                .map(TypeMatchingResponse::from)
                 .toList();
-        List<PokemonTypeResponse> pokemonTypeResponses = findTypes();
 
-        return new PokemonMatchingAndTypeResponse(matching, pokemonTypeResponses);
+        return new PokemonTypeMatchingResponse(typeMatchingResponses, findTypes());
     }
 }
