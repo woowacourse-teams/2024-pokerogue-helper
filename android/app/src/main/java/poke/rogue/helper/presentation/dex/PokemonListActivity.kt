@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.dex
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
@@ -65,7 +64,9 @@ class PokemonListActivity :
     private fun initObservers() {
         repeatOnStarted {
             viewModel.uiState.collect { uiState ->
-                pokemonAdapter.submitList(uiState.pokemons)
+                pokemonAdapter.submitList(uiState.pokemons) {
+                    binding.rvPokemonList.scrollToPosition(0)
+                }
 
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
@@ -111,15 +112,14 @@ class PokemonListActivity :
                 startActivity(PokemonDetailActivity.intent(this, pokemonId))
             }
         }
-        val fm: FragmentManager = supportFragmentManager
 
-        fm.setFragmentResultListener(FILTER_RESULT_KEY, this) { key, bundle ->
+        supportFragmentManager.setFragmentResultListener(FILTER_RESULT_KEY, this) { key, bundle ->
             val filterArgs: PokeFilterUiModel =
                 PokemonFilterBottomSheetFragment.argsFrom(bundle)
                     ?: return@setFragmentResultListener
             viewModel.filterPokemon(filterArgs)
         }
-        fm.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
+        supportFragmentManager.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
             val sortArgs: PokemonSortUiModel =
                 PokemonSortBottomSheetFragment.argsFrom(bundle)
                     ?: return@setFragmentResultListener
