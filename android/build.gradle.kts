@@ -23,6 +23,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.room) apply false
     alias(libs.plugins.android.junit5) apply false
     alias(libs.plugins.google.services) apply false
     alias(libs.plugins.firebase.crashlytics.plugin) apply false

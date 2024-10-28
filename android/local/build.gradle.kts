@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -43,6 +44,13 @@ android {
             excludes += "win32-x86*/**"
         }
     }
+    sourceSets {
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
+    }
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
@@ -71,4 +79,5 @@ dependencies {
     androidTestImplementation(libs.kotest.runner.junit5)
     androidTestImplementation(libs.junit5.android.test.core)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
+    androidTestImplementation(libs.room.testing)
 }
