@@ -20,9 +20,10 @@ fun WildPokemon.toUi(): BiomePokemonUiModel =
         grade = tier,
         gymLeaderUrl = null,
         type = null,
-        pokemons = pokemons.mapIndexed { index, biomePokemon ->
-            biomePokemon.toPokemonUiModel(index)
-        }
+        pokemons =
+            pokemons.mapIndexed { index, biomePokemon ->
+                biomePokemon.toPokemonUiModel(index)
+            },
     )
 
 fun BossPokemon.toUi(): BiomePokemonUiModel =
@@ -30,9 +31,10 @@ fun BossPokemon.toUi(): BiomePokemonUiModel =
         grade = tier,
         gymLeaderUrl = null,
         type = null,
-        pokemons = pokemons.mapIndexed { index, biomePokemon ->
-            biomePokemon.toPokemonUiModel(index)
-        },
+        pokemons =
+            pokemons.mapIndexed { index, biomePokemon ->
+                biomePokemon.toPokemonUiModel(index)
+            },
     )
 
 fun GymPokemon.toUi(): BiomePokemonUiModel =
@@ -40,9 +42,10 @@ fun GymPokemon.toUi(): BiomePokemonUiModel =
         grade = gymLeaderName,
         gymLeaderUrl = gymLeaderImage,
         type = gymLeaderTypeLogos.firstOrNull()?.toUi(),
-        pokemons = pokemons.mapIndexed { index, biomePokemon ->
-            biomePokemon.toPokemonUiModel(index)
-        },
+        pokemons =
+            pokemons.mapIndexed { index, biomePokemon ->
+                biomePokemon.toPokemonUiModel(index)
+            },
     )
 
 fun BiomePokemon.toPokemonUiModel(hashId: Int): PokemonUiModel =

@@ -13,6 +13,7 @@ fun BossPokemonResponse.toData(): BossPokemon =
         pokemons = pokemons.toData(),
     )
 
-fun List<BossPokemonResponse>.toData(): List<BossPokemon> = filter {
-    it.pokemons.isNotEmpty()
-}.map(BossPokemonResponse::toData)
+fun List<BossPokemonResponse>.toData(): List<BossPokemon> =
+    filter {
+        it.pokemons.isNotEmpty()
+    }.map(BossPokemonResponse::toData)

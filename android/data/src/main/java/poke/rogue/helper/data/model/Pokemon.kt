@@ -55,13 +55,14 @@ fun PokemonResponse.toData(): Pokemon =
 fun PokemonResponse2.toData(): Pokemon {
     // TODO : 지금 포켓몬 이름을 보여주는거 모든 곳에서 통일이 안됨..
     val pureName = name.substringBefore("_")
-    val pascalCaseFormName = formName.split("_").joinToString("") { original ->
-        if (original.isBlank()) {
-            original
-        } else {
-            original.replaceFirstChar { it.uppercase() }
+    val pascalCaseFormName =
+        formName.split("_").joinToString("") { original ->
+            if (original.isBlank()) {
+                original
+            } else {
+                original.replaceFirstChar { it.uppercase() }
+            }
         }
-    }
 
     val formattedName =
         if (formName.isBlank() || formName.trim().lowercase() == "normal") {
