@@ -36,7 +36,7 @@ class BiomeBossAdapter(
     companion object {
         val wildPokemonComparator =
             ItemDiffCallback<BiomePokemonUiModel>(
-                onItemsTheSame = { oldItem, newItem -> oldItem == newItem },
+                onItemsTheSame = { oldItem, newItem -> oldItem.grade == newItem.grade },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
     }
