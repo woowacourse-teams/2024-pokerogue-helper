@@ -53,23 +53,21 @@ fun PokemonResponse.toData(): Pokemon =
     )
 
 fun PokemonResponse2.toData(): Pokemon {
-    // TODO : 바꿔야 함 - 임시로 걍 바꿈
-    val newFormName =
-        formName.split("_").joinToString("_") {
-            if (it.isBlank()) {
-                it
-            } else {
-                it[0].uppercase() + it.substring(1).lowercase()
-            }
+    // TODO : 지금 포켓몬 이름을 보여주는거 모든 곳에서 통일이 안됨..
+    val pureName = name.substringBefore("_")
+    val pascalCaseFormName = formName.split("_").joinToString("") { original ->
+        if (original.isBlank()) {
+            original
+        } else {
+            original.replaceFirstChar { it.uppercase() }
         }
+    }
 
     val formattedName =
-        if (formName.isBlank() || formName.trim().lowercase() == "empty" || formName.trim()
-                .lowercase() == "normal"
-        ) {
-            name
+        if (formName.isBlank() || formName.trim().lowercase() == "normal") {
+            pureName
         } else {
-            "$name-$newFormName"
+            "$pureName-$pascalCaseFormName"
         }
 
     return Pokemon(
@@ -96,6 +94,7 @@ fun PokemonEntity.toData(): Pokemon =
         id = id,
         dexNumber = dexNumber,
         name = name,
+        formName = formName,
         imageUrl = imageUrl,
         backImageUrl = backImageUrl,
         types = types.map(Type::valueOf),
