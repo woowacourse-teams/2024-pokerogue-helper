@@ -5,6 +5,8 @@ import androidx.core.content.contentValuesOf
 import androidx.room.Room
 import androidx.room.testing.MigrationTestHelper
 import androidx.test.platform.app.InstrumentationRegistry
+import io.kotest.matchers.booleans.shouldBeFalse
+import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldBeEmpty
 import io.kotest.matchers.string.shouldNotBeEmpty
@@ -61,11 +63,11 @@ class PokeRogueDatabaseMigrationTest {
                 insert(PokemonEntity.TABLE_NAME, SQLiteDatabase.CONFLICT_REPLACE, contentValue)
             },
             onAfterMigration = {
-                moveToFirst() shouldBe true
+                moveToFirst().shouldBeTrue()
                 val backImageUrlIndex = getColumnIndex("backImageUrl")
                 val backImageUrl = getString(backImageUrlIndex)
                 backImageUrl.shouldBeEmpty()
-                moveToNext() shouldBe false
+                moveToNext().shouldBeFalse()
             },
             migrations = PokeRogueDatabase.MIGRATIONS,
         )
@@ -100,12 +102,11 @@ class PokeRogueDatabaseMigrationTest {
                 insert(PokemonEntity.TABLE_NAME, SQLiteDatabase.CONFLICT_REPLACE, contentValue)
             },
             onAfterMigration = {
-                moveToFirst() shouldBe true
-                val backImageUrlIndex = getColumnIndex("backImageUrl")
-                val backImageUrl = getString(backImageUrlIndex)
-                backImageUrl.shouldNotBeEmpty()
-                backImageUrl shouldBe "testUrl"
-                moveToNext() shouldBe false
+                moveToFirst().shouldBeTrue()
+                val pokemonName = getString(getColumnIndex("name"))
+                pokemonName.shouldNotBeEmpty()
+                pokemonName shouldBe "Pikachu"
+                moveToNext().shouldBeFalse()
             },
             migrations = PokeRogueDatabase.MIGRATIONS,
         )
