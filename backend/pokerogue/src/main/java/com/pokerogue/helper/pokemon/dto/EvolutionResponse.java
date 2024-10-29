@@ -1,6 +1,7 @@
 package com.pokerogue.helper.pokemon.dto;
 
 
+import com.pokerogue.helper.pokemon.config.ImageUrl;
 import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 
@@ -21,8 +22,8 @@ public record EvolutionResponse(
                 evolution.getLevel(),
                 depth,
                 evolution.getItem(),
-                evolution.getCondition(),
-                pokemon.getImageId()
+                "",
+                ImageUrl.getPokemonImage(pokemon.getImageId())
         );
     }
 }
