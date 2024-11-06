@@ -1,0 +1,54 @@
+name: Backend Production Server CD A
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: [ cd, my-a ]
+    steps:
+      - name: Change permission
+        run: |
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/2024-pokerogue-helper
+
+      - name: Deploy
+        run: |
+          cd /home/ubuntu
+          
+          sudo chmod 666 /var/run/docker.sock
+          
+          if [ "$(docker ps -qa -f name=server)" ]; then
+          docker rm -f server
+          else
+          echo "No container named 'server' to remove."
+          fi
+          
+          sudo docker system prune -f
+          
+          docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
+          
+          docker run -d -p 80:8080 --name server \
+              -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
+              -e TZ=Asia/Seoul \
+              ${{ secrets.DOCKER_SERVER_IMAGE }}
+
+      - name: Check service availability
+        run: |
+          SUCCESS=false
+
+          for i in {1..10}; do
+            HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" http://localhost:80/actuator/health) || { 
+              echo "Attempt $i: curl command failed. Retrying...";
+              sleep 3;
+              continue;
+            }
+          
+            if [ $? -eq 0 ] && [ "$HTTP_STATUS" -eq 200 ]; then
+              echo "Service is up and running"
+              SUCCESS=true
+              break
+            fi
+          done
