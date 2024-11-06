@@ -1,4 +1,4 @@
-name: Backend Production Server CD All
+name: Backend Production Server CD My All
 
 permissions:
   contents: read
@@ -43,6 +43,6 @@ jobs:
 
   prod_a:
     needs: build
-    name: Backend Production Server CD A
-    uses: ./.github/workflows/Backend-CD-Prod-A.yml
+    name: Backend Production Server CD My A
+    uses: ./.github/workflows/Backend-CD-My-A.yml
     secrets: inherit
