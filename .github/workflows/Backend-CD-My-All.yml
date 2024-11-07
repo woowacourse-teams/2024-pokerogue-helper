@@ -47,7 +47,7 @@ jobs:
     uses: ./.github/workflows/Backend-CD-My-A.yml
     secrets: inherit
   prod_b:
-    needs: build
+    needs: prod_a
     name: Backend Production Server CD My B
     uses: ./.github/workflows/Backend-CD-My-B.yml
     secrets: inherit
