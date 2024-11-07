@@ -18,9 +18,10 @@ jobs:
         run: |
           sudo sysctl -w net.ipv4.ip_forward=1
           sudo iptables --policy FORWARD ACCEPT
+          sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
           sudo iptables -t nat -I PREROUTING 1 -p tcp --dport 80 -j DNAT --to-destination ${{ secrets.BE_PROD_A_MY_PRIVATE_IP }}:80
           sudo iptables -t nat -I POSTROUTING 1 -p tcp --dport 80 -j SNAT --to-source ${{ secrets.BE_PROD_B_MY_PRIVATE_IP }}
-          sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+          sleep 5
 
       - name: Deploy
         run: |
@@ -63,9 +64,9 @@ jobs:
 
       - name: Port forwarding end
         run: |
+          sudo iptables -D INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
           sudo iptables -t nat -D PREROUTING 1
           sudo iptables -t nat -D POSTROUTING 1
-          sudo iptables -D INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
           sudo iptables -L -v -t nat
 
       - name: Exit if fails
