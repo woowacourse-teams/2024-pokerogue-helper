@@ -1,0 +1,21 @@
+{
+  "message": "특성 정보 불러오기에 성공했습니다.",
+  "data": {
+    "koName": "저수",
+    "description": "물타입의 기술을 받으면 데미지를 받지 않고 회복한다.",
+    "pokemons": [
+      {
+        "id": "poliwag",
+        "pokedexNumber": 60,
+        "koName": "발챙이",
+        "image": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/pokemon/front/poliwag.png",
+        "pokemonTypeResponses": [
+          {
+            "typeLogo": "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/water",
+            "typeName": "물"
+          }
+        ]
+      }
+    ]
+  }
+}

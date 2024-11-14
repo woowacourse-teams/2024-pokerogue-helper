@@ -1,0 +1,71 @@
+name: 'Test Alpha Unit Test'
+
+description: 'Run Alpha Unit Tests using Gradle'
+
+inputs:
+  POKE_BASE_URL:
+    description: 'Base URL for local.properties'
+    required: true
+  GOOGLE_SERVICES_ALPHA:
+    description: 'Google Services JSON for alpha build'
+    required: true
+  GOOGLE_SERVICES_BETA:
+    description: 'Google Services JSON for beta build'
+    required: true
+  GOOGLE_SERVICES:
+    description: 'Google Services JSON for release'
+    required: true
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Gradle cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: 17
+
+    - name: Create Google-Services.json
+      shell: bash
+      run: |
+        touch ./android/app/src/debug/google-services.json
+        touch ./android/app/src/alpha/google-services.json
+        touch ./android/app/src/beta/google-services.json
+        mkdir ./android/app/src/release
+        touch ./android/app/src/release/google-services.json
+        echo ${{ inputs.GOOGLE_SERVICES_ALPHA }} >> ./android/app/src/debug/google-services.json
+        echo ${{ inputs.GOOGLE_SERVICES_ALPHA }} >> ./android/app/src/alpha/google-services.json
+        echo ${{ inputs.GOOGLE_SERVICES_BETA }} >> ./android/app/src/beta/google-services.json
+        echo ${{ inputs.GOOGLE_SERVICES }} >> ./android/app/src/release/google-services.json
+
+    - name: Create Local Properties
+      shell: bash
+      run: touch local.properties
+      working-directory: ./android
+
+    - name: Access Local Properties
+      shell: bash
+      run: |
+        echo POKE_BASE_URL=\"${{ inputs.POKE_BASE_URL }}\" >> local.properties
+      working-directory: ./android
+
+    - name: Grant execute permission for gradlew
+      shell: bash
+      run: chmod +x gradlew
+      working-directory: ./android
+
+    - name: Run Alpha Unit Tests
+      shell: bash
+      run: ./gradlew testAlphaUnitTest
+      working-directory: ./android

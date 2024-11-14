@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomRoundedBackgroundBottomSheet</item>
+    </style>
+
+    <style name="CustomRoundedBackgroundBottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_type_selection_bottom_sheet</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.CardView" parent="">
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeBottomLeft">20%</item>
+        <item name="cornerSizeBottomRight">20%</item>
+    </style>
+
+    <style name="toolbar_menu_text" parent="">
+        <item name="android:textColor">#40A1F0</item>
+        <item name="android:textSize">14sp</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">?attr/actionBarSize</item>
+    </style>
+
+    <style name="CustomSearchViewTheme" parent="Widget.AppCompat.SearchView">
+        <item name="android:editTextColor">@color/poke_white</item>
+        <item name="android:textColorHint">@color/poke_grey_60</item>
+        <item name="android:textSize">14sp</item>
+        <item name="closeIcon">@drawable/icon_close</item>
+    </style>
+
+    <style name="CustomSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/icon_search</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="closeIcon">@drawable/icon_close</item>
+        <item name="queryBackground">@drawable/bg_search_view</item>
+    </style>
+
+    <style name="CustomToolbarStyle">
+        <item name="android:backgroundTint">@color/poke_black</item>
+        <item name="titleCentered">true</item>
+        <item name="titleTextColor">@color/poke_white</item>
+        <item name="textFillColor">@color/poke_white</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Poke.TitleLargeBold</item>
+        <item name="navigationIcon">@drawable/ic_arrow_back_24</item>
+        <item name="popupTheme">@style/toolbar_menu_text</item>
+    </style>
+
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabSelectedTextColor">@color/poke_white</item>
+        <item name="tabBackground">@color/tablayout_background</item>
+        <item name="tabIndicatorColor">@color/poke_electric</item>
+        <item name="tabTextAppearance">@style/CustomTabTextAppearance</item>
+    </style>
+
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/tablayout_text_size</item>
+    </style>
+
+    <style name="HighlightTextStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/poke_red_20</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+</resources>

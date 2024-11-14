@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="eventHandler"
+            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/pokemon_detail_fragment_bottom_padding"
+            tools:context=".presentation.dex.detail.stat.PokemonStatFragment">
+
+            <poke.rogue.helper.presentation.util.view.NestedScrollableHost
+                android:id="@+id/scrollable_host_pokemon_abilities"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/pokemon_detail_stat_margins_between_layout"
+                app:layout_constraintBottom_toTopOf="@id/layout_pokemon_stats_stats"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_pokemon_abilities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:foregroundGravity="center"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/pokemon_detail_stat_ability_padding"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_ability_title" />
+
+            </poke.rogue.helper.presentation.util.view.NestedScrollableHost>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_pokemon_stats_stats"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/pokemon_detail_stat_margins_between_layout"
+                android:background="@drawable/shape_grey_80_fill_20_rect"
+                android:paddingBottom="@dimen/pokemon_detail_stat_margins_between_layout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollable_host_pokemon_abilities">
+
+                <TextView
+                    android:id="@+id/tv_title_stats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/pokemon_detail_stat_margins_between_layout"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:text="@string/dex_detail_pokemon_stats_title"
+                    android:textSize="@dimen/text_size_header_large"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_pokemon_stats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/pokemon_detail_stat_margins_between_layout"
+                    android:layout_marginTop="@dimen/pokemon_detail_stat_margins_between_layout"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_stats"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_stat" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

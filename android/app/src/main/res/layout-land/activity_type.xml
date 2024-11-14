@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="poke.rogue.helper.presentation.type.model.SelectorType" />
+
+        <variable
+            name="typeHandler"
+            type="poke.rogue.helper.presentation.type.TypeHandler" />
+
+        <variable
+            name="vm"
+            type="poke.rogue.helper.presentation.type.TypeViewModel" />
+
+        <variable
+            name="myType"
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
+
+        <variable
+            name="opponent1Type"
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
+
+        <variable
+            name="opponent2Type"
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_type"
+            style="@style/CustomToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/type_title_name" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="?attr/actionBarSize" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="12dp" />
+
+        <TextView
+            android:id="@+id/tv_type_opponent_type_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/type_opponent_type_title"
+            app:layout_constraintBottom_toTopOf="@id/vw_type_opponent_type_container_1"
+            app:layout_constraintEnd_toEndOf="@id/gl_center"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/gl_top" />
+
+        <ImageButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_type_choice_container"
+            android:onClick="@{() -> typeHandler.removeAllSelections()}"
+            android:padding="2dp"
+            android:src="@drawable/ic_type_reset"
+            app:layout_constraintBottom_toBottomOf="@id/tv_type_opponent_type_title"
+            app:layout_constraintEnd_toEndOf="@id/gl_center"
+            app:layout_constraintTop_toTopOf="@id/tv_type_opponent_type_title" />
+
+        <ImageView
+            android:id="@+id/vw_type_opponent_type_container_1"
+            onSingleClick="@{() -> typeHandler.startSelection(SelectorType.OPPONENT1)}"
+            android:layout_width="0dp"
+            android:layout_height="68dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/bg_type_choice_container"
+            android:paddingVertical="16dp"
+            android:src="@drawable/icon_add"
+            app:layout_constraintBottom_toTopOf="@id/tv_type_my_type_title"
+            app:layout_constraintEnd_toStartOf="@id/vw_type_opponent_type_container_2"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_type_opponent_type_title" />
+
+        <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
+            android:id="@+id/parallelogram_type_opponent_type_content_1"
+            typeSelection="@{opponent1Type}"
+            typeSelectionListener="@{() -> typeHandler.removeSelection(SelectorType.OPPONENT1)}"
+            visible="@{vm.typeSelectionStates.isOpponent1Selected}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/vw_type_opponent_type_container_1"
+            app:layout_constraintEnd_toEndOf="@id/vw_type_opponent_type_container_1"
+            app:layout_constraintStart_toStartOf="@id/vw_type_opponent_type_container_1"
+            app:layout_constraintTop_toTopOf="@id/vw_type_opponent_type_container_1" />
+
+        <ImageView
+            android:id="@+id/vw_type_opponent_type_container_2"
+            onSingleClick="@{() -> typeHandler.startSelection(SelectorType.OPPONENT2)}"
+            android:layout_width="0dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/bg_type_choice_container"
+            android:paddingVertical="16dp"
+            android:src="@drawable/icon_add"
+            app:layout_constraintBottom_toBottomOf="@id/vw_type_opponent_type_container_1"
+            app:layout_constraintEnd_toEndOf="@id/gl_center"
+            app:layout_constraintStart_toEndOf="@id/vw_type_opponent_type_container_1"
+            app:layout_constraintTop_toTopOf="@id/vw_type_opponent_type_container_1" />
+
+        <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
+            android:id="@+id/parallelogram_type_opponent_type_content_2"
+            typeSelection="@{opponent2Type}"
+            typeSelectionListener="@{() -> typeHandler.removeSelection(SelectorType.OPPONENT2)}"
+            visible="@{vm.typeSelectionStates.isOpponent2Selected}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/vw_type_opponent_type_container_2"
+            app:layout_constraintEnd_toEndOf="@id/vw_type_opponent_type_container_2"
+            app:layout_constraintStart_toStartOf="@id/vw_type_opponent_type_container_2"
+            app:layout_constraintTop_toTopOf="@id/vw_type_opponent_type_container_2" />
+
+        <TextView
+            android:id="@+id/tv_type_my_type_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/type_my_type_title"
+            app:layout_constraintBottom_toTopOf="@id/vw_type_my_type_container"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/vw_type_opponent_type_container_1" />
+
+        <ImageView
+            android:id="@+id/vw_type_my_type_container"
+            onSingleClick="@{() -> typeHandler.startSelection(SelectorType.MINE)}"
+            android:layout_width="0dp"
+            android:layout_height="68dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_type_choice_container"
+            android:paddingVertical="16dp"
+            android:src="@drawable/icon_add"
+            app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gl_center"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/tv_type_my_type_title" />
+
+        <poke.rogue.helper.presentation.type.view.PokeParallelogramLayout
+            android:id="@+id/parallelogram_type_my_type_content"
+            typeSelection="@{myType}"
+            typeSelectionListener="@{() -> typeHandler.removeSelection(SelectorType.MINE)}"
+            visible="@{vm.typeSelectionStates.isMyTypeSelected}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/vw_type_my_type_container"
+            app:layout_constraintEnd_toEndOf="@id/vw_type_my_type_container"
+            app:layout_constraintStart_toStartOf="@id/vw_type_my_type_container"
+            app:layout_constraintTop_toTopOf="@id/vw_type_my_type_container" />
+
+        <TextView
+            android:id="@+id/tv_type_result_title"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/type_result_title"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_center"
+            app:layout_constraintTop_toTopOf="@id/gl_top" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_type_result"
+            visible="@{!vm.typeSelectionStates.allEmpty}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_center"
+            app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
+
+        <ImageView
+            android:id="@+id/iv_no_selection"
+            visible="@{vm.typeSelectionStates.allEmpty}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/img_type_empty_view_placeholder"
+            app:layout_constraintBottom_toBottomOf="@id/gl_bottom"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_center"
+            app:layout_constraintTop_toBottomOf="@id/tv_type_result_title" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

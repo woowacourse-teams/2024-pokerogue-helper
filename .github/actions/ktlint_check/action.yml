@@ -1,0 +1,50 @@
+name: 'ktLint Check'
+
+description: 'Run ktLint Check using Gradle'
+
+inputs:
+  POKE_BASE_URL:
+    description: 'Base URL for local.properties'
+    required: true
+
+
+runs:
+  using: 'composite'
+  steps:
+
+    - name: Gradle cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: 17
+
+    - name: Create Local Properties
+      shell: bash
+      run: touch local.properties
+      working-directory: ./android
+
+    - name: Access Local Properties
+      shell: bash
+      run: |
+        echo POKE_BASE_URL=\"${{ inputs.POKE_BASE_URL }}\" >> local.properties
+      working-directory: ./android
+
+    - name: Grant execute permission for gradlew
+      shell: bash
+      run: chmod +x gradlew
+      working-directory: ./android
+
+    - name: Lint Check
+      shell: bash
+      run: ./gradlew ktlintCheck
+      working-directory: ./android

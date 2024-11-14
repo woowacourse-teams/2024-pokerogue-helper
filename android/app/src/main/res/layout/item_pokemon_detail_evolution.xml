@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="evolution"
+            type="poke.rogue.helper.presentation.dex.model.SingleEvolutionUiModel" />
+
+        <variable
+            name="onClickPokemon"
+            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        onSingleClick="@{()->onClickPokemon.navigateToPokemonDetail(evolution.pokemonId)}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/pokemon_detail_evolution_image_padding">
+
+        <ImageView
+            android:id="@+id/iv_pokemon_detail_evolution"
+            imageUrl="@{evolution.imageUrl}"
+            android:layout_width="@dimen/pokemon_detail_evolution_image_size"
+            android:layout_height="@dimen/pokemon_detail_evolution_image_size"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_pokemon_name"
+            app:layout_constraintEnd_toEndOf="@id/tv_pokemon_detail_evolution_pokemon_name"
+            app:layout_constraintStart_toStartOf="@id/tv_pokemon_detail_evolution_pokemon_name"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_evolution_pokemon_name"
+            style="@style/TextAppearance.Poke.TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{evolution.pokemonName}"
+            android:textSize="@dimen/item_pokemon_evolution_text_size"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_level"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_evolution"
+            tools:ignore="SpUsage"
+            tools:text="라이츄-알로라" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_evolution_level"
+            style="@style/TextAppearance.Poke.CaptionLarge"
+            evolutionLevel="@{evolution.level}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/item_pokemon_evolution_text_size"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_evolution_pokemon_condition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_evolution_pokemon_name"
+            tools:ignore="SpUsage"
+            tools:text="33 레벨" />
+
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_evolution_pokemon_condition"
+            style="@style/TextAppearance.Poke.CaptionLarge"
+            condition="@{evolution.condition}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/item_pokemon_evolution_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_evolution_level"
+            tools:ignore="SpUsage"
+            tools:text="섬이나 해변에서 아이템 사용" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_evolution_pokemon_evolutioin_item"
+            style="@style/TextAppearance.Poke.CaptionLarge"
+            item="@{evolution.item}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/item_pokemon_evolution_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_evolution_pokemon_condition"
+            tools:ignore="SpUsage"
+            tools:text="아이템: 천둥의 돌" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="skill"
+            type="poke.rogue.helper.presentation.battle.model.SkillSelectionUiModel" />
+
+        <variable
+            name="isSelected"
+            type="Boolean" />
+
+        <variable
+            name="selectionHandler"
+            type="poke.rogue.helper.presentation.battle.selection.skill.SkillSelectionHandler" />
+    </data>
+
+    <LinearLayout
+        selectedBackground="@{isSelected}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> selectionHandler.selectSkill(skill)}"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            invisible="@{!isSelected}"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/icon_arrow_right_pixel" />
+
+        <TextView
+            style="@style/TextAppearance.Poke.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@{skill.name}"
+            tools:text="기술 이름" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/iv_type"
+            imageRes="@{skill.typeLogo.typeIconResId}"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            tools:src="@drawable/img_tmp_loading" />
+
+        <Space
+            android:layout_width="8dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv_category"
+            imageUrl="@{skill.categoryLogo}"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            tools:src="@drawable/img_tmp_loading" />
+    </LinearLayout>
+</layout>
