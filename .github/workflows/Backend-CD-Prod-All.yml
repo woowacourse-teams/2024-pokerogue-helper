@@ -7,7 +7,7 @@ on:
   push:
     branches: [ "be/release" ]
     tags:
-      - 'v*'
+      - 'api-v*'
 
 jobs:
   test:
