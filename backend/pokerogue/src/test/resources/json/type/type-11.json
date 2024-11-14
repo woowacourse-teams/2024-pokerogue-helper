@@ -1,0 +1,387 @@
+{
+  "damage_relations": {
+    "double_damage_from": [
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      },
+      {
+        "name": "electric",
+        "url": "https://pokeapi.co/api/v2/type/13/"
+      }
+    ],
+    "double_damage_to": [
+      {
+        "name": "ground",
+        "url": "https://pokeapi.co/api/v2/type/5/"
+      },
+      {
+        "name": "rock",
+        "url": "https://pokeapi.co/api/v2/type/6/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      }
+    ],
+    "half_damage_from": [
+      {
+        "name": "steel",
+        "url": "https://pokeapi.co/api/v2/type/9/"
+      },
+      {
+        "name": "fire",
+        "url": "https://pokeapi.co/api/v2/type/10/"
+      },
+      {
+        "name": "water",
+        "url": "https://pokeapi.co/api/v2/type/11/"
+      },
+      {
+        "name": "ice",
+        "url": "https://pokeapi.co/api/v2/type/15/"
+      }
+    ],
+    "half_damage_to": [
+      {
+        "name": "water",
+        "url": "https://pokeapi.co/api/v2/type/11/"
+      },
+      {
+        "name": "grass",
+        "url": "https://pokeapi.co/api/v2/type/12/"
+      },
+      {
+        "name": "dragon",
+        "url": "https://pokeapi.co/api/v2/type/16/"
+      }
+    ],
+    "no_damage_from": [],
+    "no_damage_to": []
+  },
+  "game_indices": [
+    {
+      "game_index": 21,
+      "generation": {
+        "name": "generation-i",
+        "url": "https://pokeapi.co/api/v2/generation/1/"
+      }
+    },
+    {
+      "game_index": 21,
+      "generation": {
+        "name": "generation-ii",
+        "url": "https://pokeapi.co/api/v2/generation/2/"
+      }
+    },
+    {
+      "game_index": 11,
+      "generation": {
+        "name": "generation-iii",
+        "url": "https://pokeapi.co/api/v2/generation/3/"
+      }
+    },
+    {
+      "game_index": 11,
+      "generation": {
+        "name": "generation-iv",
+        "url": "https://pokeapi.co/api/v2/generation/4/"
+      }
+    },
+    {
+      "game_index": 10,
+      "generation": {
+        "name": "generation-v",
+        "url": "https://pokeapi.co/api/v2/generation/5/"
+      }
+    },
+    {
+      "game_index": 10,
+      "generation": {
+        "name": "generation-vi",
+        "url": "https://pokeapi.co/api/v2/generation/6/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-i",
+    "url": "https://pokeapi.co/api/v2/generation/1/"
+  },
+  "id": 11,
+  "move_damage_class": {
+    "name": "special",
+    "url": "https://pokeapi.co/api/v2/move-damage-class/3/"
+  },
+  "moves": [
+    {
+      "name": "water-gun",
+      "url": "https://pokeapi.co/api/v2/move/55/"
+    },
+    {
+      "name": "hydro-pump",
+      "url": "https://pokeapi.co/api/v2/move/56/"
+    },
+    {
+      "name": "surf",
+      "url": "https://pokeapi.co/api/v2/move/57/"
+    },
+    {
+      "name": "bubble-beam",
+      "url": "https://pokeapi.co/api/v2/move/61/"
+    },
+    {
+      "name": "withdraw",
+      "url": "https://pokeapi.co/api/v2/move/110/"
+    },
+    {
+      "name": "waterfall",
+      "url": "https://pokeapi.co/api/v2/move/127/"
+    },
+    {
+      "name": "clamp",
+      "url": "https://pokeapi.co/api/v2/move/128/"
+    },
+    {
+      "name": "bubble",
+      "url": "https://pokeapi.co/api/v2/move/145/"
+    },
+    {
+      "name": "crabhammer",
+      "url": "https://pokeapi.co/api/v2/move/152/"
+    },
+    {
+      "name": "octazooka",
+      "url": "https://pokeapi.co/api/v2/move/190/"
+    },
+    {
+      "name": "rain-dance",
+      "url": "https://pokeapi.co/api/v2/move/240/"
+    },
+    {
+      "name": "whirlpool",
+      "url": "https://pokeapi.co/api/v2/move/250/"
+    },
+    {
+      "name": "dive",
+      "url": "https://pokeapi.co/api/v2/move/291/"
+    },
+    {
+      "name": "hydro-cannon",
+      "url": "https://pokeapi.co/api/v2/move/308/"
+    },
+    {
+      "name": "water-spout",
+      "url": "https://pokeapi.co/api/v2/move/323/"
+    },
+    {
+      "name": "muddy-water",
+      "url": "https://pokeapi.co/api/v2/move/330/"
+    },
+    {
+      "name": "water-sport",
+      "url": "https://pokeapi.co/api/v2/move/346/"
+    },
+    {
+      "name": "water-pulse",
+      "url": "https://pokeapi.co/api/v2/move/352/"
+    },
+    {
+      "name": "brine",
+      "url": "https://pokeapi.co/api/v2/move/362/"
+    },
+    {
+      "name": "aqua-ring",
+      "url": "https://pokeapi.co/api/v2/move/392/"
+    },
+    {
+      "name": "aqua-tail",
+      "url": "https://pokeapi.co/api/v2/move/401/"
+    },
+    {
+      "name": "aqua-jet",
+      "url": "https://pokeapi.co/api/v2/move/453/"
+    },
+    {
+      "name": "soak",
+      "url": "https://pokeapi.co/api/v2/move/487/"
+    },
+    {
+      "name": "scald",
+      "url": "https://pokeapi.co/api/v2/move/503/"
+    },
+    {
+      "name": "water-pledge",
+      "url": "https://pokeapi.co/api/v2/move/518/"
+    },
+    {
+      "name": "razor-shell",
+      "url": "https://pokeapi.co/api/v2/move/534/"
+    },
+    {
+      "name": "steam-eruption",
+      "url": "https://pokeapi.co/api/v2/move/592/"
+    },
+    {
+      "name": "water-shuriken",
+      "url": "https://pokeapi.co/api/v2/move/594/"
+    },
+    {
+      "name": "origin-pulse",
+      "url": "https://pokeapi.co/api/v2/move/618/"
+    },
+    {
+      "name": "hydro-vortex--physical",
+      "url": "https://pokeapi.co/api/v2/move/642/"
+    },
+    {
+      "name": "hydro-vortex--special",
+      "url": "https://pokeapi.co/api/v2/move/643/"
+    },
+    {
+      "name": "sparkling-aria",
+      "url": "https://pokeapi.co/api/v2/move/664/"
+    },
+    {
+      "name": "oceanic-operetta",
+      "url": "https://pokeapi.co/api/v2/move/697/"
+    },
+    {
+      "name": "liquidation",
+      "url": "https://pokeapi.co/api/v2/move/710/"
+    },
+    {
+      "name": "splishy-splash",
+      "url": "https://pokeapi.co/api/v2/move/730/"
+    },
+    {
+      "name": "bouncy-bubble",
+      "url": "https://pokeapi.co/api/v2/move/733/"
+    },
+    {
+      "name": "snipe-shot",
+      "url": "https://pokeapi.co/api/v2/move/745/"
+    },
+    {
+      "name": "fishious-rend",
+      "url": "https://pokeapi.co/api/v2/move/755/"
+    },
+    {
+      "name": "max-geyser",
+      "url": "https://pokeapi.co/api/v2/move/765/"
+    },
+    {
+      "name": "life-dew",
+      "url": "https://pokeapi.co/api/v2/move/791/"
+    },
+    {
+      "name": "flip-turn",
+      "url": "https://pokeapi.co/api/v2/move/812/"
+    },
+    {
+      "name": "surging-strikes",
+      "url": "https://pokeapi.co/api/v2/move/818/"
+    },
+    {
+      "name": "wave-crash",
+      "url": "https://pokeapi.co/api/v2/move/834/"
+    },
+    {
+      "name": "jet-punch",
+      "url": "https://pokeapi.co/api/v2/move/857/"
+    },
+    {
+      "name": "triple-dive",
+      "url": "https://pokeapi.co/api/v2/move/865/"
+    },
+    {
+      "name": "aqua-step",
+      "url": "https://pokeapi.co/api/v2/move/872/"
+    },
+    {
+      "name": "hydro-steam",
+      "url": "https://pokeapi.co/api/v2/move/876/"
+    },
+    {
+      "name": "chilling-water",
+      "url": "https://pokeapi.co/api/v2/move/886/"
+    },
+    {
+      "name": "aqua-cutter",
+      "url": "https://pokeapi.co/api/v2/move/895/"
+    }
+  ],
+  "name": "water",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "みず"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "물"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "水"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Eau"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Wasser"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Agua"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Acqua"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Water"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "みず"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "水"
+    }
+  ],
+  "past_damage_relations": []
+}

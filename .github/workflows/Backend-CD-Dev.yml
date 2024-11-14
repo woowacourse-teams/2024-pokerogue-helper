@@ -1,0 +1,73 @@
+name: Backend Development Server CD
+
+on:
+  push:
+    branches: [ "be/develop" ]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    uses: ./.github/workflows/Backend-CI.yml
+    secrets: inherit
+
+  build:
+    needs: test
+    runs-on: dev
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ACTION_TOKEN }}
+          submodules: true
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: ./gradlew bootJar
+        working-directory: ./backend/pokerogue
+
+      - name: Docker build and push
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+          docker build -t ${{ secrets.DOCKER_DEV_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
+          docker push ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}
+  
+
+  deploy:
+    needs: build
+    runs-on: dev
+    steps:
+
+      - name: Deploy
+        run: |
+          cd /home/ubuntu
+          
+          sudo mkdir -p log/nginx && sudo touch log/nginx/error.log && sudo touch log/nginx/access.log
+          
+          sudo chmod 666 /var/run/docker.sock
+          
+          if [ "$(docker ps -qa)" ]; then
+          docker rm -f $(docker ps -qa)
+          docker builder prune
+          else
+          echo "No containers to remove."
+          fi
+
+          docker pull ${{ secrets.DOCKER_DEV_MONGO_IMAGE }}
+          docker run -d --name pokerogue-mongo-db ${{ secrets.DOCKER_DEV_MONGO_IMAGE }}
+
+          docker pull ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}
+          docker run -d -p 8080:8080 --name server \
+              --link pokerogue-mongo-db \
+              -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
+              -e TZ=Asia/Seoul \
+              -e SPRING_PROFILES_ACTIVE=dev \
+              ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}
