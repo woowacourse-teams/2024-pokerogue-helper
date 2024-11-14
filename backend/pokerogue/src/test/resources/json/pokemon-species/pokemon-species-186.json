@@ -1,0 +1,1527 @@
+{
+  "base_happiness": 50,
+  "capture_rate": 45,
+  "color": {
+    "name": "green",
+    "url": "https://pokeapi.co/api/v2/pokemon-color/5/"
+  },
+  "egg_groups": [
+    {
+      "name": "water1",
+      "url": "https://pokeapi.co/api/v2/egg-group/2/"
+    }
+  ],
+  "evolution_chain": {
+    "url": "https://pokeapi.co/api/v2/evolution-chain/26/"
+  },
+  "evolves_from_species": {
+    "name": "poliwhirl",
+    "url": "https://pokeapi.co/api/v2/pokemon-species/61/"
+  },
+  "flavor_text_entries": [
+    {
+      "flavor_text": "If POLIWAG and\nPOLIWHIRL hear its\nechoing cry, they\frespond by gather­\ning from far and\nwide.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "gold",
+        "url": "https://pokeapi.co/api/v2/version/4/"
+      }
+    },
+    {
+      "flavor_text": "Whenever three or\nmore of these get\ntogether, they\fsing in a loud\nvoice that sounds\nlike bellowing.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "silver",
+        "url": "https://pokeapi.co/api/v2/version/5/"
+      }
+    },
+    {
+      "flavor_text": "When it expands\nits throat to\ncroak out a tune,\fnearby POLIWAG and\nPOLIWHIRL gather\nimmediately.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "crystal",
+        "url": "https://pokeapi.co/api/v2/version/6/"
+      }
+    },
+    {
+      "flavor_text": "The curled hair on POLITOED’s head is\nproof of its status as a king. It is said\nthat the longer and more curled the\fhair, the more respect this POKéMON\nearns from its peers.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "ruby",
+        "url": "https://pokeapi.co/api/v2/version/7/"
+      }
+    },
+    {
+      "flavor_text": "The curled hair on POLITOED’s head is\nproof of its status as a king. It is said\nthat the longer and more curled the\fhair, the more respect this POKéMON\nearns from its peers.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "sapphire",
+        "url": "https://pokeapi.co/api/v2/version/8/"
+      }
+    },
+    {
+      "flavor_text": "The curled hair on its head proves its\nstatus as a king. It is said that the\nlonger and curlier the hair, the more\nrespect it earns from its peers.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "emerald",
+        "url": "https://pokeapi.co/api/v2/version/9/"
+      }
+    },
+    {
+      "flavor_text": "Whenever three or more of these get\ntogether, they sing in a loud voice that\nsounds like bellowing.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "firered",
+        "url": "https://pokeapi.co/api/v2/version/10/"
+      }
+    },
+    {
+      "flavor_text": "If POLIWAG and POLIWHIRL hear its\nechoing cry, they respond by gathering\nfrom far and wide.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "leafgreen",
+        "url": "https://pokeapi.co/api/v2/version/11/"
+      }
+    },
+    {
+      "flavor_text": "It gathers groups of others as\ntheir leader. Its cries make\nPOLIWAG obey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "diamond",
+        "url": "https://pokeapi.co/api/v2/version/12/"
+      }
+    },
+    {
+      "flavor_text": "It gathers groups of others as\ntheir leader. Its cries make\nPOLIWAG obey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "pearl",
+        "url": "https://pokeapi.co/api/v2/version/13/"
+      }
+    },
+    {
+      "flavor_text": "It gathers groups of others as\ntheir leader. Its cries make\nPOLIWAG obey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "platinum",
+        "url": "https://pokeapi.co/api/v2/version/14/"
+      }
+    },
+    {
+      "flavor_text": "If POLIWAG and POLIWHIRL hear its\nechoing cry, they respond by\ngathering from far and wide.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "heartgold",
+        "url": "https://pokeapi.co/api/v2/version/15/"
+      }
+    },
+    {
+      "flavor_text": "Whenever three or more of these get\ntogether, they sing in a loud\nvoice that sounds like bellowing.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "soulsilver",
+        "url": "https://pokeapi.co/api/v2/version/16/"
+      }
+    },
+    {
+      "flavor_text": "Il rassemble ses pairs pour les\ncommander. Il utilise son cri \npour diriger Ptitard.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "black",
+        "url": "https://pokeapi.co/api/v2/version/17/"
+      }
+    },
+    {
+      "flavor_text": "It gathers groups of others as\ntheir leader. Its cries make\nPoliwag obey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "black",
+        "url": "https://pokeapi.co/api/v2/version/17/"
+      }
+    },
+    {
+      "flavor_text": "Il rassemble ses pairs pour les\ncommander. Il utilise son cri \npour diriger Ptitard.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "white",
+        "url": "https://pokeapi.co/api/v2/version/18/"
+      }
+    },
+    {
+      "flavor_text": "It gathers groups of others as\ntheir leader. Its cries make\nPoliwag obey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "white",
+        "url": "https://pokeapi.co/api/v2/version/18/"
+      }
+    },
+    {
+      "flavor_text": "It gathers groups of others as\ntheir leader. Its cries make\nPoliwag obey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "black-2",
+        "url": "https://pokeapi.co/api/v2/version/21/"
+      }
+    },
+    {
+      "flavor_text": "It gathers groups of others as\ntheir leader. Its cries make\nPoliwag obey.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "white-2",
+        "url": "https://pokeapi.co/api/v2/version/22/"
+      }
+    },
+    {
+      "flavor_text": "３びき　いじょう　ニョロトノが\nあつまると　かならず　どなるような\nなきごえで　がっしょうを　はじめる。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "3마리 이상 왕구리가\n모이면 반드시 고함치는 듯한\n울음소리로 합창하기 시작한다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Quand trois ou plus se réunissent, ils chantent d’une\nmême voix ressemblant à un beuglement.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Sind drei oder mehr von ihnen zusammen,\nlassen sie einen schallenden Ruf erklingen.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Cuando tres o más de estos se juntan, emiten un\nsonido muy fuerte parecido a un bramido.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Quando tre o più Politoed si trovano insieme, iniziano\na cantare ad alta voce producendo un gran frastuono.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "Whenever three or more of these get together,\nthey sing in a loud voice that sounds like bellowing.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "３匹以上　ニョロトノが　集まると\nかならず　怒鳴るような　鳴き声で\n合唱を　はじめる。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "x",
+        "url": "https://pokeapi.co/api/v2/version/23/"
+      }
+    },
+    {
+      "flavor_text": "なきごえが　ひびきわたると\nあちこちから　ニョロモや\nニョロゾたちが　あつまってくる。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "울음소리가 울려 퍼지면\n여기저기에서 발챙이와\n슈륙챙이들이 모인다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Si Ptitard et Têtarte entendent son cri, ils se\nrassemblent pour venir le rencontrer.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Hören Quapsel und Quaputzi seinen Ruf,\nantworten sie, indem sie sich von nah und fern\nversammeln.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Si Poliwag y Poliwhirl oyen su llanto, acudirán de\ntodas partes para consolarlo.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "Se i Poliwag o i Poliwhirl odono il suo verso\nrimbombante si radunano anche da enormi distanze.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "If Poliwag and Poliwhirl hear its echoing cry, they\nrespond by gathering from far and wide.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "鳴き声が　響きわたると\nあちこちから　ニョロモや\nニョロゾたちが　集まってくる。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "y",
+        "url": "https://pokeapi.co/api/v2/version/24/"
+      }
+    },
+    {
+      "flavor_text": "あたまの　まきげは　おうじゃの　あかしだ。\nながく　きれいに　まいている　ニョロトノほど\nなかまの　そんけいを　あつめると　いわれている。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "머리의 말린 머리칼은 왕의 징표이다.\n길고 아름답게 말린 왕구리일수록\n동료에게 존경받는다고 전해진다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Le cheveu bouclé sur la tête de Tarpaud est la preuve de\nson statut de roi. On raconte que plus son cheveu est long\net bouclé, plus ce Pokémon est respecté par ses semblables.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Quaxo hat gelocktes Haar, das ihm den Status eines Königs\nbescheinigt. Je länger und lockiger sein Haar ist, desto mehr\nRespekt erntet dieses Pokémon von seinen Artgenossen.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "El mechón rizado de Politoed confirma su condición de rey.\nDicen que cuanto más le crece y más se le riza, mayor es el\nrespeto que recibe de sus súbditos.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "Il pennacchio arricciato sul capo di Politoed simboleggia\nil suo stato di re. Si dice che più lungo e più arricciato è\nil pennacchio, maggiore sia il rispetto che questo Pokémon\nriceve dai suoi pari.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "The curled hair on Politoed’s head is proof of its status as a\nking. It is said that the longer and more curled the hair, the\nmore respect this Pokémon earns from its peers.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "頭の　巻き毛は　王者の　証だ。\n長く　きれいに　巻いている　ニョロトノほど\n仲間の　尊敬を　集めると　いわれている。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "omega-ruby",
+        "url": "https://pokeapi.co/api/v2/version/25/"
+      }
+    },
+    {
+      "flavor_text": "あたまの　まきげは　おうじゃの　あかしだ。\nながく　きれいに　まいている　ニョロトノほど\nなかまの　そんけいを　あつめると　いわれている。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "머리의 말린 머리칼은 왕의 징표이다.\n길고 아름답게 말린 왕구리일수록\n동료에게 존경받는다고 전해진다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Le cheveu bouclé sur la tête de Tarpaud est la preuve de\nson statut de roi. On raconte que plus son cheveu est long\net bouclé, plus ce Pokémon est respecté par ses semblables.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Quaxo hat lockiges Haar, das ihm den Status eines Königs\nbescheinigt. Je länger und lockiger sein Haar ist, desto mehr\nRespekt erntet dieses Pokémon von seinen Artgenossen.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "El mechón rizado de Politoed confirma su condición de rey.\nDicen que cuanto más le crece y más se le riza, mayor es el\nrespeto que recibe de sus súbditos.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "Il pennacchio arricciato sul capo di Politoed simboleggia\nil suo stato di re. Si dice che più lungo e più arricciato è\nil pennacchio, maggiore sia il rispetto che questo Pokémon\nriceve dai suoi pari.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "The curled hair on Politoed’s head is proof of its status as a\nking. It is said that the longer and more curled the hair, the\nmore respect this Pokémon earns from its peers.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "頭の　巻き毛は　王者の　証だ。\n長く　きれいに　巻いている　ニョロトノほど\n仲間の　尊敬を　集めると　いわれている。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "alpha-sapphire",
+        "url": "https://pokeapi.co/api/v2/version/26/"
+      }
+    },
+    {
+      "flavor_text": "つきよに　あつまり　だいがっしょう。\nそのなきごえは　どなりごえのようで\nうつくしくはないが　あじが　あるぞ。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "달밤에 모여 대합창을 한다.\n그 울음소리는 고함치는 것 같아\n아름답지는 않지만 멋이 있다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "在月圓之夜聚集起來大合唱。\n那歌聲像是怒吼一般，\n雖然並不美妙，但卻別有韻味。",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "Ils se regroupent sous la lune pour chanter.\nLeur musique est très bruyante et s’apparente à\nune dispute, mais certains esthètes l’apprécient.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "In klaren Mondnächten versammeln sie sich und\nsingen im Chor. Ihr Gesang ist zwar nicht schön\nund klingt eher wie Geschrei, aber er hat Stil.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "Se reúnen bajo la luz de la luna para cantar a\ncoro. No es la más bonita de las melodías, pues\nparecen estar enfadados, pero tiene su encanto.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "Nelle notti di luna si radunano in grandi gruppi\ne cantano in coro. Il loro verso gracchiante\nnon è proprio bello, ma ha un certo fascino.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "They gather on moonlit nights to form a large\nchorus. Their cries sound angry and not at all\npleasant, but they are certainly distinctive.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "月夜に　集まり　大合唱。\nその鳴き声は　怒鳴り声のようで\n美しくはないが　味が　あるぞ。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "在有月亮的夜晚聚集起来大合唱。\n那鸣叫声如怒吼般，并不美妙，\n但却别有韵味。",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "version": {
+        "name": "sun",
+        "url": "https://pokeapi.co/api/v2/version/27/"
+      }
+    },
+    {
+      "flavor_text": "ニョロモや　ニョロゾの　リーダー。\nニョロトノが　いっかつ　すると\nみな　おびえて　そのばに　ふせる。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "발챙이와 슈륙챙이의 리더.\n왕구리가 크게 꾸짖으면\n모두 겁을 먹고 그 자리에 엎드린다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "蚊香蝌蚪和蚊香君的領袖。\n蚊香蛙皇一聲吼，\n大家都嚇得伏在地上一動不動。",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "Les Ptitard et Têtarte lui obéissent. Il n’a qu’à\ndonner de la voix pour les faire trembler comme\ndes feuilles.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "Es ist der Anführer von Quapsel und Quaputzi.\nFängt Quaxo an seinen Unmut zu äußern,\nnehmen alle vor lauter Angst sofort Reißaus.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "Lidera a Poliwag y a Poliwhirl. Cuando Politoed\nemite un bramido, todos se esconden en el acto\nasustados.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "È il re dei Poliwag e dei Poliwhirl. Il suo verso\ntonante fa fuggire atterriti gli avversari.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "It’s the leader of Poliwag and Poliwhirl.\nWhen Politoed roars, they all cower in fear.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "ニョロモや　ニョロゾの　リーダー。\nニョロトノが　一喝　すると\n皆　怯えて　その場に　伏せる。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "蚊香蝌蚪和蚊香君的头领。\n蚊香蛙皇一声吼，\n大家都吓得伏在地上一动不动。",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "version": {
+        "name": "moon",
+        "url": "https://pokeapi.co/api/v2/version/28/"
+      }
+    },
+    {
+      "flavor_text": "がなるような　なきごえなのに　とある\nさっきょくかは　えいきょうを　うけて\nうつくしい　バラードを　つくった。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "고함치는 듯한 울음소리임에도\n어느 작곡가는 영향을 받아\n아름다운 발라드를 만들었다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "雖然叫聲像噪音一樣吵，\n但某位作曲家卻受到其影響，\n創作了優美的敘事曲。",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "Bien que le chant de ce Pokémon s’apparente\nà des cris, un musicien s’en est inspiré pour\ncomposer une magnifique ballade.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "Sein Ruf mag zwar wie Gebrüll klingen, doch\nein Komponist ließ sich von ihm zu einer\ntraumhaften Ballade inspirieren.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "A pesar de lo discordante de sus gritos, un\nautor se inspiró en ellos para componer una\nhermosa balada.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "Nonostante emetta un verso chiassoso,\nun compositore si è ispirato alle sue grida\nper scrivere delle splendide ballate.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "Although its cries sound like screams, a\ncomposer created a beautiful ballad that was\ninfluenced by the sounds.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "がなるような　鳴き声なのに　とある\n作曲家は　影響を　受けて\n美しい　バラードを　作った。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "明明叫声有如嚎叫一般，\n但某位作曲家却受其影响\n创作了优美的叙事曲。",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "version": {
+        "name": "ultra-sun",
+        "url": "https://pokeapi.co/api/v2/version/29/"
+      }
+    },
+    {
+      "flavor_text": "あたまの　まきげが　ながく　りっぱな\nニョロトノほど　おおくの　ニョロモや\nニョロゾを　したがえている。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "둥글게 말린 머리칼이 길고 훌륭한\n왕구리일수록 많은 발챙이나\n슈륙챙이가 따르고 있다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "頭上捲毛越長的蚊香蛙皇\n就越有派頭，且能夠得到\n越多蚊香蝌蚪和蚊香君的追隨。",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "La longueur et la beauté du cheveu bouclé qui\norne la tête de Tarpaud influencent directement\nle nombre de Ptitard et de Têtarte lui obéissant.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "Je länger und prächtiger Quaxos Haarlocke ist,\ndesto mehr Quapsel und Quaputzi führt es an.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "Cuanto más largo y magnífico sea el rizo que\nluce en la cabeza, más Poliwag y Poliwhirl se\nsometerán a su mandato.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "Più lungo e arricciato è il pennacchio sul capo\ndi un Politoed, maggiore è il numero di Poliwag\ne Poliwhirl che obbediranno ai suoi ordini.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "The longer and more luxurious the curled hair on\nits head, the greater the number of Poliwag and\nPoliwhirl that will obey it.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "頭の　巻き毛が　長く　立派な\nニョロトノほど　多くの　ニョロモや\nニョロゾを　従えている。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "蚊香蛙皇头上的卷毛越长，\n长得越仪表堂堂，就越能领导\n更多的蚊香蝌蚪和蚊香君。",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "version": {
+        "name": "ultra-moon",
+        "url": "https://pokeapi.co/api/v2/version/30/"
+      }
+    },
+    {
+      "flavor_text": "よるになると　いけの　ほとりに\nあらわれる。　どなるような　こえで\nないて　ナワバリを　アピールするぞ。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "밤이 되면 연못 근처에\n나타난다. 고함치는 듯한\n울음소리로 영역을 알린다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "天黑後就會出現在池子邊。\n會用怒吼般的聲音大叫，\n來強調那是自己的地盤喔。",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "Il apparaît sur les rives des étangs à la nuit\ntombée. Il marque son territoire en poussant\ndes hurlements.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "Nachts erscheint Quaxo an Ufern von Teichen.\nMit seinem schallenden Ruf beansprucht es sein\nRevier.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "Aparece a orillas de las charcas al caer la noche.\nReclama su territorio profiriendo un fuerte grito\nque recuerda a un bramido.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "Appare di notte sulle sponde degli stagni.\nSegnala il proprio territorio gracidando\na squarciagola.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "At nightfall, these Pokémon appear on the shores\nof lakes. They announce their territorial claims by\nletting out cries that sound like shouting.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "夜になると　池の　畔に　現れる。\n怒鳴るような　声で　鳴いて\n縄張りを　アピールするぞ。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "夜幕降临时便会出现在池塘边。\n会发出怒吼般的叫声\n来强调那是自己的地盘。",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "version": {
+        "name": "sword",
+        "url": "https://pokeapi.co/api/v2/version/33/"
+      }
+    },
+    {
+      "flavor_text": "オスのほうが　なきごえが　おおきい。\nひくく　すごみのある　こえで　なく\nニョロトノが　メスに　すかれる。",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "수컷의 울음소리가 더 크다.\n나지막하고 위협적인 목소리로 우는\n왕구리가 암컷에게 인기다.",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "雄性的叫聲比雌性更巨大。\n叫聲低沉有魄力的蚊香蛙皇\n更能受到雌性喜愛。",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "Le cri des mâles est plus puissant que celui\ndes femelles, qui préfèrent les voix fortes\net intimidantes.",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "Die Rufe der Männchen sind besonders laut.\nQuaxo mit einer tiefen, bedrohlichen Stimme\nsind bei den Weibchen sehr beliebt.",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "Los machos emiten gritos muy potentes. Las\nhembras sienten predilección por los de voz\ngrave e imponente.",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "Il gracidio del maschio è più forte.\nI Politoed con un verso basso e minaccioso\nsono molto apprezzati dalle femmine.",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "The cry of a male is louder than that of a female.\nMale Politoed with deep, menacing voices find\nmore popularity with the opposite gender.",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "オスのほうが　鳴き声が　大きい。\n低く　凄みのある　声で　鳴く\nニョロトノが　メスに　好かれる。",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    },
+    {
+      "flavor_text": "雄性的叫声更响亮。\n叫声低沉可怕的蚊香蛙皇\n更能受到雌性的欢迎。",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "version": {
+        "name": "shield",
+        "url": "https://pokeapi.co/api/v2/version/34/"
+      }
+    }
+  ],
+  "form_descriptions": [],
+  "forms_switchable": false,
+  "gender_rate": 4,
+  "genera": [
+    {
+      "genus": "かえるポケモン",
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      }
+    },
+    {
+      "genus": "개구리포켓몬",
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      }
+    },
+    {
+      "genus": "蛙寶可夢",
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      }
+    },
+    {
+      "genus": "Pokémon Grenouille",
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      }
+    },
+    {
+      "genus": "Frosch-Pokémon",
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      }
+    },
+    {
+      "genus": "Pokémon Rana",
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      }
+    },
+    {
+      "genus": "Pokémon Rana",
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      }
+    },
+    {
+      "genus": "Frog Pokémon",
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      }
+    },
+    {
+      "genus": "かえるポケモン",
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      }
+    },
+    {
+      "genus": "蛙宝可梦",
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      }
+    }
+  ],
+  "generation": {
+    "name": "generation-ii",
+    "url": "https://pokeapi.co/api/v2/generation/2/"
+  },
+  "growth_rate": {
+    "name": "medium-slow",
+    "url": "https://pokeapi.co/api/v2/growth-rate/4/"
+  },
+  "habitat": {
+    "name": "waters-edge",
+    "url": "https://pokeapi.co/api/v2/pokemon-habitat/9/"
+  },
+  "has_gender_differences": true,
+  "hatch_counter": 20,
+  "id": 186,
+  "is_baby": false,
+  "is_legendary": false,
+  "is_mythical": false,
+  "name": "politoed",
+  "names": [
+    {
+      "language": {
+        "name": "ja-Hrkt",
+        "url": "https://pokeapi.co/api/v2/language/1/"
+      },
+      "name": "ニョロトノ"
+    },
+    {
+      "language": {
+        "name": "roomaji",
+        "url": "https://pokeapi.co/api/v2/language/2/"
+      },
+      "name": "Nyorotono"
+    },
+    {
+      "language": {
+        "name": "ko",
+        "url": "https://pokeapi.co/api/v2/language/3/"
+      },
+      "name": "왕구리"
+    },
+    {
+      "language": {
+        "name": "zh-Hant",
+        "url": "https://pokeapi.co/api/v2/language/4/"
+      },
+      "name": "蚊香蛙皇"
+    },
+    {
+      "language": {
+        "name": "fr",
+        "url": "https://pokeapi.co/api/v2/language/5/"
+      },
+      "name": "Tarpaud"
+    },
+    {
+      "language": {
+        "name": "de",
+        "url": "https://pokeapi.co/api/v2/language/6/"
+      },
+      "name": "Quaxo"
+    },
+    {
+      "language": {
+        "name": "es",
+        "url": "https://pokeapi.co/api/v2/language/7/"
+      },
+      "name": "Politoed"
+    },
+    {
+      "language": {
+        "name": "it",
+        "url": "https://pokeapi.co/api/v2/language/8/"
+      },
+      "name": "Politoed"
+    },
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Politoed"
+    },
+    {
+      "language": {
+        "name": "ja",
+        "url": "https://pokeapi.co/api/v2/language/11/"
+      },
+      "name": "ニョロトノ"
+    },
+    {
+      "language": {
+        "name": "zh-Hans",
+        "url": "https://pokeapi.co/api/v2/language/12/"
+      },
+      "name": "蚊香蛙皇"
+    }
+  ],
+  "order": 68,
+  "pal_park_encounters": [
+    {
+      "area": {
+        "name": "pond",
+        "url": "https://pokeapi.co/api/v2/pal-park-area/4/"
+      },
+      "base_score": 80,
+      "rate": 10
+    }
+  ],
+  "pokedex_numbers": [
+    {
+      "entry_number": 186,
+      "pokedex": {
+        "name": "national",
+        "url": "https://pokeapi.co/api/v2/pokedex/1/"
+      }
+    },
+    {
+      "entry_number": 75,
+      "pokedex": {
+        "name": "original-johto",
+        "url": "https://pokeapi.co/api/v2/pokedex/3/"
+      }
+    },
+    {
+      "entry_number": 75,
+      "pokedex": {
+        "name": "updated-johto",
+        "url": "https://pokeapi.co/api/v2/pokedex/7/"
+      }
+    },
+    {
+      "entry_number": 36,
+      "pokedex": {
+        "name": "kalos-mountain",
+        "url": "https://pokeapi.co/api/v2/pokedex/14/"
+      }
+    },
+    {
+      "entry_number": 152,
+      "pokedex": {
+        "name": "original-alola",
+        "url": "https://pokeapi.co/api/v2/pokedex/16/"
+      }
+    },
+    {
+      "entry_number": 79,
+      "pokedex": {
+        "name": "original-akala",
+        "url": "https://pokeapi.co/api/v2/pokedex/18/"
+      }
+    },
+    {
+      "entry_number": 71,
+      "pokedex": {
+        "name": "original-ulaula",
+        "url": "https://pokeapi.co/api/v2/pokedex/19/"
+      }
+    },
+    {
+      "entry_number": 185,
+      "pokedex": {
+        "name": "updated-alola",
+        "url": "https://pokeapi.co/api/v2/pokedex/21/"
+      }
+    },
+    {
+      "entry_number": 86,
+      "pokedex": {
+        "name": "updated-akala",
+        "url": "https://pokeapi.co/api/v2/pokedex/23/"
+      }
+    },
+    {
+      "entry_number": 77,
+      "pokedex": {
+        "name": "updated-ulaula",
+        "url": "https://pokeapi.co/api/v2/pokedex/24/"
+      }
+    },
+    {
+      "entry_number": 145,
+      "pokedex": {
+        "name": "isle-of-armor",
+        "url": "https://pokeapi.co/api/v2/pokedex/28/"
+      }
+    },
+    {
+      "entry_number": 42,
+      "pokedex": {
+        "name": "kitakami",
+        "url": "https://pokeapi.co/api/v2/pokedex/32/"
+      }
+    }
+  ],
+  "shape": {
+    "name": "humanoid",
+    "url": "https://pokeapi.co/api/v2/pokemon-shape/12/"
+  },
+  "varieties": [
+    {
+      "is_default": true,
+      "pokemon": {
+        "name": "politoed",
+        "url": "https://pokeapi.co/api/v2/pokemon/186/"
+      }
+    }
+  ]
+}
