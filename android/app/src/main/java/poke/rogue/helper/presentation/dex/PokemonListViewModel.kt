@@ -29,7 +29,7 @@ import poke.rogue.helper.presentation.dex.filter.PokeGenerationUiModel
 import poke.rogue.helper.presentation.dex.filter.toDataOrNull
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
-import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel1
+import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
 import poke.rogue.helper.presentation.dex.sort.toData
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toData
@@ -46,7 +46,7 @@ class PokemonListViewModel(
                 PokeGenerationUiModel.ALL,
             ),
         )
-    private val pokeSort = MutableStateFlow(PokemonSortUiModel1.ByDexNumber)
+    private val pokeSort = MutableStateFlow(PokemonSortUiModel.ByDexNumber)
 
     @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
     val uiState: StateFlow<PokemonListUiState> =
@@ -61,12 +61,12 @@ class PokemonListViewModel(
                 combine(pokeSort, pokeFilter) { sort, filter ->
                     PokemonListUiState(
                         pokemons =
-                        queriedPokemons(
-                            query = query,
-                            types = filter.selectedTypes,
-                            generation = filter.selectedGeneration,
-                            sort = sort,
-                        ),
+                            queriedPokemons(
+                                query = query,
+                                types = filter.selectedTypes,
+                                generation = filter.selectedGeneration,
+                                sort = sort,
+                            ),
                         sort = sort,
                         filteredTypes = filter.selectedTypes,
                         filteredGeneration = filter.selectedGeneration,
@@ -96,7 +96,7 @@ class PokemonListViewModel(
         query: String,
         types: List<TypeUiModel>,
         generation: PokeGenerationUiModel,
-        sort: PokemonSortUiModel1,
+        sort: PokemonSortUiModel,
     ): List<PokemonUiModel> {
         return try {
             val filteredTypes = types.map { PokemonFilter.ByType(it.toData()) }
@@ -137,7 +137,7 @@ class PokemonListViewModel(
         analyticsLogger().logPokemonFilter(filter)
     }
 
-    fun sortPokemon(sort: PokemonSortUiModel1) {
+    fun sortPokemon(sort: PokemonSortUiModel) {
         viewModelScope.launch {
             pokeSort.value = sort
         }
@@ -147,11 +147,11 @@ class PokemonListViewModel(
 
 data class PokemonListUiState(
     val pokemons: List<PokemonUiModel> = emptyList(),
-    val sort: PokemonSortUiModel1 = PokemonSortUiModel1.ByDexNumber,
+    val sort: PokemonSortUiModel = PokemonSortUiModel.ByDexNumber,
     val filteredTypes: List<TypeUiModel> = emptyList(),
     val filteredGeneration: PokeGenerationUiModel = PokeGenerationUiModel.ALL,
 ) {
-    val isSorted get() = sort != PokemonSortUiModel1.ByDexNumber
+    val isSorted get() = sort != PokemonSortUiModel.ByDexNumber
     val isFiltered get() = filteredTypes.isNotEmpty() || filteredGeneration != PokeGenerationUiModel.ALL
 
     val filterCount

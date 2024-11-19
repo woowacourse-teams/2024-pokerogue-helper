@@ -24,7 +24,7 @@ class PokeSortViewModel(
     private val _uiEvent = MutableEventFlow<PokeSortUiEvent>()
     val uiEvent: EventFlow<PokeSortUiEvent> = _uiEvent.asEventFlow()
 
-    fun init(sort: PokemonSortUiModel1) {
+    fun init(sort: PokemonSortUiModel) {
         savedStateHandle[UI_STATE_KEY] = PokeSortUiState(sort)
     }
 
@@ -67,28 +67,28 @@ class PokeSortViewModel(
 sealed interface PokeSortUiEvent {
     data object CloseSort : PokeSortUiEvent
 
-    data class ApplySorting(val sort: PokemonSortUiModel1) : PokeSortUiEvent
+    data class ApplySorting(val sort: PokemonSortUiModel) : PokeSortUiEvent
 }
 
 @Parcelize
 data class PokeSortUiState(
-    val pokemonSorts: List<SelectableUiModel<PokemonSortUiModel1>>,
+    val pokemonSorts: List<SelectableUiModel<PokemonSortUiModel>>,
 ) : Parcelable {
-    constructor(pokemonSort: PokemonSortUiModel1) : this(
+    constructor(pokemonSort: PokemonSortUiModel) : this(
         pokemonSorts = pokemonSortsFrom(pokemonSort),
     )
 
-    val selectedSort: PokemonSortUiModel1
+    val selectedSort: PokemonSortUiModel
         get() = pokemonSorts.first { it.isSelected }.data
 
     companion object {
         val Default =
             PokeSortUiState(
-                pokemonSorts = pokemonSortsFrom(PokemonSortUiModel1.ByDexNumber),
+                pokemonSorts = pokemonSortsFrom(PokemonSortUiModel.ByDexNumber),
             )
 
-        private fun pokemonSortsFrom(sort: PokemonSortUiModel1) =
-            PokemonSortUiModel1.entries.map { type ->
+        private fun pokemonSortsFrom(sort: PokemonSortUiModel) =
+            PokemonSortUiModel.entries.map { type ->
                 if (type == sort) {
                     SelectableUiModel(
                         id = type.id,

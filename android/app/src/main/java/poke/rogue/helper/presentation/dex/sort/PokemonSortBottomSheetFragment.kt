@@ -96,11 +96,11 @@ class PokemonSortBottomSheetFragment : BottomSheetDialogFragment() {
         val TAG: String = PokemonSortBottomSheetFragment::class.java.simpleName
         private const val ARGS_KEY = "PokemonSortBottomSheetFragment_args_key"
 
-        fun argsFrom(result: Bundle): PokemonSortUiModel1? {
-            return result.parcelable<PokemonSortUiModel1>(ARGS_KEY)
+        fun argsFrom(result: Bundle): PokemonSortUiModel? {
+            return result.parcelable<PokemonSortUiModel>(ARGS_KEY)
         }
 
-        fun newInstance(sort: PokemonSortUiModel1): PokemonSortBottomSheetFragment {
+        fun newInstance(sort: PokemonSortUiModel): PokemonSortBottomSheetFragment {
             return PokemonSortBottomSheetFragment().apply {
                 arguments =
                     bundleOf(ARGS_KEY to sort)

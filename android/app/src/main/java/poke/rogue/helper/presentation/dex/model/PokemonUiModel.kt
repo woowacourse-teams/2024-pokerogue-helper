@@ -1,7 +1,7 @@
 package poke.rogue.helper.presentation.dex.model
 
 import poke.rogue.helper.data.model.Pokemon
-import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel1
+import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
 import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
 
@@ -20,18 +20,18 @@ data class PokemonUiModel(
     val defense: Int = 0,
     val specialAttack: Int = 0,
     val specialDefense: Int = 0,
-    private val sortUiModel: PokemonSortUiModel1 = PokemonSortUiModel1.ByDexNumber,
+    private val sortUiModel: PokemonSortUiModel = PokemonSortUiModel.ByDexNumber,
 ) {
     val displayStat: Int
         get() =
             when (sortUiModel) {
-                PokemonSortUiModel1.ByBaseStat -> baseStats
-                PokemonSortUiModel1.BySpeed -> speed
-                PokemonSortUiModel1.ByHp -> hp
-                PokemonSortUiModel1.ByAttack -> attack
-                PokemonSortUiModel1.ByDefense -> defense
-                PokemonSortUiModel1.BySpecialAttack -> specialAttack
-                PokemonSortUiModel1.BySpecialDefense -> specialDefense
+                PokemonSortUiModel.ByBaseStat -> baseStats
+                PokemonSortUiModel.BySpeed -> speed
+                PokemonSortUiModel.ByHp -> hp
+                PokemonSortUiModel.ByAttack -> attack
+                PokemonSortUiModel.ByDefense -> defense
+                PokemonSortUiModel.BySpecialAttack -> specialAttack
+                PokemonSortUiModel.BySpecialDefense -> specialDefense
                 else -> 0
             }
 }

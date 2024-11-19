@@ -13,7 +13,7 @@ import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.filter.PokemonFilterBottomSheetFragment
 import poke.rogue.helper.presentation.dex.sort.PokemonSortBottomSheetFragment
-import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel1
+import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
 import poke.rogue.helper.presentation.util.activity.hideKeyboard
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -71,10 +71,10 @@ class PokemonListActivity :
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
                         label =
-                        stringOf(
-                            R.string.dex_filter_chip,
-                            if (uiState.isFiltered) uiState.filterCount.toString() else "",
-                        ),
+                            stringOf(
+                                R.string.dex_filter_chip,
+                                if (uiState.isFiltered) uiState.filterCount.toString() else "",
+                            ),
                         trailingIconRes = R.drawable.ic_filter,
                         isSelected = uiState.isFiltered,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
@@ -120,7 +120,7 @@ class PokemonListActivity :
             viewModel.filterPokemon(filterArgs)
         }
         supportFragmentManager.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
-            val sortArgs: PokemonSortUiModel1 =
+            val sortArgs: PokemonSortUiModel =
                 PokemonSortBottomSheetFragment.argsFrom(bundle)
                     ?: return@setFragmentResultListener
             viewModel.sortPokemon(sortArgs)
