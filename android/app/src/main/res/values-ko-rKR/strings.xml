@@ -49,6 +49,16 @@
     <string name="dex_filter_generation_format">%d세대</string>
     <string name="dex_pokemon_sort_title">포켓몬 정렬</string>
 
+    <!--    sort-->
+    <string name="by_pokedex_number">도감순</string>
+    <string name="by_base_stats">종족값순 ⭐️ </string>
+    <string name="by_speed">스피드순 ⭐ </string>
+    <string name="by_attack">공격력순</string>
+    <string name="by_defense">방어력순</string>
+    <string name="by_special_attack">특수공격순</string>
+    <string name="by_special_defense">특수방어순</string>
+    <string name="by_hp">HP순</string>
+
     <!--    pokemon detail-->
     <string name="dex_detail_pokemon_stats_title">기본 스탯</string>
 

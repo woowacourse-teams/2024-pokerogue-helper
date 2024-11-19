@@ -49,6 +49,18 @@
     <string name="dex_filter_generation_format">Generation %d</string>
     <string name="dex_pokemon_sort_title">Sort Pokémon</string>
 
+    <!--    sort-->
+    <string name="by_pokedex_number">By Pokédex Number</string>
+    <string name="by_base_stats">By Base Stats ⭐️️</string>
+    <string name="by_speed">By Speed ⭐️️</string>
+    <string name="by_attack">By Attack</string>
+    <string name="by_defense">By Defense</string>
+    <string name="by_special_attack">By Special Attack</string>
+    <string name="by_special_defense">By Special Defense</string>
+    <string name="by_hp">By HP</string>
+
+
+
     <!--    pokemon detail-->
     <string name="dex_detail_pokemon_stats_title">Base Stats</string>
 

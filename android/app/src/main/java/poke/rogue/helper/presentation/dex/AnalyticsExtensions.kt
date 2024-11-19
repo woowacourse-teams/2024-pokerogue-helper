@@ -4,9 +4,9 @@ import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.presentation.dex.detail.NavigateToBattleEvent
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
-import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
+import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel1
 
-fun AnalyticsLogger.logPokemonSort(sort: PokemonSortUiModel) {
+fun AnalyticsLogger.logPokemonSort(sort: PokemonSortUiModel1) {
     val eventType = "pokemon_dex_sort"
     logEvent(
         AnalyticsEvent(
@@ -16,7 +16,7 @@ fun AnalyticsLogger.logPokemonSort(sort: PokemonSortUiModel) {
     )
 }
 
-private fun PokemonSortUiModel.toParams(): List<AnalyticsEvent.Param> {
+private fun PokemonSortUiModel1.toParams(): List<AnalyticsEvent.Param> {
     return listOf(
         AnalyticsEvent.Param(key = "sort_type", value = name),
     )

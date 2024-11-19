@@ -9,7 +9,7 @@
 
         <variable
             name="sort"
-            type="poke.rogue.helper.presentation.dex.filter.SelectableUiModel&lt;poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel&gt;" />
+            type="poke.rogue.helper.presentation.dex.filter.SelectableUiModel&lt;poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel1&gt;" />
 
         <variable
             name="handler"
