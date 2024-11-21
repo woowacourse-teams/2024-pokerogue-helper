@@ -31,7 +31,7 @@ import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
 import poke.rogue.helper.presentation.dex.sort.toData
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.type.model.toData
 
 class PokemonListViewModel(
@@ -94,7 +94,7 @@ class PokemonListViewModel(
 
     private suspend fun queriedPokemons(
         query: String,
-        types: List<TypeUiModel>,
+        types: List<TypeUiModel1>,
         generation: PokeGenerationUiModel,
         sort: PokemonSortUiModel,
     ): List<PokemonUiModel> {
@@ -148,7 +148,7 @@ class PokemonListViewModel(
 data class PokemonListUiState(
     val pokemons: List<PokemonUiModel> = emptyList(),
     val sort: PokemonSortUiModel = PokemonSortUiModel.ByDexNumber,
-    val filteredTypes: List<TypeUiModel> = emptyList(),
+    val filteredTypes: List<TypeUiModel1> = emptyList(),
     val filteredGeneration: PokeGenerationUiModel = PokeGenerationUiModel.ALL,
 ) {
     val isSorted get() = sort != PokemonSortUiModel.ByDexNumber

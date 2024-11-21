@@ -7,7 +7,7 @@
 
         <variable
             name="typeItem"
-            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel1" />
 
         <variable
             name="selector"

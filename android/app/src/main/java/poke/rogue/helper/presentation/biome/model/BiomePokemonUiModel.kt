@@ -5,13 +5,13 @@ import poke.rogue.helper.data.model.biome.BossPokemon
 import poke.rogue.helper.data.model.biome.GymPokemon
 import poke.rogue.helper.data.model.biome.WildPokemon
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.type.model.toUi
 
 data class BiomePokemonUiModel(
     val grade: String,
     val gymLeaderUrl: String?,
-    val type: TypeUiModel?,
+    val type: TypeUiModel1?,
     val pokemons: List<PokemonUiModel>,
 )
 

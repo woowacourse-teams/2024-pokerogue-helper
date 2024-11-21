@@ -4,13 +4,13 @@ import android.content.Context
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.LinearLayout.LayoutParams
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.view.dp
 
 class PokemonTypesAdapter(private val context: Context, private val viewGroup: ViewGroup) {
     fun addTypes(
-        types: List<TypeUiModel>,
+        types: List<TypeUiModel1>,
         config: TypeChip.PokemonTypeViewConfiguration,
         spacingBetweenTypes: Int = 0.dp,
     ) {

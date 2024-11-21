@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.util.event.EventFlow
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
 import poke.rogue.helper.presentation.util.event.asEventFlow
@@ -26,11 +26,11 @@ class PokeFilterViewModel(
         savedStateHandle[UI_STATE_KEY] =
             PokeFilterUiState(
                 types =
-                    TypeUiModel.entries.mapIndexed { index, typeUiModel ->
+                    TypeUiModel1.entries.mapIndexed { index, typeUiModel1 ->
                         SelectableUiModel(
                             index,
-                            args.selectedTypes.contains(typeUiModel),
-                            typeUiModel,
+                            args.selectedTypes.contains(typeUiModel1),
+                            typeUiModel1,
                         )
                     },
                 generations =
@@ -60,8 +60,8 @@ class PokeFilterViewModel(
 
     private fun selectTypeWithinLimit(
         id: Int,
-        types: List<SelectableUiModel<TypeUiModel>>,
-        selectedTypes: List<TypeUiModel>,
+        types: List<SelectableUiModel<TypeUiModel1>>,
+        selectedTypes: List<TypeUiModel1>,
     ) {
         var newSelectedTypes = selectedTypes
         val newTypes =
@@ -83,8 +83,8 @@ class PokeFilterViewModel(
 
     private fun selectTypeExceedingLimit(
         id: Int,
-        types: List<SelectableUiModel<TypeUiModel>>,
-        selectedTypes: List<TypeUiModel>,
+        types: List<SelectableUiModel<TypeUiModel1>>,
+        selectedTypes: List<TypeUiModel1>,
     ) {
         var newSelectedTypes = selectedTypes
         val firstSelectedType = selectedTypes.first()

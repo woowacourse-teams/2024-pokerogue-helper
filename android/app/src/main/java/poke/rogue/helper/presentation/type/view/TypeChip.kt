@@ -12,7 +12,7 @@ import androidx.core.content.res.use
 import androidx.databinding.BindingAdapter
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeBinding
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.px
 
@@ -55,7 +55,7 @@ class TypeChip
             @BindingAdapter("type", "PokemonTypeViewConfiguration")
             fun setTypeUiConfiguration(
                 view: TypeChip,
-                typeUiModel: TypeUiModel,
+                typeUiModel: TypeUiModel1,
                 typeViewConfiguration: PokemonTypeViewConfiguration,
             ) {
                 with(view.binding) {

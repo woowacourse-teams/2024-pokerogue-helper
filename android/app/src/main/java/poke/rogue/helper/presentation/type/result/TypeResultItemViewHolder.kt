@@ -4,14 +4,14 @@ import android.view.Gravity
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemTypeBinding
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.view.dp
 
 class TypeResultItemViewHolder(
     private val binding: ItemTypeBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(typeItem: TypeUiModel) {
+    fun bind(typeItem: TypeUiModel1) {
         binding.type = typeItem
         binding.viewConfiguration = typeViewConfiguration
     }

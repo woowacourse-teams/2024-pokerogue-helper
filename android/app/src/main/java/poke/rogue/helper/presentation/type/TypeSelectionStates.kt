@@ -1,7 +1,7 @@
 package poke.rogue.helper.presentation.type
 
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 
 data class TypeSelectionStates(
     val myType: TypeSelectionUiState = TypeSelectionUiState.Empty,
@@ -36,7 +36,7 @@ data class TypeSelectionStates(
     val isAllEmpty: Boolean
         get() = !isMyTypeSelected && !isOpponent1Selected && !isOpponent2Selected
 
-    fun disabledTypeItems(selectorType: SelectorType): Set<TypeUiModel> {
+    fun disabledTypeItems(selectorType: SelectorType): Set<TypeUiModel1> {
         return when (selectorType) {
             SelectorType.MINE -> emptySet()
             SelectorType.OPPONENT1 -> opponentType2.selectedTypes()
@@ -49,7 +49,7 @@ private fun TypeSelectionUiState.isSelected(): Boolean = this is TypeSelectionUi
 
 private fun TypeSelectionUiState.isEmpty(): Boolean = this is TypeSelectionUiState.Empty
 
-private fun TypeSelectionUiState.selectedTypes(): Set<TypeUiModel> {
+private fun TypeSelectionUiState.selectedTypes(): Set<TypeUiModel1> {
     return when (this) {
         is TypeSelectionUiState.Selected -> setOf(selectedType)
         else -> emptySet()

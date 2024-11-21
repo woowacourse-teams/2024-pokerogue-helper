@@ -4,10 +4,10 @@ import android.content.Context
 import android.widget.ImageView
 import com.google.android.flexbox.FlexboxLayout
 import poke.rogue.helper.R
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 
 class PokemonDetailBiomeTypesAdapter(private val context: Context, private val viewGroup: FlexboxLayout) {
-    fun addTypes(types: List<TypeUiModel>) {
+    fun addTypes(types: List<TypeUiModel1>) {
         viewGroup.removeAllViews()
 
         types.forEach { type ->

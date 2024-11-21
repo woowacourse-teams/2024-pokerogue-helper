@@ -15,7 +15,7 @@ import poke.rogue.helper.data.repository.TypeRepository
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModelComparator
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.type.model.toUi
 
 class TypeViewModel(
@@ -27,7 +27,7 @@ class TypeViewModel(
     private val _typeEvent = MutableSharedFlow<TypeEvent>()
     val typeEvent: SharedFlow<TypeEvent> = _typeEvent.asSharedFlow()
 
-    val allTypes: List<TypeUiModel> by lazy {
+    val allTypes: List<TypeUiModel1> by lazy {
         typeRepository.allTypes().map { it.toUi() }
     }
 
@@ -91,7 +91,7 @@ class TypeViewModel(
 
     override fun selectType(
         selectorType: SelectorType,
-        selectedType: TypeUiModel,
+        selectedType: TypeUiModel1,
     ) {
         val changedState = TypeSelectionUiState.Selected(selectedType)
         updateSelectionState(selectorType, changedState)

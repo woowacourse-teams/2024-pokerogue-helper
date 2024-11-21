@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemTypeRightNameBinding
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
 class AbilityDetailTypeAdapter :
-    ListAdapter<TypeUiModel, AbilityDetailTypeAdapter.PokemonTypeViewHolder>(typeComparator) {
+    ListAdapter<TypeUiModel1, AbilityDetailTypeAdapter.PokemonTypeViewHolder>(typeComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -31,14 +31,14 @@ class AbilityDetailTypeAdapter :
 
     class PokemonTypeViewHolder(private val binding: ItemTypeRightNameBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(type: TypeUiModel) {
+        fun bind(type: TypeUiModel1) {
             binding.type = type
         }
     }
 
     companion object {
         private val typeComparator =
-            ItemDiffCallback<TypeUiModel>(
+            ItemDiffCallback<TypeUiModel1>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )

@@ -1,14 +1,14 @@
 package poke.rogue.helper.presentation.dex.model
 
 import poke.rogue.helper.data.model.PokemonBiome
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.type.model.toUi
 
 data class PokemonBiomeUiModel(
     val id: String,
     val name: String,
     val imageUrl: String,
-    val types: List<TypeUiModel>,
+    val types: List<TypeUiModel1>,
 )
 
 fun PokemonBiome.toUi(): PokemonBiomeUiModel =

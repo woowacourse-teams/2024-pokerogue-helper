@@ -13,7 +13,7 @@ import poke.rogue.helper.databinding.FragmentTypeSelectionBottomSheetBinding
 import poke.rogue.helper.presentation.type.TypeEvent
 import poke.rogue.helper.presentation.type.TypeViewModel
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.util.fragment.withArgs
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.serializable
@@ -27,8 +27,8 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
         arguments?.serializable<SelectorType>(KEY_SELECTOR_TYPE)
             ?: error("InValid TypeSelector")
     }
-    private val disabledTypes: Set<TypeUiModel> by lazy {
-        arguments?.serializable<Array<TypeUiModel>>(KEY_DISABLED_TYPES)?.toSet()
+    private val disabledTypes: Set<TypeUiModel1> by lazy {
+        arguments?.serializable<Array<TypeUiModel1>>(KEY_DISABLED_TYPES)?.toSet()
             ?: error("Invalid DisabledTypes")
     }
 
@@ -102,7 +102,7 @@ class TypeSelectionBottomSheetFragment : BottomSheetDialogFragment() {
 
         fun newInstance(
             selectorType: SelectorType,
-            disabledTypes: Set<TypeUiModel>,
+            disabledTypes: Set<TypeUiModel1>,
         ): TypeSelectionBottomSheetFragment {
             return TypeSelectionBottomSheetFragment().withArgs {
                 putSerializable(KEY_SELECTOR_TYPE, selectorType)

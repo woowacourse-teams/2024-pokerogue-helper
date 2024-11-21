@@ -2,7 +2,7 @@ package poke.rogue.helper.presentation.dex.model
 
 import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.data.model.SkillCategory
-import poke.rogue.helper.presentation.type.model.TypeUiModel
+import poke.rogue.helper.presentation.type.model.TypeUiModel1
 import poke.rogue.helper.presentation.type.model.toUi
 
 data class PokemonSkillUiModel(
@@ -10,7 +10,7 @@ data class PokemonSkillUiModel(
     val name: String,
     val level: Int,
     val power: String,
-    val type: TypeUiModel,
+    val type: TypeUiModel1,
     val accuracy: String,
     val category: SkillCategory,
 ) {

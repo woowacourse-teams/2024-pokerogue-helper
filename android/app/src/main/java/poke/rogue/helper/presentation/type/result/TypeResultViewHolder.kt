@@ -42,7 +42,8 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
                 inSpans(
                     StyleSpan(Typeface.BOLD),
                 ) {
-                    append(typeName)
+                    // TODO: 2024-11-21 type name postfix
+//                    append(typeName)
                 }
                 append(typeNameTail)
             }
