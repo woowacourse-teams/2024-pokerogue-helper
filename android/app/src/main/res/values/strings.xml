@@ -14,6 +14,26 @@
     <string name="type_result_ineffective">Ineffective</string>
     <string name="type_result_normal">Neutral</string>
 
+    <string name="type_matching_type_normal">normal</string>
+    <string name="type_matching_type_fire">fire</string>
+    <string name="type_matching_type_water">water</string>
+    <string name="type_matching_type_electric">electric</string>
+    <string name="type_matching_type_grass">grass</string>
+    <string name="type_matching_type_ice">ice</string>
+    <string name="type_matching_type_fighting">fighting</string>
+    <string name="type_matching_type_poison">poison</string>
+    <string name="type_matching_type_ground">ground</string>
+    <string name="type_matching_type_flying">flying</string>
+    <string name="type_matching_type_psychic">psychic</string>
+    <string name="type_matching_type_bug">bug</string>
+    <string name="type_matching_type_rock">rock</string>
+    <string name="type_matching_type_ghost">ghost</string>
+    <string name="type_matching_type_dragon">dragon</string>
+    <string name="type_matching_type_dark">dark</string>
+    <string name="type_matching_type_steel">steel</string>
+    <string name="type_matching_type_fairy">fairy</string>
+    <string name="type_matching_type_stellar">stellar</string>
+
     <!-- home -->
     <string name="toolbar_pokerogue">PokéRogue Shortcut</string>
     <string name="toolbar_feedback">Send Feedback</string>
@@ -60,7 +80,6 @@
     <string name="by_hp">By HP</string>
 
 
-
     <!--    pokemon detail-->
     <string name="dex_detail_pokemon_stats_title">Base Stats</string>
 
@@ -76,7 +95,7 @@
 
     <!--    pokemon detail skills-->
     <string name="pokemon_detail_skill_level">Level</string>
-    <string name="pokemon_detail_skill_name">Move Name</string>
+    <string name="pokemon_detail_skill_name">Move</string>
     <string name="pokemon_detail_skill_power">Power</string>
     <string name="pokemon_detail_skill_accuracy">Accuracy</string>
     <string name="pokemon_detail_skill_type">Type</string>

@@ -14,6 +14,28 @@
     <string name="type_result_ineffective">무효한</string>
     <string name="type_result_normal">대등한</string>
 
+    <string name="type_matching_type_normal">노말</string>
+    <string name="type_matching_type_fire">불꽃</string>
+    <string name="type_matching_type_water">물</string>
+    <string name="type_matching_type_electric">전기</string>
+    <string name="type_matching_type_grass">풀</string>
+    <string name="type_matching_type_ice">얼음</string>
+    <string name="type_matching_type_fighting">격투</string>
+    <string name="type_matching_type_poison">독</string>
+    <string name="type_matching_type_ground">땅</string>
+    <string name="type_matching_type_flying">비행</string>
+    <string name="type_matching_type_psychic">에스퍼</string>
+    <string name="type_matching_type_bug">벌레</string>
+    <string name="type_matching_type_rock">바위</string>
+    <string name="type_matching_type_ghost">고스트</string>
+    <string name="type_matching_type_dragon">드래곤</string>
+    <string name="type_matching_type_dark">악</string>
+    <string name="type_matching_type_steel">강철</string>
+    <string name="type_matching_type_fairy">페어리</string>
+    <string name="type_matching_type_stellar">스텔라</string>
+
+
+
     <!-- home -->
     <string name="toolbar_pokerogue">포켓로그 바로가기</string>
     <string name="toolbar_feedback">피드백 보내기</string>
