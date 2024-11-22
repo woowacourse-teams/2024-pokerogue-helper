@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!--    poke basic color-->
+    <color name="poke_white">#FDFDFDFD</color>
+    <color name="poke_black">#000000</color>
+    <color name="poke_grey_80">#242627</color>
+    <color name="poke_grey_75">#383939</color>
+    <color name="poke_grey_70">#4B4B4B</color>
+    <color name="poke_grey_65">#717171</color>
+    <color name="poke_grey_60">#969696</color>
+    <color name="poke_grey_20">#DCDCDC</color>
+    <color name="poke_blue_30">#6C7EE2</color>
+    <color name="poke_blue_40">#5981F2</color>
+    <color name="poke_blue_50">#182E6A</color>
+    <color name="poke_green_20">#74CC73</color>
+    <color name="poke_red_20">#F66868</color>
+    <color name="lemon">#E1CA13</color>
+
+    <color name="poke_grey_80_inactive">#BF242627</color>
+    <!--    pokemon type-->
+    <color name="poke_grass">#459836</color>
+    <color name="poke_electric">#DDBC29</color>
+    <color name="poke_fighting">#E3901E</color>
+    <color name="poke_fire">#E3613F</color>
+    <color name="poke_flying">#75A9D0</color>
+    <color name="poke_steel">#73B1CC</color>
+    <color name="poke_ice">#72D5FB</color>
+    <color name="poke_water">#3199E2</color>
+    <color name="poke_dragon">#016ECA</color>
+    <color name="poke_poison">#b567cf</color>
+    <color name="poke_ghost">#704572</color>
+    <color name="poke_ground">#E87236</color>
+    <color name="poke_psychic">#FF6675</color>
+    <color name="poke_bug">#9f9f27</color>
+    <color name="poke_rock">#C8B686</color>
+    <color name="poke_normal">#828282</color>
+    <color name="poke_dark">#4E4747</color>
+    <color name="poke_fairy">#F5B4FA</color>
+    <color name="item_pokemon_background_gray">#242627</color>
+
+    <!--    stats -->
+    <color name="stat_hp">#D63A45</color>
+    <color name="stat_attack">#FDA832</color>
+    <color name="stat_defense">#F4C53D</color>
+    <color name="stat_special_attack">#4AA0DD</color>
+    <color name="stat_special_defense">#3568FF</color>
+    <color name="stat_speed">#5FC253</color>
+    <color name="stat_total">#964DF0</color>
+
+    <!-- tablayout -->
+    <color name="tablayout_background">#00000000</color>
+
+    <!--    chip-->
+    <color name="poke_chip_background_selected">@color/poke_grey_65</color>
+    <color name="poke_chip_background_default">@color/poke_grey_75</color>
+
+    <color name="poke_chip_text_selected">@color/poke_white</color>
+    <color name="poke_chip_text_default">@color/poke_white</color>
+
+    <color name="poke_chip_stroke_selected">@color/poke_white</color>
+    <color name="poke_chip_stroke_default">@color/poke_grey_80</color>
+    <!--    splash-->
+    <color name="splash_background">#151515</color>
+    <color name="splash_logo_background">#151515</color>
 </resources>

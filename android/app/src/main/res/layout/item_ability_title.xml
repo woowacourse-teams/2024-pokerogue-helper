@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ability"
+            type="poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel" />
+
+        <variable
+            name="onClickAbility"
+            type="poke.rogue.helper.presentation.dex.detail.PokemonDetailNavigateHandler" />
+
+    </data>
+
+    <TextView
+        android:id="@+id/tv_ability_title"
+        hidden="@{ability.hidden}"
+        onSingleClick="@{()->onClickAbility.navigateToAbilityDetail(ability.id)}"
+        passive="@{ability.passive}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_ability_title"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/pokemon_detail_ability_text_padding_horizontal"
+        android:paddingVertical="@dimen/pokemon_detail_ability_text_padding_vertical"
+        android:textSize="@dimen/pokemon_detail_ability_text_size"
+        android:text="@{ability.name}"
+        android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+        android:textColor="@color/poke_white"
+        tools:text="악취"
+        tools:ignore="SpUsage" />
+
+
+</layout>

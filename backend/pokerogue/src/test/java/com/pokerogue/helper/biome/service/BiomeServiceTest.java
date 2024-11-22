@@ -38,7 +38,7 @@ class BiomeServiceTest extends ServiceTest {
 
         assertAll(
                 () -> assertThat(biomeDetailResponse.id()).isEqualTo("fairy_cave"),
-                () -> assertThat(biomeDetailResponse.name()).isEqualTo("페어리 동굴"),
+                () -> assertThat(biomeDetailResponse.name()).isEqualTo("Fairy Cave"),
                 () -> assertThat(biomeDetailResponse.wildPokemons()).hasSize(5),
                 () -> assertThat(biomeDetailResponse.bossPokemons()).hasSize(4),
                 () -> assertThat(biomeDetailResponse.trainerPokemons()).hasSize(3),
@@ -65,9 +65,9 @@ class BiomeServiceTest extends ServiceTest {
 
         assertAll(() -> {
             assertThat(biomeDetailResponse.wildPokemons()).extracting(BiomeAllPokemonResponse::tier)
-                    .containsExactly("보통", "드묾", "레어", "슈퍼 레어", "울트라 레어");
+                    .containsExactly("Common", "Uncommon", "Rare", "Super Rare", "Ultra Rare");
             assertThat(biomeDetailResponse.bossPokemons()).extracting(BiomeAllPokemonResponse::tier)
-                    .containsExactly("슈퍼 울트라 레어 보스", "슈퍼 레어 보스", "레어 보스", "보스");
+                    .containsExactly("Ultra Rare Boss", "Super Rare Boss", "Rare Boss", "Boss");
         });
     }
 }

@@ -1,0 +1,74 @@
+name: Android PR Builder
+
+on:
+  pull_request:
+    branches: [ an/develop ]
+  workflow_call:
+
+defaults:
+  run:
+    working-directory: ./android
+
+jobs:
+  ktlintCheck:
+    name: ktLint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run ktLint Check
+        uses: ./.github/actions/ktlint_check
+        with:
+          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
+
+  testAlphaUnitTest:
+    name: Test Alpha Unit Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Create Google-Services.json
+        env:
+          GOOGLE_SERVICES_ALPHA: ${{ secrets.GOOGLE_SERVICES_ALPHA }}
+          GOOGLE_SERVICES_BETA: ${{ secrets.GOOGLE_SERVICES_BETA }}
+          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+        run: |
+          touch ./app/src/debug/google-services.json
+          touch ./app/src/alpha/google-services.json
+          touch ./app/src/beta/google-services.json
+          mkdir ./app/src/release
+          touch ./app/src/release/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/debug/google-services.json
+          echo $GOOGLE_SERVICES_ALPHA >> ./app/src/alpha/google-services.json
+          echo $GOOGLE_SERVICES_BETA >> ./app/src/beta/google-services.json
+          echo $GOOGLE_SERVICES >> ./app/src/release/google-services.json
+
+      - name: Create Local Properties
+        run: touch local.properties
+
+      - name: Access Local Properties
+        env:
+          POKE_BASE_URL: ${{ secrets.POKE_BASE_URL }}
+        run: |
+          echo POKE_BASE_URL=\"${{ secrets.POKE_BASE_URL }}\" >> local.properties
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: run alpha unit test
+        run: ./gradlew testAlphaUnitTest

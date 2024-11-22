@@ -13,6 +13,7 @@ captures/
 .externalNativeBuild/
 .cxx/
 *.apk
+*.aab
 output.json
 
 # IntelliJ
@@ -25,6 +26,9 @@ render.experimental.xml
 # Keystore files
 *.jks
 *.keystore
+!debug.keystore
+*.dm
+output-metadata.json
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
@@ -34,3 +38,6 @@ google-services.json
 
 # Mac OS
 .DS_Store
+
+# docker scripts
+docker

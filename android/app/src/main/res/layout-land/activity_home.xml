@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <data>
+
+        <variable
+            name="actionHandler"
+            type="poke.rogue.helper.presentation.home.HomeActionHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_home"
+            style="@style/CustomToolbarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_home">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                tools:context=".presentation.home.HomeActivity">
+
+                <ImageView
+                    android:id="@+id/iv_home_land_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> actionHandler.navigateToPokeRogue()}"
+                    android:src="@drawable/img_home_land_logo"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <GridLayout
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:columnCount="5"
+                    android:padding="@dimen/home_gridLayout_padding"
+                    android:rowCount="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="4"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/iv_home_land_logo">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_home_land_type"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_row="0"
+                        android:layout_column="2"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="6dp"
+                        android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.navigateToType()}"
+                        app:cardCornerRadius="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_home_land_type"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:src="@drawable/img_home_type" />
+
+                            <TextView
+                                android:id="@+id/tv_home_land_type"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="12dp"
+                                android:text="@string/home_menu_type"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_home_land_dex"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="6dp"
+                        android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.navigateToDex()}"
+                        app:cardCornerRadius="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_home_land_dex"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:src="@drawable/img_home_dex" />
+
+                            <TextView
+                                android:id="@+id/tv_home_land_dex"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="12dp"
+                                android:text="@string/home_menu_pokemon_detail"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_home_land_ability"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_row="0"
+                        android:layout_column="4"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="6dp"
+                        android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.navigateToAbility()}"
+                        app:cardCornerRadius="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_home_land_ability"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:src="@drawable/img_home_ability" />
+
+                            <TextView
+                                android:id="@+id/tv_home_land_ability"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="12dp"
+                                android:text="@string/home_menu_ability"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_home_land_biome"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_row="0"
+                        android:layout_column="3"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="6dp"
+                        android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.navigateToBiome()}"
+                        app:cardCornerRadius="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_home_land_biome"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:src="@drawable/icon_home_biome" />
+
+                            <TextView
+                                android:id="@+id/tv_home_land_biome"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="12dp"
+                                android:text="@string/home_menu_biome"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_home_battle"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_row="0"
+                        android:layout_column="1"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        android:layout_margin="6dp"
+                        android:backgroundTint="@color/poke_grey_80"
+                        android:onClick="@{() -> actionHandler.navigateToBattle()}"
+                        app:cardCornerRadius="16dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/iv_home_land_battle"
+                                android:layout_width="@dimen/home_iv_width"
+                                android:layout_height="@dimen/home_iv_height"
+                                android:src="@drawable/icon_home_battle" />
+
+                            <TextView
+                                android:id="@+id/tv_home_land_battle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="12dp"
+                                android:text="@string/home_menu_battle"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                                android:textSize="@dimen/home_tv_size" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </GridLayout>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="25dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="25dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

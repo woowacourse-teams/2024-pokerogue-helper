@@ -1,0 +1,81 @@
+name: Add Labels Action
+
+description: "Add labels to a pull request based on its title"
+
+inputs:
+  title:
+    description: "title of the pull request or issue"
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    
+    - name: Input title 
+      shell: bash
+      run: |
+        echo "Input Title: ${{ inputs.title }}"
+          
+    - name: add FEAT ✨ labels
+      uses: actions-ecosystem/action-add-labels@v1
+      if: ${{ contains(inputs.title, 'FEAT') }}
+      with:
+        labels: |
+          AN_FEAT ✨
+
+    - name: add UI 🎨 labels
+      uses: actions-ecosystem/action-add-labels@v1
+      if: ${{ contains(inputs.title, 'UI') }}
+      with:
+        labels: |
+          AN_UI 🎨
+
+    - name: add REFACTOR ✍️ label
+      uses: actions-ecosystem/action-add-labels@v1
+      if: ${{ contains(inputs.title, 'REFACTOR') }}
+      with:
+        labels: |
+          AN_REFACTOR ✍️
+
+    - name: add FIX 🐛 label
+      uses: actions-ecosystem/action-add-labels@v1
+      if: ${{ contains(inputs.title, 'FIX') }}
+      with:
+        labels: |
+          AN_FIX 🐛
+
+    - name: add CI/CD 🤖 label
+      uses: actions-ecosystem/action-add-labels@v1
+      if: ${{ contains(inputs.title, 'CI') || contains(inputs.title, 'CD') }}
+      with:
+        labels: |
+          AN_CI/CD 🤖
+
+    - name: add CONFIG 🧭 label
+      uses: actions-ecosystem/action-add-labels@v1
+      if: ${{ contains(inputs.title, 'CONFIG') }}
+      with:
+        labels: |
+          AN_CONFIG 🧭
+
+    - name: Extract Version Name
+      shell: bash
+      env:
+        title: ${{ inputs.title }}
+      run: |
+        version=$(echo '${{ env.title }}' | grep -oP '\d+\.\d+\.\d+')
+        if [ -z "$version" ]; then
+          echo "No version found in the title."
+          echo "version=none" >> $GITHUB_ENV
+        else
+          echo "version=v$version" >> $GITHUB_ENV
+        fi
+
+    - name: Add version 🏷️ label
+      uses: actions-ecosystem/action-add-labels@v1
+      if: ${{ env.version != 'none' }}  # 버전이 존재할 때만 실행
+      with:
+        labels: |
+          ${{ env.version }} 🏷️
+
+

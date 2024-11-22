@@ -35,14 +35,14 @@ class MoveServiceTest extends ServiceTest {
 
         assertAll(
                 () -> assertThat(moveResponse.id()).isEqualTo("earth_power"),
-                () -> assertThat(moveResponse.name()).isEqualTo("대지의힘"),
+                () -> assertThat(moveResponse.name()).isEqualTo("Earth Power"),
                 () -> assertThat(moveResponse.typeEngName()).isEqualTo("ground"),
                 () -> assertThat(moveResponse.typeLogo()).contains("type/ground"),
                 () -> assertThat(moveResponse.categoryEngName()).isEqualTo("special"),
                 () -> assertThat(moveResponse.categoryLogo()).contains("move-category/special.png"),
                 () -> assertThat(moveResponse.power()).isEqualTo(90),
                 () -> assertThat(moveResponse.accuracy()).isEqualTo(100),
-                () -> assertThat(moveResponse.effect()).isEqualTo("상대의 발밑에 대지의 힘을 방출한다. 상대의 특수방어를 떨어뜨릴 때가 있다.")
+                () -> assertThat(moveResponse.effect()).isEqualTo("The user makes the ground under the target erupt with power. This may also lower the target's Sp. Def stat.")
         );
     }
 
