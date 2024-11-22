@@ -6,7 +6,7 @@ import poke.rogue.helper.presentation.biome.model.BiomeUiModel
 import poke.rogue.helper.presentation.biome.model.NextBiomeUiModel
 import poke.rogue.helper.presentation.biome.model.toUi
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 
 class BiomeDetailUiState(
     val id: String,
@@ -50,7 +50,7 @@ class BiomeDetailUiState(
                                         dexNumber = it.toLong(),
                                         name = "일반 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.GRASS),
+                                        types = listOf(TypeUiModel.GRASS),
                                     )
                                 },
                         ),
@@ -64,7 +64,7 @@ class BiomeDetailUiState(
                                         dexNumber = it.toLong(),
                                         name = "희귀 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.POISON),
+                                        types = listOf(TypeUiModel.POISON),
                                     )
                                 },
                         ),
@@ -78,7 +78,7 @@ class BiomeDetailUiState(
                                         dexNumber = it.toLong(),
                                         name = "전설 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.GRASS, TypeUiModel1.POISON),
+                                        types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
                                     )
                                 },
                         ),
@@ -95,7 +95,7 @@ class BiomeDetailUiState(
                                         dexNumber = it.toLong(),
                                         name = "일반 보스 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.GRASS, TypeUiModel1.POISON),
+                                        types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
                                     )
                                 },
                         ),
@@ -109,7 +109,7 @@ class BiomeDetailUiState(
                                         dexNumber = it.toLong(),
                                         name = "희귀 보스 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.GRASS, TypeUiModel1.POISON),
+                                        types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
                                     )
                                 },
                         ),
@@ -123,7 +123,7 @@ class BiomeDetailUiState(
                                         dexNumber = it.toLong(),
                                         name = "전설 보스 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.GRASS, TypeUiModel1.POISON),
+                                        types = listOf(TypeUiModel.GRASS, TypeUiModel.POISON),
                                     )
                                 },
                         ),
@@ -133,42 +133,42 @@ class BiomeDetailUiState(
                         BiomePokemonUiModel(
                             grade = "심지박사",
                             gymLeaderUrl = "https://wiki.pokerogue.net/_media/trainers:opal.png",
-                            type = TypeUiModel1.FAIRY,
+                            type = TypeUiModel.FAIRY,
                             pokemons =
                                 (871..874).map {
                                     PokemonUiModel(
                                         dexNumber = it.toLong(),
                                         name = "심지몬 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.STEEL, TypeUiModel1.FAIRY),
+                                        types = listOf(TypeUiModel.STEEL, TypeUiModel.FAIRY),
                                     )
                                 },
                         ),
                         BiomePokemonUiModel(
                             grade = "꼬상조교",
                             gymLeaderUrl = "https://wiki.pokerogue.net/_media/trainers:bede.png",
-                            type = TypeUiModel1.FAIRY,
+                            type = TypeUiModel.FAIRY,
                             pokemons =
                                 (901..905).map {
                                     PokemonUiModel(
                                         dexNumber = it.toLong(),
                                         name = "꼬상몬 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.DRAGON, TypeUiModel1.FAIRY),
+                                        types = listOf(TypeUiModel.DRAGON, TypeUiModel.FAIRY),
                                     )
                                 },
                         ),
                         BiomePokemonUiModel(
                             grade = "비토학생",
                             gymLeaderUrl = "https://wiki.pokerogue.net/_media/trainers:valerie.png",
-                            type = TypeUiModel1.FAIRY,
+                            type = TypeUiModel.FAIRY,
                             pokemons =
                                 (100..105).map {
                                     PokemonUiModel(
                                         dexNumber = it.toLong(),
                                         name = "비토몬 $it",
                                         imageUrl = dummyUrl(it.toLong()),
-                                        types = listOf(TypeUiModel1.ICE, TypeUiModel1.POISON),
+                                        types = listOf(TypeUiModel.ICE, TypeUiModel.POISON),
                                     )
                                 },
                         ),

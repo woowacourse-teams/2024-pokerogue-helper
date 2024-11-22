@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.BottomSheetPokemonFilterBinding
 import poke.rogue.helper.presentation.dex.PokemonListActivity.Companion.FILTER_RESULT_KEY
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.parcelable
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -140,7 +140,7 @@ class PokemonFilterBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         fun newInstance(
-            selectedTypes: List<TypeUiModel1> = emptyList(),
+            selectedTypes: List<TypeUiModel> = emptyList(),
             selectedGeneration: PokeGenerationUiModel = PokeGenerationUiModel.ALL,
         ): PokemonFilterBottomSheetFragment {
             return PokemonFilterBottomSheetFragment().apply {

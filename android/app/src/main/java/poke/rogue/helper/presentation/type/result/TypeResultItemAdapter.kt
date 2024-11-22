@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemTypeBinding
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 
-class TypeResultItemAdapter(private val types: List<TypeUiModel1> = listOf()) :
+class TypeResultItemAdapter(private val types: List<TypeUiModel> = listOf()) :
     RecyclerView.Adapter<TypeResultItemViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,

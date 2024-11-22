@@ -16,15 +16,15 @@
 
         <variable
             name="myType"
-            type="poke.rogue.helper.presentation.type.model.TypeUiModel1" />
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
 
         <variable
             name="opponent1Type"
-            type="poke.rogue.helper.presentation.type.model.TypeUiModel1" />
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
 
         <variable
             name="opponent2Type"
-            type="poke.rogue.helper.presentation.type.model.TypeUiModel1" />
+            type="poke.rogue.helper.presentation.type.model.TypeUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

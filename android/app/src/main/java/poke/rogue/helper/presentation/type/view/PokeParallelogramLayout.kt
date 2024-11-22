@@ -12,7 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeParallelogramBinding
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.view.dp
 import kotlin.math.tan
@@ -127,7 +127,7 @@ class PokeParallelogramLayout
             }
         }
 
-        private fun bindType(type: TypeUiModel1) {
+        private fun bindType(type: TypeUiModel) {
             binding.type = type
             contentPaint.color = context.colorOf(type.typeColor)
             invalidate()
@@ -142,7 +142,7 @@ class PokeParallelogramLayout
             @BindingAdapter("typeSelection", "typeSelectionListener", requireAll = false)
             fun setSelectedType(
                 view: PokeParallelogramLayout,
-                type: TypeUiModel1?,
+                type: TypeUiModel?,
                 clickListener: OnClickListener?,
             ) {
                 type?.let { view.bindType(it) }

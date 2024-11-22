@@ -9,7 +9,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityTypeBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.result.TypeResultAdapter
 import poke.rogue.helper.presentation.type.selection.TypeSelectionBottomSheetFragment
 import poke.rogue.helper.presentation.util.repeatOnStarted
@@ -83,7 +83,7 @@ class TypeActivity : ToolbarActivity<ActivityTypeBinding>(R.layout.activity_type
 
     private fun showBottomSheet(
         selectorType: SelectorType,
-        disabledTypes: Set<TypeUiModel1>,
+        disabledTypes: Set<TypeUiModel>,
     ) {
         TypeSelectionBottomSheetFragment.newInstance(selectorType, disabledTypes).show(
             supportFragmentManager,

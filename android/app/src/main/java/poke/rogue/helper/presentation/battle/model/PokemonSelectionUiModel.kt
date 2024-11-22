@@ -3,7 +3,7 @@ package poke.rogue.helper.presentation.battle.model
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import poke.rogue.helper.data.model.Pokemon
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
 
 @Parcelize
@@ -13,7 +13,7 @@ data class PokemonSelectionUiModel(
     val name: String,
     val frontImageUrl: String,
     val backImageUrl: String,
-    val types: List<TypeUiModel1>,
+    val types: List<TypeUiModel>,
 ) : Parcelable {
     companion object {
         val DUMMY =
@@ -26,8 +26,8 @@ data class PokemonSelectionUiModel(
                     backImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
                     types =
                     listOf(
-                        TypeUiModel1.GRASS,
-                        TypeUiModel1.POISON,
+                        TypeUiModel.GRASS,
+                        TypeUiModel.POISON,
                     ),
                 ),
                 PokemonSelectionUiModel(
@@ -36,7 +36,7 @@ data class PokemonSelectionUiModel(
                     name = "파이리",
                     frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
                     backImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/4.png",
-                    types = listOf(TypeUiModel1.FIRE),
+                    types = listOf(TypeUiModel.FIRE),
                 ),
                 PokemonSelectionUiModel(
                     id = "squirtle",
@@ -44,7 +44,7 @@ data class PokemonSelectionUiModel(
                     name = "꼬북이",
                     frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
                     backImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/7.png",
-                    types = listOf(TypeUiModel1.WATER),
+                    types = listOf(TypeUiModel.WATER),
                 ),
                 PokemonSelectionUiModel(
                     id = "pikachu",
@@ -52,7 +52,7 @@ data class PokemonSelectionUiModel(
                     name = "피카츄",
                     frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
                     backImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/25.png",
-                    types = listOf(TypeUiModel1.ELECTRIC),
+                    types = listOf(TypeUiModel.ELECTRIC),
                 ),
                 PokemonSelectionUiModel(
                     id = "Charizard",
@@ -60,7 +60,7 @@ data class PokemonSelectionUiModel(
                     name = "리자몽",
                     frontImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
                     backImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/6.png",
-                    types = listOf(TypeUiModel1.FIRE, TypeUiModel1.FLYING),
+                    types = listOf(TypeUiModel.FIRE, TypeUiModel.FLYING),
                 ),
             )
     }

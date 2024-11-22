@@ -20,7 +20,7 @@ import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.di.testViewModelModule
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -70,8 +70,8 @@ class PokemonDetailViewModelTest : KoinTest {
                                     "/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
                             types =
                                 listOf(
-                                    TypeUiModel1.GRASS,
-                                    TypeUiModel1.POISON,
+                                    TypeUiModel.GRASS,
+                                    TypeUiModel.POISON,
                                 ),
                         ),
                     stats =

@@ -12,7 +12,7 @@ import poke.rogue.helper.data.repository.TypeRepository
 import poke.rogue.helper.presentation.type.model.MatchedResultUiModel
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.testing.CoroutinesTestExtension
 import poke.rogue.helper.testing.data.repository.FakeTypeRepository
 
@@ -43,13 +43,13 @@ class TypeViewModelTest {
     fun `내 타입을 선택하는 경우, 선택된 타입을 알 수 있다`() =
         runTest {
             // given
-            val selectedMyType = TypeUiModel1.FAIRY
+            val selectedMyType = TypeUiModel.FAIRY
 
             // when
             viewModel.selectType(SelectorType.MINE, selectedMyType)
 
             // then
-            val expected = TypeSelectionUiState.Selected(TypeUiModel1.FAIRY)
+            val expected = TypeSelectionUiState.Selected(TypeUiModel.FAIRY)
             val actual = viewModel.typeSelectionStates.value.myType
             actual shouldBe expected
         }
@@ -58,7 +58,7 @@ class TypeViewModelTest {
     fun `내 타입만 선택된 경우, 내 타입에 대한 모든 상성 결과를 불러온다`() =
         runTest {
             // given
-            val selectedMyType = TypeUiModel1.FAIRY
+            val selectedMyType = TypeUiModel.FAIRY
 
             // when
             viewModel.selectType(SelectorType.MINE, selectedMyType)
@@ -69,16 +69,16 @@ class TypeViewModelTest {
                     val expected =
                         listOf(
                             MatchedTypesUiModel(
-                                TypeUiModel1.FAIRY,
+                                TypeUiModel.FAIRY,
                                 true,
                                 MatchedResultUiModel.STRONG,
-                                listOf(TypeUiModel1.ICE, TypeUiModel1.DRAGON),
+                                listOf(TypeUiModel.ICE, TypeUiModel.DRAGON),
                             ),
                             MatchedTypesUiModel(
-                                TypeUiModel1.FAIRY,
+                                TypeUiModel.FAIRY,
                                 true,
                                 MatchedResultUiModel.WEAK,
-                                listOf(TypeUiModel1.FIRE, TypeUiModel1.POISON),
+                                listOf(TypeUiModel.FIRE, TypeUiModel.POISON),
                             ),
                         )
                     actual shouldBe expected
@@ -91,7 +91,7 @@ class TypeViewModelTest {
     fun `상대 타입 1개만 선택하는 경우, 해당 타입에 대한 모든 상성 결과를 불러온다`() =
         runTest {
             // given
-            val selectedType = TypeUiModel1.FAIRY
+            val selectedType = TypeUiModel.FAIRY
 
             // when
             viewModel.selectType(SelectorType.OPPONENT1, selectedType)
@@ -102,16 +102,16 @@ class TypeViewModelTest {
                     val expected =
                         listOf(
                             MatchedTypesUiModel(
-                                TypeUiModel1.FAIRY,
+                                TypeUiModel.FAIRY,
                                 false,
                                 MatchedResultUiModel.STRONG,
-                                listOf(TypeUiModel1.POISON, TypeUiModel1.STEEL),
+                                listOf(TypeUiModel.POISON, TypeUiModel.STEEL),
                             ),
                             MatchedTypesUiModel(
-                                TypeUiModel1.FAIRY,
+                                TypeUiModel.FAIRY,
                                 false,
                                 MatchedResultUiModel.NORMAL,
-                                listOf(TypeUiModel1.WATER, TypeUiModel1.GRASS),
+                                listOf(TypeUiModel.WATER, TypeUiModel.GRASS),
                             ),
                         )
                     actual shouldBe expected
@@ -124,8 +124,8 @@ class TypeViewModelTest {
     fun `내 타입과 상대 타입 모두를 선택하면, 두 타입의 상성 결과를 불러온다`() =
         runTest {
             // given
-            val myType = TypeUiModel1.FAIRY
-            val opponentType = TypeUiModel1.FIGHTING
+            val myType = TypeUiModel.FAIRY
+            val opponentType = TypeUiModel.FIGHTING
 
             // when
             viewModel.selectType(SelectorType.MINE, myType)
@@ -137,10 +137,10 @@ class TypeViewModelTest {
                     val expected =
                         listOf(
                             MatchedTypesUiModel(
-                                TypeUiModel1.FAIRY,
+                                TypeUiModel.FAIRY,
                                 true,
                                 MatchedResultUiModel.STRONG,
-                                listOf(TypeUiModel1.FIGHTING),
+                                listOf(TypeUiModel.FIGHTING),
                             ),
                         )
 

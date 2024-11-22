@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemTypeSelectionBinding
 import poke.rogue.helper.presentation.type.TypeHandler
 import poke.rogue.helper.presentation.type.model.SelectorType
-import poke.rogue.helper.presentation.type.model.TypeUiModel1
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 
 class TypeSelectionAdapter(
-    private val types: List<TypeUiModel1> = listOf(),
+    private val types: List<TypeUiModel> = listOf(),
     private val selector: SelectorType,
-    private val disabledType: Set<TypeUiModel1> = setOf(),
+    private val disabledType: Set<TypeUiModel> = setOf(),
     private val typeHandler: TypeHandler,
 ) :
     RecyclerView.Adapter<TypeSelectionViewHolder>() {
