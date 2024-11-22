@@ -27,8 +27,8 @@ class AbilityServiceTest extends ServiceTest {
         AbilityDetailResponse abilityDetails = abilityService.findAbilityDetails("stench");
 
         assertAll(
-                () -> assertThat(abilityDetails.koName()).isEqualTo("악취"),
-                () -> assertThat(abilityDetails.description()).isEqualTo("악취를 풍겨서 공격했을 때 상대가 풀죽을 때가 있다."),
+                () -> assertThat(abilityDetails.koName()).isEqualTo("Stench"),
+                () -> assertThat(abilityDetails.description()).isEqualTo("By releasing stench when attacking, this Pokémon may cause the target to flinch."),
                 () -> assertThat(abilityDetails.pokemons()).hasSize(9)
         );
     }
