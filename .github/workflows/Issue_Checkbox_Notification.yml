@@ -1,0 +1,58 @@
+name: Notification Checkbox Issue
+
+on:
+  issues:
+    types: [ opened, edited ]
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if Client Checkboxes are Checked
+        id: check-client-checkbox
+        run: |
+          issue_body="${{ github.event.issue.body }}"
+          client_section=$(echo "${issue_body}" | sed -n '/✨ Client/,/Time/p')
+          
+          if echo "${client_section}" | grep -q "\- \[x\]"; then
+            echo "client_checked=true" >> $GITHUB_ENV
+          else
+            echo "client_checked=false" >> $GITHUB_ENV
+          fi
+
+      - name: Send Discord Notification
+        if: env.client_checked == 'true'
+        env:
+          WEB_HOOK: ${{ secrets.AN_DISCORD_WEB_HOOK }}
+          AVATAR_URL: ${{ secrets.ISSUE_NOTI_AVATAR_URL }}
+        run: |
+          ISSUE_TITLE="${{ github.event.issue.title }}"
+          ISSUE_URL="${{ github.event.issue.html_url }}"
+          AUTHOR_NAME="${{ github.event.issue.user.login }}"
+          AUTHOR_AVATAR="${{ github.event.issue.user.avatar_url }}"
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "$(jq -n \
+                     --arg content "API 관련 수정이 있습니다!" \
+                     --arg username "팽도리" \
+                     --arg avatar_url "$AVATAR_URL" \
+                     --arg issue_title "$ISSUE_TITLE" \
+                     --arg issue_url "$ISSUE_URL" \
+                     --arg author_name "$AUTHOR_NAME" \
+                     --arg author_avatar "$AUTHOR_AVATAR" \
+                     '{
+                        content: $content, 
+                        username: $username, 
+                        avatar_url: $avatar_url, 
+                        embeds: [{
+                          title: $issue_title, 
+                          url: $issue_url,
+                          author: {
+                            name: $author_name,
+                            icon_url: $author_avatar
+                          }
+                        }] 
+                     }'
+                  )" \
+               "$WEB_HOOK"

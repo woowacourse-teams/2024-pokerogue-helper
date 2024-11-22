@@ -1,0 +1,25 @@
+name: Close Linked Issues on Merge
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  close_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Extract issue numbers from PR body
+        id: extract_issues
+        run: |
+          ISSUES=$(echo "${{ github.event.pull_request.body }}" | grep -oE '#[0-9]+' | tr -d '#')
+          echo "issues=${ISSUES}" >> $GITHUB_OUTPUT
+
+      - name: Close linked issues
+        if: ${{ steps.extract_issues.outputs.issues }}
+        uses: peter-evans/close-issue@v3
+        with:
+          issue-number: ${{ steps.extract_issues.outputs.issues }}
+          comment: 'This issue has been closed because the related PR was merged.'
