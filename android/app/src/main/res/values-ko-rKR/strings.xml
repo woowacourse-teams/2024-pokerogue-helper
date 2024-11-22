@@ -34,8 +34,6 @@
     <string name="type_matching_type_fairy">페어리</string>
     <string name="type_matching_type_stellar">스텔라</string>
 
-
-
     <!-- home -->
     <string name="toolbar_pokerogue">포켓로그 바로가기</string>
     <string name="toolbar_feedback">피드백 보내기</string>
@@ -166,6 +164,9 @@
     <string name="battle_selection_previous_btn">이전</string>
     <string name="battle_result_multiplier">*</string>
     <string name="battle_result_equal">=</string>
+
+    <!--    weather-->
+    <string name="battle_weather_none">There is no weather</string>
 
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>

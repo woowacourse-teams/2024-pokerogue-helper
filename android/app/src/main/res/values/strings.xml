@@ -40,7 +40,7 @@
     <string name="home_pokerogue_url">https://pokerogue.net/</string>
     <string name="home_pokerogue_tip_url">https://namu.wiki/w/Pok%C3%A9Rogue</string>
     <string name="home_pokeroque_surey_url">https://docs.google.com/forms/d/e/1FAIpQLScd-Kp5zCzrcWKO6eXR7Ujgm0TscGrwuCPNCX1na0enhtVZaw/viewform</string>
-    <string name="home_menu_type">View Matchups</string>
+    <string name="home_menu_type">Type Matchup</string>
     <string name="home_menu_pokemon_detail">Pokémon Dex</string>
     <string name="home_menu_ability">Ability Dex</string>
     <string name="home_menu_tip">Tips</string>
@@ -164,6 +164,9 @@
     <string name="battle_selection_previous_btn">Previous</string>
     <string name="battle_result_multiplier">*</string>
     <string name="battle_result_equal">=</string>
+
+    <!--    weather-->
+    <string name="battle_weather_none">There is no weather</string>
 
     <!--    error-->
     <string name="error_IO_Exception">An unknown error occurred..</string>
