@@ -38,7 +38,7 @@ class BiomeServiceTest extends ServiceTest {
 
         assertAll(
                 () -> assertThat(biomeDetailResponse.id()).isEqualTo("fairy_cave"),
-                () -> assertThat(biomeDetailResponse.name()).isEqualTo("페어리 동굴"),
+                () -> assertThat(biomeDetailResponse.name()).isEqualTo("Fairy Cave"),
                 () -> assertThat(biomeDetailResponse.wildPokemons()).hasSize(5),
                 () -> assertThat(biomeDetailResponse.bossPokemons()).hasSize(4),
                 () -> assertThat(biomeDetailResponse.trainerPokemons()).hasSize(3),
