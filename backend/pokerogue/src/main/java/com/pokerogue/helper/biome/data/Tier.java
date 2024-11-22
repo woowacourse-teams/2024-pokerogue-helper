@@ -38,12 +38,12 @@ public enum Tier {
     }
 
     public static Tier convertFrom(String tierData) {
-        return getTierByName(tierData);
+        return getTierByKoName(tierData);
     }
 
-    private static Tier getTierByName(String name) {
+    private static Tier getTierByKoName(String name) {
         return Arrays.stream(values())
-                .filter(tier -> tier.name.equals(name))
+                .filter(tier -> tier.koName.equals(name))
                 .findFirst()
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.TIER_NOT_FOUND));
     }
