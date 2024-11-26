@@ -69,16 +69,17 @@ class WeatherSpinnerAdapter(
     }
 
     private fun localizedWeathers(updated: List<WeatherUiModel>): List<WeatherUiModel> {
-        val weathers = updated.map {
-            if (it.id == "none") {
-                it.copy(
-                    description = context.stringOf(R.string.battle_weather_none),
-                    effect = "",
-                )
-            } else {
-                it
+        val weathers =
+            updated.map {
+                if (it.id == "none") {
+                    it.copy(
+                        description = context.stringOf(R.string.battle_weather_none),
+                        effect = "",
+                    )
+                } else {
+                    it
+                }
             }
-        }
         return weathers
     }
 }

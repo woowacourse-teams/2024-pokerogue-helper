@@ -14,7 +14,6 @@ import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.drawable
 import poke.rogue.helper.presentation.util.style
-import timber.log.Timber
 
 class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
     RecyclerView.ViewHolder(binding.root) {
