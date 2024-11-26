@@ -76,9 +76,13 @@ fun View.setBackGroundColorRes(
     setBackgroundColor(context.colorOf(backgroundColorRes))
 }
 
-@BindingAdapter("visible")
-fun View.setVisible(visible: Boolean) {
-    visibility = if (visible) View.VISIBLE else View.GONE
+@BindingAdapter(value = ["visible", "invisibleAsGone"], requireAll = false)
+fun View.setVisible(visible: Boolean, invisibleAsGone: Boolean = true) {
+    visibility = when {
+        visible -> View.VISIBLE
+        invisibleAsGone -> View.GONE
+        else -> View.INVISIBLE
+    }
 }
 
 @BindingAdapter("backgroundTintRes")
