@@ -170,7 +170,7 @@
     <string name="battle_result_equal">=</string>
 
     <!--    weather-->
-    <string name="battle_weather_none">There is no weather</string>
+    <string name="battle_weather_none">날씨가 없다</string>
 
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>
