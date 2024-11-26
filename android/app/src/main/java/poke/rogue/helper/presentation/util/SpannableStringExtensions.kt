@@ -20,9 +20,10 @@ fun SpannableString.drawable(
 ) {
     val iconIndex = fullText.indexOf("|")
     if (iconIndex != -1) {
-        val drawable = iconDrawable?.apply {
-            setBounds(0, 0, iconSize, iconSize)
-        }
+        val drawable =
+            iconDrawable?.apply {
+                setBounds(0, 0, iconSize, iconSize)
+            }
         val imageSpan = ImageSpan(drawable!!, ImageSpan.ALIGN_BOTTOM)
         setSpan(imageSpan, iconIndex, iconIndex + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
@@ -31,7 +32,7 @@ fun SpannableString.drawable(
 fun SpannableString.color(
     targetWord: String,
     color: Int,
-    fullText: String
+    fullText: String,
 ): SpannableString {
     val startIndex = fullText.indexOf(targetWord)
     if (startIndex != -1) {
@@ -39,7 +40,7 @@ fun SpannableString.color(
             ForegroundColorSpan(color),
             startIndex,
             startIndex + targetWord.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
         )
     }
     return this
@@ -47,7 +48,7 @@ fun SpannableString.color(
 
 fun SpannableString.style(
     targetWord: String,
-    fullText: String
+    fullText: String,
 ): SpannableString {
     val startIndex = fullText.indexOf(targetWord)
     if (startIndex != -1) {
@@ -55,9 +56,8 @@ fun SpannableString.style(
             StyleSpan(Typeface.BOLD),
             startIndex,
             startIndex + targetWord.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
         )
     }
     return this
 }
-

@@ -32,11 +32,11 @@ data class PokeFilterUiState(
         val DEFAULT =
             PokeFilterUiState(
                 types =
-                    TypeUiModel.entries.mapIndexed { index, typeUiModel1 ->
+                    TypeUiModel.entries.mapIndexed { index, typeUiModel ->
                         SelectableUiModel(
                             index,
                             false,
-                            typeUiModel1,
+                            typeUiModel,
                         )
                     },
                 generations =

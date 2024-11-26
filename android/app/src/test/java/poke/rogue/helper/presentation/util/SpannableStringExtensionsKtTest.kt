@@ -17,8 +17,7 @@ import poke.rogue.helper.testing.TestApplication
 
 @RunWith(AndroidJUnit4::class)
 @Config(application = TestApplication::class)
-class SpannableExtensionsTest {
-
+class SpannableStringExtensionsKtTest {
     private lateinit var mockDrawable: Drawable
 
     @Before

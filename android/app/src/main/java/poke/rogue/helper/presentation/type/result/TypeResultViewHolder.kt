@@ -35,29 +35,32 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
         val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultUi.colorRes)
         val iconResource = typeMatchedResult.selectedType.typeIconResId
 
-        val (result, textView) = if (isMyType) {
-            Pair(
-                context.stringOf(
-                    resId = R.string.type_my_type_result,
-                    formatArgs = arrayOf(
-                        typeName,
-                        matchedResultText,
-                    )
-                ), binding.tvMyTypeResult
-            )
-        } else {
-            Pair(
-                context.stringOf(
-                    resId = R.string.type_opponent_type_result,
-                    formatArgs = arrayOf(
-                        typeName,
-                        matchedResultText,
-                    )
-                ), binding.tvOpponentTypeResult
-            )
-        }
-
-        Timber.d("result: $result")
+        val (result, textView) =
+            if (isMyType) {
+                Pair(
+                    context.stringOf(
+                        resId = R.string.type_my_type_result,
+                        formatArgs =
+                            arrayOf(
+                                typeName,
+                                matchedResultText,
+                            ),
+                    ),
+                    binding.tvMyTypeResult,
+                )
+            } else {
+                Pair(
+                    context.stringOf(
+                        resId = R.string.type_opponent_type_result,
+                        formatArgs =
+                            arrayOf(
+                                typeName,
+                                matchedResultText,
+                            ),
+                    ),
+                    binding.tvOpponentTypeResult,
+                )
+            }
 
         styleText(
             textView = textView,
@@ -77,17 +80,16 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
         fontStyleTargetWord: String,
         color: Int,
     ) {
-        val spannableString = SpannableString(fullText).applySpans {
-            drawable(
-                iconDrawable = textView.context.drawableOf(iconRes),
-                iconSize = (textView.textSize * 1.2).toInt(),
-                fullText = fullText,
-            )
-            color(colorTargetWord, color, fullText)
-            style(fontStyleTargetWord, fullText)
-        }
+        val spannableString =
+            SpannableString(fullText).applySpans {
+                drawable(
+                    iconDrawable = textView.context.drawableOf(iconRes),
+                    iconSize = (textView.textSize * 1.2).toInt(),
+                    fullText = fullText,
+                )
+                color(colorTargetWord, color, fullText)
+                style(fontStyleTargetWord, fullText)
+            }
         textView.text = spannableString
     }
-
 }
-

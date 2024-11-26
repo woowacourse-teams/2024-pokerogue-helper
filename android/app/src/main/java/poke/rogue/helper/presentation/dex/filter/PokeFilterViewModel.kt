@@ -26,11 +26,11 @@ class PokeFilterViewModel(
         savedStateHandle[UI_STATE_KEY] =
             PokeFilterUiState(
                 types =
-                    TypeUiModel.entries.mapIndexed { index, typeUiModel1 ->
+                    TypeUiModel.entries.mapIndexed { index, typeUiModel ->
                         SelectableUiModel(
                             index,
-                            args.selectedTypes.contains(typeUiModel1),
-                            typeUiModel1,
+                            args.selectedTypes.contains(typeUiModel),
+                            typeUiModel,
                         )
                     },
                 generations =
