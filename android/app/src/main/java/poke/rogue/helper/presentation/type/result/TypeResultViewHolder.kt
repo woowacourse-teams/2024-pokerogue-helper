@@ -1,20 +1,19 @@
 package poke.rogue.helper.presentation.type.result
 
 import android.content.Context
-import android.graphics.Typeface
-import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.text.style.ImageSpan
-import android.text.style.StyleSpan
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
+import poke.rogue.helper.presentation.util.applySpans
+import poke.rogue.helper.presentation.util.color
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
+import poke.rogue.helper.presentation.util.drawable
+import poke.rogue.helper.presentation.util.style
 import timber.log.Timber
 
 class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
@@ -36,7 +35,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
         val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultUi.colorRes)
         val iconResource = typeMatchedResult.selectedType.typeIconResId
 
-        val (result, chip) = if (isMyType) {
+        val (result, textView) = if (isMyType) {
             Pair(
                 context.stringOf(
                     resId = R.string.type_my_type_result,
@@ -44,7 +43,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
                         typeName,
                         matchedResultText,
                     )
-                ), binding.chipMyTypeResult
+                ), binding.tvMyTypeResult
             )
         } else {
             Pair(
@@ -54,14 +53,14 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
                         typeName,
                         matchedResultText,
                     )
-                ), binding.chipOpponentTypeResult
+                ), binding.tvOpponentTypeResult
             )
         }
 
         Timber.d("result: $result")
 
         styleText(
-            chip = chip,
+            textView = textView,
             fullText = result,
             iconRes = iconResource,
             colorTargetWord = matchedResultText,
@@ -71,7 +70,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
     }
 
     private fun styleText(
-        chip: TextView,
+        textView: TextView,
         fullText: String,
         iconRes: Int,
         colorTargetWord: String,
@@ -79,58 +78,16 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
         color: Int,
     ) {
         val spannableString = SpannableString(fullText).applySpans {
-            val iconIndex = fullText.indexOf("|") // 아이콘 자리 표시자
-            if (iconIndex != -1) {
-                val drawable = binding.root.context.drawableOf(iconRes)?.apply {
-                    val iconSize = (chip.textSize * 1.2).toInt() // 텍스트 크기의 1.5배
-                    setBounds(0, 0, iconSize, iconSize)
-                }
-                val imageSpan = ImageSpan(drawable!!, ImageSpan.ALIGN_BOTTOM)
-                setSpan(imageSpan, iconIndex, iconIndex + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-            applyColor(colorTargetWord, color, fullText)
-            applyStyle(fontStyleTargetWord, fullText)
+            drawable(
+                iconDrawable = textView.context.drawableOf(iconRes),
+                iconSize = (textView.textSize * 1.2).toInt(),
+                fullText = fullText,
+            )
+            color(colorTargetWord, color, fullText)
+            style(fontStyleTargetWord, fullText)
         }
-        chip.text = spannableString
+        textView.text = spannableString
     }
 
-}
-
-inline fun SpannableString.applySpans(configure: SpannableString.() -> Unit): SpannableString {
-    this.configure()
-    return this
-}
-
-fun SpannableString.applyColor(
-    targetWord: String,
-    color: Int,
-    fullText: String
-): SpannableString {
-    val startIndex = fullText.indexOf(targetWord)
-    if (startIndex != -1) {
-        this.setSpan(
-            ForegroundColorSpan(color),
-            startIndex,
-            startIndex + targetWord.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-    }
-    return this
-}
-
-fun SpannableString.applyStyle(
-    targetWord: String,
-    fullText: String
-): SpannableString {
-    val startIndex = fullText.indexOf(targetWord)
-    if (startIndex != -1) {
-        this.setSpan(
-            StyleSpan(Typeface.BOLD),
-            startIndex,
-            startIndex + targetWord.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-    }
-    return this
 }
 

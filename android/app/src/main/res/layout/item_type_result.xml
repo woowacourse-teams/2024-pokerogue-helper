@@ -15,10 +15,10 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/chip_my_type_result"
+            android:id="@+id/tv_my_type_result"
             style="@style/TextAppearance.Poke.Title"
-            visible="@{typeResult.isMyType}"
             invisibleAsGone="false"
+            visible="@{typeResult.isMyType}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
             tools:text=" fighting is Strong type against" />
 
         <TextView
-            android:id="@+id/chip_opponent_type_result"
+            android:id="@+id/tv_opponent_type_result"
             style="@style/TextAppearance.Poke.Title"
             visible="@{!typeResult.isMyType}"
             android:layout_width="wrap_content"
@@ -45,8 +45,8 @@
             android:background="@color/poke_grey_60"
             app:layout_constraintBottom_toTopOf="@id/rv_result_matched_types"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/chip_my_type_result"
-            app:layout_constraintTop_toBottomOf="@id/chip_my_type_result" />
+            app:layout_constraintStart_toStartOf="@id/tv_my_type_result"
+            app:layout_constraintTop_toBottomOf="@id/tv_my_type_result" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_result_matched_types"
