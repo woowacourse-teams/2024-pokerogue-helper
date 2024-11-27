@@ -9,11 +9,11 @@ import lombok.Getter;
 @Getter
 public enum MoveCategory {
 
-    STATUS("변화", "status", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/move-category/status"),
+    STATUS("변화", "status", "https://d11z3l5940xyw9.cloudfront.net/pokerogue/move-category/status"),
     SPECIAL("특수", "special",
-            "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/move-category/special"),
+            "https://d11z3l5940xyw9.cloudfront.net/pokerogue/move-category/special"),
     PHYSICAL("물리", "physical",
-            "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/move-category/physical"),
+            "https://d11z3l5940xyw9.cloudfront.net/pokerogue/move-category/physical"),
     ;
 
     private final String name;

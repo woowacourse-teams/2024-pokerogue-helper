@@ -2,7 +2,7 @@ package com.pokerogue.helper.pokemon.config;
 
 public enum ImageUrl {
 
-    BASE_URL("https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue"),
+    BASE_URL("https://d11z3l5940xyw9.cloudfront.net/pokerogue"),
     POKEMON_FRONT("/pokemon/front/"),
     POKEMON_BACK("/pokemon/back/"),
     TYPE("/type/"),
