@@ -11,111 +11,244 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".presentation.ability.AbilityActivity">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_ability_detail"
-            style="@style/CustomToolbarStyle"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/ability_title_name" />
-
-        <LinearLayout
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@id/gl_ability_detail_end"
-            app:layout_constraintStart_toStartOf="@id/gl_ability_detail_start"
-            app:layout_constraintTop_toTopOf="@id/rv_ability_detail_pokemon">
+            android:background="@color/poke_black"
+            app:liftOnScrollColor="@color/poke_black">
 
-            <TextView
-                android:id="@+id/tv_ability_title"
-                android:layout_width="@dimen/ability_tv_title_width"
-                android:layout_height="@dimen/ability_tv_title_height"
-                android:background="@drawable/bg_ability_title"
-                android:gravity="center"
-                android:text="@{abilityUiModel.title}"
-                android:textAppearance="@style/TextAppearance.Poke.TitleBold"
-                android:textSize="@dimen/ability_tv_title_size"
-                tools:text="악취" />
-
-            <TextView
-                android:id="@+id/tv_ability_description"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_ability_detail"
+                style="@style/CustomToolbarStyle"
                 android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:title="@string/ability_title_name">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_ability_detail_end"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.4" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_ability_detail_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="45dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@{abilityUiModel.description}"
-                android:textAppearance="@style/TextAppearance.Poke.Description"
-                android:textSize="@dimen/ability_tv_description_size"
-                tools:text="특성을 대충 작성한 글입니다~~~~~~~~~~~~~~~~~~~~~~~" />
-        </LinearLayout>
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                app:layout_constraintEnd_toEndOf="@id/gl_ability_detail_end"
+                app:layout_constraintStart_toStartOf="@id/gl_ability_detail_start"
+                app:layout_constraintTop_toTopOf="@id/rv_ability_detail_pokemon">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_ability_detail_pokemon"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="15dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/gl_ability_detail_end"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_ability_detail"
-            app:spanCount="3"
-            tools:listitem="@layout/item_ability_detail_pokemon" />
+                <TextView
+                    android:id="@+id/tv_ability_title"
+                    android:layout_width="@dimen/ability_tv_title_width"
+                    android:layout_height="@dimen/ability_tv_title_height"
+                    android:background="@drawable/bg_ability_title"
+                    android:gravity="center"
+                    android:text="@{abilityUiModel.title}"
+                    android:textAppearance="@style/TextAppearance.Poke.TitleBold"
+                    android:textSize="@dimen/ability_tv_title_size"
+                    tools:text="악취" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_ability_detail_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_ability_detail_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="45dp" />
+                <TextView
+                    android:id="@+id/tv_ability_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="@{abilityUiModel.description}"
+                    android:textAppearance="@style/TextAppearance.Poke.Description"
+                    android:textSize="@dimen/ability_tv_description_size"
+                    tools:text="특성을 대충 작성한 글입니다~~~~~~~~~~~~~~~~~~~~~~~" />
+            </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ability_detail_pokemon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="15dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/gl_ability_detail_end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="3"
+                tools:listitem="@layout/item_ability_detail_pokemon" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ability_detail_loading"
             visible="@{vm.isEmpty()}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:id="@+id/iv_ability_detail_empty"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/ic_network_error"
-                app:layout_constraintBottom_toTopOf="@id/tv_empty"
+                app:layout_constraintBottom_toTopOf="@id/tv_ability_detail_empty"
+                app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.3"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/tv_empty"
+                android:id="@+id/tv_ability_detail_empty"
                 style="@style/TextAppearance.Poke.TitleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="해당하는 포켓몬이 없습니다"
+                android:text="@string/ability_detail_no_pokemons_with_ability"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_ability_detail_empty" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 </layout>
+
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<com.google.android.material.appbar.MaterialToolbar-->
+    <!--    android:id="@+id/toolbar_ability_detail"-->
+    <!--    style="@style/CustomToolbarStyle"-->
+    <!--    android:layout_width="0dp"-->
+    <!--    android:layout_height="?attr/actionBarSize"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toTopOf="parent"-->
+    <!--    app:title="@string/ability_title_name" />-->
+
+    <!--<LinearLayout-->
+    <!--    android:layout_width="0dp"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:gravity="center"-->
+    <!--    android:orientation="vertical"-->
+    <!--    app:layout_constraintEnd_toEndOf="@id/gl_ability_detail_end"-->
+    <!--    app:layout_constraintStart_toStartOf="@id/gl_ability_detail_start"-->
+    <!--    app:layout_constraintTop_toTopOf="@id/rv_ability_detail_pokemon">-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_ability_title"-->
+    <!--        android:layout_width="@dimen/ability_tv_title_width"-->
+    <!--        android:layout_height="@dimen/ability_tv_title_height"-->
+    <!--        android:background="@drawable/bg_ability_title"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="@{abilityUiModel.title}"-->
+    <!--        android:textAppearance="@style/TextAppearance.Poke.TitleBold"-->
+    <!--        android:textSize="@dimen/ability_tv_title_size"-->
+    <!--        tools:text="악취" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_ability_description"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="@{abilityUiModel.description}"-->
+    <!--        android:textAppearance="@style/TextAppearance.Poke.Description"-->
+    <!--        android:textSize="@dimen/ability_tv_description_size"-->
+    <!--        tools:text="특성을 대충 작성한 글입니다~~~~~~~~~~~~~~~~~~~~~~~" />-->
+    <!--</LinearLayout>-->
+
+
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+    <!--    android:id="@+id/rv_ability_detail_pokemon"-->
+    <!--    android:layout_width="0dp"-->
+    <!--    android:layout_height="0dp"-->
+    <!--    android:layout_marginHorizontal="15dp"-->
+    <!--    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
+    <!--    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="@id/gl_ability_detail_end"-->
+    <!--    app:layout_constraintTop_toBottomOf="@id/toolbar_ability_detail"-->
+    <!--    app:spanCount="3"-->
+    <!--    tools:listitem="@layout/item_ability_detail_pokemon" />-->
+
+    <!--<androidx.constraintlayout.widget.Guideline-->
+    <!--    android:id="@+id/gl_ability_detail_end"-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:orientation="vertical"-->
+    <!--    app:layout_constraintGuide_percent="0.4" />-->
+
+    <!--<androidx.constraintlayout.widget.Guideline-->
+    <!--    android:id="@+id/gl_ability_detail_start"-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:orientation="vertical"-->
+    <!--    app:layout_constraintGuide_begin="45dp" />-->
+
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--    android:id="@+id/ability_detail_loading"-->
+    <!--    visible="@{vm.isEmpty()}"-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--    app:layout_constraintStart_toStartOf="parent"-->
+    <!--    app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="170dp"-->
+    <!--        android:layout_height="170dp"-->
+    <!--        android:layout_marginBottom="10dp"-->
+    <!--        android:src="@drawable/ic_network_error"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/tv_empty"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        tools:ignore="ContentDescription" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tv_empty"-->
+    <!--        style="@style/TextAppearance.Poke.TitleLarge"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="해당하는 포켓몬이 없습니다"-->
+    <!--        android:textSize="20sp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
