@@ -14,7 +14,7 @@
     <string name="type_result_ineffective">Ineffective</string>
     <string name="type_result_normal">Neutral</string>
 
-        <!--|: position of Type Icon , 1s: type name, 2s: type effect-->
+    <!--|: position of Type Icon , 1s: type name, 2s: type effect-->
     <string name="type_my_type_result">| %1s is %2s type against</string>
     <string name="type_opponent_type_result">%2s types against %1s |</string>
 
@@ -124,6 +124,7 @@
     <string name="ability_search_hint">Search by Ability name.</string>
     <string name="ability_detail_error_abilityId">Invalid abilityId value (-1).</string>
     <string name="ability_detail_error_containerId">Invalid containerId value (-1).</string>
+    <string name="ability_detail_no_pokemons_with_ability">There are no pokemons corresponding ability</string>
 
     <!--    biome -->
     <string name="biome_title_name">Biome Dex</string>
