@@ -10,51 +10,62 @@
             type="poke.rogue.helper.presentation.ability.AbilityViewModel" />
     </data>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".presentation.ability.AbilityActivity">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_ability"
-            style="@style/CustomToolbarStyle"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:contentInsetStartWithNavigation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/ability_title_name">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_ability"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.SearchView
-                style="@style/CustomSearchViewStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:theme="@style/CustomSearchViewTheme"
-                app:onQueryTextChange="@{vm}"
-                app:queryHint="@string/ability_search_hint" />
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout_ability"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/poke_black"
+                app:collapsedTitleTextColor="@color/poke_white"
+                app:contentScrim="@color/poke_black"
+                app:expandedTitleTextColor="@color/poke_white"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:title="@string/ability_title_name"
+                app:titleCollapseMode="scale">
 
-        </com.google.android.material.appbar.MaterialToolbar>
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar_ability"
+                    style="@style/CustomToolbarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentInsetStartWithNavigation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title="@string/ability_title_name">
+
+                    <androidx.appcompat.widget.SearchView
+                        style="@style/CustomSearchViewStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:theme="@style/CustomSearchViewTheme"
+                        app:onQueryTextChange="@{vm}"
+                        app:queryHint="@string/ability_search_hint" />
+
+                </com.google.android.material.appbar.MaterialToolbar>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_ability_description"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_ability"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_ability_description" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_ability_toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="64dp" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
