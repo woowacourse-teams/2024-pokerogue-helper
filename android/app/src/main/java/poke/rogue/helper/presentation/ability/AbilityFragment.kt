@@ -9,6 +9,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.FragmentAbilityBinding
 import poke.rogue.helper.presentation.ability.detail.AbilityDetailFragment
+import poke.rogue.helper.presentation.ability.model.AbilityUiModel
 import poke.rogue.helper.presentation.base.error.ErrorEvent
 import poke.rogue.helper.presentation.base.error.ErrorHandleFragment
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
@@ -54,7 +55,8 @@ class AbilityFragment : ErrorHandleFragment<FragmentAbilityBinding>(R.layout.fra
                 when (abilities) {
                     is AbilityUiState.Loading -> {}
                     is AbilityUiState.Success -> {
-                        adapter.submitList(abilities.data)
+                        // TODO: remove dummy data
+                        adapter.submitList(abilities.data + listOf(AbilityUiModel.DUMMY))
                     }
                 }
             }
@@ -67,9 +69,9 @@ class AbilityFragment : ErrorHandleFragment<FragmentAbilityBinding>(R.layout.fra
                     replace<AbilityDetailFragment>(
                         containerId,
                         args =
-                            AbilityDetailFragment.bundleOf(
-                                abilityId,
-                            ),
+                        AbilityDetailFragment.bundleOf(
+                            abilityId,
+                        ),
                     )
                     addToBackStack(TAG)
                 }
