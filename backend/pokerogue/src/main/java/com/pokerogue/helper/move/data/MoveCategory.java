@@ -9,21 +9,17 @@ import lombok.Getter;
 @Getter
 public enum MoveCategory {
 
-    STATUS("변화", "status", "https://d11z3l5940xyw9.cloudfront.net/pokerogue/move-category/status"),
-    SPECIAL("특수", "special",
-            "https://d11z3l5940xyw9.cloudfront.net/pokerogue/move-category/special"),
-    PHYSICAL("물리", "physical",
-            "https://d11z3l5940xyw9.cloudfront.net/pokerogue/move-category/physical"),
+    STATUS("변화", "status"),
+    SPECIAL("특수", "special"),
+    PHYSICAL("물리", "physical"),
     ;
 
     private final String name;
     private final String engName;
-    private final String image;
 
-    MoveCategory(String name, String engName, String image) {
+    MoveCategory(String name, String engName) {
         this.name = name;
         this.engName = engName;
-        this.image = image;
     }
 
     public static Optional<MoveCategory> findByEngName(String name) {
@@ -34,10 +30,6 @@ public enum MoveCategory {
 
     private boolean hasSameEngName(String name) {
         return this.engName.equals(name);
-    }
-
-    public String getImage() {
-        return image + ".png";
     }
 
     public static MoveCategory convertFrom(String moveCategoryData) {

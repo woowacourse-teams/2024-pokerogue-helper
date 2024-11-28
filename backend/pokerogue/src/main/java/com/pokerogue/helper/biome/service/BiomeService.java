@@ -12,6 +12,7 @@ import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
 import com.pokerogue.helper.biome.dto.NextBiomeResponse;
 import com.pokerogue.helper.biome.dto.TrainerPokemonResponse;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
+import com.pokerogue.helper.global.config.ImageUrl;
 import com.pokerogue.helper.global.constant.SortingCriteria;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
@@ -122,7 +123,7 @@ public class BiomeService {
     private List<BiomeTypeResponse> getTypesResponses(List<Type> types) {
         return types.stream()
                 .map(type -> new BiomeTypeResponse(
-                        type.getImage(),
+                        ImageUrl.getTypeImage(type.getName()),
                         type.getKoName())
                 )
                 .toList();
@@ -133,7 +134,7 @@ public class BiomeService {
                 .map(Trainer::getTypes)
                 .flatMap(List::stream)
                 .map(type -> new BiomeTypeResponse(
-                        type.getImage(),
+                        ImageUrl.getTypeImage(type.getName()),
                         type.getKoName())
                 )
                 .toList();

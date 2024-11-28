@@ -1,4 +1,4 @@
-package com.pokerogue.helper.pokemon.config;
+package com.pokerogue.helper.global.config;
 
 public enum ImageUrl {
 
@@ -10,7 +10,7 @@ public enum ImageUrl {
     BIOME("/biome/"),
     ;
 
-    public static final String PNG = ".png";
+    private static final String PNG = ".png";
     private final String url;
 
     ImageUrl(String url) {
@@ -29,4 +29,11 @@ public enum ImageUrl {
         return BASE_URL.url + BIOME.url + id + PNG;
     }
 
+    public static String getMoveCategoryImage(String id) {
+        return BASE_URL.url + MOVE_CATEGORY.url + id + PNG;
+    }
+
+    public static String getTypeImage(String id) {
+        return BASE_URL.url + TYPE.url + id;
+    }
 }

@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.dto;
 
+import com.pokerogue.helper.global.config.ImageUrl;
 import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.type.data.Type;
@@ -27,9 +28,9 @@ public record EggMoveResponse(
                 move.getPower(),
                 move.getAccuracy(),
                 type.getName(),
-                type.getImage(),
+                ImageUrl.getTypeImage(type.getName()),
                 moveCategory.getName(),
-                moveCategory.getImage()
+                ImageUrl.getMoveCategoryImage(moveCategory.getEngName())
         );
     }
 
