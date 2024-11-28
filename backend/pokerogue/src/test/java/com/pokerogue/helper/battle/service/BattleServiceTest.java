@@ -23,7 +23,7 @@ class BattleServiceTest extends ServiceTest {
         String myMoveId = "ember";
 
         assertThatThrownBy(
-                () -> battleService.calculateBattleResult(wrongWeatherId, myPokemonId, rivalPokemonId, myMoveId))
+                () -> battleService.calculateBattleResultV2(wrongWeatherId, myPokemonId, rivalPokemonId, myMoveId))
                 .isInstanceOf(GlobalCustomException.class)
                 .hasMessage(ErrorMessage.WEATHER_NOT_FOUND.getMessage());
     }
@@ -37,7 +37,7 @@ class BattleServiceTest extends ServiceTest {
         String myMoveId = "ember";
 
         assertThatThrownBy(
-                () -> battleService.calculateBattleResult(weatherId, wrongMyPokemonId, rivalPokemonId, myMoveId))
+                () -> battleService.calculateBattleResultV2(weatherId, wrongMyPokemonId, rivalPokemonId, myMoveId))
                 .isInstanceOf(GlobalCustomException.class)
                 .hasMessage(ErrorMessage.POKEMON_NOT_FOUND.getMessage());
     }
@@ -51,7 +51,7 @@ class BattleServiceTest extends ServiceTest {
         String wrongMyMoveId = "punch";
 
         assertThatThrownBy(
-                () -> battleService.calculateBattleResult(weatherId, myPokemonId, rivalPokemonId, wrongMyMoveId))
+                () -> battleService.calculateBattleResultV2(weatherId, myPokemonId, rivalPokemonId, wrongMyMoveId))
                 .isInstanceOf(GlobalCustomException.class)
                 .hasMessage(ErrorMessage.MOVE_NOT_FOUND.getMessage());
     }
