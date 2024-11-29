@@ -1,6 +1,7 @@
 package com.pokerogue.helper.battle.controller;
 
-import com.pokerogue.helper.battle.dto.BattleResultResponse;
+import com.pokerogue.helper.battle.dto.BattleResultResponseV1;
+import com.pokerogue.helper.battle.dto.BattleResultResponseV2;
 import com.pokerogue.helper.battle.dto.WeatherResponse;
 import com.pokerogue.helper.battle.service.BattleService;
 import com.pokerogue.helper.battle.service.WeatherService;
@@ -26,11 +27,20 @@ public class BattleController {
     }
 
     @GetMapping("/api/v1/battle")
-    public ApiResponse<BattleResultResponse> battleResult(@RequestParam("weather-id") String weatherId,
-                                                          @RequestParam("my-pokemon-id") String myPokemonId,
-                                                          @RequestParam("rival-pokemon-id") String rivalPokemonId,
-                                                          @RequestParam("my-move-id") String myMoveId) {
+    public ApiResponse<BattleResultResponseV1> battleResultV1(@RequestParam("weather-id") String weatherId,
+                                                              @RequestParam("my-pokemon-id") String myPokemonId,
+                                                              @RequestParam("rival-pokemon-id") String rivalPokemonId,
+                                                              @RequestParam("my-move-id") String myMoveId) {
         return new ApiResponse<>("배틀 예측 결과 불러오기에 성공했습니다.",
-                battleService.calculateBattleResult(weatherId, myPokemonId, rivalPokemonId, myMoveId));
+                battleService.calculateBattleResultV1(weatherId, myPokemonId, rivalPokemonId, myMoveId));
+    }
+
+    @GetMapping("/api/v2/battle")
+    public ApiResponse<BattleResultResponseV2> battleResultV2(@RequestParam("weather-id") String weatherId,
+                                                              @RequestParam("my-pokemon-id") String myPokemonId,
+                                                              @RequestParam("rival-pokemon-id") String rivalPokemonId,
+                                                              @RequestParam("my-move-id") String myMoveId) {
+        return new ApiResponse<>("배틀 예측 결과 불러오기에 성공했습니다.",
+                battleService.calculateBattleResultV2(weatherId, myPokemonId, rivalPokemonId, myMoveId));
     }
 }
