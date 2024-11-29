@@ -1,7 +1,7 @@
 package com.pokerogue.helper.pokemon.dto;
 
 
-import com.pokerogue.helper.pokemon.config.ImageUrl;
+import com.pokerogue.helper.global.config.ImageUrl;
 import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 

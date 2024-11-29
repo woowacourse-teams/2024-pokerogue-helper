@@ -1,5 +1,6 @@
 package com.pokerogue.helper.move.dto;
 
+import com.pokerogue.helper.global.config.ImageUrl;
 import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.move.data.MoveFlag;
@@ -38,9 +39,9 @@ public record MoveDetailResponse(
                 move.getId(),
                 move.getKoName(),
                 type.getName(),
-                type.getImage(),
+                ImageUrl.getTypeImage(type.getName()),
                 moveCategory.getEngName(),
-                moveCategory.getImage(),
+                ImageUrl.getMoveCategoryImage(moveCategory.getEngName()),
                 move.getMoveTarget().getId(),
                 move.getPower(),
                 move.getAccuracy(),

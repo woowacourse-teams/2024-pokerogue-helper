@@ -9,36 +9,34 @@ import lombok.Getter;
 @Getter
 public enum Type {
 
-    GRASS("grass", "풀", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/grass"),
-    POISON("poison", "독", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/poison"),
-    FIRE("fire", "불꽃", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/fire"),
-    WATER("water", "물", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/water"),
-    ELECTRIC("electric", "전기", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/electric"),
-    NORMAL("normal", "노말", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/normal"),
-    FAIRY("fairy", "페어리", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/fairy"),
-    BUG("bug", "벌레", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/bug"),
-    DARK("dark", "악", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/dark"),
-    DRAGON("dragon", "드래곤", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/dragon"),
-    FIGHTING("fighting", "격투", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/fighting"),
-    FLYING("flying", "비행", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/flying"),
-    GHOST("ghost", "고스트", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/ghost"),
-    GROUND("ground", "땅", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/ground"),
-    ICE("ice", "얼음", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/ice"),
-    ROCK("rock", "바위", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/rock"),
-    PSYCHIC("psychic", "에스퍼", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/psychic"),
-    STEEL("steel", "강철", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/steel"),
-    STELLAR("stellar", "스텔라", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/stellar"),
-    UNKNOWN("unknown", "언노운", "https://dl70s9ccojnge.cloudfront.net/pokerogue-helper/pokerogue/type/unknown"),
+    GRASS("grass", "풀"),
+    POISON("poison", "독"),
+    FIRE("fire", "불꽃"),
+    WATER("water", "물"),
+    ELECTRIC("electric", "전기"),
+    NORMAL("normal", "노말"),
+    FAIRY("fairy", "페어리"),
+    BUG("bug", "벌레"),
+    DARK("dark", "악"),
+    DRAGON("dragon", "드래곤"),
+    FIGHTING("fighting", "격투"),
+    FLYING("flying", "비행"),
+    GHOST("ghost", "고스트"),
+    GROUND("ground", "땅"),
+    ICE("ice", "얼음"),
+    ROCK("rock", "바위"),
+    PSYCHIC("psychic", "에스퍼"),
+    STEEL("steel", "강철"),
+    STELLAR("stellar", "스텔라"),
+    UNKNOWN("unknown", "언노운"),
     ;
 
     private final String name;
     private final String koName;
-    private final String image;
 
-    Type(String name, String koName, String image) {
+    Type(String name, String koName) {
         this.name = name;
         this.koName = koName;
-        this.image = image;
     }
 
     public static Optional<Type> findByName(String name) {
