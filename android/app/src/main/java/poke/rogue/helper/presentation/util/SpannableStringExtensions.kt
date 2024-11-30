@@ -8,11 +8,6 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
 import android.text.style.StyleSpan
 
-inline fun SpannableString.applySpans(configure: SpannableString.() -> Unit): SpannableString {
-    this.configure()
-    return this
-}
-
 fun SpannableString.drawable(
     fullText: String,
     iconDrawable: Drawable?,

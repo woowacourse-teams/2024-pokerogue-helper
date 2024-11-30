@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
-import poke.rogue.helper.presentation.util.applySpans
 import poke.rogue.helper.presentation.util.color
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.drawableOf
@@ -40,10 +39,10 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
                     context.stringOf(
                         resId = R.string.type_my_type_result,
                         formatArgs =
-                            arrayOf(
-                                typeName,
-                                matchedResultText,
-                            ),
+                        arrayOf(
+                            typeName,
+                            matchedResultText,
+                        ),
                     ),
                     binding.tvMyTypeResult,
                 )
@@ -52,10 +51,10 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
                     context.stringOf(
                         resId = R.string.type_opponent_type_result,
                         formatArgs =
-                            arrayOf(
-                                typeName,
-                                matchedResultText,
-                            ),
+                        arrayOf(
+                            typeName,
+                            matchedResultText,
+                        ),
                     ),
                     binding.tvOpponentTypeResult,
                 )
@@ -80,7 +79,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
         color: Int,
     ) {
         val spannableString =
-            SpannableString(fullText).applySpans {
+            SpannableString(fullText).apply {
                 drawable(
                     iconDrawable = textView.context.drawableOf(iconRes),
                     iconSize = (textView.textSize * 1.2).toInt(),
