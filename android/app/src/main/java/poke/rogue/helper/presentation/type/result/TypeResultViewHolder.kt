@@ -34,7 +34,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
         val matchedResultTextColor = context.colorOf(typeMatchedResult.matchedResultUi.colorRes)
         val iconResource = typeMatchedResult.selectedType.typeIconResId
 
-        val (result, textView) =
+        val (typeResult: String, typeResultView: TextView) =
             if (isMyType) {
                 Pair(
                     context.stringOf(
@@ -62,8 +62,8 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
             }
 
         styleText(
-            textView = textView,
-            fullText = result,
+            textView = typeResultView,
+            fullText = typeResult,
             iconRes = iconResource,
             colorTargetWord = matchedResultText,
             fontStyleTargetWord = typeName,
