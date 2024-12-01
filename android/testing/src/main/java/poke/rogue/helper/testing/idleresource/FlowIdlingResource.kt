@@ -6,6 +6,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+inline fun <reified T : Any> Flow<T>.asIdlingResource(
+    coroutineScope: CoroutineScope,
+    crossinline idleCondition: (T) -> Boolean,
+): IdlingResource {
+    return FlowIdlingResource(this, coroutineScope) { value ->
+        idleCondition(value)
+    }
+}
+
 class FlowIdlingResource<T>(
     flow: Flow<T>,
     coroutineScope: CoroutineScope,
