@@ -13,11 +13,19 @@ import org.junit.Test
 import org.junit.jupiter.api.DisplayName
 import org.junit.runner.RunWith
 import poke.rogue.helper.R
+import poke.rogue.helper.presentation.di.testViewModelModule
+import poke.rogue.helper.testing.rule.KoinAndroidUnitTestRule
 
 @RunWith(AndroidJUnit4::class)
 class TypeActivityTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(TypeActivity::class.java)
+
+    @get:Rule
+    val koinTestRule =
+        KoinAndroidUnitTestRule(
+            testViewModelModule,
+        )
 
     @Test
     @DisplayName("사용자가 아무것도 선택하지 않은 경우에는 선택 안내 이미지가 보인다")
