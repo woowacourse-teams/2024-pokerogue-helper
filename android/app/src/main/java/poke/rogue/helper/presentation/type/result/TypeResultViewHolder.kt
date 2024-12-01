@@ -50,18 +50,16 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
     private fun bindTypeResultView(
         typeResultView: TypeResultView,
         matchedTypeResource: MatchedTypeResource,
-    ) = SpannedString(typeResultView.text).drawable(
-        iconDrawable = matchedTypeResource.iconDrawable,
-        iconSize = (typeResultView.textView.textSize * 1.2).toInt(),
-        fullText = typeResultView.text,
-    ).style(
-        targetWord = matchedTypeResource.typeName,
-        fullText = typeResultView.text,
-    ).color(
-        fullText = typeResultView.text,
-        targetWord = matchedTypeResource.matchedResult,
-        color = matchedTypeResource.matchedResultColor,
-    )
+    ): SpannedString =
+        SpannedString(typeResultView.text).drawable(
+            iconDrawable = matchedTypeResource.iconDrawable,
+            iconSize = (typeResultView.textView.textSize * 1.2).toInt(),
+        ).style(
+            targetWord = matchedTypeResource.typeName,
+        ).color(
+            targetWord = matchedTypeResource.matchedResult,
+            color = matchedTypeResource.matchedResultColor,
+        )
 }
 
 private data class MatchedTypeResource(
