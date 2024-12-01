@@ -161,6 +161,7 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
     implementation(libs.splash.screen)
+    implementation(libs.balloon)
     // google & firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics.buildtools)
@@ -170,14 +171,15 @@ dependencies {
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
     androidTestImplementation(libs.koin.android.test)
+    // unit test
+    testRuntimeOnly(libs.junit.vintage.engine)
+    // robolectric test
+    testImplementation(libs.robolectric)
+    testImplementation(libs.bundles.android.test)
     // android test
     androidTestImplementation(libs.bundles.android.test)
     debugImplementation(libs.bundles.android.test)
-    testRuntimeOnly(libs.junit.vintage.engine)
-    testImplementation(libs.bundles.robolectric.test)
     androidTestRuntimeOnly(libs.junit5.android.test.runner)
     testImplementation(libs.android.test.fragment)
     debugImplementation(libs.android.test.fragment.manifest)
-
-    implementation(libs.balloon)
 }
