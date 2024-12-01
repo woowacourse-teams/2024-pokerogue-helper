@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.util
 
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.Spannable
 import android.text.SpannableString
@@ -31,12 +30,15 @@ fun SpannedString.drawable(
     return SpannedString(spannable)
 }
 
-fun SpannedString.style(targetWord: String): SpannedString {
+fun SpannedString.style(
+    targetWord: String,
+    styleSpan: StyleSpan,
+): SpannedString {
     val spannable = SpannableString(this)
     val startIndex = indexOf(targetWord)
     if (startIndex != -1) {
         spannable.setSpan(
-            StyleSpan(Typeface.BOLD),
+            styleSpan,
             startIndex,
             startIndex + targetWord.length,
             SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE,
@@ -79,11 +81,14 @@ fun SpannableString.drawable(
     return this
 }
 
-fun SpannableString.style(targetWord: String): SpannableString {
+fun SpannableString.style(
+    targetWord: String,
+    styleSpan: StyleSpan,
+): SpannableString {
     val startIndex = indexOf(targetWord)
     if (startIndex != -1) {
         this.setSpan(
-            StyleSpan(Typeface.BOLD),
+            styleSpan,
             startIndex,
             startIndex + targetWord.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,

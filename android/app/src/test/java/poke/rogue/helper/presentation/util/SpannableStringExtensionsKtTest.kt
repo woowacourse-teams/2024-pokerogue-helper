@@ -73,7 +73,7 @@ class SpannableStringExtensionsKtTest {
         val targetWord = "Fire"
 
         val spannable = SpannableString(fullText)
-        spannable.style(targetWord)
+        spannable.style(targetWord = targetWord, styleSpan = StyleSpan(Typeface.BOLD))
 
         val spans = spannable.getSpans(0, spannable.length, StyleSpan::class.java)
         spans.size shouldBe 1
@@ -140,7 +140,11 @@ class SpannableStringExtensionsKtTest {
         val targetWord = "Fire"
 
         val spannedString = SpannedString(fullText)
-        val updatedSpanned = spannedString.style(targetWord)
+        val updatedSpanned =
+            spannedString.style(
+                targetWord = targetWord,
+                styleSpan = StyleSpan(Typeface.BOLD),
+            )
 
         val spans = updatedSpanned.getSpans(0, updatedSpanned.length, StyleSpan::class.java)
         spans.size shouldBe 1

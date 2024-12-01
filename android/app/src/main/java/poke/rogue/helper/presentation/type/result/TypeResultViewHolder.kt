@@ -1,7 +1,9 @@
 package poke.rogue.helper.presentation.type.result
 
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.SpannedString
+import android.text.style.StyleSpan
 import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +58,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
             iconSize = (typeResultView.textView.textSize * 1.2).toInt(),
         ).style(
             targetWord = matchedTypeResource.typeName,
+            styleSpan = StyleSpan(Typeface.BOLD),
         ).color(
             targetWord = matchedTypeResource.matchedResult,
             color = matchedTypeResource.matchedResultColor,
