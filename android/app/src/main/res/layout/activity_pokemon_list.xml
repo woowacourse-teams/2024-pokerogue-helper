@@ -154,5 +154,20 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_poke_list_scroll_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/poke_grey_60"
+            android:contentDescription="Scroll Up"
+            android:gravity="center"
+            android:src="@drawable/ic_arrow_up_24"
+            android:visibility="gone"
+            app:fabCustomSize="44dp"
+            app:iconSize="12dp"
+            app:layout_anchor="@id/rv_pokemon_list"
+            app:layout_anchorGravity="bottom|end"
+            tools:visibility="visible" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
