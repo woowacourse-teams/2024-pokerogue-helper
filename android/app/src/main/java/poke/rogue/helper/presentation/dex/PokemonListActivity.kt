@@ -2,8 +2,15 @@ package poke.rogue.helper.presentation.dex
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityPokemonListBinding
@@ -56,6 +63,53 @@ class PokemonListActivity :
                     spanCount = spanCount,
                     spacing = 9.dp,
                     includeEdge = false,
+                ),
+            )
+            addOnScrollListener(pokemonListScrollListener())
+        }
+    }
+
+    private fun pokemonListScrollListener() =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(
+                recyclerView: RecyclerView,
+                dx: Int,
+                dy: Int,
+            ) {
+                if (!recyclerView.canScrollVertically(-1)) {
+                    hideScrollUpButton()
+                } else {
+                    showScrollUpButton()
+                }
+            }
+
+            override fun onScrollStateChanged(
+                recyclerView: RecyclerView,
+                newState: Int,
+            ) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    hideScrollUpButton()
+                }
+            }
+        }
+
+    private fun showScrollUpButton() {
+        val scrollUpButton = binding.btnPokeListScrollUp
+        if (scrollUpButton.isVisible) return
+        scrollUpButton.isVisible = true
+        scrollUpButton.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+    }
+
+    private fun hideScrollUpButton() {
+        val scrollUpButton = binding.btnPokeListScrollUp
+        if (scrollUpButton.isGone) return
+        lifecycleScope.launch {
+            delay(300L)
+            scrollUpButton.isGone = true
+            scrollUpButton.startAnimation(
+                AnimationUtils.loadAnimation(
+                    this@PokemonListActivity,
+                    R.anim.fade_out,
                 ),
             )
         }
@@ -128,6 +182,10 @@ class PokemonListActivity :
     }
 
     private fun initListeners() {
+        binding.btnPokeListScrollUp.setOnClickListener {
+            binding.rvPokemonList.scrollToPosition(0)
+            binding.appBarPokemonList.setExpanded(true, true)
+        }
         binding.root.setOnClickListener {
             hideKeyboard()
         }
