@@ -1,26 +1,26 @@
 package com.pokerogue.helper.ability.service;
 
-import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.ability.data.Ability;
 import com.pokerogue.helper.ability.dto.AbilityDetailResponse;
 import com.pokerogue.helper.ability.dto.AbilityPokemonResponse;
 import com.pokerogue.helper.ability.dto.AbilityResponse;
 import com.pokerogue.helper.ability.dto.AbilityTypeResponse;
 import com.pokerogue.helper.ability.repository.AbilityRepository;
+import com.pokerogue.helper.global.config.ImageUrl;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class AbilityService {
 
-    private final S3Service s3Service;
     private final AbilityRepository abilityRepository;
     private final PokemonRepository pokemonRepository;
 
@@ -40,7 +40,7 @@ public class AbilityService {
         List<AbilityPokemonResponse> abilityPokemonResponses = pokemons.stream()
                 .map(pokemon -> AbilityPokemonResponse.of(
                         pokemon,
-                        s3Service.getPokemonImageFromS3(pokemon.getImageId()),
+                        ImageUrl.getPokemonImage(pokemon.getImageId()),
                         getAbilityTypeResponses(pokemon.getTypes())
                 ))
                 .toList();
