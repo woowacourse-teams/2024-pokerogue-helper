@@ -4,30 +4,27 @@ import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.data.MoveCategory;
 import com.pokerogue.helper.type.data.Type;
 
-public record BattleResultResponse(
+public record BattleResultResponseV1(
         int power,
         double multiplier,
         double accuracy,
         String moveName,
         String moveDescription,
         String moveType,
-        String moveCategory,
-        boolean isPreemptive
+        String moveCategory
 ) {
-
-    public static BattleResultResponse from(Move move, double multiplier, double accuracy, boolean isPreemptive) {
+    public static BattleResultResponseV1 from(Move move, double multiplier, double accuracy) {
         Type moveType = move.getType();
         MoveCategory moveCategory = move.getMoveCategory();
 
-        return new BattleResultResponse(
+        return new BattleResultResponseV1(
                 move.getPower(),
                 multiplier,
                 accuracy,
                 move.getName(),
                 move.getEffect(),
                 moveType.getKoName(),
-                moveCategory.getName(),
-                isPreemptive
+                moveCategory.getName()
         );
     }
 }
