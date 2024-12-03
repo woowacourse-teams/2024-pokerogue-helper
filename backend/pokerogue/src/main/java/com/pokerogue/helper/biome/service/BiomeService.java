@@ -1,16 +1,9 @@
 package com.pokerogue.helper.biome.service;
 
-import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.NativePokemon;
 import com.pokerogue.helper.biome.data.Trainer;
-import com.pokerogue.helper.biome.dto.BiomeAllPokemonResponse;
-import com.pokerogue.helper.biome.dto.BiomeDetailResponse;
-import com.pokerogue.helper.biome.dto.BiomePokemonResponse;
-import com.pokerogue.helper.biome.dto.BiomeResponse;
-import com.pokerogue.helper.biome.dto.BiomeTypeResponse;
-import com.pokerogue.helper.biome.dto.NextBiomeResponse;
-import com.pokerogue.helper.biome.dto.TrainerPokemonResponse;
+import com.pokerogue.helper.biome.dto.*;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.config.ImageUrl;
 import com.pokerogue.helper.global.constant.SortingCriteria;
@@ -18,15 +11,15 @@ import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class BiomeService {
 
-    private final S3Service s3Service;
     private final BiomeRepository biomeRepository;
     private final PokemonRepository pokemonRepository;
 

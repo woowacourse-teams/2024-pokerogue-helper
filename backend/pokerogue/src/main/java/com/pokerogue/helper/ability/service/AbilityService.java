@@ -1,6 +1,5 @@
 package com.pokerogue.helper.ability.service;
 
-import com.pokerogue.external.s3.service.S3Service;
 import com.pokerogue.helper.ability.data.Ability;
 import com.pokerogue.helper.ability.dto.AbilityDetailResponse;
 import com.pokerogue.helper.ability.dto.AbilityPokemonResponse;
@@ -13,15 +12,15 @@ import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class AbilityService {
 
-    private final S3Service s3Service;
     private final AbilityRepository abilityRepository;
     private final PokemonRepository pokemonRepository;
 
