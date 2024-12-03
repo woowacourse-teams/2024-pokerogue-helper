@@ -8,6 +8,7 @@ public enum ImageUrl {
     TYPE("/type/"),
     MOVE_CATEGORY("/move-category/"),
     BIOME("/biome/"),
+    TRAINER("/trainer/"),
     ;
 
     private static final String PNG = ".png";
@@ -35,5 +36,9 @@ public enum ImageUrl {
 
     public static String getTypeImage(String id) {
         return BASE_URL.url + TYPE.url + id;
+    }
+
+    public static String getTrainerImage(String id) {
+        return BASE_URL.url + TRAINER.url + id + PNG;
     }
 }

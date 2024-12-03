@@ -7,6 +7,7 @@ import com.pokerogue.helper.ability.dto.AbilityPokemonResponse;
 import com.pokerogue.helper.ability.dto.AbilityResponse;
 import com.pokerogue.helper.ability.dto.AbilityTypeResponse;
 import com.pokerogue.helper.ability.repository.AbilityRepository;
+import com.pokerogue.helper.global.config.ImageUrl;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Pokemon;
@@ -40,7 +41,7 @@ public class AbilityService {
         List<AbilityPokemonResponse> abilityPokemonResponses = pokemons.stream()
                 .map(pokemon -> AbilityPokemonResponse.of(
                         pokemon,
-                        s3Service.getPokemonImageFromS3(pokemon.getImageId()),
+                        ImageUrl.getPokemonImage(pokemon.getImageId()),
                         getAbilityTypeResponses(pokemon.getTypes())
                 ))
                 .toList();

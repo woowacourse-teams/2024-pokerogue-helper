@@ -34,7 +34,7 @@ public class BiomeService {
         return biomeRepository.findAll().stream()
                 .map(biome -> BiomeResponse.of(
                         biome,
-                        s3Service.getBiomeImageFromS3(biome.getId()),
+                        ImageUrl.getBiomeImage(biome.getId()),
                         getTypesResponses(biome.getTypes()),
                         getTrainerTypesResponses(biome.getTrainers()))
                 )
@@ -47,7 +47,7 @@ public class BiomeService {
 
         return BiomeDetailResponse.of(
                 biome,
-                s3Service.getBiomeImageFromS3(biome.getId()),
+                ImageUrl.getBiomeImage(biome.getId()),
                 getWildPokemons(biome.getNativePokemons(), wildPokemonOrder),
                 getBossPokemons(biome.getNativePokemons(), bossPokemonOrder),
                 getTrainerPokemons(biome),
@@ -79,7 +79,7 @@ public class BiomeService {
         return biome.getTrainers().stream()
                 .map(trainer -> TrainerPokemonResponse.from(
                         trainer,
-                        s3Service.getTrainerImageFromS3(trainer.getName()),
+                        ImageUrl.getTrainerImage(trainer.getName()),
                         getTypesResponses(trainer.getTypes()),
                         getBiomePokemons(trainer.getPokemonIds()))
                 )
@@ -94,7 +94,7 @@ public class BiomeService {
 
                     return NextBiomeResponse.of(
                             nextBiome,
-                            s3Service.getBiomeImageFromS3(nextBiome.getId()),
+                            ImageUrl.getBiomeImage(nextBiome.getId()),
                             String.valueOf(nextBiomeInfo.getPercentage()),
                             getTypesResponses(nextBiome.getTypes()),
                             getTrainerTypesResponses(nextBiome.getTrainers())
@@ -108,7 +108,7 @@ public class BiomeService {
                 .map(pokemon -> new BiomePokemonResponse(
                         pokemon.getId(),
                         pokemon.getKoName(),
-                        s3Service.getPokemonImageFromS3(pokemon.getImageId()),
+                        ImageUrl.getPokemonImage(pokemon.getImageId()),
                         getTypesResponses(pokemon.getTypes()))
                 )
                 .distinct()
