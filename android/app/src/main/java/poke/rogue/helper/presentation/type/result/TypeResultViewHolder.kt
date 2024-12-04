@@ -1,21 +1,23 @@
 package poke.rogue.helper.presentation.type.result
 
+import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.SpannedString
 import android.text.style.StyleSpan
 import android.widget.TextView
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
+import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding
 import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
-import poke.rogue.helper.presentation.util.color
+import poke.rogue.helper.presentation.util.addIcon
+import poke.rogue.helper.presentation.util.applyColor
+import poke.rogue.helper.presentation.util.applyFontStyle
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
-import poke.rogue.helper.presentation.util.drawable
-import poke.rogue.helper.presentation.util.style
 
 class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -53,22 +55,32 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
         typeResultView: TypeResultView,
         matchedTypeResource: MatchedTypeResource,
     ): SpannedString =
-        SpannedString(typeResultView.text).drawable(
-            iconDrawable = matchedTypeResource.iconDrawable,
-            iconSize = (typeResultView.textView.textSize * 1.2).toInt(),
-        ).style(
-            targetWord = matchedTypeResource.typeName,
-            styleSpan = StyleSpan(Typeface.BOLD),
-        ).color(
-            targetWord = matchedTypeResource.matchedResult,
-            color = matchedTypeResource.matchedResultColor,
-        )
+        buildSpannedString {
+            val fullText = typeResultView.text
+            val iconSIze = (typeResultView.textView.textSize * 1.2).toInt()
+            addIcon(
+                fullText = fullText,
+                iconDrawable = matchedTypeResource.iconDrawable,
+                delimiter = "|",
+                bounds = Rect(0, 0, iconSIze, iconSIze),
+            )
+            applyFontStyle(
+                fullText = fullText,
+                target = matchedTypeResource.typeName,
+                styleSpan = StyleSpan(Typeface.BOLD),
+            )
+            applyColor(
+                fullText = fullText,
+                target = matchedTypeResource.matchedResult,
+                color = matchedTypeResource.matchedResultColor,
+            )
+        }
 }
 
 private data class MatchedTypeResource(
     val typeName: String,
     val matchedResult: String,
-    @ColorRes val matchedResultColor: Int,
+    @ColorInt val matchedResultColor: Int,
     val iconDrawable: Drawable,
 ) {
     fun typeResultView(
