@@ -3,6 +3,7 @@ package poke.rogue.helper.presentation.util
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.text.Spannable
+import android.text.Spannable.SPAN_INCLUSIVE_EXCLUSIVE
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.SpannedString
@@ -117,41 +118,7 @@ fun SpannableString.color(
     return this
 }
 
-fun SpannableStringBuilder.applyColor(
-    fullText: String,
-    target: String,
-    @ColorInt color: Int,
-) {
-    val matchedResultStart = fullText.indexOf(target)
-
-    if (matchedResultStart != -1) {
-        setSpan(
-            ForegroundColorSpan(color),
-            matchedResultStart,
-            matchedResultStart + target.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
-        )
-    }
-}
-
-fun SpannableStringBuilder.applyFontStyle(
-    fullText: String,
-    target: String,
-    styleSpan: StyleSpan,
-) {
-    val typeNameStart = fullText.indexOf(target)
-
-    if (typeNameStart != -1) {
-        setSpan(
-            styleSpan,
-            typeNameStart,
-            typeNameStart + target.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
-        )
-    }
-}
-
-fun SpannableStringBuilder.addIcon(
+fun SpannableStringBuilder.appendIconWithString(
     fullText: String,
     iconDrawable: Drawable,
     delimiter: String,
@@ -168,3 +135,52 @@ fun SpannableStringBuilder.addIcon(
         append(fullText)
     }
 }
+
+fun SpannableStringBuilder.addIcon(
+    fullText: String,
+    targetDelimiter: String,
+    iconDrawable: Drawable,
+    bounds: Rect,
+) {
+    val delimiterIndex = fullText.indexOf(targetDelimiter)
+    setSpan(
+        ImageSpan(iconDrawable.apply { setBounds(bounds) }, ImageSpan.ALIGN_BOTTOM),
+        delimiterIndex,
+        delimiterIndex + 1,
+        SPAN_INCLUSIVE_EXCLUSIVE,
+    )
+}
+
+fun SpannableStringBuilder.applyFontStyle(
+    fullText: String,
+    target: String,
+    styleSpan: StyleSpan,
+) {
+    val typeNameStartIndex = fullText.indexOf(target)
+    if (typeNameStartIndex.isValid()) {
+        setSpan(
+            styleSpan,
+            typeNameStartIndex,
+            typeNameStartIndex + target.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
+        )
+    }
+}
+
+fun SpannableStringBuilder.applyColor(
+    fullText: String,
+    target: String,
+    @ColorInt color: Int,
+) {
+    val matchedResultStartIndex = fullText.indexOf(target)
+    if (matchedResultStartIndex.isValid()) {
+        setSpan(
+            ForegroundColorSpan(color),
+            matchedResultStartIndex,
+            matchedResultStartIndex + target.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
+        )
+    }
+}
+
+private fun Int.isValid() = this != -1
