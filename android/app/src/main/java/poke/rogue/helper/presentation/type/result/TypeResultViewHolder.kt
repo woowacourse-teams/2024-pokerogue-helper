@@ -54,14 +54,15 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
     private fun bindTypeResultView(
         typeResultView: TypeResultView,
         matchedTypeResource: MatchedTypeResource,
-    ): SpannedString =
-        buildSpannedString {
-            val fullText = typeResultView.text
-            val iconSIze = (typeResultView.textView.textSize * 1.2).toInt()
+    ): SpannedString {
+        val fullText = typeResultView.text
+        val iconSIze = (typeResultView.textView.textSize * 1.2).toInt()
+        return buildSpannedString {
+            append(fullText)
             addIcon(
                 fullText = fullText,
+                targetDelimiter = "|",
                 iconDrawable = matchedTypeResource.iconDrawable,
-                delimiter = "|",
                 bounds = Rect(0, 0, iconSIze, iconSIze),
             )
             applyFontStyle(
@@ -75,6 +76,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
                 color = matchedTypeResource.matchedResultColor,
             )
         }
+    }
 }
 
 private data class MatchedTypeResource(
