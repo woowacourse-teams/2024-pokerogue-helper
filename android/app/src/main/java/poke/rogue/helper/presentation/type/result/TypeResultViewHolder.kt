@@ -15,6 +15,7 @@ import poke.rogue.helper.presentation.type.model.MatchedTypesUiModel
 import poke.rogue.helper.presentation.util.addIcon
 import poke.rogue.helper.presentation.util.applyColor
 import poke.rogue.helper.presentation.util.applyFontStyle
+import poke.rogue.helper.presentation.util.buildSpannedString
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.drawableOf
 import poke.rogue.helper.presentation.util.context.stringOf
@@ -57,8 +58,7 @@ class TypeResultViewHolder(private val binding: ItemTypeResultBinding) :
     ): SpannedString {
         val fullText = typeResultView.text
         val iconSIze = (typeResultView.textView.textSize * 1.2).toInt()
-        return buildSpannedString {
-            append(fullText)
+        return buildSpannedString(fullText) {
             addIcon(
                 fullText = fullText,
                 targetDelimiter = "|",
