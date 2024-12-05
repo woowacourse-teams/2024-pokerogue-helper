@@ -1,8 +1,8 @@
 package poke.rogue.helper.presentation.util
 
+import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
 import android.text.style.StyleSpan
@@ -26,63 +26,88 @@ class SpannableStringExtensionsKtTest {
     }
 
     @Test
-    fun `아이콘이 버티컬 라인 위치에 drawable 스팬이 정확히 추가된다`() {
-        val fullText = "Fire is | strong against Grass"
-        val spannable = SpannableString(fullText)
+    fun `SpannableStringBuilder 에 아이콘이 구분자 위치에 추가된다`() {
+        // given
+        val delimiter = "|"
+        val fullText = "Fire is $delimiter strong against Grass"
+        val iconBound = Rect(0, 0, 50, 50)
 
-        val iconSize = 50
+        // when
+        val spannedString =
+            buildSpannedString(fullText) {
+                addIcon(
+                    fullText = fullText,
+                    targetDelimiter = delimiter,
+                    iconDrawable = mockDrawable,
+                    bounds = iconBound,
+                )
+            }
 
-        spannable.drawable(fullText, mockDrawable, iconSize)
+        // then
+        val spans = spannedString.getSpans(0, spannedString.length, ImageSpan::class.java)
+        spans.size shouldBe 1
 
-        // getImageSpans only
-        val spans = spannable.getSpans(0, spannable.length, ImageSpan::class.java)
-        val imageSpan = spans[0] ?: error("ImageSpan not found")
+        val imageSpan = spans[0]
+        val iconStart = spannedString.getSpanStart(imageSpan)
+        val iconENd = spannedString.getSpanEnd(imageSpan)
 
-        val start = spannable.getSpanStart(imageSpan)
-        val end = spannable.getSpanEnd(imageSpan)
-
-        fullText.indexOf("|") shouldBe start
-        fullText.indexOf("|") + 1 shouldBe end
+        iconStart shouldBe 8
+        iconENd shouldBe 9
     }
 
     @Test
-    fun `컬러 스팬이 strong 위치에 적용된다`() {
-        val fullText = "Fire is strong against Grass"
-        val targetWord = "Grass"
+    fun `SpannableStringBuilder 에 컬러가 특정 단어에 적용된다`() {
+        // given
+        val fullText = "Fire is strong"
+        val targetWord = "Fire"
         val color = 0xFFFF0000.toInt() // Red color
 
-        val spannable = SpannableString(fullText)
-        spannable.color(targetWord, color, fullText)
+        val spannedString =
+            buildSpannedString(fullText) {
+                applyColor(
+                    fullText = fullText,
+                    target = targetWord,
+                    color = color,
+                )
+            }
 
-        // getColoredSpan Only
-        val spans = spannable.getSpans(0, spannable.length, ForegroundColorSpan::class.java)
-        val colorSpan = spans[0] ?: error("ColorSpan not found")
+        val spans = spannedString.getSpans(0, spannedString.length, ForegroundColorSpan::class.java)
+        spans.size shouldBe 1
 
-        val start = spannable.getSpanStart(colorSpan)
-        val end = spannable.getSpanEnd(colorSpan)
+        val colorSpan = spans[0]
+        val colorStart = spannedString.getSpanStart(colorSpan)
+        val endStart = spannedString.getSpanEnd(colorSpan)
 
-        fullText.indexOf(targetWord) shouldBe start
-        fullText.indexOf(targetWord) + targetWord.length shouldBe end
+        colorStart shouldBe 0
+        endStart shouldBe 4
     }
 
     @Test
-    fun `폰트 스타일 스팬이 Fire 위치에 적용된다`() {
-        val fullText = "Fire is strong against Grass"
+    fun `SpannableStringBuilder 에 폰트 스타일이 특정 단어에 적용된다`() {
+        // given
+        val fullText = "Fire is strong"
         val targetWord = "Fire"
 
-        val spannable = SpannableString(fullText)
-        spannable.style(targetWord, fullText)
+        // when
+        val spannedString =
+            buildSpannedString(fullText) {
+                applyFontStyle(
+                    fullText = fullText,
+                    target = targetWord,
+                    styleSpan = StyleSpan(Typeface.BOLD),
+                )
+            }
 
-        // getStyleSpan Only
-        val spans = spannable.getSpans(0, spannable.length, StyleSpan::class.java)
-        val styleSpan = spans[0] ?: error("StyleSpan not found")
+        // then
+        val spans = spannedString.getSpans(0, spannedString.length, StyleSpan::class.java)
+        spans.size shouldBe 1
 
-        val start = spannable.getSpanStart(styleSpan)
-        val end = spannable.getSpanEnd(styleSpan)
+        val styleSpan = spans[0]
+        val styleStart = spannedString.getSpanStart(styleSpan)
+        val styleEnd = spannedString.getSpanEnd(styleSpan)
 
-        fullText.indexOf(targetWord) shouldBe start
-        fullText.indexOf(targetWord) + targetWord.length shouldBe end
-
+        styleStart shouldBe 0
+        styleEnd shouldBe 4
         styleSpan.style shouldBe Typeface.BOLD
     }
 }

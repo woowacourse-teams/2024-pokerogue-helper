@@ -89,6 +89,11 @@ fun View.setVisible(
         }
 }
 
+@BindingAdapter("invisible")
+fun View.setInvisible(invisible: Boolean) {
+    visibility = if (invisible) View.INVISIBLE else View.VISIBLE
+}
+
 @BindingAdapter("backgroundTintRes")
 fun View.setBackgroundTint(
     @ColorRes colorRes: Int?,

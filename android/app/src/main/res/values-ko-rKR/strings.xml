@@ -14,9 +14,9 @@
     <string name="type_result_ineffective">무효한</string>
     <string name="type_result_normal">대등한</string>
 
-    <!--|: position of Type Icon , 1s: type name, 2s: type effect-->
-    <string name="type_my_type_result">| %1s (이)가 %2s 타입</string>
-    <string name="type_opponent_type_result">| %1s 에게 %2s 타입</string>
+    <!--|: position of Type Icon , 1$s: type name, 2$s: type effect-->
+    <string name="type_my_type_result">| %1$s (이)가 %2$s 타입</string>
+    <string name="type_opponent_type_result">| %1$s 에게 %2$s 타입</string>
 
     <string name="type_matching_type_normal">노말</string>
     <string name="type_matching_type_fire">불꽃</string>
