@@ -92,7 +92,7 @@ class PokemonListActivity :
 
                 binding.chipPokeSort.bindPokeChip(
                     PokeChip.Spec(
-                        label = uiState.sort.label.clean(),
+                        label = this.stringOf(uiState.sort.label),
                         trailingIconRes = R.drawable.ic_sort,
                         isSelected = uiState.isSorted,
                         padding = PaddingValues(horizontal = 10.dp, vertical = 8.dp),
