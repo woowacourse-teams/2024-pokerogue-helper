@@ -103,4 +103,46 @@ class PokemonDetailViewModelTest : KoinTest {
                     biomes = PokemonBiome.DUMMYS.toUi(),
                 )
         }
+
+    @Test
+    fun `홈으로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToHome()
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToHome
+        }
+
+    @Test
+    fun `특성 상세로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToAbilityDetail("10")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToAbilityDetail("10")
+        }
+
+    @Test
+    fun `바이옴 상세로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToBiomeDetail("10")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToBiomeDetail("10")
+        }
 }

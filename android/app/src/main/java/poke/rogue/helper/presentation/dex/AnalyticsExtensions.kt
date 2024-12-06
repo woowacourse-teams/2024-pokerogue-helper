@@ -2,7 +2,7 @@ package poke.rogue.helper.presentation.dex
 
 import poke.rogue.helper.analytics.AnalyticsEvent
 import poke.rogue.helper.analytics.AnalyticsLogger
-import poke.rogue.helper.presentation.dex.detail.NavigateToBattleEvent
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel.NavigationEvent
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.sort.PokemonSortUiModel
 
@@ -38,7 +38,7 @@ private fun PokeFilterUiModel.toParams(): List<AnalyticsEvent.Param> {
     } + AnalyticsEvent.Param(key = "generation", value = selectedGeneration.name)
 }
 
-fun AnalyticsLogger.logPokemonDetailToBattle(event: NavigateToBattleEvent) {
+fun AnalyticsLogger.logPokemonDetailToBattle(event: NavigationEvent.ToBattle) {
     val eventType = "pokemon_detail_to_battle_directly"
     logEvent(
         AnalyticsEvent(
@@ -48,11 +48,11 @@ fun AnalyticsLogger.logPokemonDetailToBattle(event: NavigateToBattleEvent) {
     )
 }
 
-private fun NavigateToBattleEvent.toParams(): List<AnalyticsEvent.Param> {
+private fun NavigationEvent.ToBattle.toParams(): List<AnalyticsEvent.Param> {
     val (battleRoleValue, pokemon) =
         when (this) {
-            is NavigateToBattleEvent.WithMyPokemon -> Pair("MyPokemon", pokemon)
-            is NavigateToBattleEvent.WithOpponentPokemon -> Pair("EnemyPokemon", pokemon)
+            is NavigationEvent.ToBattle.WithMyPokemon -> Pair("MyPokemon", pokemon)
+            is NavigationEvent.ToBattle.WithOpponentPokemon -> Pair("EnemyPokemon", pokemon)
         }
 
     return listOf(
