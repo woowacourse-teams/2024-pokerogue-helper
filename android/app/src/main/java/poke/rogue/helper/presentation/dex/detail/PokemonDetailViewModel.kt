@@ -23,7 +23,7 @@ class PokemonDetailViewModel(
     private val logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-        PokemonDetailNavigateHandler {
+    PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> =
         MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
@@ -31,15 +31,6 @@ class PokemonDetailViewModel(
     val isLoading: StateFlow<Boolean> =
         uiState.map { it is PokemonDetailUiState.IsLoading }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), true)
-
-    private val _navigationToAbilityDetailEvent = MutableEventFlow<String>()
-    val navigationToAbilityDetailEvent = _navigationToAbilityDetailEvent.asEventFlow()
-
-    private val _navigationToBiomeDetailEvent = MutableEventFlow<String>()
-    val navigationToBiomeDetailEvent = _navigationToBiomeDetailEvent.asEventFlow()
-
-    private val _navigateToHomeEvent = MutableEventFlow<Boolean>()
-    val navigateToHomeEvent = _navigateToHomeEvent.asEventFlow()
 
     private val _navigateToBattleEvent = MutableEventFlow<NavigateToBattleEvent>()
     val navigateToBattleEvent = _navigateToBattleEvent.asEventFlow()
@@ -59,24 +50,18 @@ class PokemonDetailViewModel(
 
     override fun navigateToAbilityDetail(abilityId: String) {
         viewModelScope.launch {
-            // TODO: REMOVE
-            _navigationToAbilityDetailEvent.emit(abilityId)
             _navigationEvent.emit(NavigationEvent.ToAbilityDetail(abilityId))
         }
     }
 
     override fun navigateToBiomeDetail(biomeId: String) {
         viewModelScope.launch {
-            // TODO: REMOVE
-            _navigationToBiomeDetailEvent.emit(biomeId)
             _navigationEvent.emit(NavigationEvent.ToBiomeDetail(biomeId))
         }
     }
 
     override fun navigateToHome() {
         viewModelScope.launch {
-            // TODO: REMOVE
-            _navigateToHomeEvent.emit(true)
             _navigationEvent.emit(NavigationEvent.ToHome)
         }
     }

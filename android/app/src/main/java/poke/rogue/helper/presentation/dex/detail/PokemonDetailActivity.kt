@@ -86,9 +86,7 @@ class PokemonDetailActivity :
 
     private fun initObservers() {
         observePokemonDetailUi()
-        observeNavigateToHomeEvent()
-        observeNavigateToAbilityDetailEvent()
-        observeNavigateToBiomeDetailEvent()
+        observeNavigationEvent()
         observePokemonEvolutionEvent()
         observeNavigateToBattleEvent()
     }
@@ -112,28 +110,28 @@ class PokemonDetailActivity :
         }
     }
 
-    private fun observeNavigateToHomeEvent() {
+
+    private fun observeNavigationEvent() {
         repeatOnStarted {
-            viewModel.navigateToHomeEvent.collect {
-                if (it) {
-                    startActivity(HomeActivity.intent(this))
+            viewModel.navigationEvent.collect { event ->
+                when (event) {
+                    is PokemonDetailViewModel.NavigationEvent.ToAbilityDetail ->
+                        startActivity(
+                            AbilityActivity.intent(this, event.id),
+                        )
+
+                    is PokemonDetailViewModel.NavigationEvent.ToBiomeDetail ->
+                        startActivity(
+                            BiomeDetailActivity.intent(this, event.id),
+                        )
+
+                    is PokemonDetailViewModel.NavigationEvent.ToHome ->
+                        startActivity(
+                            HomeActivity.intent(this),
+                        )
+
+                    PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
                 }
-            }
-        }
-    }
-
-    private fun observeNavigateToAbilityDetailEvent() {
-        repeatOnStarted {
-            viewModel.navigationToAbilityDetailEvent.collect { abilityId ->
-                startActivity(AbilityActivity.intent(this, abilityId))
-            }
-        }
-    }
-
-    private fun observeNavigateToBiomeDetailEvent() {
-        repeatOnStarted {
-            viewModel.navigationToBiomeDetailEvent.collect { biomeId ->
-                startActivity(BiomeDetailActivity.intent(this, biomeId))
             }
         }
     }
@@ -142,10 +140,20 @@ class PokemonDetailActivity :
         repeatOnStarted {
             viewModel.evolutionsEvent.collect { event ->
                 when (event) {
-                    is PokemonEvolutionEvent.NavigateToPokemonDetail -> startActivity(intent(this, event.pokemonId))
+                    is PokemonEvolutionEvent.NavigateToPokemonDetail ->
+                        startActivity(
+                            intent(
+                                this,
+                                event.pokemonId,
+                            ),
+                        )
+
                     is PokemonEvolutionEvent.SameWithCurrentPokemon ->
                         toast(
-                            this.stringOf(R.string.pokemon_detail_evolution_same_with_current_pokemon_message, event.pokemonName),
+                            this.stringOf(
+                                R.string.pokemon_detail_evolution_same_with_current_pokemon_message,
+                                event.pokemonName,
+                            ),
                         )
                 }
             }
