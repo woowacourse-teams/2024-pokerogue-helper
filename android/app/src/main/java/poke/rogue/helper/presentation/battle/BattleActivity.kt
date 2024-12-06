@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.battle
 
-import WeatherSpinnerAdapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
