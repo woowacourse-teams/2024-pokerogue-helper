@@ -76,13 +76,13 @@ class PokemonDetailViewModelTest : KoinTest {
                         ),
                     stats =
                         listOf(
-                            StatUiModel("HP", 45, 255, R.color.stat_hp),
-                            StatUiModel("공격", 49, 190, R.color.stat_attack),
-                            StatUiModel("방어", 49, 250, R.color.stat_defense),
-                            StatUiModel("특수공격", 65, 194, R.color.stat_special_attack),
-                            StatUiModel("특수방어", 65, 250, R.color.stat_special_defense),
-                            StatUiModel("스피드", 45, 200, R.color.stat_speed),
-                            StatUiModel("종족값", 318, 800, R.color.stat_total),
+                            StatUiModel(100, 45, 255, R.color.stat_hp),
+                            StatUiModel(200, 49, 190, R.color.stat_attack),
+                            StatUiModel(300, 49, 250, R.color.stat_defense),
+                            StatUiModel(400, 65, 194, R.color.stat_special_attack),
+                            StatUiModel(500, 65, 250, R.color.stat_special_defense),
+                            StatUiModel(600, 45, 200, R.color.stat_speed),
+                            StatUiModel(700, 318, 800, R.color.stat_total),
                         ),
                     abilities =
                         listOf(
@@ -102,5 +102,47 @@ class PokemonDetailViewModelTest : KoinTest {
                     weight = 6.9f,
                     biomes = PokemonBiome.DUMMYS.toUi(),
                 )
+        }
+
+    @Test
+    fun `홈으로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToHome()
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToHome
+        }
+
+    @Test
+    fun `특성 상세로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToAbilityDetail("10")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToAbilityDetail("10")
+        }
+
+    @Test
+    fun `바이옴 상세로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToBiomeDetail("10")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToBiomeDetail("10")
         }
 }
