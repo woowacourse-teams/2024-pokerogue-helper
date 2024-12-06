@@ -41,11 +41,11 @@ class PokemonDetailViewModel(
     private val _navigateToHomeEvent = MutableEventFlow<Boolean>()
     val navigateToHomeEvent = _navigateToHomeEvent.asEventFlow()
 
-    private val _navigateToPokemonDetailEvent = MutableEventFlow<String>()
-    val navigateToPokemonDetailEvent = _navigateToPokemonDetailEvent.asEventFlow()
-
     private val _navigateToBattleEvent = MutableEventFlow<NavigateToBattleEvent>()
     val navigateToBattleEvent = _navigateToBattleEvent.asEventFlow()
+
+    private val _evolutionsEvent = MutableEventFlow<PokemonEvolutionEvent>()
+    val evolutionsEvent = _evolutionsEvent.asEventFlow()
 
     fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
@@ -74,9 +74,13 @@ class PokemonDetailViewModel(
 
     override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
-            if (pokemonUiModel().id == pokemonId) return@launch
-
-            _navigateToPokemonDetailEvent.emit(pokemonId)
+            pokemonUiModel().let { pokemon ->
+                if (pokemon.id == pokemonId) {
+                    _evolutionsEvent.emit(PokemonEvolutionEvent.SameWithCurrentPokemon(pokemon.name))
+                    return@launch
+                }
+                _evolutionsEvent.emit(PokemonEvolutionEvent.NavigateToPokemonDetail(pokemonId))
+            }
         }
     }
 

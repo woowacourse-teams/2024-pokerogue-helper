@@ -22,6 +22,7 @@ import poke.rogue.helper.presentation.type.view.TypeChip
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
+import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
@@ -88,7 +89,7 @@ class PokemonDetailActivity :
         observeNavigateToHomeEvent()
         observeNavigateToAbilityDetailEvent()
         observeNavigateToBiomeDetailEvent()
-        observeNavigateToPokemonDetailEvent()
+        observePokemonEvolutionEvent()
         observeNavigateToBattleEvent()
     }
 
@@ -137,10 +138,13 @@ class PokemonDetailActivity :
         }
     }
 
-    private fun observeNavigateToPokemonDetailEvent() {
+    private fun observePokemonEvolutionEvent() {
         repeatOnStarted {
-            viewModel.navigateToPokemonDetailEvent.collect { pokemonId ->
-                startActivity(intent(this, pokemonId))
+            viewModel.evolutionsEvent.collect { event ->
+                when (event) {
+                    is PokemonEvolutionEvent.NavigateToPokemonDetail -> startActivity(intent(this, event.pokemonId))
+                    is PokemonEvolutionEvent.SameWithCurrentPokemon -> toast("너가 그 ${event.pokemonName} 이잖아.")
+                }
             }
         }
     }
