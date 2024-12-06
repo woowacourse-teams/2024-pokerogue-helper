@@ -24,7 +24,8 @@ class PokemonDetailViewModel(
 ) :
     ErrorHandleViewModel(logger),
         PokemonDetailNavigateHandler {
-    private val _uiState: MutableStateFlow<PokemonDetailUiState> = MutableStateFlow(PokemonDetailUiState.IsLoading)
+    private val _uiState: MutableStateFlow<PokemonDetailUiState> =
+        MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 
     val isLoading: StateFlow<Boolean> =
@@ -73,6 +74,8 @@ class PokemonDetailViewModel(
 
     override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
+            if (pokemonUiModel().id == pokemonId) return@launch
+
             _navigateToPokemonDetailEvent.emit(pokemonId)
         }
     }
