@@ -7,7 +7,6 @@ import android.text.SpannedString
 import android.text.style.StyleSpan
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemTypeResultBinding

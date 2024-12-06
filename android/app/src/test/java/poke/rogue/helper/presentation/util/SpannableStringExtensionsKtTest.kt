@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
 import android.text.style.StyleSpan
-import androidx.core.text.buildSpannedString
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.kotest.matchers.shouldBe
 import io.mockk.mockk
