@@ -88,7 +88,6 @@ class PokemonDetailActivity :
         observePokemonDetailUi()
         observeNavigationEvent()
         observePokemonEvolutionEvent()
-        observeNavigateToBattleEvent()
     }
 
     private fun initFloatingButtonsHandler() {
@@ -110,7 +109,6 @@ class PokemonDetailActivity :
         }
     }
 
-
     private fun observeNavigationEvent() {
         repeatOnStarted {
             viewModel.navigationEvent.collect { event ->
@@ -130,7 +128,14 @@ class PokemonDetailActivity :
                             HomeActivity.intent(this),
                         )
 
-                    PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
+                    is PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
+                    is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon -> startActivity(
+                        battleIntent(event)
+                    )
+
+                    is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon -> startActivity(
+                        battleIntent(event)
+                    )
                 }
             }
         }
@@ -160,34 +165,21 @@ class PokemonDetailActivity :
         }
     }
 
-    private fun observeNavigateToBattleEvent() {
-        repeatOnStarted {
-            viewModel.navigateToBattleEvent.collect { battleEvent ->
-                val intent = battleIntent(battleEvent)
-                startActivity<BattleActivity> {
-                    putExtras(intent)
-                }
-            }
-        }
-    }
-
-    private fun battleIntent(battleEvent: NavigateToBattleEvent): Intent =
+    private fun battleIntent(battleEvent: PokemonDetailViewModel.NavigationEvent.ToBattle): Intent =
         when (battleEvent) {
-            is NavigateToBattleEvent.WithMyPokemon -> {
+            is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon ->
                 BattleActivity.intent(
                     this@PokemonDetailActivity,
                     pokemonId = battleEvent.pokemon.id,
                     isMine = true,
                 )
-            }
 
-            is NavigateToBattleEvent.WithOpponentPokemon -> {
+            is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon ->
                 BattleActivity.intent(
                     this@PokemonDetailActivity,
                     pokemonId = battleEvent.pokemon.id,
                     isMine = false,
                 )
-            }
         }
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {

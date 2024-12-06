@@ -14,7 +14,7 @@ import poke.rogue.helper.analytics.AnalyticsLogger
 import poke.rogue.helper.analytics.analyticsLogger
 import poke.rogue.helper.data.repository.DexRepository
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.dex.logPokemonDetailToBattle
+import poke.rogue.helper.presentation.dex.model.PokemonUiModel
 import poke.rogue.helper.presentation.util.event.MutableEventFlow
 import poke.rogue.helper.presentation.util.event.asEventFlow
 
@@ -23,7 +23,7 @@ class PokemonDetailViewModel(
     private val logger: AnalyticsLogger = analyticsLogger(),
 ) :
     ErrorHandleViewModel(logger),
-    PokemonDetailNavigateHandler {
+        PokemonDetailNavigateHandler {
     private val _uiState: MutableStateFlow<PokemonDetailUiState> =
         MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
@@ -31,9 +31,6 @@ class PokemonDetailViewModel(
     val isLoading: StateFlow<Boolean> =
         uiState.map { it is PokemonDetailUiState.IsLoading }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), true)
-
-    private val _navigateToBattleEvent = MutableEventFlow<NavigateToBattleEvent>()
-    val navigateToBattleEvent = _navigateToBattleEvent.asEventFlow()
 
     private val _navigationEvent = MutableEventFlow<NavigationEvent>()
     val navigationEvent = _navigationEvent.asEventFlow()
@@ -80,17 +77,17 @@ class PokemonDetailViewModel(
 
     override fun navigateToBattleWithMine() {
         viewModelScope.launch {
-            val navigation = NavigateToBattleEvent.WithMyPokemon(pokemonUiModel())
-            _navigateToBattleEvent.emit(navigation)
-            logger.logPokemonDetailToBattle(navigation)
+            val navigation2 = NavigationEvent.ToBattle.WithMyPokemon(pokemonUiModel())
+            _navigationEvent.emit(navigation2)
+//            logger.logPokemonDetailToBattle(navigation) // TODO: change
         }
     }
 
     override fun navigateToBattleWithOpponent() {
         viewModelScope.launch {
-            val navigation = NavigateToBattleEvent.WithOpponentPokemon(pokemonUiModel())
-            _navigateToBattleEvent.emit(navigation)
-            logger.logPokemonDetailToBattle(navigation)
+            val navigation2 = NavigationEvent.ToBattle.WithOpponentPokemon(pokemonUiModel())
+            _navigationEvent.emit(navigation2)
+//            logger.logPokemonDetailToBattle(navigation) // TODO: change
         }
     }
 
@@ -107,5 +104,11 @@ class PokemonDetailViewModel(
         data object ToHome : NavigationEvent
 
         data object NONE : NavigationEvent
+
+        sealed class ToBattle : NavigationEvent {
+            data class WithMyPokemon(val pokemon: PokemonUiModel) : ToBattle()
+
+            data class WithOpponentPokemon(val pokemon: PokemonUiModel) : ToBattle()
+        }
     }
 }
