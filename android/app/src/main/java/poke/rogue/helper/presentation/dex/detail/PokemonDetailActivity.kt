@@ -19,9 +19,9 @@ import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
-import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
+import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
@@ -85,11 +85,7 @@ class PokemonDetailActivity :
 
     private fun initObservers() {
         observePokemonDetailUi()
-        observeNavigateToHomeEvent()
-        observeNavigateToAbilityDetailEvent()
-        observeNavigateToBiomeDetailEvent()
-        observeNavigateToPokemonDetailEvent()
-        observeNavigateToBattleEvent()
+        observeNavigationEvent()
     }
 
     private fun initFloatingButtonsHandler() {
@@ -111,69 +107,39 @@ class PokemonDetailActivity :
         }
     }
 
-    private fun observeNavigateToHomeEvent() {
+    private fun observeNavigationEvent() {
         repeatOnStarted {
-            viewModel.navigateToHomeEvent.collect {
-                if (it) {
-                    startActivity(HomeActivity.intent(this))
+            viewModel.navigationEvent.collect { event ->
+                when (event) {
+                    is PokemonDetailViewModel.NavigationEvent.ToAbilityDetail ->
+                        startActivity(
+                            AbilityActivity.intent(this, event.id),
+                        )
+
+                    is PokemonDetailViewModel.NavigationEvent.ToBiomeDetail ->
+                        startActivity(
+                            BiomeDetailActivity.intent(this, event.id),
+                        )
+
+                    is PokemonDetailViewModel.NavigationEvent.ToHome ->
+                        startActivity(
+                            HomeActivity.intent(this),
+                        )
+
+                    is PokemonDetailViewModel.NavigationEvent.ToBattle ->
+                        startActivity(
+                            battleIntent(
+                                event,
+                            ),
+                        )
+
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail -> navigateToPokemonDetail(event)
+
+                    is PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
                 }
             }
         }
     }
-
-    private fun observeNavigateToAbilityDetailEvent() {
-        repeatOnStarted {
-            viewModel.navigationToAbilityDetailEvent.collect { abilityId ->
-                startActivity(AbilityActivity.intent(this, abilityId))
-            }
-        }
-    }
-
-    private fun observeNavigateToBiomeDetailEvent() {
-        repeatOnStarted {
-            viewModel.navigationToBiomeDetailEvent.collect { biomeId ->
-                startActivity(BiomeDetailActivity.intent(this, biomeId))
-            }
-        }
-    }
-
-    private fun observeNavigateToPokemonDetailEvent() {
-        repeatOnStarted {
-            viewModel.navigateToPokemonDetailEvent.collect { pokemonId ->
-                startActivity(intent(this, pokemonId))
-            }
-        }
-    }
-
-    private fun observeNavigateToBattleEvent() {
-        repeatOnStarted {
-            viewModel.navigateToBattleEvent.collect { battleEvent ->
-                val intent = battleIntent(battleEvent)
-                startActivity<BattleActivity> {
-                    putExtras(intent)
-                }
-            }
-        }
-    }
-
-    private fun battleIntent(battleEvent: NavigateToBattleEvent): Intent =
-        when (battleEvent) {
-            is NavigateToBattleEvent.WithMyPokemon -> {
-                BattleActivity.intent(
-                    this@PokemonDetailActivity,
-                    pokemonId = battleEvent.pokemon.id,
-                    isMine = true,
-                )
-            }
-
-            is NavigateToBattleEvent.WithOpponentPokemon -> {
-                BattleActivity.intent(
-                    this@PokemonDetailActivity,
-                    pokemonId = battleEvent.pokemon.id,
-                    isMine = false,
-                )
-            }
-        }
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
@@ -210,6 +176,40 @@ class PokemonDetailActivity :
             config = typesUiConfig,
             spacingBetweenTypes = 0.dp,
         )
+    }
+
+    private fun battleIntent(battleEvent: PokemonDetailViewModel.NavigationEvent.ToBattle): Intent =
+        when (battleEvent) {
+            is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon ->
+                BattleActivity.intent(
+                    this@PokemonDetailActivity,
+                    pokemonId = battleEvent.pokemon.id,
+                    isMine = true,
+                )
+
+            is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon ->
+                BattleActivity.intent(
+                    this@PokemonDetailActivity,
+                    pokemonId = battleEvent.pokemon.id,
+                    isMine = false,
+                )
+        }
+
+    private fun navigateToPokemonDetail(event: PokemonDetailViewModel.NavigationEvent.ToPokemonDetail) {
+        when (event) {
+            is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Success ->
+                startActivity(
+                    intent(this, event.pokemonId),
+                )
+
+            is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Failure ->
+                toast(
+                    this.stringOf(
+                        R.string.pokemon_detail_evolution_same_with_current_pokemon_message,
+                        event.pokemonName,
+                    ),
+                )
+        }
     }
 
     private fun toggleFloatingButtons() {

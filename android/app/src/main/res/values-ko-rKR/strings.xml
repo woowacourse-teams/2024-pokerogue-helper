@@ -127,6 +127,7 @@
     <!--    pokemon detail evolution-->
     <string name="pokemon_detail_evolution_no_evolution_chain">진화 체인이 없는 포켓몬입니다.</string>
     <string name="pokemon_detail_evolution_level">레벨 %d</string>
+    <string name="pokemon_detail_evolution_same_with_current_pokemon_message">현재 화면의 포켓몬이 %s 입니다.</string>
 
     <!-- ability -->
     <string name="ability_title_name">특성 도감</string>
