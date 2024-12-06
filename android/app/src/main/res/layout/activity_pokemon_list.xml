@@ -10,70 +10,87 @@
             type="poke.rogue.helper.presentation.dex.PokemonListViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".presentation.dex.PokemonListActivity">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_dex"
-            style="@style/CustomToolbarStyle"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:contentInsetStartWithNavigation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/pokemon_list_title_name">
-
-            <androidx.appcompat.widget.SearchView
-                style="@style/CustomSearchViewStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:imeOptions="actionSearch|flagNoExtractUi|flagNoFullscreen"
-                android:theme="@style/CustomSearchViewTheme"
-                app:onQueryTextChange="@{vm}"
-                app:queryHint="@string/dex_list_search_pokemon_hint" />
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
-        <poke.rogue.helper.ui.component.PokeChip
-            android:id="@+id/chip_poke_fiter"
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_pokemon_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
-            app:label="필터"
-            visible="@{! vm.isLoading()}"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="8dp"
-            app:trailingIcon="@drawable/ic_filter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_dex" />
+            android:background="@color/poke_black"
+            app:liftOnScrollColor="@color/poke_black">
 
-        <poke.rogue.helper.ui.component.PokeChip
-            android:id="@+id/chip_poke_sort"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="10dp"
-            app:label="정렬"
-            visible="@{! vm.isLoading()}"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="8dp"
-            app:trailingIcon="@drawable/ic_sort"
-            app:layout_constraintEnd_toStartOf="@id/chip_poke_fiter"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_dex" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header_group"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/poke_black"
+                android:elevation="2dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar_dex"
+                    style="@style/CustomToolbarStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="?attr/actionBarSize"
+                    android:contentInsetStartWithNavigation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title="@string/pokemon_list_title_name">
+
+                    <androidx.appcompat.widget.SearchView
+                        style="@style/CustomSearchViewStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:imeOptions="actionSearch|flagNoExtractUi|flagNoFullscreen"
+                        android:theme="@style/CustomSearchViewTheme"
+                        app:onQueryTextChange="@{vm}"
+                        app:queryHint="@string/dex_list_search_pokemon_hint" />
+
+                </com.google.android.material.appbar.MaterialToolbar>
+
+                <poke.rogue.helper.ui.component.PokeChip
+                    android:id="@+id/chip_poke_fiter"
+                    visible="@{! vm.isLoading()}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
+                    app:label="필터"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar_dex"
+                    app:trailingIcon="@drawable/ic_filter" />
+
+                <poke.rogue.helper.ui.component.PokeChip
+                    android:id="@+id/chip_poke_sort"
+                    visible="@{! vm.isLoading()}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
+                    app:label="정렬"
+                    app:layout_constraintEnd_toStartOf="@id/chip_poke_fiter"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar_dex"
+                    app:trailingIcon="@drawable/ic_sort" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokemon_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chip_poke_fiter"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_pokemon_list_pokemon"
             tools:spanCount="3" />
 
@@ -82,10 +99,7 @@
             visible="@{vm.isLoading()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_gravity="center">
 
             <ImageView
                 android:layout_width="170dp"
@@ -114,10 +128,7 @@
             visible="@{vm.isEmpty()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_gravity="center">
 
             <ImageView
                 android:layout_width="170dp"
@@ -127,6 +138,7 @@
                 app:layout_constraintBottom_toTopOf="@id/tv_empty"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -141,5 +153,5 @@
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
