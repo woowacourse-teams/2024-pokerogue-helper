@@ -14,9 +14,9 @@
     <string name="type_result_ineffective">Ineffective</string>
     <string name="type_result_normal">Neutral</string>
 
-    <!--|: position of Type Icon , 1s: type name, 2s: type effect-->
-    <string name="type_my_type_result">| %1s is %2s type against</string>
-    <string name="type_opponent_type_result">%2s types against %1s |</string>
+    <!--|: position of Type Icon , 1$s: type name, 2$s: type effect-->
+    <string name="type_my_type_result">| %1$s is %2$s type against</string>
+    <string name="type_opponent_type_result"> %2$s types against %1$s |</string>
 
     <string name="type_matching_type_normal">normal</string>
     <string name="type_matching_type_fire">fire</string>
