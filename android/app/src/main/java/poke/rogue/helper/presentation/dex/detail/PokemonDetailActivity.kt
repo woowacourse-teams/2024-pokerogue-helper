@@ -133,41 +133,13 @@ class PokemonDetailActivity :
                             ),
                         )
 
-                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Success ->
-                        startActivity(
-                            intent(this, event.pokemonId),
-                        )
-
-                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Failure ->
-                        toast(
-                            this.stringOf(
-                                R.string.pokemon_detail_evolution_same_with_current_pokemon_message,
-                                event.pokemonName,
-                            ),
-                        )
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail -> navigateToPokemonDetail(event)
 
                     is PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
                 }
             }
         }
     }
-
-    private fun battleIntent(battleEvent: PokemonDetailViewModel.NavigationEvent.ToBattle): Intent =
-        when (battleEvent) {
-            is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon ->
-                BattleActivity.intent(
-                    this@PokemonDetailActivity,
-                    pokemonId = battleEvent.pokemon.id,
-                    isMine = true,
-                )
-
-            is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon ->
-                BattleActivity.intent(
-                    this@PokemonDetailActivity,
-                    pokemonId = battleEvent.pokemon.id,
-                    isMine = false,
-                )
-        }
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
         with(binding) {
@@ -204,6 +176,40 @@ class PokemonDetailActivity :
             config = typesUiConfig,
             spacingBetweenTypes = 0.dp,
         )
+    }
+
+    private fun battleIntent(battleEvent: PokemonDetailViewModel.NavigationEvent.ToBattle): Intent =
+        when (battleEvent) {
+            is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon ->
+                BattleActivity.intent(
+                    this@PokemonDetailActivity,
+                    pokemonId = battleEvent.pokemon.id,
+                    isMine = true,
+                )
+
+            is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon ->
+                BattleActivity.intent(
+                    this@PokemonDetailActivity,
+                    pokemonId = battleEvent.pokemon.id,
+                    isMine = false,
+                )
+        }
+
+    private fun navigateToPokemonDetail(event: PokemonDetailViewModel.NavigationEvent.ToPokemonDetail) {
+        when (event) {
+            is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Success ->
+                startActivity(
+                    intent(this, event.pokemonId),
+                )
+
+            is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Failure ->
+                toast(
+                    this.stringOf(
+                        R.string.pokemon_detail_evolution_same_with_current_pokemon_message,
+                        event.pokemonName,
+                    ),
+                )
+        }
     }
 
     private fun toggleFloatingButtons() {
