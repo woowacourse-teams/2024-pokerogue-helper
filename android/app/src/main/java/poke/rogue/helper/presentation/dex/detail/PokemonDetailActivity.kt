@@ -143,7 +143,10 @@ class PokemonDetailActivity :
             viewModel.evolutionsEvent.collect { event ->
                 when (event) {
                     is PokemonEvolutionEvent.NavigateToPokemonDetail -> startActivity(intent(this, event.pokemonId))
-                    is PokemonEvolutionEvent.SameWithCurrentPokemon -> toast("너가 그 ${event.pokemonName} 이잖아.")
+                    is PokemonEvolutionEvent.SameWithCurrentPokemon ->
+                        toast(
+                            this.stringOf(R.string.pokemon_detail_evolution_same_with_current_pokemon_message, event.pokemonName),
+                        )
                 }
             }
         }
