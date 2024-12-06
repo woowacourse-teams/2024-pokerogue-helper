@@ -19,7 +19,6 @@ import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.type.view.TypeChip
-import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
@@ -128,14 +127,16 @@ class PokemonDetailActivity :
                             HomeActivity.intent(this),
                         )
 
-                    is PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
-                    is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon -> startActivity(
-                        battleIntent(event)
-                    )
+                    is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon ->
+                        startActivity(
+                            battleIntent(event),
+                        )
 
-                    is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon -> startActivity(
-                        battleIntent(event)
-                    )
+                    is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon ->
+                        startActivity(
+                            battleIntent(event),
+                        )
+                    is PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
                 }
             }
         }
