@@ -5,85 +5,6 @@ import androidx.annotation.StringRes
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.Stat
 
-data class StatUiModel2(
-    val name: String,
-    val amount: Int,
-    val limit: Int,
-    @ColorRes val color: Int = 0,
-) {
-    val progress: Int
-        get() = amount * 100 / limit
-}
-
-fun Stat.toUi2() =
-    when (name) {
-        "hp" ->
-            StatUiModel2(
-                name = "HP",
-                amount = amount,
-                limit = MAX_HP_LIMIT,
-                color = R.color.stat_hp,
-            )
-
-        "attack" ->
-            StatUiModel2(
-                name = "공격",
-                amount = amount,
-                limit = MAX_ATTACK_LIMIT,
-                color = R.color.stat_attack,
-            )
-
-        "defense" ->
-            StatUiModel2(
-                name = "방어",
-                amount = amount,
-                limit = MAX_DEFENSE_LIMIT,
-                color = R.color.stat_defense,
-            )
-
-        "specialAttack" ->
-            StatUiModel2(
-                name = "특수공격",
-                amount = amount,
-                limit = MAX_SPECIAL_ATTACK_LIMIT,
-                color = R.color.stat_special_attack,
-            )
-
-        "specialDefense" ->
-            StatUiModel2(
-                name = "특수방어",
-                amount = amount,
-                limit = MAX_SPECIAL_DEFENSE_LIMIT,
-                color = R.color.stat_special_defense,
-            )
-
-        "speed" ->
-            StatUiModel2(
-                name = "스피드",
-                amount = amount,
-                limit = MAX_SPEED_LIMIT,
-                color = R.color.stat_speed,
-            )
-
-        "total" ->
-            StatUiModel2(
-                name = "종족값",
-                amount = amount,
-                limit = MAX_TOTAL_LIMIT,
-                color = R.color.stat_total,
-            )
-
-        else -> error("Unknown stat name: $name")
-    }
-
-private const val MAX_HP_LIMIT = 255
-private const val MAX_ATTACK_LIMIT = 190
-private const val MAX_DEFENSE_LIMIT = 250
-private const val MAX_SPECIAL_ATTACK_LIMIT = 194
-private const val MAX_SPECIAL_DEFENSE_LIMIT = 250
-private const val MAX_SPEED_LIMIT = 200
-private const val MAX_TOTAL_LIMIT = 800
-
 data class StatUiModel(
     @StringRes val name: Int,
     val amount: Int,
@@ -154,3 +75,11 @@ fun Stat.toUi(): StatUiModel =
 
         else -> error("Unknown stat name: $name")
     }
+
+private const val MAX_HP_LIMIT = 255
+private const val MAX_ATTACK_LIMIT = 190
+private const val MAX_DEFENSE_LIMIT = 250
+private const val MAX_SPECIAL_ATTACK_LIMIT = 194
+private const val MAX_SPECIAL_DEFENSE_LIMIT = 250
+private const val MAX_SPEED_LIMIT = 200
+private const val MAX_TOTAL_LIMIT = 800

@@ -8,15 +8,14 @@ import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonBiomeUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
-import poke.rogue.helper.presentation.dex.model.StatUiModel2
+import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.dex.model.toPokemonDetailUi
 import poke.rogue.helper.presentation.dex.model.toUi
-import poke.rogue.helper.presentation.dex.model.toUi2
 
 sealed interface PokemonDetailUiState {
     data class Success(
         val pokemon: PokemonUiModel,
-        val stats: List<StatUiModel2>,
+        val stats: List<StatUiModel>,
         val abilities: List<PokemonDetailAbilityUiModel>,
         val evolutions: EvolutionsUiModel,
         val skills: PokemonDetailSkills,
@@ -31,7 +30,7 @@ sealed interface PokemonDetailUiState {
 fun PokemonDetail.toUi(allBiomes: List<Biome>): PokemonDetailUiState.Success =
     PokemonDetailUiState.Success(
         pokemon = pokemon.toUi(),
-        stats = stats.map(Stat::toUi2),
+        stats = stats.map(Stat::toUi),
         abilities = abilities.toPokemonDetailUi(),
         evolutions = evolutions.toUi(),
         skills = skills,
@@ -43,7 +42,7 @@ fun PokemonDetail.toUi(allBiomes: List<Biome>): PokemonDetailUiState.Success =
 fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
     PokemonDetailUiState.Success(
         pokemon = pokemon.toUi(),
-        stats = stats.map(Stat::toUi2),
+        stats = stats.map(Stat::toUi),
         abilities = abilities.toPokemonDetailUi(),
         evolutions = evolutions.toUi(),
         skills = skills,

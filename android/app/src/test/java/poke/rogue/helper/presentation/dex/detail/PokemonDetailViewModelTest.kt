@@ -17,7 +17,7 @@ import poke.rogue.helper.data.model.PokemonSkill
 import poke.rogue.helper.presentation.dex.model.EvolutionsUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonDetailAbilityUiModel
 import poke.rogue.helper.presentation.dex.model.PokemonUiModel
-import poke.rogue.helper.presentation.dex.model.StatUiModel2
+import poke.rogue.helper.presentation.dex.model.StatUiModel
 import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.di.testViewModelModule
 import poke.rogue.helper.presentation.type.model.TypeUiModel
@@ -76,13 +76,13 @@ class PokemonDetailViewModelTest : KoinTest {
                         ),
                     stats =
                         listOf(
-                            StatUiModel2("HP", 45, 255, R.color.stat_hp),
-                            StatUiModel2("공격", 49, 190, R.color.stat_attack),
-                            StatUiModel2("방어", 49, 250, R.color.stat_defense),
-                            StatUiModel2("특수공격", 65, 194, R.color.stat_special_attack),
-                            StatUiModel2("특수방어", 65, 250, R.color.stat_special_defense),
-                            StatUiModel2("스피드", 45, 200, R.color.stat_speed),
-                            StatUiModel2("종족값", 318, 800, R.color.stat_total),
+                            StatUiModel(100, 45, 255, R.color.stat_hp),
+                            StatUiModel(200, 49, 190, R.color.stat_attack),
+                            StatUiModel(300, 49, 250, R.color.stat_defense),
+                            StatUiModel(400, 65, 194, R.color.stat_special_attack),
+                            StatUiModel(500, 65, 250, R.color.stat_special_defense),
+                            StatUiModel(600, 45, 200, R.color.stat_speed),
+                            StatUiModel(700, 318, 800, R.color.stat_total),
                         ),
                     abilities =
                         listOf(
