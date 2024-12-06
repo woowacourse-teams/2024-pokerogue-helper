@@ -44,6 +44,9 @@ class PokemonDetailViewModel(
     private val _navigateToBattleEvent = MutableEventFlow<NavigateToBattleEvent>()
     val navigateToBattleEvent = _navigateToBattleEvent.asEventFlow()
 
+    private val _navigationEvent = MutableEventFlow<NavigationEvent>()
+    val navigationEvent = _navigationEvent.asEventFlow()
+
     private val _evolutionsEvent = MutableEventFlow<PokemonEvolutionEvent>()
     val evolutionsEvent = _evolutionsEvent.asEventFlow()
 
@@ -56,19 +59,25 @@ class PokemonDetailViewModel(
 
     override fun navigateToAbilityDetail(abilityId: String) {
         viewModelScope.launch {
+            // TODO: REMOVE
             _navigationToAbilityDetailEvent.emit(abilityId)
+            _navigationEvent.emit(NavigationEvent.ToAbilityDetail(abilityId))
         }
     }
 
     override fun navigateToBiomeDetail(biomeId: String) {
         viewModelScope.launch {
+            // TODO: REMOVE
             _navigationToBiomeDetailEvent.emit(biomeId)
+            _navigationEvent.emit(NavigationEvent.ToBiomeDetail(biomeId))
         }
     }
 
     override fun navigateToHome() {
         viewModelScope.launch {
+            // TODO: REMOVE
             _navigateToHomeEvent.emit(true)
+            _navigationEvent.emit(NavigationEvent.ToHome)
         }
     }
 
@@ -104,4 +113,14 @@ class PokemonDetailViewModel(
         uiState
             .filterIsInstance<PokemonDetailUiState.Success>()
             .first().pokemon
+
+    sealed interface NavigationEvent {
+        data class ToAbilityDetail(val id: String) : NavigationEvent
+
+        data class ToBiomeDetail(val id: String) : NavigationEvent
+
+        data object ToHome : NavigationEvent
+
+        data object NONE : NavigationEvent
+    }
 }
