@@ -13,11 +13,19 @@ import org.junit.Test
 import org.junit.jupiter.api.DisplayName
 import org.junit.runner.RunWith
 import poke.rogue.helper.R
+import poke.rogue.helper.presentation.di.testViewModelModule
+import poke.rogue.helper.testing.rule.KoinAndroidUnitTestRule
 
 @RunWith(AndroidJUnit4::class)
 class HomeActivityTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(HomeActivity::class.java)
+
+    @get:Rule
+    val koinTestRule =
+        KoinAndroidUnitTestRule(
+            testViewModelModule,
+        )
 
     @Test
     @DisplayName("앱이 실행되면 포켓로그 로고가 보인다")
