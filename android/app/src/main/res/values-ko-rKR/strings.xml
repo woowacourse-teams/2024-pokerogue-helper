@@ -124,6 +124,8 @@
     <string name="ability_search_hint">특성 이름으로 검색하세요.</string>
     <string name="ability_detail_error_abilityId">잘못된 abilityId값(-1) 입니다.</string>
     <string name="ability_detail_error_containerId">잘못된 containerId값(-1) 입니다.</string>
+    <string name="ability_detail_no_pokemons_with_ability">해당하는 포켓몬이 없습니다.</string>
+
 
     <!--    biome -->
     <string name="biome_title_name">바이옴 도감</string>

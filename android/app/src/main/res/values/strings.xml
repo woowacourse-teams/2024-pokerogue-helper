@@ -124,6 +124,7 @@
     <string name="ability_search_hint">Search by Ability name.</string>
     <string name="ability_detail_error_abilityId">Invalid abilityId value (-1).</string>
     <string name="ability_detail_error_containerId">Invalid containerId value (-1).</string>
+    <string name="ability_detail_no_pokemons_with_ability">There are no pokemons corresponding ability</string>
 
     <!--    biome -->
     <string name="biome_title_name">Biome Dex</string>
