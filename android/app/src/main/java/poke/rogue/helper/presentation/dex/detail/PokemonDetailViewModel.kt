@@ -36,9 +36,6 @@ class PokemonDetailViewModel(
     private val _navigationEvent = MutableEventFlow<NavigationEvent>()
     val navigationEvent = _navigationEvent.asEventFlow()
 
-    private val _evolutionsEvent = MutableEventFlow<PokemonEvolutionEvent>()
-    val evolutionsEvent = _evolutionsEvent.asEventFlow()
-
     fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch {
@@ -68,10 +65,10 @@ class PokemonDetailViewModel(
         viewModelScope.launch {
             pokemonUiModel().let { pokemon ->
                 if (pokemon.id == pokemonId) {
-                    _evolutionsEvent.emit(PokemonEvolutionEvent.SameWithCurrentPokemon(pokemon.name))
+                    _navigationEvent.emit(NavigationEvent.ToPokemonDetail.Failure(pokemon.name))
                     return@launch
                 }
-                _evolutionsEvent.emit(PokemonEvolutionEvent.NavigateToPokemonDetail(pokemonId))
+                _navigationEvent.emit(NavigationEvent.ToPokemonDetail.Success(pokemonId))
             }
         }
     }
@@ -114,6 +111,12 @@ class PokemonDetailViewModel(
             data class WithMyPokemon(val pokemon: PokemonUiModel) : ToBattle()
 
             data class WithOpponentPokemon(val pokemon: PokemonUiModel) : ToBattle()
+        }
+
+        sealed class ToPokemonDetail : NavigationEvent {
+            data class Success(val pokemonId: String) : ToPokemonDetail()
+
+            data class Failure(val pokemonName: String) : ToPokemonDetail()
         }
     }
 }

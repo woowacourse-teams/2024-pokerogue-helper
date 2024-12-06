@@ -86,7 +86,6 @@ class PokemonDetailActivity :
     private fun initObservers() {
         observePokemonDetailUi()
         observeNavigationEvent()
-        observePokemonEvolutionEvent()
     }
 
     private fun initFloatingButtonsHandler() {
@@ -127,40 +126,27 @@ class PokemonDetailActivity :
                             HomeActivity.intent(this),
                         )
 
-                    is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon ->
+                    is PokemonDetailViewModel.NavigationEvent.ToBattle ->
                         startActivity(
-                            battleIntent(event),
-                        )
-
-                    is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon ->
-                        startActivity(
-                            battleIntent(event),
-                        )
-                    is PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
-                }
-            }
-        }
-    }
-
-    private fun observePokemonEvolutionEvent() {
-        repeatOnStarted {
-            viewModel.evolutionsEvent.collect { event ->
-                when (event) {
-                    is PokemonEvolutionEvent.NavigateToPokemonDetail ->
-                        startActivity(
-                            intent(
-                                this,
-                                event.pokemonId,
+                            battleIntent(
+                                event,
                             ),
                         )
 
-                    is PokemonEvolutionEvent.SameWithCurrentPokemon ->
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Success ->
+                        startActivity(
+                            intent(this, event.pokemonId),
+                        )
+
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Failure ->
                         toast(
                             this.stringOf(
                                 R.string.pokemon_detail_evolution_same_with_current_pokemon_message,
                                 event.pokemonName,
                             ),
                         )
+
+                    is PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
                 }
             }
         }
