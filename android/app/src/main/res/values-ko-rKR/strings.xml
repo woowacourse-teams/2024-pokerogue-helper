@@ -96,6 +96,15 @@
     <string name="pokemon_detail_to_battle_with_enemy_pop_up_descriptions">상대 포켓몬으로</string>
     <string name="pokemon_detail_to_battle_with_mine_pop_up_descriptions">내 포켓몬으로</string>
 
+    <!--    pokemon stat-->
+    <string name="pokemon_stat_hp">Max.HP</string>
+    <string name="pokemon_stat_attack">Attack</string>
+    <string name="pokemon_stat_defense">DEFENSE</string>
+    <string name="pokemon_stat_special_attack">Sp.Atk</string>
+    <string name="pokemon_stat_special_defense">Sp.Def</string>
+    <string name="pokemon_stat_speed">Speed</string>
+    <string name="pokemon_stat_base_stat">Base Stat</string>
+
     <!--    pokemon detail skills-->
     <string name="pokemon_detail_skill_level">레벨</string>
     <string name="pokemon_detail_skill_name">기술명</string>
