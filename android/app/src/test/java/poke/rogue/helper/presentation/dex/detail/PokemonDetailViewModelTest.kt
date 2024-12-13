@@ -147,7 +147,7 @@ class PokemonDetailViewModelTest : KoinTest {
         }
 
     @Test
-    fun `포켓몬 상세로 이동한다`() =
+    fun `현재 포켓몬을 선택하여 포켓몬 상세로 이동하려고 하면 이동에 실패한다`() =
         runTest {
             // given
             viewModel.updatePokemonDetail("1")
@@ -163,6 +163,26 @@ class PokemonDetailViewModelTest : KoinTest {
             event shouldBe
                 PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Failure(
                     "이상해씨",
+                )
+        }
+
+    @Test
+    fun `현재 포켓몬이 아닌 포켓몬을 선택하여 포켓몬 상세로 이동한다`() =
+        runTest {
+            // given
+            viewModel.updatePokemonDetail("1")
+
+            // when
+            viewModel.navigateToPokemonDetail("2")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            event shouldBe
+                PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Success(
+                    "2",
                 )
         }
 }
