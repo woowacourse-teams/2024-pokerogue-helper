@@ -113,7 +113,7 @@ class PokemonDetailViewModelTest : KoinTest {
             // then
             val event =
                 viewModel.navigationEvent.first {
-                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                    it !is PokemonDetailViewModel.NavigationEvent.None
                 }
             event shouldBe PokemonDetailViewModel.NavigationEvent.ToHome
         }
@@ -127,7 +127,7 @@ class PokemonDetailViewModelTest : KoinTest {
             // then
             val event =
                 viewModel.navigationEvent.first {
-                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                    it !is PokemonDetailViewModel.NavigationEvent.None
                 }
             event shouldBe PokemonDetailViewModel.NavigationEvent.ToAbilityDetail("10")
         }
@@ -141,7 +141,7 @@ class PokemonDetailViewModelTest : KoinTest {
             // then
             val event =
                 viewModel.navigationEvent.first {
-                    it !is PokemonDetailViewModel.NavigationEvent.NONE
+                    it !is PokemonDetailViewModel.NavigationEvent.None
                 }
             event shouldBe PokemonDetailViewModel.NavigationEvent.ToBiomeDetail("10")
         }

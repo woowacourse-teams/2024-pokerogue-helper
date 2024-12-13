@@ -105,7 +105,7 @@ class PokemonDetailViewModel(
 
         data object ToHome : NavigationEvent
 
-        data object NONE : NavigationEvent
+        data object None : NavigationEvent
 
         sealed class ToBattle : NavigationEvent {
             data class WithMyPokemon(val pokemon: PokemonUiModel) : ToBattle()
