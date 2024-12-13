@@ -145,4 +145,24 @@ class PokemonDetailViewModelTest : KoinTest {
                 }
             event shouldBe PokemonDetailViewModel.NavigationEvent.ToBiomeDetail("10")
         }
+
+    @Test
+    fun `포켓몬 상세로 이동한다`() =
+        runTest {
+            // given
+            viewModel.updatePokemonDetail("1")
+
+            // when
+            viewModel.navigateToPokemonDetail("1")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            event shouldBe
+                PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Failure(
+                    "이상해씨",
+                )
+        }
 }
