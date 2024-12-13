@@ -31,7 +31,7 @@ class PokemonDetailViewModel(
     private val successUiState: PokemonDetailUiState.Success
         get() =
             uiState.value as? PokemonDetailUiState.Success
-                ?: error("PokemonDetailUiState is note updated. You have to call updatePokemonDetail method first.")
+                ?: error("PokemonDetailUiState is note updated. You have to wait the updatePokemonDetail method is completed after called.")
 
     val isLoading: StateFlow<Boolean> =
         uiState.map { it is PokemonDetailUiState.IsLoading }
@@ -43,7 +43,7 @@ class PokemonDetailViewModel(
     fun updatePokemonDetail(pokemonId: String?) {
         requireNotNull(pokemonId) { "Pokemon ID must not be null" }
         viewModelScope.launch {
-            delay(11000)
+            delay(100)
             _uiState.value = dexRepository.pokemonDetail(pokemonId).toUi()
         }
     }
@@ -68,7 +68,6 @@ class PokemonDetailViewModel(
 
     override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
-            delay(11000)
             if (successUiState.pokemon.id == pokemonId) {
                 _navigationEvent.emit(NavigationEvent.ToPokemonDetail.Failure(successUiState.pokemon.name))
                 return@launch

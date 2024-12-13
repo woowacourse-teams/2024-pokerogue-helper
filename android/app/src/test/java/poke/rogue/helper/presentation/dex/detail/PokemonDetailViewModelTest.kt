@@ -3,6 +3,7 @@ package poke.rogue.helper.presentation.dex.detail
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -51,6 +52,7 @@ class PokemonDetailViewModelTest : KoinTest {
         runTest {
             // when
             viewModel.updatePokemonDetail(pokemonId = "1")
+            advanceUntilIdle()
 
             // then
             val pokemonDetailUiState =
@@ -151,6 +153,7 @@ class PokemonDetailViewModelTest : KoinTest {
         runTest {
             // given
             viewModel.updatePokemonDetail("1")
+            advanceUntilIdle()
 
             // when
             viewModel.navigateToPokemonDetail("1")
@@ -171,6 +174,7 @@ class PokemonDetailViewModelTest : KoinTest {
         runTest {
             // given
             viewModel.updatePokemonDetail("1")
+            advanceUntilIdle()
 
             // when
             viewModel.navigateToPokemonDetail("2")
@@ -184,5 +188,41 @@ class PokemonDetailViewModelTest : KoinTest {
                 PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Success(
                     "2",
                 )
+        }
+
+    @Test
+    fun `현재 포켓몬을 나의 포켓몬으로 하여 배틀 페이지로 이동한다`() =
+        runTest {
+            // given
+            viewModel.updatePokemonDetail("1")
+            advanceUntilIdle()
+
+            // when
+            viewModel.navigateToBattleWithMine()
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            (event as PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon).pokemon.id shouldBe "1"
+        }
+
+    @Test
+    fun `현재 포켓몬을 상대 포켓몬으로 하여 배틀 페이지로 이동한다`() =
+        runTest {
+            // given
+            viewModel.updatePokemonDetail("1")
+            advanceUntilIdle()
+
+            // when
+            viewModel.navigateToBattleWithOpponent()
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            (event as PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon).pokemon.id shouldBe "1"
         }
 }
