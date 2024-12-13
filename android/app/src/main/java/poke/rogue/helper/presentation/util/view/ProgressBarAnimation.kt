@@ -16,9 +16,6 @@ class ProgressBarAnimation(
         super.applyTransformation(interpolatedTime, t)
         val value = from + to * interpolatedTime
         progressBar.progress = value.toInt()
-        progressBar.apply {
-            progress = value.toInt()
-        }
     }
 }
 
