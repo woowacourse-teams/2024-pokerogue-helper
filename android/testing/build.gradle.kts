@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.kotlin)
     implementation(libs.timber)
     implementation(libs.mockk)
+    // android
+    implementation(libs.androidx.core.ktx)
     // koin
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
@@ -56,8 +58,11 @@ dependencies {
     // JUnit test api
     api(libs.bundles.unit.test)
     api(libs.kotlin.test)
-    // robolectric api
-    api(libs.bundles.robolectric.test)
+    // androidx test api
+    implementation(libs.androidx.test.core)
+    implementation(libs.androidx.test.extention.ktx)
+    implementation(libs.androidx.test.espresso)
+    implementation(libs.androidx.test.espresso.contrib)
     // koin api
     api(libs.koin.test.junit5)
     api(libs.koin.android.test)
