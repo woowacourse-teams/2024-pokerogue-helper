@@ -122,7 +122,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
                 if (it.weather is BattleSelectionUiState.Selected) {
                     val selected = it.weather.content
-                    binding.tvWeatherDescription.text = selected.effect
+                    binding.ivWeatherIcon.setImage(selected.icon.iconResId)
                 }
             }
         }

@@ -68,6 +68,20 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_end="20dp" />
 
+            <ImageView
+                android:id="@+id/iv_weather_icon"
+                android:layout_width="54dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="12dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:background="@drawable/bg_battle_default"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_weather"
+                app:layout_constraintEnd_toStartOf="@id/spinner_weather"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintTop_toTopOf="@id/spinner_weather"
+                tools:src="@drawable/icon_foggy" />
+
             <Spinner
                 android:id="@+id/spinner_weather"
                 android:layout_width="0dp"
@@ -75,23 +89,10 @@
                 android:background="@drawable/bg_spinner"
                 android:padding="0dp"
                 android:spinnerMode="dropdown"
-                app:layout_constraintBottom_toTopOf="@id/tv_weather_description"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"
-                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintStart_toEndOf="@id/iv_weather_icon"
                 app:layout_constraintTop_toBottomOf="@id/gl_top"
                 tools:listitem="@layout/item_spinner_weather" />
-
-            <TextView
-                android:id="@+id/tv_weather_description"
-                style="@style/TextAppearance.Poke.CaptionLarge"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="end"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="@id/spinner_weather"
-                app:layout_constraintStart_toStartOf="@id/spinner_weather"
-                app:layout_constraintTop_toBottomOf="@id/spinner_weather" />
 
             <TextView
                 android:id="@+id/tv_opponent_pokemon"
@@ -148,7 +149,7 @@
                 android:layout_marginTop="16dp"
                 android:src="@drawable/icon_pokemon_selection_op"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"
-                app:layout_constraintTop_toBottomOf="@id/tv_weather_description" />
+                app:layout_constraintTop_toBottomOf="@id/spinner_weather" />
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/flexbox_mine_types"
