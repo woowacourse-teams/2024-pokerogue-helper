@@ -3,7 +3,6 @@ package poke.rogue.helper.presentation.dex.detail
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -52,7 +51,6 @@ class PokemonDetailViewModelTest : KoinTest {
         runTest {
             // when
             viewModel.updatePokemonDetail(pokemonId = "1")
-            advanceUntilIdle()
 
             // then
             val pokemonDetailUiState =
@@ -153,7 +151,6 @@ class PokemonDetailViewModelTest : KoinTest {
         runTest {
             // given
             viewModel.updatePokemonDetail("1")
-            advanceUntilIdle()
 
             // when
             viewModel.navigateToPokemonDetail("1")
@@ -174,7 +171,6 @@ class PokemonDetailViewModelTest : KoinTest {
         runTest {
             // given
             viewModel.updatePokemonDetail("1")
-            advanceUntilIdle()
 
             // when
             viewModel.navigateToPokemonDetail("2")
@@ -195,7 +191,6 @@ class PokemonDetailViewModelTest : KoinTest {
         runTest {
             // given
             viewModel.updatePokemonDetail("1")
-            advanceUntilIdle()
 
             // when
             viewModel.navigateToBattleWithMine()
@@ -213,7 +208,6 @@ class PokemonDetailViewModelTest : KoinTest {
         runTest {
             // given
             viewModel.updatePokemonDetail("1")
-            advanceUntilIdle()
 
             // when
             viewModel.navigateToBattleWithOpponent()

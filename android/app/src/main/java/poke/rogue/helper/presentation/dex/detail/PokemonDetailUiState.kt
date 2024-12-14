@@ -1,6 +1,5 @@
 package poke.rogue.helper.presentation.dex.detail
 
-import poke.rogue.helper.data.model.Biome
 import poke.rogue.helper.data.model.PokemonDetail
 import poke.rogue.helper.data.model.PokemonDetailSkills
 import poke.rogue.helper.data.model.Stat
@@ -26,18 +25,6 @@ sealed interface PokemonDetailUiState {
 
     data object IsLoading : PokemonDetailUiState
 }
-
-fun PokemonDetail.toUi(allBiomes: List<Biome>): PokemonDetailUiState.Success =
-    PokemonDetailUiState.Success(
-        pokemon = pokemon.toUi(),
-        stats = stats.map(Stat::toUi),
-        abilities = abilities.toPokemonDetailUi(),
-        evolutions = evolutions.toUi(),
-        skills = skills,
-        height = height.toFloat(),
-        weight = weight.toFloat(),
-        biomes = biomes.toUi(),
-    )
 
 fun PokemonDetail.toUi(): PokemonDetailUiState.Success =
     PokemonDetailUiState.Success(

@@ -1,7 +1,6 @@
 package poke.rogue.helper.presentation.dex.detail
 
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -28,10 +27,7 @@ class PokemonDetailViewModel(
         MutableStateFlow(PokemonDetailUiState.IsLoading)
     val uiState = _uiState.asStateFlow()
 
-    private val successUiState: PokemonDetailUiState.Success
-        get() =
-            uiState.value as? PokemonDetailUiState.Success
-                ?: error("PokemonDetailUiState is note updated. You have to wait the updatePokemonDetail method is completed after called.")
+    private val successUiState: PokemonDetailUiState.Success? get() = uiState.value as? PokemonDetailUiState.Success
 
     val isLoading: StateFlow<Boolean> =
         uiState.map { it is PokemonDetailUiState.IsLoading }
@@ -67,18 +63,20 @@ class PokemonDetailViewModel(
 
     override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
-            if (successUiState.pokemon.id == pokemonId) {
-                _navigationEvent.emit(NavigationEvent.ToPokemonDetail.Failure(successUiState.pokemon.name))
-                return@launch
+            successUiState?.let { state ->
+                if (state.pokemon.id == pokemonId) {
+                    _navigationEvent.emit(NavigationEvent.ToPokemonDetail.Failure(state.pokemon.name))
+                    return@launch
+                }
+                _navigationEvent.emit(NavigationEvent.ToPokemonDetail.Success(pokemonId))
             }
-            _navigationEvent.emit(NavigationEvent.ToPokemonDetail.Success(pokemonId))
         }
     }
 
     override fun navigateToBattleWithMine() {
         viewModelScope.launch {
-            successUiState.pokemon.let { pokemon ->
-                val event = NavigationEvent.ToBattle.WithMyPokemon(pokemon)
+            successUiState?.let { state ->
+                val event = NavigationEvent.ToBattle.WithMyPokemon(state.pokemon)
                 _navigationEvent.emit(event)
                 logger.logPokemonDetailToBattle(event)
             }
@@ -87,8 +85,8 @@ class PokemonDetailViewModel(
 
     override fun navigateToBattleWithOpponent() {
         viewModelScope.launch {
-            successUiState.pokemon.let { pokemon ->
-                val event = NavigationEvent.ToBattle.WithOpponentPokemon(pokemon)
+            successUiState?.let { state ->
+                val event = NavigationEvent.ToBattle.WithOpponentPokemon(state.pokemon)
                 _navigationEvent.emit(event)
                 logger.logPokemonDetailToBattle(event)
             }
