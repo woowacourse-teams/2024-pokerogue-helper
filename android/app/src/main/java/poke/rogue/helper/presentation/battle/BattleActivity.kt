@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.Toolbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -13,6 +14,7 @@ import poke.rogue.helper.databinding.ActivityBattleBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
+import poke.rogue.helper.presentation.battle.model.hasWeatherEffect
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
 import poke.rogue.helper.presentation.battle.selection.pokemon.addPokemonTypes
 import poke.rogue.helper.presentation.battle.view.itemSelectListener
@@ -26,7 +28,6 @@ import poke.rogue.helper.presentation.util.serializable
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.presentation.util.view.setOnSingleClickListener
-import timber.log.Timber
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModel<BattleViewModel> {
@@ -57,7 +58,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        initSpinner()
+        initWeatherView()
         initObserver()
     }
 
@@ -66,12 +67,29 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         binding.lifecycleOwner = this
     }
 
+    private fun initWeatherView() {
+        initSpinner()
+        initWeatherEffectToggle()
+    }
+
     private fun initSpinner() {
         binding.spinnerWeather.adapter = weatherAdapter
         binding.spinnerWeather.onItemSelectedListener =
             itemSelectListener<WeatherUiModel> {
                 viewModel.updateWeather(it)
             }
+    }
+
+    private fun initWeatherEffectToggle() {
+        binding.ivWeatherIcon.setOnClickListener {
+            it.isSelected = !it.isSelected
+            binding.weatherEffectContainer.visibility =
+                if (it.isSelected) View.VISIBLE else View.GONE
+        }
+        binding.btnWeatherDescriptionClose.setOnClickListener {
+            binding.ivWeatherIcon.isSelected = false
+            binding.weatherEffectContainer.visibility = View.GONE
+        }
     }
 
     private fun initObserver() {
@@ -83,7 +101,6 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
         repeatOnStarted {
             viewModel.weatherPos
                 .collect {
-                    Timber.tag("weatherPos").d("weatherPos: $it")
                     binding.spinnerWeather.setSelection(it)
                 }
         }
@@ -123,6 +140,8 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                 if (it.weather is BattleSelectionUiState.Selected) {
                     val selected = it.weather.content
                     binding.ivWeatherIcon.setImage(selected.icon.iconResId)
+                    binding.ivWeatherIcon.isEnabled = selected.hasWeatherEffect()
+                    binding.tvWeatherEffect?.text = selected.effect // TODO: null 처리
                 }
             }
         }
