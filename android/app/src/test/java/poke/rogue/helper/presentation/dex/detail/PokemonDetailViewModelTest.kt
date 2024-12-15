@@ -103,4 +103,120 @@ class PokemonDetailViewModelTest : KoinTest {
                     biomes = PokemonBiome.DUMMYS.toUi(),
                 )
         }
+
+    @Test
+    fun `홈으로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToHome()
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToHome
+        }
+
+    @Test
+    fun `특성 상세로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToAbilityDetail("10")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToAbilityDetail("10")
+        }
+
+    @Test
+    fun `바이옴 상세로 이동한다`() =
+        runTest {
+            // when
+            viewModel.navigateToBiomeDetail("10")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            event shouldBe PokemonDetailViewModel.NavigationEvent.ToBiomeDetail("10")
+        }
+
+    @Test
+    fun `현재 포켓몬을 선택하여 포켓몬 상세로 이동하려고 하면 이동에 실패한다`() =
+        runTest {
+            // given
+            viewModel.updatePokemonDetail("1")
+
+            // when
+            viewModel.navigateToPokemonDetail("1")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            event shouldBe
+                PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Failure(
+                    "이상해씨",
+                )
+        }
+
+    @Test
+    fun `현재 포켓몬이 아닌 포켓몬을 선택하여 포켓몬 상세로 이동한다`() =
+        runTest {
+            // given
+            viewModel.updatePokemonDetail("1")
+
+            // when
+            viewModel.navigateToPokemonDetail("2")
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            event shouldBe
+                PokemonDetailViewModel.NavigationEvent.ToPokemonDetail.Success(
+                    "2",
+                )
+        }
+
+    @Test
+    fun `현재 포켓몬을 나의 포켓몬으로 하여 배틀 페이지로 이동한다`() =
+        runTest {
+            // given
+            viewModel.updatePokemonDetail("1")
+
+            // when
+            viewModel.navigateToBattleWithMine()
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            (event as PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon).pokemon.id shouldBe "1"
+        }
+
+    @Test
+    fun `현재 포켓몬을 상대 포켓몬으로 하여 배틀 페이지로 이동한다`() =
+        runTest {
+            // given
+            viewModel.updatePokemonDetail("1")
+
+            // when
+            viewModel.navigateToBattleWithOpponent()
+
+            // then
+            val event =
+                viewModel.navigationEvent.first {
+                    it !is PokemonDetailViewModel.NavigationEvent.None
+                }
+            (event as PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon).pokemon.id shouldBe "1"
+        }
 }

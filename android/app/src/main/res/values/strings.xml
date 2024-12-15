@@ -118,7 +118,7 @@
     <!--    pokemon detail evolution-->
     <string name="pokemon_detail_evolution_no_evolution_chain">This Pokémon has no evolution chain.</string>
     <string name="pokemon_detail_evolution_level">Level %d</string>
-
+    <string name="pokemon_detail_evolution_same_with_current_pokemon_message">This is the current Pokémon on the screen: %s.</string>
     <!-- ability -->
     <string name="ability_title_name">Ability Dex</string>
     <string name="ability_search_hint">Search by Ability name.</string>
