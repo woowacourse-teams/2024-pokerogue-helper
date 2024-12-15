@@ -4,7 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.kotest.matchers.string.shouldContain
 import org.junit.Test
 import org.junit.runner.RunWith
-import poke.rogue.helper.presentation.util.testContext
+import poke.rogue.helper.testing.testContext
 
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {

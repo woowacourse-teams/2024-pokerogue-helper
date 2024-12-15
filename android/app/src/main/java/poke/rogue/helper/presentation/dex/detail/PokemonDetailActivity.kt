@@ -135,7 +135,7 @@ class PokemonDetailActivity :
 
                     is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail -> navigateToPokemonDetail(event)
 
-                    is PokemonDetailViewModel.NavigationEvent.NONE -> return@collect
+                    is PokemonDetailViewModel.NavigationEvent.None -> return@collect
                 }
             }
         }
