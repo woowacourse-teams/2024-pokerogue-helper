@@ -76,6 +76,7 @@
                 android:background="@drawable/selector_button_clicked"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{() -> vm.toggleWeatherEffect()}"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="4dp"
                 app:layout_constraintBottom_toBottomOf="@id/spinner_weather"
@@ -182,8 +183,10 @@
 
                 <ImageView
                     android:id="@+id/btn_weather_description_close"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:onClick="@{() -> vm.hideWeatherEffect()}"
+                    android:padding="4dp"
                     android:src="@drawable/icon_close"
                     app:layout_constraintBottom_toBottomOf="@id/tv_weather_effect_title"
                     app:layout_constraintEnd_toEndOf="parent"
