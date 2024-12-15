@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.Toolbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -76,23 +75,39 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     }
 
     private fun initObserver() {
+        observeWeathers()
+        observeWeatherPosition()
+        observeWeatherEffect()
+        observeSelectionState()
+        observeNavigationEvent()
+        observeBattleResult()
+    }
+
+    private fun observeWeathers() {
         repeatOnStarted {
             viewModel.weathers.collect {
                 weatherAdapter.updateWeathers(it)
             }
         }
+    }
+
+    private fun observeWeatherPosition() {
         repeatOnStarted {
             viewModel.weatherPos.collect {
                 binding.spinnerWeather.setSelection(it)
             }
         }
+    }
 
+    private fun observeWeatherEffect() {
         repeatOnStarted {
             viewModel.showWeatherEffect.collect {
                 binding.ivWeatherIcon.isSelected = it
             }
         }
+    }
 
+    private fun observeSelectionState() {
         repeatOnStarted {
             viewModel.selectedState.collect {
                 if (it.minePokemon is BattleSelectionUiState.Selected) {
@@ -136,7 +151,9 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                 }
             }
         }
+    }
 
+    private fun observeNavigationEvent() {
         repeatOnStarted {
             viewModel.navigationEvent.collect { event ->
                 when (event) {
@@ -145,7 +162,9 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                 }
             }
         }
+    }
 
+    private fun observeBattleResult() {
         repeatOnStarted {
             viewModel.battleResult.collect {
                 if (it is BattleResultUiState.Success) {
