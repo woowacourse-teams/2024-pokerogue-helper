@@ -58,18 +58,13 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        initWeatherView()
+        initSpinner()
         initObserver()
     }
 
     private fun initView() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
-    }
-
-    private fun initWeatherView() {
-        initSpinner()
-        initWeatherEffectToggle()
     }
 
     private fun initSpinner() {
@@ -80,18 +75,6 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
             }
     }
 
-    private fun initWeatherEffectToggle() {
-        binding.ivWeatherIcon.setOnClickListener {
-            it.isSelected = !it.isSelected
-            binding.weatherEffectContainer.visibility =
-                if (it.isSelected) View.VISIBLE else View.GONE
-        }
-        binding.btnWeatherDescriptionClose.setOnClickListener {
-            binding.ivWeatherIcon.isSelected = false
-            binding.weatherEffectContainer.visibility = View.GONE
-        }
-    }
-
     private fun initObserver() {
         repeatOnStarted {
             viewModel.weathers.collect {
@@ -99,10 +82,15 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
             }
         }
         repeatOnStarted {
-            viewModel.weatherPos
-                .collect {
-                    binding.spinnerWeather.setSelection(it)
-                }
+            viewModel.weatherPos.collect {
+                binding.spinnerWeather.setSelection(it)
+            }
+        }
+
+        repeatOnStarted {
+            viewModel.showWeatherEffect.collect {
+                binding.ivWeatherIcon.isSelected = it
+            }
         }
 
         repeatOnStarted {
@@ -140,8 +128,11 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                 if (it.weather is BattleSelectionUiState.Selected) {
                     val selected = it.weather.content
                     binding.ivWeatherIcon.setImage(selected.icon.iconResId)
-                    binding.ivWeatherIcon.isEnabled = selected.hasWeatherEffect()
-                    binding.tvWeatherEffect?.text = selected.effect // TODO: null 처리
+
+                    val hasEffect = selected.hasWeatherEffect()
+                    binding.ivWeatherIcon.isEnabled = hasEffect
+                    if (!hasEffect) viewModel.hideWeatherEffect()
+                    binding.tvWeatherEffect.text = selected.effect
                 }
             }
         }
