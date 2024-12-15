@@ -69,9 +69,11 @@
             android:layout_width="54dp"
             android:layout_height="0dp"
             android:layout_marginEnd="12dp"
+            android:background="@drawable/selector_button_clicked"
             android:paddingHorizontal="12dp"
             android:paddingVertical="4dp"
-            android:background="@drawable/bg_battle_default"
+            android:clickable="true"
+            android:focusable="true"
             app:layout_constraintBottom_toBottomOf="@id/spinner_weather"
             app:layout_constraintEnd_toStartOf="@id/spinner_weather"
             app:layout_constraintStart_toStartOf="@id/gl_start"
@@ -147,6 +149,54 @@
             android:src="@drawable/icon_pokemon_selection_op"
             app:layout_constraintEnd_toEndOf="@id/gl_end"
             app:layout_constraintTop_toBottomOf="@id/spinner_weather" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/weather_effect_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_battle_description"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintTop_toBottomOf="@id/spinner_weather">
+
+            <TextView
+                android:id="@+id/tv_weather_effect_title"
+                style="@style/TextAppearance.Poke.CaptionLargeBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/battle_weather_effect_title"
+                app:layout_constraintEnd_toStartOf="@id/btn_weather_description_close"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_weather_description_close"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_close"
+                app:layout_constraintBottom_toBottomOf="@id/tv_weather_effect_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_weather_effect_title"
+                app:layout_constraintTop_toTopOf="@id/tv_weather_effect_title" />
+
+            <TextView
+                android:id="@+id/tv_weather_effect"
+                style="@style/TextAppearance.Poke.CaptionLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_weather_effect_title"
+                tools:text="날씨 효과 적는 칸" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flexbox_mine_types"
