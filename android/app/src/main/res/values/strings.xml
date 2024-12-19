@@ -180,6 +180,7 @@
 
     <!--    weather-->
     <string name="battle_weather_none">There is no weather</string>
+    <string name="battle_weather_effect_title">Weather Effects</string>
 
     <!--    error-->
     <string name="error_IO_Exception">An unknown error occurred..</string>
