@@ -17,7 +17,7 @@
         <TextView
             android:id="@+id/tv_my_type_result"
             style="@style/TextAppearance.Poke.Title"
-            visible="@{typeResult.isMyType}"
+            invisible="@{!typeResult.isMyType}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"

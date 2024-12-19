@@ -76,13 +76,13 @@ class PokemonDetailViewModelTest : KoinTest {
                         ),
                     stats =
                         listOf(
-                            StatUiModel("HP", 45, 255, R.color.stat_hp),
-                            StatUiModel("공격", 49, 190, R.color.stat_attack),
-                            StatUiModel("방어", 49, 250, R.color.stat_defense),
-                            StatUiModel("특수공격", 65, 194, R.color.stat_special_attack),
-                            StatUiModel("특수방어", 65, 250, R.color.stat_special_defense),
-                            StatUiModel("스피드", 45, 200, R.color.stat_speed),
-                            StatUiModel("종족값", 318, 800, R.color.stat_total),
+                            StatUiModel(R.string.pokemon_stat_hp, 45, 255, R.color.stat_hp),
+                            StatUiModel(R.string.pokemon_stat_attack, 49, 190, R.color.stat_attack),
+                            StatUiModel(R.string.pokemon_stat_defense, 49, 250, R.color.stat_defense),
+                            StatUiModel(R.string.pokemon_stat_special_attack, 65, 194, R.color.stat_special_attack),
+                            StatUiModel(R.string.pokemon_stat_special_defense, 65, 250, R.color.stat_special_defense),
+                            StatUiModel(R.string.pokemon_stat_speed, 45, 200, R.color.stat_speed),
+                            StatUiModel(R.string.pokemon_stat_base_stat, 318, 800, R.color.stat_total),
                         ),
                     abilities =
                         listOf(
