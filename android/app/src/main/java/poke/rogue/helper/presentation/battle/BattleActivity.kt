@@ -13,6 +13,7 @@ import poke.rogue.helper.databinding.ActivityBattleBinding
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.model.SelectionData
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
+import poke.rogue.helper.presentation.battle.model.hasWeatherEffect
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
 import poke.rogue.helper.presentation.battle.selection.pokemon.addPokemonTypes
 import poke.rogue.helper.presentation.battle.view.itemSelectListener
@@ -26,7 +27,6 @@ import poke.rogue.helper.presentation.util.serializable
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.setImage
 import poke.rogue.helper.presentation.util.view.setOnSingleClickListener
-import timber.log.Timber
 
 class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_battle) {
     private val viewModel by viewModel<BattleViewModel> {
@@ -75,19 +75,39 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     }
 
     private fun initObserver() {
+        observeWeathers()
+        observeWeatherPosition()
+        observeWeatherEffect()
+        observeSelectionState()
+        observeNavigationEvent()
+        observeBattleResult()
+    }
+
+    private fun observeWeathers() {
         repeatOnStarted {
             viewModel.weathers.collect {
                 weatherAdapter.updateWeathers(it)
             }
         }
-        repeatOnStarted {
-            viewModel.weatherPos
-                .collect {
-                    Timber.tag("weatherPos").d("weatherPos: $it")
-                    binding.spinnerWeather.setSelection(it)
-                }
-        }
+    }
 
+    private fun observeWeatherPosition() {
+        repeatOnStarted {
+            viewModel.weatherPos.collect {
+                binding.spinnerWeather.setSelection(it)
+            }
+        }
+    }
+
+    private fun observeWeatherEffect() {
+        repeatOnStarted {
+            viewModel.isWeatherEffectVisible.collect {
+                binding.ivWeatherIcon.isSelected = it
+            }
+        }
+    }
+
+    private fun observeSelectionState() {
         repeatOnStarted {
             viewModel.selectedState.collect {
                 if (it.minePokemon is BattleSelectionUiState.Selected) {
@@ -122,11 +142,18 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
                 if (it.weather is BattleSelectionUiState.Selected) {
                     val selected = it.weather.content
-                    binding.tvWeatherDescription.text = selected.effect
+                    binding.ivWeatherIcon.setImage(selected.icon.iconResId)
+
+                    val hasEffect = selected.hasWeatherEffect()
+                    binding.ivWeatherIcon.isEnabled = hasEffect
+                    if (!hasEffect) viewModel.hideWeatherEffect()
+                    binding.tvWeatherEffect.text = selected.effect
                 }
             }
         }
+    }
 
+    private fun observeNavigationEvent() {
         repeatOnStarted {
             viewModel.navigationEvent.collect { event ->
                 when (event) {
@@ -135,7 +162,9 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
                 }
             }
         }
+    }
 
+    private fun observeBattleResult() {
         repeatOnStarted {
             viewModel.battleResult.collect {
                 if (it is BattleResultUiState.Success) {

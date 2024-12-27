@@ -183,6 +183,7 @@
 
     <!--    weather-->
     <string name="battle_weather_none">날씨가 없다</string>
+    <string name="battle_weather_effect_title">날씨 효과</string>
 
     <!--    error-->
     <string name="error_IO_Exception">알수없는 문제가 발생했습니다..</string>
