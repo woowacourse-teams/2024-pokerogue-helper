@@ -29,7 +29,7 @@ enum class WeatherIcon(
     TURBULENCE(R.drawable.icon_air),
 }
 
-fun WeatherUiModel.hasWeatherEffect(): Boolean = effect.isNotBlank() && effect.isNotEmpty()
+fun WeatherUiModel.hasWeatherEffect(): Boolean = effect.isNotBlank()
 
 fun Weather.toUi(): WeatherUiModel {
     val weatherIcon =
