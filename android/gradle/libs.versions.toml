@@ -61,12 +61,10 @@ mockk = "1.13.9"
 firebaseCrashlyticsBuildtools = "3.0.2"
 
 [libraries]
-agp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 
 # kotlin
 balloon = { module = "com.github.skydoves:balloon", version.ref = "balloon" }
 kotlin = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
-kotlin-gradleplugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 # koin
@@ -127,7 +125,6 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-webserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "okhttp" }
 
 # third party
-ktlint = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
 okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp" }
 okhttp = { module = "com.squareup.okhttp3:okhttp" }
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor" }

@@ -83,7 +83,6 @@
     <string name="by_special_defense">By Special Defense</string>
     <string name="by_hp">By HP</string>
 
-
     <!--    pokemon detail-->
     <string name="dex_detail_pokemon_stats_title">Base Stats</string>
 
@@ -96,6 +95,15 @@
 
     <string name="pokemon_detail_to_battle_with_enemy_pop_up_descriptions">As Opponent Pokémon</string>
     <string name="pokemon_detail_to_battle_with_mine_pop_up_descriptions">As My Pokémon</string>
+
+    <!--    pokemon stat-->
+    <string name="pokemon_stat_hp">Max.HP</string>
+    <string name="pokemon_stat_attack">Attack</string>
+    <string name="pokemon_stat_defense">Defense</string>
+    <string name="pokemon_stat_special_attack">Sp.Atk</string>
+    <string name="pokemon_stat_special_defense">Sp.Def</string>
+    <string name="pokemon_stat_speed">Speed</string>
+    <string name="pokemon_stat_base_stat">Base Stat</string>
 
     <!--    pokemon detail skills-->
     <string name="pokemon_detail_skill_level">Level</string>
@@ -118,7 +126,7 @@
     <!--    pokemon detail evolution-->
     <string name="pokemon_detail_evolution_no_evolution_chain">This Pokémon has no evolution chain.</string>
     <string name="pokemon_detail_evolution_level">Level %d</string>
-
+    <string name="pokemon_detail_evolution_same_with_current_pokemon_message">This is the current Pokémon on the screen: %s.</string>
     <!-- ability -->
     <string name="ability_title_name">Ability Dex</string>
     <string name="ability_search_hint">Search by Ability name.</string>

@@ -96,6 +96,15 @@
     <string name="pokemon_detail_to_battle_with_enemy_pop_up_descriptions">상대 포켓몬으로</string>
     <string name="pokemon_detail_to_battle_with_mine_pop_up_descriptions">내 포켓몬으로</string>
 
+    <!--    pokemon stat-->
+    <string name="pokemon_stat_hp">HP</string>
+    <string name="pokemon_stat_attack">공격</string>
+    <string name="pokemon_stat_defense">방어</string>
+    <string name="pokemon_stat_special_attack">특수공격</string>
+    <string name="pokemon_stat_special_defense">특수방어</string>
+    <string name="pokemon_stat_speed">스피드</string>
+    <string name="pokemon_stat_base_stat">종족값</string>
+
     <!--    pokemon detail skills-->
     <string name="pokemon_detail_skill_level">레벨</string>
     <string name="pokemon_detail_skill_name">기술명</string>
@@ -118,6 +127,7 @@
     <!--    pokemon detail evolution-->
     <string name="pokemon_detail_evolution_no_evolution_chain">진화 체인이 없는 포켓몬입니다.</string>
     <string name="pokemon_detail_evolution_level">레벨 %d</string>
+    <string name="pokemon_detail_evolution_same_with_current_pokemon_message">현재 화면의 포켓몬이 %s 입니다.</string>
 
     <!-- ability -->
     <string name="ability_title_name">특성 도감</string>
