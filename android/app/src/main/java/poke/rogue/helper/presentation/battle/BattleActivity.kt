@@ -101,7 +101,7 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
 
     private fun observeWeatherEffect() {
         repeatOnStarted {
-            viewModel.showWeatherEffect.collect {
+            viewModel.isWeatherEffectVisible.collect {
                 binding.ivWeatherIcon.isSelected = it
             }
         }

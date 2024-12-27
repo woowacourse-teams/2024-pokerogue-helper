@@ -78,8 +78,8 @@ class BattleViewModel(
         battleResult.map { it.isSuccess() }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
-    private val _showWeatherEffect = MutableStateFlow(false)
-    val showWeatherEffect = _showWeatherEffect.asStateFlow()
+    private val _isWeatherEffectVisible = MutableStateFlow(false)
+    val isWeatherEffectVisible = _isWeatherEffectVisible.asStateFlow()
 
     init {
         initWeathers()
@@ -254,11 +254,11 @@ class BattleViewModel(
     }
 
     fun toggleWeatherEffect() {
-        _showWeatherEffect.value = !_showWeatherEffect.value
+        _isWeatherEffectVisible.value = !_isWeatherEffectVisible.value
     }
 
     fun hideWeatherEffect() {
-        _showWeatherEffect.value = false
+        _isWeatherEffectVisible.value = false
     }
 }
 

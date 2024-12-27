@@ -153,7 +153,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/weather_effect_container"
-            animatedVisibility="@{vm.showWeatherEffect}"
+            animatedVisibility="@{vm.isWeatherEffectVisible}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
