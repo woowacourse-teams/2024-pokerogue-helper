@@ -21,7 +21,7 @@ class PokemonDetailSkillFragment :
     private val activityViewModel: PokemonDetailViewModel by activityViewModel<PokemonDetailViewModel>()
 
     private val eggSkillsAdapter: NewPokemonDetailSkillAdapter by lazy { NewPokemonDetailSkillAdapter() }
-    private val skillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
+    private val skillsAdapter: NewPokemonDetailSkillAdapter by lazy { NewPokemonDetailSkillAdapter() }
 
     override fun onViewCreated(
         view: View,
@@ -82,7 +82,12 @@ class PokemonDetailSkillFragment :
                             },
                         )
 
-                        skillsAdapter.submitList(state.skills.selfLearn.toUi())
+                        skillsAdapter.submitList(
+                            buildList {
+                                add(SkillListItem.Header)
+                                addAll(state.skills.selfLearn.toUi())
+                            },
+                        )
                     }
                 }
             }
