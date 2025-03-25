@@ -10,15 +10,17 @@ import poke.rogue.helper.databinding.FragmentPokemonSkillsBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
+import poke.rogue.helper.presentation.dex.model.SkillListItem
 import poke.rogue.helper.presentation.dex.model.toUi
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>(R.layout.fragment_pokemon_skills) {
+class PokemonDetailSkillFragment :
+    BindingFragment<FragmentPokemonSkillsBinding>(R.layout.fragment_pokemon_skills) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModel<PokemonDetailViewModel>()
 
-    private val eggSkillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
+    private val eggSkillsAdapter: NewPokemonDetailSkillAdapter by lazy { NewPokemonDetailSkillAdapter() }
     private val skillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
 
     override fun onViewCreated(
@@ -73,7 +75,13 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
                 when (state) {
                     is PokemonDetailUiState.IsLoading -> {}
                     is PokemonDetailUiState.Success -> {
-                        eggSkillsAdapter.submitList(state.skills.eggLearn.toUi())
+                        eggSkillsAdapter.submitList(
+                            buildList {
+                                add(SkillListItem.Header)
+                                addAll(state.skills.eggLearn.toUi())
+                            },
+                        )
+
                         skillsAdapter.submitList(state.skills.selfLearn.toUi())
                     }
                 }

@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import poke.rogue.helper.databinding.ItemPokemonDetailSkillBinding
-import poke.rogue.helper.presentation.dex.model.PokemonSkillUiModel
+import poke.rogue.helper.presentation.dex.model.SkillListItem
 import poke.rogue.helper.presentation.util.view.ItemDiffCallback
 
-class PokemonDetailSkillAdapter : ListAdapter<PokemonSkillUiModel, PokemonDetailSkillViewHolder>(skillsComparator) {
+class PokemonDetailSkillAdapter : ListAdapter<SkillListItem.Skill, PokemonDetailSkillViewHolder>(skillsComparator) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -29,7 +29,7 @@ class PokemonDetailSkillAdapter : ListAdapter<PokemonSkillUiModel, PokemonDetail
 
     companion object {
         private val skillsComparator =
-            ItemDiffCallback<PokemonSkillUiModel>(
+            ItemDiffCallback<SkillListItem.Skill>(
                 onItemsTheSame = { oldItem, newItem -> oldItem.id == newItem.id },
                 onContentsTheSame = { oldItem, newItem -> oldItem == newItem },
             )
