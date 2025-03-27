@@ -68,6 +68,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".presentation.dex.detail.PokemonDetailActivity2"
+            android:exported="false" />
+
+        <activity
             android:name=".presentation.biome.guide.BiomeGuideActivity"
             android:exported="false" />
     </application>
