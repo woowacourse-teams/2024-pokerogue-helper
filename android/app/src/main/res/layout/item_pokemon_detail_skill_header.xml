@@ -10,12 +10,12 @@
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_level"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_skill_level"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,78 +25,79 @@
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_name"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_skill_name"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_power"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_level"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintWidth_percent="0.35"
             tools:ignore="SpUsage" />
 
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_power"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_skill_power"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_accuracy"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_level"
-            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintWidth_percent="0.15"
             tools:ignore="SpUsage" />
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_accuracy"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pokemon_detail_skill_accuracy"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toStartOf="@id/iv_item_pokemon_detail_skill_type"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_power"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
-            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintWidth_percent="0.15"
             tools:ignore="SpUsage" />
 
         <TextView
             android:id="@+id/iv_item_pokemon_detail_skill_type"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:importantForAccessibility="no"
             android:text="@string/pokemon_detail_skill_type"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_category"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_accuracy"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
-            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintWidth_percent="0.1"
             tools:ignore="SpUsage" />
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_category"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:importantForAccessibility="no"
             android:text="@string/pokemon_detail_skill_category"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_item_pokemon_detail_skill_type"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
-            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintWidth_percent="0.1"
             tools:ignore="SpUsage" />
 
 

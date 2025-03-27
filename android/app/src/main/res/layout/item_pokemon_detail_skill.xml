@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_power"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_level"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintWidth_percent="0.35"
             tools:ignore="SpUsage"
             tools:text="몸통박치기" />
 
@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_accuracy"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_level"
-            app:layout_constraintWidth_percent="0.1"
+            app:layout_constraintWidth_percent="0.15"
             tools:ignore="SpUsage"
             tools:text="40" />
 
@@ -75,7 +75,7 @@
             app:layout_constraintEnd_toStartOf="@id/iv_item_pokemon_detail_skill_type"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_power"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
-            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintWidth_percent="0.15"
             tools:ignore="SpUsage"
             tools:text="100" />
 
@@ -90,7 +90,7 @@
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_category"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_accuracy"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
-            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintWidth_percent="0.1"
             tools:src="@drawable/icon_type_normal" />
 
         <ImageView
@@ -105,7 +105,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_item_pokemon_detail_skill_type"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
-            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintWidth_percent="0.1"
             tools:src="@drawable/ic_physical_attack_skill" />
 
 
