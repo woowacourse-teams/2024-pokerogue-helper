@@ -12,49 +12,31 @@ import poke.rogue.helper.presentation.dex.model.SkillListItem
 
 class PokemonDetailSkillAdapter :
     ListAdapter<SkillListItem, RecyclerView.ViewHolder>(diffCallback) {
-    override fun getItemViewType(position: Int): Int =
-        when (getItem(position)) {
-            is SkillListItem.SectionTitle -> VIEW_TYPE_SECTION_TITLE
-            is SkillListItem.Header -> VIEW_TYPE_HEADER
-            is SkillListItem.Skill -> VIEW_TYPE_SKILL
-        }
+    override fun getItemViewType(position: Int): Int = getItem(position).viewType
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): RecyclerView.ViewHolder =
-        when (viewType) {
-            VIEW_TYPE_SECTION_TITLE -> {
-                val binding =
-                    ItemPokemonDetailSkillSectionTitleBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false,
+        LayoutInflater.from(parent.context).let { inflater ->
+            when (viewType) {
+                SkillListItem.VIEW_TYPE_SECTION_TITLE ->
+                    SectionTitleViewHolder(
+                        ItemPokemonDetailSkillSectionTitleBinding.inflate(inflater, parent, false),
                     )
-                SectionTitleViewHolder(binding)
-            }
 
-            VIEW_TYPE_HEADER -> {
-                val binding =
-                    ItemPokemonDetailSkillHeaderBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false,
+                SkillListItem.VIEW_TYPE_HEADER ->
+                    HeaderViewHolder(
+                        ItemPokemonDetailSkillHeaderBinding.inflate(inflater, parent, false),
                     )
-                HeaderViewHolder(binding)
-            }
 
-            VIEW_TYPE_SKILL -> {
-                val binding =
-                    ItemPokemonDetailSkillBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false,
+                SkillListItem.VIEW_TYPE_SKILL ->
+                    SkillViewHolder(
+                        ItemPokemonDetailSkillBinding.inflate(inflater, parent, false),
                     )
-                SkillViewHolder(binding)
-            }
 
-            else -> throw IllegalArgumentException("Invalid viewType")
+                else -> error("Invalid viewType: $viewType")
+            }
         }
 
     override fun onBindViewHolder(
@@ -86,10 +68,6 @@ class PokemonDetailSkillAdapter :
     }
 
     companion object {
-        private const val VIEW_TYPE_SECTION_TITLE = 0
-        private const val VIEW_TYPE_HEADER = 1
-        private const val VIEW_TYPE_SKILL = 2
-
         private val diffCallback =
             object : DiffUtil.ItemCallback<SkillListItem>() {
                 override fun areItemsTheSame(

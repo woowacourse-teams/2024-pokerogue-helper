@@ -6,9 +6,15 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
 
 sealed class SkillListItem {
-    data class SectionTitle(val title: String) : SkillListItem()
+    abstract val viewType: Int
 
-    data object Header : SkillListItem()
+    data class SectionTitle(val title: String) : SkillListItem() {
+        override val viewType: Int = VIEW_TYPE_SECTION_TITLE
+    }
+
+    data object Header : SkillListItem() {
+        override val viewType: Int = VIEW_TYPE_HEADER
+    }
 
     data class Skill(
         val id: String,
@@ -19,10 +25,18 @@ sealed class SkillListItem {
         val accuracy: String,
         val category: SkillCategory,
     ) : SkillListItem() {
+        override val viewType: Int = VIEW_TYPE_SKILL
+
         companion object {
             const val NO_POWER = "-"
             const val NO_ACCURACY = "-"
         }
+    }
+
+    companion object {
+        const val VIEW_TYPE_SECTION_TITLE = 0
+        const val VIEW_TYPE_HEADER = 1
+        const val VIEW_TYPE_SKILL = 2
     }
 }
 
