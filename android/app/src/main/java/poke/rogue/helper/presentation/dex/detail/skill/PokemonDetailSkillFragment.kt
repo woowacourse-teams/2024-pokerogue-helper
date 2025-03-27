@@ -12,6 +12,7 @@ import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
 import poke.rogue.helper.presentation.dex.model.SkillListItem
 import poke.rogue.helper.presentation.dex.model.toUi
+import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
@@ -21,7 +22,6 @@ class PokemonDetailSkillFragment :
     private val activityViewModel: PokemonDetailViewModel by activityViewModel<PokemonDetailViewModel>()
 
     private val eggSkillsAdapter: NewPokemonDetailSkillAdapter by lazy { NewPokemonDetailSkillAdapter() }
-    private val skillsAdapter: NewPokemonDetailSkillAdapter by lazy { NewPokemonDetailSkillAdapter() }
 
     override fun onViewCreated(
         view: View,
@@ -33,23 +33,6 @@ class PokemonDetailSkillFragment :
     }
 
     private fun initAdapter() {
-        binding.rvPokemonDetailSkills.apply {
-            adapter = skillsAdapter
-            val spacingItemDecoration =
-                LinearSpacingItemDecoration(
-                    spacing = 8.dp,
-                    includeEdge = true,
-                    orientation = LinearSpacingItemDecoration.Orientation.VERTICAL,
-                )
-            val dividerItemDecoration =
-                MaterialDividerItemDecoration(
-                    context,
-                    VERTICAL,
-                )
-            addItemDecoration(spacingItemDecoration)
-            addItemDecoration(dividerItemDecoration)
-        }
-
         binding.rvPokemonDetailEggSkills.apply {
             adapter = eggSkillsAdapter
 
@@ -77,13 +60,11 @@ class PokemonDetailSkillFragment :
                     is PokemonDetailUiState.Success -> {
                         eggSkillsAdapter.submitList(
                             buildList {
+                                add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_egg_skill_title)))
                                 add(SkillListItem.Header)
                                 addAll(state.skills.eggLearn.toUi())
-                            },
-                        )
 
-                        skillsAdapter.submitList(
-                            buildList {
+                                add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_self_learn_skill_title)))
                                 add(SkillListItem.Header)
                                 addAll(state.skills.selfLearn.toUi())
                             },

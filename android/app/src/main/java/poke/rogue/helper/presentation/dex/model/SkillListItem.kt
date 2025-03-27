@@ -6,6 +6,8 @@ import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.type.model.toUi
 
 sealed class SkillListItem {
+    data class SectionTitle(val title: String) : SkillListItem()
+
     data object Header : SkillListItem()
 
     data class Skill(

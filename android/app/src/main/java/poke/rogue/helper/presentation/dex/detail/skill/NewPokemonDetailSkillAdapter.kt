@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import poke.rogue.helper.databinding.ItemPokemonDetailSkillBinding
 import poke.rogue.helper.databinding.ItemPokemonDetailSkillHeaderBinding
+import poke.rogue.helper.databinding.ItemPokemonDetailSkillSectionTitleBinding
 import poke.rogue.helper.presentation.dex.model.SkillListItem
 
 class NewPokemonDetailSkillAdapter :
     ListAdapter<SkillListItem, RecyclerView.ViewHolder>(diffCallback) {
     override fun getItemViewType(position: Int): Int =
         when (getItem(position)) {
+            is SkillListItem.SectionTitle -> VIEW_TYPE_SECTION_TITLE
             is SkillListItem.Header -> VIEW_TYPE_HEADER
             is SkillListItem.Skill -> VIEW_TYPE_SKILL
         }
@@ -22,6 +24,16 @@ class NewPokemonDetailSkillAdapter :
         viewType: Int,
     ): RecyclerView.ViewHolder {
         return when (viewType) {
+            VIEW_TYPE_SECTION_TITLE -> {
+                val binding =
+                    ItemPokemonDetailSkillSectionTitleBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false,
+                    )
+                SectionTitleViewHolder(binding)
+            }
+
             VIEW_TYPE_HEADER -> {
                 val binding =
                     ItemPokemonDetailSkillHeaderBinding.inflate(
@@ -51,8 +63,16 @@ class NewPokemonDetailSkillAdapter :
         position: Int,
     ) {
         when (val item = getItem(position)) {
+            is SkillListItem.SectionTitle -> (holder as SectionTitleViewHolder).bind(item.title)
             is SkillListItem.Header -> Unit
             is SkillListItem.Skill -> (holder as SkillViewHolder).bind(item)
+        }
+    }
+
+    class SectionTitleViewHolder(private val binding: ItemPokemonDetailSkillSectionTitleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(title: String) {
+            binding.title = title
         }
     }
 
@@ -67,8 +87,9 @@ class NewPokemonDetailSkillAdapter :
     }
 
     companion object {
-        private const val VIEW_TYPE_HEADER = 0
-        private const val VIEW_TYPE_SKILL = 1
+        private const val VIEW_TYPE_SECTION_TITLE = 0
+        private const val VIEW_TYPE_HEADER = 1
+        private const val VIEW_TYPE_SKILL = 2
 
         private val diffCallback =
             object : DiffUtil.ItemCallback<SkillListItem>() {

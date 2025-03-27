@@ -3,105 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_pokemon_detail_egg_skills"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="12dp"
-            tools:context=".presentation.dex.detail.skill.PokemonDetailSkillFragment">
-
-            <TextView
-                android:id="@+id/pokemon_detail_egg_skill_title"
-                style="@style/TextAppearance.Poke.TitleLargeBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pokemon_detail_egg_skill_title"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider_pokemon_detail_egg_skill"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:layout_marginEnd="100dp"
-                app:dividerThickness="2dp"
-                app:layout_constraintBottom_toTopOf="@id/divider_pokemon_egg_skill_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pokemon_detail_egg_skill_title" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider_pokemon_egg_skill_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:dividerThickness="1.5dp"
-                app:layout_constraintBottom_toTopOf="@id/rv_pokemon_detail_egg_skills"
-                app:layout_constraintTop_toBottomOf="@id/divider_pokemon_detail_egg_skill" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_pokemon_detail_egg_skills"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@id/pokemon_detail_self_learn_skill_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider_pokemon_egg_skill_title"
-                tools:listitem="@layout/item_pokemon_detail_skill" />
-
-            <TextView
-                android:id="@+id/pokemon_detail_self_learn_skill_title"
-                style="@style/TextAppearance.Poke.TitleLargeBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:text="@string/pokemon_detail_self_learn_skill_title"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/divider_pokemon_detail_self_skill"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_pokemon_detail_egg_skills" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider_pokemon_detail_self_skill"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:layout_marginEnd="100dp"
-                app:dividerThickness="2dp"
-                app:layout_constraintBottom_toTopOf="@id/divider_pokemon_skill_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pokemon_detail_self_learn_skill_title" />
-
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider_pokemon_skill_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:dividerThickness="1.5dp"
-                app:layout_constraintBottom_toTopOf="@id/rv_pokemon_detail_skills"
-                app:layout_constraintTop_toBottomOf="@id/divider_pokemon_detail_self_skill" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_pokemon_detail_skills"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/pokemon_detail_fragment_bottom_padding"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider_pokemon_skill_title"
-                tools:listitem="@layout/item_pokemon_detail_skill" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_pokemon_detail_skill" />
 
 </layout>
