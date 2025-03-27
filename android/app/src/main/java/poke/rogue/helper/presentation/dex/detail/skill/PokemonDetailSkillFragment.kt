@@ -56,22 +56,23 @@ class PokemonDetailSkillFragment :
         repeatOnStarted {
             activityViewModel.uiState.collect { state ->
                 when (state) {
-                    is PokemonDetailUiState.IsLoading -> {}
+                    is PokemonDetailUiState.IsLoading -> Unit
                     is PokemonDetailUiState.Success -> {
-                        skillsAdapter.submitList(
-                            buildList {
-                                add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_egg_skill_title)))
-                                add(SkillListItem.Header)
-                                addAll(state.skills.eggLearn.toUi())
-
-                                add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_self_learn_skill_title)))
-                                add(SkillListItem.Header)
-                                addAll(state.skills.selfLearn.toUi())
-                            },
-                        )
+                        skillsAdapter.submitList(skillListItems(state))
                     }
                 }
             }
         }
     }
+
+    private fun skillListItems(state: PokemonDetailUiState.Success): List<SkillListItem> =
+        buildList {
+            add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_egg_skill_title)))
+            add(SkillListItem.Header)
+            addAll(state.skills.eggLearn.toUi())
+
+            add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_self_learn_skill_title)))
+            add(SkillListItem.Header)
+            addAll(state.skills.selfLearn.toUi())
+        }
 }
