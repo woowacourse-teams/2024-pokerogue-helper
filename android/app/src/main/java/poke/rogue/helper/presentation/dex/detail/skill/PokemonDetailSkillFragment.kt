@@ -21,7 +21,7 @@ class PokemonDetailSkillFragment :
     BindingFragment<FragmentPokemonSkillsBinding>(R.layout.fragment_pokemon_skills) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModel<PokemonDetailViewModel>()
 
-    private val eggSkillsAdapter: NewPokemonDetailSkillAdapter by lazy { NewPokemonDetailSkillAdapter() }
+    private val skillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
 
     override fun onViewCreated(
         view: View,
@@ -34,7 +34,7 @@ class PokemonDetailSkillFragment :
 
     private fun initAdapter() {
         binding.rvPokemonDetailEggSkills.apply {
-            adapter = eggSkillsAdapter
+            adapter = skillsAdapter
 
             val spacingItemDecoration =
                 LinearSpacingItemDecoration(
@@ -58,7 +58,7 @@ class PokemonDetailSkillFragment :
                 when (state) {
                     is PokemonDetailUiState.IsLoading -> {}
                     is PokemonDetailUiState.Success -> {
-                        eggSkillsAdapter.submitList(
+                        skillsAdapter.submitList(
                             buildList {
                                 add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_egg_skill_title)))
                                 add(SkillListItem.Header)
