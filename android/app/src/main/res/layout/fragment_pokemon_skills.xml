@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_pokemon_detail_egg_skills"
+        android:id="@+id/rv_pokemon_detail_skills"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/pokemon_detail_fragment_bottom_padding"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_pokemon_detail_skill" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </layout>

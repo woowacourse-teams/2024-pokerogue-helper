@@ -33,7 +33,7 @@ class PokemonDetailSkillFragment :
     }
 
     private fun initAdapter() {
-        binding.rvPokemonDetailEggSkills.apply {
+        binding.rvPokemonDetailSkills.apply {
             adapter = skillsAdapter
 
             val spacingItemDecoration =
