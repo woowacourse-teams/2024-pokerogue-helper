@@ -23,11 +23,24 @@
 
         <ImageView
             android:id="@+id/iv_pokemon_detail_navigation_back"
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+            onSingleClick="@{() -> eventHandler.navigateToPokemonList()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
             android:src="@drawable/ic_arrow_back_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_pokemon_detail_navigation_home"
+            style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+            onSingleClick="@{() -> eventHandler.navigateToHome()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:src="@drawable/icon_home"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/iv_pokemon_detail_pokemon"

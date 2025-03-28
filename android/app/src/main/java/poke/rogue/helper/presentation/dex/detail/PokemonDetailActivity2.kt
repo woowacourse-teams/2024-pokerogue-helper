@@ -106,6 +106,9 @@ class PokemonDetailActivity2 :
         repeatOnStarted {
             viewModel.navigationEvent.collect { event ->
                 when (event) {
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonList ->
+                        onBackPressedDispatcher.onBackPressed()
+
                     is PokemonDetailViewModel.NavigationEvent.ToAbilityDetail ->
                         startActivity(
                             AbilityActivity.intent(this, event.id),

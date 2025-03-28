@@ -111,6 +111,7 @@ class PokemonDetailActivity :
         repeatOnStarted {
             viewModel.navigationEvent.collect { event ->
                 when (event) {
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonList -> {}
                     is PokemonDetailViewModel.NavigationEvent.ToAbilityDetail ->
                         startActivity(
                             AbilityActivity.intent(this, event.id),
@@ -133,7 +134,10 @@ class PokemonDetailActivity :
                             ),
                         )
 
-                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail -> navigateToPokemonDetail(event)
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail ->
+                        navigateToPokemonDetail(
+                            event,
+                        )
 
                     is PokemonDetailViewModel.NavigationEvent.None -> return@collect
                 }
