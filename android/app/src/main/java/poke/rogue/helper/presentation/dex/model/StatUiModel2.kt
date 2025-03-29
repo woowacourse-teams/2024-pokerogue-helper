@@ -1,11 +1,12 @@
 package poke.rogue.helper.presentation.dex.model
 
 import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import poke.rogue.helper.R
 import poke.rogue.helper.data.model.Stat
 
 data class StatUiModel(
-    val name: String,
+    @StringRes val name: Int,
     val amount: Int,
     val limit: Int,
     @ColorRes val color: Int = 0,
@@ -14,11 +15,11 @@ data class StatUiModel(
         get() = amount * 100 / limit
 }
 
-fun Stat.toUi() =
+fun Stat.toUi(): StatUiModel =
     when (name) {
         "hp" ->
             StatUiModel(
-                name = "HP",
+                name = R.string.pokemon_stat_hp,
                 amount = amount,
                 limit = MAX_HP_LIMIT,
                 color = R.color.stat_hp,
@@ -26,7 +27,7 @@ fun Stat.toUi() =
 
         "attack" ->
             StatUiModel(
-                name = "공격",
+                name = R.string.pokemon_stat_attack,
                 amount = amount,
                 limit = MAX_ATTACK_LIMIT,
                 color = R.color.stat_attack,
@@ -34,7 +35,7 @@ fun Stat.toUi() =
 
         "defense" ->
             StatUiModel(
-                name = "방어",
+                name = R.string.pokemon_stat_defense,
                 amount = amount,
                 limit = MAX_DEFENSE_LIMIT,
                 color = R.color.stat_defense,
@@ -42,7 +43,7 @@ fun Stat.toUi() =
 
         "specialAttack" ->
             StatUiModel(
-                name = "특수공격",
+                name = R.string.pokemon_stat_special_attack,
                 amount = amount,
                 limit = MAX_SPECIAL_ATTACK_LIMIT,
                 color = R.color.stat_special_attack,
@@ -50,7 +51,7 @@ fun Stat.toUi() =
 
         "specialDefense" ->
             StatUiModel(
-                name = "특수방어",
+                name = R.string.pokemon_stat_special_defense,
                 amount = amount,
                 limit = MAX_SPECIAL_DEFENSE_LIMIT,
                 color = R.color.stat_special_defense,
@@ -58,7 +59,7 @@ fun Stat.toUi() =
 
         "speed" ->
             StatUiModel(
-                name = "스피드",
+                name = R.string.pokemon_stat_speed,
                 amount = amount,
                 limit = MAX_SPEED_LIMIT,
                 color = R.color.stat_speed,
@@ -66,7 +67,7 @@ fun Stat.toUi() =
 
         "total" ->
             StatUiModel(
-                name = "종족값",
+                name = R.string.pokemon_stat_base_stat,
                 amount = amount,
                 limit = MAX_TOTAL_LIMIT,
                 color = R.color.stat_total,

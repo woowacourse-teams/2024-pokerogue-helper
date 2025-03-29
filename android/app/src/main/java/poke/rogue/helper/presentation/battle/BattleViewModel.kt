@@ -78,6 +78,9 @@ class BattleViewModel(
         battleResult.map { it.isSuccess() }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), false)
 
+    private val _isWeatherEffectVisible = MutableStateFlow(false)
+    val isWeatherEffectVisible = _isWeatherEffectVisible.asStateFlow()
+
     init {
         initWeathers()
         handlePokemonSelection(pokemonId, selectionType)
@@ -248,6 +251,14 @@ class BattleViewModel(
         viewModelScope.launch {
             _navigationEvent.emit(NavigateToDetail(pokemonId))
         }
+    }
+
+    fun toggleWeatherEffect() {
+        _isWeatherEffectVisible.value = !_isWeatherEffectVisible.value
+    }
+
+    fun hideWeatherEffect() {
+        _isWeatherEffectVisible.value = false
     }
 }
 

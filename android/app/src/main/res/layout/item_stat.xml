@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:foregroundGravity="center"
-        android:gravity="start"
+        android:gravity="center"
         android:orientation="horizontal"
         android:paddingHorizontal="4dp"
         android:paddingVertical="4dp">
@@ -28,7 +28,7 @@
             android:text="@{stat.name}"
             android:textSize="@dimen/pokemon_stat_text_size"
             tools:ignore="SpUsage"
-            tools:text="HPD" />
+            tools:text="Base stat sdf" />
 
         <Space
             android:layout_width="12dp"
@@ -50,9 +50,9 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             progressColor="@{stat.color}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="16dp"
+            android:max="@{stat.limit}"
             android:paddingHorizontal="4dp"
-            android:max="100"
             android:progress="@{stat.progress}"
             tools:progress="70"
             tools:progressDrawable="@drawable/progress_dex_stat" />

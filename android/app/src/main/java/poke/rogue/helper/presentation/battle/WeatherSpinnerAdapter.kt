@@ -1,3 +1,5 @@
+package poke.rogue.helper.presentation.battle
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ItemSpinnerWeatherBinding
 import poke.rogue.helper.presentation.battle.model.WeatherUiModel
+import poke.rogue.helper.presentation.util.context.stringOf
 
 class WeatherSpinnerAdapter(
     context: Context,
@@ -16,7 +19,7 @@ class WeatherSpinnerAdapter(
 
     fun updateWeathers(updated: List<WeatherUiModel>) {
         items.clear()
-        items.addAll(updated)
+        items.addAll(localizedWeathers(updated))
         notifyDataSetChanged()
     }
 
@@ -65,5 +68,20 @@ class WeatherSpinnerAdapter(
             viewHolder.binding.weather = weather
         }
         return view
+    }
+
+    private fun localizedWeathers(updated: List<WeatherUiModel>): List<WeatherUiModel> {
+        val weathers =
+            updated.map {
+                if (it.id == "none") {
+                    it.copy(
+                        description = context.stringOf(R.string.battle_weather_none),
+                        effect = "",
+                    )
+                } else {
+                    it
+                }
+            }
+        return weathers
     }
 }
