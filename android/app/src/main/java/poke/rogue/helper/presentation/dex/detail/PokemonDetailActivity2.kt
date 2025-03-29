@@ -8,6 +8,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.view.children
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
@@ -24,6 +25,8 @@ import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 import poke.rogue.helper.ui.component.PokeChip
+import poke.rogue.helper.ui.layout.PaddingValues
+import poke.rogue.helper.ui.layout.applyTo
 
 class PokemonDetailActivity2 :
     ToolbarActivity<ActivityPokemonDetail2Binding>(R.layout.activity_pokemon_detail2) {
@@ -36,6 +39,7 @@ class PokemonDetailActivity2 :
     private var isExpanded = false
 
     private var chipSpecs: List<PokeChip.Spec> = listOf()
+    private var iconOnlyChipSpecs: List<PokeChip.Spec> = listOf()
     private var fullNameChipSpecs: List<PokeChip.Spec> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -287,7 +291,26 @@ class PokemonDetailActivity2 :
     }
 
     private fun updateChipIconsOnly() {
-        chipSpecs = chipSpecs.map { it.copy(label = "") }
+        iconOnlyChipSpecs =
+            chipSpecs.map { spec ->
+                spec.copy(
+                    label = "",
+                    sizes =
+                        PokeChip.Sizes(
+                            leadingIconSize = 20.dp,
+                            leadingSpacing = 0.dp,
+                            trailingSpacing = 0.dp,
+                        ),
+                )
+            }
+
+        val zeroPadding = PaddingValues(all = 4.dp)
+
+        binding.chipGroupPokemonDetailTypes.children.forEach { chip ->
+            zeroPadding.applyTo(chip)
+        }
+
+        chipSpecs = iconOnlyChipSpecs
         binding.chipGroupPokemonDetailTypes.submitList(chipSpecs)
     }
 

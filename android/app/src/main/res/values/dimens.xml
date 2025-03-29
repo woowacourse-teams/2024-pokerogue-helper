@@ -39,6 +39,9 @@
     <dimen name="recycler_view_padding_medium">12dp</dimen>
 
 
+    <!--pokemon_chip_group-->
+    <dimen name="poke_chip_group_padding_medium">4dp</dimen>
+
     <!--pokemon detail-->
     <dimen name="pokemon_detail_pokemon_image_horizontal_padding_horizontal">40dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_horizontal_padding_top">20dp</dimen>
