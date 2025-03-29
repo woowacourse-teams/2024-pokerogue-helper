@@ -166,6 +166,3 @@
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>
-
-
-    <!--    app:layoutDescription="@xml/activity_pokemon_detail2_xml_constraintlayout_scene"-->

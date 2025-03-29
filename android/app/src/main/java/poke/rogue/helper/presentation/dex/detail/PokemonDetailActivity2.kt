@@ -35,6 +35,9 @@ class PokemonDetailActivity2 :
 
     private var isExpanded = false
 
+    private var chipSpecs: List<PokeChip.Spec> = listOf()
+    private var fullNameChipSpecs: List<PokeChip.Spec> = listOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.updatePokemonDetail(intent.getStringExtra(POKEMON_ID).toString())
@@ -46,10 +49,43 @@ class PokemonDetailActivity2 :
         initAdapter()
         initObservers()
         initFloatingButtonsHandler()
-        binding.motionLayout.setDebugMode(MotionLayout.DEBUG_SHOW_PATH)
-        binding.ivPokemonDetailPokemon.setOnClickListener {
-            binding.motionLayout.transitionToEnd()
-        }
+        binding.motionLayout.setTransitionListener(
+            object : MotionLayout.TransitionListener {
+                override fun onTransitionStarted(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int,
+                ) {
+                }
+
+                override fun onTransitionChange(
+                    motionLayout: MotionLayout?,
+                    startId: Int,
+                    endId: Int,
+                    progress: Float,
+                ) {
+                }
+
+                override fun onTransitionCompleted(
+                    motionLayout: MotionLayout?,
+                    currentId: Int,
+                ) {
+                    if (currentId == R.id.end) {
+                        updateChipIconsOnly()
+                    } else if (currentId == R.id.start) {
+                        updateChipWithLabels()
+                    }
+                }
+
+                override fun onTransitionTrigger(
+                    motionLayout: MotionLayout?,
+                    triggerId: Int,
+                    positive: Boolean,
+                    progress: Float,
+                ) {
+                }
+            },
+        )
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -155,7 +191,7 @@ class PokemonDetailActivity2 :
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
-            chipGroupPokemonDetailTypes.submitList(
+            val nowChipSpecs =
                 pokemonDetail.pokemon.types.map {
                     PokeChip.Spec(
                         id = it.id,
@@ -172,7 +208,12 @@ class PokemonDetailActivity2 :
                             ),
                         strokeWidth = 0.dp,
                     )
-                },
+                }
+            chipSpecs = nowChipSpecs
+            fullNameChipSpecs = nowChipSpecs
+
+            chipGroupPokemonDetailTypes.submitList(
+                nowChipSpecs,
             )
         }
     }
@@ -243,6 +284,16 @@ class PokemonDetailActivity2 :
                 efabPokemonDetailBattleWithOpponent.visibility = View.INVISIBLE
             }
         }
+    }
+
+    private fun updateChipIconsOnly() {
+        chipSpecs = chipSpecs.map { it.copy(label = "") }
+        binding.chipGroupPokemonDetailTypes.submitList(chipSpecs)
+    }
+
+    private fun updateChipWithLabels() {
+        chipSpecs = fullNameChipSpecs
+        binding.chipGroupPokemonDetailTypes.submitList(chipSpecs)
     }
 
     companion object {

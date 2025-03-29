@@ -36,7 +36,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
-            motion:layout_constraintStart_toStartOf="parent" />
+            motion:layout_constraintStart_toStartOf="parent">
+
+        </Constraint>
 
         <Constraint
             android:id="@+id/tab_layout_pokemon_detail"
@@ -76,7 +78,9 @@
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_navigation_back"
             motion:layout_constraintEnd_toStartOf="@id/iv_pokemon_detail_pokemon"
-            motion:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_navigation_back" />
+            motion:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_navigation_back">
+
+        </Constraint>
 
         <Constraint
             android:id="@+id/tab_layout_pokemon_detail"
