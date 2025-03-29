@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.ImageView
@@ -20,6 +21,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.res.use
 import androidx.core.graphics.ColorUtils
 import androidx.databinding.BindingAdapter
+import kotlinx.parcelize.Parcelize
 import poke.rogue.helper.R
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.view.dp
@@ -155,7 +157,15 @@ class PokeChip
             }
         }
 
+        // TODO: 놀랍게도 initLayout(PaddingValues) 함수에서 setPadding 이 없엇음.
         private fun initLayout(padding: PaddingValues = PaddingValues(8.dp)) {
+            setPadding(
+                padding.start,
+                padding.top,
+                padding.end,
+                padding.bottom,
+            )
+
             gravity = Gravity.CENTER_VERTICAL
             if (paddingStart == 0 && paddingTop == 0 && paddingEnd == 0 && paddingBottom == 0) {
                 padding.applyTo(this)
@@ -267,6 +277,7 @@ class PokeChip
             label.setTextColor(textColorList)
         }
 
+        @Parcelize
         data class Spec(
             val id: Int = NO_ID,
             val label: String,
@@ -279,7 +290,7 @@ class PokeChip
             @Dimension(DP) val cornerRadius: Int = 10.dp,
             val isSelected: Boolean = false,
             val onSelect: ((chipId: Int) -> Unit)? = null,
-        ) {
+        ) : Parcelable {
             init {
                 require(leadingIconRes != null || label.isNotBlank()) {
                     "leadingIconRes 와 label 중 하나는 반드시 있어야 합니다."
@@ -298,6 +309,7 @@ class PokeChip
             }
         }
 
+        @Parcelize
         data class Colors(
             @ColorRes val labelColor: Int = R.color.poke_chip_text_default,
             @ColorRes val strokeColor: Int = R.color.poke_chip_stroke_default,
@@ -305,15 +317,16 @@ class PokeChip
             @ColorRes val selectedLabelColor: Int = R.color.poke_chip_text_selected,
             @ColorRes val selectedStrokeColor: Int = R.color.poke_chip_stroke_selected,
             @ColorRes val selectedContainerColor: Int = R.color.poke_chip_background_selected,
-        )
+        ) : Parcelable
 
+        @Parcelize
         data class Sizes(
             @Dimension(DP) val leadingIconSize: Int = 24.dp,
             @Dimension(DP) val leadingSpacing: Int = 8.dp,
             @Dimension(PX) val labelSize: Int = 16,
             @Dimension(DP) val trailingSpacing: Int = 4.dp,
             @Dimension(DP) val trailingIconSize: Int = 24.dp,
-        ) {
+        ) : Parcelable {
             init {
                 require(leadingIconSize >= 0) { "leadingIconSize can't be negative" }
                 require(leadingSpacing >= 0) { "leadingSpacing can't be negative" }

@@ -8,7 +8,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.view.children
+import androidx.core.os.BundleCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
@@ -26,7 +26,6 @@ import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 import poke.rogue.helper.ui.component.PokeChip
 import poke.rogue.helper.ui.layout.PaddingValues
-import poke.rogue.helper.ui.layout.applyTo
 
 class PokemonDetailActivity2 :
     ToolbarActivity<ActivityPokemonDetail2Binding>(R.layout.activity_pokemon_detail2) {
@@ -38,9 +37,8 @@ class PokemonDetailActivity2 :
 
     private var isExpanded = false
 
-    private var chipSpecs: List<PokeChip.Spec> = listOf()
-    private var iconOnlyChipSpecs: List<PokeChip.Spec> = listOf()
-    private var fullNameChipSpecs: List<PokeChip.Spec> = listOf()
+    private var fullNameChipSpecs: List<PokeChip.Spec> = emptyList()
+    private var iconOnlyChipSpecs: List<PokeChip.Spec> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,53 +51,33 @@ class PokemonDetailActivity2 :
         initAdapter()
         initObservers()
         initFloatingButtonsHandler()
-        binding.motionLayout.setTransitionListener(
-            object : MotionLayout.TransitionListener {
-                override fun onTransitionStarted(
-                    motionLayout: MotionLayout?,
-                    startId: Int,
-                    endId: Int,
-                ) {
-                }
-
-                override fun onTransitionChange(
-                    motionLayout: MotionLayout?,
-                    startId: Int,
-                    endId: Int,
-                    progress: Float,
-                ) {
-                }
-
-                override fun onTransitionCompleted(
-                    motionLayout: MotionLayout?,
-                    currentId: Int,
-                ) {
-                    if (currentId == R.id.end) {
-                        updateChipIconsOnly()
-                    } else if (currentId == R.id.start) {
-                        updateChipWithLabels()
-                    }
-                }
-
-                override fun onTransitionTrigger(
-                    motionLayout: MotionLayout?,
-                    triggerId: Int,
-                    positive: Boolean,
-                    progress: Float,
-                ) {
-                }
-            },
-        )
+        initMotionLayoutListener()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(IS_EXPANDED, isExpanded)
+        outState.putBoolean(IS_EXPANDED, isExpanded)
+        outState.putParcelableArrayList(FULL_NAME_CHIP_SPECS, ArrayList(fullNameChipSpecs))
+        outState.putParcelableArrayList(ICON_ONLY_CHIP_SPECS, ArrayList(iconOnlyChipSpecs))
+        super.onSaveInstanceState(outState)
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        isExpanded = savedInstanceState.getBoolean(IS_EXPANDED)
         super.onRestoreInstanceState(savedInstanceState)
+        isExpanded = savedInstanceState.getBoolean(IS_EXPANDED)
+        fullNameChipSpecs = BundleCompat.getParcelableArrayList(
+            savedInstanceState,
+            FULL_NAME_CHIP_SPECS,
+            PokeChip.Spec::class.java,
+        ) ?: emptyList()
+
+        iconOnlyChipSpecs = BundleCompat.getParcelableArrayList(
+            savedInstanceState,
+            ICON_ONLY_CHIP_SPECS,
+            PokeChip.Spec::class.java,
+        ) ?: emptyList()
+
         updateFloatingButtonsState()
     }
 
@@ -127,6 +105,39 @@ class PokemonDetailActivity2 :
         binding.fabPokemonDetailBattle.setOnClickListener {
             toggleFloatingButtons()
         }
+    }
+
+    private fun initMotionLayoutListener() {
+        binding.motionLayout?.setTransitionListener(
+            ChipTransitionListener(
+                startId = R.id.start,
+                endId = R.id.end,
+                onEnd = { updateChipIconsOnly() },
+                onStart = { updateChipWithLabels() },
+            ),
+        )
+    }
+
+    private fun updateChipIconsOnly() {
+        if (iconOnlyChipSpecs.isEmpty()) {
+            iconOnlyChipSpecs =
+                fullNameChipSpecs.map { spec ->
+                    spec.copy(
+                        label = "",
+                        sizes =
+                            PokeChip.Sizes(
+                                leadingIconSize = 20.dp,
+                                leadingSpacing = 0.dp,
+                                trailingSpacing = 0.dp,
+                            ),
+                    )
+                }
+        }
+        binding.chipGroupPokemonDetailTypes.submitList(iconOnlyChipSpecs) { }
+    }
+
+    private fun updateChipWithLabels() {
+        binding.chipGroupPokemonDetailTypes.submitList(fullNameChipSpecs)
     }
 
     private fun observePokemonDetailUi() {
@@ -195,32 +206,34 @@ class PokemonDetailActivity2 :
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
-            val nowChipSpecs =
-                pokemonDetail.pokemon.types.map {
-                    PokeChip.Spec(
-                        id = it.id,
-                        label = stringOf(it.typeName),
-                        leadingIconRes = it.typeIconResId,
-                        colors =
-                            PokeChip.Colors(
-                                selectedContainerColor = it.typeColor,
-                                containerColor = R.color.poke_black,
-                            ),
-                        sizes =
-                            PokeChip.Sizes(
-                                leadingIconSize = 20.dp,
-                            ),
-                        strokeWidth = 0.dp,
-                    )
-                }
-            chipSpecs = nowChipSpecs
-            fullNameChipSpecs = nowChipSpecs
 
-            chipGroupPokemonDetailTypes.submitList(
-                nowChipSpecs,
-            )
+            if (fullNameChipSpecs.isEmpty()) {
+                fullNameChipSpecs = initialTypeChipSpecs(pokemonDetail)
+            }
+
+            chipGroupPokemonDetailTypes.submitList(fullNameChipSpecs)
         }
     }
+
+    private fun initialTypeChipSpecs(pokemonDetail: PokemonDetailUiState.Success) =
+        pokemonDetail.pokemon.types.map {
+            PokeChip.Spec(
+                id = it.id,
+                label = stringOf(it.typeName),
+                leadingIconRes = it.typeIconResId,
+                colors =
+                    PokeChip.Colors(
+                        selectedContainerColor = it.typeColor,
+                        containerColor = R.color.poke_black,
+                    ),
+                sizes =
+                    PokeChip.Sizes(
+                        leadingIconSize = 20.dp,
+                    ),
+                padding = PaddingValues(all = 4.dp),
+                strokeWidth = 0.dp,
+            )
+        }
 
     private fun battleIntent(battleEvent: PokemonDetailViewModel.NavigationEvent.ToBattle): Intent =
         when (battleEvent) {
@@ -290,38 +303,11 @@ class PokemonDetailActivity2 :
         }
     }
 
-    private fun updateChipIconsOnly() {
-        iconOnlyChipSpecs =
-            chipSpecs.map { spec ->
-                spec.copy(
-                    label = "",
-                    sizes =
-                        PokeChip.Sizes(
-                            leadingIconSize = 20.dp,
-                            leadingSpacing = 0.dp,
-                            trailingSpacing = 0.dp,
-                        ),
-                )
-            }
-
-        val zeroPadding = PaddingValues(all = 4.dp)
-
-        binding.chipGroupPokemonDetailTypes.children.forEach { chip ->
-            zeroPadding.applyTo(chip)
-        }
-
-        chipSpecs = iconOnlyChipSpecs
-        binding.chipGroupPokemonDetailTypes.submitList(chipSpecs)
-    }
-
-    private fun updateChipWithLabels() {
-        chipSpecs = fullNameChipSpecs
-        binding.chipGroupPokemonDetailTypes.submitList(chipSpecs)
-    }
-
     companion object {
         private const val POKEMON_ID = "pokemonId"
         private const val IS_EXPANDED = "isExpanded"
+        private const val FULL_NAME_CHIP_SPECS = "fullNameChipSpecs"
+        private const val ICON_ONLY_CHIP_SPECS = "iconOnlyChipSpecs"
 
         fun intent(
             context: Context,
@@ -330,5 +316,46 @@ class PokemonDetailActivity2 :
             Intent(context, PokemonDetailActivity2::class.java).apply {
                 putExtra(POKEMON_ID, pokemonId)
             }
+    }
+}
+
+class ChipTransitionListener(
+    private val startId: Int,
+    private val endId: Int,
+    private val onEnd: () -> Unit,
+    private val onStart: () -> Unit,
+) : MotionLayout.TransitionListener {
+    override fun onTransitionStarted(
+        motionLayout: MotionLayout,
+        startId: Int,
+        endId: Int,
+    ) {
+    }
+
+    override fun onTransitionChange(
+        motionLayout: MotionLayout,
+        startId: Int,
+        endId: Int,
+        progress: Float,
+    ) {
+    }
+
+    override fun onTransitionCompleted(
+        motionLayout: MotionLayout,
+        currentId: Int,
+    ) {
+        when (currentId) {
+            endId -> onEnd()
+            startId -> onStart()
+            else -> {}
+        }
+    }
+
+    override fun onTransitionTrigger(
+        motionLayout: MotionLayout,
+        triggerId: Int,
+        positive: Boolean,
+        progress: Float,
+    ) {
     }
 }
