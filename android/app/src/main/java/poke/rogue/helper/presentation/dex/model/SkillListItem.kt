@@ -43,4 +43,5 @@ fun PokemonSkill.toUi(): SkillListItem.Skill =
         category = category,
     )
 
+@JvmName("pokemonSkillListToUi")
 fun List<PokemonSkill>.toUi(): List<SkillListItem.Skill> = map(PokemonSkill::toUi)
