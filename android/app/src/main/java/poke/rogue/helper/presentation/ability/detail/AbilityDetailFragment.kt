@@ -10,7 +10,7 @@ import poke.rogue.helper.presentation.ability.model.toUi
 import poke.rogue.helper.presentation.base.error.ErrorEvent
 import poke.rogue.helper.presentation.base.error.NetworkErrorActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarFragment
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity2
 import poke.rogue.helper.presentation.home.HomeActivity
 import poke.rogue.helper.presentation.util.fragment.startActivity
 import poke.rogue.helper.presentation.util.fragment.toast
@@ -86,7 +86,7 @@ class AbilityDetailFragment :
 
         repeatOnStarted {
             viewModel.navigationToPokemonDetailEvent.collect { pokemonId ->
-                PokemonDetailActivity.intent(requireContext(), pokemonId).let(::startActivity)
+                PokemonDetailActivity2.intent(requireContext(), pokemonId).let(::startActivity)
             }
         }
 
