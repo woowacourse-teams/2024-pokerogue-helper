@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="skill"
-            type="poke.rogue.helper.presentation.dex.model.SkillListItem.Skill" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,96 +10,95 @@
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_level"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{String.valueOf(skill.level)}"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:text="@string/pokemon_detail_skill_level"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintWidth_percent="0.1"
-            tools:ignore="SpUsage"
-            tools:text="1" />
+            tools:ignore="SpUsage" />
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_name"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{skill.name}"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:text="@string/pokemon_detail_skill_name"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_power"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_level"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.35"
-            tools:ignore="SpUsage"
-            tools:text="몸통박치기" />
+            tools:ignore="SpUsage" />
 
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_power"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{skill.power}"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:text="@string/pokemon_detail_skill_power"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_accuracy"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_level"
             app:layout_constraintWidth_percent="0.15"
-            tools:ignore="SpUsage"
-            tools:text="40" />
+            tools:ignore="SpUsage" />
 
         <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_accuracy"
-            style="@style/TextAppearance.Poke.Description"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{String.valueOf(skill.accuracy)}"
-            android:textSize="@dimen/item_pokemon_skills_text_size"
+            android:text="@string/pokemon_detail_skill_accuracy"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toStartOf="@id/iv_item_pokemon_detail_skill_type"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_power"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintWidth_percent="0.15"
-            tools:ignore="SpUsage"
-            tools:text="100" />
+            tools:ignore="SpUsage" />
 
-        <ImageView
+        <TextView
             android:id="@+id/iv_item_pokemon_detail_skill_type"
-            imageRes="@{skill.type.typeIconResId}"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:importantForAccessibility="no"
+            android:text="@string/pokemon_detail_skill_type"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toStartOf="@id/tv_item_pokemon_detail_skill_category"
             app:layout_constraintStart_toEndOf="@id/tv_item_pokemon_detail_skill_accuracy"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintWidth_percent="0.1"
-            tools:src="@drawable/icon_type_normal" />
+            tools:ignore="SpUsage" />
 
-        <ImageView
+        <TextView
             android:id="@+id/tv_item_pokemon_detail_skill_category"
-            style="@style/TextAppearance.Poke.Description"
-            imageUrl="@{skill.category.logo}"
+            style="@style/TextAppearance.Poke.TitleLargeBold"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:importantForAccessibility="no"
+            android:text="@string/pokemon_detail_skill_category"
+            android:textSize="@dimen/item_pokemon_skills_header_text_size"
             app:layout_constraintBottom_toBottomOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_item_pokemon_detail_skill_type"
             app:layout_constraintTop_toTopOf="@id/tv_item_pokemon_detail_skill_name"
             app:layout_constraintWidth_percent="0.1"
-            tools:src="@drawable/ic_physical_attack_skill" />
+            tools:ignore="SpUsage" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

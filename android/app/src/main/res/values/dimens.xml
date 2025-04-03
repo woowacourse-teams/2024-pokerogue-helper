@@ -38,6 +38,7 @@
     <dimen name="stroke_width_small">1dp</dimen>
     <dimen name="progress_bar_corner_radius">8dp</dimen>
     <dimen name="text_size_header_large">20sp</dimen>
+    <dimen name="recycler_view_padding_medium">12dp</dimen>
 
 
     <!--pokemon detail-->
@@ -79,6 +80,7 @@
     <dimen name="item_pokemon_evolution_text_size">12dp</dimen>
 
     <!--    pokemon skills-->
+    <dimen name="item_pokemon_skills_header_text_size">16dp</dimen>
     <dimen name="item_pokemon_skills_text_size">12dp</dimen>
 
     <!--    pokemon information-->

@@ -10,15 +10,17 @@ import poke.rogue.helper.databinding.FragmentPokemonSkillsBinding
 import poke.rogue.helper.presentation.base.BindingFragment
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailUiState
 import poke.rogue.helper.presentation.dex.detail.PokemonDetailViewModel
+import poke.rogue.helper.presentation.dex.model.SkillListItem
 import poke.rogue.helper.presentation.dex.model.toUi
+import poke.rogue.helper.presentation.util.fragment.stringOf
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.LinearSpacingItemDecoration
 import poke.rogue.helper.presentation.util.view.dp
 
-class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>(R.layout.fragment_pokemon_skills) {
+class PokemonDetailSkillFragment :
+    BindingFragment<FragmentPokemonSkillsBinding>(R.layout.fragment_pokemon_skills) {
     private val activityViewModel: PokemonDetailViewModel by activityViewModel<PokemonDetailViewModel>()
 
-    private val eggSkillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
     private val skillsAdapter: PokemonDetailSkillAdapter by lazy { PokemonDetailSkillAdapter() }
 
     override fun onViewCreated(
@@ -33,23 +35,6 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
     private fun initAdapter() {
         binding.rvPokemonDetailSkills.apply {
             adapter = skillsAdapter
-            val spacingItemDecoration =
-                LinearSpacingItemDecoration(
-                    spacing = 8.dp,
-                    includeEdge = true,
-                    orientation = LinearSpacingItemDecoration.Orientation.VERTICAL,
-                )
-            val dividerItemDecoration =
-                MaterialDividerItemDecoration(
-                    context,
-                    VERTICAL,
-                )
-            addItemDecoration(spacingItemDecoration)
-            addItemDecoration(dividerItemDecoration)
-        }
-
-        binding.rvPokemonDetailEggSkills.apply {
-            adapter = eggSkillsAdapter
 
             val spacingItemDecoration =
                 LinearSpacingItemDecoration(
@@ -71,13 +56,23 @@ class PokemonDetailSkillFragment : BindingFragment<FragmentPokemonSkillsBinding>
         repeatOnStarted {
             activityViewModel.uiState.collect { state ->
                 when (state) {
-                    is PokemonDetailUiState.IsLoading -> {}
+                    is PokemonDetailUiState.IsLoading -> Unit
                     is PokemonDetailUiState.Success -> {
-                        eggSkillsAdapter.submitList(state.skills.eggLearn.toUi())
-                        skillsAdapter.submitList(state.skills.selfLearn.toUi())
+                        skillsAdapter.submitList(skillListItems(state))
                     }
                 }
             }
         }
     }
+
+    private fun skillListItems(state: PokemonDetailUiState.Success): List<SkillListItem> =
+        buildList {
+            add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_egg_skill_title)))
+            add(SkillListItem.Header)
+            addAll(state.skills.eggLearn.toUi())
+
+            add(SkillListItem.SectionTitle(stringOf(R.string.pokemon_detail_self_learn_skill_title)))
+            add(SkillListItem.Header)
+            addAll(state.skills.selfLearn.toUi())
+        }
 }
