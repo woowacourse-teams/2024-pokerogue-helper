@@ -46,6 +46,8 @@
             android:id="@+id/iv_pokemon_detail_pokemon"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/pokemon_detail_pokemon_image_padding"
+            android:paddingBottom="@dimen/pokemon_detail_pokemon_image_padding"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,22 +69,23 @@
             app:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_pokemon"
             tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/tv_pokemon_detail_pokemon_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.Poke.TitleLargeBold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chip_group_pokemon_detail_types"
-            tools:text="@string/pokemon_list_title_name" />
-
         <poke.rogue.helper.ui.component.PokeChipGroup
             android:id="@+id/chip_group_pokemon_detail_types"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:direction="row"
-            app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_pokemon_name"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_pokemon_detail_pokemon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Poke.TitleLargeBold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_pokemon_detail_types"
+            tools:text="@string/pokemon_list_title_name" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout_pokemon_detail"
