@@ -12,7 +12,7 @@ import androidx.core.os.BundleCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
-import poke.rogue.helper.databinding.ActivityPokemonDetail2Binding
+import poke.rogue.helper.databinding.ActivityPokemonDetailBinding
 import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.BattleActivity
@@ -27,8 +27,8 @@ import poke.rogue.helper.presentation.util.view.loadImageWithProgress
 import poke.rogue.helper.ui.component.PokeChip
 import poke.rogue.helper.ui.layout.PaddingValues
 
-class PokemonDetailActivity2 :
-    ToolbarActivity<ActivityPokemonDetail2Binding>(R.layout.activity_pokemon_detail2) {
+class PokemonDetailActivity :
+    ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModel<PokemonDetailViewModel>()
     override val toolbar: Toolbar?
         get() = null
@@ -258,14 +258,14 @@ class PokemonDetailActivity2 :
         when (battleEvent) {
             is PokemonDetailViewModel.NavigationEvent.ToBattle.WithMyPokemon ->
                 BattleActivity.intent(
-                    this@PokemonDetailActivity2,
+                    this@PokemonDetailActivity,
                     pokemonId = battleEvent.pokemon.id,
                     isMine = true,
                 )
 
             is PokemonDetailViewModel.NavigationEvent.ToBattle.WithOpponentPokemon ->
                 BattleActivity.intent(
-                    this@PokemonDetailActivity2,
+                    this@PokemonDetailActivity,
                     pokemonId = battleEvent.pokemon.id,
                     isMine = false,
                 )
@@ -332,7 +332,7 @@ class PokemonDetailActivity2 :
             context: Context,
             pokemonId: String,
         ): Intent =
-            Intent(context, PokemonDetailActivity2::class.java).apply {
+            Intent(context, PokemonDetailActivity::class.java).apply {
                 putExtra(POKEMON_ID, pokemonId)
             }
     }

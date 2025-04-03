@@ -64,7 +64,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".presentation.dex.detail.PokemonDetailActivity2"
+            android:name=".presentation.dex.detail.PokemonDetailActivity"
             android:exported="false" />
 
         <activity
