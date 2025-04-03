@@ -112,8 +112,14 @@ class PokemonDetailActivity2 :
             ChipTransitionListener(
                 startId = R.id.start,
                 endId = R.id.end,
-                onEnd = { updateChipIconsOnly() },
-                onStart = { updateChipWithLabels() },
+                onEnd = {
+                    updateChipIconsOnly()
+                    updatePadding(1f)
+                },
+                onStart = {
+                    updateChipWithLabels()
+                    updatePadding(0f)
+                },
                 update = { progress: Float -> updatePadding(progress) },
             ),
         )
@@ -144,13 +150,12 @@ class PokemonDetailActivity2 :
     private fun updatePadding(progress: Float) {
         val startPadding =
             resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_image_padding)
-        val endPadding = 0
-
+        val endPadding = 4.dp
         val interpolatedPadding = (startPadding * (1 - progress) + endPadding * progress).toInt()
 
         binding.ivPokemonDetailPokemon.setPadding(
             interpolatedPadding,
-            interpolatedPadding,
+            0,
             interpolatedPadding,
             interpolatedPadding,
         )

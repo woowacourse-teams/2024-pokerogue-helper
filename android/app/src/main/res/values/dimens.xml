@@ -49,6 +49,7 @@
     <dimen name="pokemon_detail_pokemon_image_horizontal_padding_top">20dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_horizontal_margin_start">28dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_horizontal_margin_bottom">28dp</dimen>
+    <dimen name="pokemon_detail_pokemon_image_margin_top">12dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_padding">40dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_padding_start">16dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_padding_bottom">20dp</dimen>
