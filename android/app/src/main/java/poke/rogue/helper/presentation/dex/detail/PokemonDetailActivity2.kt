@@ -114,6 +114,7 @@ class PokemonDetailActivity2 :
                 endId = R.id.end,
                 onEnd = { updateChipIconsOnly() },
                 onStart = { updateChipWithLabels() },
+                update = { progress: Float -> updatePadding(progress) },
             ),
         )
     }
@@ -138,6 +139,21 @@ class PokemonDetailActivity2 :
 
     private fun updateChipWithLabels() {
         binding.chipGroupPokemonDetailTypes.submitList(fullNameChipSpecs)
+    }
+
+    private fun updatePadding(progress: Float) {
+        val startPadding =
+            resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_image_padding)
+        val endPadding = 0
+
+        val interpolatedPadding = (startPadding * (1 - progress) + endPadding * progress).toInt()
+
+        binding.ivPokemonDetailPokemon.setPadding(
+            interpolatedPadding,
+            interpolatedPadding,
+            interpolatedPadding,
+            interpolatedPadding,
+        )
     }
 
     private fun observePokemonDetailUi() {
@@ -324,6 +340,7 @@ class ChipTransitionListener(
     private val endId: Int,
     private val onEnd: () -> Unit,
     private val onStart: () -> Unit,
+    private val update: (Float) -> Unit,
 ) : MotionLayout.TransitionListener {
     override fun onTransitionStarted(
         motionLayout: MotionLayout,
@@ -338,6 +355,7 @@ class ChipTransitionListener(
         endId: Int,
         progress: Float,
     ) {
+        update(progress)
     }
 
     override fun onTransitionCompleted(

@@ -80,7 +80,6 @@
             android:id="@+id/chip_group_pokemon_detail_types"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/poke_chip_group_padding_medium"
             app:direction="row"
             app:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
             app:layout_constraintStart_toStartOf="parent" />
