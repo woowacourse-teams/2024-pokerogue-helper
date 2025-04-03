@@ -112,10 +112,8 @@ class PokemonDetailActivity2 :
             ChipTransitionListener(
                 startId = R.id.start,
                 endId = R.id.end,
-                onEnd = {
-                    updateChipIconsOnly()
-                    updatePadding(1f)
-                },
+                onStartToLeave = { updateChipIconsOnly() },
+                onEnd = { updatePadding(1f) },
                 onStart = {
                     updateChipWithLabels()
                     updatePadding(0f)
@@ -343,6 +341,7 @@ class PokemonDetailActivity2 :
 class ChipTransitionListener(
     private val startId: Int,
     private val endId: Int,
+    private val onStartToLeave: () -> Unit,
     private val onEnd: () -> Unit,
     private val onStart: () -> Unit,
     private val update: (Float) -> Unit,
@@ -352,6 +351,9 @@ class ChipTransitionListener(
         startId: Int,
         endId: Int,
     ) {
+        if (startId == this.startId) {
+            onStartToLeave()
+        }
     }
 
     override fun onTransitionChange(
@@ -370,7 +372,6 @@ class ChipTransitionListener(
         when (currentId) {
             endId -> onEnd()
             startId -> onStart()
-            else -> {}
         }
     }
 
