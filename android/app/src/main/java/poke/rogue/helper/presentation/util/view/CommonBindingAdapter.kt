@@ -1,5 +1,6 @@
 package poke.rogue.helper.presentation.util.view
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorRes
@@ -54,13 +55,33 @@ fun ImageView.loadImageWithProgress(
     imageUrl: String?,
     progressIndicator: CircularProgressIndicator,
 ) {
-    progressIndicator.visibility = View.VISIBLE
+    if (isImageCached(context, imageUrl)) {
+        progressIndicator.visibility = View.GONE
+    } else {
+        progressIndicator.visibility = View.VISIBLE
+    }
 
     Glide.with(context)
         .load(imageUrl)
         .listener(createProgressListener(progressIndicator))
         .error(R.drawable.ic_ditto_silhouette)
         .into(this)
+}
+
+private fun isImageCached(
+    context: Context,
+    url: String?,
+): Boolean {
+    return try {
+        val futureTarget =
+            Glide.with(context)
+                .load(url)
+                .onlyRetrieveFromCache(true)
+                .submit()
+        futureTarget.get() != null
+    } catch (e: Exception) {
+        false
+    }
 }
 
 @BindingAdapter("imageRes")
