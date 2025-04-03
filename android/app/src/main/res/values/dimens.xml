@@ -25,6 +25,8 @@
     <dimen name="biome_gym_item_tv_size">16sp</dimen>
     <dimen name="pokemon_detail_pokemon_types_name_size">12sp</dimen>
     <dimen name="pokemon_detail_pokemon_types_icon_size">16dp</dimen>
+    <dimen name="biome_item_margin_between_biome_name_and_image">12dp</dimen>
+
 
     <dimen name="pokemon_stat_text_size">12dp</dimen>
     <dimen name="pokemon_stat_key_text_width">52dp</dimen>
