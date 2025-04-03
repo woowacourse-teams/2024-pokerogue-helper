@@ -157,7 +157,6 @@ class PokeChip
             }
         }
 
-        // TODO: 놀랍게도 initLayout(PaddingValues) 함수에서 setPadding 이 없엇음.
         private fun initLayout(padding: PaddingValues = PaddingValues(8.dp)) {
             setPadding(
                 padding.start,
