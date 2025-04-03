@@ -15,7 +15,7 @@ import poke.rogue.helper.databinding.ActivityBiomeDetailBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
 import poke.rogue.helper.presentation.battle.BattleActivity
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity2
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.logClickEvent
@@ -86,9 +86,9 @@ class BiomeDetailActivity :
 
                     is BiomeDetailUiEvent.NavigateToPokemonDetail -> {
                         val pokemonId = event.pokemonId
-                        startActivity<PokemonDetailActivity> {
+                        startActivity<PokemonDetailActivity2> {
                             putExtras(
-                                PokemonDetailActivity.intent(
+                                PokemonDetailActivity2.intent(
                                     this@BiomeDetailActivity,
                                     pokemonId,
                                 ),

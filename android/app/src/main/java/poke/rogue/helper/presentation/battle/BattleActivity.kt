@@ -17,7 +17,7 @@ import poke.rogue.helper.presentation.battle.model.hasWeatherEffect
 import poke.rogue.helper.presentation.battle.selection.BattleSelectionActivity
 import poke.rogue.helper.presentation.battle.selection.pokemon.addPokemonTypes
 import poke.rogue.helper.presentation.battle.view.itemSelectListener
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity2
 import poke.rogue.helper.presentation.util.context.colorOf
 import poke.rogue.helper.presentation.util.context.startActivity
 import poke.rogue.helper.presentation.util.context.stringOf
@@ -192,9 +192,9 @@ class BattleActivity : ToolbarActivity<ActivityBattleBinding>(R.layout.activity_
     }
 
     private fun navigateToDetail(event: NavigateToDetail) {
-        startActivity<PokemonDetailActivity> {
+        startActivity<PokemonDetailActivity2> {
             putExtras(
-                PokemonDetailActivity.intent(
+                PokemonDetailActivity2.intent(
                     this@BattleActivity,
                     event.pokemonId,
                 ),
