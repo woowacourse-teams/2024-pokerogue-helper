@@ -43,6 +43,12 @@ class PokemonDetailViewModel(
         }
     }
 
+    override fun navigateToPokemonList() {
+        viewModelScope.launch {
+            _navigationEvent.emit(NavigationEvent.ToPokemonList)
+        }
+    }
+
     override fun navigateToAbilityDetail(abilityId: String) {
         viewModelScope.launch {
             _navigationEvent.emit(NavigationEvent.ToAbilityDetail(abilityId))
@@ -94,6 +100,8 @@ class PokemonDetailViewModel(
     }
 
     sealed interface NavigationEvent {
+        data object ToPokemonList : NavigationEvent
+
         data class ToAbilityDetail(val id: String) : NavigationEvent
 
         data class ToBiomeDetail(val id: String) : NavigationEvent
