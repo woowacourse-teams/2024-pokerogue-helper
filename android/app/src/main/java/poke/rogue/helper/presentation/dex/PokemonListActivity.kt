@@ -16,7 +16,7 @@ import poke.rogue.helper.R
 import poke.rogue.helper.databinding.ActivityPokemonListBinding
 import poke.rogue.helper.presentation.base.error.ErrorHandleActivity
 import poke.rogue.helper.presentation.base.error.ErrorHandleViewModel
-import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity2
+import poke.rogue.helper.presentation.dex.detail.PokemonDetailActivity
 import poke.rogue.helper.presentation.dex.filter.PokeFilterUiModel
 import poke.rogue.helper.presentation.dex.filter.PokemonFilterBottomSheetFragment
 import poke.rogue.helper.presentation.dex.sort.PokemonSortBottomSheetFragment
@@ -163,7 +163,7 @@ class PokemonListActivity :
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 hideKeyboard()
-                startActivity(PokemonDetailActivity2.intent(this, pokemonId))
+                startActivity(PokemonDetailActivity.intent(this, pokemonId))
             }
         }
 

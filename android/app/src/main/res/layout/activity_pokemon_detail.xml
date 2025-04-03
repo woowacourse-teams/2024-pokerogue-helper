@@ -19,7 +19,7 @@
         android:id="@+id/motion_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/activity_pokemon_detail2_xml_motion_layout_scene">
+        app:layoutDescription="@xml/activity_pokemon_detail_motion_layout_scene">
 
         <ImageView
             android:id="@+id/iv_pokemon_detail_navigation_back"

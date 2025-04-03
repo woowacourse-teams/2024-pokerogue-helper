@@ -17,7 +17,7 @@ import poke.rogue.helper.testing.rule.KoinAndroidUnitTestRule
 @Config(application = TestApplication::class)
 class PokemonDetailActivityTest {
     @get:Rule
-    val activityRule = activityScenarioRule<PokemonDetailActivity2>()
+    val activityRule = activityScenarioRule<PokemonDetailActivity>()
     private val scenario get() = activityRule.scenario
 
     @get:Rule
