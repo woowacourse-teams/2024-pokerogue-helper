@@ -48,8 +48,10 @@ class PokemonListActivity :
         binding.vm = viewModel
         binding.lifecycleOwner = this
         initAdapter()
-        initObservers()
-        initListeners()
+        observeUiState()
+        observeUiEvent()
+        initClickListeners()
+        initFragmentResultListeners()
     }
 
     private fun initAdapter() {
@@ -115,7 +117,7 @@ class PokemonListActivity :
         }
     }
 
-    private fun initObservers() {
+    private fun observeUiState() {
         repeatOnStarted {
             viewModel.uiState.collect { uiState ->
                 pokemonAdapter.submitList(uiState.pokemons) {
@@ -160,19 +162,25 @@ class PokemonListActivity :
                 )
             }
         }
+    }
+
+    private fun observeUiEvent() {
         repeatOnStarted {
             viewModel.navigateToDetailEvent.collect { pokemonId ->
                 hideKeyboard()
                 startActivity(PokemonDetailActivity.intent(this, pokemonId))
             }
         }
-
+    }
+    
+    private fun initFragmentResultListeners() {
         supportFragmentManager.setFragmentResultListener(FILTER_RESULT_KEY, this) { key, bundle ->
             val filterArgs: PokeFilterUiModel =
                 PokemonFilterBottomSheetFragment.argsFrom(bundle)
                     ?: return@setFragmentResultListener
             viewModel.filterPokemon(filterArgs)
         }
+        
         supportFragmentManager.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
             val sortArgs: PokemonSortUiModel =
                 PokemonSortBottomSheetFragment.argsFrom(bundle)
@@ -181,7 +189,7 @@ class PokemonListActivity :
         }
     }
 
-    private fun initListeners() {
+    private fun initClickListeners() {
         binding.btnPokeListScrollUp.setOnClickListener {
             binding.rvPokemonList.scrollToPosition(0)
             binding.appBarPokemonList.setExpanded(true, true)
