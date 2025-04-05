@@ -121,7 +121,7 @@ class PokemonListActivity :
         repeatOnStarted {
             viewModel.uiState.collect { uiState ->
                 pokemonAdapter.submitList(uiState.pokemons) {
-                    binding.rvPokemonList.scrollToPosition(0)
+                    scrollToTop()
                 }
 
                 binding.chipPokeFiter.bindPokeChip(
@@ -172,7 +172,7 @@ class PokemonListActivity :
             }
         }
     }
-    
+
     private fun initFragmentResultListeners() {
         supportFragmentManager.setFragmentResultListener(FILTER_RESULT_KEY, this) { key, bundle ->
             val filterArgs: PokeFilterUiModel =
@@ -180,7 +180,7 @@ class PokemonListActivity :
                     ?: return@setFragmentResultListener
             viewModel.filterPokemon(filterArgs)
         }
-        
+
         supportFragmentManager.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
             val sortArgs: PokemonSortUiModel =
                 PokemonSortBottomSheetFragment.argsFrom(bundle)
@@ -191,18 +191,17 @@ class PokemonListActivity :
 
     private fun initClickListeners() {
         binding.btnPokeListScrollUp.setOnClickListener {
-            binding.rvPokemonList.scrollToPosition(0)
-            binding.appBarPokemonList.setExpanded(true, true)
+            scrollToTop()
         }
         binding.root.setOnClickListener {
             hideKeyboard()
         }
     }
 
-    private fun String.clean() =
-        this
-            .replace("\\s".toRegex(), "")
-            .replace("[^a-zA-Z0-9ㄱ-ㅎ가-힣]".toRegex(), "")
+    private fun scrollToTop() {
+        binding.rvPokemonList.scrollToPosition(0)
+        binding.appBarPokemonList.setExpanded(true, true)
+    }
 
     companion object {
         const val FILTER_RESULT_KEY = "FILTER_RESULT_KEY_result_key"
