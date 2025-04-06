@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.doOnNextLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -120,9 +121,7 @@ class PokemonListActivity :
     private fun observeUiState() {
         repeatOnStarted {
             viewModel.uiState.collect { uiState ->
-                pokemonAdapter.submitList(uiState.pokemons) {
-                    scrollToTop()
-                }
+                pokemonAdapter.submitList(uiState.pokemons)
 
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
@@ -166,9 +165,17 @@ class PokemonListActivity :
 
     private fun observeUiEvent() {
         repeatOnStarted {
-            viewModel.navigateToDetailEvent.collect { pokemonId ->
-                hideKeyboard()
-                startActivity(PokemonDetailActivity.intent(this, pokemonId))
+            viewModel.uiEvent.collect { uiEvent ->
+                when (uiEvent) {
+                    is PokemonListUiEvent.NavigateToHome -> {
+                        hideKeyboard()
+                        startActivity(PokemonDetailActivity.intent(this, uiEvent.pokemonId))
+                    }
+
+                    is PokemonListUiEvent.ChangeSearchOption -> {
+                        scrollToTop()
+                    }
+                }
             }
         }
     }
@@ -199,7 +206,9 @@ class PokemonListActivity :
     }
 
     private fun scrollToTop() {
-        binding.rvPokemonList.scrollToPosition(0)
+        binding.rvPokemonList.doOnNextLayout {
+            binding.rvPokemonList.scrollToPosition(0)
+        }
         binding.appBarPokemonList.setExpanded(true, true)
     }
 

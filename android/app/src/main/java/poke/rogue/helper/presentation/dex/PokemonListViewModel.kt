@@ -3,11 +3,11 @@ package poke.rogue.helper.presentation.dex
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
@@ -89,8 +90,8 @@ class PokemonListViewModel(
                 true,
             )
 
-    private val _navigateToDetailEvent = MutableSharedFlow<String>()
-    val navigateToDetailEvent = _navigateToDetailEvent.asSharedFlow()
+    private val _uiEvent = Channel<PokemonListUiEvent>(capacity = Channel.BUFFERED)
+    val uiEvent: Flow<PokemonListUiEvent> = _uiEvent.receiveAsFlow()
 
     private suspend fun queriedPokemons(
         query: String,
@@ -119,19 +120,21 @@ class PokemonListViewModel(
 
     override fun navigateToPokemonDetail(pokemonId: String) {
         viewModelScope.launch {
-            _navigateToDetailEvent.emit(pokemonId)
+            _uiEvent.send(PokemonListUiEvent.NavigateToHome(pokemonId))
         }
     }
 
     override fun queryName(name: String) {
         viewModelScope.launch {
             searchQuery.value = name
+            _uiEvent.send(PokemonListUiEvent.ChangeSearchOption)
         }
     }
 
     fun filterPokemon(filter: PokeFilterUiModel) {
         viewModelScope.launch {
             pokeFilter.value = filter
+            _uiEvent.send(PokemonListUiEvent.ChangeSearchOption)
         }
         analyticsLogger().logPokemonFilter(filter)
     }
@@ -139,6 +142,7 @@ class PokemonListViewModel(
     fun sortPokemon(sort: PokemonSortUiModel) {
         viewModelScope.launch {
             pokeSort.value = sort
+            _uiEvent.send(PokemonListUiEvent.ChangeSearchOption)
         }
         analyticsLogger().logPokemonSort(sort)
     }
@@ -161,4 +165,10 @@ data class PokemonListUiState(
                 if (filteredGeneration != PokeGenerationUiModel.ALL) count++
                 count
             }
+}
+
+sealed interface PokemonListUiEvent {
+    data class NavigateToHome(val pokemonId: String) : PokemonListUiEvent
+
+    data object ChangeSearchOption : PokemonListUiEvent
 }

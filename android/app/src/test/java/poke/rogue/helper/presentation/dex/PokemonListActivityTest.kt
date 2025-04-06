@@ -13,6 +13,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowLooper
 import poke.rogue.helper.R
@@ -26,7 +27,7 @@ import poke.rogue.helper.testing.view.withItemCount
 class PokemonListActivityTest {
     @get:Rule
     val activityRule = activityScenarioRule<PokemonListActivity>()
-    val scenario get() = activityRule.scenario
+    private val scenario get() = activityRule.scenario
 
     @get:Rule
     val koinTestRule =
@@ -34,8 +35,14 @@ class PokemonListActivityTest {
             testViewModelModule,
         )
 
+    lateinit var viewModel: PokemonListViewModel
+
     @Before
     fun setUp() {
+        scenario.onActivity { activity ->
+            viewModel = activity.getViewModel()
+        }
+
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
     }
 
@@ -68,6 +75,17 @@ class PokemonListActivityTest {
         // scroll up
         onView(withId(R.id.root_pokemon_list))
             .perform(ViewActions.swipeDown())
+        onView(withId(R.id.header_group))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun `스크롤 down 후 포켓몬 검색 시 헤더 그룹이 보인다`() {
+        onView(withId(R.id.root_pokemon_list))
+            .perform(ViewActions.swipeUp())
+
+        viewModel.queryName("이상해씨")
+
         onView(withId(R.id.header_group))
             .check(matches(isDisplayed()))
     }
