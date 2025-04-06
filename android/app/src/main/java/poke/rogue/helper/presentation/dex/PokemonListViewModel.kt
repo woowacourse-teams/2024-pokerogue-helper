@@ -37,7 +37,7 @@ import poke.rogue.helper.presentation.type.model.toData
 
 class PokemonListViewModel(
     private val pokemonRepository: DexRepository,
-    logger: AnalyticsLogger = analyticsLogger(),
+    private val logger: AnalyticsLogger = analyticsLogger(),
 ) : ErrorHandleViewModel(logger), PokemonListNavigateHandler, PokemonQueryHandler {
     private val searchQuery = MutableStateFlow("")
     private val pokeFilter =
@@ -136,7 +136,7 @@ class PokemonListViewModel(
             pokeFilter.value = filter
             _uiEvent.send(PokemonListUiEvent.ChangeSearchOption)
         }
-        analyticsLogger().logPokemonFilter(filter)
+        logger.logPokemonFilter(filter)
     }
 
     fun sortPokemon(sort: PokemonSortUiModel) {
@@ -144,7 +144,7 @@ class PokemonListViewModel(
             pokeSort.value = sort
             _uiEvent.send(PokemonListUiEvent.ChangeSearchOption)
         }
-        analyticsLogger().logPokemonSort(sort)
+        logger.logPokemonSort(sort)
     }
 }
 
