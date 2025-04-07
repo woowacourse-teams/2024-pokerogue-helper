@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.doOnNextLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
@@ -48,8 +49,10 @@ class PokemonListActivity :
         binding.vm = viewModel
         binding.lifecycleOwner = this
         initAdapter()
-        initObservers()
-        initListeners()
+        observeUiState()
+        observeUiEvent()
+        initClickListeners()
+        initFragmentResultListeners()
     }
 
     private fun initAdapter() {
@@ -115,12 +118,10 @@ class PokemonListActivity :
         }
     }
 
-    private fun initObservers() {
+    private fun observeUiState() {
         repeatOnStarted {
             viewModel.uiState.collect { uiState ->
-                pokemonAdapter.submitList(uiState.pokemons) {
-                    binding.rvPokemonList.scrollToPosition(0)
-                }
+                pokemonAdapter.submitList(uiState.pokemons)
 
                 binding.chipPokeFiter.bindPokeChip(
                     PokeChip.Spec(
@@ -160,19 +161,33 @@ class PokemonListActivity :
                 )
             }
         }
+    }
+
+    private fun observeUiEvent() {
         repeatOnStarted {
-            viewModel.navigateToDetailEvent.collect { pokemonId ->
-                hideKeyboard()
-                startActivity(PokemonDetailActivity.intent(this, pokemonId))
+            viewModel.uiEvent.collect { uiEvent ->
+                when (uiEvent) {
+                    is PokemonListUiEvent.NavigateToHome -> {
+                        hideKeyboard()
+                        startActivity(PokemonDetailActivity.intent(this, uiEvent.pokemonId))
+                    }
+
+                    is PokemonListUiEvent.PokemonsChanged -> {
+                        scrollToTop()
+                    }
+                }
             }
         }
+    }
 
+    private fun initFragmentResultListeners() {
         supportFragmentManager.setFragmentResultListener(FILTER_RESULT_KEY, this) { key, bundle ->
             val filterArgs: PokeFilterUiModel =
                 PokemonFilterBottomSheetFragment.argsFrom(bundle)
                     ?: return@setFragmentResultListener
             viewModel.filterPokemon(filterArgs)
         }
+
         supportFragmentManager.setFragmentResultListener(SORT_RESULT_KEY, this) { key, bundle ->
             val sortArgs: PokemonSortUiModel =
                 PokemonSortBottomSheetFragment.argsFrom(bundle)
@@ -181,20 +196,21 @@ class PokemonListActivity :
         }
     }
 
-    private fun initListeners() {
+    private fun initClickListeners() {
         binding.btnPokeListScrollUp.setOnClickListener {
-            binding.rvPokemonList.scrollToPosition(0)
-            binding.appBarPokemonList.setExpanded(true, true)
+            scrollToTop()
         }
         binding.root.setOnClickListener {
             hideKeyboard()
         }
     }
 
-    private fun String.clean() =
-        this
-            .replace("\\s".toRegex(), "")
-            .replace("[^a-zA-Z0-9ㄱ-ㅎ가-힣]".toRegex(), "")
+    private fun scrollToTop() {
+        binding.rvPokemonList.doOnNextLayout {
+            binding.rvPokemonList.scrollToPosition(0)
+        }
+        binding.appBarPokemonList.setExpanded(true, true)
+    }
 
     companion object {
         const val FILTER_RESULT_KEY = "FILTER_RESULT_KEY_result_key"

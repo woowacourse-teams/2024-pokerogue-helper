@@ -28,7 +28,7 @@ import poke.rogue.helper.testing.view.withItemCount
 class PokemonListActivityTest {
     @get:Rule
     val activityRule = activityScenarioRule<PokemonListActivity>()
-    val scenario get() = activityRule.scenario
+    private val scenario get() = activityRule.scenario
     private lateinit var idlingResource: IdlingResource
 
     @get:Rule
@@ -37,10 +37,12 @@ class PokemonListActivityTest {
             testViewModelModule,
         )
 
+    private lateinit var viewModel: PokemonListViewModel
+
     @Before
     fun setUp() {
         scenario.onActivity { activity ->
-            val viewModel = activity.getViewModel<PokemonListViewModel>()
+            viewModel = activity.getViewModel<PokemonListViewModel>()
 
             // StateFlow의 값이 비어 있지 않은 상태를 Idle로 간주
             idlingResource =
@@ -87,6 +89,17 @@ class PokemonListActivityTest {
         // scroll up
         onView(withId(R.id.root_pokemon_list))
             .perform(ViewActions.swipeDown())
+        onView(withId(R.id.header_group))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun `스크롤_down_후_포켓몬_검색_시_헤더그룹이_보인다`() {
+        onView(withId(R.id.root_pokemon_list))
+            .perform(ViewActions.swipeUp())
+
+        viewModel.queryName("이상해씨")
+
         onView(withId(R.id.header_group))
             .check(matches(isDisplayed()))
     }
