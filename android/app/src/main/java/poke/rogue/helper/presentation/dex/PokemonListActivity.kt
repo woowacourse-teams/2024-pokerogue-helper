@@ -172,7 +172,7 @@ class PokemonListActivity :
                         startActivity(PokemonDetailActivity.intent(this, uiEvent.pokemonId))
                     }
 
-                    is PokemonListUiEvent.ChangeSearchOption -> {
+                    is PokemonListUiEvent.PokemonsChanged -> {
                         scrollToTop()
                     }
                 }

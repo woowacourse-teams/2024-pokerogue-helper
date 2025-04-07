@@ -127,14 +127,14 @@ class PokemonListViewModel(
     override fun queryName(name: String) {
         viewModelScope.launch {
             searchQuery.value = name
-            _uiEvent.send(PokemonListUiEvent.ChangeSearchOption)
+            _uiEvent.send(PokemonListUiEvent.PokemonsChanged)
         }
     }
 
     fun filterPokemon(filter: PokeFilterUiModel) {
         viewModelScope.launch {
             pokeFilter.value = filter
-            _uiEvent.send(PokemonListUiEvent.ChangeSearchOption)
+            _uiEvent.send(PokemonListUiEvent.PokemonsChanged)
         }
         logger.logPokemonFilter(filter)
     }
@@ -142,7 +142,7 @@ class PokemonListViewModel(
     fun sortPokemon(sort: PokemonSortUiModel) {
         viewModelScope.launch {
             pokeSort.value = sort
-            _uiEvent.send(PokemonListUiEvent.ChangeSearchOption)
+            _uiEvent.send(PokemonListUiEvent.PokemonsChanged)
         }
         logger.logPokemonSort(sort)
     }
@@ -170,5 +170,5 @@ data class PokemonListUiState(
 sealed interface PokemonListUiEvent {
     data class NavigateToHome(val pokemonId: String) : PokemonListUiEvent
 
-    data object ChangeSearchOption : PokemonListUiEvent
+    data object PokemonsChanged : PokemonListUiEvent
 }
