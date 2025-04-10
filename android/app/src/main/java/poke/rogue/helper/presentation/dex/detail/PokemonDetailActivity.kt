@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.annotation.IdRes
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.BundleCompat
@@ -338,8 +339,8 @@ class PokemonDetailActivity :
 }
 
 class ChipTransitionListener(
-    private val startId: Int,
-    private val endId: Int,
+    @IdRes private val startId: Int,
+    @IdRes private val endId: Int,
     private val onStartToLeave: () -> Unit,
     private val onEnd: () -> Unit,
     private val onStart: () -> Unit,
