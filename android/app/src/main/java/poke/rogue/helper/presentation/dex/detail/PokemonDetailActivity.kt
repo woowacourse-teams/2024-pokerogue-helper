@@ -60,7 +60,6 @@ class PokemonDetailActivity :
         outState.putParcelableArrayList(FULL_NAME_CHIP_SPECS, ArrayList(fullNameChipSpecs))
         outState.putParcelableArrayList(ICON_ONLY_CHIP_SPECS, ArrayList(iconOnlyChipSpecs))
         super.onSaveInstanceState(outState)
-        super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -113,12 +112,12 @@ class PokemonDetailActivity :
                 startId = R.id.start,
                 endId = R.id.end,
                 onStartToLeave = { updateChipIconsOnly() },
-                onEnd = { updatePadding(1f) },
+                onEnd = { updatePokemonImagePadding(1f) },
                 onStart = {
                     updateChipWithLabels()
-                    updatePadding(0f)
+                    updatePokemonImagePadding(0f)
                 },
-                update = { progress: Float -> updatePadding(progress) },
+                update = { progress: Float -> updatePokemonImagePadding(progress) },
             ),
         )
     }
@@ -138,14 +137,14 @@ class PokemonDetailActivity :
                     )
                 }
         }
-        binding.chipGroupPokemonDetailTypes.submitList(iconOnlyChipSpecs) { }
+        binding.chipGroupPokemonDetailTypes.submitList(iconOnlyChipSpecs)
     }
 
     private fun updateChipWithLabels() {
         binding.chipGroupPokemonDetailTypes.submitList(fullNameChipSpecs)
     }
 
-    private fun updatePadding(progress: Float) {
+    private fun updatePokemonImagePadding(progress: Float) {
         val startPadding =
             resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_image_padding)
         val endPadding = 4.dp
