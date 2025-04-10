@@ -53,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/pokemon_detail_pokemon_types_margin"
+            android:layout_marginBottom="@dimen/poke_chip_group_padding_medium"
             motion:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_pokemon_name"
             motion:layout_constraintStart_toStartOf="parent" />
 
