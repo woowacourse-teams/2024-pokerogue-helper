@@ -11,6 +11,20 @@
             motion:dragDirection="dragUp"
             motion:touchAnchorId="@id/pager_pokemon_detail"
             motion:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                motion:framePosition="0"
+                motion:motionTarget="@id/tv_pokemon_detail_pokemon_name" />
+            <KeyAttribute
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                motion:framePosition="100"
+                motion:motionTarget="@id/tv_pokemon_detail_pokemon_name" />
+        </KeyFrameSet>
+
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -101,4 +115,5 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/tab_layout_pokemon_detail" />
     </ConstraintSet>
+
 </MotionScene>
