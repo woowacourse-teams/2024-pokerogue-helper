@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils
 import androidx.annotation.IdRes
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.os.BundleCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
@@ -19,6 +18,7 @@ import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.BattleActivity
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
 import poke.rogue.helper.presentation.home.HomeActivity
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
@@ -35,11 +35,8 @@ class PokemonDetailActivity :
         get() = null
 
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
-
     private var isExpanded = false
-
-    private var fullNameChipSpecs: List<PokeChip.Spec> = emptyList()
-    private var iconOnlyChipSpecs: List<PokeChip.Spec> = emptyList()
+    private var pokemonTypes: List<TypeUiModel> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,26 +54,12 @@ class PokemonDetailActivity :
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(IS_EXPANDED, isExpanded)
-        outState.putBoolean(IS_EXPANDED, isExpanded)
-        outState.putParcelableArrayList(FULL_NAME_CHIP_SPECS, ArrayList(fullNameChipSpecs))
-        outState.putParcelableArrayList(ICON_ONLY_CHIP_SPECS, ArrayList(iconOnlyChipSpecs))
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         isExpanded = savedInstanceState.getBoolean(IS_EXPANDED)
-        fullNameChipSpecs = BundleCompat.getParcelableArrayList(
-            savedInstanceState,
-            FULL_NAME_CHIP_SPECS,
-            PokeChip.Spec::class.java,
-        ) ?: emptyList()
-
-        iconOnlyChipSpecs = BundleCompat.getParcelableArrayList(
-            savedInstanceState,
-            ICON_ONLY_CHIP_SPECS,
-            PokeChip.Spec::class.java,
-        ) ?: emptyList()
 
         updateFloatingButtonsState()
     }
@@ -124,25 +107,11 @@ class PokemonDetailActivity :
     }
 
     private fun updateChipIconsOnly() {
-        if (iconOnlyChipSpecs.isEmpty()) {
-            iconOnlyChipSpecs =
-                fullNameChipSpecs.map { spec ->
-                    spec.copy(
-                        label = "",
-                        sizes =
-                            PokeChip.Sizes(
-                                leadingIconSize = 20.dp,
-                                leadingSpacing = 0.dp,
-                                trailingSpacing = 0.dp,
-                            ),
-                    )
-                }
-        }
-        binding.chipGroupPokemonDetailTypes.submitList(iconOnlyChipSpecs)
+        binding.chipGroupPokemonDetailTypes.submitList(pokemonTypes.toIconOnlyChipSpecs())
     }
 
     private fun updateChipWithLabels() {
-        binding.chipGroupPokemonDetailTypes.submitList(fullNameChipSpecs)
+        binding.chipGroupPokemonDetailTypes.submitList(pokemonTypes.toChipSpecs(this))
     }
 
     private fun updatePokemonImagePadding(progress: Float) {
@@ -213,6 +182,8 @@ class PokemonDetailActivity :
     }
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
+        pokemonTypes = pokemonDetail.pokemon.types
+
         with(binding) {
             ivPokemonDetailPokemon.loadImageWithProgress(
                 pokemonDetail.pokemon.imageUrl,
@@ -225,34 +196,9 @@ class PokemonDetailActivity :
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
-
-            if (fullNameChipSpecs.isEmpty()) {
-                fullNameChipSpecs = initialTypeChipSpecs(pokemonDetail)
-            }
-
-            chipGroupPokemonDetailTypes.submitList(fullNameChipSpecs)
+            chipGroupPokemonDetailTypes.submitList(pokemonTypes.toChipSpecs(this@PokemonDetailActivity))
         }
     }
-
-    private fun initialTypeChipSpecs(pokemonDetail: PokemonDetailUiState.Success) =
-        pokemonDetail.pokemon.types.map {
-            PokeChip.Spec(
-                id = it.id,
-                label = stringOf(it.typeName),
-                leadingIconRes = it.typeIconResId,
-                colors =
-                    PokeChip.Colors(
-                        selectedContainerColor = it.typeColor,
-                        containerColor = R.color.poke_black,
-                    ),
-                sizes =
-                    PokeChip.Sizes(
-                        leadingIconSize = 20.dp,
-                    ),
-                padding = PaddingValues(all = 4.dp),
-                strokeWidth = 0.dp,
-            )
-        }
 
     private fun battleIntent(battleEvent: PokemonDetailViewModel.NavigationEvent.ToBattle): Intent =
         when (battleEvent) {
@@ -383,3 +329,47 @@ class ChipTransitionListener(
     ) {
     }
 }
+
+@JvmName("TypesMapToChipSpecs")
+private fun List<TypeUiModel>.toChipSpecs(context: Context) =
+    map {
+        PokeChip.Spec(
+            id = it.id,
+            label = context.stringOf(it.typeName),
+            leadingIconRes = it.typeIconResId,
+            colors =
+                PokeChip.Colors(
+                    selectedContainerColor = it.typeColor,
+                    containerColor = R.color.poke_black,
+                ),
+            sizes =
+                PokeChip.Sizes(
+                    leadingIconSize = 20.dp,
+                ),
+            padding = PaddingValues(all = 4.dp),
+            strokeWidth = 0.dp,
+        )
+    }
+
+@JvmName("TypesMapToIconOnlyChipSpecs")
+private fun List<TypeUiModel>.toIconOnlyChipSpecs() =
+    map {
+        PokeChip.Spec(
+            id = it.id,
+            label = "",
+            leadingIconRes = it.typeIconResId,
+            colors =
+                PokeChip.Colors(
+                    selectedContainerColor = it.typeColor,
+                    containerColor = R.color.poke_black,
+                ),
+            sizes =
+                PokeChip.Sizes(
+                    leadingIconSize = 20.dp,
+                    leadingSpacing = 0.dp,
+                    trailingSpacing = 0.dp,
+                ),
+            padding = PaddingValues(all = 4.dp),
+            strokeWidth = 0.dp,
+        )
+    }
