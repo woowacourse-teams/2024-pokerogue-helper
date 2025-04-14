@@ -43,7 +43,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: my-prod-b
+    runs-on: cd
     steps:
 
       - name: Change permission
