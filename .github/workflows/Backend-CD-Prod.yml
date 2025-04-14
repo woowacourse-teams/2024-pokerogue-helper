@@ -5,7 +5,7 @@ permissions:
 
 on:
   push:
-    branches: [ "be/refactor/#502" ]
+    branches: [ "be/release" ]
     tags:
       - 'api-v*'
 
