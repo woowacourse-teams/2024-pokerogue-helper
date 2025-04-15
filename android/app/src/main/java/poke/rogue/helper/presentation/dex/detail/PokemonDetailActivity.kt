@@ -36,7 +36,6 @@ class PokemonDetailActivity :
 
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
     private var isExpanded = false
-    private var pokemonTypes: List<TypeUiModel> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +48,6 @@ class PokemonDetailActivity :
         initAdapter()
         initObservers()
         initFloatingButtonsHandler()
-        initMotionLayoutListener()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -90,15 +88,15 @@ class PokemonDetailActivity :
         }
     }
 
-    private fun initMotionLayoutListener() {
+    private fun initMotionLayoutListener(pokemonTypes: List<TypeUiModel>) {
         binding.motionLayout?.setTransitionListener(
             ChipTransitionListener(
                 startId = R.id.start,
                 endId = R.id.end,
-                onStartToLeave = { updateChipIconsOnly() },
+                onStartToLeave = { updateChipIconsOnly(pokemonTypes) },
                 onEnd = { updatePokemonImagePadding(1f) },
                 onStart = {
-                    updateChipWithLabels()
+                    updateChipWithLabels(pokemonTypes)
                     updatePokemonImagePadding(0f)
                 },
                 update = { progress: Float -> updatePokemonImagePadding(progress) },
@@ -106,11 +104,11 @@ class PokemonDetailActivity :
         )
     }
 
-    private fun updateChipIconsOnly() {
+    private fun updateChipIconsOnly(pokemonTypes: List<TypeUiModel>) {
         binding.chipGroupPokemonDetailTypes.submitList(pokemonTypes.toIconOnlyChipSpecs())
     }
 
-    private fun updateChipWithLabels() {
+    private fun updateChipWithLabels(pokemonTypes: List<TypeUiModel>) {
         binding.chipGroupPokemonDetailTypes.submitList(pokemonTypes.toChipSpecs(this))
     }
 
@@ -182,7 +180,7 @@ class PokemonDetailActivity :
     }
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
-        pokemonTypes = pokemonDetail.pokemon.types
+        val pokemonTypes = pokemonDetail.pokemon.types
 
         with(binding) {
             ivPokemonDetailPokemon.loadImageWithProgress(
@@ -197,6 +195,8 @@ class PokemonDetailActivity :
                     pokemonDetail.pokemon.dexNumber,
                 )
             chipGroupPokemonDetailTypes.submitList(pokemonTypes.toChipSpecs(this@PokemonDetailActivity))
+
+            initMotionLayoutListener(pokemonTypes = pokemonTypes)
         }
     }
 
