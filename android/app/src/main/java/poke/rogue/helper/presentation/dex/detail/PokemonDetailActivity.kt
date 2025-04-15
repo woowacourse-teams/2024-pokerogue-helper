@@ -93,10 +93,10 @@ class PokemonDetailActivity :
             ChipTransitionListener(
                 startId = R.id.start,
                 endId = R.id.end,
-                onStartToLeave = { updateChipIconsOnly(pokemonTypes) },
+                onStartToLeave = { updateChipsSpecsIconsOnly(pokemonTypes) },
                 onEnd = { updatePokemonImagePadding(1f) },
                 onStart = {
-                    updateChipWithLabels(pokemonTypes)
+                    updateChipsSpecs(pokemonTypes)
                     updatePokemonImagePadding(0f)
                 },
                 update = { progress: Float -> updatePokemonImagePadding(progress) },
@@ -104,11 +104,11 @@ class PokemonDetailActivity :
         )
     }
 
-    private fun updateChipIconsOnly(pokemonTypes: List<TypeUiModel>) {
+    private fun updateChipsSpecsIconsOnly(pokemonTypes: List<TypeUiModel>) {
         binding.chipGroupPokemonDetailTypes.submitList(pokemonTypes.toIconOnlyChipSpecs())
     }
 
-    private fun updateChipWithLabels(pokemonTypes: List<TypeUiModel>) {
+    private fun updateChipsSpecs(pokemonTypes: List<TypeUiModel>) {
         binding.chipGroupPokemonDetailTypes.submitList(pokemonTypes.toChipSpecs(this))
     }
 
@@ -271,8 +271,6 @@ class PokemonDetailActivity :
     companion object {
         private const val POKEMON_ID = "pokemonId"
         private const val IS_EXPANDED = "isExpanded"
-        private const val FULL_NAME_CHIP_SPECS = "fullNameChipSpecs"
-        private const val ICON_ONLY_CHIP_SPECS = "iconOnlyChipSpecs"
 
         fun intent(
             context: Context,
