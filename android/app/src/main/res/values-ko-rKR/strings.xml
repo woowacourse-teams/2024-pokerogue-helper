@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">PokéRogue Helper</string>
     <!-- type -->
     <string name="type_title_name">타입 상성</string>
     <string name="type_my_type_title">내 타입</string>
