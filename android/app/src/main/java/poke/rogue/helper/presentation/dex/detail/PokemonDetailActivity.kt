@@ -6,8 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.LinearLayout.LayoutParams
+import androidx.annotation.IdRes
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.motion.widget.MotionLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import poke.rogue.helper.R
@@ -16,26 +17,24 @@ import poke.rogue.helper.presentation.ability.AbilityActivity
 import poke.rogue.helper.presentation.base.toolbar.ToolbarActivity
 import poke.rogue.helper.presentation.battle.BattleActivity
 import poke.rogue.helper.presentation.biome.detail.BiomeDetailActivity
-import poke.rogue.helper.presentation.dex.PokemonTypesAdapter
 import poke.rogue.helper.presentation.home.HomeActivity
-import poke.rogue.helper.presentation.type.view.TypeChip
+import poke.rogue.helper.presentation.type.model.TypeUiModel
 import poke.rogue.helper.presentation.util.context.stringArrayOf
 import poke.rogue.helper.presentation.util.context.stringOf
 import poke.rogue.helper.presentation.util.context.toast
 import poke.rogue.helper.presentation.util.repeatOnStarted
 import poke.rogue.helper.presentation.util.view.dp
 import poke.rogue.helper.presentation.util.view.loadImageWithProgress
+import poke.rogue.helper.ui.component.PokeChip
+import poke.rogue.helper.ui.layout.PaddingValues
 
 class PokemonDetailActivity :
     ToolbarActivity<ActivityPokemonDetailBinding>(R.layout.activity_pokemon_detail) {
     private val viewModel by viewModel<PokemonDetailViewModel>()
-    override val toolbar: Toolbar
-        get() = binding.toolbarPokemonDetail
-
-    private lateinit var pokemonTypesAdapter: PokemonTypesAdapter
+    override val toolbar: Toolbar?
+        get() = null
 
     private lateinit var pokemonDetailPagerAdapter: PokemonDetailPagerAdapter
-
     private var isExpanded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,18 +56,13 @@ class PokemonDetailActivity :
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        isExpanded = savedInstanceState.getBoolean(IS_EXPANDED)
         super.onRestoreInstanceState(savedInstanceState)
+        isExpanded = savedInstanceState.getBoolean(IS_EXPANDED)
+
         updateFloatingButtonsState()
     }
 
     private fun initAdapter() {
-        pokemonTypesAdapter =
-            PokemonTypesAdapter(
-                context = this,
-                viewGroup = binding.layoutPokemonDetailPokemonTypes,
-            )
-
         pokemonDetailPagerAdapter = PokemonDetailPagerAdapter(this)
         binding.pagerPokemonDetail.apply {
             adapter = pokemonDetailPagerAdapter
@@ -94,6 +88,44 @@ class PokemonDetailActivity :
         }
     }
 
+    private fun initMotionLayoutListener(pokemonTypes: List<TypeUiModel>) {
+        binding.motionLayout?.setTransitionListener(
+            ChipTransitionListener(
+                startId = R.id.start,
+                endId = R.id.end,
+                onStartToLeave = { updateChipsSpecsIconsOnly(pokemonTypes) },
+                onEnd = { updatePokemonImagePadding(1f) },
+                onStart = {
+                    updateChipsSpecs(pokemonTypes)
+                    updatePokemonImagePadding(0f)
+                },
+                update = { progress: Float -> updatePokemonImagePadding(progress) },
+            ),
+        )
+    }
+
+    private fun updateChipsSpecsIconsOnly(pokemonTypes: List<TypeUiModel>) {
+        binding.chipGroupPokemonDetailTypes.submitList(pokemonTypes.toIconOnlyChipSpecs())
+    }
+
+    private fun updateChipsSpecs(pokemonTypes: List<TypeUiModel>) {
+        binding.chipGroupPokemonDetailTypes.submitList(pokemonTypes.toChipSpecs(this))
+    }
+
+    private fun updatePokemonImagePadding(progress: Float) {
+        val startPadding =
+            resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_image_padding)
+        val endPadding = 4.dp
+        val interpolatedPadding = (startPadding * (1 - progress) + endPadding * progress).toInt()
+
+        binding.ivPokemonDetailPokemon.setPadding(
+            interpolatedPadding,
+            0,
+            interpolatedPadding,
+            interpolatedPadding,
+        )
+    }
+
     private fun observePokemonDetailUi() {
         repeatOnStarted {
             viewModel.uiState.collect { pokemonDetail ->
@@ -111,6 +143,9 @@ class PokemonDetailActivity :
         repeatOnStarted {
             viewModel.navigationEvent.collect { event ->
                 when (event) {
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonList ->
+                        onBackPressedDispatcher.onBackPressed()
+
                     is PokemonDetailViewModel.NavigationEvent.ToAbilityDetail ->
                         startActivity(
                             AbilityActivity.intent(this, event.id),
@@ -133,7 +168,10 @@ class PokemonDetailActivity :
                             ),
                         )
 
-                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail -> navigateToPokemonDetail(event)
+                    is PokemonDetailViewModel.NavigationEvent.ToPokemonDetail ->
+                        navigateToPokemonDetail(
+                            event,
+                        )
 
                     is PokemonDetailViewModel.NavigationEvent.None -> return@collect
                 }
@@ -142,40 +180,24 @@ class PokemonDetailActivity :
     }
 
     private fun bindPokemonDetail(pokemonDetail: PokemonDetailUiState.Success) {
+        val pokemonTypes = pokemonDetail.pokemon.types
+
         with(binding) {
             ivPokemonDetailPokemon.loadImageWithProgress(
                 pokemonDetail.pokemon.imageUrl,
                 progressIndicatorPokemonDetail,
             )
 
-            collapsingToolbarLayoutPokemonDetail?.title =
+            tvPokemonDetailPokemonName.text =
                 stringOf(
                     R.string.pokemon_list_poke_name_format,
                     pokemonDetail.pokemon.name,
                     pokemonDetail.pokemon.dexNumber,
                 )
+            chipGroupPokemonDetailTypes.submitList(pokemonTypes.toChipSpecs(this@PokemonDetailActivity))
 
-            tvPokemonDetailPokemonName?.text =
-                stringOf(
-                    R.string.pokemon_list_poke_name_format,
-                    pokemonDetail.pokemon.name,
-                    pokemonDetail.pokemon.dexNumber,
-                )
+            initMotionLayoutListener(pokemonTypes = pokemonTypes)
         }
-
-        val typesUiConfig =
-            TypeChip.PokemonTypeViewConfiguration(
-                width = LayoutParams.WRAP_CONTENT,
-                nameSize = resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_types_name_size),
-                iconSize = resources.getDimensionPixelSize(R.dimen.pokemon_detail_pokemon_types_icon_size),
-                hasBackGround = false,
-            )
-
-        pokemonTypesAdapter.addTypes(
-            types = pokemonDetail.pokemon.types,
-            config = typesUiConfig,
-            spacingBetweenTypes = 0.dp,
-        )
     }
 
     private fun battleIntent(battleEvent: PokemonDetailViewModel.NavigationEvent.ToBattle): Intent =
@@ -250,8 +272,6 @@ class PokemonDetailActivity :
         private const val POKEMON_ID = "pokemonId"
         private const val IS_EXPANDED = "isExpanded"
 
-        val TAG: String = PokemonDetailActivity::class.java.simpleName
-
         fun intent(
             context: Context,
             pokemonId: String,
@@ -261,3 +281,93 @@ class PokemonDetailActivity :
             }
     }
 }
+
+class ChipTransitionListener(
+    @IdRes private val startId: Int,
+    @IdRes private val endId: Int,
+    private val onStartToLeave: () -> Unit,
+    private val onEnd: () -> Unit,
+    private val onStart: () -> Unit,
+    private val update: (Float) -> Unit,
+) : MotionLayout.TransitionListener {
+    override fun onTransitionStarted(
+        motionLayout: MotionLayout,
+        startId: Int,
+        endId: Int,
+    ) {
+        if (startId == this.startId) {
+            onStartToLeave()
+        }
+    }
+
+    override fun onTransitionChange(
+        motionLayout: MotionLayout,
+        startId: Int,
+        endId: Int,
+        progress: Float,
+    ) {
+        update(progress)
+    }
+
+    override fun onTransitionCompleted(
+        motionLayout: MotionLayout,
+        currentId: Int,
+    ) {
+        when (currentId) {
+            endId -> onEnd()
+            startId -> onStart()
+        }
+    }
+
+    override fun onTransitionTrigger(
+        motionLayout: MotionLayout,
+        triggerId: Int,
+        positive: Boolean,
+        progress: Float,
+    ) {
+    }
+}
+
+@JvmName("TypesMapToChipSpecs")
+private fun List<TypeUiModel>.toChipSpecs(context: Context) =
+    map {
+        PokeChip.Spec(
+            id = it.id,
+            label = context.stringOf(it.typeName),
+            leadingIconRes = it.typeIconResId,
+            colors =
+                PokeChip.Colors(
+                    selectedContainerColor = it.typeColor,
+                    containerColor = R.color.poke_black,
+                ),
+            sizes =
+                PokeChip.Sizes(
+                    leadingIconSize = 20.dp,
+                ),
+            padding = PaddingValues(all = 4.dp),
+            strokeWidth = 0.dp,
+        )
+    }
+
+@JvmName("TypesMapToIconOnlyChipSpecs")
+private fun List<TypeUiModel>.toIconOnlyChipSpecs() =
+    map {
+        PokeChip.Spec(
+            id = it.id,
+            label = "",
+            leadingIconRes = it.typeIconResId,
+            colors =
+                PokeChip.Colors(
+                    selectedContainerColor = it.typeColor,
+                    containerColor = R.color.poke_black,
+                ),
+            sizes =
+                PokeChip.Sizes(
+                    leadingIconSize = 20.dp,
+                    leadingSpacing = 0.dp,
+                    trailingSpacing = 0.dp,
+                ),
+            padding = PaddingValues(all = 4.dp),
+            strokeWidth = 0.dp,
+        )
+    }

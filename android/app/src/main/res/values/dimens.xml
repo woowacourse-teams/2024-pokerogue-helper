@@ -41,14 +41,20 @@
     <dimen name="recycler_view_padding_medium">12dp</dimen>
 
 
+    <!--pokemon_chip_group-->
+    <dimen name="poke_chip_group_padding_medium">4dp</dimen>
+
     <!--pokemon detail-->
     <dimen name="pokemon_detail_pokemon_image_horizontal_padding_horizontal">40dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_horizontal_padding_top">20dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_horizontal_margin_start">28dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_horizontal_margin_bottom">28dp</dimen>
+    <dimen name="pokemon_detail_pokemon_image_margin_top">12dp</dimen>
+    <dimen name="pokemon_detail_pokemon_image_padding">40dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_padding_start">16dp</dimen>
     <dimen name="pokemon_detail_pokemon_image_padding_bottom">20dp</dimen>
-    <dimen name="pokemon_detail_pokemon_name_margin">28dp</dimen>
+    <dimen name="pokemon_detail_pokemon_name_margin">8dp</dimen>
+    <dimen name="pokemon_detail_pokemon_types_margin">8dp</dimen>
     <dimen name="pokemon_detail_pokemon_name_size">16sp</dimen>
 
     <!--    floating action button-->

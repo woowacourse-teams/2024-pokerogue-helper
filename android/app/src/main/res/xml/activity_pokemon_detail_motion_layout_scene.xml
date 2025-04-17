@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:autoTransition="none"
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/pager_pokemon_detail"
+            motion:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                motion:framePosition="0"
+                motion:motionTarget="@id/tv_pokemon_detail_pokemon_name" />
+            <KeyAttribute
+                android:scaleX="1.0"
+                android:scaleY="1.0"
+                motion:framePosition="100"
+                motion:motionTarget="@id/tv_pokemon_detail_pokemon_name" />
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/iv_pokemon_detail_pokemon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/pokemon_detail_pokemon_image_margin_top"
+            motion:layout_constraintBottom_toTopOf="@id/tab_layout_pokemon_detail"
+            motion:layout_constraintDimensionRatio="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintWidth_percent="0.66" />
+
+        <Constraint
+            android:id="@+id/tv_pokemon_detail_pokemon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/pokemon_detail_pokemon_name_margin"
+            motion:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_pokemon"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/chip_group_pokemon_detail_types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/pokemon_detail_pokemon_types_margin"
+            android:layout_marginBottom="@dimen/poke_chip_group_padding_medium"
+            motion:layout_constraintBottom_toTopOf="@id/tv_pokemon_detail_pokemon_name"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+        <Constraint
+            android:id="@+id/tab_layout_pokemon_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/tv_pokemon_detail_pokemon_name" />
+
+        <Constraint
+            android:id="@+id/pager_pokemon_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/tab_layout_pokemon_detail" />
+
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/iv_pokemon_detail_pokemon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            motion:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_navigation_back"
+            motion:layout_constraintDimensionRatio="1:1"
+            motion:layout_constraintEnd_toStartOf="@id/iv_pokemon_detail_navigation_home"
+            motion:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_navigation_back" />
+
+        <Constraint
+            android:id="@+id/tv_pokemon_detail_pokemon_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_navigation_back"
+            motion:layout_constraintStart_toEndOf="@id/iv_pokemon_detail_navigation_back"
+            motion:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_navigation_back" />
+
+        <Constraint
+            android:id="@+id/chip_group_pokemon_detail_types"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="@id/iv_pokemon_detail_navigation_back"
+            motion:layout_constraintEnd_toStartOf="@id/iv_pokemon_detail_pokemon"
+            motion:layout_constraintTop_toTopOf="@id/iv_pokemon_detail_navigation_back">
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/tab_layout_pokemon_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintTop_toBottomOf="@id/iv_pokemon_detail_navigation_back" />
+
+        <Constraint
+            android:id="@+id/pager_pokemon_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/tab_layout_pokemon_detail" />
+    </ConstraintSet>
+
+</MotionScene>

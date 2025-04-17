@@ -1,16 +1,19 @@
 package poke.rogue.helper.ui.layout
 
+import android.os.Parcelable
 import android.view.View
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.Companion.DP
+import kotlinx.parcelize.Parcelize
 import poke.rogue.helper.presentation.util.view.dp
 
+@Parcelize
 data class PaddingValues(
     @Dimension(DP) val start: Int = 0.dp,
     @Dimension(DP) val top: Int = 0.dp,
     @Dimension(DP) val end: Int = 0.dp,
     @Dimension(DP) val bottom: Int = 0.dp,
-) {
+) : Parcelable {
     constructor(horizontal: Int, vertical: Int) : this(
         horizontal,
         vertical,
