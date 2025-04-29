@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.data;
 
+import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.type.data.Type;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Setter
 @ToString
 @NoArgsConstructor
-@Document(collection = "pokemon")
+@Document(collection = "pokemon_" + LanguageSetter.KOREAN)
 public class Pokemon {
 
     @Id
@@ -30,9 +31,6 @@ public class Pokemon {
 
     @Field("name")
     private String name;
-
-    @Field("koName")
-    private String koName;
 
     @Field("speciesName")
     private String speciesName;
@@ -117,6 +115,13 @@ public class Pokemon {
 
     @Field("biomeIds")
     private List<String> biomeIds;
+
+    @Field("language")
+    private String language;
+
+    public boolean hasSameLanguage(String language) {
+        return this.language.equals(language);
+    }
 
     public boolean hasSameType(Type type) {
         return this.types.stream()

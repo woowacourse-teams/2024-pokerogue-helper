@@ -18,7 +18,7 @@ public record AbilityPokemonResponse(
         return new AbilityPokemonResponse(
                 pokemon.getId(),
                 (long) pokemon.getPokedexNumber(),
-                pokemon.getKoName(),
+                pokemon.getName(),
                 image,
                 pokemonTypeResponses
         );

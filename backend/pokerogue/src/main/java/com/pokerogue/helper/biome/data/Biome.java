@@ -20,9 +20,6 @@ public class Biome {
     @Field("name")
     private String name;
 
-    @Field("koName")
-    private String koName;
-
     @Field("types")
     private List<Type> types;
 
@@ -34,4 +31,11 @@ public class Biome {
 
     @Field("trainers")
     private List<Trainer> trainers;
+
+    @Field("language")
+    private String language;
+
+    public boolean hasSameLanguage(String language) {
+        return this.language.equals(language);
+    }
 }

@@ -22,7 +22,7 @@ public record BiomeDetailResponse(
     ) {
         return new BiomeDetailResponse(
                 biome.getId(),
-                biome.getKoName(),
+                biome.getName(),
                 biomeImage,
                 wildPokemons,
                 bossPokemons,

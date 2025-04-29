@@ -6,6 +6,7 @@ import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.dto.*;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.config.ImageUrl;
+import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.constant.SortingCriteria;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
@@ -25,6 +26,7 @@ public class BiomeService {
 
     public List<BiomeResponse> findBiomes() {
         return biomeRepository.findAll().stream()
+                .filter(biome -> biome.hasSameLanguage(LanguageSetter.getLanguage()))
                 .map(biome -> BiomeResponse.of(
                         biome,
                         ImageUrl.getBiomeImage(biome.getId()),
@@ -35,7 +37,7 @@ public class BiomeService {
     }
 
     public BiomeDetailResponse findBiome(String id, SortingCriteria bossPokemonOrder, SortingCriteria wildPokemonOrder) {
-        Biome biome = biomeRepository.findById(id)
+        Biome biome = biomeRepository.findByIdAndLanguage(id, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
 
         return BiomeDetailResponse.of(
@@ -72,7 +74,7 @@ public class BiomeService {
         return biome.getTrainers().stream()
                 .map(trainer -> TrainerPokemonResponse.from(
                         trainer,
-                        ImageUrl.getTrainerImage(trainer.getName()),
+                        ImageUrl.getTrainerImage(trainer.getId()),
                         getTypesResponses(trainer.getTypes()),
                         getBiomePokemons(trainer.getPokemonIds()))
                 )
@@ -100,7 +102,7 @@ public class BiomeService {
         List<BiomePokemonResponse> biomePokemonResponses = pokemonRepository.findAllById(biomePokemons).stream()
                 .map(pokemon -> new BiomePokemonResponse(
                         pokemon.getId(),
-                        pokemon.getKoName(),
+                        pokemon.getName(),
                         ImageUrl.getPokemonImage(pokemon.getImageId()),
                         getTypesResponses(pokemon.getTypes()))
                 )

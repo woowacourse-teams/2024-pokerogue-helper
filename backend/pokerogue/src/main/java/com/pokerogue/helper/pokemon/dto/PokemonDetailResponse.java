@@ -42,7 +42,7 @@ public record PokemonDetailResponse(
         return new PokemonDetailResponse(
                 pokemon.getId(),
                 (long) pokemon.getPokedexNumber(),
-                pokemon.getKoName(),
+                pokemon.getName(),
                 ImageUrl.getPokemonImage(pokemon.getImageId()),
                 pokemonTypeResponses,
                 pokemonAbilityResponses,

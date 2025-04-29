@@ -26,7 +26,7 @@ public record PokemonResponse(
         return new PokemonResponse(
                 pokemon.getId(),
                 (long) pokemon.getPokedexNumber(),
-                pokemon.getKoName(),
+                pokemon.getName(),
                 pokemon.getFormName(),
                 ImageUrl.getPokemonImage(pokemon.getImageId()), //image front
                 ImageUrl.getPokemonBackImage(pokemon.getImageId()), //back

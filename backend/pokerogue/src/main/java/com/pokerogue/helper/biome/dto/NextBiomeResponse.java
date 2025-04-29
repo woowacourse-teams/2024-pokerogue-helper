@@ -21,7 +21,7 @@ public record NextBiomeResponse(
     ) {
         return new NextBiomeResponse(
                 biome.getId(),
-                biome.getKoName(),
+                biome.getName(),
                 biomeImage,
                 percent,
                 pokemonTypeResponses,

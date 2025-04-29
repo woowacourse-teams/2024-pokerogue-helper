@@ -37,7 +37,7 @@ public record MoveDetailResponse(
 
         return new MoveDetailResponse(
                 move.getId(),
-                move.getKoName(),
+                move.getName(),
                 type.getName(),
                 ImageUrl.getTypeImage(type.getName()),
                 moveCategory.getEngName(),

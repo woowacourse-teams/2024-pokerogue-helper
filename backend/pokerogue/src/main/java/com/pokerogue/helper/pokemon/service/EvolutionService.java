@@ -1,5 +1,6 @@
 package com.pokerogue.helper.pokemon.service;
 
+import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponse;
@@ -39,7 +40,7 @@ public class EvolutionService {
         return evolutions.stream()
                 .flatMap(evolution -> Stream.of(evolution.getFrom(), evolution.getTo()))
                 .distinct()
-                .map(pokemonRepository::findById)
+                .map(pokemon -> pokemonRepository.findByIdAndLanguage(pokemon, LanguageSetter.getLanguage()))
                 .filter(Optional::isPresent) // TODO: data is inconsistent, isPresent is change to throw
                 .map(Optional::get)
                 .toList();

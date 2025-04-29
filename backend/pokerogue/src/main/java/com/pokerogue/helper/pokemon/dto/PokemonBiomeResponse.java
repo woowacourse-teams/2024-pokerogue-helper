@@ -5,6 +5,6 @@ import com.pokerogue.helper.global.config.ImageUrl;
 
 public record PokemonBiomeResponse(String id, String name, String image) {
     public static PokemonBiomeResponse from(Biome biome) {
-        return new PokemonBiomeResponse(biome.getId(), biome.getKoName(), ImageUrl.getBiomeImage(biome.getId()));
+        return new PokemonBiomeResponse(biome.getId(), biome.getName(), ImageUrl.getBiomeImage(biome.getId()));
     }
 }

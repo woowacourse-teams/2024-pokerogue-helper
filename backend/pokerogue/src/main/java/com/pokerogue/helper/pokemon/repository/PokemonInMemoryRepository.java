@@ -1,8 +1,10 @@
 package com.pokerogue.helper.pokemon.repository;
 
 import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
 
+import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import jakarta.annotation.PostConstruct;
 
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public class PokemonInMemoryRepository {
 
     private final PokemonRepository pokemonRepository;
-    private Map<String, Pokemon> pokemons;
+    private Map<String, Map<String, Pokemon>> pokemons;
 
     public PokemonInMemoryRepository(PokemonRepository pokemonRepository) {
         this.pokemonRepository = pokemonRepository;
@@ -32,17 +34,22 @@ public class PokemonInMemoryRepository {
     public void refreshCache() {
         List<Pokemon> allPokemons = pokemonRepository.findAll();
         this.pokemons = allPokemons.stream()
-                .collect(toMap(Pokemon::getId, identity()));
+                .collect(
+                        groupingBy(
+                                Pokemon::getLanguage,
+                                toMap(Pokemon::getId, identity())
+                        )
+                );
     }
 
     public List<Pokemon> findAll() {
-        return pokemons.values()
+        return pokemons.get(LanguageSetter.getLanguage()).values()
                 .stream()
                 .sorted(Comparator.comparingInt(Pokemon::getPokedexNumber))
                 .toList();
     }
 
     public Optional<Pokemon> findById(String id) {
-        return Optional.ofNullable(pokemons.get(id));
+        return Optional.ofNullable(pokemons.get(LanguageSetter.getLanguage()).get(id));
     }
 }

@@ -1,5 +1,6 @@
 package com.pokerogue.helper.type.data;
 
+import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
@@ -37,6 +38,13 @@ public enum Type {
     Type(String name, String koName) {
         this.name = name;
         this.koName = koName;
+    }
+
+    public String getKoName() {
+        if (LanguageSetter.isKorean()) {
+            return koName;
+        }
+        return name;
     }
 
     public static Optional<Type> findByName(String name) {

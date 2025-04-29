@@ -23,7 +23,7 @@ public record EggMoveResponse(
 
         return new EggMoveResponse(
                 move.getId(),
-                move.getKoName(),
+                move.getName(),
                 1,
                 move.getPower(),
                 move.getAccuracy(),

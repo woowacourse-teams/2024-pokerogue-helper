@@ -23,7 +23,7 @@ public record MoveResponse(
 
         return new MoveResponse(
                 move.getId(),
-                move.getKoName(),
+                move.getName(),
                 type.getName(),
                 ImageUrl.getTypeImage(type.getName()),
                 moveCategory.getEngName(),

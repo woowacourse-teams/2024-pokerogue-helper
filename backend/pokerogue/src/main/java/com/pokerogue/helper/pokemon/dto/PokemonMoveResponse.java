@@ -23,7 +23,7 @@ public record PokemonMoveResponse(
 
         return new PokemonMoveResponse(
                 move.getId(),
-                move.getKoName(),
+                move.getName(),
                 level,
                 move.getPower(),
                 move.getAccuracy(),

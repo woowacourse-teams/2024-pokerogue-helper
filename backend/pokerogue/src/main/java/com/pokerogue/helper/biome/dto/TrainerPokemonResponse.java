@@ -16,7 +16,7 @@ public record TrainerPokemonResponse(
             List<BiomeTypeResponse> trainerTypes,
             List<BiomePokemonResponse> trainerPokemons) {
         return new TrainerPokemonResponse(
-                trainer.getKoName(),
+                trainer.getName(),
                 trainerImage,
                 trainerTypes,
                 trainerPokemons

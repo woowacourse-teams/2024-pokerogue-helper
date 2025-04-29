@@ -7,6 +7,7 @@ import com.pokerogue.helper.ability.dto.AbilityResponse;
 import com.pokerogue.helper.ability.dto.AbilityTypeResponse;
 import com.pokerogue.helper.ability.repository.AbilityRepository;
 import com.pokerogue.helper.global.config.ImageUrl;
+import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Pokemon;
@@ -27,15 +28,18 @@ public class AbilityService {
     public List<AbilityResponse> findAbilities() {
         return abilityRepository.findAll().stream()
                 .filter(Ability::isPresent)
+                .filter(ability -> ability.hasSameLanguage(LanguageSetter.getLanguage()))
                 .map(AbilityResponse::from)
                 .toList();
     }
 
     public AbilityDetailResponse findAbilityDetails(String id) {
-        Ability ability = abilityRepository.findById(id)
+        Ability ability = abilityRepository.findByIdAndLanguage(id, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<String> abilityPokemonIds = ability.getPokemonIds();
-        List<Pokemon> pokemons = pokemonRepository.findAllById(abilityPokemonIds);
+        List<Pokemon> pokemons = pokemonRepository.findAllById(abilityPokemonIds).stream()
+                .filter(pokemon -> pokemon.hasSameLanguage(LanguageSetter.getLanguage()))
+                .toList();
         validateExistAllPokemonId(abilityPokemonIds, pokemons);
         List<AbilityPokemonResponse> abilityPokemonResponses = pokemons.stream()
                 .map(pokemon -> AbilityPokemonResponse.of(
