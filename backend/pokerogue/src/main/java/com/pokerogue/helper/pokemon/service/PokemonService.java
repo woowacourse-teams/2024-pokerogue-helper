@@ -19,6 +19,7 @@ import com.pokerogue.helper.pokemon.dto.PokemonDetailResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonMoveResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonInMemoryRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 
@@ -37,9 +38,10 @@ public class PokemonService {
     private final AbilityRepository abilityRepository;
     private final EvolutionService evolutionService;
     private final PokemonInMemoryRepository pokemonInMemoryRepository;
+    private final PokemonRepository pokemonRepository;
 
     public PokemonDetailResponse findById(String id) {
-        Pokemon pokemon = pokemonInMemoryRepository.findById(id)
+        Pokemon pokemon = pokemonRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
         return createPokemonDetailResponse(pokemon);

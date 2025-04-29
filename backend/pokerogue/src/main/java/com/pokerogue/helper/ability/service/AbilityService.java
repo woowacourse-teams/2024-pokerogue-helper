@@ -39,10 +39,7 @@ public class AbilityService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<String> abilityPokemonIds = ability.getPokemonIds();
         List<Pokemon> pokemons = abilityPokemonIds.stream()
-                .map(pokemonId -> {
-                    System.out.println(pokemonId + " " + LanguageSetter.getLanguage());
-                    return pokemonRepository.findByIndexAndLanguage(pokemonId, LanguageSetter.getLanguage());
-                })
+                .map(pokemonId -> pokemonRepository.findByIndexAndLanguage(pokemonId, LanguageSetter.getLanguage()))
                 .map(Optional::get)
                 .toList();
         validateExistAllPokemonId(abilityPokemonIds, pokemons);
@@ -61,7 +58,6 @@ public class AbilityService {
             List<String> abilityPokemonIds,
             List<Pokemon> abilityPokemonResponses
     ) {
-        System.out.println(abilityPokemonIds.size() + " " + abilityPokemonResponses.size());
         if (abilityPokemonIds.size() != abilityPokemonResponses.size()) {
             throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
         }

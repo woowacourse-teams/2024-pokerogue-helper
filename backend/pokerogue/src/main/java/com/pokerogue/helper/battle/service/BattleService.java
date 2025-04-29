@@ -54,7 +54,6 @@ public class BattleService {
     ) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
-        System.out.println(myPokemonId + " " + LanguageSetter.getLanguage());
         Pokemon myPokemon = pokemonRepository.findByIndexAndLanguage(myPokemonId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         Pokemon rivalPokemon = pokemonRepository.findByIndexAndLanguage(rivalPokemonId, LanguageSetter.getLanguage())
