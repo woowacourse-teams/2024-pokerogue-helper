@@ -20,7 +20,7 @@ public record NextBiomeResponse(
             List<BiomeTypeResponse> trainerTypeResponses
     ) {
         return new NextBiomeResponse(
-                biome.getId(),
+                biome.getIndex(),
                 biome.getName(),
                 biomeImage,
                 percent,

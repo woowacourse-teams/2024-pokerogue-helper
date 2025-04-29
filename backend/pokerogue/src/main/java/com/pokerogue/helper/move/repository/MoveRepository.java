@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface MoveRepository extends MongoRepository<Move, String> {
 
-    Optional<Move> findByIdAndLanguage(String id, String language);
+    Optional<Move> findByIndexAndLanguage(String index, String language);
 }

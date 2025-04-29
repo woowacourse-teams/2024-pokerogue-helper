@@ -33,7 +33,7 @@ public class PokemonDataTest extends MongoRepositoryTest {
     @DisplayName("포켓몬 데이터의 아이디 형식을 확인한다.")
     @Test
     void pokemonIdFormat() {
-        List<String> actual = pokemonRepository.findAll().stream().map(Pokemon::getId).toList();
+        List<String> actual = pokemonRepository.findAll().stream().map(Pokemon::getIndex).toList();
 
         ThrowingCallable validator = () -> validatePokemonIdFormat(actual);
 

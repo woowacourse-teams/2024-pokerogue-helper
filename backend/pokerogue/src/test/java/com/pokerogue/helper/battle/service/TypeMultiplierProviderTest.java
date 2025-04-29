@@ -23,7 +23,7 @@ class TypeMultiplierProviderTest extends ServiceTest {
     @Test
     @DisplayName("타입 상성에 따른 배틀 결과 배수를 구한다.")
     void getByTypeMatching() {
-        Pokemon rivalPokemon = pokemonRepository.findById("squirtle").get();
+        Pokemon rivalPokemon = pokemonRepository.findByIndexAndLanguage("squirtle", "en").get();
         List<Type> rivalPokemonTypes = rivalPokemon.getTypes();
         Type attackMoveType = Type.FIRE;
 
@@ -36,7 +36,7 @@ class TypeMultiplierProviderTest extends ServiceTest {
     @Test
     @DisplayName("같은 타입 공격 보너스 배수를 구한다.")
     void getBySameTypeAttackBonus() {
-        Pokemon rivalPokemon = pokemonRepository.findById("squirtle").get();
+        Pokemon rivalPokemon = pokemonRepository.findByIndexAndLanguage("squirtle", "en").get();
         Type attackMoveType = Type.WATER;
 
         BattleMultiplier multiplier = typeMultiplierProvider.getBySameTypeAttackBonus(attackMoveType, rivalPokemon);
@@ -49,7 +49,7 @@ class TypeMultiplierProviderTest extends ServiceTest {
     @Test
     @DisplayName("강한 바람이 불 때 비행타입 라이벌 포켓몬의 약점을 가려주는 배수를 구한다.")
     void getByStrongWind() {
-        Pokemon rivalPokemon = pokemonRepository.findById("pidgey").get();
+        Pokemon rivalPokemon = pokemonRepository.findByIndexAndLanguage("pidgey", "en").get();
         List<Type> rivalPokemonTypes = rivalPokemon.getTypes();
         Type attackMoveType = Type.ELECTRIC;
 

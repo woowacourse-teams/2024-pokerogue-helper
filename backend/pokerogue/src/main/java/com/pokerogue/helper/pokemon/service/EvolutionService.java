@@ -28,19 +28,19 @@ public class EvolutionService {
                 .map(connectedPokemon -> createEvolutionResponse(connectedPokemon, evolutionContext))
                 .toList();
 
-        return new EvolutionResponses(evolutionContext.getDepthOf(pokemon.getId()), responses);
+        return new EvolutionResponses(evolutionContext.getDepthOf(pokemon.getIndex()), responses);
     }
 
     private EvolutionResponse createEvolutionResponse(Pokemon pokemon, EvolutionContext evolutionContext) {
-        return EvolutionResponse.from(pokemon, evolutionContext.getEvolutionOf(pokemon.getId()),
-                evolutionContext.getDepthOf(pokemon.getId()));
+        return EvolutionResponse.from(pokemon, evolutionContext.getEvolutionOf(pokemon.getIndex()),
+                evolutionContext.getDepthOf(pokemon.getIndex()));
     }
 
     private List<Pokemon> createConnectedPokemons(List<Evolution> evolutions) {
         return evolutions.stream()
                 .flatMap(evolution -> Stream.of(evolution.getFrom(), evolution.getTo()))
                 .distinct()
-                .map(pokemon -> pokemonRepository.findByIdAndLanguage(pokemon, LanguageSetter.getLanguage()))
+                .map(pokemon -> pokemonRepository.findByIndexAndLanguage(pokemon, LanguageSetter.getLanguage()))
                 .filter(Optional::isPresent) // TODO: data is inconsistent, isPresent is change to throw
                 .map(Optional::get)
                 .toList();

@@ -54,11 +54,12 @@ public class BattleService {
     ) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
-        Pokemon myPokemon = pokemonRepository.findByIdAndLanguage(myPokemonId, LanguageSetter.getLanguage())
+        System.out.println(myPokemonId + " " + LanguageSetter.getLanguage());
+        Pokemon myPokemon = pokemonRepository.findByIndexAndLanguage(myPokemonId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Pokemon rivalPokemon = pokemonRepository.findByIdAndLanguage(rivalPokemonId, LanguageSetter.getLanguage())
+        Pokemon rivalPokemon = pokemonRepository.findByIndexAndLanguage(rivalPokemonId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Move move = moveRepository.findByIdAndLanguage(myMoveId, LanguageSetter.getLanguage())
+        Move move = moveRepository.findByIndexAndLanguage(myMoveId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
 
         double finalAccuracy = battleCalculator.calculateAccuracy(move, weather);

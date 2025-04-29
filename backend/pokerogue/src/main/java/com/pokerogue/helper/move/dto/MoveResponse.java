@@ -22,7 +22,7 @@ public record MoveResponse(
         MoveCategory moveCategory = move.getMoveCategory();
 
         return new MoveResponse(
-                move.getId(),
+                move.getIndex(),
                 move.getName(),
                 type.getName(),
                 ImageUrl.getTypeImage(type.getName()),

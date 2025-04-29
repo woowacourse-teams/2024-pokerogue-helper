@@ -29,6 +29,7 @@ public class PokemonTestFixture {
     );
 
     public static Pokemon BULBASAUR = new Pokemon(
+            "gfdsgfadf",
             "bulbasaur", // id
             "bulbasaur", // imageId
             1, // pokedexNumber
@@ -94,6 +95,7 @@ public class PokemonTestFixture {
     );
 
     public static Pokemon CHARMANDER = new Pokemon(
+            "gfdsgfadf",
             "charmander", // id
             "charmander", // imageId
             4, // pokedexNumber

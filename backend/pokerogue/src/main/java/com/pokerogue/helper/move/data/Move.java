@@ -17,6 +17,9 @@ public class Move {
     @Id
     private String id;
 
+    @Field("index")
+    private String index;
+
     @Field("name")
     private String name;
 

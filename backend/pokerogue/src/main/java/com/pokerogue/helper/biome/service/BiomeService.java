@@ -12,6 +12,7 @@ import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class BiomeService {
                 .filter(biome -> biome.hasSameLanguage(LanguageSetter.getLanguage()))
                 .map(biome -> BiomeResponse.of(
                         biome,
-                        ImageUrl.getBiomeImage(biome.getId()),
+                        ImageUrl.getBiomeImage(biome.getIndex()),
                         getTypesResponses(biome.getTypes()),
                         getTrainerTypesResponses(biome.getTrainers()))
                 )
@@ -37,12 +38,12 @@ public class BiomeService {
     }
 
     public BiomeDetailResponse findBiome(String id, SortingCriteria bossPokemonOrder, SortingCriteria wildPokemonOrder) {
-        Biome biome = biomeRepository.findByIdAndLanguage(id, LanguageSetter.getLanguage())
+        Biome biome = biomeRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
 
         return BiomeDetailResponse.of(
                 biome,
-                ImageUrl.getBiomeImage(biome.getId()),
+                ImageUrl.getBiomeImage(biome.getIndex()),
                 getWildPokemons(biome.getNativePokemons(), wildPokemonOrder),
                 getBossPokemons(biome.getNativePokemons(), bossPokemonOrder),
                 getTrainerPokemons(biome),
@@ -84,12 +85,12 @@ public class BiomeService {
     private List<NextBiomeResponse> getNextBiomes(Biome biome) {
         return biome.getNextBiomes().stream()
                 .map(nextBiomeInfo -> {
-                    Biome nextBiome = biomeRepository.findById(nextBiomeInfo.getName())
+                    Biome nextBiome = biomeRepository.findByIndexAndLanguage(nextBiomeInfo.getName(), LanguageSetter.getLanguage())
                             .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
 
                     return NextBiomeResponse.of(
                             nextBiome,
-                            ImageUrl.getBiomeImage(nextBiome.getId()),
+                            ImageUrl.getBiomeImage(nextBiome.getIndex()),
                             String.valueOf(nextBiomeInfo.getPercentage()),
                             getTypesResponses(nextBiome.getTypes()),
                             getTrainerTypesResponses(nextBiome.getTrainers())
@@ -99,9 +100,11 @@ public class BiomeService {
     }
 
     private List<BiomePokemonResponse> getBiomePokemons(List<String> biomePokemons) {
-        List<BiomePokemonResponse> biomePokemonResponses = pokemonRepository.findAllById(biomePokemons).stream()
+        List<BiomePokemonResponse> biomePokemonResponses = biomePokemons.stream()
+                .map(pokemonId -> pokemonRepository.findByIndexAndLanguage(pokemonId, LanguageSetter.getLanguage()))
+                .map(Optional::get)
                 .map(pokemon -> new BiomePokemonResponse(
-                        pokemon.getId(),
+                        pokemon.getIndex(),
                         pokemon.getName(),
                         ImageUrl.getPokemonImage(pokemon.getImageId()),
                         getTypesResponses(pokemon.getTypes()))

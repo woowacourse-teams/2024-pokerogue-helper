@@ -13,7 +13,7 @@ public interface PokemonRepository extends MongoRepository<Pokemon, String> {
 
     List<Pokemon> findByLevelMovesMoveId(String moveId);
 
-    Optional<Pokemon> findByIdAndLanguage(String id, String language);
+    Optional<Pokemon> findByIndexAndLanguage(String index, String language);
 
     List<Pokemon> findByPokedexNumberAndLanguage(Integer pokedexNumber, String language);
 }

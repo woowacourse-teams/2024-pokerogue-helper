@@ -86,7 +86,7 @@ public class PokemonService {
         abilityIds.add(pokemon.getHiddenAbilityId());
 
         List<Optional<Ability>> abilities = abilityIds.stream()
-                .map(ability -> abilityRepository.findByIdAndLanguage(ability, LanguageSetter.getLanguage()))
+                .map(ability -> abilityRepository.findByIndexAndLanguage(ability, LanguageSetter.getLanguage()))
                 .toList();
 
         return PokemonAbilityResponse.createListFrom(abilities);
@@ -96,7 +96,7 @@ public class PokemonService {
         List<String> biomes = pokemon.getBiomeIds();
 
         return biomes.stream()
-                .map(biome -> biomeRepository.findByIdAndLanguage(biome, LanguageSetter.getLanguage()))
+                .map(biome -> biomeRepository.findByIndexAndLanguage(biome, LanguageSetter.getLanguage()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(PokemonBiomeResponse::from)
@@ -107,7 +107,7 @@ public class PokemonService {
         List<String> moves = pokemon.getEggMoveIds();
 
         return moves.stream()
-                .map(move -> moveRepository.findByIdAndLanguage(move, LanguageSetter.getLanguage()))
+                .map(move -> moveRepository.findByIndexAndLanguage(move, LanguageSetter.getLanguage()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(EggMoveResponse::from)
@@ -123,7 +123,7 @@ public class PokemonService {
     }
 
     private Move getMoveById(LevelMove levelMove) {
-        return moveRepository.findByIdAndLanguage(levelMove.getMoveId(), LanguageSetter.getLanguage())
+        return moveRepository.findByIndexAndLanguage(levelMove.getMoveId(), LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }

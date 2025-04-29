@@ -9,7 +9,7 @@ public record PokemonAbilityResponse(String id, String name, String description,
 
     public static PokemonAbilityResponse from(Ability ability, boolean isPassive, boolean isHidden) {
         return new PokemonAbilityResponse(
-                ability.getId(),
+                ability.getIndex(),
                 ability.getName(),
                 ability.getDescription(),
                 isPassive,

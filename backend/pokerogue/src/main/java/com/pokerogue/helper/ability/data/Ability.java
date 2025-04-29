@@ -16,6 +16,9 @@ public class Ability {
     @Id
     private String id;
 
+    @Field("index")
+    private String index;
+
     @Field("name")
     private String name;
 
@@ -45,6 +48,6 @@ public class Ability {
     }
 
     public boolean isPresent() {
-        return !id.equals("none");
+        return !index.equals("none");
     }
 }

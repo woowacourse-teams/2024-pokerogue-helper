@@ -22,7 +22,7 @@ public record EggMoveResponse(
         Type type = move.getType();
 
         return new EggMoveResponse(
-                move.getId(),
+                move.getIndex(),
                 move.getName(),
                 1,
                 move.getPower(),

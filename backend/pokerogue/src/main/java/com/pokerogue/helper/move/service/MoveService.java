@@ -67,20 +67,20 @@ public class MoveService {
 
     public MoveDetailResponse findMove(String id) {
         Move move = findMoveById(id);
-        List<String> eggMovePokemonIds = pokemonRepository.findByEggMoveIdsContains(move.getId()).stream()
+        List<String> eggMovePokemonIds = pokemonRepository.findByEggMoveIdsContains(move.getIndex()).stream()
                 .filter(pokemon -> pokemon.hasSameLanguage(LanguageSetter.getLanguage()))
-                .map(Pokemon::getId)
+                .map(Pokemon::getIndex)
                 .toList();
-        List<String> levelMovePokemonIds = pokemonRepository.findByLevelMovesMoveId(move.getId()).stream()
+        List<String> levelMovePokemonIds = pokemonRepository.findByLevelMovesMoveId(move.getIndex()).stream()
                 .filter(pokemon -> pokemon.hasSameLanguage(LanguageSetter.getLanguage()))
-                .map(Pokemon::getId)
+                .map(Pokemon::getIndex)
                 .toList();
 
         return MoveDetailResponse.from(move, levelMovePokemonIds, eggMovePokemonIds);
     }
 
     private Move findMoveById(String id) {
-        return moveRepository.findByIdAndLanguage(id, LanguageSetter.getLanguage())
+        return moveRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }

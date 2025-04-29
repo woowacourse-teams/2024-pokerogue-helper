@@ -16,7 +16,7 @@ public record AbilityPokemonResponse(
             List<AbilityTypeResponse> pokemonTypeResponses
     ) {
         return new AbilityPokemonResponse(
-                pokemon.getId(),
+                pokemon.getIndex(),
                 (long) pokemon.getPokedexNumber(),
                 pokemon.getName(),
                 image,

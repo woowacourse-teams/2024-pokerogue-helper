@@ -17,11 +17,14 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Setter
 @ToString
 @NoArgsConstructor
-@Document(collection = "pokemon_" + LanguageSetter.KOREAN)
+@Document(collection = "pokemon")
 public class Pokemon {
 
     @Id
     private String id;
+
+    @Field("index")
+    private String index;
 
     @Field("imageId")
     private String imageId;

@@ -45,7 +45,7 @@ public class PokeomonControllerTest extends MongoRepositoryTest {
             given()
                     .contentType(ContentType.JSON)
                     .when()
-                    .get("/pokemon2/" + pokemon.getId())
+                    .get("/pokemon2/" + pokemon.getIndex())
                     .then()
                     .statusCode(200);
         }

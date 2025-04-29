@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface AbilityRepository extends MongoRepository<Ability, String> {
 
-    Optional<Ability> findByIdAndLanguage(String id, String language);
+    Optional<Ability> findByIndexAndLanguage(String index, String language);
 }

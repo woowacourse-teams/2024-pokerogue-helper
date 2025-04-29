@@ -37,7 +37,7 @@ public class PokemonInMemoryRepository {
                 .collect(
                         groupingBy(
                                 Pokemon::getLanguage,
-                                toMap(Pokemon::getId, identity())
+                                toMap(Pokemon::getIndex, identity())
                         )
                 );
     }

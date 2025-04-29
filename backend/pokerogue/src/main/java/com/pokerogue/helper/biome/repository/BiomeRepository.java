@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface BiomeRepository extends MongoRepository<Biome, String> {
 
-    Optional<Biome> findByIdAndLanguage(String id, String language);
+    Optional<Biome> findByIndexAndLanguage(String index, String language);
 }

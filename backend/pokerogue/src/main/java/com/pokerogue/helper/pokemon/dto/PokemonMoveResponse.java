@@ -22,7 +22,7 @@ public record PokemonMoveResponse(
         Type moveType = move.getType();
 
         return new PokemonMoveResponse(
-                move.getId(),
+                move.getIndex(),
                 move.getName(),
                 level,
                 move.getPower(),

@@ -36,7 +36,7 @@ public record MoveDetailResponse(
                 .toList();
 
         return new MoveDetailResponse(
-                move.getId(),
+                move.getIndex(),
                 move.getName(),
                 type.getName(),
                 ImageUrl.getTypeImage(type.getName()),

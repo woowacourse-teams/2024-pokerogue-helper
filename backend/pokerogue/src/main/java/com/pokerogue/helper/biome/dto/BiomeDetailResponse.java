@@ -21,7 +21,7 @@ public record BiomeDetailResponse(
             List<NextBiomeResponse> nextBiomes
     ) {
         return new BiomeDetailResponse(
-                biome.getId(),
+                biome.getIndex(),
                 biome.getName(),
                 biomeImage,
                 wildPokemons,

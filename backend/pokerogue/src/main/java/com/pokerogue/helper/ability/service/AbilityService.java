@@ -13,6 +13,7 @@ import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,11 +35,15 @@ public class AbilityService {
     }
 
     public AbilityDetailResponse findAbilityDetails(String id) {
-        Ability ability = abilityRepository.findByIdAndLanguage(id, LanguageSetter.getLanguage())
+        Ability ability = abilityRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<String> abilityPokemonIds = ability.getPokemonIds();
-        List<Pokemon> pokemons = pokemonRepository.findAllById(abilityPokemonIds).stream()
-                .filter(pokemon -> pokemon.hasSameLanguage(LanguageSetter.getLanguage()))
+        List<Pokemon> pokemons = abilityPokemonIds.stream()
+                .map(pokemonId -> {
+                    System.out.println(pokemonId + " " + LanguageSetter.getLanguage());
+                    return pokemonRepository.findByIndexAndLanguage(pokemonId, LanguageSetter.getLanguage());
+                })
+                .map(Optional::get)
                 .toList();
         validateExistAllPokemonId(abilityPokemonIds, pokemons);
         List<AbilityPokemonResponse> abilityPokemonResponses = pokemons.stream()
@@ -56,6 +61,7 @@ public class AbilityService {
             List<String> abilityPokemonIds,
             List<Pokemon> abilityPokemonResponses
     ) {
+        System.out.println(abilityPokemonIds.size() + " " + abilityPokemonResponses.size());
         if (abilityPokemonIds.size() != abilityPokemonResponses.size()) {
             throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
         }
