@@ -11,7 +11,7 @@ public class LanguageInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String acceptLanguage = request.getHeader(LANGUAGE_HEADER_NAME);
-        if (LanguageSetter.KOREAN.equalsIgnoreCase(acceptLanguage)) {
+        if (acceptLanguage != null && acceptLanguage.toLowerCase().startsWith(LanguageSetter.KOREAN)) {
             LanguageSetter.setKorean();
         } else {
             LanguageSetter.setEnglish();
