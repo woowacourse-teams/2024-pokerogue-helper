@@ -10,7 +10,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class EvolutionContextTest {
+class EvolutionContextTest {
 
     @DisplayName("각 포켓몬 진화 깊이 정보를 가져올 수 있다.")
     @Test
@@ -23,7 +23,7 @@ public class EvolutionContextTest {
         EvolutionContext context = new EvolutionContext(List.of(evolution, evolution2, evolution3, evolution4));
 
         assertAll(() -> {
-            Assertions.assertThat(context.getDepthOf("A")).isEqualTo(0);
+            Assertions.assertThat(context.getDepthOf("A")).isZero();
             Assertions.assertThat(context.getDepthOf("B")).isEqualTo(1);
             Assertions.assertThat(context.getDepthOf("C")).isEqualTo(2);
             Assertions.assertThat(context.getDepthOf("D")).isEqualTo(3);
