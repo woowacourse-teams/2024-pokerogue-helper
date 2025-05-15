@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class BiomeRepositoryTest extends MongoRepositoryTest {
+class BiomeRepositoryTest extends MongoRepositoryTest {
 
     @Autowired
     private BiomeRepository biomeRepository;

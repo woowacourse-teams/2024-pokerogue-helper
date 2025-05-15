@@ -1,6 +1,5 @@
 package com.pokerogue.helper.pokemon.data;
 
-import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.type.data.Type;
 import java.util.List;
 import lombok.AllArgsConstructor;
