@@ -10,6 +10,7 @@ import org.koin.dsl.module
 import poke.rogue.helper.remote.BuildConfig
 import poke.rogue.helper.remote.injector.PokeCallAdapterFactory
 import poke.rogue.helper.remote.injector.PokeConverterFactory
+import poke.rogue.helper.remote.interceptor.LocaleInterceptor
 import poke.rogue.helper.remote.interceptor.RedirectInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -47,12 +48,14 @@ internal val retrofitModule
             single { (redirectUrl: String) ->
                 RedirectInterceptor(redirectUrl)
             }
+            singleOf(::LocaleInterceptor)
             singleOf(::PokeCallAdapterFactory)
             singleOf(::PokeConverterFactory)
 
             single<OkHttpClient> {
                 OkHttpClient
                     .Builder()
+                    .addInterceptor(get<LocaleInterceptor>())
                     .addInterceptor(get<HttpLoggingInterceptor>())
                     .let { client ->
                         if (BuildConfig.DEBUG) {
