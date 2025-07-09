@@ -25,7 +25,9 @@ internal object FireBaseAnalyticsLogger : AnalyticsLogger {
         message: String?,
     ) {
         analyticsScope.launch {
-            message ?: Firebase.crashlytics.log("Error: $message")
+            message?.let {
+                Firebase.crashlytics.log("Error: $message")
+            }
             Firebase.crashlytics.recordException(throwable)
         }
     }
