@@ -52,6 +52,15 @@ jobs:
             fi
           done
 
+      - name: Import test data to MongoDB
+        working-directory: ./backend/pokerogue
+        env:
+          TEST_DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
+          TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+        run: |
+          chmod +x ./scripts/import-test-data.sh
+          ./scripts/import-test-data.sh
+
       - name: Run Test
         working-directory: ./backend/pokerogue
         env:
