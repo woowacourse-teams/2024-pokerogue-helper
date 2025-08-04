@@ -5,7 +5,7 @@ permissions:
 
 on:
   push:
-    branches: [ "be/feat/#510" ]
+    branches: [ "be/feat/cd-fix" ]
     tags:
       - 'api-v*'
 
