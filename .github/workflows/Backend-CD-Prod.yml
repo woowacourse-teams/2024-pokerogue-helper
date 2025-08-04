@@ -1,11 +1,13 @@
-name: Backend Development Server CD
-
-on:
-  push:
-    branches: [ "be/develop" ]
+name: Backend Production Server CD
 
 permissions:
   contents: read
+
+on:
+  push:
+    branches: [ "be/feat/#510" ]
+    tags:
+      - 'api-v*'
 
 jobs:
   test:
@@ -16,7 +18,6 @@ jobs:
     needs: test
     runs-on: cd
     steps:
-
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -36,38 +37,31 @@ jobs:
       - name: Docker build and push
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-          docker build -t ${{ secrets.DOCKER_DEV_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
-          docker push ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}
-  
-
+          docker build -t ${{ secrets.DOCKER_SERVER_IMAGE }} -f ./backend/pokerogue/docker/Dockerfile ./backend/pokerogue
+          docker push ${{ secrets.DOCKER_SERVER_IMAGE }}
   deploy:
     needs: build
     runs-on: cd
     steps:
 
+      - name: Change permission
+        run: |
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/actions-runner/_work/2024-pokerogue-helper
       - name: Deploy
         run: |
           cd /home/ubuntu
           
-          sudo mkdir -p log/nginx && sudo touch log/nginx/error.log && sudo touch log/nginx/access.log
-          
           sudo chmod 666 /var/run/docker.sock
           
-          if [ "$(docker ps -qa)" ]; then
-          docker rm -f $(docker ps -qa)
-          docker builder prune
+          if [ "$(docker ps -qa -f name=server)" ]; then
+          docker rm -f server
           else
-          echo "No containers to remove."
+          echo "No container named 'server' to remove."
           fi
-
-          docker pull ${{ secrets.DOCKER_DEV_MONGO_IMAGE }}
-          docker run -d --name pokerogue-mongo-db ${{ secrets.DOCKER_DEV_MONGO_IMAGE }}
-
-          docker pull ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}
-          docker run -d -p 8080:8080 --name server \
-              --link pokerogue-mongo-db \
+          
+          docker pull ${{ secrets.DOCKER_SERVER_IMAGE }}
+          
+          docker run -d -p 80:8080 --name server \
               -e JAVA_OPTS="-XX:InitialRAMPercentage=70.0 -XX:MaxRAMPercentage=70.0" \
               -e TZ=Asia/Seoul \
-              -e SPRING_PROFILES_ACTIVE=dev \
-              ${{ secrets.DOCKER_DEV_SERVER_IMAGE }}
+              ${{ secrets.DOCKER_SERVER_IMAGE }}
