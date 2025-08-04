@@ -17,7 +17,7 @@ import org.apache.logging.log4j.util.Strings;
 
 class PokemonValidator {
 
-    private static final int POKEMON_SIZE = 1454;
+    private static final int POKEMON_SIZE = 2904;
     private static final int MIN_GENERATION = 1;
     private static final int MAX_GENERATION = 9;
     private static final int MIN_TYPE_COUNT = 1;
@@ -236,7 +236,7 @@ class PokemonValidator {
     }
 
     static void validateEvolutionFromToIsPokemonId(List<Pokemon> pokemons) {
-        List<String> pokemonIds = pokemons.stream().map(Pokemon::getId).toList();
+        List<String> pokemonIds = pokemons.stream().map(Pokemon::getIndex).toList();
         List<String> evolutionIds = pokemons.stream()
                 .flatMap(pokemon -> pokemon.getEvolutions().stream())
                 .flatMap(evolution -> Stream.of(evolution.getFrom(), evolution.getTo()))

@@ -22,8 +22,8 @@ public record MoveResponse(
         MoveCategory moveCategory = move.getMoveCategory();
 
         return new MoveResponse(
-                move.getId(),
-                move.getKoName(),
+                move.getIndex(),
+                move.getName(),
                 type.getName(),
                 ImageUrl.getTypeImage(type.getName()),
                 moveCategory.getEngName(),

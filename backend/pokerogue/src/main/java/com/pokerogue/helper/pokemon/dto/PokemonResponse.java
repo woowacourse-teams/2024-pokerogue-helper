@@ -24,9 +24,9 @@ public record PokemonResponse(
 ) {
     public static PokemonResponse from(Pokemon pokemon, List<PokemonTypeResponse> pokemonTypeResponses) {
         return new PokemonResponse(
-                pokemon.getId(),
+                pokemon.getIndex(),
                 (long) pokemon.getPokedexNumber(),
-                pokemon.getKoName(),
+                pokemon.getName(),
                 pokemon.getFormName(),
                 ImageUrl.getPokemonImage(pokemon.getImageId()), //image front
                 ImageUrl.getPokemonBackImage(pokemon.getImageId()), //back

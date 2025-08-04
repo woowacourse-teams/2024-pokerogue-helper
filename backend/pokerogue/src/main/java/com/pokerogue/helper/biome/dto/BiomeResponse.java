@@ -13,8 +13,8 @@ public record BiomeResponse(
 
     public static BiomeResponse of(Biome biome, String biomeImage, List<BiomeTypeResponse> pokemonTypeLogos, List<BiomeTypeResponse> trainerTypeLogos) {
         return new BiomeResponse(
-                biome.getId(),
-                biome.getKoName(),
+                biome.getIndex(),
+                biome.getName(),
                 biomeImage,
                 pokemonTypeLogos,
                 trainerTypeLogos

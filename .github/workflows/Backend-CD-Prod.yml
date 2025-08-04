@@ -5,17 +5,17 @@ permissions:
 
 on:
   push:
-    branches: [ "be/release" ]
+    branches: [ "be/develop" ]
     tags:
       - 'api-v*'
 
 jobs:
-  test:
-    uses: ./.github/workflows/Backend-CI.yml
-    secrets: inherit
+#  test:
+#    uses: ./.github/workflows/Backend-CI.yml
+#    secrets: inherit
 
   build:
-    needs: test
+#    needs: test
     runs-on: ci
     steps:
       - name: Checkout

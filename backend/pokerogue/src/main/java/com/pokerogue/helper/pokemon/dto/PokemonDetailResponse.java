@@ -40,9 +40,9 @@ public record PokemonDetailResponse(
             EvolutionResponses evolutionResponses
     ) {
         return new PokemonDetailResponse(
-                pokemon.getId(),
+                pokemon.getIndex(),
                 (long) pokemon.getPokedexNumber(),
-                pokemon.getKoName(),
+                pokemon.getName(),
                 ImageUrl.getPokemonImage(pokemon.getImageId()),
                 pokemonTypeResponses,
                 pokemonAbilityResponses,

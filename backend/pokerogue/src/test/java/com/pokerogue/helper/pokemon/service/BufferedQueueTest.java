@@ -7,7 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class BufferedQueueTest {
+class BufferedQueueTest {
 
     @DisplayName("버퍼에 삽입 전에는 버퍼 카운팅이 작동하지 않는다.")
     @Test

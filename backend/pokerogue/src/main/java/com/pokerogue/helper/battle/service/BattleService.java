@@ -3,6 +3,7 @@ package com.pokerogue.helper.battle.service;
 import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.battle.dto.BattleResultResponseV1;
 import com.pokerogue.helper.battle.dto.BattleResultResponseV2;
+import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
@@ -53,11 +54,11 @@ public class BattleService {
     ) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
-        Pokemon myPokemon = pokemonRepository.findById(myPokemonId)
+        Pokemon myPokemon = pokemonRepository.findByIndexAndLanguage(myPokemonId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Pokemon rivalPokemon = pokemonRepository.findById(rivalPokemonId)
+        Pokemon rivalPokemon = pokemonRepository.findByIndexAndLanguage(rivalPokemonId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Move move = moveRepository.findById(myMoveId)
+        Move move = moveRepository.findByIndexAndLanguage(myMoveId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
 
         double finalAccuracy = battleCalculator.calculateAccuracy(move, weather);

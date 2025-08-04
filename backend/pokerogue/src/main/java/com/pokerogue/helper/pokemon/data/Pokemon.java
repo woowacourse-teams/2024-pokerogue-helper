@@ -22,6 +22,9 @@ public class Pokemon {
     @Id
     private String id;
 
+    @Field("index")
+    private String index;
+
     @Field("imageId")
     private String imageId;
 
@@ -30,9 +33,6 @@ public class Pokemon {
 
     @Field("name")
     private String name;
-
-    @Field("koName")
-    private String koName;
 
     @Field("speciesName")
     private String speciesName;
@@ -117,6 +117,13 @@ public class Pokemon {
 
     @Field("biomeIds")
     private List<String> biomeIds;
+
+    @Field("language")
+    private String language;
+
+    public boolean hasSameLanguage(String language) {
+        return this.language.equals(language);
+    }
 
     public boolean hasSameType(Type type) {
         return this.types.stream()

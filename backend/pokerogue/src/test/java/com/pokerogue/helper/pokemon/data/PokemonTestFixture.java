@@ -29,18 +29,18 @@ public class PokemonTestFixture {
     );
 
     public static Pokemon BULBASAUR = new Pokemon(
+            "gfdsgfadf",
             "bulbasaur", // id
             "bulbasaur", // imageId
             1, // pokedexNumber
             "bulbasaur", // name
-            "이상해씨", // koName
             "bulbasaur", // speciesName
             false, // canChangeForm
             "", // formName
             64, // baseExp
             50, // friendship
             Arrays.asList(Type.GRASS, Type.POISON), // types
-            Arrays.asList("overgrow"), // normalAbilityIds
+            List.of("overgrow"), // normalAbilityIds
             "chlorophyll", // hiddenAbilityId
             "grassy_surge", // passiveAbilityId
             1, // generation
@@ -48,7 +48,7 @@ public class PokemonTestFixture {
             false, // subLegendary
             false, // mythical
             BULBASAUR_EVOLUTIONS, // evolutions
-            Arrays.asList(), // formChanges
+            List.of(), // formChanges
             318, // baseTotal
             45, // hp
             49, // attack
@@ -70,7 +70,8 @@ public class PokemonTestFixture {
                     "leaf_storm", "power_whip", "grass_knot", "venoshock", "acid_spray", "round", "echoed_voice",
                     "grass_pledge", "work_up", "grassy_terrain", "confide", "grassy_glide", "tera_blast", "trailblaze"
             ), // technicalMachineMoveIds
-            Arrays.asList("grass") // biomeIds
+            List.of("grass"), // biomeIds,
+            "en"
     );
 
     public static List<Evolution> CHARMANDER_EVOLUTIONS = List.of(
@@ -94,11 +95,11 @@ public class PokemonTestFixture {
     );
 
     public static Pokemon CHARMANDER = new Pokemon(
+            "gfdsgfadf",
             "charmander", // id
             "charmander", // imageId
             4, // pokedexNumber
             "charmander", // name
-            "파이리", // koName
             "charmander", // speciesName
             false, // canChangeForm
             "", // formName
@@ -136,6 +137,7 @@ public class PokemonTestFixture {
                     "flame_charge", "round", "echoed_voice", "incinerate", "acrobatics", "fire_pledge", "dragon_tail", "work_up",
                     "confide", "power_up_punch", "breaking_swipe", "tera_blast", "temper_flare"
             ), // technicalMachineMoveIds
-            List.of("volcano") // biomeIds
+            List.of("volcano"), // biomeIds
+            "en"
     );
 }

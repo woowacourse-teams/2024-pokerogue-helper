@@ -22,8 +22,8 @@ public record PokemonMoveResponse(
         Type moveType = move.getType();
 
         return new PokemonMoveResponse(
-                move.getId(),
-                move.getKoName(),
+                move.getIndex(),
+                move.getName(),
                 level,
                 move.getPower(),
                 move.getAccuracy(),

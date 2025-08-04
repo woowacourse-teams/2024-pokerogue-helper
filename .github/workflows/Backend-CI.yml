@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ci
+    runs-on: ubuntu-latest
     steps:
 
       - name: Checkout
@@ -32,13 +32,16 @@ jobs:
 
       - name: Set up Test MongoDB
         working-directory: ./backend/pokerogue/src/main/resources/
-        run: docker-compose -f docker-compose-ci.yml up -d
+        env:
+          TEST_DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
+          TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+        run: docker compose -f docker-compose-ci.yml up -d
 
       - name: Wait for Test MongoDB to be ready
         working-directory: ./backend/pokerogue/src/main/resources/
         run: |
           for i in {1..30}; do
-            if docker-compose -f docker-compose-ci.yml exec -T pokerogue-db mongo -u ${{ secrets.TEST_DB_USERNAME }} -p ${{ secrets.TEST_DB_PASSWORD }} --authenticationDatabase admin --eval "db.runCommand({ ping: 1 })" --quiet; then
+            if docker compose -f docker-compose-ci.yml exec -T pokerogue-db mongosh -u ${{ secrets.TEST_DB_USERNAME }} -p ${{ secrets.TEST_DB_PASSWORD }} --authenticationDatabase admin --eval "db.runCommand({ ping: 1 })" --quiet; then
               echo "MongoDB is up and running!"
               break
             else
@@ -47,6 +50,18 @@ jobs:
             fi
           done
 
+      - name: Import test data to MongoDB
+        working-directory: ./backend/pokerogue
+        env:
+          TEST_DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
+          TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+        run: |
+          chmod +x ./scripts/import-test-data.sh
+          ./scripts/import-test-data.sh
+
       - name: Run Test
         working-directory: ./backend/pokerogue
+        env:
+          TEST_DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
+          TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
         run: ./gradlew clean test

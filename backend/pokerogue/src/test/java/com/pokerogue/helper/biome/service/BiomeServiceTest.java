@@ -28,7 +28,7 @@ class BiomeServiceTest extends ServiceTest {
     void findBoimes() {
         List<BiomeResponse> biomes = biomeService.findBiomes();
 
-        assertThat(biomes.size()).isEqualTo(35);
+        assertThat(biomes).hasSize(35);
     }
 
     @Test

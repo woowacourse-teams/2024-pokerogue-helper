@@ -20,8 +20,8 @@ public record NextBiomeResponse(
             List<BiomeTypeResponse> trainerTypeResponses
     ) {
         return new NextBiomeResponse(
-                biome.getId(),
-                biome.getKoName(),
+                biome.getIndex(),
+                biome.getName(),
                 biomeImage,
                 percent,
                 pokemonTypeResponses,

@@ -17,11 +17,11 @@ public class Move {
     @Id
     private String id;
 
+    @Field("index")
+    private String index;
+
     @Field("name")
     private String name;
-
-    @Field("koName")
-    private String koName;
 
     @Field("type")
     private Type type;
@@ -61,6 +61,13 @@ public class Move {
 
     @Field("pokemonIds")
     private List<String> pokemonIds;
+
+    @Field("language")
+    private String language;
+
+    public boolean hasSameLanguage(String language) {
+        return this.language.equals(language);
+    }
 
     public boolean isAttackMove() {
         return this.moveCategory != MoveCategory.STATUS;

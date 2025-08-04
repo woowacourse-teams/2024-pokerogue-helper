@@ -16,11 +16,11 @@ public class Ability {
     @Id
     private String id;
 
+    @Field("index")
+    private String index;
+
     @Field("name")
     private String name;
-
-    @Field("koName")
-    private String koName;
 
     @Field("released")
     private String released;
@@ -40,7 +40,14 @@ public class Ability {
     @Field("isIgnorable")
     private Boolean isIgnorable;
 
+    @Field("language")
+    private String language;
+
+    public boolean hasSameLanguage(String language) {
+        return this.language.equals(language);
+    }
+
     public boolean isPresent() {
-        return !id.equals("none");
+        return !index.equals("none");
     }
 }

@@ -1,5 +1,6 @@
 package com.pokerogue.helper.move.service;
 
+import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
@@ -23,12 +24,13 @@ public class MoveService {
 
     public List<MoveResponse> findMoves() {
         return moveRepository.findAll().stream()
+                .filter(move -> move.hasSameLanguage(LanguageSetter.getLanguage()))
                 .map(MoveResponse::from)
                 .toList();
     }
 
     public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
-        List<Pokemon> pokemons = pokemonRepository.findByPokedexNumber(pokedexNumber);
+        List<Pokemon> pokemons = pokemonRepository.findByPokedexNumberAndLanguage(pokedexNumber, LanguageSetter.getLanguage());
         if (pokemons.isEmpty()) {
             throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
         }
@@ -65,18 +67,20 @@ public class MoveService {
 
     public MoveDetailResponse findMove(String id) {
         Move move = findMoveById(id);
-        List<String> eggMovePokemonIds = pokemonRepository.findByEggMoveIdsContains(move.getId()).stream()
-                .map(Pokemon::getId)
+        List<String> eggMovePokemonIds = pokemonRepository.findByEggMoveIdsContains(move.getIndex()).stream()
+                .filter(pokemon -> pokemon.hasSameLanguage(LanguageSetter.getLanguage()))
+                .map(Pokemon::getIndex)
                 .toList();
-        List<String> levelMovePokemonIds = pokemonRepository.findByLevelMovesMoveId(move.getId()).stream()
-                .map(Pokemon::getId)
+        List<String> levelMovePokemonIds = pokemonRepository.findByLevelMovesMoveId(move.getIndex()).stream()
+                .filter(pokemon -> pokemon.hasSameLanguage(LanguageSetter.getLanguage()))
+                .map(Pokemon::getIndex)
                 .toList();
 
         return MoveDetailResponse.from(move, levelMovePokemonIds, eggMovePokemonIds);
     }
 
     private Move findMoveById(String id) {
-        return moveRepository.findById(id)
+        return moveRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }

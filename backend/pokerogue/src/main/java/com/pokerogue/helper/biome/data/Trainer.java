@@ -11,11 +11,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Trainer {
 
+    @Field("id")
+    private String id;
+
     @Field("name")
     private String name;
-
-    @Field("koName")
-    private String koName;
 
     @Field("types")
     private List<Type> types;

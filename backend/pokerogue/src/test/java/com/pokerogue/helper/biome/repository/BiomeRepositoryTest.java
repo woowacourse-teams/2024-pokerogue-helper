@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class BiomeRepositoryTest extends MongoRepositoryTest {
+class BiomeRepositoryTest extends MongoRepositoryTest {
 
     @Autowired
     private BiomeRepository biomeRepository;
@@ -26,7 +26,7 @@ public class BiomeRepositoryTest extends MongoRepositoryTest {
         List<Biome> biomes = biomeRepository.findAll();
 
         assertAll(
-                () -> assertThat(biomes).hasSize(35),
+                () -> assertThat(biomes).hasSize(70),
                 () -> assertThat(biomes.stream()
                         .flatMap(biome -> biome.getTypes().stream()))
                         .allMatch(type -> type.getDeclaringClass()

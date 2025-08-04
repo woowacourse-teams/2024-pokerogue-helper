@@ -17,8 +17,8 @@ public record EvolutionResponse(
 
     public static EvolutionResponse from(Pokemon pokemon, Evolution evolution, Integer depth) {
         return new EvolutionResponse(
-                pokemon.getId(),
-                pokemon.getKoName(),
+                pokemon.getIndex(),
+                pokemon.getName(),
                 evolution.getLevel(),
                 depth,
                 evolution.getItem(),
