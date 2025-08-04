@@ -3,6 +3,8 @@ name: Backend CI
 on:
   pull_request:
     branches: [ "be/develop" ]
+  push:
+    branches: [ "be/feat/#510" ]
   workflow_call:
 
 permissions:
