@@ -5,7 +5,7 @@ permissions:
 
 on:
   push:
-    branches: [ "be/release" ]
+    branches: [ "be/develop" ]
     tags:
       - 'api-v*'
 
