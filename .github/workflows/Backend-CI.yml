@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ci
+    runs-on: ubuntu-latest
     steps:
 
       - name: Checkout
