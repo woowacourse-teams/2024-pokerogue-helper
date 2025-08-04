@@ -54,4 +54,7 @@ jobs:
 
       - name: Run Test
         working-directory: ./backend/pokerogue
+        env:
+          TEST_DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
+          TEST_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
         run: ./gradlew clean test
