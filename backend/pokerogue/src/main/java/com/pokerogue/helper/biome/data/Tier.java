@@ -1,6 +1,7 @@
 package com.pokerogue.helper.biome.data;
 
 import com.pokerogue.helper.global.config.LanguageSetter;
+import com.pokerogue.helper.global.config.LocaleContextHolder;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
@@ -31,10 +32,10 @@ public enum Tier {
     }
 
     public String getName() {
-        if (LanguageSetter.isKorean()) {
-            return koName;
+        if (LocaleContextHolder.isDefault()) {
+            return name;
         }
-        return name;
+        return koName;
     }
 
     public boolean isWild() {

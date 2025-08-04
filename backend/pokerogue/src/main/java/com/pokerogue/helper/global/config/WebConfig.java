@@ -9,6 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    private final LanguageInterceptor languageInterceptor;
+
+    public WebConfig(LanguageInterceptor languageInterceptor) {
+        this.languageInterceptor = languageInterceptor;
+    }
+
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new SortingCriteriaRequestConverter());
@@ -16,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LanguageInterceptor())
+        registry.addInterceptor(languageInterceptor)
                 .addPathPatterns("/**");
     }
 }

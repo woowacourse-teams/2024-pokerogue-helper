@@ -1,6 +1,7 @@
 package com.pokerogue.helper.move.data;
 
 import com.pokerogue.helper.global.config.LanguageSetter;
+import com.pokerogue.helper.global.config.LocaleContextHolder;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import java.util.Arrays;
@@ -30,10 +31,10 @@ public enum MoveCategory {
     }
 
     public String getName() {
-        if (LanguageSetter.isKorean()) {
-            return name;
+        if (LocaleContextHolder.isDefault()) {
+            return engName;
         }
-        return engName;
+        return name;
     }
 
     private boolean hasSameEngName(String name) {

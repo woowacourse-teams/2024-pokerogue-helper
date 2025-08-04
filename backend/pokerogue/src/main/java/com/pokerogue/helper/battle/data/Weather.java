@@ -1,6 +1,7 @@
 package com.pokerogue.helper.battle.data;
 
 import com.pokerogue.helper.global.config.LanguageSetter;
+import com.pokerogue.helper.global.config.LocaleContextHolder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -141,10 +142,10 @@ public enum Weather {
     }
 
     public String getName() {
-        if (LanguageSetter.isKorean()) {
-            return koName;
+        if (LocaleContextHolder.isDefault()) {
+            return name;
         }
-        return name;
+        return koName;
     }
 
     public static Optional<Weather> findById(String id) {
