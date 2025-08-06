@@ -54,6 +54,7 @@ android {
         debug {
             applicationIdSuffix = ".dev"
             signingConfig = signingConfigs.getByName("debug")
+            resValue("string", "app_name", "Dev PokéRogue Helper")
         }
 
         create("beta") {
@@ -61,6 +62,7 @@ android {
             versionNameSuffix = "-beta"
             applicationIdSuffix = ".beta"
             signingConfig = signingConfigs.getByName("debug")
+            resValue("string", "app_name", "Beta PokéRogue Helper")
 //            firebaseAppDistribution {
 //                artifactType = "APK"
 //                releaseNotesFile = "firebase/releaseNote.txt"
@@ -73,6 +75,7 @@ android {
             versionNameSuffix = "-alpha"
             applicationIdSuffix = ".alpha"
             signingConfig = signingConfigs.getByName("debug")
+            resValue("string", "app_name", "Alpha PokéRogue Helper")
 //            firebaseAppDistribution {
 //                artifactType = "APK"
 //                releaseNotesFile = "firebase/releaseNote.txt"
