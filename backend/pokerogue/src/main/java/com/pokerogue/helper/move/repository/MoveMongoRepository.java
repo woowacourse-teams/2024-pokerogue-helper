@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MoveRepository extends MongoRepository<Move, String> {
+public interface MoveMongoRepository extends MongoRepository<Move, String> {
 
     Optional<Move> findByIndexAndLanguage(String index, String language);
 }

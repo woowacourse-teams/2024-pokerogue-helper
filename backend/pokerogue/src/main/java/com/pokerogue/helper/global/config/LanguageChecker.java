@@ -1,19 +1,19 @@
 package com.pokerogue.helper.global.config;
 
-import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LanguageChecker {
 
-    private final PokemonRepository pokemonRepository;
+    private final PokemonMongoRepository pokemonMongoRepository;
 
-    public LanguageChecker(PokemonRepository pokemonRepository) {
-        this.pokemonRepository = pokemonRepository;
+    public LanguageChecker(PokemonMongoRepository pokemonMongoRepository) {
+        this.pokemonMongoRepository = pokemonMongoRepository;
     }
 
     public boolean existsByLanguage(String locale) {
         String language = locale.toLowerCase().substring(0, 2);
-        return pokemonRepository.existsByLanguage(language);
+        return pokemonMongoRepository.existsByLanguage(language);
     }
 }

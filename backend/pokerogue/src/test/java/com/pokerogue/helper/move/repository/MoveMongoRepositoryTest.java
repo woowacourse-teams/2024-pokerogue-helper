@@ -14,15 +14,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class MoveRepositoryTest extends MongoRepositoryTest {
+public class MoveMongoRepositoryTest extends MongoRepositoryTest {
 
     @Autowired
-    private MoveRepository moveRepository;
+    private MoveMongoRepository moveMongoRepository;
 
     @Test
     @DisplayName("모든 기술 정보가 정상적으로 매핑되는지 확인한다.")
     void findAll_AndConvertToMove() {
-        List<Move> moves = moveRepository.findAll();
+        List<Move> moves = moveMongoRepository.findAll();
 
         assertAll(
                 () -> assertThat(moves).hasSize(1838),

@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BiomeRepository extends MongoRepository<Biome, String> {
+public interface BiomeMongoRepository extends MongoRepository<Biome, String> {
 
     Optional<Biome> findByIndexAndLanguage(String index, String language);
 }

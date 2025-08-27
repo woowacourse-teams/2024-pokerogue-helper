@@ -7,9 +7,9 @@ import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
-import com.pokerogue.helper.move.repository.MoveRepository;
+import com.pokerogue.helper.move.repository.MoveMongoRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;
-import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
-    private final MoveRepository moveRepository;
-    private final PokemonRepository pokemonRepository;
+    private final MoveMongoRepository moveMongoRepository;
+    private final PokemonMongoRepository pokemonMongoRepository;
     private final BattleCalculator battleCalculator;
 
     public BattleResultResponseV1 calculateBattleResultV1(
@@ -54,11 +54,11 @@ public class BattleService {
     ) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
-        Pokemon myPokemon = pokemonRepository.findByIndexAndLanguage(myPokemonId, LanguageSetter.getLanguage())
+        Pokemon myPokemon = pokemonMongoRepository.findByIndexAndLanguage(myPokemonId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Pokemon rivalPokemon = pokemonRepository.findByIndexAndLanguage(rivalPokemonId, LanguageSetter.getLanguage())
+        Pokemon rivalPokemon = pokemonMongoRepository.findByIndexAndLanguage(rivalPokemonId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Move move = moveRepository.findByIndexAndLanguage(myMoveId, LanguageSetter.getLanguage())
+        Move move = moveMongoRepository.findByIndexAndLanguage(myMoveId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
 
         double finalAccuracy = battleCalculator.calculateAccuracy(move, weather);

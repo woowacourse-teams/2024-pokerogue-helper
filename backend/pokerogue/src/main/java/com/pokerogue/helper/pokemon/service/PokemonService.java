@@ -2,13 +2,13 @@ package com.pokerogue.helper.pokemon.service;
 
 
 import com.pokerogue.helper.ability.data.Ability;
-import com.pokerogue.helper.ability.repository.AbilityRepository;
-import com.pokerogue.helper.biome.repository.BiomeRepository;
+import com.pokerogue.helper.ability.repository.AbilityMongoRepository;
+import com.pokerogue.helper.biome.repository.BiomeMongoRepository;
 import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
-import com.pokerogue.helper.move.repository.MoveRepository;
+import com.pokerogue.helper.move.repository.MoveMongoRepository;
 import com.pokerogue.helper.pokemon.data.LevelMove;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.dto.EggMoveResponse;
@@ -19,7 +19,7 @@ import com.pokerogue.helper.pokemon.dto.PokemonDetailResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonMoveResponse;
 import com.pokerogue.helper.pokemon.dto.PokemonResponse;
 import com.pokerogue.helper.pokemon.repository.PokemonInMemoryRepository;
-import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
 
@@ -33,15 +33,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PokemonService {
 
-    private final MoveRepository moveRepository;
-    private final BiomeRepository biomeRepository;
-    private final AbilityRepository abilityRepository;
+    private final MoveMongoRepository moveMongoRepository;
+    private final BiomeMongoRepository biomeMongoRepository;
+    private final AbilityMongoRepository abilityMongoRepository;
     private final EvolutionService evolutionService;
     private final PokemonInMemoryRepository pokemonInMemoryRepository;
-    private final PokemonRepository pokemonRepository;
+    private final PokemonMongoRepository pokemonMongoRepository;
 
     public PokemonDetailResponse findById(String id) {
-        Pokemon pokemon = pokemonRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
+        Pokemon pokemon = pokemonMongoRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
         return createPokemonDetailResponse(pokemon);
@@ -88,7 +88,7 @@ public class PokemonService {
         abilityIds.add(pokemon.getHiddenAbilityId());
 
         List<Optional<Ability>> abilities = abilityIds.stream()
-                .map(ability -> abilityRepository.findByIndexAndLanguage(ability, LanguageSetter.getLanguage()))
+                .map(ability -> abilityMongoRepository.findByIndexAndLanguage(ability, LanguageSetter.getLanguage()))
                 .toList();
 
         return PokemonAbilityResponse.createListFrom(abilities);
@@ -98,7 +98,7 @@ public class PokemonService {
         List<String> biomes = pokemon.getBiomeIds();
 
         return biomes.stream()
-                .map(biome -> biomeRepository.findByIndexAndLanguage(biome, LanguageSetter.getLanguage()))
+                .map(biome -> biomeMongoRepository.findByIndexAndLanguage(biome, LanguageSetter.getLanguage()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(PokemonBiomeResponse::from)
@@ -109,7 +109,7 @@ public class PokemonService {
         List<String> moves = pokemon.getEggMoveIds();
 
         return moves.stream()
-                .map(move -> moveRepository.findByIndexAndLanguage(move, LanguageSetter.getLanguage()))
+                .map(move -> moveMongoRepository.findByIndexAndLanguage(move, LanguageSetter.getLanguage()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(EggMoveResponse::from)
@@ -125,7 +125,7 @@ public class PokemonService {
     }
 
     private Move getMoveById(LevelMove levelMove) {
-        return moveRepository.findByIndexAndLanguage(levelMove.getMoveId(), LanguageSetter.getLanguage())
+        return moveMongoRepository.findByIndexAndLanguage(levelMove.getMoveId(), LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }
