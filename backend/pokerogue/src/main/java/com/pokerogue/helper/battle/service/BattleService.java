@@ -7,7 +7,7 @@ import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
-import com.pokerogue.helper.move.repository.MoveMongoRepository;
+import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BattleService {
 
-    private final MoveMongoRepository moveMongoRepository;
+    private final MoveRepository moveRepository;
     private final PokemonMongoRepository pokemonMongoRepository;
     private final BattleCalculator battleCalculator;
 
@@ -58,7 +58,7 @@ public class BattleService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         Pokemon rivalPokemon = pokemonMongoRepository.findByIndexAndLanguage(rivalPokemonId, LanguageSetter.getLanguage())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Move move = moveMongoRepository.findByIndexAndLanguage(myMoveId, LanguageSetter.getLanguage())
+        Move move = moveRepository.findByIndex(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
 
         double finalAccuracy = battleCalculator.calculateAccuracy(move, weather);

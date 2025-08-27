@@ -8,7 +8,7 @@ import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
-import com.pokerogue.helper.move.repository.MoveMongoRepository;
+import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.LevelMove;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.dto.EggMoveResponse;
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PokemonService {
 
-    private final MoveMongoRepository moveMongoRepository;
+    private final MoveRepository moveRepository;
     private final BiomeRepository biomeRepository;
     private final AbilityRepository abilityRepository;
     private final EvolutionService evolutionService;
@@ -109,7 +109,7 @@ public class PokemonService {
         List<String> moves = pokemon.getEggMoveIds();
 
         return moves.stream()
-                .map(move -> moveMongoRepository.findByIndexAndLanguage(move, LanguageSetter.getLanguage()))
+                .map(moveRepository::findByIndex)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(EggMoveResponse::from)
@@ -125,7 +125,7 @@ public class PokemonService {
     }
 
     private Move getMoveById(LevelMove levelMove) {
-        return moveMongoRepository.findByIndexAndLanguage(levelMove.getMoveId(), LanguageSetter.getLanguage())
+        return moveRepository.findByIndex(levelMove.getMoveId())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }

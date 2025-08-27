@@ -6,7 +6,7 @@ import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.dto.MoveDetailResponse;
 import com.pokerogue.helper.move.dto.MoveResponse;
-import com.pokerogue.helper.move.repository.MoveMongoRepository;
+import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.LevelMove;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
@@ -20,11 +20,10 @@ import org.springframework.stereotype.Service;
 public class MoveService {
 
     private final PokemonMongoRepository pokemonMongoRepository;
-    private final MoveMongoRepository moveMongoRepository;
+    private final MoveRepository moveRepository;
 
     public List<MoveResponse> findMoves() {
-        return moveMongoRepository.findAll().stream()
-                .filter(move -> move.hasSameLanguage(LanguageSetter.getLanguage()))
+        return moveRepository.findAll().stream()
                 .map(MoveResponse::from)
                 .toList();
     }
@@ -80,7 +79,7 @@ public class MoveService {
     }
 
     private Move findMoveById(String id) {
-        return moveMongoRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
+        return moveRepository.findByIndex(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }

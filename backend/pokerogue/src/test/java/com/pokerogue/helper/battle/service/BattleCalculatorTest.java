@@ -6,7 +6,7 @@ import com.pokerogue.environment.service.ServiceTest;
 import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.move.data.Move;
-import com.pokerogue.helper.move.repository.MoveMongoRepository;
+import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +19,7 @@ class BattleCalculatorTest extends ServiceTest {
     private BattleCalculator battleCalculator;
 
     @Autowired
-    private MoveMongoRepository moveMongoRepository;
+    private MoveRepository moveRepository;
 
     @Autowired
     private PokemonMongoRepository pokemonMongoRepository;
@@ -27,7 +27,7 @@ class BattleCalculatorTest extends ServiceTest {
     @Test
     @DisplayName("배틀에서 공격 기술의 정확도를 계산한다.")
     void calculateAccuracy() {
-        Move move = moveMongoRepository.findByIndexAndLanguage("ember", LanguageSetter.getLanguage()).get();
+        Move move = moveRepository.findByIndex("ember").get();
         Weather weather = Weather.FOG;
 
         double accuracy = battleCalculator.calculateAccuracy(move, weather);
@@ -38,7 +38,7 @@ class BattleCalculatorTest extends ServiceTest {
     @Test
     @DisplayName("배틀에서 공격 기술의 배수를 계산한다.")
     void calculateBattleResult() {
-        Move move = moveMongoRepository.findByIndexAndLanguage("ember", LanguageSetter.getLanguage()).get();
+        Move move = moveRepository.findByIndex("ember").get();
         Weather weather = Weather.SUNNY;
         Pokemon rivalPokemon = pokemonMongoRepository.findByIndexAndLanguage("bulbasaur", LanguageSetter.getLanguage()).get();
         Pokemon myPokemon = pokemonMongoRepository.findByIndexAndLanguage("charmander", LanguageSetter.getLanguage()).get();
