@@ -1,6 +1,6 @@
 package com.pokerogue.helper.type.dto;
 
-import com.pokerogue.helper.type.collection.TypeMatching;
+import com.pokerogue.helper.type.data.TypeMatching;
 
 public record TypeMatchingResponse(String from, String to, int result) {
 

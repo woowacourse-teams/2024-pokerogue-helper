@@ -1,7 +1,7 @@
 package com.pokerogue.helper.type.service;
 
 
-import com.pokerogue.helper.type.collection.TypeMatching;
+import com.pokerogue.helper.type.data.TypeMatching;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeMatchingResponse;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;

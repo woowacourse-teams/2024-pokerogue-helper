@@ -1,6 +1,6 @@
 package com.pokerogue.helper.type.repository;
 
-import com.pokerogue.helper.type.collection.TypeMatching;
+import com.pokerogue.helper.type.data.TypeMatching;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
