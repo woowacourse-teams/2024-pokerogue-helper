@@ -2,7 +2,7 @@ package com.pokerogue.helper.pokemon.service;
 
 
 import com.pokerogue.helper.ability.data.Ability;
-import com.pokerogue.helper.ability.repository.AbilityMongoRepository;
+import com.pokerogue.helper.ability.repository.AbilityRepository;
 import com.pokerogue.helper.biome.repository.BiomeMongoRepository;
 import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
@@ -35,7 +35,7 @@ public class PokemonService {
 
     private final MoveMongoRepository moveMongoRepository;
     private final BiomeMongoRepository biomeMongoRepository;
-    private final AbilityMongoRepository abilityMongoRepository;
+    private final AbilityRepository abilityRepository;
     private final EvolutionService evolutionService;
     private final PokemonInMemoryRepository pokemonInMemoryRepository;
     private final PokemonMongoRepository pokemonMongoRepository;
@@ -88,7 +88,7 @@ public class PokemonService {
         abilityIds.add(pokemon.getHiddenAbilityId());
 
         List<Optional<Ability>> abilities = abilityIds.stream()
-                .map(ability -> abilityMongoRepository.findByIndexAndLanguage(ability, LanguageSetter.getLanguage()))
+                .map(abilityRepository::findByIndex)
                 .toList();
 
         return PokemonAbilityResponse.createListFrom(abilities);

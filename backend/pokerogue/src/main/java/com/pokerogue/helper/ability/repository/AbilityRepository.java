@@ -1,12 +1,23 @@
 package com.pokerogue.helper.ability.repository;
 
 import com.pokerogue.helper.ability.data.Ability;
+import com.pokerogue.helper.global.config.LocaleContextHolder;
+import java.util.List;
 import java.util.Optional;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AbilityRepository extends MongoRepository<Ability, String> {
+@RequiredArgsConstructor
+public class AbilityRepository {
 
-    Optional<Ability> findByIndexAndLanguage(String index, String language);
+    private final AbilityMongoRepository abilityMongoRepository;
+
+    public List<Ability> findAll() {
+        return abilityMongoRepository.findAllByLanguage(LocaleContextHolder.getCurrentLocale());
+    }
+
+    public Optional<Ability> findByIndex(String index) {
+        return abilityMongoRepository.findByIndexAndLanguage(index, LocaleContextHolder.getCurrentLocale());
+    }
 }
