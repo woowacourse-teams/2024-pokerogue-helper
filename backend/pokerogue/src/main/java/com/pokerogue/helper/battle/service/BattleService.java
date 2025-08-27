@@ -3,13 +3,12 @@ package com.pokerogue.helper.battle.service;
 import com.pokerogue.helper.battle.data.Weather;
 import com.pokerogue.helper.battle.dto.BattleResultResponseV1;
 import com.pokerogue.helper.battle.dto.BattleResultResponseV2;
-import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;
-import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class BattleService {
 
     private final MoveRepository moveRepository;
-    private final PokemonMongoRepository pokemonMongoRepository;
+    private final PokemonRepository pokemonRepository;
     private final BattleCalculator battleCalculator;
 
     public BattleResultResponseV1 calculateBattleResultV1(
@@ -54,9 +53,9 @@ public class BattleService {
     ) {
         Weather weather = Weather.findById(weatherId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.WEATHER_NOT_FOUND));
-        Pokemon myPokemon = pokemonMongoRepository.findByIndexAndLanguage(myPokemonId, LanguageSetter.getLanguage())
+        Pokemon myPokemon = pokemonRepository.findByIndex(myPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
-        Pokemon rivalPokemon = pokemonMongoRepository.findByIndexAndLanguage(rivalPokemonId, LanguageSetter.getLanguage())
+        Pokemon rivalPokemon = pokemonRepository.findByIndex(rivalPokemonId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
         Move move = moveRepository.findByIndex(myMoveId)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));

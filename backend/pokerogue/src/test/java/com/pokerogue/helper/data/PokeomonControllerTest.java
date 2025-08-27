@@ -41,7 +41,6 @@ public class PokeomonControllerTest extends MongoRepositoryTest {
         List<Pokemon> all = pokemonMongoRepository.findAll();
 
         for (Pokemon pokemon : all) {
-            System.out.println(pokemon);
             given()
                     .contentType(ContentType.JSON)
                     .when()

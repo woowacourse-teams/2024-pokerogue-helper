@@ -48,8 +48,4 @@ public class PokemonInMemoryRepository {
                 .sorted(Comparator.comparingInt(Pokemon::getPokedexNumber))
                 .toList();
     }
-
-    public Optional<Pokemon> findById(String id) {
-        return Optional.ofNullable(pokemons.get(LanguageSetter.getLanguage()).get(id));
-    }
 }

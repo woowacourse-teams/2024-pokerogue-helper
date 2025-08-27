@@ -8,7 +8,7 @@ import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;
-import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ class BattleCalculatorTest extends ServiceTest {
     private MoveRepository moveRepository;
 
     @Autowired
-    private PokemonMongoRepository pokemonMongoRepository;
+    private PokemonRepository pokemonRepository;
 
     @Test
     @DisplayName("배틀에서 공격 기술의 정확도를 계산한다.")
@@ -40,8 +40,8 @@ class BattleCalculatorTest extends ServiceTest {
     void calculateBattleResult() {
         Move move = moveRepository.findByIndex("ember").get();
         Weather weather = Weather.SUNNY;
-        Pokemon rivalPokemon = pokemonMongoRepository.findByIndexAndLanguage("bulbasaur", LanguageSetter.getLanguage()).get();
-        Pokemon myPokemon = pokemonMongoRepository.findByIndexAndLanguage("charmander", LanguageSetter.getLanguage()).get();
+        Pokemon rivalPokemon = pokemonRepository.findByIndex("bulbasaur").get();
+        Pokemon myPokemon = pokemonRepository.findByIndex("charmander").get();
 
         double multiplier = battleCalculator.calculateTotalMultiplier(move, weather, rivalPokemon, myPokemon);
 

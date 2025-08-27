@@ -9,7 +9,7 @@ import com.pokerogue.helper.move.dto.MoveResponse;
 import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.LevelMove;
 import com.pokerogue.helper.pokemon.data.Pokemon;
-import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MoveService {
 
-    private final PokemonMongoRepository pokemonMongoRepository;
+    private final PokemonRepository pokemonRepository;
     private final MoveRepository moveRepository;
 
     public List<MoveResponse> findMoves() {
@@ -29,7 +29,7 @@ public class MoveService {
     }
 
     public List<MoveResponse> findMovesByPokemon(Integer pokedexNumber) {
-        List<Pokemon> pokemons = pokemonMongoRepository.findByPokedexNumberAndLanguage(pokedexNumber, LanguageSetter.getLanguage());
+        List<Pokemon> pokemons = pokemonRepository.findByPokedexNumber(pokedexNumber);
         if (pokemons.isEmpty()) {
             throw new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND);
         }
@@ -66,12 +66,10 @@ public class MoveService {
 
     public MoveDetailResponse findMove(String id) {
         Move move = findMoveById(id);
-        List<String> eggMovePokemonIds = pokemonMongoRepository.findByEggMoveIdsContains(move.getIndex()).stream()
-                .filter(pokemon -> pokemon.hasSameLanguage(LanguageSetter.getLanguage()))
+        List<String> eggMovePokemonIds = pokemonRepository.findByEggMoveIdsContains(move.getIndex()).stream()
                 .map(Pokemon::getIndex)
                 .toList();
-        List<String> levelMovePokemonIds = pokemonMongoRepository.findByLevelMovesMoveId(move.getIndex()).stream()
-                .filter(pokemon -> pokemon.hasSameLanguage(LanguageSetter.getLanguage()))
+        List<String> levelMovePokemonIds = pokemonRepository.findByLevelMovesMoveId(move.getIndex()).stream()
                 .map(Pokemon::getIndex)
                 .toList();
 

@@ -9,11 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PokemonMongoRepository extends MongoRepository<Pokemon, String> {
 
-    List<Pokemon> findByPokedexNumber(int pokedexNumber);
+    List<Pokemon> findByLanguageAndEggMoveIdsContains(String language, String eggMoveIds);
 
-    List<Pokemon> findByEggMoveIdsContains(String eggMoveIds);
-
-    List<Pokemon> findByLevelMovesMoveId(String moveId);
+    List<Pokemon> findByLevelMovesMoveIdAndLanguage(String moveId, String language);
 
     Optional<Pokemon> findByIndexAndLanguage(String index, String language);
 

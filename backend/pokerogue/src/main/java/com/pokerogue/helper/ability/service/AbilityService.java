@@ -11,7 +11,7 @@ import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.pokemon.data.Pokemon;
-import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import java.util.List;
 public class AbilityService {
 
     private final AbilityRepository abilityRepository;
-    private final PokemonMongoRepository pokemonMongoRepository;
+    private final PokemonRepository pokemonRepository;
 
     public List<AbilityResponse> findAbilities() {
         return abilityRepository.findAll().stream()
@@ -38,7 +38,7 @@ public class AbilityService {
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_ABILITY_NOT_FOUND));
         List<String> abilityPokemonIds = ability.getPokemonIds();
         List<Pokemon> pokemons = abilityPokemonIds.stream()
-                .map(pokemonId -> pokemonMongoRepository.findByIndexAndLanguage(pokemonId, LanguageSetter.getLanguage()))
+                .map(pokemonRepository::findByIndex)
                 .map(Optional::get)
                 .toList();
         validateExistAllPokemonId(abilityPokemonIds, pokemons);

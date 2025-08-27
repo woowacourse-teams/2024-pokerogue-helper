@@ -5,7 +5,7 @@ import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponse;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponses;
-import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class EvolutionService {
 
-    private final PokemonMongoRepository pokemonMongoRepository;
+    private final PokemonRepository pokemonRepository;
 
     public EvolutionResponses getEvolutionResponses(Pokemon pokemon) {
         List<Evolution> evolutions = pokemon.getEvolutions();
@@ -40,7 +40,7 @@ public class EvolutionService {
         return evolutions.stream()
                 .flatMap(evolution -> Stream.of(evolution.getFrom(), evolution.getTo()))
                 .distinct()
-                .map(pokemon -> pokemonMongoRepository.findByIndexAndLanguage(pokemon, LanguageSetter.getLanguage()))
+                .map(pokemonRepository::findByIndex)
                 .filter(Optional::isPresent) // TODO: data is inconsistent, isPresent is change to throw
                 .map(Optional::get)
                 .toList();
