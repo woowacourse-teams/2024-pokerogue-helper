@@ -4,7 +4,7 @@ import com.pokerogue.helper.biome.data.Biome;
 import com.pokerogue.helper.biome.data.NativePokemon;
 import com.pokerogue.helper.biome.data.Trainer;
 import com.pokerogue.helper.biome.dto.*;
-import com.pokerogue.helper.biome.repository.BiomeMongoRepository;
+import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.config.ImageUrl;
 import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.constant.SortingCriteria;
@@ -22,12 +22,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BiomeService {
 
-    private final BiomeMongoRepository biomeMongoRepository;
+    private final BiomeRepository biomeRepository;
     private final PokemonMongoRepository pokemonMongoRepository;
 
     public List<BiomeResponse> findBiomes() {
-        return biomeMongoRepository.findAll().stream()
-                .filter(biome -> biome.hasSameLanguage(LanguageSetter.getLanguage()))
+        return biomeRepository.findAll().stream()
                 .map(biome -> BiomeResponse.of(
                         biome,
                         ImageUrl.getBiomeImage(biome.getIndex()),
@@ -38,7 +37,7 @@ public class BiomeService {
     }
 
     public BiomeDetailResponse findBiome(String id, SortingCriteria bossPokemonOrder, SortingCriteria wildPokemonOrder) {
-        Biome biome = biomeMongoRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
+        Biome biome = biomeRepository.findByIndex(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
 
         return BiomeDetailResponse.of(
@@ -85,7 +84,7 @@ public class BiomeService {
     private List<NextBiomeResponse> getNextBiomes(Biome biome) {
         return biome.getNextBiomes().stream()
                 .map(nextBiomeInfo -> {
-                    Biome nextBiome = biomeMongoRepository.findByIndexAndLanguage(nextBiomeInfo.getName(), LanguageSetter.getLanguage())
+                    Biome nextBiome = biomeRepository.findByIndex(nextBiomeInfo.getName())
                             .orElseThrow(() -> new GlobalCustomException(ErrorMessage.BIOME_NOT_FOUND));
 
                     return NextBiomeResponse.of(

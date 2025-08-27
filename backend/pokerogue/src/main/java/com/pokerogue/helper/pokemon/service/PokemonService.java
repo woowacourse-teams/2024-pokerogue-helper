@@ -3,7 +3,7 @@ package com.pokerogue.helper.pokemon.service;
 
 import com.pokerogue.helper.ability.data.Ability;
 import com.pokerogue.helper.ability.repository.AbilityRepository;
-import com.pokerogue.helper.biome.repository.BiomeMongoRepository;
+import com.pokerogue.helper.biome.repository.BiomeRepository;
 import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
 public class PokemonService {
 
     private final MoveMongoRepository moveMongoRepository;
-    private final BiomeMongoRepository biomeMongoRepository;
+    private final BiomeRepository biomeRepository;
     private final AbilityRepository abilityRepository;
     private final EvolutionService evolutionService;
     private final PokemonInMemoryRepository pokemonInMemoryRepository;
@@ -98,7 +98,7 @@ public class PokemonService {
         List<String> biomes = pokemon.getBiomeIds();
 
         return biomes.stream()
-                .map(biome -> biomeMongoRepository.findByIndexAndLanguage(biome, LanguageSetter.getLanguage()))
+                .map(biomeRepository::findByIndex)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(PokemonBiomeResponse::from)
