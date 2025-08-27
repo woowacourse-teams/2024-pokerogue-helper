@@ -1,6 +1,5 @@
 package com.pokerogue.helper.type.data;
 
-import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.config.LocaleContextHolder;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;

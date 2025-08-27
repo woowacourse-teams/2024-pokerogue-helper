@@ -1,6 +1,5 @@
 package com.pokerogue.helper.move.service;
 
-import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;

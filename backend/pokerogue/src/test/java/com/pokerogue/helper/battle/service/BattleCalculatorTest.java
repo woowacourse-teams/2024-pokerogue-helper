@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.pokerogue.environment.service.ServiceTest;
 import com.pokerogue.helper.battle.data.Weather;
-import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.move.data.Move;
 import com.pokerogue.helper.move.repository.MoveRepository;
 import com.pokerogue.helper.pokemon.data.Pokemon;

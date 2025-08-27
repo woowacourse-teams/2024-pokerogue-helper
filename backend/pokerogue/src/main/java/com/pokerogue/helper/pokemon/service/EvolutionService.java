@@ -1,6 +1,5 @@
 package com.pokerogue.helper.pokemon.service;
 
-import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.pokemon.data.Evolution;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import com.pokerogue.helper.pokemon.dto.EvolutionResponse;

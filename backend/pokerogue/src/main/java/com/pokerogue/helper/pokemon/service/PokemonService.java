@@ -4,7 +4,6 @@ package com.pokerogue.helper.pokemon.service;
 import com.pokerogue.helper.ability.data.Ability;
 import com.pokerogue.helper.ability.repository.AbilityRepository;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
-import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
@@ -22,7 +21,6 @@ import com.pokerogue.helper.pokemon.repository.PokemonInMemoryRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

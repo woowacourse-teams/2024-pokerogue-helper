@@ -4,14 +4,12 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
 
-import com.pokerogue.helper.global.config.LanguageSetter;
+import com.pokerogue.helper.global.config.LocaleContextHolder;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import jakarta.annotation.PostConstruct;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
@@ -43,7 +41,7 @@ public class PokemonInMemoryRepository {
     }
 
     public List<Pokemon> findAll() {
-        return pokemons.get(LanguageSetter.getLanguage()).values()
+        return pokemons.get(LocaleContextHolder.getCurrentLocale()).values()
                 .stream()
                 .sorted(Comparator.comparingInt(Pokemon::getPokedexNumber))
                 .toList();
