@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongodb-test:
+    image: mongo:7.0
+    container_name: pokerogue-test-db
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: pokerogue-test
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb-test-data:/data/db
+      - ./pokerogue/src/test/resources/data:/docker-entrypoint-initdb.d/data:ro
+      - ./scripts/init-mongo-test.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
+    networks:
+      - pokerogue-test-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/pokerogue-test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+networks:
+  pokerogue-test-network:
+    driver: bridge
+
+volumes:
+  mongodb-test-data:
+    driver: local
