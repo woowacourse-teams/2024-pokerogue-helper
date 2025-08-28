@@ -1,6 +1,7 @@
 package com.pokerogue.environment.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pokerogue.helper.global.config.LanguageChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -18,4 +19,7 @@ public abstract class ControllerTest {
 
     @MockBean
     protected MongoTemplate mongoTemplate;
+
+    @MockBean
+    protected LanguageChecker languageChecker;
 }
