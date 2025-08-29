@@ -4,25 +4,23 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
 
-import com.pokerogue.helper.global.config.LanguageSetter;
+import com.pokerogue.helper.global.config.LocaleContextHolder;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import jakarta.annotation.PostConstruct;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class PokemonInMemoryRepository {
 
-    private final PokemonRepository pokemonRepository;
+    private final PokemonMongoRepository pokemonMongoRepository;
     private Map<String, Map<String, Pokemon>> pokemons;
 
-    public PokemonInMemoryRepository(PokemonRepository pokemonRepository) {
-        this.pokemonRepository = pokemonRepository;
+    public PokemonInMemoryRepository(PokemonMongoRepository pokemonMongoRepository) {
+        this.pokemonMongoRepository = pokemonMongoRepository;
     }
 
     @PostConstruct
@@ -32,7 +30,7 @@ public class PokemonInMemoryRepository {
 
     @Scheduled(cron = "0 0 5 * * *")
     public void refreshCache() {
-        List<Pokemon> allPokemons = pokemonRepository.findAll();
+        List<Pokemon> allPokemons = pokemonMongoRepository.findAll();
         this.pokemons = allPokemons.stream()
                 .collect(
                         groupingBy(
@@ -43,13 +41,9 @@ public class PokemonInMemoryRepository {
     }
 
     public List<Pokemon> findAll() {
-        return pokemons.get(LanguageSetter.getLanguage()).values()
+        return pokemons.get(LocaleContextHolder.getCurrentLocale()).values()
                 .stream()
                 .sorted(Comparator.comparingInt(Pokemon::getPokedexNumber))
                 .toList();
-    }
-
-    public Optional<Pokemon> findById(String id) {
-        return Optional.ofNullable(pokemons.get(LanguageSetter.getLanguage()).get(id));
     }
 }

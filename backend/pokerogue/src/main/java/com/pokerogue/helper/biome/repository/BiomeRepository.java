@@ -1,10 +1,23 @@
 package com.pokerogue.helper.biome.repository;
 
 import com.pokerogue.helper.biome.data.Biome;
+import com.pokerogue.helper.global.config.LocaleContextHolder;
+import java.util.List;
 import java.util.Optional;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
-public interface BiomeRepository extends MongoRepository<Biome, String> {
+@Repository
+@RequiredArgsConstructor
+public class BiomeRepository {
 
-    Optional<Biome> findByIndexAndLanguage(String index, String language);
+    private final BiomeMongoRepository biomeMongoRepository;
+
+    public List<Biome> findAll() {
+        return biomeMongoRepository.findAllByLanguage(LocaleContextHolder.getCurrentLocale());
+    }
+
+    public Optional<Biome> findByIndex(String index) {
+        return biomeMongoRepository.findByIndexAndLanguage(index, LocaleContextHolder.getCurrentLocale());
+    }
 }

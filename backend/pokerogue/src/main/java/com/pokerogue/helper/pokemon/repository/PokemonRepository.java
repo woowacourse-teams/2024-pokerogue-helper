@@ -1,19 +1,31 @@
 package com.pokerogue.helper.pokemon.repository;
 
+import com.pokerogue.helper.global.config.LocaleContextHolder;
 import com.pokerogue.helper.pokemon.data.Pokemon;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
-public interface PokemonRepository extends MongoRepository<Pokemon, String> {
+@Repository
+@RequiredArgsConstructor
+public class PokemonRepository {
 
-    List<Pokemon> findByPokedexNumber(int pokedexNumber);
+    private final PokemonMongoRepository pokemonMongoRepository;
 
-    List<Pokemon> findByEggMoveIdsContains(String eggMoveIds);
+    public List<Pokemon> findByEggMoveIdsContains(String eggMoveIds) {
+        return pokemonMongoRepository.findByLanguageAndEggMoveIdsContains(LocaleContextHolder.getCurrentLocale(), eggMoveIds);
+    }
 
-    List<Pokemon> findByLevelMovesMoveId(String moveId);
+    public List<Pokemon> findByLevelMovesMoveId(String moveId) {
+        return pokemonMongoRepository.findByLevelMovesMoveIdAndLanguage(moveId, LocaleContextHolder.getCurrentLocale());
+    }
 
-    Optional<Pokemon> findByIndexAndLanguage(String index, String language);
+    public Optional<Pokemon> findByIndex(String index) {
+        return pokemonMongoRepository.findByIndexAndLanguage(index, LocaleContextHolder.getCurrentLocale());
+    }
 
-    List<Pokemon> findByPokedexNumberAndLanguage(Integer pokedexNumber, String language);
+    public List<Pokemon> findByPokedexNumber(Integer pokedexNumber) {
+        return pokemonMongoRepository.findByPokedexNumberAndLanguage(pokedexNumber, LocaleContextHolder.getCurrentLocale());
+    }
 }

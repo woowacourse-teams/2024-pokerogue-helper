@@ -15,15 +15,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class BiomeRepositoryTest extends MongoRepositoryTest {
+class BiomeMongoRepositoryTest extends MongoRepositoryTest {
 
     @Autowired
-    private BiomeRepository biomeRepository;
+    private BiomeMongoRepository biomeMongoRepository;
 
     @Test
     @DisplayName("모든 바이옴 정보가 정상적으로 매핑되는지 확인한다.")
     void findAll_AndConvertToBiome() {
-        List<Biome> biomes = biomeRepository.findAll();
+        List<Biome> biomes = biomeMongoRepository.findAll();
 
         assertAll(
                 () -> assertThat(biomes).hasSize(70),

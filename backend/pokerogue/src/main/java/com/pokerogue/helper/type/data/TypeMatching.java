@@ -1,6 +1,5 @@
-package com.pokerogue.helper.type.collection;
+package com.pokerogue.helper.type.data;
 
-import com.pokerogue.helper.type.data.Type;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -4,7 +4,7 @@ import static io.restassured.RestAssured.given;
 
 import com.pokerogue.environment.repository.MongoRepositoryTest;
 import com.pokerogue.helper.pokemon.data.Pokemon;
-import com.pokerogue.helper.pokemon.repository.PokemonRepository;
+import com.pokerogue.helper.pokemon.repository.PokemonMongoRepository;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import java.util.List;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PokeomonControllerTest extends MongoRepositoryTest {
 
     @Autowired
-    PokemonRepository pokemonRepository;
+    PokemonMongoRepository pokemonMongoRepository;
 
     @BeforeAll
     public static void setup() {
@@ -38,10 +38,9 @@ public class PokeomonControllerTest extends MongoRepositoryTest {
     @Test
     public void testApiError2() {
 
-        List<Pokemon> all = pokemonRepository.findAll();
+        List<Pokemon> all = pokemonMongoRepository.findAll();
 
         for (Pokemon pokemon : all) {
-            System.out.println(pokemon);
             given()
                     .contentType(ContentType.JSON)
                     .when()

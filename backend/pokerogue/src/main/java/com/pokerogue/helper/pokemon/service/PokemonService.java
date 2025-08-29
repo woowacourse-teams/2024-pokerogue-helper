@@ -4,7 +4,6 @@ package com.pokerogue.helper.pokemon.service;
 import com.pokerogue.helper.ability.data.Ability;
 import com.pokerogue.helper.ability.repository.AbilityRepository;
 import com.pokerogue.helper.biome.repository.BiomeRepository;
-import com.pokerogue.helper.global.config.LanguageSetter;
 import com.pokerogue.helper.global.exception.ErrorMessage;
 import com.pokerogue.helper.global.exception.GlobalCustomException;
 import com.pokerogue.helper.move.data.Move;
@@ -22,7 +21,6 @@ import com.pokerogue.helper.pokemon.repository.PokemonInMemoryRepository;
 import com.pokerogue.helper.pokemon.repository.PokemonRepository;
 import com.pokerogue.helper.type.data.Type;
 import com.pokerogue.helper.type.dto.PokemonTypeResponse;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +39,7 @@ public class PokemonService {
     private final PokemonRepository pokemonRepository;
 
     public PokemonDetailResponse findById(String id) {
-        Pokemon pokemon = pokemonRepository.findByIndexAndLanguage(id, LanguageSetter.getLanguage())
+        Pokemon pokemon = pokemonRepository.findByIndex(id)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.POKEMON_NOT_FOUND));
 
         return createPokemonDetailResponse(pokemon);
@@ -88,7 +86,7 @@ public class PokemonService {
         abilityIds.add(pokemon.getHiddenAbilityId());
 
         List<Optional<Ability>> abilities = abilityIds.stream()
-                .map(ability -> abilityRepository.findByIndexAndLanguage(ability, LanguageSetter.getLanguage()))
+                .map(abilityRepository::findByIndex)
                 .toList();
 
         return PokemonAbilityResponse.createListFrom(abilities);
@@ -98,7 +96,7 @@ public class PokemonService {
         List<String> biomes = pokemon.getBiomeIds();
 
         return biomes.stream()
-                .map(biome -> biomeRepository.findByIndexAndLanguage(biome, LanguageSetter.getLanguage()))
+                .map(biomeRepository::findByIndex)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(PokemonBiomeResponse::from)
@@ -109,7 +107,7 @@ public class PokemonService {
         List<String> moves = pokemon.getEggMoveIds();
 
         return moves.stream()
-                .map(move -> moveRepository.findByIndexAndLanguage(move, LanguageSetter.getLanguage()))
+                .map(moveRepository::findByIndex)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(EggMoveResponse::from)
@@ -125,7 +123,7 @@ public class PokemonService {
     }
 
     private Move getMoveById(LevelMove levelMove) {
-        return moveRepository.findByIndexAndLanguage(levelMove.getMoveId(), LanguageSetter.getLanguage())
+        return moveRepository.findByIndex(levelMove.getMoveId())
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_NOT_FOUND));
     }
 }
