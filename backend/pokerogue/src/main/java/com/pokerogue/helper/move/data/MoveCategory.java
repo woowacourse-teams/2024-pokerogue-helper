@@ -45,10 +45,6 @@ public enum MoveCategory {
         return names.get("en");
     }
 
-    private boolean hasSameEngName(String name) {
-        return this.names.get("en").equals(name);
-    }
-
     public static MoveCategory convertFrom(String moveCategoryData) {
         return findByEngName(moveCategoryData)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
@@ -58,5 +54,9 @@ public enum MoveCategory {
         return Arrays.stream(values())
                 .filter(category -> category.hasSameEngName(name.toLowerCase()))
                 .findAny();
+    }
+
+    private boolean hasSameEngName(String name) {
+        return this.names.get("en").equals(name);
     }
 }
