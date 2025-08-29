@@ -11,6 +11,6 @@ public record WeatherResponse(
 ) {
 
     public static WeatherResponse from(Weather weather) {
-        return new WeatherResponse(weather.getId(), weather.getName(), weather.getDescription(), weather.getEffects());
+        return new WeatherResponse(weather.getId(), weather.getName(), weather.getDescription(), weather.getEffect());
     }
 }
