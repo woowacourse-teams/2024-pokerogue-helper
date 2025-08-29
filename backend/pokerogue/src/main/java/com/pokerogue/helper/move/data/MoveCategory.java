@@ -13,20 +13,20 @@ public enum MoveCategory {
 
     STATUS(
             Map.of(
-                    "en", "변화",
-                    "ko", "status"
+                    "ko", "변화",
+                    "en", "status"
             )
     ),
     SPECIAL(
             Map.of(
-                    "en", "특수",
-                    "ko", "special"
+                    "ko", "특수",
+                    "en", "special"
             )
     ),
     PHYSICAL(
             Map.of(
-                    "en", "물리",
-                    "ko", "physical"
+                    "ko", "물리",
+                    "en", "physical"
             )
     ),
     ;
@@ -35,12 +35,6 @@ public enum MoveCategory {
 
     MoveCategory(Map<String, String> names) {
         this.names = names;
-    }
-
-    public static Optional<MoveCategory> findByEngName(String name) {
-        return Arrays.stream(values())
-                .filter(category -> category.hasSameEngName(name.toLowerCase()))
-                .findAny();
     }
 
     public String getName() {
@@ -58,5 +52,11 @@ public enum MoveCategory {
     public static MoveCategory convertFrom(String moveCategoryData) {
         return findByEngName(moveCategoryData)
                 .orElseThrow(() -> new GlobalCustomException(ErrorMessage.MOVE_CATEGORY_NOT_FOUND));
+    }
+
+    private static Optional<MoveCategory> findByEngName(String name) {
+        return Arrays.stream(values())
+                .filter(category -> category.hasSameEngName(name.toLowerCase()))
+                .findAny();
     }
 }
