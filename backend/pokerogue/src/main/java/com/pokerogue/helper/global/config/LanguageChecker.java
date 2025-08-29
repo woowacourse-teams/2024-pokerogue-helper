@@ -13,6 +13,9 @@ public class LanguageChecker {
     }
 
     public boolean existsByLanguage(String locale) {
+        if (locale.length() < 2) {
+            return false;
+        }
         String language = locale.toLowerCase().substring(0, 2);
         return pokemonMongoRepository.existsByLanguage(language);
     }
