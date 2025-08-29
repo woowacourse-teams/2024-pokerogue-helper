@@ -125,7 +125,7 @@ public class BiomeService {
         return types.stream()
                 .map(type -> new BiomeTypeResponse(
                         ImageUrl.getTypeImage(type.getName()),
-                        type.getKoName())
+                        type.getName())
                 )
                 .toList();
     }
@@ -136,7 +136,7 @@ public class BiomeService {
                 .flatMap(List::stream)
                 .map(type -> new BiomeTypeResponse(
                         ImageUrl.getTypeImage(type.getName()),
-                        type.getKoName())
+                        type.getName())
                 )
                 .toList();
     }

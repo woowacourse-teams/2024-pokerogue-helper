@@ -6,6 +6,6 @@ import com.pokerogue.helper.type.data.Type;
 public record PokemonTypeResponse(String typeName, String typeLogo) {
 
     public static PokemonTypeResponse from(Type type) {
-        return new PokemonTypeResponse(type.getKoName(), ImageUrl.getTypeImage(type.getName()));
+        return new PokemonTypeResponse(type.getName(), ImageUrl.getTypeImage(type.getName()));
     }
 }

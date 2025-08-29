@@ -25,7 +25,7 @@ public record BattleResultResponseV2(
                 accuracy,
                 move.getName(),
                 move.getEffect(),
-                moveType.getKoName(),
+                moveType.getName(),
                 moveCategory.getName(),
                 isPreemptive
         );

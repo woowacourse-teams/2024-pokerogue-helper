@@ -21,11 +21,6 @@ public class LocaleContextHolder {
         return locale != null ? locale : DEFAULT_LANGUAGE;
     }
 
-    public static boolean isDefault() {
-        String locale = localeContext.get();
-        return locale == null || locale.equals(DEFAULT_LANGUAGE);
-    }
-
     public static void clear() {
         localeContext.remove();
     }
